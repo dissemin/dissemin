@@ -1,0 +1,1397 @@
+{
+    "indexed":{
+        "date-parts":[
+            [
+                2019,
+                11,
+                25
+            ]
+        ],
+        "date-time":"2019-11-25T17:33:04Z",
+        "timestamp":1574703184708
+    },
+    "publisher-location":"Amsterdam",
+    "reference-count":158,
+    "publisher":"John Benjamins Publishing Company",
+    "isbn-type":[
+        {
+            "value":"9789027213570",
+            "type":"print"
+        },
+        {
+            "value":"9789027271822",
+            "type":"electronic"
+        }
+    ],
+    "content-domain":{
+        "domain":[
+
+        ],
+        "crossmark-restriction":false
+    },
+    "published-print":{
+        "date-parts":[
+            [
+                2013
+            ]
+        ]
+    },
+    "DOI":"10.1075\/aicr.90.09ngo",
+    "type":"chapter",
+    "created":{
+        "date-parts":[
+            [
+                2014,
+                3,
+                23
+            ]
+        ],
+        "date-time":"2014-03-23T15:09:57Z",
+        "timestamp":1395587397000
+    },
+    "page":"211-252",
+    "source":"Crossref",
+    "is-referenced-by-count":7,
+    "title":"Binocular rivalry, brain stimulation and\u00a0bipolar disorder",
+    "prefix":"10.1075",
+    "author":[
+        {
+            "given":"Trung T.",
+            "family":"Ngo",
+            "sequence":"first",
+            "affiliation":[
+
+            ]
+        },
+        {
+            "given":"Wendy N.",
+            "family":"Barsdell",
+            "sequence":"additional",
+            "affiliation":[
+
+            ]
+        },
+        {
+            "given":"Phillip C.F.",
+            "family":"Law",
+            "sequence":"additional",
+            "affiliation":[
+
+            ]
+        },
+        {
+            "given":"Steven M.",
+            "family":"Miller",
+            "sequence":"additional",
+            "affiliation":[
+
+            ]
+        }
+    ],
+    "member":"1757",
+    "reference":[
+        {
+            "key":"keyref1",
+            "author":"Aafjes",
+            "first-page":"18",
+            "year":"1966",
+            "article-title":"Individual and interindividual differences in binocular retinal rivalry in man",
+            "volume-title":"Psychophysiology"
+        },
+        {
+            "key":"keyref2",
+            "author":"Alvarez",
+            "first-page":"9",
+            "year":"2012",
+            "article-title":"Anatomical constraints on attention: Hemifield independence is a signature of multifocal spatial selection",
+            "volume-title":"Journal of Vision"
+        },
+        {
+            "key":"keyref3",
+            "author":"Andr\u00c3\u00a9",
+            "first-page":"190",
+            "year":"2001",
+            "article-title":"Temporary phantom limbs evoked by vestibular caloric stimulation in amputees",
+            "volume-title":"Neuropsychiatry, Neuropsychology, and Behavioural Neurology"
+        },
+        {
+            "key":"keyref4",
+            "author":"Arai",
+            "first-page":"605",
+            "year":"2005",
+            "article-title":"Comparison between short train, monophasic and biphasic repetitive transcranial magnetic stimulation (rTMS) of the human motor cortex",
+            "volume-title":"Clinical Neurophysiology"
+        },
+        {
+            "key":"keyref5",
+            "author":"B\u00c3\u00a4chtold",
+            "first-page":"128",
+            "article-title":"Spatial- and verbal-memory improvement by cold-water caloric stimulation in healthy subjects",
+            "volume-title":"Experimental Brain Research"
+        },
+        {
+            "key":"keyref6",
+            "author":"Bagby",
+            "first-page":"331",
+            "year":"1957",
+            "article-title":"A cross-cultural study of perceptual predominance in binocular rivalry",
+            "volume-title":"Journal of Abnormal Psychology"
+        },
+        {
+            "key":"keyref7",
+            "author":"Been",
+            "first-page":"346",
+            "year":"2007",
+            "article-title":"The use tDCS and CVS as methods of non-invasive brain stimulation",
+            "volume-title":"Brain Research Reviews"
+        },
+        {
+            "key":"keyref8",
+            "author":"Bellen",
+            "first-page":"514",
+            "year":"2010",
+            "article-title":"100 years of Drosophila research and its impact on vertebrate neuroscience: A history lesson for the future",
+            "volume-title":"Nature Reviews Neuroscience"
+        },
+        {
+            "key":"keyref9",
+            "author":"Bemelmans",
+            "year":"1984",
+            "article-title":"Periodicities in the basic rest-activity cycle range during the waking phase",
+            "volume-title":"IRCS Medical Science: Psychology and Psychiatry"
+        },
+        {
+            "key":"keyref10",
+            "author":"Blake",
+            "first-page":"145",
+            "year":"1989",
+            "article-title":"A neural theory of binocular rivalry",
+            "volume-title":"Psychological Review"
+        },
+        {
+            "key":"keyref11",
+            "author":"Blake",
+            "first-page":"5",
+            "year":"2001",
+            "article-title":"A primer on binocular rivalry, including current controversies",
+            "volume-title":"Brain and Mind"
+        },
+        {
+            "key":"keyref12",
+            "author":"Blumberg",
+            "first-page":"1045",
+            "year":"2000",
+            "article-title":"Increased anterior cingulated and caudate activity in bipolar mania",
+            "volume-title":"Biological Psychiatry"
+        },
+        {
+            "key":"keyref13",
+            "author":"Bogen",
+            "first-page":"173",
+            "year":"1998",
+            "article-title":"Left hemicerebrectomy: Vision, olfaction and mentation 45 years later",
+            "volume-title":"Proceedings of the 28th Annual Meeting of the Society for Neuroscience"
+        },
+        {
+            "key":"keyref14",
+            "author":"Bogen",
+            "first-page":"341",
+            "year":"2000",
+            "article-title":"Split-brain basics: Relevance for the concept of one\u2019s other mind",
+            "volume-title":"Journal of American Academy of Psychoanalysis"
+        },
+        {
+            "key":"keyref15",
+            "author":"Bonneh",
+            "first-page":"798",
+            "year":"2001",
+            "article-title":"Motion-induced blindness in normal observers",
+            "volume-title":"Nature"
+        },
+        {
+            "key":"keyref16",
+            "author":"Borsellino",
+            "first-page":"139",
+            "year":"1972",
+            "article-title":"Reversal time distribution in the perception of visual ambiguous stimuli",
+            "volume-title":"Kybernetik"
+        },
+        {
+            "key":"keyref17",
+            "author":"Bottini",
+            "first-page":"1278",
+            "year":"2005",
+            "article-title":"Left caloric vestibular stimulation ameliorates right hemianesthesia",
+            "volume-title":"Neurology"
+        },
+        {
+            "key":"keyref18",
+            "author":"Brascamp",
+            "first-page":"1159",
+            "year":"2012",
+            "article-title":"Inattention abolishes binocular rivalry: Perceptual evidence",
+            "volume-title":"Psychological Science"
+        },
+        {
+            "key":"keyref19",
+            "author":"Brouwer",
+            "year":"2005",
+            "article-title":"Voluntary control over perceptual changes during bistable structure-from-motion, revealed by fMRI",
+            "volume-title":"Society for Neuroscience"
+        },
+        {
+            "key":"keyref20",
+            "author":"Carmel",
+            "year":"2010",
+            "article-title":"Right parietal TMS shortens dominance durations in binocular rivalry",
+            "volume-title":"Current Biology",
+            "DOI":"10.1016\/j.cub.2010.07.036",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"keyref21",
+            "author":"Carter",
+            "first-page":"1154",
+            "year":"2005",
+            "article-title":"Modulating the rate and rhythmicity of perceptual rivalry alternations with the mixed 5-HT2A and 5-HT1A agonist psilocybin",
+            "volume-title":"Neuropsychopharmacology"
+        },
+        {
+            "key":"keyref22",
+            "author":"Chokron",
+            "first-page":"3127",
+            "year":"2007",
+            "article-title":"Experimental remission of unilateral spatial neglect",
+            "volume-title":"Neuropsychologia"
+        },
+        {
+            "key":"keyref23",
+            "author":"Crain",
+            "first-page":"259",
+            "year":"1961",
+            "article-title":"Binocular rivalry: Its relation to intelligence, and general theory of its nature and physiological correlates",
+            "volume-title":"Journal of General Psychology"
+        },
+        {
+            "key":"keyref24",
+            "author":"de Graaf",
+            "first-page":"2322",
+            "year":"2011",
+            "article-title":"On the functional relevance of frontal cortex for passive and voluntarily controlled bistable vision",
+            "volume-title":"Cerebral Cortex"
+        },
+        {
+            "key":"keyref25",
+            "author":"de Graaf",
+            "first-page":"871",
+            "year":"2011",
+            "article-title":"Null results in TMS: From absence of evidence to evidence of absence",
+            "volume-title":"Neuroscience & Biobehavioral Reviews"
+        },
+        {
+            "key":"keyref26",
+            "author":"de la Iglesia",
+            "first-page":"799",
+            "year":"2000",
+            "article-title":"Antiphase oscillation of the left and right suprachiasmatic nuclei",
+            "volume-title":"Science"
+        },
+        {
+            "key":"keyref28",
+            "author":"D\u00c3\u00adaz-Caneja",
+            "year":"1928",
+            "article-title":"Sur l\u2019alternance binoculaire",
+            "volume-title":"Annales D\u2019Oculistique"
+        },
+        {
+            "key":"keyref28a",
+            "author":"Dodson",
+            "first-page":"168",
+            "year":"2004",
+            "article-title":"Vestibular stimulation in mania: A case report",
+            "volume-title":"Journal of Neurology, Neurosurgery & Psychiatry"
+        },
+        {
+            "key":"keyref29",
+            "author":"Eccles",
+            "first-page":"580",
+            "year":"2000",
+            "article-title":"Nasal airflow in health and disease",
+            "volume-title":"Acta Otolaryngologica"
+        },
+        {
+            "key":"keyref30",
+            "author":"Einh\u00c3\u00a4user",
+            "first-page":"1704",
+            "year":"2008",
+            "article-title":"Pupil dilation reflects perceptual selection and predicts subsequent stability in perceptual rivalry",
+            "volume-title":"Proceedings of the National Academy of Sciences USA"
+        },
+        {
+            "key":"keyref31",
+            "author":"Enoksson",
+            "first-page":"544",
+            "year":"1963",
+            "article-title":"Binocular rivalry and monocular dominance studied with optokinetic nystagmus.",
+            "volume-title":"Acta Ophthalmologica"
+        },
+        {
+            "key":"keyref32",
+            "author":"Ewen",
+            "first-page":"742",
+            "year":"1931",
+            "article-title":"The psychological estimation of the effects of certain drugs upon the syntonic and schizophrenic psychoses: With a brief enquiry into a physiological basis of temperament",
+            "volume-title":"Journal of Mental Science"
+        },
+        {
+            "key":"keyref33",
+            "author":"Fagard",
+            "first-page":"2451",
+            "year":"2008",
+            "article-title":"The role of the corpus callosum in the perception of reversible figures in children",
+            "volume-title":"Vision Research"
+        },
+        {
+            "key":"keyref34",
+            "author":"Ferr\u00c3\u00a8",
+            "first-page":"1337",
+            "year":"2012",
+            "article-title":"Vestibular modulation of somatosensory perception",
+            "volume-title":"European Journal of Neuroscience"
+        },
+        {
+            "key":"keyref35",
+            "author":"Ferr\u00c3\u00a8",
+            "article-title":"(in press). The balance of feelings: Vestibular modulation of bodily sensations",
+            "volume-title":"Cortex"
+        },
+        {
+            "key":"keyref36",
+            "author":"Ferr\u00c3\u00a8",
+            "first-page":"29",
+            "year":"2011",
+            "article-title":"How the vestibular system modulates tactile perception in normal subjects: A behavioural and physiological study",
+            "volume-title":"Experimental Brain Research"
+        },
+        {
+            "key":"keyref37",
+            "author":"Frederiksen",
+            "first-page":"470",
+            "year":"1934",
+            "article-title":"Personality traits and fluctuations of the outline cube",
+            "volume-title":"American Journal Psychology"
+        },
+        {
+            "key":"keyref38",
+            "author":"Freeman",
+            "first-page":"35",
+            "year":"2012",
+            "article-title":"fMRI correlates of subjective reversals in ambiguous structure-from-motion",
+            "volume-title":"Journal of Vision"
+        },
+        {
+            "key":"keyref39",
+            "author":"Fuchs",
+            "first-page":"77",
+            "year":"2009",
+            "article-title":"Daytime micro-naps in a nocturnal migrant: An EEG analysis",
+            "volume-title":"Biology Letters"
+        },
+        {
+            "key":"keyref40",
+            "author":"Funk",
+            "first-page":"1325",
+            "year":"2003",
+            "article-title":"Does interhemispheric competition mediate motion-induced blindness? A transcranial magnetic stimulation study",
+            "volume-title":"Perception"
+        },
+        {
+            "key":"keyref41",
+            "author":"Ge",
+            "year":"2007",
+            "article-title":"Repetitive transcranial magnetic stimulation effect on perceptual reversals of ambiguous figures",
+            "volume-title":"Proceedings of 2007 IEEE\/ICME International Conference on Complex Medical Imaging",
+            "DOI":"10.1109\/ICCME.2007.4381974",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"keyref42",
+            "author":"Ge",
+            "first-page":"4743",
+            "year":"2007",
+            "article-title":"The rTMS effect on perceptual reversal of ambiguous figures",
+            "volume-title":"Proceedings of 29th Annual International Conference of the IEEE on Engineering in Medicine and Biology Society"
+        },
+        {
+            "key":"keyref43",
+            "author":"Ge",
+            "first-page":"458",
+            "year":"2008",
+            "article-title":"Effects of repetitive transcranial-magnetic stimulation on perceptual reversal",
+            "volume-title":"Journal of the Magnetics Society of Japan"
+        },
+        {
+            "key":"keyref44",
+            "author":"Gen\u00c3\u00a7",
+            "first-page":"1494",
+            "year":"2011",
+            "article-title":"Interhemispheric connections shape subjective experience of bistable motion",
+            "volume-title":"Current Biology"
+        },
+        {
+            "key":"keyref45",
+            "author":"Gen\u00c3\u00a7",
+            "year":"2011",
+            "article-title":"Callosal connections of primary visual cortex predict the spatial spreading of binocular rivalry across the visual hemifields",
+            "volume-title":"Frontiers in Human Neuroscience"
+        },
+        {
+            "key":"keyref46",
+            "author":"George",
+            "first-page":"39",
+            "year":"1936",
+            "article-title":"The significance of the fluctuations experienced in observing ambiguous figures and in binocular rivalry",
+            "volume-title":"Journal of General Psychology"
+        },
+        {
+            "key":"keyref47",
+            "author":"Gorenstein",
+            "first-page":"619",
+            "year":"1989",
+            "article-title":"Performance of inattentive-overactive children on selected measures of prefrontal-type function",
+            "volume-title":"Journal of Clinical Psychology"
+        },
+        {
+            "key":"keyref48",
+            "author":"Gottesman",
+            "first-page":"636",
+            "year":"2003",
+            "article-title":"The endophenotype concept in psychiatry: etymology and strategic intentions",
+            "volume-title":"American Journal of Psychiatry"
+        },
+        {
+            "key":"keyref49",
+            "author":"Gould",
+            "first-page":"113",
+            "year":"2006",
+            "article-title":"Psychiatric endophenotypes and the development of valid animal models",
+            "volume-title":"Genes, Brain and Behavior"
+        },
+        {
+            "key":"keyref50",
+            "author":"Grisaru",
+            "first-page":"1608",
+            "year":"1998",
+            "article-title":"Transcranial magnetic stimulation in mania: A controlled study",
+            "volume-title":"American Journal of Psychiatry"
+        },
+        {
+            "key":"keyref51",
+            "author":"Hasler",
+            "first-page":"93",
+            "year":"2006",
+            "article-title":"Toward constructing an endophenotype strategy for bipolar disorders",
+            "volume-title":"Biological Psychiatry"
+        },
+        {
+            "key":"keyref52",
+            "author":"Haynes",
+            "first-page":"496",
+            "year":"2005",
+            "article-title":"Eye-specific effects of binocular rivalry in the human lateral geniculate nucleus",
+            "volume-title":"Nature"
+        },
+        {
+            "key":"keyref53",
+            "author":"Helmholtz",
+            "year":"1867",
+            "volume-title":"Handbuch der physiologischen Optik Helmholtz\u2019s treatise on physiological optics"
+        },
+        {
+            "key":"keyref54",
+            "author":"Hsu",
+            "year":"2008",
+            "article-title":"Oscillation of conscious experience and brain activity in motion-induced blindness and the Necker cube",
+            "volume-title":"Paper presented at the 12th Annual Meeting of the Association for the Scientific Study of Consciousness"
+        },
+        {
+            "key":"keyref55",
+            "author":"Hunt",
+            "first-page":"443",
+            "year":"1933",
+            "article-title":"Fluctuation of an ambiguous figure in dementia praecox and in manic-depressive patients",
+            "volume-title":"Journal of Abnormal and Social Psychology"
+        },
+        {
+            "key":"keyref56",
+            "author":"Imbach",
+            "year":"2012",
+            "article-title":"Inter-hemispheric oscillations in human sleep",
+            "volume-title":"PLoS One",
+            "DOI":"10.1371\/journal.pone.0048660",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"keyref57",
+            "author":"Kamphuisen",
+            "year":"2008",
+            "article-title":"No evidence for widespread synchronized networks in binocular rivalry: MEG frequency tagging entrains primarily early visual cortex",
+            "volume-title":"Journal of Vision",
+            "DOI":"10.1167\/8.5.4",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"keyref58",
+            "author":"Karnath",
+            "first-page":"1001",
+            "year":"1994",
+            "article-title":"Subjective body orientation in neglect and the interactive contribution of neck muscle proprioception and vestibular stimulation",
+            "volume-title":"Brain"
+        },
+        {
+            "key":"keyref59",
+            "author":"Karnath",
+            "first-page":"333",
+            "year":"1996",
+            "article-title":"Ocular exploration of space as a function of neck proprioceptive and vestibular input \u2013 observations in normal subjects and patients with spatial neglect after parietal lesions",
+            "volume-title":"Experimantal Brain Research"
+        },
+        {
+            "key":"keyref60",
+            "author":"Karnath",
+            "first-page":"231",
+            "year":"2003",
+            "article-title":"Neglect-like behavior in healthy subjects. Dissociation of space exploration and goal-directed pointing after vestibular stimulation",
+            "volume-title":"Experimantal Brain Research"
+        },
+        {
+            "key":"keyref61",
+            "author":"Karnath",
+            "first-page":"140",
+            "year":"1994",
+            "article-title":"The interactive contribution of neck muscle proprioception and vestibular stimulation to subjective \u00e2\u20ac\u0153straight head\u00e2\u20ac\ufffd orientation in man",
+            "volume-title":"Experimantal Brain Research"
+        },
+        {
+            "key":"keyref62",
+            "author":"Kanai",
+            "first-page":"1626",
+            "year":"2010",
+            "article-title":"Human parietal cortex structure predicts individual differences in perceptual rivalry",
+            "volume-title":"Current Biology"
+        },
+        {
+            "key":"keyref63",
+            "author":"Kanai",
+            "year":"2011",
+            "article-title":"Structural and functional fractionation of right superior parietal cortex in bistable perception",
+            "volume-title":"Current Biology",
+            "DOI":"10.1016\/j.cub.2010.12.009",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"keyref64",
+            "author":"Keliris",
+            "first-page":"12353",
+            "year":"2010",
+            "article-title":"The role of the primary visual cortex in perceptual suppression of salient visual stimuli",
+            "volume-title":"Journal of Neuroscience"
+        },
+        {
+            "key":"keyref65",
+            "author":"Kendler",
+            "first-page":"789",
+            "year":"2010",
+            "article-title":"Endophenotype: A conceptual analysis",
+            "volume-title":"Molecular Psychiatry"
+        },
+        {
+            "key":"keyref66",
+            "author":"Kikuta",
+            "first-page":"11989",
+            "year":"2008",
+            "article-title":"Compensatory rapid switching of binasal inputs in the olfactory cortex",
+            "volume-title":"Journal of Neuroscience"
+        },
+        {
+            "key":"keyref67",
+            "author":"Kolev",
+            "first-page":"167",
+            "year":"1990",
+            "article-title":"How caloric vestibular irritation influences migraine attacks",
+            "volume-title":"Cephalalgia"
+        },
+        {
+            "key":"keyref68",
+            "author":"Kondo",
+            "first-page":"1915",
+            "year":"2012",
+            "article-title":"Separability and commonality of auditory and visual bistable perception",
+            "volume-title":"Cerebral Cortex"
+        },
+        {
+            "key":"keyref69",
+            "author":"Kov\u00c3\u00a1cs",
+            "first-page":"15508",
+            "year":"1996",
+            "article-title":"When the brain changes its mind: Interocular grouping during binocular rivalry",
+            "volume-title":"Proceedings of the National Academy of Sciences USA"
+        },
+        {
+            "key":"keyref70",
+            "author":"Krug",
+            "first-page":"1839",
+            "year":"2008",
+            "volume-title":"Proceedings of the Royal Society of London B: Biological Sciences"
+        },
+        {
+            "key":"keyref71",
+            "author":"Le Chapelain",
+            "first-page":"85",
+            "year":"2001",
+            "article-title":"Vestibular caloric stimulation evokes phantom limb illusions in patients with paraplegia",
+            "volume-title":"Spinal Cord"
+        },
+        {
+            "key":"keyref72",
+            "author":"Lee",
+            "year":"2002",
+            "article-title":"V1 activity is reduced during binocular rivalry",
+            "volume-title":"Journal of Vision",
+            "DOI":"10.1167\/2.9.4",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"keyref73",
+            "author":"Leopold",
+            "first-page":"549",
+            "year":"1996",
+            "article-title":"Activity changes in early visual cortex reflect monkeys\u2019 percepts during binocular rivalry",
+            "volume-title":"Nature"
+        },
+        {
+            "key":"keyref74",
+            "author":"Leopold",
+            "first-page":"254",
+            "year":"1999",
+            "article-title":"Multistable phenomena: Changing views in perception",
+            "volume-title":"Trends in Cognitive Sciences"
+        },
+        {
+            "key":"keyref75",
+            "author":"Levine",
+            "first-page":"267",
+            "year":"2012",
+            "article-title":"Beneficial effects of caloric vestibular stimulation on denial of illness and manic delusions in schizoaffective disorder: A case report",
+            "volume-title":"Brain Stimulation"
+        },
+        {
+            "key":"keyref76",
+            "author":"Lewald",
+            "first-page":"1107",
+            "year":"2000",
+            "article-title":"Vestibular influence on human auditory space perception",
+            "volume-title":"Journal of Neurophysiology"
+        },
+        {
+            "key":"keyref77",
+            "author":"Ling",
+            "first-page":"531",
+            "year":"2012",
+            "article-title":"Normalization regulates competition for visual awareness",
+            "volume-title":"Neuron"
+        },
+        {
+            "key":"keyref78",
+            "author":"Logothetis",
+            "first-page":"1801",
+            "year":"1998",
+            "article-title":"Single units and conscious vision",
+            "volume-title":"Philosophical Transactions of the Royal Society of London B: Biological Sciences"
+        },
+        {
+            "key":"keyref79",
+            "author":"Logothetis",
+            "first-page":"621",
+            "year":"1996",
+            "article-title":"What is rivalling during binocular rivalry?",
+            "volume-title":"Nature"
+        },
+        {
+            "key":"keyref80",
+            "author":"Logothetis",
+            "first-page":"87",
+            "year":"2003",
+            "article-title":"Neural mechanisms of perceptual organization",
+            "volume-title":"Neural basis of consciousness",
+            "DOI":"10.1075\/aicr.49.09log",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"keyref81",
+            "author":"Logothetis",
+            "first-page":"761",
+            "year":"1989",
+            "article-title":"Neuronal correlates of subjective visual perception",
+            "volume-title":"Science"
+        },
+        {
+            "key":"keyref82",
+            "author":"Long",
+            "first-page":"748",
+            "year":"2004",
+            "article-title":"Enduring interest in perceptual ambiguity: Alternating views of reversible figures",
+            "volume-title":"Psychological Bulletin"
+        },
+        {
+            "key":"keyref83",
+            "author":"Long",
+            "first-page":"189",
+            "year":"2008",
+            "article-title":"Using temperature to analyse temporal dynamics in the songbird motor pathway",
+            "volume-title":"Nature"
+        },
+        {
+            "key":"keyref84",
+            "author":"Lopez",
+            "year":"2012",
+            "article-title":"The human vestibular cortex revealed by coordinate-based activation likelihood estimation meta-analysis",
+            "volume-title":"Neuroscience"
+        },
+        {
+            "key":"keyref85",
+            "author":"Lopez",
+            "year":"2012",
+            "article-title":"Vestibular stimulation modifies the body schema",
+            "volume-title":"Neuropsychologia",
+            "DOI":"10.1016\/j.neuropsychologia.2012.04.008",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"keyref86",
+            "author":"Low",
+            "first-page":"9081",
+            "year":"2008",
+            "volume-title":"Proceedings of the National Academy of Sciences USA"
+        },
+        {
+            "key":"keyref87",
+            "author":"Lyamin",
+            "first-page":"1451",
+            "year":"2008",
+            "article-title":"Cetacean sleep: An unusual form of mammalian sleep",
+            "volume-title":"Neuroscience & Biobehavioral Reviews"
+        },
+        {
+            "key":"keyref88",
+            "author":"Luck",
+            "first-page":"543",
+            "year":"1989",
+            "article-title":"Independent hemispheric attentional systems mediate visual search in split-brain patients",
+            "volume-title":"Nature"
+        },
+        {
+            "key":"keyref89",
+            "author":"Lumer",
+            "first-page":"1930",
+            "year":"1998",
+            "article-title":"Neural correlates of perceptual rivalry in the human brain",
+            "volume-title":"Science"
+        },
+        {
+            "key":"keyref90",
+            "author":"Lyoo",
+            "first-page":"65",
+            "year":"2006",
+            "article-title":"Regional cerebral cortical thinning in bipolar disorder",
+            "volume-title":"Bipolar Disorders"
+        },
+        {
+            "key":"keyref91",
+            "author":"Mast",
+            "first-page":"101",
+            "year":"2006",
+            "article-title":"Visual mental imagery during caloric vestibular stimulation",
+            "volume-title":"Neuropsychologia"
+        },
+        {
+            "key":"keyref92",
+            "author":"McDougall",
+            "first-page":"329",
+            "year":"1906",
+            "article-title":"III.\u00e2\u20ac\u201dPhysiological factors of the attention-process (IV.)",
+            "volume-title":"Mind"
+        },
+        {
+            "key":"keyref93",
+            "author":"McGeoch",
+            "first-page":"756",
+            "year":"2008",
+            "article-title":"Vestibular stimulation can relieve central pain of spinal origin",
+            "volume-title":"Spinal Cord"
+        },
+        {
+            "key":"keyref94",
+            "author":"McGeoch",
+            "first-page":"1298",
+            "year":"2008",
+            "article-title":"Behavioural evidence for vestibular stimulation as a treatment for central post-stroke pain",
+            "volume-title":"Journal of Neurology, Neurosurgery & Psychiatry"
+        },
+        {
+            "key":"keyref95",
+            "author":"McGeoch",
+            "first-page":"404",
+            "year":"2009",
+            "article-title":"Post-stroke tactile allodynia and its modulation by vestibular stimulation: A MEG case study",
+            "volume-title":"Acta Neurologica Scandinavica"
+        },
+        {
+            "key":"keyref96",
+            "author":"Meldman",
+            "first-page":"8",
+            "year":"1965",
+            "article-title":"The quantitative analysis of anxiety and depression",
+            "volume-title":"Psychosomatics"
+        },
+        {
+            "key":"keyref97",
+            "author":"Miller",
+            "first-page":"119",
+            "year":"2001",
+            "article-title":"Binocular rivalry and the cerebral hemispheres: With a note on the correlates and constitution of visual consciousness",
+            "volume-title":"Brain and Mind"
+        },
+        {
+            "key":"keyref98",
+            "author":"Miller",
+            "first-page":"683",
+            "year":"2003",
+            "article-title":"Slow binocular rivalry in bipolar disorder",
+            "volume-title":"Psychological Medicine"
+        },
+        {
+            "key":"keyref99",
+            "author":"Miller",
+            "first-page":"2664",
+            "year":"2010",
+            "volume-title":"Proceedings of the National Academy of Sciences USA"
+        },
+        {
+            "key":"keyref100",
+            "author":"Miller",
+            "first-page":"383",
+            "year":"2000",
+            "article-title":"Interhemispheric switching mediates perceptual rivalry",
+            "volume-title":"Current Biology"
+        },
+        {
+            "key":"keyref101",
+            "author":"Miller",
+            "first-page":"183",
+            "year":"2007",
+            "article-title":"Studies of caloric vestibular stimulation: Implications for the cognitive neurosciences, the clinical neurosciences and neurophilosophy",
+            "volume-title":"Acta Neuropsychiatrica"
+        },
+        {
+            "key":"keyref102",
+            "author":"Miller",
+            "first-page":"188",
+            "year":"2012",
+            "article-title":"Attentional switching in humans and flies: Rivalry in large and miniature brains",
+            "volume-title":"Frontiers in Human Neuroscience"
+        },
+        {
+            "key":"keyref103",
+            "author":"Mukamel",
+            "first-page":"511",
+            "year":"2012",
+            "article-title":"Human intracranial recordings and cognitive neuroscience",
+            "volume-title":"Annual Review of Psychology"
+        },
+        {
+            "key":"keyref104",
+            "author":"Nagamine",
+            "first-page":"279",
+            "year":"2008",
+            "article-title":"Effects of selective 5-HT1A agonist tandospirone on the rate and rhythmicity of binocular rivalry",
+            "volume-title":"Psychopharmacology"
+        },
+        {
+            "key":"keyref105",
+            "author":"Nagamine",
+            "first-page":"539",
+            "year":"2009",
+            "article-title":"Difference in binocular rivalry rate between patients with bipolar I and bipolar II disorders",
+            "volume-title":"Bipolar Disorders"
+        },
+        {
+            "key":"keyref106",
+            "author":"Ngo",
+            "volume-title":"Retesting the interhemispheric switch model of perceptual rivalry"
+        },
+        {
+            "key":"keyref107",
+            "author":"Ngo",
+            "first-page":"610",
+            "year":"2008",
+            "article-title":"The changing face of perceptual rivalry",
+            "volume-title":"Brain Research Bulletin"
+        },
+        {
+            "key":"keyref108",
+            "author":"Ngo",
+            "first-page":"2685",
+            "year":"2007",
+            "article-title":"Caloric vestibular stimulation reveals discrete neural mechanisms for coherence rivalry and eye rivalry: A meta-rivalry model",
+            "volume-title":"Vision Research"
+        },
+        {
+            "key":"keyref109",
+            "author":"Ngo",
+            "first-page":"R134",
+            "year":"2000",
+            "article-title":"Binocular rivalry and perceptual coherence",
+            "volume-title":"Current Biology"
+        },
+        {
+            "key":"keyref110",
+            "author":"Ngo",
+            "first-page":"37",
+            "year":"2011",
+            "article-title":"Psychiatric and genetic studies of binocular rivalry: An endophenotype for bipolar disorder?",
+            "volume-title":"Acta Neuropsychiatrica"
+        },
+        {
+            "key":"keyref111",
+            "author":"Nojima",
+            "first-page":"6579",
+            "year":"2010",
+            "article-title":"Time change of perceptual reversal of ambiguous figures by rTMS",
+            "volume-title":"Proceedings of 32nd Annual International Conference of the IEEE Engineering in Medicine and Biology Society"
+        },
+        {
+            "key":"keyref112",
+            "author":"Nojima",
+            "first-page":"336",
+            "year":"2011",
+            "article-title":"Number of pulses of rTMS affects the inter-reversal time of perceptual reversal",
+            "volume-title":"IFMBE Proceedings BIOMED 2011, 5th Kuala Lumpur International Conference on Biomedical Engineering 2011"
+        },
+        {
+            "key":"keyref113",
+            "author":"Nojima",
+            "first-page":"8106",
+            "year":"2011",
+            "article-title":"Relationship between pulse number of rTMS and inter reversal time of perceptual reversal",
+            "volume-title":"Proceedings of 33rd Annual International Conference of the IEEE Engineering in Medicine and Biology Society"
+        },
+        {
+            "key":"keyref114",
+            "author":"Nojima",
+            "first-page":"09B320-1",
+            "year":"2010",
+            "article-title":"Effect of the stimulus frequency and pulse number of repetitive transcranial magnetic stimulation on the inter-reversal time of perceptual reversal on the right superior parietal lobule",
+            "volume-title":"Journal of Applied Physics"
+        },
+        {
+            "key":"keyref115",
+            "author":"Nojima",
+            "first-page":"548",
+            "year":"2010",
+            "article-title":"Effect of repetitive transcranial magnetic stimulation on perceptual reversals of ambiguous figures",
+            "volume-title":"Journal of the Magnetics Society of Japan"
+        },
+        {
+            "key":"keyref116",
+            "author":"Ohta",
+            "first-page":"267",
+            "year":"2005",
+            "article-title":"Constant light desynchronizes mammalian clock neurons",
+            "volume-title":"Nature Neuroscience"
+        },
+        {
+            "key":"keyref117",
+            "author":"O\u2019Kane",
+            "first-page":"37",
+            "year":"2011",
+            "article-title":"Drosophila as a model organism for the study of neuropsychiatric disorders",
+            "volume-title":"Molecular and functional models in neuropsychiatry",
+            "DOI":"10.1007\/7854_2010_110",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"keyref118",
+            "author":"O\u2019Shea",
+            "first-page":"151",
+            "year":"2001",
+            "article-title":"Binocular rivalry between complex stimuli in split-brain observers",
+            "volume-title":"Brain and Mind"
+        },
+        {
+            "key":"keyref119",
+            "author":"O\u2019Shea",
+            "first-page":"3",
+            "year":"2003",
+            "article-title":"Binocular rivalry in split-brain observers",
+            "volume-title":"Journal of Vision"
+        },
+        {
+            "key":"keyref120",
+            "author":"O\u2019Shea",
+            "first-page":"247",
+            "year":"2005",
+            "article-title":"Visual grouping on binocular rivalry in a split-brain observer",
+            "volume-title":"Vision Research"
+        },
+        {
+            "key":"keyref121",
+            "author":"O\u2019Shea",
+            "first-page":"301",
+            "year":"2005",
+            "article-title":"Binocular rivalry in the divided brain",
+            "volume-title":"Binocular rivalry"
+        },
+        {
+            "key":"keyref122",
+            "author":"Panagiotaropoulos",
+            "first-page":"924",
+            "year":"2012",
+            "article-title":"Neuronal discharges and gamma oscillations explicitly reflect visual consciousness in the lateral prefrontal cortex",
+            "volume-title":"Neuron"
+        },
+        {
+            "key":"keyref123",
+            "author":"Pascual-Leone",
+            "first-page":"233",
+            "year":"1996",
+            "article-title":"Rapid-rate transcranial magnetic stimulation of left dorsolateral prefrontal cortex in drug-resistant depression",
+            "volume-title":"Lancet"
+        },
+        {
+            "key":"keyref124",
+            "author":"Paulk",
+            "first-page":"313",
+            "year":"2013",
+            "article-title":"Vision in Drosophila: Seeing the world through a model\u2019s eyes",
+            "volume-title":"Annual Review of Entomology"
+        },
+        {
+            "key":"keyref125",
+            "author":"Pearson",
+            "first-page":"2",
+            "year":"2007",
+            "article-title":"The effects of transcranial magnetic stimulation on visual rivalry",
+            "volume-title":"Journal of Vision"
+        },
+        {
+            "key":"keyref126",
+            "author":"Pettigrew",
+            "first-page":"85",
+            "year":"2001",
+            "article-title":"Searching for the switch: Neural bases for perceptual rivalry alternations",
+            "volume-title":"Brain and Mind"
+        },
+        {
+            "key":"keyref127",
+            "author":"Pettigrew",
+            "first-page":"421",
+            "year":"1999",
+            "article-title":"Convergence of highly-specialised behaviour, eye movements and visual optics in the sandlance (Teleostei) and the chameleon (Reptilia)",
+            "volume-title":"Current Biology"
+        },
+        {
+            "key":"keyref128",
+            "author":"Pettigrew",
+            "first-page":"2141",
+            "year":"1998",
+            "volume-title":"A \u00e2\u20ac\u02dcsticky\u2019 interhemispheric switch in bipolar disorder? Proceedings of the Royal Society of London B: Biological Sciences"
+        },
+        {
+            "key":"keyref129",
+            "author":"Polonsky",
+            "first-page":"1153",
+            "year":"2000",
+            "article-title":"Neuronal activity in human primary visual cortex correlates with perception during binocular rivalry",
+            "volume-title":"Nature Neuroscience"
+        },
+        {
+            "key":"keyref130",
+            "author":"Ramachandran",
+            "first-page":"291",
+            "year":"1994",
+            "article-title":"Phantom limbs, neglect syndromes and Freudian psychology",
+            "volume-title":"International Review of Neurobiology"
+        },
+        {
+            "key":"keyref131",
+            "author":"Rattenborg",
+            "first-page":"397",
+            "year":"1999",
+            "article-title":"Half-awake to the risk of predation",
+            "volume-title":"Nature"
+        },
+        {
+            "key":"keyref132",
+            "author":"Rode",
+            "first-page":"245",
+            "year":"2012",
+            "article-title":"Facial macrosomatognosia and pain in a case of Wallenberg\u2019s syndrome: Selective effects of vestibular and transcutaneous stimulations",
+            "volume-title":"Neuropsychologia"
+        },
+        {
+            "key":"keyref133",
+            "author":"Rossetti",
+            "first-page":"375",
+            "year":"2002",
+            "article-title":"Reducing spatial neglect by visual and other sensory manipulations: Noncognitive (physiological) routes to the rehabilitation of a cognitive disorder",
+            "volume-title":"The cognitive and neural bases of spatial neglect",
+            "DOI":"10.1093\/acprof:oso\/9780198508335.003.0027",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"keyref134",
+            "author":"Sandrini",
+            "first-page":"516",
+            "year":"2011",
+            "article-title":"The use of transcranial magnetic stimulation in cognitive neuroscience: A new synthesis of methodological issues",
+            "volume-title":"Neuroscience & Biobehavioral Reviews"
+        },
+        {
+            "key":"keyref135",
+            "author":"Schaap",
+            "first-page":"359",
+            "year":"2001",
+            "article-title":"Phase differences in electrical discharge rhythms between neuronal populations of the left and right suprachiasmatic nuclei",
+            "volume-title":"Neuroscience"
+        },
+        {
+            "key":"keyref136",
+            "author":"Schm\u00c3\u00a4l",
+            "first-page":"473",
+            "year":"2000",
+            "article-title":"The localization of an imaginary target under the influence of caloric vestibular stimulation in healthy adults",
+            "volume-title":"European Archives of Otorhinolaryngology"
+        },
+        {
+            "key":"keyref137",
+            "author":"Shannahoff-Khalsa",
+            "first-page":"333",
+            "year":"2001",
+            "article-title":"Ultradian rhythms of alternating cerebral hemispheric EEG dominance are coupled to rapid eye movement and non-rapid eye movement stage 4 sleep in humans",
+            "volume-title":"Sleep Medicine"
+        },
+        {
+            "key":"keyref138",
+            "author":"Shannon",
+            "first-page":"8",
+            "year":"2011",
+            "article-title":"Genes contribute to the switching dynamics of bistable perception",
+            "volume-title":"Journal of Vision"
+        },
+        {
+            "key":"keyref139",
+            "author":"Sheinberg",
+            "first-page":"3408",
+            "year":"1997",
+            "volume-title":"Proceedings of the National Academy of Sciences USA"
+        },
+        {
+            "key":"keyref140",
+            "author":"Slotnick",
+            "first-page":"97",
+            "year":"2005",
+            "article-title":"Common neural substrates for the control and effects of visual attention and perceptual bistability",
+            "volume-title":"Cognitive Brain Research"
+        },
+        {
+            "key":"keyref141",
+            "author":"Sobel",
+            "first-page":"35",
+            "year":"1999",
+            "article-title":"The world smells different to each nostril",
+            "volume-title":"Nature"
+        },
+        {
+            "key":"keyref142",
+            "author":"Sterzer",
+            "first-page":"310",
+            "year":"2009",
+            "article-title":"The neural bases of multistable perception",
+            "volume-title":"Trends in Cognitive Sciences"
+        },
+        {
+            "key":"keyref143",
+            "author":"Sterzer",
+            "first-page":"908",
+            "year":"2002",
+            "article-title":"Neural correlates of spontaneous direction reversals in ambiguous apparent visual-motion",
+            "volume-title":"Neuroimage"
+        },
+        {
+            "key":"keyref144",
+            "author":"Srinivasan",
+            "first-page":"5435",
+            "year":"1999",
+            "article-title":"Increased synchronization of neuromagnetic responses during conscious perception",
+            "volume-title":"Journal of Neuroscience"
+        },
+        {
+            "key":"keyref145",
+            "author":"Tang",
+            "first-page":"e14455",
+            "year":"2010",
+            "article-title":"Intrinsic activity in the fly brain gates visual information during behavioral choices",
+            "volume-title":"PLoS One"
+        },
+        {
+            "key":"keyref146",
+            "author":"Tong",
+            "first-page":"502",
+            "year":"2006",
+            "article-title":"Neural bases of binocular rivalry",
+            "volume-title":"Trends in Cognitive Sciences"
+        },
+        {
+            "key":"keyref147",
+            "author":"van Alphen",
+            "article-title":"Drosophila strategies to study psychiatric disorders",
+            "volume-title":"Brain Research Bulletin",
+            "DOI":"10.1016\/j.brainresbull.2011.09.007",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"keyref148",
+            "author":"van Swinderen",
+            "first-page":"51",
+            "year":"2011",
+            "article-title":"Attention in Drosophila",
+            "volume-title":"International Review of Neurobiology",
+            "DOI":"10.1016\/B978-0-12-387003-2.00003-3",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"keyref149",
+            "author":"van Swinderen",
+            "first-page":"96",
+            "year":"2012",
+            "article-title":"Competing visual flicker reveals attention-like rivalry in the fly brain",
+            "volume-title":"Frontiers in Integrative Neuroscience"
+        },
+        {
+            "key":"keyref150",
+            "author":"Vialatte",
+            "first-page":"418",
+            "year":"2010",
+            "article-title":"Steady-state visually evoked potentials: Focus on essential paradigms and future perspectives",
+            "volume-title":"Progress in Neurobiology"
+        },
+        {
+            "key":"keyref151",
+            "author":"Vierck",
+            "article-title":"Further evidence for slow binocular rivalry rate as a trait marker for bipolar disorder",
+            "volume-title":"Australian and New Zealand Journal of Psychiatry",
+            "DOI":"10.1177\/0004867412474105",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"keyref152",
+            "author":"Wang",
+            "first-page":"e250",
+            "year":"2008",
+            "article-title":"Rapid interhemispheric switching during vocal production in a songbird",
+            "volume-title":"PLoS Biology"
+        },
+        {
+            "key":"keyref153",
+            "author":"Werntz",
+            "first-page":"39",
+            "year":"1983",
+            "article-title":"Alternating cerebral hemispheric activation and the lateralization of autonomic nervous function",
+            "volume-title":"Human Neurobiology"
+        },
+        {
+            "key":"keyref154",
+            "author":"Wunderlich",
+            "first-page":"1595",
+            "year":"2005",
+            "article-title":"Neural correlates of binocular rivalry in the human lateral geniculate nucleus",
+            "volume-title":"Nature Neuroscience"
+        },
+        {
+            "key":"keyref155",
+            "author":"Yan",
+            "first-page":"9017",
+            "year":"2005",
+            "article-title":"Two antiphase oscillations occur in each suprachiasmatic nucleus of behaviorally split hamsters",
+            "volume-title":"Journal of Neuroscience"
+        },
+        {
+            "key":"keyref156",
+            "author":"Zaretskaya",
+            "first-page":"2106",
+            "year":"2010",
+            "article-title":"Disrupting parietal function prolongs dominance durations in binocular rivalry",
+            "volume-title":"Current Biology"
+        },
+        {
+            "key":"keyref157",
+            "author":"Zhang",
+            "first-page":"362",
+            "year":"2011",
+            "article-title":"Binocular rivalry requires visual attention",
+            "volume-title":"Neuron"
+        },
+        {
+            "key":"keyref158",
+            "author":"zu Eulenburg",
+            "first-page":"162",
+            "year":"2012",
+            "article-title":"Meta-analytical definition and functional connectivity of the human vestibular cortex",
+            "volume-title":"Neuroimage"
+        }
+    ],
+    "container-title":"The Constitution of Visual Consciousness",
+    "original-title":[
+
+    ],
+    "deposited":{
+        "date-parts":[
+            [
+                2019,
+                8,
+                8
+            ]
+        ],
+        "date-time":"2019-08-08T20:48:15Z",
+        "timestamp":1565297295000
+    },
+    "score":1.0,
+    "subtitle":[
+
+    ],
+    "short-title":[
+
+    ],
+    "issued":{
+        "date-parts":[
+            [
+                2013
+            ]
+        ]
+    },
+    "ISBN":[
+        "9789027213570",
+        "9789027271822"
+    ],
+    "references-count":158,
+    "URL":"http:\/\/dx.doi.org\/10.1075\/aicr.90.09ngo",
+    "relation":{
+        "cites":[
+
+        ]
+    },
+    "ISSN":[
+        "1381-589X"
+    ]
+}

@@ -19,6 +19,74 @@
 #
 
 
+# A list of citeproc types can be found here:
+# https://github.com/citation-style-language/schema/blob/master/csl-types.rnc
+# This list is not complete, so we extend it with types from CrossRef
+# https://api.crossref.org/types
+
+CITEPROC_PUBTYPE_TRANSLATION = {
+    'article' : 'journal-article',
+    'article-journal' : 'journal-article',
+    'article-magazine' : 'other',
+    'article-newspaper' : 'other',
+    'bill' : 'other',
+    'book' : 'book',
+    'book-chapter' : 'book-chapter',
+    'book-part' : 'book-chapter',
+    'book-section' : 'book-chapter',
+    'book-series' : 'other',
+    'book-set' : 'other',
+    'book-track' : 'other',
+    'broadcast' : 'other',
+    'chapter' : 'book-chapter',
+    'component' : 'other',
+    'dataset' : 'dataset',
+    'dissertation' : 'thesis',
+    'edited-book' : 'book',
+    'entry' : 'reference-entry',
+    'entry-dictionary' : 'reference-entry',
+    'entry-encyclopedia' : 'reference-entry',
+    'figure' : 'other',
+    'graphic' : 'other',
+    'interview' : 'other',
+    'journal' : 'other',
+    'journal-article' : 'journal-article',
+    'journal-issue' : 'journal-issue',
+    'journal-volume' : 'journal-issue',
+    'legal_case' : 'other',
+    'legislation' : 'other',
+    'manuscript' : 'other',
+    'map' : 'other',
+    'motion_picture' : 'other',
+    'monograph' : 'book',
+    'musical_score' : 'other',
+    'other' : 'other',
+    'pamphlet' : 'other',
+    'paper-conference' : 'proceedings-article',
+    'patent' : 'other',
+    'peer-review' : 'reference-entry',
+    'personal_communication' : 'other',
+    'preprint' : 'preprint',
+    'post' : 'other',
+    'post-weblog' : 'other',
+    'proceedings' : 'proceedings',
+    'proceedings-article' : 'proceedings-article',
+    'proceedings-series' : 'other',
+    'standard' : 'other',
+    'standard-series' : 'other',
+    'reference-book' : 'reference-entry',
+    'reference-entry' : 'reference-entry',
+    'report' : 'report',
+    'report-series' : 'other',
+    'review' : 'other',
+    'review-book' : 'other',
+    'song' : 'other',
+    'speech' : 'other',
+    'thesis' : 'thesis',
+    'treaty' : 'other',
+    'unknown' : 'other',
+    'webpage' : 'other',
+}
 
 # arXiv: they are all 'text'
 # DOAJ: all 'article'
@@ -100,5 +168,3 @@ SET_TO_PUBTYPE = {
 CROSSREF_PUBTYPE_ALIASES = {
         'article': 'journal-article',
         }
-
-

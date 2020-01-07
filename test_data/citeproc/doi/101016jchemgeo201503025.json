@@ -1,0 +1,211 @@
+{
+    "indexed":{
+        "date-parts":[
+            [
+                2019,
+                2,
+                14
+            ]
+        ],
+        "date-time":"2019-02-14T22:49:08Z",
+        "timestamp":1550184548534
+    },
+    "reference-count":92,
+    "publisher":"Elsevier BV",
+    "license":[
+        {
+            "URL":"https:\/\/www.elsevier.com\/tdm\/userlicense\/1.0\/",
+            "start":{
+                "date-parts":[
+                    [
+                        2015,
+                        12,
+                        1
+                    ]
+                ],
+                "date-time":"2015-12-01T00:00:00Z",
+                "timestamp":1448928000000
+            },
+            "delay-in-days":0,
+            "content-version":"tdm"
+        }
+    ],
+    "funder":[
+        {
+            "name":"LABEX VOLTAIRE",
+            "award":[
+                "308665",
+                "282759"
+            ]
+        },
+        {
+            "name":"FP7-ENV-2011\/2012",
+            "award":[
+
+            ]
+        },
+        {
+            "name":"MED-SUV",
+            "award":[
+
+            ]
+        },
+        {
+            "name":"Italian Civil Defense",
+            "award":[
+                "V3-4"
+            ]
+        }
+    ],
+    "content-domain":{
+        "domain":[
+            "elsevier.com",
+            "sciencedirect.com"
+        ],
+        "crossmark-restriction":true
+    },
+    "published-print":{
+        "date-parts":[
+            [
+                2015,
+                12
+            ]
+        ]
+    },
+    "DOI":"10.1016\/j.chemgeo.2015.03.025",
+    "type":"article-journal",
+    "created":{
+        "date-parts":[
+            [
+                2015,
+                4,
+                18
+            ]
+        ],
+        "date-time":"2015-04-18T08:23:51Z",
+        "timestamp":1429345431000
+    },
+    "page":"104-116",
+    "update-policy":"http:\/\/dx.doi.org\/10.1016\/elsevier_cm_policy",
+    "source":"Crossref",
+    "is-referenced-by-count":6,
+    "title":"The solubility of sulfur in hydrous basaltic melts",
+    "prefix":"10.1016",
+    "volume":"418",
+    "author":[
+        {
+            "given":"Priscille",
+            "family":"Lesne",
+            "sequence":"first",
+            "affiliation":[
+
+            ]
+        },
+        {
+            "given":"Bruno",
+            "family":"Scaillet",
+            "sequence":"additional",
+            "affiliation":[
+
+            ]
+        },
+        {
+            "given":"Michel",
+            "family":"Pichavant",
+            "sequence":"additional",
+            "affiliation":[
+
+            ]
+        }
+    ],
+    "member":"78",
+    "container-title":"Chemical Geology",
+    "original-title":[
+
+    ],
+    "language":"en",
+    "link":[
+        {
+            "URL":"https:\/\/api.elsevier.com\/content\/article\/PII:S0009254115001734?httpAccept=text\/plain",
+            "content-type":"text\/plain",
+            "content-version":"vor",
+            "intended-application":"text-mining"
+        },
+        {
+            "URL":"https:\/\/api.elsevier.com\/content\/article\/PII:S0009254115001734?httpAccept=text\/xml",
+            "content-type":"text\/xml",
+            "content-version":"vor",
+            "intended-application":"text-mining"
+        }
+    ],
+    "deposited":{
+        "date-parts":[
+            [
+                2018,
+                9,
+                23
+            ]
+        ],
+        "date-time":"2018-09-23T10:25:37Z",
+        "timestamp":1537698337000
+    },
+    "score":1.0,
+    "subtitle":[
+
+    ],
+    "short-title":[
+
+    ],
+    "issued":{
+        "date-parts":[
+            [
+                2015,
+                12
+            ]
+        ]
+    },
+    "references-count":92,
+    "alternative-id":[
+        "S0009254115001734"
+    ],
+    "URL":"http:\/\/dx.doi.org\/10.1016\/j.chemgeo.2015.03.025",
+    "relation":{
+
+    },
+    "ISSN":[
+        "0009-2541"
+    ],
+    "container-title-short":"Chemical Geology",
+    "assertion":[
+        {
+            "value":"Elsevier",
+            "name":"publisher",
+            "label":"This article is maintained by"
+        },
+        {
+            "value":"The solubility of sulfur in hydrous basaltic melts",
+            "name":"articletitle",
+            "label":"Article Title"
+        },
+        {
+            "value":"Chemical Geology",
+            "name":"journaltitle",
+            "label":"Journal Title"
+        },
+        {
+            "value":"https:\/\/doi.org\/10.1016\/j.chemgeo.2015.03.025",
+            "name":"articlelink",
+            "label":"CrossRef DOI link to publisher maintained version"
+        },
+        {
+            "value":"article",
+            "name":"content_type",
+            "label":"Content Type"
+        },
+        {
+            "value":"Copyright \u00a9 2015 Published by Elsevier B.V.",
+            "name":"copyright",
+            "label":"Copyright"
+        }
+    ]
+}

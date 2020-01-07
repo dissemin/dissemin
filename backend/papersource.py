@@ -42,6 +42,23 @@ class PaperSource(object):
         """
         self.max_results = max_results
 
+
+    def associate_researchers(self, paper):
+        """
+        Associate known ORCIDs to the corresponding researchers
+        :params paper: Paper object
+        :returns: Paper object with updated researchers
+        """
+        for idx, author in enumerate(paper.authors_list):
+            if author['orcid']:
+                try:
+                    researcher = Researcher.objects.get(orcid=author['orcid'])
+                    paper.set_researcher(idx, researcher.pk)
+                except Researcher.DoesNotExist:
+                    pass
+
+        return paper
+
     def fetch_papers(self, researcher):
         """
         This function is the one subclasses should reimplement.
@@ -79,23 +96,15 @@ class PaperSource(object):
 
     def save_paper(self, bare_paper, researcher):
         # Save the paper as non-bare
-        p = Paper.from_bare(bare_paper)
+        paper = Paper.from_bare(bare_paper)
 
         # Associate known ORCIDs to the corresponding researchers
-        for idx, author in enumerate(p.authors_list):
-            if author['orcid']:
-                try:
-                    researcher = Researcher.objects.get(orcid=author['orcid'])
-                    p.set_researcher(idx, researcher.id)
-                except Researcher.DoesNotExist:
-                    p.set_researcher(idx, None)
-            else:
-                p.set_researcher(idx, None)
+        paper = self.associate_researchers(paper)
 
-        p.save()
-        p.update_index()
+        paper.save()
+        paper.update_index()
 
-        return p
+        return paper
 
     def update_empty_orcid(self, researcher, val):
         """

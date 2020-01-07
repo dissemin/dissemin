@@ -1,0 +1,157 @@
+{
+    "indexed":{
+        "date-parts":[
+            [
+                2019,
+                2,
+                18
+            ]
+        ],
+        "date-time":"2019-02-18T02:06:56Z",
+        "timestamp":1550455616493
+    },
+    "reference-count":4,
+    "publisher":"Elsevier BV",
+    "issue":"21-22",
+    "license":[
+        {
+            "URL":"https:\/\/www.elsevier.com\/tdm\/userlicense\/1.0\/",
+            "start":{
+                "date-parts":[
+                    [
+                        2012,
+                        11,
+                        1
+                    ]
+                ],
+                "date-time":"2012-11-01T00:00:00Z",
+                "timestamp":1351728000000
+            },
+            "delay-in-days":0,
+            "content-version":"tdm"
+        }
+    ],
+    "content-domain":{
+        "domain":[
+
+        ],
+        "crossmark-restriction":false
+    },
+    "published-print":{
+        "date-parts":[
+            [
+                2012,
+                11
+            ]
+        ]
+    },
+    "DOI":"10.1016\/j.crma.2012.10.021",
+    "type":"article-journal",
+    "created":{
+        "date-parts":[
+            [
+                2012,
+                11,
+                1
+            ]
+        ],
+        "date-time":"2012-11-01T22:15:26Z",
+        "timestamp":1351808126000
+    },
+    "page":"967-970",
+    "source":"Crossref",
+    "is-referenced-by-count":0,
+    "title":"A construction of conformal-harmonic maps",
+    "prefix":"10.1016",
+    "volume":"350",
+    "author":[
+        {
+            "given":"Olivier",
+            "family":"Biquard",
+            "sequence":"first",
+            "affiliation":[
+
+            ]
+        },
+        {
+            "given":"Farid",
+            "family":"Madani",
+            "sequence":"additional",
+            "affiliation":[
+
+            ]
+        }
+    ],
+    "member":"78",
+    "container-title":"Comptes Rendus Mathematique",
+    "original-title":[
+
+    ],
+    "language":"en",
+    "link":[
+        {
+            "URL":"https:\/\/api.elsevier.com\/content\/article\/PII:S1631073X12003111?httpAccept=text\/xml",
+            "content-type":"text\/xml",
+            "content-version":"vor",
+            "intended-application":"text-mining"
+        },
+        {
+            "URL":"https:\/\/api.elsevier.com\/content\/article\/PII:S1631073X12003111?httpAccept=text\/plain",
+            "content-type":"text\/plain",
+            "content-version":"vor",
+            "intended-application":"text-mining"
+        }
+    ],
+    "deposited":{
+        "date-parts":[
+            [
+                2018,
+                10,
+                21
+            ]
+        ],
+        "date-time":"2018-10-21T20:51:51Z",
+        "timestamp":1540155111000
+    },
+    "score":1.0,
+    "subtitle":[
+
+    ],
+    "short-title":[
+
+    ],
+    "issued":{
+        "date-parts":[
+            [
+                2012,
+                11
+            ]
+        ]
+    },
+    "references-count":4,
+    "journal-issue":{
+        "published-print":{
+            "date-parts":[
+                [
+                    2012,
+                    11
+                ]
+            ]
+        },
+        "issue":"21-22"
+    },
+    "alternative-id":[
+        "S1631073X12003111"
+    ],
+    "URL":"http:\/\/dx.doi.org\/10.1016\/j.crma.2012.10.021",
+    "relation":{
+
+    },
+    "ISSN":[
+        "1631-073X"
+    ],
+    "subject":[
+        "General Mathematics"
+    ],
+    "container-title-short":"Comptes Rendus Mathematique"
+}

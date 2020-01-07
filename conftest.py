@@ -1,8 +1,10 @@
+import hashlib
 import json
 import os
 import pytest
 import re
 import requests
+import responses
 import sys
 
 
@@ -10,12 +12,15 @@ from datetime import date
 from html5validator import Validator as HTML5Validator
 from io import BytesIO
 from tempfile import NamedTemporaryFile
+from urllib.parse import parse_qs
+from urllib.parse import urlparse
 
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.core.management import call_command
 from django.urls import reverse
+from django.utils.text import slugify
 
 from deposit.models import Repository
 from dissemin.settings import BASE_DIR
@@ -78,11 +83,59 @@ def oaisource(db):
 
 
 @pytest.fixture
+def dummy_journal(dummy_publisher):
+    """
+    Empty Journal with FK to Publisher
+    """
+    j = Journal.objects.create(
+        publisher=dummy_publisher,
+    )
+
+    return j
+
+
+@pytest.fixture
 def dummy_oaisource(oaisource):
     """
     Provides a dummy OaiSource if you just need a OaiSource, but do not do anything with it. Use this, if you need just a single OaiSource.
     """
     return oaisource.dummy_oaisource()
+
+
+@pytest.fixture
+def dummy_oairecord(dummy_paper, dummy_oaisource):
+    """
+    Empty OaiRecord with FK to empty_paper and empty OaiSource
+    """
+    o = OaiRecord.objects.create(
+        source=dummy_oaisource,
+        about=dummy_paper,
+        identifier='dummy',
+    )
+
+    return o
+
+
+@pytest.fixture
+def dummy_paper(db):
+    """
+    Just an empty paper
+    """
+    p =  Paper.objects.create(
+        pubdate='2019-10-08',
+    )
+
+    return p
+
+
+@pytest.fixture
+def dummy_publisher():
+    """
+    Empty Publisher
+    """
+    p = Publisher.objects.create()
+
+    return p
 
 
 @pytest.fixture
@@ -159,6 +212,69 @@ def dummy_repository(repository):
     Returns a dummy_repository with a faked dummy-protocol where you need only the repository, but do not anything with it. Use this if you need a single dummy repository.
     """
     return repository.dummy_repository()
+
+@pytest.fixture
+def requests_mocker():
+    with responses.RequestsMock() as rsps:
+        yield rsps
+
+@pytest.fixture
+def mock_doi(requests_mocker):
+    def request_callback(request):
+        doi = request.path_url[1:]
+        f_name = '{}.json'.format(slugify(doi))
+        f_path = os.path.join(settings.BASE_DIR, 'test_data', 'citeproc', 'doi', f_name)
+        headers = {
+            'Content-Type' : 'application/citeproc+json'
+        }
+        try:
+            with open(f_path, 'r') as f:
+                body = f.read()
+                return (200, headers, body)
+        except FileNotFoundError:
+            print('File not found: {} - Returning 404'.format(f_path))
+            return (404, {}, None)
+
+    requests_mocker.add_callback(
+        requests_mocker.GET,
+        re.compile('{}(.*)'.format(settings.DOI_RESOLVER_ENDPOINT)),
+        callback=request_callback
+    )
+    requests_mocker.add_passthru('http://doi-cache.dissem.in/zotero/')
+    requests_mocker.add_passthru('https://doi-cache.dissem.in/zotero/')
+    requests_mocker.add_passthru('http://localhost') # Our VNU server runs on localhost
+    requests_mocker.add_passthru('https://pub.orcid.org/')
+    requests_mocker.add_passthru('https://sandbox.zenodo.org/')
+
+    return requests_mocker
+
+@pytest.fixture
+def mock_crossref(requests_mocker):
+    def request_callback(request):
+        query = parse_qs(urlparse(request.url).query)
+        query_f = query['filter'][0].split(',')
+        slugified_dois = [slugify(item.split(':')[1]) for item in query_f]
+        # Since the file name might be to long if a lot of DOIs are requested, we hash them
+        m = hashlib.sha256()
+        m.update("-".join(slugified_dois).encode('utf-8'))
+        f_name = '{}.json'.format(m.hexdigest())
+        f_path = os.path.join(settings.BASE_DIR, 'test_data', 'citeproc', 'crossref', f_name)
+        print("curl \"{}\" > {}".format(request.url, f_path))
+        with open(f_path, 'r') as f:
+            body = f.read()
+            return (200, {}, body)
+
+    requests_mocker.add_callback(
+        requests_mocker.GET,
+        re.compile(r'https://api.crossref.org/works'),
+        callback=request_callback
+    )
+    requests_mocker.add_passthru('http://doi-cache.dissem.in/zotero/')
+    requests_mocker.add_passthru('http://localhost') # Our VNU server runs on localhost
+    requests_mocker.add_passthru('https://pub.orcid.org/')
+    requests_mocker.add_passthru('https://sandbox.zenodo.org/')
+
+    return requests_mocker
 
 
 @pytest.fixture

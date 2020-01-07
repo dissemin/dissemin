@@ -1,0 +1,348 @@
+{
+    "indexed":{
+        "date-parts":[
+            [
+                2019,
+                2,
+                17
+            ]
+        ],
+        "date-time":"2019-02-17T01:06:55Z",
+        "timestamp":1550365615558
+    },
+    "reference-count":18,
+    "publisher":"Wiley",
+    "issue":"23-24",
+    "license":[
+        {
+            "URL":"http:\/\/doi.wiley.com\/10.1002\/tdm_license_1.1",
+            "start":{
+                "date-parts":[
+                    [
+                        2015,
+                        9,
+                        1
+                    ]
+                ],
+                "date-time":"2015-09-01T00:00:00Z",
+                "timestamp":1441065600000
+            },
+            "delay-in-days":7561,
+            "content-version":"tdm"
+        }
+    ],
+    "content-domain":{
+        "domain":[
+
+        ],
+        "crossmark-restriction":false
+    },
+    "published-print":{
+        "date-parts":[
+            [
+                1994,
+                12,
+                19
+            ]
+        ]
+    },
+    "DOI":"10.1002\/ange.19941062339",
+    "type":"article-journal",
+    "created":{
+        "date-parts":[
+            [
+                2007,
+                7,
+                16
+            ]
+        ],
+        "date-time":"2007-07-16T09:26:17Z",
+        "timestamp":1184577977000
+    },
+    "page":"2582-2584",
+    "source":"Crossref",
+    "is-referenced-by-count":18,
+    "title":"\u201cAntennen-Effekt\u201d in multichromophoren Cyclodextrinen",
+    "prefix":"10.1002",
+    "volume":"106",
+    "author":[
+        {
+            "given":"Ludovic",
+            "family":"Jullien",
+            "sequence":"first",
+            "affiliation":[
+
+            ]
+        },
+        {
+            "given":"Josette",
+            "family":"Canceill",
+            "sequence":"additional",
+            "affiliation":[
+
+            ]
+        },
+        {
+            "given":"Bernard",
+            "family":"Valeur",
+            "sequence":"additional",
+            "affiliation":[
+
+            ]
+        },
+        {
+            "given":"Elisabeth",
+            "family":"Bardez",
+            "sequence":"additional",
+            "affiliation":[
+
+            ]
+        },
+        {
+            "given":"Jean-Marie",
+            "family":"Lehn",
+            "sequence":"additional",
+            "affiliation":[
+
+            ]
+        }
+    ],
+    "member":"311",
+    "reference":[
+        {
+            "key":"10.1002\/ange.19941062339-BIB1",
+            "author":"Michel-Beyerle)",
+            "year":"1985",
+            "unstructured":"Antennas and Reaction Centers in Photosynthetic Bacteria (Hrsg.: Springer, Berlin, 1985.",
+            "volume-title":"Antennas and Reaction Centers in Photosynthetic Bacteria",
+            "DOI":"10.1007\/978-3-642-82688-7",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"10.1002\/ange.19941062339-BIB2.1",
+            "author":"Alpha",
+            "volume":"99",
+            "first-page":"1310",
+            "year":"1987",
+            "journal-title":"Angew. Chem.",
+            "DOI":"10.1002\/ange.19870991226",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"10.1002\/ange.19941062339-BIB2.2",
+            "volume":"26",
+            "first-page":"266",
+            "year":"1987",
+            "journal-title":"Angew. Chem. Int. Ed. Engl.",
+            "DOI":"10.1002\/anie.198702661",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"10.1002\/ange.19941062339-BIB3",
+            "author":"Balzani",
+            "year":"1990",
+            "unstructured":", Supramolecular Photochemistry, Ellis Horwood, New York, 1990.",
+            "volume-title":"Supramolecular Photochemistry"
+        },
+        {
+            "key":"10.1002\/ange.19941062339-BIB4",
+            "author":"Balzani",
+            "first-page":"233",
+            "year":"1992",
+            "unstructured":"in Photoprocesses in Transition Metal Complexes, Biosystems and Other Molecules. Experiment and Theory (Hrsg.: Kluwer, Dordrecht, 1992, S. 233.",
+            "volume-title":"Photoprocesses in Transition Metal Complexes, Biosystems and Other Molecules. Experiment and Theory",
+            "DOI":"10.1007\/978-94-011-2698-4_10",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"10.1002\/ange.19941062339-BIB5",
+            "author":"Guillet",
+            "year":"1985",
+            "unstructured":"Polymer Photophysics and Photochemistry, Cambridge University Press, Cambridge, Gro\u00dfbritannien, 1985.",
+            "volume-title":"Polymer Photophysics and Photochemistry"
+        },
+        {
+            "key":"10.1002\/ange.19941062339-BIB6",
+            "author":"Webber",
+            "volume":"90",
+            "first-page":"1469",
+            "year":"1990",
+            "journal-title":"Chem. Rev.",
+            "DOI":"10.1021\/cr00106a005",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"10.1002\/ange.19941062339-BIB7",
+            "author":"Berberan-Santos",
+            "volume":"114",
+            "first-page":"6427",
+            "year":"1992",
+            "journal-title":"J. Am. Chem. Soc.",
+            "DOI":"10.1021\/ja00042a021",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"10.1002\/ange.19941062339-BIB8",
+            "author":"Berberan-Santos",
+            "volume":"97",
+            "first-page":"11376",
+            "year":"1993",
+            "journal-title":"J. Phys. Chem.",
+            "DOI":"10.1021\/j100146a006",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"10.1002\/ange.19941062339-BIB9",
+            "author":"Gravett",
+            "volume":"115",
+            "first-page":"5970",
+            "year":"1993",
+            "journal-title":"J. Am. Chem. Soc.",
+            "DOI":"10.1021\/ja00067a011",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"10.1002\/ange.19941062339-BIB10",
+            "author":"Bourson",
+            "volume":"72",
+            "first-page":"367",
+            "year":"1989",
+            "journal-title":"Opt. Commun.",
+            "DOI":"10.1016\/0030-4018(89)90441-0",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"10.1002\/ange.19941062339-BIB11",
+            "author":"Kajtar",
+            "volume":"110",
+            "first-page":"327",
+            "year":"1982",
+            "journal-title":"Acta Chim. Acad. Sci. Hung."
+        },
+        {
+            "key":"10.1002\/ange.19941062339-BIB12",
+            "author":"Connors",
+            "year":"1987",
+            "unstructured":"Binding Constants. The Measurement of Complex Stability, Wiley, Chichester, 1987.",
+            "volume-title":"Binding Constants. The Measurement of Complex Stability"
+        },
+        {
+            "key":"10.1002\/ange.19941062339-BIB13",
+            "author":"Inoue",
+            "volume":"115",
+            "first-page":"475",
+            "year":"1993",
+            "journal-title":"J. Am. Chem. Soc.",
+            "DOI":"10.1021\/ja00055a017",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"10.1002\/ange.19941062339-BIB14",
+            "author":"Sabbatini",
+            "volume":"123",
+            "first-page":"201",
+            "year":"1993",
+            "journal-title":"Coord. Chem. Rev.",
+            "DOI":"10.1016\/0010-8545(93)85056-A",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"10.1002\/ange.19941062339-BIB15",
+            "author":"Baer",
+            "volume":"228",
+            "first-page":"307",
+            "year":"1992",
+            "journal-title":"Carbohydr. Res.",
+            "DOI":"10.1016\/S0008-6215(00)90568-8",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"10.1002\/ange.19941062339-BIB16",
+            "author":"Bourson",
+            "volume":"93",
+            "first-page":"3871",
+            "year":"1989",
+            "journal-title":"J. Phys. Chem.",
+            "DOI":"10.1021\/j100346a099",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"10.1002\/ange.19941062339-BIB17",
+            "author":"Frugoni",
+            "volume":"87",
+            "first-page":"403",
+            "year":"1957",
+            "journal-title":"Gazz. Chim. Ital."
+        }
+    ],
+    "container-title":"Angewandte Chemie",
+    "original-title":[
+
+    ],
+    "language":"de",
+    "link":[
+        {
+            "URL":"https:\/\/api.wiley.com\/onlinelibrary\/tdm\/v1\/articles\/10.1002%2Fange.19941062339",
+            "content-type":"unspecified",
+            "content-version":"vor",
+            "intended-application":"text-mining"
+        },
+        {
+            "URL":"https:\/\/onlinelibrary.wiley.com\/doi\/full\/10.1002\/ange.19941062339",
+            "content-type":"unspecified",
+            "content-version":"vor",
+            "intended-application":"similarity-checking"
+        }
+    ],
+    "deposited":{
+        "date-parts":[
+            [
+                2019,
+                2,
+                1
+            ]
+        ],
+        "date-time":"2019-02-01T22:51:43Z",
+        "timestamp":1549061503000
+    },
+    "score":1.0,
+    "subtitle":[
+
+    ],
+    "short-title":[
+
+    ],
+    "issued":{
+        "date-parts":[
+            [
+                1994,
+                12,
+                19
+            ]
+        ]
+    },
+    "references-count":18,
+    "journal-issue":{
+        "published-print":{
+            "date-parts":[
+                [
+                    1994,
+                    12,
+                    19
+                ]
+            ]
+        },
+        "issue":"23-24"
+    },
+    "URL":"http:\/\/dx.doi.org\/10.1002\/ange.19941062339",
+    "relation":{
+        "cites":[
+
+        ]
+    },
+    "ISSN":[
+        "0044-8249",
+        "1521-3757"
+    ],
+    "container-title-short":"Angew. Chem."
+}

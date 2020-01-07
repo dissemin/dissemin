@@ -81,6 +81,7 @@ class TestPaperPages():
     def test_invalid_orcid(self, check_status):
         check_status(404, 'researcher-by-orcid',  kwargs={'orcid': '0000-0002-2803-9724'})
 
+    @pytest.mark.usefixtures('mock_doi')
     def test_invisible_paper(self, db, check_status):
         """
         If a paper is marked as invisible, then accessing it returns 404
@@ -90,6 +91,8 @@ class TestPaperPages():
         p.save()
         check_status(404, 'paper', kwargs={'pk': p.id, 'slug': p.slug})
 
+
+    @pytest.mark.usefixtures('mock_doi')
     def test_missing_info_in_pub(self, db, check_page):
         p = Paper.create_by_doi('10.1007/978-3-642-14363-2_7')
         check_page(200, 'paper', kwargs={'pk': p.id, 'slug': p.slug})
@@ -105,13 +108,13 @@ class TestPaperPages():
         publi = OaiRecord.objects.filter(doi__isnull=False)[0]
         check_permanent_redirect('paper-doi', kwargs={'doi': publi.doi}, url=publi.about.url)
 
+    @pytest.mark.usefixtures('mock_doi')
     def test_paper_by_doi_escaped(self, check_permanent_redirect):
         """
         Automatically unescape DOIs, for issue
         https://github.com/dissemin/dissemin/issues/517
         """
         paper = Paper.create_by_doi('10.1175/1520-0426(2003)020<0383%3ARCAACO>2.0.CO%3B2')
-        paper.save()
         check_permanent_redirect(
             'paper-doi',
             kwargs={'doi':'10.1175%2F1520-0426%282003%29020%3C0383%3ARCAACO%3E2.0.CO%3B2'},

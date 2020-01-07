@@ -68,8 +68,6 @@ class PaperSourceTest(TestCase):
 
     def test_fetch(self):
         papers = list(self.source.fetch_papers(self.researcher))
-        for paper in papers:
-            paper = Paper.from_bare(paper)
         self.assertTrue(len(papers) > 1)
         self.check_papers(papers)
 

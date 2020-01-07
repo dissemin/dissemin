@@ -1,15 +1,14 @@
-'''
-Created on 21 févr. 2019
-
-@author: antonin
-'''
+import pytest
 
 from django.contrib.auth.models import User
+
 from dissemin.celery import app as celery_app
-from papers.tests.test_ajax import JsonRenderingTest
+
 from papers.models import Paper
+from papers.tests.test_ajax import JsonRenderingTest
 from publishers.tests.test_romeo import RomeoAPIStub
 
+@pytest.mark.usefixtures('mock_doi')
 class PublisherAjaxTest(JsonRenderingTest):
 
     @classmethod

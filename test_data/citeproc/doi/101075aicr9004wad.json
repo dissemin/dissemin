@@ -1,0 +1,930 @@
+{
+    "indexed":{
+        "date-parts":[
+            [
+                2019,
+                11,
+                25
+            ]
+        ],
+        "date-time":"2019-11-25T17:33:04Z",
+        "timestamp":1574703184419
+    },
+    "publisher-location":"Amsterdam",
+    "reference-count":111,
+    "publisher":"John Benjamins Publishing Company",
+    "isbn-type":[
+        {
+            "value":"9789027213570",
+            "type":"print"
+        },
+        {
+            "value":"9789027271822",
+            "type":"electronic"
+        }
+    ],
+    "content-domain":{
+        "domain":[
+
+        ],
+        "crossmark-restriction":false
+    },
+    "published-print":{
+        "date-parts":[
+            [
+                2013
+            ]
+        ]
+    },
+    "DOI":"10.1075\/aicr.90.04wad",
+    "type":"chapter",
+    "created":{
+        "date-parts":[
+            [
+                2014,
+                3,
+                23
+            ]
+        ],
+        "date-time":"2014-03-23T15:09:57Z",
+        "timestamp":1395587397000
+    },
+    "page":"77-108",
+    "source":"Crossref",
+    "is-referenced-by-count":10,
+    "title":"Early views on binocular rivalry",
+    "prefix":"10.1075",
+    "author":[
+        {
+            "given":"Nicholas J.",
+            "family":"Wade",
+            "sequence":"first",
+            "affiliation":[
+
+            ]
+        },
+        {
+            "given":"Trung T.",
+            "family":"Ngo",
+            "sequence":"additional",
+            "affiliation":[
+
+            ]
+        }
+    ],
+    "member":"1757",
+    "reference":[
+        {
+            "key":"keyref1",
+            "author":"Aguilonius",
+            "year":"1613",
+            "volume-title":"Opticorum Libri Sex. Philosophis juxta ac Mathematicis utiles"
+        },
+        {
+            "key":"keyref2",
+            "author":"Alhazen",
+            "year":"1572",
+            "volume-title":"Opticae Thesaurus"
+        },
+        {
+            "key":"keyref3",
+            "author":"Angell",
+            "year":"1904",
+            "volume-title":"Psychology: An introductory study of the structure and function of human consciousness"
+        },
+        {
+            "key":"keyref4",
+            "author":"Angell",
+            "first-page":"61",
+            "year":"1907",
+            "article-title":"The province of functional psychology",
+            "volume-title":"Psychological Review"
+        },
+        {
+            "key":"keyref5",
+            "author":"B\u00c3\u00a1r\u00c3\u00a1ny",
+            "first-page":"296",
+            "year":"1947",
+            "article-title":"The influence of some central nervous depressants on the reciprocal inhibition between the two retinae as manifested in retinal rivalry",
+            "volume-title":"Acta Physiologica Scandinavica"
+        },
+        {
+            "key":"keyref6",
+            "author":"Barlow",
+            "first-page":"327",
+            "year":"1967",
+            "article-title":"The neural mechanism of binocular depth discrimination",
+            "volume-title":"Journal of Physiology",
+            "DOI":"10.1113\/jphysiol.1967.sp008360",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"keyref7",
+            "author":"Bell",
+            "year":"1803",
+            "volume-title":"The anatomy of the human body"
+        },
+        {
+            "key":"keyref8",
+            "author":"Blake",
+            "first-page":"1",
+            "year":"2005",
+            "article-title":"Landmarks in the history of binocular rivalry",
+            "volume-title":"Binocular rivalry"
+        },
+        {
+            "key":"keyref9",
+            "author":"Bose",
+            "year":"1902",
+            "volume-title":"Response in the living and non-living"
+        },
+        {
+            "key":"keyref10",
+            "author":"Bose",
+            "year":"1907",
+            "volume-title":"Comparative electro-physiology: A physico-physiologcal study",
+            "DOI":"10.5962\/bhl.title.29620",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"keyref11",
+            "author":"Braunstein",
+            "year":"1976",
+            "volume-title":"Depth perception through motion"
+        },
+        {
+            "key":"keyref12",
+            "author":"Breese",
+            "first-page":"1",
+            "year":"1899",
+            "article-title":"On inhibition",
+            "volume-title":"Psychological Monographs"
+        },
+        {
+            "key":"keyref13",
+            "author":"Breese",
+            "first-page":"410",
+            "year":"1909",
+            "article-title":"Binocular rivalry",
+            "volume-title":"Psychological Review"
+        },
+        {
+            "key":"keyref14",
+            "author":"Breese",
+            "year":"1917",
+            "volume-title":"Psychology",
+            "DOI":"10.1037\/12388-000",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"keyref15",
+            "author":"Brewster",
+            "first-page":"349",
+            "year":"1844",
+            "article-title":"On the law of visible position in single and binocular vision, and on the representation of solid figures by the union of dissimilar plane pictures on the retina",
+            "volume-title":"Transactions of the Royal Society of Edinburgh"
+        },
+        {
+            "key":"keyref16",
+            "author":"Brewster",
+            "year":"1855",
+            "volume-title":"Memoirs of the life, writings, and discoveries of Sir Isaac Newton"
+        },
+        {
+            "key":"keyref17",
+            "author":"Br\u00c3\u00bccke",
+            "first-page":"459",
+            "year":"1841",
+            "article-title":"Ueber die stereoskopischen Erscheinungen und Wheatstone\u2019s Angriff auf die Lehre von den identischen Stellen der Netzh\u00c3\u00a4ute",
+            "volume-title":"Archiv f\u00c3\u00bcr Anatomie, Physiologie und wissenschaftliche Medicin"
+        },
+        {
+            "key":"keyref18",
+            "author":"Cattell",
+            "first-page":"20",
+            "year":"1933",
+            "article-title":"Temperament tests. II. Tests",
+            "volume-title":"British Journal of Psychology"
+        },
+        {
+            "key":"keyref19",
+            "author":"Cattell",
+            "first-page":"321",
+            "year":"1949",
+            "article-title":"The varieties of structural rigidity",
+            "volume-title":"Journal of Personality"
+        },
+        {
+            "key":"keyref20",
+            "author":"Desaguliers",
+            "first-page":"448",
+            "year":"1716",
+            "article-title":"A plain and easy experiment to confirm Sir Isaac Newton\u2019s doctrine of the different refrangibility of the rays of light",
+            "volume-title":"Philosophical Transactions of the Royal Society"
+        },
+        {
+            "key":"keyref21",
+            "author":"Descartes",
+            "first-page":"81",
+            "year":"1637",
+            "volume-title":"La Dioptrique Oeuvres de Descartes"
+        },
+        {
+            "key":"keyref22",
+            "author":"Descartes",
+            "first-page":"119",
+            "year":"1664",
+            "volume-title":"Trait\u00c3\u00a9 de l\u2019Homme Oeuvres de Descartes"
+        },
+        {
+            "key":"keyref23",
+            "author":"Dodge",
+            "first-page":"106",
+            "year":"1933",
+            "article-title":"Theories of inhibition. Part I",
+            "volume-title":"Psychological Review"
+        },
+        {
+            "key":"keyref24",
+            "author":"Dove",
+            "first-page":"251",
+            "year":"1841",
+            "article-title":"\u00c3\u0153ber die Combination der Eindr\u00c3\u00bccke beider Ohren unde beider Augen zu einem Eindruck",
+            "volume-title":"Bericht \u00c3\u00bcber die zur Bekanntmachung geeigneten Verhandlungen der K\u00c3\u00b6niglich Preussische Akademie der Wissenschaften zu Berlin"
+        },
+        {
+            "key":"keyref25",
+            "author":"Du Tour",
+            "first-page":"514",
+            "year":"1760",
+            "article-title":"Discussion d\u2019une question d\u2019optique",
+            "volume-title":"M\u00c3\u00a9moires de Math\u00c3\u00a9matique et de Physique, pr\u00c3\u00a9sent\u00c3\u00a9s \u00c3\u00a0 l\u2019Acad\u00c3\u00a9mie Royale des Sciences, par divers Savans, & l\u00c3\u00bbs dans ses Assembl\u00c3\u00a9es"
+        },
+        {
+            "key":"keyref26",
+            "author":"Du Tour",
+            "first-page":"499",
+            "year":"1761",
+            "article-title":"Addition au M\u00c3\u00a9moire intitul\u00c3\u00a9. Discussion d\u2019une question d\u2019Optique",
+            "volume-title":"M\u00c3\u00a9moires de Math\u00c3\u00a9matique et de Physique, pr\u00c3\u00a9sent\u00c3\u00a9s \u00c3\u00a0 l\u2019Acad\u00c3\u00a9mie Royale des Sciences, par divers Savans, & l\u00c3\u00bbs dans ses Assembl\u00c3\u00a9es"
+        },
+        {
+            "key":"keyref27",
+            "author":"Ewen",
+            "first-page":"742",
+            "year":"1931",
+            "article-title":"The psychological estimation of the effects of certain drugs upon the syntonic and schizophrenic psychoses: With a brief enquiry into a physiological basis of temperament",
+            "volume-title":"Journal of Mental Science"
+        },
+        {
+            "key":"keyref28",
+            "author":"Eysenck",
+            "first-page":"656",
+            "year":"1957",
+            "article-title":"Drugs and personality. IV. The effects of stimulant and depressant drugs on the rate of fluctuation of a reversible perspective",
+            "volume-title":"Journal of Mental Science"
+        },
+        {
+            "key":"keyref29",
+            "author":"Eysenck",
+            "year":"1957",
+            "volume-title":"Perceptual processes and mental illness"
+        },
+        {
+            "key":"keyref30",
+            "author":"Fechner",
+            "first-page":"337",
+            "year":"1861",
+            "article-title":"\u00c3\u0153ber einige Verh\u00c3\u00a4ltnisse des binocularen Sehens",
+            "volume-title":"Abhandlungen der mathematisch-physischen Classe der K\u00c3\u00b6niglich S\u00c3\u00a4chsischen Gesellschaft der Wissenschaften"
+        },
+        {
+            "key":"keyref31",
+            "author":"Fisher",
+            "first-page":"189",
+            "year":"1968",
+            "article-title":"Ambiguity of form: Old and new",
+            "volume-title":"Perception & Psychophysics"
+        },
+        {
+            "key":"keyref32",
+            "author":"Funke",
+            "year":"1857",
+            "volume-title":"Lehrbuch der Physiologie f\u00c3\u00bcr akademische Vorlesungen und zum Selbstudium"
+        },
+        {
+            "key":"keyref33",
+            "author":"George",
+            "first-page":"39",
+            "year":"1936",
+            "article-title":"The significance of the fluctuations experienced in observing ambiguous figures and in binocular rivalry",
+            "volume-title":"Journal of General Psychology"
+        },
+        {
+            "key":"keyref34",
+            "author":"Guilford",
+            "first-page":"382",
+            "year":"1931",
+            "article-title":"An experimental test of McDougall\u2019s theory of extroversion-introversion",
+            "volume-title":"Journal of Abnormal and Social Psychology"
+        },
+        {
+            "key":"keyref35",
+            "author":"Gutmark",
+            "first-page":"481",
+            "year":"2010",
+            "article-title":"Origins of the keratometer and its evolving role in ophthalmology",
+            "volume-title":"Survey of Ophthalmology"
+        },
+        {
+            "key":"keyref36",
+            "author":"Haldat",
+            "first-page":"387",
+            "year":"1806",
+            "article-title":"Exp\u00c3\u00a9rience sur la double vision",
+            "volume-title":"Journal de Physique, de Chimie, et d\u2019Histoire Naturelle"
+        },
+        {
+            "key":"keyref37",
+            "author":"Hall",
+            "year":"1972",
+            "volume-title":"Treatise of man. Ren\u00c3\u00a9 Descartes"
+        },
+        {
+            "key":"keyref38",
+            "author":"Harris",
+            "year":"1775",
+            "volume-title":"A treatise of optics: Containing elements of the science; in two books"
+        },
+        {
+            "key":"keyref39",
+            "author":"Helmholtz",
+            "year":"1867",
+            "volume-title":"Handbuch der physiologischen Optik Allgemeine Encyklop\u00c3\u00a4die der Physik"
+        },
+        {
+            "key":"keyref40",
+            "author":"Helmholtz",
+            "year":"1925",
+            "volume-title":"Helmholtz\u2019s treatise on physiological optics"
+        },
+        {
+            "key":"keyref41",
+            "author":"Henning",
+            "first-page":"305",
+            "year":"1916",
+            "article-title":"Der Geruch. II",
+            "volume-title":"Zeitschrift f\u00c3\u00bcr Psychologie"
+        },
+        {
+            "key":"keyref42",
+            "author":"Hering",
+            "year":"1861",
+            "volume-title":"Beitr\u00c3\u00a4ge zur Physiologie. I. Vom Ortsinne der Netzhaut"
+        },
+        {
+            "key":"keyref43",
+            "author":"Hering",
+            "year":"1864",
+            "volume-title":"Beitr\u00c3\u00a4ge zur Physiologie. V. Vom binocularen Tiefsehen. Kritik einer Abhandlung von Helmholtz \u00c3\u00bcber den Horopter"
+        },
+        {
+            "key":"keyref44",
+            "author":"Howard",
+            "year":"2012",
+            "volume-title":"Perceiving in depth: Vol. 2, Stereoscopic vision",
+            "DOI":"10.1093\/acprof:oso\/9780199764143.001.0001",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"keyref45",
+            "author":"Howard",
+            "first-page":"1189",
+            "year":"1996",
+            "article-title":"Ptolemy\u2019s contributions to the geometry of binocular vision",
+            "volume-title":"Perception"
+        },
+        {
+            "key":"keyref46",
+            "author":"Hubel",
+            "first-page":"106",
+            "year":"1962",
+            "article-title":"Receptive fields, binocular interaction and functional architecture in the cat\u2019s visual cortex",
+            "volume-title":"Journal of Physiology",
+            "DOI":"10.1113\/jphysiol.1962.sp006837",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"keyref47",
+            "author":"James",
+            "year":"1890",
+            "volume-title":"Principles of psychology",
+            "DOI":"10.1037\/11059-000",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"keyref48",
+            "author":"Jaucourt",
+            "first-page":"902",
+            "year":"1751",
+            "article-title":"Conscience",
+            "volume-title":"Encyclop\u00c3\u00a9die, ou Dictionnaire raisonn\u00c3\u00a9 des sciences, des arts et des m\u00c3\u00a9tiers, par une societ\u00c3\u00a9 de gens de letters"
+        },
+        {
+            "key":"keyref49",
+            "author":"Kepler",
+            "year":"1604",
+            "volume-title":"Ad Vitellionem Paralipomena"
+        },
+        {
+            "key":"keyref50",
+            "author":"Lack",
+            "year":"1978",
+            "volume-title":"Selective attention and the control of binocular rivalry",
+            "DOI":"10.1515\/9783110800302",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"keyref51",
+            "author":"Le Clerc",
+            "year":"1679",
+            "volume-title":"Discours Touchant de Point de Veue, dans lequel il es prouv\u00c3\u00a9 que les chose qu\u2019on voit distinctement, ne sont veues que d\u2019un oeil"
+        },
+        {
+            "key":"keyref52",
+            "author":"Le Clerc",
+            "year":"1712",
+            "volume-title":"Syst\u00c3\u00a8me de la Vision"
+        },
+        {
+            "key":"keyref53",
+            "author":"Lejeune",
+            "year":"1948",
+            "volume-title":"Euclide et Ptol\u00c3\u00a9m\u00c3\u00a9e. Deux Stades de L'Optique Geom\u00c3\u00a9trique Grecque"
+        },
+        {
+            "key":"keyref54",
+            "author":"Locke",
+            "year":"1690",
+            "volume-title":"An essay concerning human understanding",
+            "DOI":"10.1093\/oseo\/instance.00018020",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"keyref55",
+            "author":"May",
+            "year":"1968",
+            "volume-title":"Galen. On the useful of the parts of the body"
+        },
+        {
+            "key":"keyref56",
+            "author":"Meyer",
+            "first-page":"77",
+            "year":"1856",
+            "article-title":"Ueber den Einfluss der Aufmerksamkeit auf die Bildung des Gesichtsfeldes \u00c3\u00bcberhaupt und des gemeinschaftlichen Gesichtsfeldes beider Augen im Besonderen",
+            "volume-title":"Archiv f\u00c3\u00bcr Ophthalmologie"
+        },
+        {
+            "key":"keyref57",
+            "author":"McDougall",
+            "first-page":"210",
+            "year":"1901",
+            "article-title":"IV.\u00e2\u20ac\u201dSome new observations in support of Thomas Young\u2019s theory of light- and colour-vision (II.)",
+            "volume-title":"Mind"
+        },
+        {
+            "key":"keyref58",
+            "author":"McDougall",
+            "first-page":"579",
+            "year":"1901",
+            "article-title":"On the seat of the psycho-physical processes",
+            "volume-title":"Brain"
+        },
+        {
+            "key":"keyref59",
+            "author":"McDougall",
+            "first-page":"316",
+            "year":"1902",
+            "article-title":"II.\u00e2\u20ac\u201dThe physiological factors of the attention-process (I.)",
+            "volume-title":"Mind"
+        },
+        {
+            "key":"keyref60",
+            "author":"McDougall",
+            "first-page":"473",
+            "year":"1903",
+            "article-title":"III.\u00e2\u20ac\u201dThe physiological factors of the attention-process (III.)",
+            "volume-title":"Mind"
+        },
+        {
+            "key":"keyref61",
+            "author":"McDougall",
+            "first-page":"153",
+            "year":"1903",
+            "article-title":"The nature of the inhibitory processes within the nervous system",
+            "volume-title":"Brain"
+        },
+        {
+            "key":"keyref62",
+            "author":"McDougall",
+            "first-page":"329",
+            "year":"1906",
+            "article-title":"III.\u00e2\u20ac\u201dPhysiological factors of the attention-process (IV.)",
+            "volume-title":"Mind"
+        },
+        {
+            "key":"keyref63",
+            "author":"McDougall",
+            "year":"1926",
+            "volume-title":"Outline of abnormal psychology",
+            "DOI":"10.1097\/00002060-192612000-00009",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"keyref64",
+            "author":"McDougall",
+            "year":"1920",
+            "article-title":"The effects of alcohol and some other drugs during normal and fatigued conditions",
+            "volume-title":"Medical Research Council Special Reports Series, No. 56"
+        },
+        {
+            "key":"keyref65",
+            "author":"M\u00c3\u00bcller",
+            "year":"1826",
+            "volume-title":"Zur vergleichenden Physiologie des Gesichtssinnes des Menschen und der Thiere, nebst einen Versuch \u00c3\u00bcber die Bewegung der Augen und \u00c3\u00bcber den menschlichen Blick"
+        },
+        {
+            "key":"keyref66",
+            "author":"M\u00c3\u00bcller",
+            "year":"1838",
+            "volume-title":"Handbuch der Physiologie des Menschen"
+        },
+        {
+            "key":"keyref67",
+            "author":"Newton",
+            "year":"1704",
+            "volume-title":"Opticks: or, a treatise of the reflections, refractions, inflections and colours of light"
+        },
+        {
+            "key":"keyref68",
+            "author":"Ono",
+            "first-page":"71",
+            "year":"2012",
+            "article-title":"Two historical strands in studying visual direction",
+            "volume-title":"Japanese Psychological Research"
+        },
+        {
+            "key":"keyref69",
+            "author":"Palaia",
+            "first-page":"301",
+            "year":"2012",
+            "article-title":"Theories of consciousness in early-modern philosophy",
+            "volume-title":"Consciousness in interaction: The role of the natural and social context in shaping consciousness Advances in Consciousness Research",
+            "DOI":"10.1075\/aicr.86.16pal",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"keyref70",
+            "author":"Panum",
+            "year":"1858",
+            "volume-title":"Physiologische Untersuchungen \u00c3\u00bcber das Sehen mit zwei Augen Physiological investigations concerning vision with two eyes"
+        },
+        {
+            "key":"keyref71",
+            "author":"Pillsbury",
+            "year":"1908",
+            "volume-title":"Attention"
+        },
+        {
+            "key":"keyref72",
+            "author":"Porta",
+            "year":"1593",
+            "volume-title":"De Refractione. Optices Parte. Libri Novem"
+        },
+        {
+            "key":"keyref73",
+            "author":"Reid",
+            "year":"1764",
+            "volume-title":"An inquiry into the human mind, on the principles of common sense",
+            "DOI":"10.1037\/11974-000",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"keyref74",
+            "author":"Reid",
+            "first-page":"318",
+            "year":"1889",
+            "article-title":"Intermittent sensations",
+            "volume-title":"Nature"
+        },
+        {
+            "key":"keyref75",
+            "author":"Reiss",
+            "first-page":"171",
+            "year":"1962",
+            "article-title":"A theory and simulation of rhythmic behavior due to reciprocal inhibition in small nerve nets",
+            "volume-title":"Proceedings of the 1962 A.F.I.P.S. Spring Joint Computer Conference"
+        },
+        {
+            "key":"keyref76",
+            "author":"Scheiner",
+            "year":"1619",
+            "volume-title":"Oculus, hoc est fundamentum opticum"
+        },
+        {
+            "key":"keyref77",
+            "author":"Sherrington",
+            "year":"1906",
+            "volume-title":"Integrative action of the nervous system"
+        },
+        {
+            "key":"keyref78",
+            "author":"Smith",
+            "year":"1996",
+            "volume-title":"Ptolemy's theory of visual perception: An English translation of the Optics with introduction and commentary"
+        },
+        {
+            "key":"keyref79",
+            "author":"Taylor",
+            "year":"1738",
+            "volume-title":"Le Mechanisme ou le Nouveau Trait\u00c3\u00a9 de l\u2019Anatomie du globe de l\u2019oeil, avec l\u2019usage de ses diff\u00c3\u00a9rentes parties, & de celles qui lui sont contigues."
+        },
+        {
+            "key":"keyref80",
+            "author":"Titchener",
+            "year":"1908",
+            "volume-title":"Lectures on the elementary psychology of feeling and emotion",
+            "DOI":"10.1037\/10867-000",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"keyref81",
+            "author":"Towne",
+            "first-page":"70",
+            "year":"1862",
+            "article-title":"Remarks on the stereoscopic theory of vision; with observations on the experiments of Professor Wheatstone\u00e2\u20ac\u201dSection I",
+            "volume-title":"Guy\u2019s Hospital Reports"
+        },
+        {
+            "key":"keyref82",
+            "author":"Towne",
+            "first-page":"81",
+            "year":"1862",
+            "article-title":"The stereoscope, and stereoscopic results\u00e2\u20ac\u201dSection II",
+            "volume-title":"Guy\u2019s Hospital Reports"
+        },
+        {
+            "key":"keyref83",
+            "author":"Towne",
+            "first-page":"103",
+            "year":"1863",
+            "article-title":"The stereoscope, and stereoscopic results\u00e2\u20ac\u201dSection III",
+            "volume-title":"Guy\u2019s Hospital Reports"
+        },
+        {
+            "key":"keyref84",
+            "author":"Towne",
+            "first-page":"125",
+            "year":"1864",
+            "article-title":"The stereoscope, and stereoscopic results\u00e2\u20ac\u201dSection V",
+            "volume-title":"Guy\u2019s Hospital Reports"
+        },
+        {
+            "key":"keyref85",
+            "author":"Thurstone",
+            "year":"1944",
+            "volume-title":"A factorial study of perception"
+        },
+        {
+            "key":"keyref86",
+            "author":"Thurstone",
+            "year":"1953",
+            "volume-title":"A psychological study of twins. 1. Distributions of absolute twin differences for identical and fraternal twins"
+        },
+        {
+            "key":"keyref87",
+            "author":"Thurstone",
+            "year":"1955",
+            "volume-title":"A psychological study of twins. 2. Scores of one hundred and twenty-five pairs of twins on fifty-nine tests"
+        },
+        {
+            "key":"keyref88",
+            "author":"Turner",
+            "year":"1994",
+            "volume-title":"In the eye\u2019s mind. Vision and the Helmholtz-Hering controversy",
+            "DOI":"10.1515\/9781400863815",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"keyref89",
+            "author":"Urbantschitsch",
+            "first-page":"347",
+            "year":"1903",
+            "article-title":"Ueber die Beeinflussung subjectiver Gesichtsempfindungen",
+            "volume-title":"Archiv f\u00c3\u00bcr die gesamte Physiologie des Menschen und der Tiere"
+        },
+        {
+            "key":"keyref90",
+            "author":"Valentin",
+            "year":"1848",
+            "volume-title":"Lehrbuch der Physiologie des Menschen. F\u00c3\u00bcr \u00c3\u201erzte und Studirende"
+        },
+        {
+            "key":"keyref91",
+            "author":"Venturi",
+            "first-page":"383",
+            "year":"1802",
+            "article-title":"Betrachtungen \u00c3\u00bcber die Erkenntniss der Entfernung, die wir durch das Werkzeug des Geh\u00c3\u00b6rs erhalten",
+            "volume-title":"Archiv f\u00c3\u00bcr die Physiologie"
+        },
+        {
+            "key":"keyref92",
+            "author":"Vesalius",
+            "year":"1543",
+            "volume-title":"De Humani corporis fabrica Libri septem"
+        },
+        {
+            "key":"keyref93",
+            "author":"Vickers",
+            "first-page":"31",
+            "year":"1972",
+            "article-title":"A cyclic decision model of perceptual alternation",
+            "volume-title":"Perception"
+        },
+        {
+            "key":"keyref94",
+            "author":"Vieth",
+            "first-page":"233",
+            "year":"1818",
+            "article-title":"Ueber die Richtung der Augen",
+            "volume-title":"Annalen der Physik"
+        },
+        {
+            "key":"keyref95",
+            "author":"Wade",
+            "year":"1983",
+            "volume-title":"Brewster and Wheatstone on vision"
+        },
+        {
+            "key":"keyref96",
+            "author":"Wade",
+            "year":"1998",
+            "volume-title":"A natural history of vision"
+        },
+        {
+            "key":"keyref97",
+            "author":"Wade",
+            "first-page":"16",
+            "year":"2008",
+            "article-title":"Binaural hearing \u00e2\u20ac\u201d before and after the stethophone",
+            "volume-title":"Acoustics Today"
+        },
+        {
+            "key":"keyref98",
+            "author":"Wade",
+            "first-page":"645",
+            "year":"2005",
+            "article-title":"From dichoptic to dichotic: Historical contrasts between binocular vision and binaural hearing",
+            "volume-title":"Perception"
+        },
+        {
+            "key":"keyref99",
+            "author":"Wade",
+            "first-page":"54",
+            "year":"2012",
+            "article-title":"Early studies of binocular and stereoscopic vision",
+            "volume-title":"Japanese Psychological Research"
+        },
+        {
+            "key":"keyref100",
+            "author":"Wade",
+            "first-page":"61",
+            "year":"2006",
+            "article-title":"The lost direction in binocular vision: The neglected signs posted by Wells, Towne, and LeConte",
+            "volume-title":"Journal of the History of Behavioral Sciences"
+        },
+        {
+            "key":"keyref101",
+            "author":"Wallach",
+            "first-page":"205",
+            "year":"1953",
+            "article-title":"The kinetic depth effect",
+            "volume-title":"Journal of Experimental Psychology"
+        },
+        {
+            "key":"keyref102",
+            "author":"Washburn",
+            "first-page":"315",
+            "year":"1933",
+            "article-title":"Motor factors in voluntary control of cube perspective fluctuations and retinal rivalry fluctuations",
+            "volume-title":"American Journal of Psychology"
+        },
+        {
+            "key":"keyref103",
+            "author":"Washburn",
+            "first-page":"112",
+            "year":"1929",
+            "article-title":"Experiments on the relation of reaction-time, cube fluctuations, and mirror drawing to temperamental differences",
+            "volume-title":"American Journal of Psychology"
+        },
+        {
+            "key":"keyref104",
+            "author":"Weber",
+            "year":"1834",
+            "volume-title":"De Pulsu, Resorptione, Auditu et Tactu"
+        },
+        {
+            "key":"keyref105",
+            "author":"Wells",
+            "year":"1792",
+            "volume-title":"An essay upon single vision with two eyes: Together with experiments and observations on several other subjects in optics"
+        },
+        {
+            "key":"keyref106",
+            "author":"Wheatstone",
+            "first-page":"371",
+            "year":"1838",
+            "article-title":"Contributions to the physiology of vision.\u00e2\u20ac\u201dPart the first. On some remarkable, and hitherto unobserved, phenomena of binocular vision",
+            "volume-title":"Philosophical Transactions of the Royal Society"
+        },
+        {
+            "key":"keyref107",
+            "author":"Wheatstone",
+            "first-page":"1",
+            "year":"1842",
+            "article-title":"Beitr\u00c3\u00a4ge zur Physiologie des Gesichtssinnes. Erster Teil",
+            "volume-title":"Annalen der Physik und Chemie"
+        },
+        {
+            "key":"keyref108",
+            "author":"Wheatstone",
+            "first-page":"1",
+            "year":"1852",
+            "article-title":"Contributions to the physiology of vision.\u00e2\u20ac\u201dPart the second. On some remarkable, and hitherto unobserved, phenomena of binocular vision",
+            "volume-title":"Philosophical Transactions of the Royal Society"
+        },
+        {
+            "key":"keyref109",
+            "author":"Wundt",
+            "year":"1862",
+            "volume-title":"Beirtr\u00c3\u00a4ge zur Theorie der Sinneswahrnehmung"
+        },
+        {
+            "key":"keyref110",
+            "author":"Wundt",
+            "year":"1874",
+            "volume-title":"Grundz\u00c3\u00bcge der physiologischen Psychologie"
+        },
+        {
+            "key":"keyref111",
+            "author":"Zwaardemaker",
+            "year":"1895",
+            "volume-title":"Die Physiologie des Geruchs",
+            "DOI":"10.5962\/bhl.title.156985",
+            "doi-asserted-by":"crossref"
+        }
+    ],
+    "container-title":"The Constitution of Visual Consciousness",
+    "original-title":[
+
+    ],
+    "deposited":{
+        "date-parts":[
+            [
+                2019,
+                8,
+                8
+            ]
+        ],
+        "date-time":"2019-08-08T20:48:09Z",
+        "timestamp":1565297289000
+    },
+    "score":1.0,
+    "subtitle":[
+
+    ],
+    "short-title":[
+
+    ],
+    "issued":{
+        "date-parts":[
+            [
+                2013
+            ]
+        ]
+    },
+    "ISBN":[
+        "9789027213570",
+        "9789027271822"
+    ],
+    "references-count":111,
+    "URL":"http:\/\/dx.doi.org\/10.1075\/aicr.90.04wad",
+    "relation":{
+        "cites":[
+
+        ]
+    },
+    "ISSN":[
+        "1381-589X"
+    ]
+}

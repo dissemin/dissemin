@@ -1,0 +1,385 @@
+{
+    "indexed":{
+        "date-parts":[
+            [
+                2019,
+                8,
+                25
+            ]
+        ],
+        "date-time":"2019-08-25T16:10:25Z",
+        "timestamp":1566749425675
+    },
+    "publisher-location":"New York, New York, USA",
+    "reference-count":46,
+    "publisher":"ACM Press",
+    "isbn-type":[
+        {
+            "value":"9781450335294",
+            "type":"print"
+        }
+    ],
+    "license":[
+        {
+            "URL":"http:\/\/www.acm.org\/publications\/policies\/copyright_policy#Background",
+            "start":{
+                "date-parts":[
+                    [
+                        2015,
+                        5,
+                        31
+                    ]
+                ],
+                "date-time":"2015-05-31T00:00:00Z",
+                "timestamp":1433030400000
+            },
+            "delay-in-days":150,
+            "content-version":"vor"
+        }
+    ],
+    "funder":[
+        {
+            "name":"French ANR",
+            "award":[
+                "NormAtis"
+            ]
+        }
+    ],
+    "content-domain":{
+        "domain":[
+
+        ],
+        "crossmark-restriction":false
+    },
+    "published-print":{
+        "date-parts":[
+            [
+                2015
+            ]
+        ]
+    },
+    "DOI":"10.1145\/2744680.2744690",
+    "type":"paper-conference",
+    "created":{
+        "date-parts":[
+            [
+                2015,
+                5,
+                26
+            ]
+        ],
+        "date-time":"2015-05-26T14:36:25Z",
+        "timestamp":1432650985000
+    },
+    "source":"Crossref",
+    "is-referenced-by-count":0,
+    "title":"Structurally Tractable Uncertain Data",
+    "prefix":"10.1145",
+    "author":[
+        {
+            "given":"Antoine",
+            "family":"Amarilli",
+            "sequence":"first",
+            "affiliation":[
+
+            ]
+        }
+    ],
+    "member":"320",
+    "reference":[
+        {
+            "key":"key-10.1145\/2744680.2744690-1",
+            "unstructured":"S. Abiteboul, D. Deutch, and V. Vianu. Deduction with contradictions in Datalog. In ICDT, 2014."
+        },
+        {
+            "key":"key-10.1145\/2744680.2744690-2",
+            "unstructured":"S. Abiteboul, R. Hull, and V. Vianu. Foundations of Databases. Addison-Wesley, 1995."
+        },
+        {
+            "key":"key-10.1145\/2744680.2744690-3",
+            "unstructured":"R. Agrawal and R. Srikant. Fast algorithms for mining association rules in large databases. In VLDB, 1994."
+        },
+        {
+            "key":"key-10.1145\/2744680.2744690-4",
+            "unstructured":"A. Amarilli, Y. Amsterdamer, and T. Milo. On the complexity of mining itemsets from the crowd using taxonomies. In Proc. ICDT, 2014."
+        },
+        {
+            "key":"key-10.1145\/2744680.2744690-5",
+            "unstructured":"A. Amarilli, Y. Amsterdamer, and T. Milo. Uncertainty in crowd data sourcing under structural constraints. In Proc. UnCrowd, 2014.",
+            "DOI":"10.1007\/978-3-662-43984-5_27",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"key-10.1145\/2744680.2744690-6",
+            "unstructured":"A. Amarilli, L. M. Ba, D. Deutch, and P. Senellart. Querying order-incomplete data. Preprint: http:\/\/a3nm.net\/publications\/amarilli2015querying.pdf."
+        },
+        {
+            "key":"key-10.1145\/2744680.2744690-7",
+            "unstructured":"A. Amarilli, P. Bourhis, and P. Senellart. Probabilities and provenance via tree decompositions. Preprint: http:\/\/a3nm.net\/publications\/amarilli2015probabilities.pdf, 2014."
+        },
+        {
+            "key":"key-10.1145\/2744680.2744690-8",
+            "unstructured":"A. Amarilli and P. Senellart. Unsaid string: Uncertainty and structure in the access to intensional data. Preprint: http:\/\/a3nm.net\/publications\/amarilli2014unsaid.pdf."
+        },
+        {
+            "key":"key-10.1145\/2744680.2744690-9",
+            "unstructured":"Y. Amsterdamer, Y. Grossman, T. Milo, and P. Senellart. Crowd mining. In SIGMOD, 2013.",
+            "DOI":"10.1145\/2463676.2465318",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"key-10.1145\/2744680.2744690-10",
+            "unstructured":"M. L. Ba, T. Abdessalem, and P. Senellart. Uncertain version control in open collaborative editing of tree-structured documents. In DocEng, 2013."
+        },
+        {
+            "key":"key-10.1145\/2744680.2744690-11",
+            "unstructured":"J.-F. Baget, M. Lecl&#232;re, M.-L. Mugnier, and E. Salvat. On rules with existential variables: Walking the decidability line. Artificial Intelligence, 175(9), 2011.",
+            "DOI":"10.1016\/j.artint.2011.03.002",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"key-10.1145\/2744680.2744690-12",
+            "unstructured":"V. B&#225;r&#225;ny, B. ten Cate, B. Kimelfeld, D. Olteanu, and Z. Vagena. Declarative statistical modeling with Datalog. CoRR, abs\/1412.2221, 2015."
+        },
+        {
+            "key":"key-10.1145\/2744680.2744690-13",
+            "unstructured":"M. Benedikt, E. Kharlamov, D. Olteanu, and P. Senellart. Probabilistic XML via Markov chains. PVLDB, 3(1--2), 2010.",
+            "DOI":"10.14778\/1920841.1920939",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"key-10.1145\/2744680.2744690-14",
+            "unstructured":"G. Brightwell and P. Winkler. Counting linear extensions. Order, 8(3), 1991.",
+            "DOI":"10.1007\/BF00383444",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"key-10.1145\/2744680.2744690-15",
+            "unstructured":"A. Carlson, J. Betteridge, B. Kisiel, B. Settles, E. R. H. Jr., and T. M. Mitchell. Toward an architecture for never-ending language learning. In AAAI, 2010."
+        },
+        {
+            "key":"key-10.1145\/2744680.2744690-16",
+            "unstructured":"S. Cohen, B. Kimelfeld, and Y. Sagiv. Incorporating constraints in probabilistic XML. TODS, 34(3), 2009.",
+            "DOI":"10.1145\/1567274.1567280",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"key-10.1145\/2744680.2744690-17",
+            "unstructured":"S. Cohen, B. Kimelfeld, and Y. Sagiv. Running tree automata on probabilistic XML. In PODS, 2009.",
+            "DOI":"10.1145\/1559795.1559831",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"key-10.1145\/2744680.2744690-18",
+            "unstructured":"B. Courcelle. Graph rewriting: An algebraic and logic approach. In Handbook of Theoretical Computer Science. Elsevier, 1990.",
+            "DOI":"10.1016\/B978-0-444-88074-1.50010-X",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"key-10.1145\/2744680.2744690-19",
+            "unstructured":"N. Dalvi and D. Suciu. Efficient query evaluation on probabilistic databases. VLDBJ, 16(4), 2007.",
+            "DOI":"10.1007\/s00778-006-0004-3",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"key-10.1145\/2744680.2744690-20",
+            "unstructured":"N. Dalvi and D. Suciu. The dichotomy of probabilistic inference for unions of conjunctive queries. JACM, 59(6), 2012.",
+            "DOI":"10.1145\/2395116.2395119",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"key-10.1145\/2744680.2744690-21",
+            "unstructured":"D. Deutch, T. Milo, S. Roy, and V. Tannen. Circuits for Datalog provenance. In ICDT, 2014."
+        },
+        {
+            "key":"key-10.1145\/2744680.2744690-22",
+            "unstructured":"X. Dong, A. Y. Halevy, and C. Yu. Data integration with uncertainty. In VLDB, 2007.",
+            "DOI":"10.1007\/s00778-008-0119-9",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"key-10.1145\/2744680.2744690-23",
+            "unstructured":"L. Gal&#225;rraga, C. Teflioudi, K. Hose, and F. M. Suchanek. AMIE string: Association rule mining under incomplete evidence in ontological knowledge bases. In WWW, 2013."
+        },
+        {
+            "key":"key-10.1145\/2744680.2744690-24",
+            "unstructured":"G. Gottlob, N. Leone, and F. Scarcello. Hypertree decompositions: A survey. In MFCS. 2001.",
+            "DOI":"10.1007\/3-540-44683-4_5",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"key-10.1145\/2744680.2744690-25",
+            "unstructured":"G. Gottlob, T. Lukasiewicz, and G. I. Simari. Conjunctive query answering in probabilistic Datalog+- ontologies. In Web Reasoning and Rule Systems. Springer, 2011.",
+            "DOI":"10.1007\/978-3-642-23580-1_7",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"key-10.1145\/2744680.2744690-26",
+            "unstructured":"G. Gottlob, R. Pichler, and F. Wei. Monadic Datalog over finite structures of bounded treewidth. TOCL, 12(1), 2010.",
+            "DOI":"10.1145\/1838552.1838555",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"key-10.1145\/2744680.2744690-27",
+            "unstructured":"E. Gr&#228;del. Efficient evaluation methods for guarded logics and Datalog LITE. In LPAR, 2000."
+        },
+        {
+            "key":"key-10.1145\/2744680.2744690-28",
+            "unstructured":"T. J. Green, G. Karvounarakis, and V. Tannen. Provenance semirings. In PODS, 2007.",
+            "DOI":"10.1145\/1265530.1265535",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"key-10.1145\/2744680.2744690-29",
+            "unstructured":"T. J. Green and V. Tannen. Models for incomplete and probabilistic information. In IIDB, 2006.",
+            "DOI":"10.1007\/11896548_24",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"key-10.1145\/2744680.2744690-30",
+            "unstructured":"J. Henriksen, J. Jensen, M. J&#248;rgensen, N. Klarlund, B. Paige, T. Rauhe, and A. Sandholm. Mona: Monadic second-order logic in practice. In TACAS, 1995.",
+            "DOI":"10.7146\/brics.v2i21.19923",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"key-10.1145\/2744680.2744690-31",
+            "unstructured":"J. Huang, L. Antova, C. Koch, and D. Olteanu. MayBMS: a probabilistic database management system. In SIGMOD, 2009.",
+            "DOI":"10.1145\/1559845.1559984",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"key-10.1145\/2744680.2744690-32",
+            "unstructured":"T. Imielinski and W. Lipski, Jr. Incomplete information in relational databases. JACM, 31(4), 1984.",
+            "DOI":"10.1145\/1634.1886",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"key-10.1145\/2744680.2744690-33",
+            "unstructured":"A. Jha and D. Suciu. Probabilistic databases with MarkoViews. PVLDB, 5(11), 2012.",
+            "DOI":"10.14778\/2350229.2350236",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"key-10.1145\/2744680.2744690-34",
+            "unstructured":"B. Kimelfeld, Y. Kosharovsky, and Y. Sagiv. Query efficiency in probabilistic XML models. In SIGMOD, 2008.",
+            "DOI":"10.1145\/1376616.1376687",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"key-10.1145\/2744680.2744690-35",
+            "unstructured":"B. Kimelfeld and P. Senellart. Probabilistic XML\\string: Models and complexity. In Z. Ma and L. Yan, editors, Advances in Probabilistic Databases for Uncertain Information Management. Springer, 2013.",
+            "DOI":"10.1007\/978-3-642-37509-5_3",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"key-10.1145\/2744680.2744690-36",
+            "unstructured":"L. V. S. Lakshmanan, N. Leone, R. B. Ross, and V. S. Subrahmanian. ProbView: A flexible probabilistic database system. TODS, 22(3), 1997.",
+            "DOI":"10.1145\/261124.261131",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"key-10.1145\/2744680.2744690-37",
+            "unstructured":"S. L. Lauritzen and D. J. Spiegelhalter. Local computations with probabilities on graphical structures and their application to expert systems. J. Roy. Stat. Soc., Ser. B, 1988.",
+            "DOI":"10.1111\/j.2517-6161.1988.tb01721.x",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"key-10.1145\/2744680.2744690-38",
+            "unstructured":"S. Maniu, R. Cheng, and P. Senellart. ProbTree\\string: A query-efficient representation of probabilistic graphs. In BUDA, June 2014. Workshop without formal proceedings."
+        },
+        {
+            "key":"key-10.1145\/2744680.2744690-39",
+            "unstructured":"A. Parameswaran, H. Garcia-Molina, H. Park, N. Polyzotis, A. Ramesh, and J. Widom. Crowdscreen: Algorithms for filtering data with humans. In SIGMOD, 2012.",
+            "DOI":"10.1145\/2213836.2213878",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"key-10.1145\/2744680.2744690-40",
+            "unstructured":"L. D. Raedt, A. Kimmig, and H. Toivonen. Problog: A probabilistic Prolog and its application in link discovery. In IJCAI, 2007."
+        },
+        {
+            "key":"key-10.1145\/2744680.2744690-41",
+            "unstructured":"M. Richardson and P. Domingos. Markov logic networks. Machine learning, 62(1--2), 2006.",
+            "DOI":"10.1007\/s10994-006-5833-1",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"key-10.1145\/2744680.2744690-42",
+            "unstructured":"N. Robertson and P. D. Seymour. Graph minors. II. Algorithmic aspects of tree-width. J. Algorithms, 7(3), 1986.",
+            "DOI":"10.1016\/0196-6774(86)90023-4",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"key-10.1145\/2744680.2744690-43",
+            "unstructured":"K. Stefanidis, G. Koutrika, and E. Pitoura. A survey on representation, composition and application of preferences in database systems. ACM Transactions on Database Systems (TODS), 36(3), 2011.",
+            "DOI":"10.1145\/2000824.2000829",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"key-10.1145\/2744680.2744690-44",
+            "unstructured":"R. Tang, R. Cheng, H. Wu, and S. Bressan. A framework for conditioning uncertain relational data. In Database and Expert Systems Applications. Springer, 2012.",
+            "DOI":"10.1007\/978-3-642-32597-7_7",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"key-10.1145\/2744680.2744690-45",
+            "unstructured":"J. W. Thatcher and J. B. Wright. Generalized finite automata theory with an application to a decision problem of second-order logic. Math. systems theory, 2(1), 1968.",
+            "DOI":"10.1007\/BF01691346",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"key-10.1145\/2744680.2744690-46",
+            "unstructured":"D. Vrande&#269;i&#263; and M. Kr&#246;tzsch. Wikidata: a free collaborative knowledgebase. CACM, 57(10), 2014.",
+            "DOI":"10.1145\/2629489",
+            "doi-asserted-by":"crossref"
+        }
+    ],
+    "event":"the 2015 ACM SIGMOD",
+    "container-title":"Proceedings of the 2015 ACM SIGMOD on PhD Symposium - SIGMOD '15 PhD Symposium",
+    "original-title":[
+
+    ],
+    "link":[
+        {
+            "URL":"http:\/\/dl.acm.org\/ft_gateway.cfm?id=2744690&amp;ftid=1584315&amp;dwn=1",
+            "content-type":"unspecified",
+            "content-version":"vor",
+            "intended-application":"similarity-checking"
+        }
+    ],
+    "deposited":{
+        "date-parts":[
+            [
+                2019,
+                8,
+                25
+            ]
+        ],
+        "date-time":"2019-08-25T15:33:20Z",
+        "timestamp":1566747200000
+    },
+    "score":1.0,
+    "subtitle":[
+
+    ],
+    "short-title":[
+
+    ],
+    "issued":{
+        "date-parts":[
+            [
+                2015
+            ]
+        ]
+    },
+    "ISBN":[
+        "9781450335294"
+    ],
+    "references-count":46,
+    "URL":"http:\/\/dx.doi.org\/10.1145\/2744680.2744690",
+    "relation":{
+        "cites":[
+
+        ]
+    }
+}
