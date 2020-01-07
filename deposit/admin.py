@@ -21,9 +21,10 @@
 
 
 from deposit.models import DDC
-from deposit.models import LicenseChooser
 from deposit.models import DepositRecord
+from deposit.models import LicenseChooser
 from deposit.models import License
+from deposit.models import GreenOpenAccessService
 from deposit.models import Repository
 from deposit.forms import RepositoryAdminForm
 from django.contrib import admin
@@ -61,5 +62,6 @@ class RepositoryAdmin(admin.ModelAdmin):
 
 admin.site.register(DDC)
 admin.site.register(DepositRecord, DepositRecordAdmin)
-admin.site.register(Repository, RepositoryAdmin)
 admin.site.register(License, LicenseAdmin)
+admin.site.register(GreenOpenAccessService)
+admin.site.register(Repository, RepositoryAdmin)

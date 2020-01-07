@@ -89,6 +89,29 @@ class DDC(models.Model):
 vinaigrette.register(DDC, ['name'])
 
 
+class GreenOpenAccessService(models.Model):
+    """
+    A model to store text for a green open access service, i.e. the repository administration offers a service to publish on behalf of their researchers.
+
+    Currently, after uploading in a repository with support, text is shown
+    """
+
+    #: Heading to display after deposit
+    heading = models.TextField()
+    #: Text to display after deposit
+    text = models.TextField()
+    #: URL to a page which describes the service
+    learn_more_url = models.URLField(max_length=1024)
+
+    def __str__(self):
+        """
+        String represenation of object
+        """
+        return self.heading
+
+vinaigrette.register(GreenOpenAccessService, ['heading', 'text'])
+
+
 class License(models.Model):
     """
     A model to store licenses. Each repository chooses licenses from this model.
@@ -167,6 +190,8 @@ class Repository(models.Model, CachingMixin):
     letter_declaration = models.CharField(max_length=256, blank=True)
     #: Embargo
     embargo = models.CharField(max_length=24, blank=False, choices=FORM_FIELD_CHOICES, default='none')
+    #: Green open access service
+    goa_service = models.ForeignKey(GreenOpenAccessService, on_delete=models.SET_NULL, null=True, blank=True)
 
     def get_implementation(self):
         """
