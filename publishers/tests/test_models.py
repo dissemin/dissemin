@@ -4,10 +4,13 @@ Created on 21 févr. 2019
 @author: antonin
 '''
 
+import pytest
+
+from django.test import TestCase
+
+from papers.models import Paper
 from publishers.models import Journal
 from publishers.models import Publisher
-from django.test import TestCase
-from papers.models import Paper
 from publishers.tests.test_romeo import RomeoAPIStub
 
 class JournalTest(TestCase):
@@ -59,6 +62,7 @@ class JournalTest(TestCase):
         journal = Journal.objects.get(id=journal.id)
         self.assertEqual(journal.publisher_id, self.publisher.id)
         
+    @pytest.mark.usefixtures('mock_doi')
     def test_change_publisher(self):
         """
         Changing the publisher of a journal should update the 
@@ -79,5 +83,3 @@ class JournalTest(TestCase):
         self.assertEqual(paper.oa_status, 'UNK')
         self.assertEqual(paper.publisher(), closed_publisher)
         self.assertEqual(journal.publisher, closed_publisher)
-        
-        
