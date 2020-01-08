@@ -303,9 +303,9 @@ class OaiTest(TestCase):
         mappings = {
             'ftunivsavoie:oai:HAL:hal-01062241v1': 'proceedings-article',
             'ftunivsavoie:oai:HAL:hal-01062339v1': 'book-chapter',
-            'ftunivmacedonia:oai:dspace.lib.uom.gr:2159/6227': 'other',
-            'ftartxiker:oai:HAL:hal-00845819v1': 'journal-article',
-            'ftdatacite:oai:oai.datacite.org:402223': 'dataset',
+            'ftunivmacedonia:oai:dspace.lib.uom.gr:2159/6227': 'preprint',
+            'ftartxiker:oai:HAL:hal-00845819v1': 'preprint',
+            'ftdatacite:oai:oai.datacite.org:402223': 'preprint',
         }
 
         for ident, typ in list(mappings.items()):
