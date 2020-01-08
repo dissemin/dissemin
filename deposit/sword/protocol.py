@@ -262,22 +262,23 @@ class SWORDMETSProtocol(RepositoryProtocol):
         """
         We refresh all DepositRecords that have the status 'pending'
         """
-        s = requests.Session()
-        for deposit_record in DepositRecord.objects.filter(status='pending').select_related('oairecord', 'oairecord__about'):
-            params = {
-                "id" : deposit_record.identifier
-            }
-            try:
-                data = s.get(self.repository.update_status_url, params=params).json()
-            except Exception as e:
-                logger.exception(e)
-            else:
+        if self.repository.update_status_url:
+            s = requests.Session()
+            for deposit_record in DepositRecord.objects.filter(status='pending', repository=self.repository).select_related('oairecord', 'oairecord__about'):
+                params = {
+                    "id" : deposit_record.identifier
+                }
                 try:
-                    status, pub_date, pdf_url = self._validate_deposit_status_data(data)
-                except Exception:
-                    logger.error("Invalid deposit data when updating record {} with {}".format(deposit_record.pk, data))
+                    data = s.get(self.repository.update_status_url, params=params, timeout=10).json()
+                except requests.exceptions.RequestException as e:
+                    logger.exception(e)
                 else:
-                    self._update_deposit_record_status(deposit_record, status, pub_date, pdf_url)
+                    try:
+                        status, pub_date, pdf_url = self._validate_deposit_status_data(data)
+                    except Exception:
+                        logger.error("Invalid deposit data when updating record {} with {}".format(deposit_record.pk, data))
+                    else:
+                        self._update_deposit_record_status(deposit_record, status, pub_date, pdf_url)
 
 
     def submit_deposit(self, pdf, form):

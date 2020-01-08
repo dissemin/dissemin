@@ -335,7 +335,7 @@ class MetaTestSWORDMETSProtocol(MetaTestProtocol):
         pending_deposit_record.refresh_from_db()
         assert pending_deposit_record.status == body.get('status')
 
-
+    @responses.activate
     def test_refresh_deposit_status_invalid_data(self, pending_deposit_record):
         """
         With invalid data, status must not be updated
@@ -346,6 +346,39 @@ class MetaTestSWORDMETSProtocol(MetaTestProtocol):
         }
         responses.add(responses.GET, update_status_url, status=200, body=json.dumps(body))
         self.protocol.repository.update_status_url = update_status_url
+        self.protocol.refresh_deposit_status()
+        pending_deposit_record.refresh_from_db()
+        assert pending_deposit_record.status == 'pending'
+
+    @responses.activate
+    def test_refresh_deposit_status_no_url(self, pending_deposit_record):
+        """
+        If no URL for update is given, i.e. repostory.update_status_url is empty, nothing must happen
+        """
+        body = {
+            'status' : 'embargoed'
+        }
+        responses.add(responses.GET, '', status=200, body=json.dumps(body))
+        self.protocol.refresh_deposit_status()
+        pending_deposit_record.refresh_from_db()
+        assert pending_deposit_record.status == 'pending'
+        self.protocol.refresh_deposit_status()
+
+    @responses.activate
+    def test_refresh_deposit_status_record_from_other_repository(self, pending_deposit_record, dummy_repository):
+        """
+        If the record is not from the repository, ist must not be updated.
+        """
+        pending_deposit_record.repository = dummy_repository
+        pending_deposit_record.save()
+
+        update_status_url = 'https://repository.dissem.in/update_status'
+        body = {
+            'status' : 'refused'
+        }
+        responses.add(responses.GET, update_status_url, status=200, body=json.dumps(body))
+        self.protocol.repository.update_status_url = update_status_url
+
         self.protocol.refresh_deposit_status()
         pending_deposit_record.refresh_from_db()
         assert pending_deposit_record.status == 'pending'
