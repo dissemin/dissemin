@@ -507,7 +507,7 @@ class CrossRef(Citeproc):
                         logger.debug(item)
                     except ValueError as e:
                         logger.exception(e)
-                        logger.error(item)
+                        logger.info(item)
                     else:
                         new_papers += 1
             # After running ten times
