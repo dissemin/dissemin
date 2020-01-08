@@ -21,12 +21,10 @@
 
 import pytest
 
-from datetime import date
 from mock import patch
 
 from django.urls import reverse
 
-from papers.baremodels import BareName
 from papers.models import OaiRecord
 from papers.models import Paper
 from papers.models import Researcher
@@ -60,13 +58,27 @@ class TestDoai():
         check_permanent_redirect('paper-redirect-doi', kwargs={'doi': '10.1385/1592597998'}, url=doi_to_url('10.1385/1592597998'))
 
 
-class TestPaperView():
+class TestPaperSlug():
 
-    def test_no_slug_in_request(self, dissemin_base_client, book_god_of_the_labyrinth):
+    def test_no_slug_in_request(self, dissemin_base_client, book_god_of_the_labyrinth, dummy_oairecord):
+        dummy_oairecord.about = book_god_of_the_labyrinth
+        dummy_oairecord.save()
         url = reverse('paper', args=[book_god_of_the_labyrinth.pk])
         r = dissemin_base_client.get(url)
         assert r.status_code == 301
         assert r.url == reverse('paper', args=[book_god_of_the_labyrinth.pk, book_god_of_the_labyrinth.slug])
+
+    def test_paper_with_empty_slug(self, book_god_of_the_labyrinth, dummy_oairecord, check_page):
+        """
+        Papers may have titles with characters that
+        are all ignored by slugify.
+        """
+        dummy_oairecord.about = book_god_of_the_labyrinth
+        dummy_oairecord.save()
+        book_god_of_the_labyrinth.title = '!@#$%^*()'
+        book_god_of_the_labyrinth.save()
+        assert book_god_of_the_labyrinth.slug == ''
+        check_page(200, 'paper', args=[book_god_of_the_labyrinth.pk, book_god_of_the_labyrinth.slug])
 
 @pytest.mark.usefixtures("load_test_data")
 class TestPaperPages():
@@ -127,19 +139,6 @@ class TestPaperPages():
         # is orphan: this should return a 404
         check_status(404, 'paper-doi', kwargs={'doi': '10.1385/1592597998'})
 
-    def test_paper_with_empty_slug(self, db, check_page):
-        """
-        Papers may have titles with characters that
-        are all ignored by slugify.
-        """
-        p = Paper.get_or_create(
-            '!@#$%^*()',
-            [BareName.create('Jean', 'Saisrien')],
-            date(2016, 7, 2))
-        p.visible = True # Force paper to be visible even if it an orphan
-        p.save()
-        assert p.slug == ''
-        check_page(200, 'paper', args=[p.pk, p.slug])
 
     def test_researcher(self, check_page):
         for r in [self.r1, self.r2, self.r3, self.r4]:
