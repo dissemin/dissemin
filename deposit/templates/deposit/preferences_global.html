@@ -1,0 +1,14 @@
+{% extends "deposit/preferences_base.html" %}
+
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+
+{% block title %}{% trans "Preferences" %}{% endblock title %}o
+
+{% block preferences_content %}
+    <form method="POST" action="{% url 'preferences-global' %}" id="repositoryPreferencesForm">
+	    {% crispy form %}
+    </form>
+{% endblock preferences_content %}
+

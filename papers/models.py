@@ -48,6 +48,7 @@ import re
 import haystack
 import pytz
 import logging
+import requests
 from statistics.models import AccessStatistics
 from statistics.models import combined_status_for_instance
 from statistics.models import STATUS_CHOICES_HELPTEXT
@@ -645,7 +646,6 @@ MAX_OAIRECORDS_PER_PAPER = 100
 class Paper(models.Model, BarePaper):
     title = models.CharField(max_length=1024)
     fingerprint = models.CharField(max_length=64, unique=True)
-    date_last_ask = models.DateField(null=True)  # TODO remove (unused)
 
     #: Approximate publication date.
     #: For instance if we only know it is in 2014 we'll put 2014-01-01
@@ -656,7 +656,6 @@ class Paper(models.Model, BarePaper):
 
     last_modified = models.DateTimeField(auto_now=True, db_index=True)
     visible = models.BooleanField(default=True)
-    last_annotation = models.CharField(max_length=32, null=True, blank=True)
 
     doctype = models.CharField(
         max_length=64, null=True, blank=True, choices=PAPER_TYPE_CHOICES)
@@ -669,6 +668,9 @@ class Paper(models.Model, BarePaper):
 
     # Task id of the current task updating the metadata of this article (if any)
     task = models.CharField(max_length=512, null=True, blank=True)
+
+    # A todo list to mark the paper for later deposition
+    todolist = models.ManyToManyField(User)
 
     def __init__(self, *args, **kwargs):
         super(Paper, self).__init__(*args, **kwargs)
@@ -959,6 +961,14 @@ class Paper(models.Model, BarePaper):
         # paper cannot be claimed by user
         raise ValueError
 
+
+    def on_todolist(self, user):
+        """
+        Checks if this paper is on the user todo list
+        """
+        return self.todolist.filter(pk=user.pk).exists()
+
+
     def is_owned_by(self, user, flexible=False):
         """
         Is this user one of the owners of that paper?
@@ -1027,17 +1037,24 @@ class Paper(models.Model, BarePaper):
                 self.save(update_fields=['task'])
 
     @classmethod
-    def create_by_doi(self, doi, bare=False):
+    def create_by_doi(self, doi):
         """
         Creates a paper given a DOI
+        :param DOI: DOI to return
+        :returns: A paper instance or None if no paper was created
         """
-        import backend.crossref as crossref
-        cr_api = crossref.CrossRefAPI()
-        bare_paper = cr_api.create_paper_by_doi(doi)
-        if bare:
-            return bare_paper
-        elif bare_paper:
-            return Paper.from_bare(bare_paper)  # TODO index it?
+
+        from backend.citeproc import DOIResolver
+        from backend.citeproc import CiteprocError
+        try:
+            return DOIResolver.save_doi(doi)
+        except CiteprocError as e:
+            logger.info('Could not create paper')
+            logger.info(e)
+        except requests.exceptions.RequestException as e:
+            logger.exception(e)
+        return None
+
 
     @classmethod
     def get_by_doi(cls, doi):
@@ -1155,6 +1172,8 @@ class Paper(models.Model, BarePaper):
                 author.affiliation = new_authors[new_idx].affiliation
             if new_idx is not None and new_authors[new_idx].orcid:
                 author.orcid = new_authors[new_idx].orcid
+            if new_idx is not None and new_authors[new_idx].researcher_id:
+                author.researcher_id = new_authors[new_idx].researcher_id
 
             unified_authors.append(author.serialize())
         self.authors_list = unified_authors
@@ -1189,6 +1208,7 @@ class Paper(models.Model, BarePaper):
         copied.delete()
 
         paper.id = self.id
+        self.cache_oairecords()
         self.update_availability()
 
     def recompute_fingerprint_and_merge_if_needed(self):
@@ -1239,16 +1259,6 @@ class Paper(models.Model, BarePaper):
     @property
     def url(self):
         return reverse('paper', args=[self.pk, self.slug])
-
-    def can_be_deposited(self, user):
-        """
-        Returns true when this paper can be deposited
-        in at least one repository configured on this
-        Dissemin instance.
-        """
-        from deposit.views import get_all_repositories_and_protocols
-        l = get_all_repositories_and_protocols(self, user)
-        return any([proto for _, proto in l])
 
     def remove_from_index(self):
         """
@@ -1443,6 +1453,7 @@ class OaiRecord(models.Model, BareOaiRecord):
                     doi=kwargs.get('doi'),
                     publisher=kwargs.get('publisher'),
                     journal=kwargs.get('journal'),
+                    pubdate=kwargs.get('pubdate'),
                     )
             # with transaction.atomic():
             record.save()

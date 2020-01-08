@@ -1,0 +1,24 @@
+{
+  "type": "article",
+  "id": "https://doi.org/10.5281/zenodo.1299048",
+  "author": [
+    {
+      "family": "Delpeuch",
+      "given": "Antonin"
+    }
+  ],
+  "issued": {
+    "date-parts": [
+      [
+        2015,
+        1,
+        1
+      ]
+    ]
+  },
+  "abstract": "Combining the strengths of distributional and logical semantics of natural language is a problem that has gained a lot of attention recently. We focus here on the distributional compositional framework of Coecke et al. (2011), which brings syntax-driven compositionality to word vectors.\nUsing type driven grammars, they propose a method to translate the syntactic structure\nof any sentence to a series of algebraic operations combining the individual word meanings into a sentence representation. My contribution to these semantics is twofold.\n\nFirst, I propose a new approach to tackle the dimensionality issues this model yields. One of the major hurdles to apply this composition technique to arbitrary sentences is indeed the large number of parameters to be stored and manipulated. This is due to the use of tensors, whose dimensions grow exponentially with the number of types involved in the syntax. Going back to the category-theoretical roots of the model, I show how the use of diagrams can help reduce the number of parameters, and adapt the composition operations to new sources of\ndistributional information. Second, I apply this framework to a concrete problem: prepositional phrase attachment. As this form of syntactic ambiguity requires semantic information to be resolved, distributional methods are a natural choice to improve disambiguation algoritms which usually consider words as discrete units. The attachment decision involves at least four different words, so it is interesting to see if the categorical composition method can be used to combine their representation into useful information to predict the correct attachment. A byproduct of this work is a new dataset with enriched annotations, allowing for a more fine-grained decision problem than the traditional PP attachment problem.",
+  "DOI": "10.5281/ZENODO.1299048",
+  "publisher": "Zenodo",
+  "title": "Type-Driven Distributional Semantics For Prepositional Phrase Attachment",
+  "URL": "https://zenodo.org/record/1299048"
+}

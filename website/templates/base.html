@@ -1,0 +1,122 @@
+{% load capture_tags %}
+{% load static %}
+{% load i18n %}
+{% load sass_tags %}
+
+<!DOCTYPE html>
+{% get_current_language as LANGUAGE_CODE %}
+<html lang="{{ LANGUAGE_CODE }}" prefix="og: http://ogp.me/ns#">
+    <head>
+        <!-- Meta content -->
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        {% block meta %}{% endblock meta %}
+
+        <!-- CSS -->
+        {% comment %}
+            Our custom style that extends/changes bootstrap styles.
+            It contains bootstrap, so we do not need to link bootstrap css
+        {% endcomment %}
+        <link rel="stylesheet" href="{% sass_src 'scss/custom.scss' %}" />
+        <link rel="stylesheet" href="{% static 'css/open-iconic-bootstrap.css' %}" />
+        <link rel="stylesheet" href="{% sass_src 'scss/dissemin.scss' %}" />
+        <link rel="stylesheet" href="{% static 'css/tempusdominus-bootstrap-4.min.css' %}" />
+        {% block css %}
+        {% endblock css %}
+
+        <!-- JavaScript -->
+        <script src="{% url 'javascript-catalog' %}"></script>
+        <script src="{% static 'js/jquery.min.js' %}"></script>
+        <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+        <script src="{% url 'js_reverse' %}" type="text/javascript"></script>
+        <script src="{% static 'js/dissemin.js' %}"></script>
+        <script src="{% static 'js/moment.min.js' %}"></script>
+        <script src="{% static 'js/tempusdominus-bootstrap-4.min.js' %}"></script>
+        <!-- Errors shall send to Sentry -->
+        {% if settings.SENTRY_DSN %}
+            <script type="text/javascript" src="{% static "js/sentry.min.js" %}"></script>
+            <script>Sentry.init({ dsn: '{{ settings.SENTRY_DSN }}'})</script>
+        {% endif %}
+
+        <!-- MathJAX support -->
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({
+              tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+            });
+        </script>
+        {% if settings.MATHJAX_SELFHOST_URL %}
+            <script type="text/javascript" src="{{ settings.MATHJAX_SELFHOST_URL }}" async>
+        {% else %}
+            <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async>
+        {% endif %}
+        </script>
+
+        <!-- Additional scripts, that individual pages / templates need -->
+        {% block scripts %}{% endblock %}
+
+        <!-- Title -->
+        {% comment %}
+            Set a title with block title
+        {% endcomment %}
+        <title>{% capture as title %}{% block title %}{% endblock %} - Dissemin{% endcapture %}</title>
+
+        <!-- Some more meta information -->
+        <meta name="description" content="{% trans "Dissemin detects papers behind pay-walls and invites their authors to upload them in one click to an open repository." %}">
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:creator" content="@disseminOA" />
+
+        <!-- Some informations for opengraph -->
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content='{{ title }}' />
+        <meta property="og:description" content="{% trans "Dissemin detects papers behind pay-walls and invites their authors to upload them in one click to an open repository." %}" />
+        <meta property="og:url" content="{{ request.get_full_path }}" />
+        <meta property="og:image" content="{% static "favicon/apple-icon-57x57.png" %}" />
+
+        <!-- Favicons -->
+        <link rel="apple-touch-icon" sizes="57x57" href="{% static "favicon/apple-icon-57x57.png" %}" />
+        <link rel="apple-touch-icon" sizes="60x60" href="{% static "favicon/apple-icon-60x60.png" %}" />
+        <link rel="apple-touch-icon" sizes="72x72" href="{% static "favicon/apple-icon-72x72.png" %}" />
+        <link rel="apple-touch-icon" sizes="76x76" href="{% static "favicon/apple-icon-76x76.png" %}" />
+        <link rel="apple-touch-icon" sizes="114x114" href="{% static "favicon/apple-icon-114x114.png" %}"/>
+        <link rel="apple-touch-icon" sizes="120x120" href="{% static "favicon/apple-icon-120x120.png" %}"/>
+        <link rel="apple-touch-icon" sizes="144x144" href="{% static "favicon/apple-icon-144x144.png" %}"/>
+        <link rel="apple-touch-icon" sizes="152x152" href="{% static "favicon/apple-icon-152x152.png" %}"/>
+        <link rel="apple-touch-icon" sizes="180x180" href="{% static "favicon/apple-icon-180x180.png" %}"/>
+        <link rel="icon" type="image/png" sizes="192x192" href="{% static "favicon/android-icon-192x192.png" %}" />
+        <link rel="icon" type="image/png" sizes="32x32" href="{% static "favicon/favicon-32x32.png" %}" />
+        <link rel="icon" type="image/png" sizes="96x96" href="{% static "favicon/favicon-96x96.png" %}" />
+        <link rel="icon" type="image/png" sizes="16x16" href="{% static "favicon/favicon-16x16.png" %}" />
+        <link rel="manifest" href="{% static "favicon/manifest.json" %}" />
+        <meta name="msapplication-TileImage" content="{% static "favicon/ms-icon-144x144.png" %}" />
+        <meta name="msapplication-TileColor" content="#ffffff" />
+
+    </head>
+
+    <body>
+        {% comment %}
+            We use flex, to make the container use screen height or more. Below we use a div, that uses rest of the available space.
+        {% endcomment %}
+        <div class="container p-0 d-flex flex-column min-vh-100" >
+            {% include 'navbar.html' %}
+            {% comment %}
+                Most pages should be equipped with a left or right border, however, some shall not have a border, like the start page, so there are two content blocks. Please fill either one of them.
+            {% endcomment %}
+            <div class="border-left border-right">
+                {% block content %}{% endblock content %}
+            </div>
+            {% block content_no_border %}{% endblock content_no_border %}
+            {% comment %}
+                The box above the footer uses all vertical space if any is available. Thus, the footer is moved down, if there is few content on the screen.
+            {% endcomment %}
+            <div class=" border-left border-right flex-fill"></div>
+            {% include 'footer.html' %}
+            {% comment %}
+                This is the beta ribbon, indicating, that it's not a production instance
+            {% endcomment %}
+            {% if settings.DISPLAY_BETA_RIBBON %}
+                <img style="position:absolute; top:0; left:0; border:0; opacity: 0.8; pointer-events: none;" src="{% static "img/beta-ribbon.png" %}" alt="Beta version" />
+            {% endif %}
+        </div>
+    </body>
+
+</html>

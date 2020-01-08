@@ -115,9 +115,16 @@
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name="license" type="licenseType"/>
-      <xs:element name="disseminID" type="disseminIDType"/>
-      <xs:element name="romeoID" type="romeoIDType"/>
+      <xs:element name="license" type="licenseType" minOccurs="0"/>
+      <xs:element name="disseminId" type="disseminIDType"/>
+      <xs:element name="embargoDate" type="xs:date" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>
+            The publication must not be published before given date. Publishing on given date is fine.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="romeoId" type="romeoIDType" minOccurs="0"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -135,7 +142,7 @@
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name="licenseURI" type="xs:anyURI" minOccurs="0">
+      <xs:element name="licenseURI" type="xs:anyURI">
         <xs:annotation>
           <xs:documentation>
             URI of the license e.g. https://creativecommons.org/licenses/by/4.0/
@@ -143,11 +150,11 @@
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name="licenseShortName" type="xs:token" minOccurs="0">
+      <xs:element name="licenseTransmitId" type="xs:token">
         <xs:annotation>
           <xs:documentation>
-            The short name of the license, e.g. CC BY 4.0
-            A license does need to have a shot name.
+            TransmitId of the license in case that you can or do want to use the URI.
+            A license does not need to have a URI.
           </xs:documentation>
         </xs:annotation>
       </xs:element>

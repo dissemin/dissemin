@@ -1,0 +1,44 @@
+{% load humanize %}
+{% load i18n %}
+
+<div class="statspie_caption" id="stats_pie_legend_n{{ stats_counter }}">
+    {% if combined_status_form %}
+        <fieldset class="stats_caption_table hiddenCheckboxes" id="searchByStatus">
+        <legend class="sr-only">{% trans 'Refine by OA status' %}</legend>
+        {{ combined_status.errors }}
+    {% else %}
+        <div class="stats_caption_table">
+    {% endif %}
+    <small>
+        {% for status in combined_status %}
+            {% if combined_status_form %}
+                <label>{{ status.tag }}
+            {% else %}
+                <a href="{% url 'search' %}?status={{ status.choice_value }}">
+            {% endif %}
+            <span class="stats_caption_box">
+                <span class="stats_caption_color" style="background-color:{% cycle "#FCD206" "#B9C909" "#419BE8" "#dddddd" "#122B52" %} !important"></span>
+            </span>
+            <span class="stats_caption_label">
+                <span class="stats_caption_label_text">
+                    {{ status.choice_label }}
+                    {% cycle stats.num_oa stats.num_ok stats.num_couldbe stats.num_unk stats.num_closed as stats_number silent %}
+                    {% if combined_status_form %}
+                        {{ stats_number | intcomma }}
+                    {% endif %}
+                </span>
+            </span>
+            {% if combined_status_form %}
+                <span class="statsCaptionCheckmark oi oi-check"></span>
+                </label>
+            {% else %}
+                </a>
+            {% endif %}
+        {% endfor %}
+    </small>
+    {% if combined_status_form %}
+        </fieldset>
+    {% else %}
+        </div>
+    {% endif %}
+</div>

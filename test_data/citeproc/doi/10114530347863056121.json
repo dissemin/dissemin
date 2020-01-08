@@ -1,0 +1,341 @@
+{
+    "indexed":{
+        "date-parts":[
+            [
+                2019,
+                11,
+                20
+            ]
+        ],
+        "date-time":"2019-11-20T05:23:40Z",
+        "timestamp":1574227420961
+    },
+    "publisher-location":"New York, New York, USA",
+    "reference-count":36,
+    "publisher":"ACM Press",
+    "isbn-type":[
+        {
+            "value":"9781450341981",
+            "type":"print"
+        }
+    ],
+    "license":[
+        {
+            "URL":"http:\/\/www.acm.org\/publications\/policies\/copyright_policy#Background",
+            "start":{
+                "date-parts":[
+                    [
+                        2017,
+                        5,
+                        9
+                    ]
+                ],
+                "date-time":"2017-05-09T00:00:00Z",
+                "timestamp":1494288000000
+            },
+            "delay-in-days":128,
+            "content-version":"vor"
+        }
+    ],
+    "funder":[
+        {
+            "name":"T&#233;l&#233;com ParisTech",
+            "award":[
+                "Research Chair on Big Data and Market Insights"
+            ]
+        }
+    ],
+    "content-domain":{
+        "domain":[
+
+        ],
+        "crossmark-restriction":false
+    },
+    "published-print":{
+        "date-parts":[
+            [
+                2017
+            ]
+        ]
+    },
+    "DOI":"10.1145\/3034786.3056121",
+    "type":"paper-conference",
+    "created":{
+        "date-parts":[
+            [
+                2017,
+                5,
+                10
+            ]
+        ],
+        "date-time":"2017-05-10T18:09:00Z",
+        "timestamp":1494439740000
+    },
+    "source":"Crossref",
+    "is-referenced-by-count":2,
+    "title":"Conjunctive Queries on Probabilistic Graphs",
+    "prefix":"10.1145",
+    "author":[
+        {
+            "given":"Antoine",
+            "family":"Amarilli",
+            "sequence":"first",
+            "affiliation":[
+                {
+                    "name":"Universit\u00e9 Paris-Saclay, Paris, France"
+                }
+            ]
+        },
+        {
+            "given":"Mika\u00ebl",
+            "family":"Monet",
+            "sequence":"additional",
+            "affiliation":[
+                {
+                    "name":"Universit\u00e9 Paris-Saclay & Inria Paris, Paris, France"
+                }
+            ]
+        },
+        {
+            "given":"Pierre",
+            "family":"Senellart",
+            "sequence":"additional",
+            "affiliation":[
+                {
+                    "name":"\u00c9cole normale sup\u00e9rieure, PSL Research University & Inria Paris, Paris, France"
+                }
+            ]
+        }
+    ],
+    "member":"320",
+    "reference":[
+        {
+            "key":"key-10.1145\/3034786.3056121-1",
+            "unstructured":"A. Amarilli.hrefhttp:\/\/ceur-ws.org\/Vol-1189\/paper_2.pdfThe possibility problem for probabilistic XML. In AMW, 2014."
+        },
+        {
+            "key":"key-10.1145\/3034786.3056121-2",
+            "unstructured":"A. Amarilli, P. Bourhis, M. Monet, and P. Senellart. Combined tractability of query evaluation via tree automata and cycluits. In ICDT, 2017."
+        },
+        {
+            "key":"key-10.1145\/3034786.3056121-3",
+            "unstructured":"A. Amarilli, P. Bourhis, M. Monet, and P. Senellart. Combined tractability of query evaluation via tree automata and cycluits (extended version). ArXiv e-prints, 2017. https:\/\/arxiv.org\/abs\/1612.04203v1. Extended version ofciteamarilli2017combined."
+        },
+        {
+            "key":"key-10.1145\/3034786.3056121-4",
+            "unstructured":"A. Amarilli, P. Bourhis, and P. Senellart.hrefhttps:\/\/arxiv.org\/abs\/1511.08723Provenance circuits for trees and treelike instances. In ICALP, volume 9135 of LNCS, 2015."
+        },
+        {
+            "key":"key-10.1145\/3034786.3056121-5",
+            "unstructured":"A. Amarilli, P. Bourhis, and P. Senellart. Provenance circuits for trees and treelike instances (extended version). CoRR, abs\/1511.08723, 2015. http:\/\/arxiv.org\/abs\/1511.08723. Extended version ofciteamarilli2015provenance."
+        },
+        {
+            "key":"key-10.1145\/3034786.3056121-6",
+            "unstructured":"A. Amarilli, P. Bourhis, and P. Senellart.hrefhttps:\/\/arxiv.org\/abs\/1604.02761Tractable lineages on treelike instances: limits and extensions. CoRR, abs\/1604.02761, 2016."
+        },
+        {
+            "key":"key-10.1145\/3034786.3056121-7",
+            "unstructured":"A. Amarilli, P. Bourhis, and P. Senellart. Tractable lineages on treelike instances: Limits and extensions. In PODS, 2016.",
+            "DOI":"10.1145\/2902251.2902301",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"key-10.1145\/3034786.3056121-8",
+            "unstructured":"P. Beame, G. Van den Broeck, E. Gribkoff, and D. Suciu.hrefhttps:\/\/arxiv.org\/abs\/1412.1505Symmetric weighted first-order model counting. In PODS, 2015."
+        },
+        {
+            "key":"key-10.1145\/3034786.3056121-9",
+            "unstructured":"M. Benedikt and C. Koch.hrefhttps:\/\/infoscience.epfl.ch\/record\/166852\/files\/25-leashed.pdfXPath leashed. CSUR, 2009."
+        },
+        {
+            "key":"key-10.1145\/3034786.3056121-10",
+            "unstructured":"J. Brault-Baron.hrefhttps:\/\/arxiv.org\/abs\/1403.7076Hypergraph acyclicity revisited. ArXiv e-prints, 2014."
+        },
+        {
+            "key":"key-10.1145\/3034786.3056121-11",
+            "unstructured":"J. Brault-Baron, F. Capelli, and S. Mengel.hrefhttp:\/\/drops.dagstuhl.de\/opus\/volltexte\/2015\/4963\/pdf\/lipics-vol30-stacs2015-complete.pdfUnderstanding model counting for &#946;-acyclic CNF-formulas. In STACS, 2015."
+        },
+        {
+            "key":"key-10.1145\/3034786.3056121-12",
+            "unstructured":"A. A. Bulatov. The complexity of the counting constraint satisfaction problem. J. ACM, 60(5), 2013.",
+            "DOI":"10.1145\/2528400",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"key-10.1145\/3034786.3056121-13",
+            "unstructured":"J. Cai, P. Lu, and M. Xia.hrefhttp:\/\/pages.cs.wisc.edu\/ jyc\/papers\/interpolation08.pdfHolographic reduction, interpolation and hardness. Computational Complexity, 21(4), 2008. Preprint ofcitecai2012holographic.",
+            "DOI":"10.1007\/s00037-012-0044-6",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"key-10.1145\/3034786.3056121-14",
+            "unstructured":"J. Cai, P. Lu, and M. Xia. Holographic reduction, interpolation and hardness. Computational Complexity, 21(4), 2012.",
+            "DOI":"10.1007\/s00037-012-0044-6",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"key-10.1145\/3034786.3056121-15",
+            "unstructured":"I. I. Ceylan, A. Darwiche, and G. Van den Broeck.hrefhttp:\/\/web.cs.ucla.edu\/ guyvdb\/papers\/CeylanKR16.pdfOpen-world probabilistic databases. In KR, 2016.",
+            "DOI":"10.24963\/ijcai.2017\/669",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"key-10.1145\/3034786.3056121-16",
+            "unstructured":"S. Cohen, B. Kimelfeld, and Y. Sagiv.hrefhttp:\/\/www.cs.huji.ac.il\/ sara\/papers\/running-tree-automata.pdfRunning tree automata on probabilistic XML. In PODS, 2009.",
+            "DOI":"10.1145\/1559795.1559831",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"key-10.1145\/3034786.3056121-17",
+            "unstructured":"H. Comon, M. Dauchet, R. Gilleron, C. L&#246;ding, F. Jacquemard, D. Lugiez, S. Tison, and M. Tommasi. Tree automata: Techniques and applications, 2007. Available from http:\/\/www.grappa.univ-lille3.fr\/tata."
+        },
+        {
+            "key":"key-10.1145\/3034786.3056121-18",
+            "unstructured":"R. Curticapean and D. Marx.hrefhttps:\/\/arxiv.org\/abs\/1407.2929Complexity of counting subgraphs: Only the boundedness of the vertex-cover number counts. In FOCS, 2014."
+        },
+        {
+            "key":"key-10.1145\/3034786.3056121-19",
+            "unstructured":"N. Dalvi and D. Suciu.hrefhttps:\/\/homes.cs.washington.edu\/ suciu\/vldbj-probdb.pdfEfficient query evaluation on probabilistic databases. VLDBJ, 16(4), 2007.",
+            "DOI":"10.1007\/s00778-006-0004-3",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"key-10.1145\/3034786.3056121-20",
+            "unstructured":"N. Dalvi and D. Suciu.hrefhttps:\/\/homes.cs.washington.edu\/ suciu\/jacm-dichotomy.pdfThe dichotomy of probabilistic inference for unions of conjunctive queries. JACM, 59(6), 2012.",
+            "DOI":"10.1145\/2395116.2395119",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"key-10.1145\/3034786.3056121-21",
+            "unstructured":"A. Darwiche.hrefhttps:\/\/arxiv.org\/abs\/cs\/0003044On the tractable counting of theory models and its application to truth maintenance and belief revision. J. Applied Non-Classical Logics, 11(1--2), 2001.",
+            "DOI":"10.3166\/jancl.11.11-34",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"key-10.1145\/3034786.3056121-22",
+            "unstructured":"T. Feder and M. Y. Vardi.hrefhttp:\/\/citeseerx.ist.psu.edu\/viewdoc\/download?doi=10.1.1.123.7882&#38;rep=rep1&#38;type=pdfThe computational structure of monotone monadic SNP and constraint satisfaction: A study through Datalog and group theory. SIAM Journal on Computing, 1998."
+        },
+        {
+            "key":"key-10.1145\/3034786.3056121-23",
+            "unstructured":"G. Gottlob, C. Koch, and K. U. Schulz.hrefhttps:\/\/arxiv.org\/abs\/cs\/0602004Conjunctive queries over trees. JACM, 53(2), 2006.",
+            "DOI":"10.1145\/1131342.1131345",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"key-10.1145\/3034786.3056121-24",
+            "unstructured":"M. Grohe.hrefhttp:\/\/citeseerx.ist.psu.edu\/viewdoc\/download?doi=10.1.1.86.9013&#38;rep=rep1&#38;type=pdfThe complexity of homomorphism and constraint satisfaction problems seen from the other side. JACM, 2007.",
+            "DOI":"10.1145\/1206035.1206036",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"key-10.1145\/3034786.3056121-25",
+            "unstructured":"W. Gutjahr, E. Welzl, and G. Woeginger.hrefhttp:\/\/www.sciencedirect.com\/science\/article\/pii\/0166218X9290294KPolynomial graph-colorings. Discrete Applied Mathematics, 35(1), 1992.",
+            "DOI":"10.1016\/0166-218X(92)90294-K",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"key-10.1145\/3034786.3056121-26",
+            "unstructured":"S. Khanna, S. Roy, and V. Tannen. Queries with difference on probabilistic databases. PVLDB, 2011."
+        },
+        {
+            "key":"key-10.1145\/3034786.3056121-27",
+            "unstructured":"B. Kimelfeld and P. Senellart.hrefhttp:\/\/pierre.senellart.com\/publications\/kimelfeld2013probabilistic.pdfProbabilistic XML string: models and complexity. In Z. Ma and L. Yan, editors, Advances in Probabilistic Databases for Uncertain Information Management. Springer, 2013."
+        },
+        {
+            "key":"key-10.1145\/3034786.3056121-28",
+            "unstructured":"S. Odagiri and H. Goto. On the greatest number of paths and maximal paths for a class of directed acyclic graphs. IEICE Trans. Fundamentals, E97-A(6), 2014.",
+            "DOI":"10.1587\/transfun.E97.A.1370",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"key-10.1145\/3034786.3056121-29",
+            "unstructured":"J. S. Provan and M. O. Ball. The complexity of counting cuts and of computing the probability that a graph is connected. SIAM J. Computing, 12(4), 1983.",
+            "DOI":"10.1137\/0212053",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"key-10.1145\/3034786.3056121-30",
+            "unstructured":"B. Schr&#246;der. Ordered Sets. Birkh&#228;user, second edition, 2016.",
+            "DOI":"10.1007\/978-3-319-29788-0",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"key-10.1145\/3034786.3056121-31",
+            "unstructured":"R. Stanley. Enumerative Combinatorics, volume 1. Cambridge University Press, 1997.",
+            "DOI":"10.1017\/CBO9780511805967",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"key-10.1145\/3034786.3056121-32",
+            "unstructured":"D. Suciu, D. Olteanu, C. R&#233;, and C. Koch. Probabilistic Databases. Morgan &#38; Claypool, 2011."
+        },
+        {
+            "key":"key-10.1145\/3034786.3056121-33",
+            "unstructured":"L. G. Valiant.hrefhttp:\/\/epubs.siam.org\/doi\/pdf\/10.1137\/070682575Holographic algorithms. SIAM J. Comput., 37(5), 2008.",
+            "DOI":"10.1137\/070682575",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"key-10.1145\/3034786.3056121-34",
+            "unstructured":"M. Y. Vardi.hrefhttps:\/\/www.cs.rice.edu\/ vardi\/papers\/pods95.ps.gzOn the complexity of bounded-variable queries. In PODS, 1995.",
+            "DOI":"10.1145\/212433.212474",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"key-10.1145\/3034786.3056121-35",
+            "unstructured":"T. Williams. Complexity of counting the number of edge covers of a graph. http:\/\/cstheory.stackexchange.com\/q\/21309, 2014."
+        },
+        {
+            "key":"key-10.1145\/3034786.3056121-36",
+            "unstructured":"M. Yannakakis.hrefhttps:\/\/www.researchgate.net\/profile\/Mihalis_Yannakakis\/publication\/200034379_Algorithms_for_Acyclic_Database_Schemes\/links\/5745c2a708ae9f741b430b62.pdfAlgorithms for acyclic database schemes. In VLDB, 1981."
+        }
+    ],
+    "event":"the 36th ACM SIGMOD-SIGACT-SIGAI Symposium",
+    "container-title":"Proceedings of the 36th ACM SIGMOD-SIGACT-SIGAI Symposium on Principles of Database Systems - PODS '17",
+    "original-title":[
+
+    ],
+    "link":[
+        {
+            "URL":"http:\/\/dl.acm.org\/ft_gateway.cfm?id=3056121&ftid=1872786&dwn=1",
+            "content-type":"unspecified",
+            "content-version":"vor",
+            "intended-application":"similarity-checking"
+        }
+    ],
+    "deposited":{
+        "date-parts":[
+            [
+                2019,
+                9,
+                24
+            ]
+        ],
+        "date-time":"2019-09-24T08:09:39Z",
+        "timestamp":1569312579000
+    },
+    "score":1.0,
+    "subtitle":[
+        "Combined Complexity"
+    ],
+    "short-title":[
+
+    ],
+    "issued":{
+        "date-parts":[
+            [
+                2017
+            ]
+        ]
+    },
+    "ISBN":[
+        "9781450341981"
+    ],
+    "references-count":36,
+    "URL":"http:\/\/dx.doi.org\/10.1145\/3034786.3056121",
+    "relation":{
+        "cites":[
+
+        ]
+    }
+}

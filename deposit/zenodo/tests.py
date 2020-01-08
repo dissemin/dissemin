@@ -24,19 +24,20 @@ import os
 import re
 import unittest
 import requests_mock
+import pytest
 from mock import patch
 from oaipmh.client import Client
 
+from deposit.models import License
+from deposit.models import LicenseChooser
 from deposit.tests import lorem_ipsum
 from deposit.tests.test_protocol import ProtocolTest
 from deposit.zenodo.protocol import ZenodoProtocol
-from deposit.zenodo.forms import ZENODO_DEFAULT_LICENSE_CHOICE
 from deposit.models import Repository
 from papers.models import Paper
 from papers.models import OaiSource
-from papers.tests.test_pages import RenderingTest
 
-class ZenodoProtocolTest(ProtocolTest, RenderingTest):
+class ZenodoProtocolTest(ProtocolTest):
 
     def setUp(self):
         super(ZenodoProtocolTest, self).setUp()
@@ -53,11 +54,21 @@ class ZenodoProtocolTest(ProtocolTest, RenderingTest):
         with open(os.path.join(self.testdir, 'testdata/zenodo_record.xml'), 'r') as f:
             self.zenodo_record = f.read()
 
+        self.l = License.objects.get(uri="https://dissem.in/deposit/license/zenodo-freetoread-1.0/")
+        self.lc, unused = LicenseChooser.objects.get_or_create(
+            license=self.l,
+            repository=self.repo,
+            transmit_id='zenodo-freetoread-1.0',
+            default=True,
+        )
+
+    @pytest.mark.usefixtures('mock_doi')
     def test_lncs(self):
         p = Paper.create_by_doi('10.1007/978-3-662-47666-6_5')
+
         r = self.dry_deposit(p,
             abstract = lorem_ipsum,
-            license = ZENODO_DEFAULT_LICENSE_CHOICE)
+            license = self.lc)
         self.assertEqualOrLog(r.status, 'faked')
 
     @patch.object(Client, 'makeRequest')
@@ -93,7 +104,7 @@ class ZenodoProtocolTest(ProtocolTest, RenderingTest):
         r = self.deposit(
             p,
             abstract = lorem_ipsum,
-            license = ZENODO_DEFAULT_LICENSE_CHOICE
+            license = self.lc,
         )
 
         # Deposit fails: a duplicate is found
@@ -108,7 +119,7 @@ class ZenodoProtocolTest(ProtocolTest, RenderingTest):
             p = Paper.create_by_doi('10.1007/978-3-662-47666-6_5')
             r = self.dry_deposit(p,
                     abstract = lorem_ipsum,
-                    license = ZENODO_DEFAULT_LICENSE_CHOICE)
+                    license = self.lc)
             self.assertEqual(r.status, 'failed')
 
 

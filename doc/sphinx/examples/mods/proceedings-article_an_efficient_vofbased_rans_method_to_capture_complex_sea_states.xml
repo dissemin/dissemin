@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mets:mets xmlns:mets="http://www.loc.gov/METS/" xmlns:ds="https://dissem.in/deposit/terms/" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mods="http://www.loc.gov/mods/v3">
+  <mets:metsHdr>
+    <mets:agent ROLE="CREATOR" TYPE="ORGANIZATION">
+      <mets:name>Dissemin</mets:name>
+    </mets:agent>
+  </mets:metsHdr>
+  <mets:dmdSec ID="d_dmd_1">
+    <mets:mdWrap MDTYPE="OTHER">
+      <mets:xmlData>
+        <mods:mods version="3.7">
+          <mods:relatedItem>
+            <mods:titleInfo>
+              <mods:title>29th International Conference on Ocean, Offshore and Arctic Engineering: Volume 6</mods:title>
+            </mods:titleInfo>
+          </mods:relatedItem>
+          <mods:abstract>Viscous seakeeping and manoeuvring simulations are becoming more important for an investigation of intact and damage conditions of ships exposed to extreme sea-states. The computational effort for RANS-based viscous seaway simulations is still prohibitive and reduces the possible fields of industrial applications. The limitations are associated to cumbersome grid requirements which restrain the flexibility and enhance the computational costs. The requirements follow from the aim to accurately predict the wave propagation towards the floating object and concurrently suppress wave reflections at the outlet boundary. To overcome these difficulties, a simple viscous/inviscid-coupling approach is suggested. Therein, the viscous RANS method is implicitly forced to comply with a prescribed invis-cid solution towards the far-field boundaries. Employing consistent boundary conditions at all far-field boundaries, the method facilitates the use of small domains and allows to investigate the behaviour of floating objects exposed to time-variable wave-field directions. Selected 2D and 3D examples are presented to demonstrate the capabilities of the approach.</mods:abstract>
+          <mods:originInfo>
+            <mods:dateIssued encoding="w3cdtf">2010-01-01</mods:dateIssued>
+            <mods:publisher>ASME International</mods:publisher>
+          </mods:originInfo>
+          <mods:identifier type="doi">10.1115/omae2010-20674</mods:identifier>
+          <mods:language>
+            <mods:languageTerm type="code" authority="rfc3066">en</mods:languageTerm>
+          </mods:language>
+          <mods:classification authority="ddc">330</mods:classification>
+          <mods:classification authority="ddc">550</mods:classification>
+          <mods:classification authority="ddc">620</mods:classification>
+          <mods:name type="personal">
+            <mods:namePart type="family">Woeckner</mods:namePart>
+            <mods:namePart type="given">Katja</mods:namePart>
+          </mods:name>
+          <mods:name type="personal">
+            <mods:namePart type="family">Drazyk</mods:namePart>
+            <mods:namePart type="given">Withold</mods:namePart>
+          </mods:name>
+          <mods:name type="personal">
+            <mods:namePart type="family">Rung</mods:namePart>
+            <mods:namePart type="given">Thomas</mods:namePart>
+          </mods:name>
+          <mods:titleInfo>
+            <mods:title>An Efficient VOF-Based RANS Method to Capture Complex Sea States</mods:title>
+          </mods:titleInfo>
+          <mods:genre>proceedings-article</mods:genre>
+        </mods:mods>
+      </mets:xmlData>
+    </mets:mdWrap>
+  </mets:dmdSec>
+  <mets:amdSec ID="d_amd_1">
+    <mets:rightsMD ID="d_rightsmd_1">
+      <mets:mdWrap MDTYPE="OTHER">
+        <mets:xmlData>
+          <ds:dissemin version="1.0">
+            <ds:depositor>
+              <ds:authentication>orcid</ds:authentication>
+              <ds:firstName>Gottfried</ds:firstName>
+              <ds:lastName>Leibniz</ds:lastName>
+              <ds:email>gottfried.leibniz@tib.eu</ds:email>
+              <ds:orcid>2543-2454-2345-234X</ds:orcid>
+              <ds:isContributor>false</ds:isContributor>
+            </ds:depositor>
+            <ds:publication>
+              <ds:license>
+                <ds:licenseName>Creative Commons Attribution 4.0 International (CC BY 4.0)</ds:licenseName>
+                <ds:licenseURI>https://creativecommons.org/licenses/by/4.0/</ds:licenseURI>
+                <ds:licenseTransmitId>cc_by-40</ds:licenseTransmitId>
+              </ds:license>
+              <ds:disseminId>16</ds:disseminId>
+              <ds:embargoDate>2020-10-10</ds:embargoDate>
+            </ds:publication>
+          </ds:dissemin>
+        </mets:xmlData>
+      </mets:mdWrap>
+    </mets:rightsMD>
+  </mets:amdSec>
+  <mets:fileSec>
+    <mets:fileGrp>
+      <mets:file ID="d_file_1">
+        <mets:FLocat xlink:href="document.pdf" LOCTYPE="URL"/>
+      </mets:file>
+    </mets:fileGrp>
+  </mets:fileSec>
+  <mets:structMap>
+    <mets:div DMDID="d_dmd_1">
+      <mets:div>
+        <mets:fptr FILEID="d_file_1"/>
+      </mets:div>
+    </mets:div>
+  </mets:structMap>
+</mets:mets>

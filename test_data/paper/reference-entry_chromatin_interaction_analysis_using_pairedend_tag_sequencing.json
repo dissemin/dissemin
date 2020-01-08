@@ -1,0 +1,59 @@
+{
+    "authors_list": [
+        {
+            "affiliation": null,
+            "name": {
+                "first": "Melissa J.",
+                "full": "melissa j. fullwood",
+                "last": "Fullwood"
+            },
+            "orcid": null,
+            "researcher_id": null
+        },
+        {
+            "affiliation": null,
+            "name": {
+                "first": "Yuyuan",
+                "full": "yuyuan han",
+                "last": "Han"
+            },
+            "orcid": null,
+            "researcher_id": null
+        },
+        {
+            "affiliation": null,
+            "name": {
+                "first": "Chia-Lin",
+                "full": "chia-lin wei",
+                "last": "Wei"
+            },
+            "orcid": null,
+            "researcher_id": null
+        },
+        {
+            "affiliation": null,
+            "name": {
+                "first": "Xiaoan",
+                "full": "xiaoan ruan",
+                "last": "Ruan"
+            },
+            "orcid": null,
+            "researcher_id": null
+        },
+        {
+            "affiliation": null,
+            "name": {
+                "first": "Yijun",
+                "full": "yijun ruan",
+                "last": "Ruan"
+            },
+            "orcid": null,
+            "researcher_id": null
+        }
+    ],
+    "doctype": "reference-entry",
+    "fingerprint": "7ef33786d9d1e39cf015c2de23159a38",
+    "pdf_url": null,
+    "pubdate": "2010-01-01",
+    "title": "Chromatin Interaction Analysis Using Paired-End Tag Sequencing"
+}

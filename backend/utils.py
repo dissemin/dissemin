@@ -30,7 +30,6 @@ from datetime import timedelta
 
 from dissemin.settings import redis_client
 from memoize import memoize
-from papers.errors import MetadataSourceException
 
 
 logger = logging.getLogger('dissemin.' + __name__)
@@ -76,39 +75,36 @@ def request_retry(url, **kwargs):
     :param retries: the number of times to retry a query (default 3)
     :param delay: the minimum delay between requests (default 5)
     :param backoff: the multiple used when raising the delay after an unsuccessful query (default 2)
+    :param session: A session to use
     """
-    data = kwargs.get('data', None)
+    params = kwargs.get('params', None)
     timeout = kwargs.get('timeout', 10)
-    retries = kwargs.get('retries', 3)
+    retries = kwargs.get('retries', 5)
     delay = kwargs.get('delay', 5)
     backoff = kwargs.get('backoff', 2)
     headers = kwargs.get('headers', {})
+    session = kwargs.get('session', requests.Session())
     try:
-        r = requests.get(url,
-                         params=data,
+        r = session.get(url,
+                         params=params,
                          timeout=timeout,
                          headers=headers,
                          allow_redirects=True)
         r.raise_for_status()
         return r
-    except requests.exceptions.Timeout as e:
+    except requests.exceptions.RequestException:
         if retries <= 0:
-            raise MetadataSourceException('Timeout: '+str(e))
-    except requests.exceptions.ConnectionError as e:
-        if retries <= 0:
-            raise MetadataSourceException('Connection error: '+str(e))
-    except requests.exceptions.RequestException as e:
-        if retries <= 0:
-            raise MetadataSourceException('Request error: '+str(e))
+            raise
 
     logger.info("Retrying in "+str(delay)+" seconds with url "+url)
     sleep(delay)
     return request_retry(url,
-                         data=data,
+                         params=params,
                          timeout=timeout,
                          retries=retries-1,
                          delay=delay*backoff,
-                         backoff=backoff)
+                         backoff=backoff,
+                         session=session)
 
 def urlopen_retry(url, **kwargs):
     return request_retry(url, **kwargs).text
@@ -116,6 +112,24 @@ def urlopen_retry(url, **kwargs):
 @memoize(timeout=86400)  # 1 day
 def cached_urlopen_retry(*args, **kwargs):
     return urlopen_retry(*args, **kwargs)
+
+
+def utf8_truncate(s, length=1024):
+    """
+    Truncates a string to given length when converted to utf8.
+    :param s: string to truncate
+    :param length: Desired length, default 1024
+    :returns: String of utf8-length with at most 1024
+
+    We cannot convert to utf8 and slice, since this might yield incomplete characters when decoding back.
+    """
+    s = s[:1024]
+
+    while len(s.encode('utf-8')) > length:
+        s = s[:-1]
+
+    return s
+
 
 def with_speed_report(generator, name=None, report_delay=timedelta(seconds=10)):
     """

@@ -1,0 +1,419 @@
+{
+    "indexed":{
+        "date-parts":[
+            [
+                2019,
+                11,
+                19
+            ]
+        ],
+        "date-time":"2019-11-19T02:13:13Z",
+        "timestamp":1574129593559
+    },
+    "reference-count":36,
+    "publisher":"Wiley",
+    "issue":"3",
+    "license":[
+        {
+            "URL":"http:\/\/onlinelibrary.wiley.com\/termsAndConditions#vor",
+            "start":{
+                "date-parts":[
+                    [
+                        2005,
+                        4,
+                        15
+                    ]
+                ],
+                "date-time":"2005-04-15T00:00:00Z",
+                "timestamp":1113523200000
+            },
+            "delay-in-days":0,
+            "content-version":"vor"
+        },
+        {
+            "URL":"http:\/\/doi.wiley.com\/10.1002\/tdm_license_1.1",
+            "start":{
+                "date-parts":[
+                    [
+                        2005,
+                        4,
+                        15
+                    ]
+                ],
+                "date-time":"2005-04-15T00:00:00Z",
+                "timestamp":1113523200000
+            },
+            "delay-in-days":0,
+            "content-version":"tdm"
+        }
+    ],
+    "content-domain":{
+        "domain":[
+
+        ],
+        "crossmark-restriction":false
+    },
+    "published-print":{
+        "date-parts":[
+            [
+                2005,
+                5
+            ]
+        ]
+    },
+    "DOI":"10.1111\/j.1574-0862.2005.00325.x",
+    "type":"article-journal",
+    "created":{
+        "date-parts":[
+            [
+                2005,
+                4,
+                15
+            ]
+        ],
+        "date-time":"2005-04-15T15:46:06Z",
+        "timestamp":1113579966000
+    },
+    "page":"267-279",
+    "source":"Crossref",
+    "is-referenced-by-count":7,
+    "title":"The demand for selected nutrients by Greek households: an empirical analysis with quantile regressions",
+    "prefix":"10.1111",
+    "volume":"32",
+    "author":[
+        {
+            "given":"Panos",
+            "family":"Fousekis",
+            "sequence":"first",
+            "affiliation":[
+                {
+                    "name":"Department of International Economics and Political Studies, Macedonian University of Greece, 156 Egnatia St., 540 06 Thessaloniki, Greece;"
+                }
+            ]
+        },
+        {
+            "given":"Panagiotis",
+            "family":"Lazaridis",
+            "sequence":"additional",
+            "affiliation":[
+                {
+                    "name":"Department of Agricultural Economics and Rural Development, Agricultural University of Athens, Iera Odos 75, 118 55 Athens, Greece"
+                }
+            ]
+        }
+    ],
+    "member":"311",
+    "published-online":{
+        "date-parts":[
+            [
+                2005,
+                4,
+                15
+            ]
+        ]
+    },
+    "reference":[
+        {
+            "key":"e_1_2_9_2_1",
+            "DOI":"10.2307\/1244360",
+            "doi-asserted-by":"publisher"
+        },
+        {
+            "key":"e_1_2_9_3_1",
+            "DOI":"10.2307\/1240456",
+            "doi-asserted-by":"publisher"
+        },
+        {
+            "key":"e_1_2_9_4_1",
+            "DOI":"10.2307\/1243023",
+            "doi-asserted-by":"publisher"
+        },
+        {
+            "key":"e_1_2_9_5_1",
+            "DOI":"10.2307\/146316",
+            "doi-asserted-by":"publisher"
+        },
+        {
+            "key":"e_1_2_9_6_1",
+            "first-page":"8",
+            "article-title":"Meat consumers' response to perceived risks associated with BSE in Great Britain",
+            "volume":"50",
+            "author":"Burton M.",
+            "year":"1999",
+            "journal-title":"Cah. Econ. Sociologie Rurales"
+        },
+        {
+            "key":"e_1_2_9_7_1",
+            "unstructured":"Chern W. 2000.Demand for food and demand for health in the United States. Paper presented at the XXIV International conference of the International Association of Agricultural Economists 13\u201318 August Berlin Germany ."
+        },
+        {
+            "key":"e_1_2_9_8_1",
+            "unstructured":"CINDI Dietary Guide 2000. World Health Organization Geneva ."
+        },
+        {
+            "key":"e_1_2_9_9_1",
+            "DOI":"10.1596\/0-8018-5254-4",
+            "doi-asserted-by":"publisher"
+        },
+        {
+            "key":"e_1_2_9_10_1",
+            "author":"Frazao E.",
+            "first-page":"2",
+            "year":"1996",
+            "article-title":"American diet: A costly health problem",
+            "journal-title":"Food Rev."
+        },
+        {
+            "key":"e_1_2_9_11_1",
+            "unstructured":"American Eating Habits: Changes and Consequences 1999 E. Frazao E. Frazao High costs of poor eating patterns in the USA 5 28"
+        },
+        {
+            "key":"e_1_2_9_12_1",
+            "DOI":"10.1093\/erae\/22.3.385",
+            "doi-asserted-by":"publisher"
+        },
+        {
+            "key":"e_1_2_9_13_1",
+            "first-page":"14",
+            "article-title":"sg70: Interquantile and simultaneous\u2010quantile regressions",
+            "volume":"38",
+            "author":"Gould W.",
+            "year":"1997",
+            "journal-title":"Stata Tech. Bull."
+        },
+        {
+            "key":"e_1_2_9_14_1",
+            "DOI":"10.1086\/259880",
+            "doi-asserted-by":"publisher"
+        },
+        {
+            "key":"e_1_2_9_15_1",
+            "unstructured":"The Social Benefits of Education 1997 University of Michigan Press M. Grossman R. Kaestner J. R. Behrman N. G. Stacey Effects of education on health 69 123"
+        },
+        {
+            "key":"e_1_2_9_16_1",
+            "DOI":"10.2307\/1243775",
+            "doi-asserted-by":"publisher"
+        },
+        {
+            "key":"e_1_2_9_17_1",
+            "unstructured":"Huang K. Lin H. 2000.Estimation of food demand and nutrient elasticities from household data. Technical Bulletin No 887. USDA Economic Research Service ."
+        },
+        {
+            "key":"e_1_2_9_18_1",
+            "DOI":"10.2307\/1243939",
+            "doi-asserted-by":"publisher"
+        },
+        {
+            "key":"e_1_2_9_19_1",
+            "first-page":"618",
+            "article-title":"The asymptotic distribution of the Least Absolute Deviation estimator",
+            "volume":"73",
+            "author":"Koenker R.",
+            "year":"1978",
+            "journal-title":"J. Am. Stat. Assoc."
+        },
+        {
+            "key":"e_1_2_9_20_1",
+            "DOI":"10.2307\/1913643",
+            "doi-asserted-by":"publisher"
+        },
+        {
+            "key":"e_1_2_9_21_1",
+            "DOI":"10.1257\/jep.15.4.143",
+            "doi-asserted-by":"publisher"
+        },
+        {
+            "key":"e_1_2_9_22_1",
+            "author":"Kuhler F.",
+            "first-page":"23",
+            "year":"2002",
+            "article-title":"Societal costs of obesity: how can we assess when federal interventions will pay?",
+            "journal-title":"Food Rev."
+        },
+        {
+            "key":"e_1_2_9_23_1",
+            "unstructured":"Lafrance J. 1999.An econometric model of food demand and nutrition. California Agricultural Experimental Station Giannini Foundation of Agricultural Economics No 885."
+        },
+        {
+            "key":"e_1_2_9_24_1",
+            "unstructured":"American Eating Habits: Changes and Consequences 1999 USDA B. Lin J. Gurthy E. Frazao E. Frazao Nutrient contribution of food away from home 213 245"
+        },
+        {
+            "key":"e_1_2_9_25_1",
+            "author":"Mantzouneas E.",
+            "year":"2002",
+            "volume-title":"Developments and forecasts for the private consumption in Greece"
+        },
+        {
+            "key":"e_1_2_9_26_1",
+            "author":"National Research Council",
+            "year":"1989",
+            "volume-title":"Diet and Health Implications for Reducing Chronic Disease Risk"
+        },
+        {
+            "key":"e_1_2_9_27_1",
+            "first-page":"111",
+            "article-title":"Consumer characteristics associated with healthful diets: The case of low\u2010calorie and low\u2010fat, low\u2010cholesterol foods",
+            "volume":"12",
+            "author":"Nayga R.",
+            "year":"1994",
+            "journal-title":"J. Agribusi."
+        },
+        {
+            "key":"e_1_2_9_28_1",
+            "doi-asserted-by":"crossref",
+            "first-page":"171",
+            "DOI":"10.1017\/S1068280500002288",
+            "article-title":"Effects of socioeconomic and demographic factors on consumption of selected food nutrients",
+            "volume":"23",
+            "author":"Nayga R.",
+            "year":"1994",
+            "journal-title":"Agric. Resour. Econ. Rev."
+        },
+        {
+            "key":"e_1_2_9_29_1",
+            "DOI":"10.2307\/1911031",
+            "doi-asserted-by":"publisher"
+        },
+        {
+            "key":"e_1_2_9_30_1",
+            "author":"Trichopoulou A.",
+            "year":"1992",
+            "volume-title":"Food Composition Tables"
+        },
+        {
+            "key":"e_1_2_9_31_1",
+            "unstructured":"Preventive Medicine and Public Health 2000 A. Trichopoulou Lagiou. D. Tricholpoulos B. Kalapothaki E. Petridou Diet and health 397 426"
+        },
+        {
+            "key":"e_1_2_9_32_1",
+            "unstructured":"Trichopoulos D. 2003.The health of Greeks: Today and tomorrow. Speech in the National Academy of Greece Athens 18 February (in Greek). US Department of Health and Human Services 1982 . The Surgeons General's Report on Nutrition and Health. DHHS Publications No. 88\u201050210 Washington DC ."
+        },
+        {
+            "key":"e_1_2_9_33_1",
+            "unstructured":"U.S. Department of Health and Human Services 1988.The Surgeon General's Report on Nutrition and Health Reports of the Surgeon General. U.S. Department of Health and Human Resources Washington DC ."
+        },
+        {
+            "key":"e_1_2_9_34_1",
+            "author":"Variyam J.",
+            "first-page":"13",
+            "year":"2002",
+            "article-title":"New health information is reshaping food choices",
+            "journal-title":"Food Rev."
+        },
+        {
+            "key":"e_1_2_9_35_1",
+            "DOI":"10.2307\/1243280",
+            "doi-asserted-by":"publisher"
+        },
+        {
+            "key":"e_1_2_9_36_1",
+            "DOI":"10.1111\/1467-8276.00310",
+            "doi-asserted-by":"publisher"
+        },
+        {
+            "key":"e_1_2_9_37_1",
+            "author":"World Health Organization",
+            "year":"2002",
+            "volume-title":"The World Health Report"
+        }
+    ],
+    "container-title":"Agricultural Economics",
+    "original-title":[
+
+    ],
+    "language":"en",
+    "link":[
+        {
+            "URL":"https:\/\/api.wiley.com\/onlinelibrary\/tdm\/v1\/articles\/10.1111%2Fj.1574-0862.2005.00325.x",
+            "content-type":"unspecified",
+            "content-version":"vor",
+            "intended-application":"text-mining"
+        },
+        {
+            "URL":"https:\/\/onlinelibrary.wiley.com\/doi\/pdf\/10.1111\/j.1574-0862.2005.00325.x",
+            "content-type":"application\/pdf",
+            "content-version":"vor",
+            "intended-application":"text-mining"
+        },
+        {
+            "URL":"https:\/\/onlinelibrary.wiley.com\/doi\/full-xml\/10.1111\/j.1574-0862.2005.00325.x",
+            "content-type":"application\/xml",
+            "content-version":"vor",
+            "intended-application":"text-mining"
+        },
+        {
+            "URL":"https:\/\/onlinelibrary.wiley.com\/doi\/pdf\/10.1111\/j.1574-0862.2005.00325.x",
+            "content-type":"unspecified",
+            "content-version":"vor",
+            "intended-application":"similarity-checking"
+        }
+    ],
+    "deposited":{
+        "date-parts":[
+            [
+                2019,
+                4,
+                4
+            ]
+        ],
+        "date-time":"2019-04-04T22:25:20Z",
+        "timestamp":1554416720000
+    },
+    "score":1.0,
+    "subtitle":[
+
+    ],
+    "short-title":[
+
+    ],
+    "issued":{
+        "date-parts":[
+            [
+                2005,
+                4,
+                15
+            ]
+        ]
+    },
+    "references-count":36,
+    "journal-issue":{
+        "published-online":{
+            "date-parts":[
+                [
+                    2005,
+                    4,
+                    15
+                ]
+            ]
+        },
+        "published-print":{
+            "date-parts":[
+                [
+                    2005,
+                    5
+                ]
+            ]
+        },
+        "issue":"3"
+    },
+    "alternative-id":[
+        "10.1111\/j.1574-0862.2005.00325.x"
+    ],
+    "URL":"http:\/\/dx.doi.org\/10.1111\/j.1574-0862.2005.00325.x",
+    "relation":{
+        "cites":[
+
+        ]
+    },
+    "ISSN":[
+        "0169-5150",
+        "1574-0862"
+    ],
+    "subject":[
+        "Agronomy and Crop Science",
+        "Economics and Econometrics"
+    ],
+    "container-title-short":"Agricultural Economics"
+}

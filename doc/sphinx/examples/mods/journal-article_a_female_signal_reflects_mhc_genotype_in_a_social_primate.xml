@@ -1,0 +1,113 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mets:mets xmlns:mets="http://www.loc.gov/METS/" xmlns:ds="https://dissem.in/deposit/terms/" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mods="http://www.loc.gov/mods/v3">
+  <mets:metsHdr>
+    <mets:agent ROLE="CREATOR" TYPE="ORGANIZATION">
+      <mets:name>Dissemin</mets:name>
+    </mets:agent>
+  </mets:metsHdr>
+  <mets:dmdSec ID="d_dmd_1">
+    <mets:mdWrap MDTYPE="OTHER">
+      <mets:xmlData>
+        <mods:mods version="3.7">
+          <mods:relatedItem>
+            <mods:part>
+              <mods:detail type="volume">
+                <mods:number>10</mods:number>
+              </mods:detail>
+              <mods:detail type="issue">
+                <mods:number>1</mods:number>
+              </mods:detail>
+              <mods:extent unit="pages">
+                <mods:total>96</mods:total>
+              </mods:extent>
+            </mods:part>
+            <mods:identifier type="eissn">1471-2148</mods:identifier>
+            <mods:titleInfo>
+              <mods:title>BMC Evolutionary Biology</mods:title>
+            </mods:titleInfo>
+          </mods:relatedItem>
+          <mods:abstract>Males from many species are believed to advertise their genetic quality through striking ornaments that attract mates. Yet the connections between signal expression, body condition and the genes associated with individual quality are rarely elucidated. This is particularly problematic for the signals of females in species with conventional sex roles, whose evolutionary significance has received little attention and is poorly understood. Here we explore these questions in the sexual swellings of female primates, which are among the most conspicuous of mammalian sexual signals and highly variable in size, shape and colour. We investigated the relationships between two components of sexual swellings (size and shape), body condition, and genes of the Major Histocompatibility Complex (MHC) in a wild baboon population (Papio ursinus) where males prefer large swellings.</mods:abstract>
+          <mods:originInfo>
+            <mods:dateIssued encoding="w3cdtf">2010-01-01</mods:dateIssued>
+            <mods:publisher>BMC</mods:publisher>
+          </mods:originInfo>
+          <mods:identifier type="doi">10.1186/1471-2148-10-96</mods:identifier>
+          <mods:language>
+            <mods:languageTerm type="code" authority="rfc3066">en</mods:languageTerm>
+          </mods:language>
+          <mods:classification authority="ddc">570</mods:classification>
+          <mods:classification authority="ddc">590</mods:classification>
+          <mods:name type="personal">
+            <mods:namePart type="family">Huchard</mods:namePart>
+            <mods:namePart type="given">Elise</mods:namePart>
+          </mods:name>
+          <mods:name type="personal">
+            <mods:namePart type="family">Raymond</mods:namePart>
+            <mods:namePart type="given">Michel</mods:namePart>
+          </mods:name>
+          <mods:name type="personal">
+            <mods:namePart type="family">Benavides</mods:namePart>
+            <mods:namePart type="given">Julio</mods:namePart>
+          </mods:name>
+          <mods:name type="personal">
+            <mods:namePart type="family">Marshall</mods:namePart>
+            <mods:namePart type="given">Harry</mods:namePart>
+          </mods:name>
+          <mods:name type="personal">
+            <mods:namePart type="family">Knapp</mods:namePart>
+            <mods:namePart type="given">Leslie A.</mods:namePart>
+          </mods:name>
+          <mods:name type="personal">
+            <mods:namePart type="family">Cowlishaw</mods:namePart>
+            <mods:namePart type="given">Guy</mods:namePart>
+          </mods:name>
+          <mods:titleInfo>
+            <mods:title>A female signal reflects MHC genotype in a social primate</mods:title>
+          </mods:titleInfo>
+          <mods:genre>journal-article</mods:genre>
+        </mods:mods>
+      </mets:xmlData>
+    </mets:mdWrap>
+  </mets:dmdSec>
+  <mets:amdSec ID="d_amd_1">
+    <mets:rightsMD ID="d_rightsmd_1">
+      <mets:mdWrap MDTYPE="OTHER">
+        <mets:xmlData>
+          <ds:dissemin version="1.0">
+            <ds:depositor>
+              <ds:authentication>orcid</ds:authentication>
+              <ds:firstName>Gottfried</ds:firstName>
+              <ds:lastName>Leibniz</ds:lastName>
+              <ds:email>gottfried.leibniz@tib.eu</ds:email>
+              <ds:orcid>2543-2454-2345-234X</ds:orcid>
+              <ds:isContributor>false</ds:isContributor>
+            </ds:depositor>
+            <ds:publication>
+              <ds:license>
+                <ds:licenseName>Creative Commons Attribution 4.0 International (CC BY 4.0)</ds:licenseName>
+                <ds:licenseURI>https://creativecommons.org/licenses/by/4.0/</ds:licenseURI>
+                <ds:licenseTransmitId>cc_by-40</ds:licenseTransmitId>
+              </ds:license>
+              <ds:disseminId>5</ds:disseminId>
+              <ds:romeoId>22</ds:romeoId>
+            </ds:publication>
+          </ds:dissemin>
+        </mets:xmlData>
+      </mets:mdWrap>
+    </mets:rightsMD>
+  </mets:amdSec>
+  <mets:fileSec>
+    <mets:fileGrp>
+      <mets:file ID="d_file_1">
+        <mets:FLocat xlink:href="document.pdf" LOCTYPE="URL"/>
+      </mets:file>
+    </mets:fileGrp>
+  </mets:fileSec>
+  <mets:structMap>
+    <mets:div DMDID="d_dmd_1">
+      <mets:div>
+        <mets:fptr FILEID="d_file_1"/>
+      </mets:div>
+    </mets:div>
+  </mets:structMap>
+</mets:mets>

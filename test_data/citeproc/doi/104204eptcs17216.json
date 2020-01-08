@@ -1,0 +1,342 @@
+{
+    "indexed":{
+        "date-parts":[
+            [
+                2019,
+                11,
+                25
+            ]
+        ],
+        "date-time":"2019-11-25T23:24:11Z",
+        "timestamp":1574724251491
+    },
+    "reference-count":24,
+    "publisher":"Open Publishing Association",
+    "content-domain":{
+        "domain":[
+
+        ],
+        "crossmark-restriction":false
+    },
+    "DOI":"10.4204\/eptcs.153.4",
+    "type":"article-journal",
+    "created":{
+        "date-parts":[
+            [
+                2014,
+                6,
+                5
+            ]
+        ],
+        "date-time":"2014-06-05T22:06:24Z",
+        "timestamp":1402005984000
+    },
+    "page":"51-67",
+    "source":"Crossref",
+    "is-referenced-by-count":8,
+    "title":"Normalization by Evaluation in the Delay Monad: A Case Study for Coinduction via Copatterns and Sized Types",
+    "prefix":"10.4204",
+    "volume":"153",
+    "author":[
+        {
+            "given":"Andreas",
+            "family":"Abel",
+            "sequence":"first",
+            "affiliation":[
+                {
+                    "name":"Gothenburg University"
+                }
+            ]
+        },
+        {
+            "given":"James",
+            "family":"Chapman",
+            "sequence":"additional",
+            "affiliation":[
+                {
+                    "name":"Institute of Cybernetics, Tallinn"
+                }
+            ]
+        }
+    ],
+    "member":"2720",
+    "published-online":{
+        "date-parts":[
+            [
+                2014,
+                6,
+                5
+            ]
+        ]
+    },
+    "reference":[
+        {
+            "issue":"1",
+            "key":"abelAltenkirch:jfp02",
+            "doi-asserted-by":"publisher",
+            "first-page":"1",
+            "DOI":"10.1017\/S0956796801004191",
+            "article-title":"A Predicative Analysis of Structural Recursion",
+            "volume":"12",
+            "author":"Andreas Abel",
+            "year":"2002",
+            "journal-title":"Journal of Functional Programming"
+        },
+        {
+            "key":"abelChapman:msfp14lagda",
+            "author":"Andreas Abel",
+            "year":"2014",
+            "volume-title":"Normalization by Evaluation in the Delay Monad: Literate Agda Code"
+        },
+        {
+            "key":"abelCoquandDybjer:mpc08",
+            "series-title":"Lecture Notes in Computer Science",
+            "doi-asserted-by":"publisher",
+            "first-page":"29",
+            "DOI":"10.1007\/978-3-540-70594-9_4",
+            "article-title":"Verifying a Semantic \u03b2\u03b7-Conversion Test for Martin-L\u00f6f Type Theory",
+            "volume-title":"Mathematics of Program Construction, 9th International Conference, MPC 2008, Marseille, France, July 15-18, 2008. Proceedings",
+            "volume":"5133",
+            "author":"Andreas Abel",
+            "year":"2008"
+        },
+        {
+            "key":"abelPientka:icfp13",
+            "author":"Andreas Abel",
+            "first-page":"185",
+            "year":"2013",
+            "article-title":"Wellfounded Recursion with Copatterns: A Unified Approach to Termination and Productivity",
+            "volume-title":"Proceedings of the Eighteenth ACM SIGPLAN International Conference on Functional Programming, ICFP'13, Boston, MA, USA, September 25-27, 2013",
+            "DOI":"10.1145\/2500365.2500591",
+            "doi-asserted-by":"publisher"
+        },
+        {
+            "key":"abelPientkaThibodeauSetzer:popl13",
+            "author":"Andreas Abel",
+            "first-page":"27",
+            "year":"2013",
+            "article-title":"Copatterns: Programming Infinite Structures by Observations",
+            "volume-title":"The 40th Annual ACM SIGPLAN-SIGACT Symposium on Principles of Programming Languages, POPL'13, Rome, Italy, January 23 - 25, 2013",
+            "DOI":"10.1145\/2429069.2429075",
+            "doi-asserted-by":"publisher"
+        },
+        {
+            "key":"aehligJoachimski:continuousNormalization",
+            "doi-asserted-by":"publisher",
+            "first-page":"39",
+            "DOI":"10.1016\/j.apal.2004.10.003",
+            "article-title":"Continuous Normalization for the Lambda-Calculus and G\u00f6del's T",
+            "volume":"133",
+            "author":"Klaus Aehlig",
+            "year":"2005",
+            "journal-title":"Annals of Pure and Applied Logic"
+        },
+        {
+            "key":"altenkirchChapman:bigStepNormalisation",
+            "doi-asserted-by":"publisher",
+            "first-page":"311",
+            "DOI":"10.1017\/S0956796809007278",
+            "article-title":"Big-step normalisation",
+            "volume":"19",
+            "author":"Thorsten Altenkirch",
+            "year":"2009",
+            "journal-title":"Journal of Functional Programming"
+        },
+        {
+            "key":"altenkirchDanielsson:par10",
+            "author":"Thorsten Altenkirch",
+            "year":"2010",
+            "volume-title":"Termination Checking in the Presence of Nested Inductive and Coinductive Types"
+        },
+        {
+            "key":"augustsson:equalityProofs",
+            "author":"Lennart Augustsson",
+            "year":"1999",
+            "volume-title":"Equality proofs in Cayenne"
+        },
+        {
+            "key":"bergerSchwichtenberg:lics91",
+            "author":"Ulrich Berger",
+            "first-page":"203",
+            "year":"1991",
+            "article-title":"An Inverse to the Evaluation Functional for Typed \u03bb-calculus",
+            "volume-title":"Sixth Annual Symposium on Logic in Computer Science (LICS '91), July, 1991, Amsterdam, The Netherlands, Proceedings",
+            "DOI":"10.1109\/LICS.1991.151645",
+            "doi-asserted-by":"publisher"
+        },
+        {
+            "issue":"2",
+            "key":"capretta:generalRecursionViaCoinductiveTypes",
+            "doi-asserted-by":"publisher",
+            "DOI":"10.2168\/LMCS-1(2:1)2005",
+            "article-title":"General Recursion via Coinductive Types",
+            "volume":"1",
+            "author":"Venanzio Capretta",
+            "year":"2005",
+            "journal-title":"Logical Methods in Computer Science"
+        },
+        {
+            "key":"chapman:PhD",
+            "author":"James Chapman",
+            "year":"2009",
+            "volume-title":"Type Checking and Normalization"
+        },
+        {
+            "key":"coquand:infiniteobjects",
+            "series-title":"Lecture Notes in Computer Science",
+            "doi-asserted-by":"publisher",
+            "first-page":"62",
+            "DOI":"10.1007\/3-540-58085-9_72",
+            "article-title":"Infinite Objects in Type Theory",
+            "volume-title":"Types for Proofs and Programs (TYPES '93)",
+            "volume":"806",
+            "author":"Thierry Coquand",
+            "year":"1993"
+        },
+        {
+            "key":"danielsson:icfp12",
+            "author":"Nils Anders Danielsson",
+            "first-page":"127",
+            "year":"2012",
+            "article-title":"Operational semantics using the partiality monad",
+            "volume-title":"Proceedings of the Seventeenth ACM SIGPLAN International Conference on Functional Programming, ICFP'12, Copenhagen, Denmark, September 9-15, 2012",
+            "DOI":"10.1145\/2364527.2364546",
+            "doi-asserted-by":"publisher"
+        },
+        {
+            "key":"danvy:tdpe",
+            "series-title":"Lecture Notes in Computer Science",
+            "doi-asserted-by":"publisher",
+            "first-page":"367",
+            "DOI":"10.1145\/237721.237784",
+            "article-title":"Type-Directed Partial Evaluation",
+            "volume-title":"Partial Evaluation \u2013 Practice and Theory, DIKU 1998 International Summer School, Copenhagen, Denmark, June 29 - July 10, 1998",
+            "volume":"1706",
+            "author":"Olivier Danvy",
+            "year":"1999"
+        },
+        {
+            "key":"escardo:metricPCF",
+            "author":"Martin H. Escardo",
+            "year":"1999",
+            "volume-title":"A metric model of PCF"
+        },
+        {
+            "key":"ganzFriedmanWand:icfp99",
+            "author":"Steven E. Ganz",
+            "first-page":"18",
+            "year":"1999",
+            "article-title":"Trampolined Style",
+            "volume-title":"Proceedings of the Fourth ACM SIGPLAN International Conference on Functional Programming (ICFP '99), Paris, France",
+            "DOI":"10.1145\/317636.317779",
+            "doi-asserted-by":"publisher"
+        },
+        {
+            "key":"gimenez:guardeddefinitions",
+            "series-title":"Lecture Notes in Computer Science",
+            "doi-asserted-by":"publisher",
+            "first-page":"39",
+            "DOI":"10.1007\/3-540-60579-7_3",
+            "article-title":"Codifying Guarded Definitions with Recursive Schemes",
+            "volume-title":"Types for Proofs and Programs, International Workshop TYPES'94, B\u00e5stad, Sweden, June 6-10, 1994, Selected Papers",
+            "volume":"996",
+            "author":"Eduardo Gim\u00e9nez",
+            "year":"1995"
+        },
+        {
+            "key":"gregoireLeroy:icfp02",
+            "series-title":"SIGPLAN Notices",
+            "doi-asserted-by":"publisher",
+            "first-page":"235",
+            "DOI":"10.1145\/581478.581501",
+            "article-title":"A compiled implementation of strong reduction",
+            "volume-title":"Proceedings of the Seventh ACM SIGPLAN International Conference on Functional Programming (ICFP '02), Pittsburgh, Pennsylvania, USA, October 4-6, 2002",
+            "volume":"37",
+            "author":"Benjamin Gr\u00e9goire",
+            "year":"2002"
+        },
+        {
+            "key":"inria:coq84",
+            "author":"INRIA",
+            "year":"2012",
+            "volume-title":"The Coq Proof Assistant Reference Manual"
+        },
+        {
+            "key":"kellerAltenkirch:msfp10",
+            "author":"Chantal Keller",
+            "year":"2010",
+            "article-title":"Hereditary Substitutions for Simple Types, Formalized",
+            "volume-title":"Third Workshop on Mathematically Structured Functional Programming, MSFP 2010, Baltimore, USA, September 25, 2010",
+            "DOI":"10.1145\/1863597.1863601",
+            "doi-asserted-by":"publisher"
+        },
+        {
+            "key":"mints:contNorm",
+            "doi-asserted-by":"publisher",
+            "first-page":"548",
+            "DOI":"10.1007\/BF01091743",
+            "article-title":"Finite Investigations of Transfinite Derivations",
+            "volume":"10",
+            "author":"Grigori Mints",
+            "year":"1978",
+            "journal-title":"Journal of Soviet Mathematics"
+        },
+        {
+            "key":"prawitz:natDed",
+            "author":"Dag Prawitz",
+            "year":"1965",
+            "volume-title":"Natural Deduction"
+        },
+        {
+            "key":"watkins:concurrentLFTR",
+            "author":"Kevin Watkins",
+            "year":"2003",
+            "volume-title":"A concurrent logical framework I: Judgements and properties",
+            "DOI":"10.21236\/ADA418517",
+            "doi-asserted-by":"crossref"
+        }
+    ],
+    "container-title":"Electronic Proceedings in Theoretical Computer Science",
+    "original-title":[
+
+    ],
+    "language":"en",
+    "deposited":{
+        "date-parts":[
+            [
+                2019,
+                8,
+                11
+            ]
+        ],
+        "date-time":"2019-08-11T09:02:51Z",
+        "timestamp":1565514171000
+    },
+    "score":1.0,
+    "subtitle":[
+
+    ],
+    "short-title":[
+
+    ],
+    "issued":{
+        "date-parts":[
+            [
+                2014,
+                6,
+                5
+            ]
+        ]
+    },
+    "references-count":24,
+    "URL":"http:\/\/dx.doi.org\/10.4204\/eptcs.153.4",
+    "relation":{
+        "cites":[
+
+        ]
+    },
+    "ISSN":[
+        "2075-2180"
+    ],
+    "container-title-short":"Electron. Proc. Theor. Comput. Sci."
+}

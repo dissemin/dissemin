@@ -1,345 +1,220 @@
-{% extends "dissemin/details.html" %}
+{% extends "base.html" %}
 
 {% load author %}
-{% load domain %}
-{% load statuses %}
+{% load crispy_forms_tags %}
 {% load doi %}
+{% load domain %}
 {% load i18n %}
 {% load static %}
-{% load crispy_forms_tags %}
+{% load statuses %}
+{% load widget_tweaks %}
 
-{% block headTitle %}{% trans "Depositing" %} "{{ paper.title }}"{% endblock %}
+{% block title %}{% trans "Depositing" %} "{{ paper.title }}"{% endblock %}
 
-{% block bodyTitle %}
-{% trans "Depositing" %} "{{ paper.title }}"
-{% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="{% static "css/select2.min.css" %}" />
+{% endblock css %}
 
-{% block extra_head %}
-    <script src="{% static "libs/jquery.ui.widget.js" %}"></script>
-    <script src="{% static "libs/jquery.iframe-transport.js" %}"></script>
-    <script src="{% static "libs/jquery.fileupload.js" %}"></script>
-    <script src="{% static "libs/upload.js" %}"></script>
+{% block scripts %}
+    <script src="{% static "js/dropzone.js" %}"></script>
+    <script src="{% static "js/select2.min.js"%}"></script>
+    <script>
+        // Disable auto discover of dropzone
+        Dropzone.autoDiscover = false;
 
-    <link rel="stylesheet" href="{% static "css/upload.css" %}" />
-    <link rel="stylesheet" href="{% static "css/deposit.css" %}" />
-    <!-- repository-specific JS and CSS -->
-    {% for repo_proto in available_repositories %}
-        {{ repo_proto.1.get_form.media }}
-    {% endfor %}
-{% endblock %}
-
-{% block jsScript %}
-yl = {};
-yl.jQuery = $;
-$(function() {
-    $('#waitingArea').hide();
-    $('#uploadFileId').val('');
-
-    /* Prefetched fields */
-    function initPrefetch(p) {
-        {% trans "Trying to fill this field automatically for you..." as trying_fill %}
-        p.text("{{ trying_fill|escapejs }}");
-        field = $("#"+p.data("fieldid"));
-        objid = $("input[name="+p.data("objfieldname")+"]").val();
-        field.prop('disabled', true);
-        $.get(p.data("callback"),
-            {"field":p.data("fieldname"),
-            "id":objid}, null, 'json').fail(
-            function(data) {
-                {% trans "Sorry, we could not fill this for you." as sorry %}
-                p.text('{{ sorry|escapejs }}');
-                field.prop('disabled', false);
-            }
-        ).done(
-            function(data) {
-                if(!data['success']) {
-                p.text('{{ sorry|escapejs }}');
-                } else {
-                    p.text('');
-                }
-                field.prop('disabled', false);
-                field.val(data['value']);
-            }
-        );
-    }
-
-    /* Dynamic selection of repositories */
-
-    // functions that should be run every time we replace the form
-    function init() {
-	$('.prefetchingFieldStatus').each(function(i,prefetch) {
-	    initPrefetch($(prefetch));
-	});
-	$('[data-autocomplete-light-function=select2-customTemplate]').trigger('autocompleteLightInitialize');
-    }
-    init(); // for the initial repository
-
-    function updateMetadataForm(selected) {
-        if(selected.val()) {
-        $.get("{% url 'ajax-getMetadataForm' %}", data={'paper':{{ paper.id }},'repository':selected.val()}
-            ).done(
-                function(data) {
-                    $("#repositoryMetadataForm").empty();
-                    if('status' in data && data['status'] == 'success') {
-                        $("#repositoryMetadataForm").append(data['form']);
-			init();
-                    } else if ('message' in data) {
-                        $("#repositoryMetadataForm").append("<p>"+data["message"]+"</p>");
-                    }
-                }
-            ).fail(
-                function(data) {
-                });
-        }
-    }
-
-    $('.helpPopover').popover({trigger: "hover"});
-
-    /* Panels */
-    function collapseWithInline(input_name, callback) {
-        $('#option'+input_name).collapse({
-            parent:$('#'+input_name+'Options'),
-            toggle:false,
-            }).on('show.bs.collapse', function () {
-            $('#'+input_name+'Inline').empty();
-        }).on('hidden.bs.collapse', function () {
-            var selected = $("input[type='radio'][name='radio"+input_name+"']:checked");
-            if(selected.length > 0) {
-            $('#'+input_name+'Inline').append($('#hiddenInline'+input_name+'-'+selected.val()).clone());
-            }
-            if(callback != null) {
-                callback(selected);
-            }
+        // For HAL that uses select2
+        $(function() {
+	    $('[data-autocomplete-light-function=select2-customTemplate]').trigger('autocompleteLightInitialize');
         });
-        $("input[type='radio'][name='radio"+input_name+"']").click(function(){
-            $('#option'+input_name).collapse('hide');
-            $('#error-radio'+input_name).removeClass('error').empty();
-        });
-    }
 
-    collapseWithInline('UploadType', null);
-    collapseWithInline('Repository', updateMetadataForm);
-
-    {% if request.GET.type %}
-        $('#optionUploadType').collapse('hide');
-    {% endif %}
-});
-
-    /* Submitting the deposit */
-    function depositPaper() {
-       var data = $('#depositForm').serialize();
-       $('.error').removeClass('error').empty()
-       $('#waitingArea,.submitDeposit').toggle();
-
-       $.post('{% url 'ajax-submitDeposit' paper.pk %}', data, null, 'json').fail(
-            function(data) {
-                var errorText = '';
-                if(!data.responseJSON) {
-                    {% trans "Dissemin encountered an error, please try again later." as errormsg %}
-                    errorText = "{{ errormsg|escapejs }}";
-                } else {
-                    error = data.responseJSON;
-                    if('message' in error) {
-                        errorText = error['message']
-                    }
-                    if('form' in error) {
-                        errors = error['form']
-                        if('file_id' in errors) {
-                            $('#globalError').addClass('error').text(errors['file_id'][0]);
-                            $('html, body').scrollTop($('#globalError').first().offset().top);
-                        }
-                        if('radioUploadType' in errors) {
-                            $('#error-radioUploadType').addClass('error').text(errors['radioUploadType'][0]);
-                            $('html, body').scrollTop($('#error-radioUploadType').first().offset().top);
-                            $('#optionUploadType').collapse('show');
-                        }
-                    }
-                    if('form_html' in error) {
-                        $('#repositoryMetadataForm').html(error['form_html']);
-                        $('html, body').scrollTop($('#repositoryMetadataForm').first().offset().top);
-                        $('#optionMetadata').collapse('show');
-                    }
-                }
-                if(errorText) {
-                    $('#depositError').addClass('error').text(errorText);
-                    $('html, body').scrollTop($('#depositError').first().offset().top);
-                }
-                $('#waitingArea,.submitDeposit').toggle();
-            }).done(function(data) {
-                var uploadId = data['upload_id'];
-                window.location.replace('{% url 'paper' paper.pk paper.slug %}?deposit='+uploadId);
+        // Prefetch fields when document is ready
+        $(function() {
+            $('.prefetchingFieldStatus').each(function(i,prefetch) {
+                initPrefetch($(prefetch));
             });
-    }
-
-    /* Submit button disable / enable */
-    function isFormValid() {
-        if (!$('#uploadFileId').val()) {
-            return false;
-        }
-        if (!$('#optionUploadType input:checked').val()) {
-            return false;
-        }
-        if (!$('#optionRepository input:checked').val()) {
-            return false;
-        }
-        var repositoryMetadataFormOk = true;
-        $('#repositoryMetadataForm .form-group').filter(function(index, item) {
-            return $('.asteriskField', item).length > 0;
-        }).each(function(index, item) {
-            if (!(
-                $('input[type=radio]:checked', item).val()
-                || $('input[type=checkbox]:checked', item).val()
-                || $('input[type=text]', item).val()
-                || $('textarea', item).val()
-                || $('select', item).val()
-            )) {
-                repositoryMetadataFormOk = false;
-            }
         });
-        return repositoryMetadataFormOk;
-    }
-    $(document).ready(function() {
-        if (isFormValid()) {
-            $('#submitDeposit').prop('disabled', false);
-        }
-        else {
-            $('#submitDeposit').prop('disabled', true);
-        }
-        $('#depositForm').on('change keyup paste', ':input', function(e) {
-            if (isFormValid()) {
-                $('#submitDeposit').prop('disabled', false);
-                return false;
-            }
-            else {
-                $('#submitDeposit').prop('disabled', true);
-            }
-        });
-    });
-{% endblock %}
 
-{% block lists %}
-<div id="uploadIntro">
-    <p>
-        {% url 'tos' as tosurl %}
-        {% blocktrans trimmed %}
-            You can deposit the full text of your article. Dissemin will
-            send it to a repository where it will be made freely available.
-            By depositing your article via Dissemin,
-            you agree to our <a href="{{ tosurl }}">terms of service</a>.
-        {% endblocktrans %}
-    </p>
+        // Collapse Doctype card if choosen per GET
+        {% if collapse_doctype %}
+            $(function() {
+                $("#collapseDocType").collapse('hide')
+            });
+        {% endif %}
+    </script>
 
-    {% if not is_owner %}
-    <div class="alert alert-danger" role="alert">
-        <span class="glyphicon glyphicon-exclamation-sign"></span>
-        {% blocktrans trimmed %}
-        You do not appear to be one of the authors of this paper.
-        By using this form, you certify that you have the permission to
-        upload it on their behalf.
-        {% endblocktrans %}
-    </div>
-    {% endif %}
-    {% if not selected_protocol %}
-    <div class="alert alert-danger" role="alert">
-        <span class="glyphicon glyphicon-exclamation-sign"></span>
-        {% blocktrans trimmed %}
-        This paper cannot be deposited in any repository supported by
-        Dissemin.
-        {% endblocktrans %}
-    </div>
-    {% endif %}
-</div>
+    <!-- Addiotonal JS for special repository forms -->
+    {% for protocol in used_protocols %}
+        {{ protocol.get_form.media }}
+    {% endfor %}
 
-<span class="detailsTitle">{% trans "Document" %}</span>
-<div class="detailsContent uploadSection">
-    {% include "upload/widget.html" %}
-</div>
+{% endblock scripts %}
 
-<form method="POST" action="javascript:depositPaper()" id="depositForm">
-{% csrf_token %}
-<input type="hidden" id="uploadFileId" name="file_id" />
-<span class="detailsTitle">{% trans "Options" %}</span>
-<div id="uploadOptions" class="panel-group detailsContent" role="tablist" aria-multiselectable="true">
-    <div id="error-radioUploadType"></div>
-    <div class="panel panel-default">
-        <div class="panel-heading pointer" role="tab" id="headingUploadType" data-toggle="collapse" data-target="#optionUploadType" data-parent="uploadTypeOptions">
-            {% trans "Upload type:" %}<span id="UploadTypeInline"></span>
-        </div>
-        <div id="optionUploadType" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingUploadType">
-            <div class="panel-body">
-                {% include "publishers/detailsPolicy.html" with publisher=paper.publisher mode="radio" %}
+{% block content %}
+    {% include "breadcrumbs.html" %}
+    <div class="container pb-2">
+        <div class="row">
+            <div class="col-12 col-md-4 pb-3">
+                {% include "papers/paper_panel.html" %}
+            </div>
+            <div class="col-12 col-md-8 order-md-first">
+                <h2 class="h-border">{% trans "Depositing" %} &quot;{{ paper.title }}&quot;</h2>
+                <!-- Terms of Service reminder -->
+                <p>
+                    {% url 'tos' as tosurl %}
+                    {% blocktrans trimmed %}
+                        You can deposit the full text of your article. Dissemin will send it to a repository where it will be made freely available. By depositing your article via Dissemin, you agree to our <a href="{{ tosurl }}">terms of service</a>.
+                    {% endblocktrans %}
+                </p>
+
+                <!-- Alert about authorship -->
+                {% if not is_owner %}
+                    <div class="alert alert-danger" role="alert">
+                        <p class="text-center"><strong>Authorship</strong></p>
+                        {% blocktrans trimmed %}
+                            You do not appear to be one of the authors of this paper. By using this form, you certify that you have the permission to upload it on their behalf.
+                        {% endblocktrans %}
+                    </div>
+                {% endif %}
+
+                <!-- Alert about deposition possibilities, not realy needed -->
+                {% if not selected_protocol %}
+                    <div class="alert alert-danger" role="alert">
+                        <p class="text-center"><strong>Deposition not possible</strong></p>
+                        {% blocktrans trimmed %}
+                            This paper cannot be deposited in any repository supported by Dissemin.
+                        {% endblocktrans %}
+                    </div>
+                {% endif %}
+
+                <h4 class="h-border">{% trans "Document" %}</h4>
+                <div id="errorMissingFile"></div>
+                {% include "upload/widget.html" %}
+
+                <h4 class="h-border">{% trans "Options" %}</h4>
+
+                <!-- Huge form -->
+                <form method="POST" action="javascript:depositPaper()" id="depositForm" data-paper-pk="{{ paper.pk }}" data-paper-slug="{{ paper.slug }}">
+                    <!-- Hidden field to store the internal file id of previously uploaded file -->
+                    <input type="hidden" id="uploadFileId" name="file_id" />
+                    <div class="accordion">
+
+                        <!-- Document type -->
+                        <div class="card">
+                            <a class="text-dark" data-toggle="collapse" href="#collapseDocType" aria-expanded="true" aria-controls="collapseDocType">
+                                <div class="card-header" id="headingDocType">
+                                    {% trans "Upload type:" %} <span id="choosenUploadType"></span>
+                                </div>
+                            </a>
+                            <div class="collapse show" id="collapseDocType" aria-labelledby="headingDocType">
+                                <div class="container">
+                                    <!-- Preprint -->
+                                    {% with radio_preprint=paper_form.radioUploadType.0 policy=paper.publisher.preprint %}
+                                        <span class="d-none" aria-hidden="true" id="choosenUploadType-preprint"><strong>{% trans "preprint" %}</strong> ({% include "publishers/policy_img.html" with policy=policy %} {{ policy | explain_policy_short_no_punc}})</span>
+                                        <div class="row border-bottom py-2">
+                                            <div class="col-auto">
+                                                {% include "publishers/policy_img.html" with policy=policy %}
+                                            </div>
+                                            <div class="form-check col d-flex">
+                                                <label class="form-check-label mr-auto" for="{{ radio_preprint.id_for_label }}">
+                                                    {% include "publishers/policy_preprint.html" %}
+                                                </label>
+                                                {{ radio_preprint.tag }}
+                                            </div>
+                                        </div>
+                                    {% endwith %}
+
+                                    <!-- Postprint -->
+                                    {% with radio_postprint=paper_form.radioUploadType.1 policy=paper.publisher.postprint %}
+                                        <span class="d-none" aria-hidden="true" id="choosenUploadType-postprint"><strong>{% trans "postprint" %}</strong> ({% include "publishers/policy_img.html" with policy=policy%} {{ policy | explain_policy_short_no_punc}})</span>
+                                        <div class="row border-bottom py-2">
+                                            <div class="col-auto">
+                                                {% include "publishers/policy_img.html" with policy=policy %}
+                                            </div>
+                                            <div class="form-check col d-flex">
+                                                <label class="form-check-label mr-auto" for="{{ radio_postprint.id_for_label }}">
+                                                    {% include "publishers/policy_postprint.html" %}
+                                                </label>
+                                                {{ radio_postprint.tag }}
+                                            </div>
+                                        </div>
+                                    {% endwith %}
+
+                                    <!-- PDF version -->
+                                    {% with radio_pdfversion=paper_form.radioUploadType.2 policy=paper.publisher.pdfversion %}
+                                        <span class="d-none" aria-hidden="true" id="choosenUploadType-pdfversion"><strong>{% trans "pdfversion" %}</strong> ({% include "publishers/policy_img.html" with policy=policy %} {{ policy | explain_policy_short_no_punc}})</span>
+                                        <div class="row py-2">
+                                            <div class="col-auto">
+                                                {% include "publishers/policy_img.html" with policy=policy %}
+                                            </div>
+                                            <div class="form-check col d-flex">
+                                                <label class="form-check-label mr-auto" for="{{ radio_pdfversion.id_for_label }}">
+                                                    {% include "publishers/policy_pdfversion.html" %}
+                                                </label>
+                                                {{ radio_pdfversion.tag }}
+                                            </div>
+                                        </div>
+                                    {% endwith %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Repository -->
+                        <div class="card">
+                            <a class="text-dark" data-toggle="collapse" href="#collapseRepository" aria-expanded="true" aria-controls="collapseRepository">
+                                <div class="card-header" id="headingRepository">
+                                    {% trans "Repository:" %} <span id="choosenRepository"><strong>{{ selected_repository.name }}</strong></span>
+                                </div>
+                            </a>
+                            <div class="collapse show" id="collapseRepository" aria-labelledby="headingRepository">
+                                <div class="container">
+                                    {% for repository in available_repositories %}
+                                    <span class="d-none" aria-hidden="true" id="choosenRepository-{{ repository.pk }}"><strong>{{ repository.name }}</strong></span>
+                                    <div class="row {% if not forloop.last %}border-bottom{% endif %} py-2">
+                                            <div class="col-3 px-0">
+                                                <img class="img-fluid" style="max-height: 4rem" src="{{ repository.logo.url }}" alt="{{ repository.name }}" />
+                                            </div>
+                                            <div class="col">
+                                                {{ repository.description | safe }}
+                                            </div>
+                                            <div class="col-auto">
+                                                <input type="radio" value="{{ repository.pk }}" name="radioRepository" {% if repository == selected_repository %}checked="checked"{% endif %} />
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Metadata of repository / its protocol -->
+                        <div class="card">
+                            <a class="text-dark" data-toggle="collapse" href="#collapseMetadata" aria-expanded="true" aria-controls="collapseMetadata">
+                                <div class="card-header" id="headingMetadata">
+                                    {% trans "Metadata:" %}
+                                </div>
+                            </a>
+                            <div id="errorMetadata"></div>
+                            <div class="collapse show" id="collapseMetadata" aria-labelledby="headingMetadata">
+                                <div class="container mt-2" id="repositoryMetadataForm">
+                                    {{ selected_protocol.get_form | crispy }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-center my-4">
+                        <button class="btn btn-primary btn-lg" type="submit">{% trans "Deposit" %}</button>
+                    </div>
+
+                    <div id="errorGeneral"></div>
+
+                    <div class="justify-content-center d-none" id="paperSubmitWaitingArea">
+                        <div>
+                            <img class="rounded-circle bg-secondary m-2" style="max-height: 8rem;" src ="{% static 'img/animated-bird.gif' %}" alt="{% trans 'Paper animated bird' %}" />
+                            <p class="text-center font-italic">{% trans 'Submitting paper to repository' %}…</p>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-    <div class="panel panel-default">
-        <div class="panel-heading pointer" role="tab" id="headingRepository" data-toggle="collapse" data-target="#optionRepository" data-parent="uploadOptions">
-            {% trans "Repository:" %}<span id="RepositoryInline"></span>
-        </div>
-        <div id="optionRepository" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingRepository">
-            <div class="panel-body">
-                <div class="repositoryList">
-                {% for repository in available_repositories %}
-                {% with repository.0 as repo %}
-                {% with repository.1 as proto %}
-                <label class="repositoryItem {% if forloop.first %}firstItem{% endif %} {% if not proto %}disabledRepositoryItem{% endif %}">
-
-                    {% if not repo.enabled %}
-                    <div style="text-align: center">
-                            {% trans "Coming soon:" context "This repository will be soon available in Dissemin" %}
-                    </div>
-                    {% endif %}
-                    <div style="display:none">
-                        <span id="hiddenInlineRepository-{{ repo.pk }}">
-                            <span><strong>{{ repo.name }}</strong>
-                            </span>
-                        </span>
-                    </div>
-                    <div class="repositoryLogo">
-                        <img src="{{ repo.logo.url }}" alt="{{ repo.name }}" />
-                    </div>
-                    <div class="repositoryChoiceRadio">
-                        <input id="radiorepo{{ repository.pk}}" type="radio" value="{{repo.pk}}"
-                            name="radioRepository" {% if not proto %}disabled="disabled"{% endif %}
-                            {% if repo == selected_repository %}checked="checked"{% endif %} />
-                    </div>
-                    <p>
-                        {{ repository.0.description }}
-                    </p>
-
-                    <div style="clear:left"></div>
-                </label>
-                {% endwith %}
-                {% endwith %}
-                {% endfor %}
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="panel panel-default">
-        <div class="panel-heading pointer" role="tab" id="headingMetadata" data-toggle="collapse" data-target="#optionMetadata" data-parent="uploadOptions">
-            {% trans "Metadata" %}
-        </div>
-        <div id="optionMetadata" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingMetadata">
-            <div class="panel-body">
-                <div id="repositoryMetadataForm">
-                    {{ selected_protocol.get_form|crispy }}
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div id="depositError"></div>
-<div id="uploadSubmitSection">
-    <p class="submitDeposit"><button type="submit" id="submitDeposit" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-circle-arrow-up"></span> {% trans "Deposit" %}</button></p>
-    <div id="waitingArea">
-        <span>{% trans "Processing deposit..." %}</span> <span class="waitingBird"><img src="{% static "img/animated-bird.gif" %}" alt="Paper animated bird" /></span> <span>{% trans "please wait..." %}</span>
-    </div>
-</div>
-</form>
-{% endblock %}
-
-{% block details %}
-{% include "papers/paperDetails.html" with paper=paper %}
-
-{% endblock %}
-
+{% endblock content %}

@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mets:mets xmlns:mets="http://www.loc.gov/METS/" xmlns:ds="https://dissem.in/deposit/terms/" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mods="http://www.loc.gov/mods/v3">
+  <mets:metsHdr>
+    <mets:agent ROLE="CREATOR" TYPE="ORGANIZATION">
+      <mets:name>Dissemin</mets:name>
+    </mets:agent>
+  </mets:metsHdr>
+  <mets:dmdSec ID="d_dmd_1">
+    <mets:mdWrap MDTYPE="OTHER">
+      <mets:xmlData>
+        <mods:mods version="3.7">
+          <mods:relatedItem>
+            <mods:part>
+              <mods:detail type="volume">
+                <mods:number>17</mods:number>
+              </mods:detail>
+              <mods:detail type="issue">
+                <mods:number>1</mods:number>
+              </mods:detail>
+              <mods:extent unit="pages">
+                <mods:total>23</mods:total>
+              </mods:extent>
+            </mods:part>
+            <mods:titleInfo>
+              <mods:title>La clinique lacanienne</mods:title>
+            </mods:titleInfo>
+          </mods:relatedItem>
+          <mods:abstract>This abstract is filled in from the user</mods:abstract>
+          <mods:originInfo>
+            <mods:dateIssued encoding="w3cdtf">2010-01-01</mods:dateIssued>
+            <mods:publisher>Armand Colin</mods:publisher>
+          </mods:originInfo>
+          <mods:identifier type="doi">10.3917/cla.017.0023</mods:identifier>
+          <mods:classification authority="ddc">150</mods:classification>
+          <mods:name type="personal">
+            <mods:namePart type="family">Vanier</mods:namePart>
+            <mods:namePart type="given">Alain</mods:namePart>
+          </mods:name>
+          <mods:titleInfo>
+            <mods:title>L'objet de la dépression</mods:title>
+          </mods:titleInfo>
+          <mods:genre>journal-article</mods:genre>
+        </mods:mods>
+      </mets:xmlData>
+    </mets:mdWrap>
+  </mets:dmdSec>
+  <mets:amdSec ID="d_amd_1">
+    <mets:rightsMD ID="d_rightsmd_1">
+      <mets:mdWrap MDTYPE="OTHER">
+        <mets:xmlData>
+          <ds:dissemin version="1.0">
+            <ds:depositor>
+              <ds:authentication>orcid</ds:authentication>
+              <ds:firstName>Gottfried</ds:firstName>
+              <ds:lastName>Leibniz</ds:lastName>
+              <ds:email>gottfried.leibniz@tib.eu</ds:email>
+              <ds:orcid>2543-2454-2345-234X</ds:orcid>
+              <ds:isContributor>false</ds:isContributor>
+            </ds:depositor>
+            <ds:publication>
+              <ds:license>
+                <ds:licenseName>Creative Commons Attribution 4.0 International (CC BY 4.0)</ds:licenseName>
+                <ds:licenseURI>https://creativecommons.org/licenses/by/4.0/</ds:licenseURI>
+                <ds:licenseTransmitId>cc_by-40</ds:licenseTransmitId>
+              </ds:license>
+              <ds:disseminId>9</ds:disseminId>
+              <ds:romeoId>982</ds:romeoId>
+            </ds:publication>
+          </ds:dissemin>
+        </mets:xmlData>
+      </mets:mdWrap>
+    </mets:rightsMD>
+  </mets:amdSec>
+  <mets:fileSec>
+    <mets:fileGrp>
+      <mets:file ID="d_file_1">
+        <mets:FLocat xlink:href="document.pdf" LOCTYPE="URL"/>
+      </mets:file>
+    </mets:fileGrp>
+  </mets:fileSec>
+  <mets:structMap>
+    <mets:div DMDID="d_dmd_1">
+      <mets:div>
+        <mets:fptr FILEID="d_file_1"/>
+      </mets:div>
+    </mets:div>
+  </mets:structMap>
+</mets:mets>

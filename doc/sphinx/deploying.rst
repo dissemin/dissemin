@@ -23,14 +23,18 @@ As any Django website, Dissemin can be served by various web servers.
 These settings are not specific to dissemin itself so you should refer
 to `the relevant Django documentation <https://docs.djangoproject.com/en/2.2/howto/deployment/>`_.
 
-No matter what web server you use,
-you need to run ``python manage.py collectstatic`` to copy the static files from
-the git repository to the desired location for your installation (in the example below,
-``/home/dissemin/www/static``), as well as ``python manage.py compilemessages`` to compile
-the translation files.
+There are some deployment steps that you always have to do in case of deployment (which includes rolling out updates).
+You should keep this order.
+Make sure to have the virtual environment activated.
 
-Make sure that your `media/` directory is writable by the user under which the application will run
-(`www-data` on Debian).
+#. Apply migrations with ``./manage.py migrate``
+#. Compile scss files with ``./manage.py compilescss``
+#. Collect static files with ``./manage.py collectstatic --ignore=*.scss``
+#. Compile translations with ``./manage.py compilemessages``
+#. Tell WSGI to reload with ``touch dissemin/wsgi.py``
+#. Restart celery with ``systemctl``
+
+Make sure that your `media/` directory is writable by the user under which the application will run (`www-data` on Debian).
 
 Self-hosting MathJax
 --------------------
@@ -59,98 +63,7 @@ to load MathJax from. In the example below, this would be
 Apache with WSGI
 ----------------
 
-Here is a sample VirtualHost, assuming that the root of the Dissemin source code is at ``/home/dissemin`` and you use ``python3.6``.::
+A sample VirtualHost, assuming that the root of the Dissemin source code is at ``/home/dissemin/prod`` and you use a ``python3.5`` virtualenv is available in the `Dissemin Git repository <https://github.com/dissemin/dissemin/blob/master/provisioning/apache2-vhost.conf>`_.
 
-    <VirtualHost *:80>
-            ServerAdmin webmaster@localhost
-            ServerName dissemin.myuni.edu
-
-            ### STATIC FILES ###
-
-            # Instructions for robots
-            Alias /robots.txt /home/dissemin/www/static/robots.txt
-            <Location /robots.txt>
-            Require all granted
-            </Location>
-            # Thumbnails of PDF files uploaded by users
-            Alias /media/thumbnails/ /home/dissemin/media/thumbnails/
-            <Directory /home/dissemin/media/thumbnails>
-            Require all granted
-            </Directory>
-            # Logos of the repositories configured on your instance
-            Alias /media/repository_logos/ /home/dissemin/media/repository_logos/
-            <Directory /home/dissemin/media/repository_logos>
-            Require all granted
-            </Directory>
-            # Generic static files (CSS, JS, images)
-            Alias /static/ /home/dissemin/www/static/
-            <Directory /home/dissemin/www/static>
-            Require all granted
-            </Directory>
-
-            ### WSGI connection ###
-
-            # Path to the WSGI application for the website
-            WSGIScriptAlias / /home/dissemin/dissemin/wsgi.py
-            # Python path for the application
-            WSGIDaemonProcess dissemin.myuni.edu python-path=/home/dissemin:/home/dissemin/.virtualenv/lib/python3.6/site-packages
-
-            WSGIProcessGroup dissemin.myuni.edu
-
-            <Directory /home/dissemin/dissemin>
-            <Files wsgi.py>
-            Require all granted
-            </Files>
-            </Directory>
-
-            ### Error handling ###
-            ErrorDocument 500 /500-error
-            ErrorDocument 404 /404-error
-
-            ### Log settings ###
-            ErrorLog ${APACHE_LOG_DIR}/django-dissemin-myuni.log
-
-            # Possible values include: debug, info, notice, warn, error, crit,
-            # alert, emerg.
-            LogLevel debug
-
-            CustomLog ${APACHE_LOG_DIR}/access-dissemin-myuni.log combined
-    </VirtualHost>
 
 You should only have to change the path to the application and the domain name of the service.
-
-
-lighttpd with FastCGI (deprecated)
-----------------------------------
-
-We describe here how to set up the server with lighttpd, a lightweight
-web server, with FastCGI. This has been deprecated by Django, as support
-for FastCGI will be discontinued: use WSGI instead.
-
-Add this to your lighttpd config::
-
-   $HTTP["host"] =~ "^myhostname.com$" {
-       accesslog.filename   = "/var/log/lighttpd/dissemin-$INSTANCE.log"
-       server.document-root = "$SOURCE_PATH/www/"
-       $HTTP["url"] =~ "^(?!((/static/)|(/robots\.txt)))" {
-           fastcgi.server = (
-               "/" => (
-                   "/" => (
-                       "socket" => "/tmp/django-dissemin-$INSTANCE.sock",
-                       "check-local" => "disable",
-                       "fix-root-scriptname" => "enable",
-                   )
-               ),
-           )
-       }
-       alias.url = (
-           "/static/" => "$SOURCE_PATH/www/static/",
-           "/robots.txt" => "$SOURCE_PATH/www/static/robots.txt",
-       )
-   }
-
-where ``$INSTANCE`` is the name of your instance and ``$SOURCE_PATH`` is
-the path to the root of the git repository of dissemin.
-
-You can create the ``.sock`` file with
-``touch /tmp/django-dissemin-$INSTANCE.sock``.

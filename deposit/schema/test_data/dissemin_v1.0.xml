@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ds:dissemin version="1.0" xmlns:ds="https://dissem.in/deposit/terms/">
+  <ds:depositor>
+    <ds:authentication>shibboleth</ds:authentication>
+    <ds:firstName>Stefan</ds:firstName>
+    <ds:lastName>Beck</ds:lastName>
+    <ds:email>stefan.beck@ulb.tu-darmstadt.de</ds:email>
+    <ds:orcid>0000-3242-4534-3223</ds:orcid>
+    <ds:isContributor>true</ds:isContributor>
+    <ds:identicalInstitution>true</ds:identicalInstitution>
+  </ds:depositor>
+  <ds:publication>
+    <ds:license>
+      <ds:licenseName>Creative Commons Attribution 4.0 International Public License</ds:licenseName>
+      <ds:licenseURI>https://creativecommons.org/licenses/by/4.0/</ds:licenseURI>
+      <ds:licenseTransmitId>cc_by_4_0</ds:licenseTransmitId>
+    </ds:license>
+    <ds:disseminId>624343</ds:disseminId>
+    <ds:embargoDate>2019-10-10</ds:embargoDate>
+    <ds:romeoId>234</ds:romeoId>
+  </ds:publication>
+</ds:dissemin>

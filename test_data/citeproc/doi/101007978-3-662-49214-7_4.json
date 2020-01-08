@@ -1,0 +1,337 @@
+{
+    "indexed":{
+        "date-parts":[
+            [
+                2019,
+                6,
+                1
+            ]
+        ],
+        "date-time":"2019-06-01T09:14:18Z",
+        "timestamp":1559380458357
+    },
+    "publisher-location":"Berlin, Heidelberg",
+    "reference-count":20,
+    "publisher":"Springer Berlin Heidelberg",
+    "isbn-type":[
+        {
+            "value":"9783662492130",
+            "type":"print"
+        },
+        {
+            "value":"9783662492147",
+            "type":"electronic"
+        }
+    ],
+    "license":[
+        {
+            "URL":"http:\/\/www.springer.com\/tdm",
+            "start":{
+                "date-parts":[
+                    [
+                        2016,
+                        1,
+                        1
+                    ]
+                ],
+                "date-time":"2016-01-01T00:00:00Z",
+                "timestamp":1451606400000
+            },
+            "delay-in-days":0,
+            "content-version":"unspecified"
+        }
+    ],
+    "content-domain":{
+        "domain":[
+
+        ],
+        "crossmark-restriction":false
+    },
+    "published-print":{
+        "date-parts":[
+            [
+                2016
+            ]
+        ]
+    },
+    "DOI":"10.1007\/978-3-662-49214-7_4",
+    "type":"chapter",
+    "created":{
+        "date-parts":[
+            [
+                2016,
+                1,
+                6
+            ]
+        ],
+        "date-time":"2016-01-06T11:43:34Z",
+        "timestamp":1452080614000
+    },
+    "page":"116-138",
+    "source":"Crossref",
+    "is-referenced-by-count":0,
+    "title":"A Framework for Sampling-Based XML Data Pricing",
+    "prefix":"10.1007",
+    "author":[
+        {
+            "given":"Ruiming",
+            "family":"Tang",
+            "sequence":"first",
+            "affiliation":[
+
+            ]
+        },
+        {
+            "given":"Antoine",
+            "family":"Amarilli",
+            "sequence":"additional",
+            "affiliation":[
+
+            ]
+        },
+        {
+            "given":"Pierre",
+            "family":"Senellart",
+            "sequence":"additional",
+            "affiliation":[
+
+            ]
+        },
+        {
+            "given":"St\u00e9phane",
+            "family":"Bressan",
+            "sequence":"additional",
+            "affiliation":[
+
+            ]
+        }
+    ],
+    "member":"297",
+    "published-online":{
+        "date-parts":[
+            [
+                2016,
+                1,
+                7
+            ]
+        ]
+    },
+    "reference":[
+        {
+            "key":"4_CR1",
+            "unstructured":"Cohen, S., Kimelfeld, B., Sagiv, Y.: Running tree automata on probabilistic XML. In: PODS (2009)",
+            "DOI":"10.1145\/1559795.1559831",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "issue":"1\u20136",
+            "key":"4_CR2",
+            "doi-asserted-by":"publisher",
+            "first-page":"295",
+            "DOI":"10.1016\/S1389-1286(00)00055-4",
+            "volume":"33",
+            "author":"MR Henzinger",
+            "year":"2000",
+            "unstructured":"Henzinger, M.R., Heydon, A., Mitzenmacher, M., Najork, M.: On near-uniform URL sampling. Comput. Netw. 33(1\u20136), 295\u2013308 (2000)",
+            "journal-title":"Comput. Netw."
+        },
+        {
+            "key":"4_CR3",
+            "unstructured":"H\u00fcbler, C., Kriegel, H.-P., Borgwardt, K., Ghahramani, Z.: Metropolis algorithms for representative subgraph sampling. In: ICDM (2008)",
+            "DOI":"10.1109\/ICDM.2008.124",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"4_CR4",
+            "unstructured":"Koutris, P., Upadhyaya, P., Balazinska, M., Howe, B., Suciu, D.: Query-based data pricing. In: PODS (2012)",
+            "DOI":"10.1145\/2213556.2213582",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "issue":"12",
+            "key":"4_CR5",
+            "first-page":"1962",
+            "volume":"5",
+            "author":"P Koutris",
+            "year":"2012",
+            "unstructured":"Koutris, P., Upadhyaya, P., Balazinska, M., Howe, B., Suciu, D.: QueryMarket demonstration: pricing for online data markets. PVLDB 5(12), 1962\u20131965 (2012)",
+            "journal-title":"PVLDB"
+        },
+        {
+            "key":"4_CR6",
+            "unstructured":"Koutris, P., Upadhyaya, P., Balazinska, M., Howe, B., Suciu, D.: Toward practical query pricing with QueryMarket. In: SIGMOD (2013)",
+            "DOI":"10.1145\/2463676.2465335",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"4_CR7",
+            "unstructured":"Leskovec, J., Faloutsos, C.: Sampling from large graphs. In: SIGKDD (2006)",
+            "DOI":"10.1145\/1150402.1150479",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"4_CR8",
+            "unstructured":"Li, C., Li, D.Y., Miklau, G., Suciu, D.: A theory of pricing private data. In: ICDT (2013)",
+            "DOI":"10.1145\/2448496.2448502",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"4_CR9",
+            "unstructured":"Li, C., Miklau, G.: Pricing aggregate queries in a data marketplace. In: WebDB (2012)"
+        },
+        {
+            "issue":"9",
+            "key":"4_CR10",
+            "first-page":"757",
+            "volume":"7",
+            "author":"B-R Lin",
+            "year":"2014",
+            "unstructured":"Lin, B.-R., Kifer, D.: On arbitrage-free pricing for general data queries. PVLDB 7(9), 757\u2013768 (2014)",
+            "journal-title":"PVLDB"
+        },
+        {
+            "key":"4_CR11",
+            "series-title":"Lecture Notes in Computer Science",
+            "doi-asserted-by":"publisher",
+            "first-page":"195",
+            "DOI":"10.1007\/978-3-642-31235-9_13",
+            "volume-title":"Scientific and Statistical Database Management",
+            "author":"X Lu",
+            "year":"2012",
+            "unstructured":"Lu, X., Bressan, S.: Sampling connected induced subgraphs uniformly at random. In: Ailamaki, A., Bowers, S. (eds.) SSDBM 2012. LNCS, vol. 7338, pp. 195\u2013212. Springer, Heidelberg (2012)"
+        },
+        {
+            "key":"4_CR12",
+            "unstructured":"Luo, C., Jiang, Z., Hou, W.-C., Yu, F., Zhu, Q.: A sampling approach for XML query selectivity estimation. In: EDBT (2009)",
+            "DOI":"10.1145\/1516360.1516400",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"4_CR13",
+            "unstructured":"Maiya, A.S., Berger-Wolf, T.Y.: Sampling community structure. In: WWW (2010)",
+            "DOI":"10.1145\/1772690.1772762",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"4_CR14",
+            "series-title":"Lecture Notes in Business Information Processing",
+            "doi-asserted-by":"publisher",
+            "first-page":"129",
+            "DOI":"10.1007\/978-3-642-39872-8_10",
+            "volume-title":"Enabling Real-Time Business Intelligence",
+            "author":"A Muschalle",
+            "year":"2013",
+            "unstructured":"Muschalle, A., Stahl, F., L\u00f6ser, A., Vossen, G.: Pricing approaches for data markets. In: Castellanos, M., Dayal, U., Rundensteiner, E.A. (eds.) BIRTE 2012. LNBIP, vol. 154, pp. 129\u2013144. Springer, Heidelberg (2013)"
+        },
+        {
+            "issue":"4",
+            "key":"4_CR15",
+            "doi-asserted-by":"publisher",
+            "first-page":"211",
+            "DOI":"10.1145\/505248.506010",
+            "volume":"75",
+            "author":"L Pipino",
+            "year":"2002",
+            "unstructured":"Pipino, L., Lee, Y.W., Wang, R.Y.: Data quality assessment. Commun. ACM 75(4), 211\u2013218 (2002)",
+            "journal-title":"Commun. ACM"
+        },
+        {
+            "key":"4_CR16",
+            "unstructured":"Ribeiro, B.F., Towsley, D.F.: Estimating and sampling graphs with multidimensional random walks. In: Internet Measurement Conference (2010)",
+            "DOI":"10.1145\/1879141.1879192",
+            "doi-asserted-by":"crossref"
+        },
+        {
+            "key":"4_CR17",
+            "series-title":"Lecture Notes in Computer Science",
+            "doi-asserted-by":"crossref",
+            "first-page":"20",
+            "DOI":"10.1007\/978-3-319-10073-9_3",
+            "volume-title":"Database and Expert Systems Applications",
+            "author":"R Tang",
+            "year":"2014",
+            "unstructured":"Tang, R., Amarilli, A., Senellart, P., Bressan, S.: Get a sample for a discount. In: Decker, H., Lhotsk\u00e1, L., Link, S., Spies, M., Wagner, R.R. (eds.) DEXA 2014, Part I. LNCS, vol. 8644, pp. 20\u201334. Springer, Heidelberg (2014)"
+        },
+        {
+            "key":"4_CR18",
+            "series-title":"Lecture Notes in Computer Science",
+            "doi-asserted-by":"publisher",
+            "first-page":"395",
+            "DOI":"10.1007\/978-3-642-40173-2_32",
+            "volume-title":"Database and Expert Systems Applications",
+            "author":"R Tang",
+            "year":"2013",
+            "unstructured":"Tang, R., Shao, D., Bressan, S., Valduriez, P.: What you pay for is what you get. In: Decker, H., Lhotsk\u00e1, L., Link, S., Basl, J., Tjoa, A.M. (eds.) DEXA 2013, Part II. LNCS, vol. 8056, pp. 395\u2013409. Springer, Heidelberg (2013)"
+        },
+        {
+            "issue":"4",
+            "key":"4_CR19",
+            "doi-asserted-by":"publisher",
+            "first-page":"5",
+            "DOI":"10.1080\/07421222.1996.11518099",
+            "volume":"12",
+            "author":"RY Wang",
+            "year":"1996",
+            "unstructured":"Wang, R.Y., Strong, D.M.: Beyond accuracy: what data quality means to data consumers. J. Manag. Inf. Syst. 12(4), 5\u201333 (1996)",
+            "journal-title":"J. Manag. Inf. Syst."
+        },
+        {
+            "key":"4_CR20",
+            "unstructured":"Wang, W., Jiang, H., Lu, H., Yu, J.X. Containment join size estimation: models and methods. In: SIGMOD (2003)",
+            "DOI":"10.1145\/872773.872777",
+            "doi-asserted-by":"crossref"
+        }
+    ],
+    "container-title":"Transactions on Large-Scale Data- and Knowledge-Centered Systems XXIV",
+    "original-title":[
+
+    ],
+    "link":[
+        {
+            "URL":"http:\/\/link.springer.com\/content\/pdf\/10.1007\/978-3-662-49214-7_4",
+            "content-type":"unspecified",
+            "content-version":"vor",
+            "intended-application":"similarity-checking"
+        }
+    ],
+    "deposited":{
+        "date-parts":[
+            [
+                2019,
+                6,
+                1
+            ]
+        ],
+        "date-time":"2019-06-01T08:38:50Z",
+        "timestamp":1559378330000
+    },
+    "score":1.0,
+    "subtitle":[
+
+    ],
+    "short-title":[
+
+    ],
+    "issued":{
+        "date-parts":[
+            [
+                2016
+            ]
+        ]
+    },
+    "ISBN":[
+        "9783662492130",
+        "9783662492147"
+    ],
+    "references-count":20,
+    "URL":"http:\/\/dx.doi.org\/10.1007\/978-3-662-49214-7_4",
+    "relation":{
+        "cites":[
+
+        ]
+    },
+    "ISSN":[
+        "0302-9743",
+        "1611-3349"
+    ]
+}

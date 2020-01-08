@@ -45,6 +45,13 @@ OA_STATUS_CHOICES = (
             'For complicated policies, unknown publishers and unpublished documents.')),
    )
 
+OA_STATUS_TO_COLOR = {
+    'OA' : 'gold',
+    'OK' : 'blue',
+    'NOK' : 'black',
+    'UNK' : 'gray',
+}
+
 POLICY_CHOICES = [('can', _('Allowed')),
                   ('cannot', _('Forbidden')),
                   ('restricted', _('Restricted')),
@@ -101,9 +108,12 @@ class Publisher(models.Model):
     A publisher, as represented by SHERPA/RoMEO.
     See http://www.sherpa.ac.uk/downloads/ for their data model
     """
+    # Romeo ids are char fields as the API sometimes returns "doaj" as publisher for journals imported from there
+    # TODO reassess if this is still needed now that we ingest them from the dumps, where there are no such publishers
     romeo_id = models.CharField(max_length=64, db_index=True)
+
     romeo_parent_id = models.CharField(max_length=64, null=True, blank=True)
-    name = models.CharField(max_length=256, db_index=True)
+    name = models.CharField(max_length=256)
     alias = models.CharField(max_length=256, null=True, blank=True)
     url = models.URLField(null=True, blank=True)
     preprint = models.CharField(
@@ -224,6 +234,10 @@ class Publisher(models.Model):
     def has_copyrightlinks(self):
         return len(self.copyrightlinks) > 0
 
+    @property
+    def oa_status_as_color(self):
+        return OA_STATUS_TO_COLOR.get(self.oa_status)
+
     def change_oa_status(self, new_oa_status):
         if self.oa_status == new_oa_status:
             return
@@ -277,7 +291,7 @@ class Journal(models.Model):
     """
     A journal as represented by SERPA/RoMEO
     """
-    title = models.CharField(max_length=256, db_index=True)
+    title = models.CharField(max_length=256)
     last_updated = models.DateTimeField(auto_now=True)
     issn = models.CharField(max_length=10, blank=True, null=True, unique=True)
     essn = models.CharField(max_length=10, blank=True, null=True, unique=True)
@@ -309,7 +323,7 @@ class Journal(models.Model):
             matches = cls.objects.filter(title__iexact=title.lower())
             if matches:
                 return matches[0]
-            
+
     def change_publisher(self, new_publisher):
         """
         Changing the publisher of a Journal is a heavy task:

@@ -2,62 +2,102 @@
 # Exported from translatewiki.net
 #
 # Author: Borichèt
+# --
+# This file is part of the Dissemin Project
+# This file is distributed under the same license as the Dissemin package.
+#
 msgid ""
 msgstr ""
-""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-25 12:06+0100\n"
-"PO-Revision-Date: 2019-03-07 15:08:20+0000\n"
+"POT-Creation-Date: 2020-01-07 14:39+0100\n"
+"PO-Revision-Date: 2019-12-26 11:32:37+0000\n"
 "Language: pms\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2019-02-25 13:41:23+0000\n"
-"X-Generator: MediaWiki 1.33.0-alpha; Translate 2019-01-17\n"
+"X-POT-Import-Date: 2019-12-12 14:04:05+0000\n"
+"X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: papers/static/papers/refresh.js:35
-msgid "Do not show this message anymore"
-msgstr "Pi nen ësmon-e 's mëssagi"
+#: website/static/js/dissemin.js:202
+#, javascript-format
+msgid "%s paper found"
+msgid_plural "%s papers found"
+msgstr[0] "%s artìcol trovà"
+msgstr[1] "%s artìcoj trovà"
 
-#: papers/static/papers/refresh.js:66
-msgid "No author"
-msgstr "Gnun autor"
+#: website/static/js/dissemin.js:293
+msgid "Claiming..."
+msgstr "Anclusion an cors..."
 
-#: papers/static/papers/refresh.js:68
-msgid "No title"
-msgstr "Gnun tìtol"
+#: website/static/js/dissemin.js:297
+msgid "Unclaiming..."
+msgstr "Esclusion an cors..."
 
-#: papers/static/papers/refresh.js:70
-msgid "Invalid publication date"
-msgstr "Dàita ëd publicassion nen bon-a"
+#: website/static/js/dissemin.js:313
+msgid "Claiming failed!"
+msgstr "Anclusion falìa!"
 
-#: papers/static/papers/refresh.js:72
-msgid "No publication date"
-msgstr "Gnun-a dàita ëd publicassion"
+#: website/static/js/dissemin.js:316
+msgid "Unclaiming failed!"
+msgstr "Esclusion falìa!"
 
-#: papers/static/papers/refresh.js:74
-msgid "Paper is invalid"
-msgstr "L'artìcol a l'é nen vàlid"
+#: website/static/js/dissemin.js:321
+msgid "Exclude from my profile"
+msgstr "Gavé da mè profil"
 
-#: papers/static/papers/refresh.js:109
-msgid "We ignored %(count)s paper from your ORCiD profile."
-msgid_plural "We ignored %(count)s papers from your ORCiD profile."
-msgstr[0] "I l'oma ignorà %(count)s artìcol da sò profil ORCiD."
-msgstr[1] "I l'oma ignorà %(count)s artìcoj da sò profil ORCiD."
+#: website/static/js/dissemin.js:325
+msgid "Include in my profile"
+msgstr "Buté an mè profil"
 
-#: papers/static/papers/refresh.js:119
-msgid "\"%(name)s\" was ignored for the following reason: %(reason)s"
-msgstr "«%(name)s» a l'é stàit ignorà për costa rason: %(reason)s"
+#: website/static/js/dissemin.js:350
+msgid "Adding to to-do list"
+msgstr "Gionté a la lista dle còse da fé"
 
-#: papers/static/papers/refresh.js:127
-msgid "A paper was ignored, because it has no name"
-msgstr "N'artìcol a l'é stàit ignorà, përchè a l'ha gnun tìtol"
+#: website/static/js/dissemin.js:354
+msgid "Removing from to-do list"
+msgstr "Gavé da la lista dle còse da fé"
 
-#: papers/static/papers/refresh.js:139 papers/static/papers/refresh.js:167
-msgid "Show more information"
-msgstr "Smon-e pi d'anformassion"
+#: website/static/js/dissemin.js:600
+msgid "Preview of uploaded file"
+msgstr "Previsualisassion ëd l'archivi carià"
 
-#: papers/static/papers/refresh.js:164
-msgid "Show less information"
-msgstr "Smon-e men anformassion"
+#: website/static/js/dissemin.js:603
+msgid "Pages: "
+msgstr "Pàgine: "
 
+#: website/static/js/dissemin.js:604
+msgid "Size: "
+msgstr "Taja: "
+
+#: website/static/js/dissemin.js:619
+msgid "While uploading %(file)s the following error occured:"
+msgstr "Durant ëd cariament ëd %(file)s, a l'é rivaje cost eror-sì:"
+
+#: website/static/js/dissemin.js:628 website/static/js/dissemin.js:683
+#: website/static/js/dissemin.js:689
+msgid "Unknown error"
+msgstr "Eror dësconossù"
+
+#: website/static/js/dissemin.js:673
+msgid "While fetching file from %(url)s the following error occured:"
+msgstr "Durant l'arcuperassion ëd l'archivi da %(url)s a l'é suceduje cost eror-sì:"
+
+#: website/static/js/dissemin.js:760
+msgid "Sorry, we could not fill this for you."
+msgstr "An dëspias, i l'oma nen podù compilé sòn për chiel."
+
+#: website/static/js/dissemin.js:761
+msgid "Trying to fill this field automatically for you..."
+msgstr "I provoma a compile 's camp-sì për chiel an automàtich..."
+
+#: website/static/js/dissemin.js:795
+msgid "You have not selected a file for upload."
+msgstr "A l'ha selessionà gnun archivi da carié."
+
+#: website/static/js/dissemin.js:822
+msgid "Dissemin encountered an error, please try again later."
+msgstr "Dissemin a l'ha rancontrà n'eror, për piasì ch'a preuva torna pi tard."
+
+#: website/static/js/moment.min.js:1
+msgid ": "
+msgstr ": "

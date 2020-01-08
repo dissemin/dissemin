@@ -1,15 +1,14 @@
-'''
-Created on 21 févr. 2019
-
-@author: antonin
-'''
+import pytest
 
 from django.contrib.auth.models import User
+
 from dissemin.celery import app as celery_app
-from papers.tests.test_ajax import JsonRenderingTest
+
 from papers.models import Paper
+from papers.tests.test_ajax import JsonRenderingTest
 from publishers.tests.test_romeo import RomeoAPIStub
 
+@pytest.mark.usefixtures('mock_doi')
 class PublisherAjaxTest(JsonRenderingTest):
 
     @classmethod
@@ -32,14 +31,14 @@ class PublisherAjaxTest(JsonRenderingTest):
 
     def test_logged_out(self):
         self.client.logout()
-        req = self.postPage('ajax-changePublisherStatus',
+        req = self.postPage('ajax_change_publisher_status',
                             postargs={'pk': self.publisher.pk, 'status': 'OA'})
         self.assertEqual(req.status_code, 302)
 
     def test_change_publisher_status(self):
         self.client.login(username='patrick', password='yo')
         self.assertEqual('OK', self.publisher.oa_status)
-        p = self.postPage('ajax-changePublisherStatus',
+        p = self.postPage('ajax_change_publisher_status',
                           postargs={'pk': self.publisher.pk,
                                     'status': 'OA'})
         self.assertEqual(p.status_code, 200)

@@ -20,25 +20,26 @@
 
 
 
-
-from statistics.models import AccessStatistics
-
-from datetime import timedelta
-from datetime import datetime
-from backend.zotero import consolidate_publication
-from backend.orcid import OrcidPaperSource
-from backend.crossref import CrossRefAPI
-from backend.utils import run_only_once
 from celery import shared_task
 from celery.utils.log import get_task_logger
+from datetime import datetime
+from datetime import timedelta
+
 from django.utils import timezone
+
+from backend.citeproc import CrossRef
+from backend.oai import OaiPaperSource
+from backend.orcid import OrcidPaperSource
+from backend.utils import run_only_once
+from backend.zotero import consolidate_publication
+from statistics.models import AccessStatistics
+
 from papers.errors import MetadataSourceException
 from papers.models import Paper
 from papers.models import PaperWorld
 from papers.models import Researcher
 from papers.models import OaiSource
 from publishers.models import Publisher
-from backend.oai import OaiPaperSource
 
 logger = get_task_logger('dissemin.' + __name__)
 
@@ -71,19 +72,17 @@ def init_profile_from_orcid(pk):
 @shared_task(name='fetch_everything_for_researcher')
 @run_only_once('researcher', keys=['pk'], timeout=60*60)
 def fetch_everything_for_researcher(pk):
-    sources = [
-        ('orcid', OrcidPaperSource(max_results=1000)),
-       ]
+    orcid_paper_source = OrcidPaperSource(max_results=1000)
     r = Researcher.objects.get(pk=pk)
 
     # If it is the first time we fetch this researcher
     # if r.stats is None:
     # make sure publications already known are also considered
-    update_researcher_task(r, 'clustering')
+    update_researcher_task(r, 'orcid')
+
     try:
-        for key, source in sources:
-            update_researcher_task(r, key)
-            source.fetch_and_save(r)
+        orcid_paper_source.link_existing_papers(r)
+        orcid_paper_source.fetch_and_save(r)
         update_researcher_task(r, None)
 
     except MetadataSourceException as e:
@@ -133,8 +132,7 @@ def update_crossref():
     """
     Updates paper metadata from Crossref
     """
-    c = CrossRefAPI()
-    c.fetch_and_save_new_records()
+    CrossRef.fetch_latest_records()
 
 @shared_task(name='update_oai_sources')
 @run_only_once('update_oai_sources', timeout=24*3600)

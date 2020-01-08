@@ -1,0 +1,19 @@
+{
+    "title":"Sein und Nichtsein",
+    "fingerprint":"seinundnichtsein",
+    "pubdate":"1610-01-01",
+    "authors_list":[
+        {
+            "name":{
+                "full":"ghost hamlet",
+                "last":"Hamlet",
+                "first":"Ghost"
+            },
+            "orcid":null,
+            "affiliation":null,
+            "researcher_id":null
+        }
+    ],
+    "doctype":"proceedings",
+    "oa_status":"UNK"
+}

@@ -21,6 +21,7 @@
 
 
 from io import BytesIO
+from datetime import date
 import json
 import traceback
 from zipfile import ZipFile
@@ -33,6 +34,7 @@ from urllib.parse import urlparse
 from deposit.hal.forms import HALForm
 from deposit.hal.forms import HALPreferencesForm
 from deposit.hal.metadata import AOFRFormatter
+from deposit.models import DepositRecord
 from deposit.protocol import DepositError
 from deposit.protocol import DepositResult
 from deposit.protocol import RepositoryProtocol
@@ -93,13 +95,15 @@ class HALProtocol(RepositoryProtocol):
             return
         try:
             r = requests.post(
-                'https://haltopics.dissem.in/predict', data={'text': topic_text}, timeout=10)
-            return r.json()['decision']['code']
+                'https://annif.dissem.in/v1/projects/hal-fasttext/suggest', data={'text': topic_text}, timeout=10)
+            results =  r.json().get('results') or ''
+            if results:
+                return results[0].get('uri', '').split('/')[-1]
         except (requests.exceptions.RequestException, ValueError, KeyError):
             return None
 
-    def get_form_initial_data(self):
-        data = super(HALProtocol, self).get_form_initial_data()
+    def get_form_initial_data(self, **kwargs):
+        data = super(HALProtocol, self).get_form_initial_data(**kwargs)
 
         data['first_name'] = self.user.first_name
         data['last_name'] = self.user.last_name
@@ -129,6 +133,26 @@ class HALProtocol(RepositoryProtocol):
         data['depositing_author'] = most_similar_idx
 
         return data
+
+    def get_form(self):
+        """
+        Returns the form where the user will fill in additional metadata
+        HAL just needs a paper
+        """
+
+        initial = self.get_form_initial_data()
+
+        return self.form_class(paper=self.paper, initial=initial)
+
+
+    def get_bound_form(self, data):
+        """
+        Returns a bound version of the form, with the given data.
+        HAL just needs a paper
+        """
+
+        return self.form_class(self.paper, data=data)
+
 
     def create_zip(self, pdf, metadata):
         s = BytesIO()
@@ -168,7 +192,10 @@ class HALProtocol(RepositoryProtocol):
             host = parsed_endpoint.netloc
             path = parsed_endpoint.path + 'hal'
 
-            conn = http_client.HTTPConnection(host)
+            if self.api_url.startswith('http://'):
+                conn = http_client.HTTPConnection(host)
+            else:
+                conn = http_client.HTTPSConnection(host)
             conn.putrequest('POST', path, True, True)
             zipContent = zipFile.getvalue()
             headers = {
@@ -300,23 +327,24 @@ class HALProtocol(RepositoryProtocol):
                                       form, pretty=True)
         return metadata
 
-    def refresh_deposit_status(self, deposit_record):
+    def refresh_deposit_status(self):
         """
         Only refresh the status if we don't already know that
         the paper is published - in that case we trust HAL not
         to delete it. This is to reduce the number of requests
         on their side.
         """
-        if deposit_record.status != 'published':
+        for deposit_record in DepositRecord.objects.filter(status='pending').select_related('oairecord', 'oairecord__about'):
             new_status = self.get_new_status(deposit_record.identifier)
             if new_status != deposit_record.status:
                 deposit_record.status = new_status
-                deposit_record.save(update_fields=['status'])
                 oairecord = deposit_record.oairecord
                 if new_status == 'published':
                     oairecord.pdf_url = oairecord.splash_url + '/document'
+                    deposit_record.pub_date = date.today()
                 else:
                     oairecord.pdf_url = None
+                deposit_record.save(update_fields=['status', 'pub_date'])
                 oairecord.save(update_fields=['pdf_url'])
                 oairecord.about.update_availability()
                 oairecord.about.update_index()

@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mets:mets xmlns:mets="http://www.loc.gov/METS/" xmlns:ds="https://dissem.in/deposit/terms/" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mods="http://www.loc.gov/mods/v3">
+  <mets:metsHdr>
+    <mets:agent ROLE="CREATOR" TYPE="ORGANIZATION">
+      <mets:name>Dissemin</mets:name>
+    </mets:agent>
+  </mets:metsHdr>
+  <mets:dmdSec ID="d_dmd_1">
+    <mets:mdWrap MDTYPE="OTHER">
+      <mets:xmlData>
+        <mods:mods version="3.7">
+          <mods:abstract>A detective story in which the solution given is wrong, although this fact is not immediately obvious.</mods:abstract>
+          <mods:originInfo>
+            <mods:dateIssued encoding="w3cdtf">1933-01-01</mods:dateIssued>
+          </mods:originInfo>
+          <mods:identifier type="doi">10.0123/quain-1933</mods:identifier>
+          <mods:classification authority="ddc">820</mods:classification>
+          <mods:name type="personal">
+            <mods:namePart type="family">Quain</mods:namePart>
+            <mods:namePart type="given">Herbert</mods:namePart>
+          </mods:name>
+          <mods:titleInfo>
+            <mods:title>The God of the Labyrinth</mods:title>
+          </mods:titleInfo>
+          <mods:genre>book</mods:genre>
+        </mods:mods>
+      </mets:xmlData>
+    </mets:mdWrap>
+  </mets:dmdSec>
+  <mets:amdSec ID="d_amd_1">
+    <mets:rightsMD ID="d_rightsmd_1">
+      <mets:mdWrap MDTYPE="OTHER">
+        <mets:xmlData>
+          <ds:dissemin version="1.0">
+            <ds:depositor>
+              <ds:authentication>orcid</ds:authentication>
+              <ds:firstName>Gottfried</ds:firstName>
+              <ds:lastName>Leibniz</ds:lastName>
+              <ds:email>gottfried.leibniz@tib.eu</ds:email>
+              <ds:orcid>2543-2454-2345-234X</ds:orcid>
+              <ds:isContributor>false</ds:isContributor>
+            </ds:depositor>
+            <ds:publication>
+              <ds:license>
+                <ds:licenseName>Creative Commons Attribution 4.0 International (CC BY 4.0)</ds:licenseName>
+                <ds:licenseURI>https://creativecommons.org/licenses/by/4.0/</ds:licenseURI>
+                <ds:licenseTransmitId>cc_by-40</ds:licenseTransmitId>
+              </ds:license>
+              <ds:disseminId>3</ds:disseminId>
+            </ds:publication>
+          </ds:dissemin>
+        </mets:xmlData>
+      </mets:mdWrap>
+    </mets:rightsMD>
+  </mets:amdSec>
+  <mets:fileSec>
+    <mets:fileGrp>
+      <mets:file ID="d_file_1">
+        <mets:FLocat xlink:href="document.pdf" LOCTYPE="URL"/>
+      </mets:file>
+    </mets:fileGrp>
+  </mets:fileSec>
+  <mets:structMap>
+    <mets:div DMDID="d_dmd_1">
+      <mets:div>
+        <mets:fptr FILEID="d_file_1"/>
+      </mets:div>
+    </mets:div>
+  </mets:structMap>
+</mets:mets>

@@ -1,0 +1,29 @@
+{
+    "authors_list": [
+        {
+            "affiliation": null,
+            "name": {
+                "first": "Maggie L.",
+                "full": "maggie l. syme",
+                "last": "Syme"
+            },
+            "orcid": null,
+            "researcher_id": null
+        },
+        {
+            "affiliation": null,
+            "name": {
+                "first": "Michelle S.",
+                "full": "michelle s. ballan",
+                "last": "Ballan"
+            },
+            "orcid": null,
+            "researcher_id": null
+        }
+    ],
+    "doctype": "dataset",
+    "fingerprint": "321f784e185f2f5e4353eb82bfeee749",
+    "pdf_url": null,
+    "pubdate": "2010-01-01",
+    "title": "Sexuality Assessment in Older Adults: Unique Situations"
+}

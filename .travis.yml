@@ -1,7 +1,6 @@
 language: python
 
 python:
-  - 3.4
   - 3.5
   - 3.6
 
@@ -26,6 +25,7 @@ services:
   - postgresql
   - redis
   - elasticsearch
+  - docker
 
 env:
   global:
@@ -34,18 +34,22 @@ env:
       # Zenodo Sandbox API key
     - secure: "KjRrTKrNyhv1xVl2UBtJ/qH0uFGItvxw7/pGFfPrcwxD5YAB5daePDaIGe/tlVy+lrQi0D9x1CA8MB2vm+Lf4jrfO+3ZHCkmb4ecbumPV7DxEbgFsralBx65PRRVUiDW1Oy0RyigxXNNdtNLvTVr1PYrZYD407HZnP6LrJP0ONM="
     - PIP_DOWNLOAD_CACHE=$HOME/.pip-cache
+    - USE_VNU_SERVER='YES'
 
 before_install:
   # Install latest tidy-html5
   - sudo apt-get remove libtidy-0.99-0
   - wget https://github.com/htacg/tidy-html5/releases/download/5.4.0/tidy-5.4.0-64bit.deb
   - sudo dpkg -i tidy-5.4.0-64bit.deb
+  # Make imagemagick read pdf
+  - sudo sed -i 's/<policy domain="coder" rights="none" pattern="PDF" \/>/<policy domain="coder" rights="read" pattern="PDF" \/>/' /etc/ImageMagick-6/policy.xml
   # Rest
   - export DJANGO_SETTINGS_MODULE=dissemin.settings
   - export PYTHONPATH=$HOME/builds/dissemin/dissemin
   - export PIP_USE_MIRRORS=true
   - echo "from .travis import *" > dissemin/settings/__init__.py
   - cp dissemin/settings/secret_template.py dissemin/settings/secret.py
+  - docker run -d -it --rm -p 8888:8888 validator/validator:latest
 
 install:
   - pip install setuptools --upgrade
@@ -59,10 +63,18 @@ install:
 before_script:
   - psql --version
   - psql -c "CREATE DATABASE dissemin;" -U postgres
+  - if [ $TRAVIS_EVENT_TYPE == 'cron' ]; 
+    then
+    echo ">= Using all languages in tests because this is trigggered by cron <=";
+    export DISSEMIN_TEST_ALL_LANGUAGES="YES";
+    else
+    echo "=> Using only english language in tests because this is not triggered by cron <=";
+    fi
 
 script:
-  - coverage run --source=dissemin,papers,backend,deposit,upload,statistics --omit="*/migrations/*,dissemin/settings/*" -m py.test
-  - python manage.py compilemessages
+  - python manage.py compilemessages --exclude qqq
+  - coverage run --source=backend,deposit,dissemin,papers,statistics,upload,website --omit="*/migrations/*,dissemin/settings/*" -m py.test
+  - python manage.py compilescss
 
 after_success:
   - coveralls

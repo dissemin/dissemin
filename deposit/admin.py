@@ -20,18 +20,46 @@
 
 
 
+from deposit.models import DDC
+from deposit.models import LicenseChooser
 from deposit.models import DepositRecord
+from deposit.models import License
 from deposit.models import Repository
 from deposit.forms import RepositoryAdminForm
 from django.contrib import admin
 
 
+class LicenseChooserInline(admin.TabularInline):
+    model = LicenseChooser
+    ordering = ('position', )
+    extra = 1
+
 class DepositRecordAdmin(admin.ModelAdmin):
     list_display = ('identifier', 'paper', 'user')
-    raw_id_fields = ('paper', 'user', 'oairecord')
+    list_filter = ['repository']
+    raw_id_fields = ('paper', 'user', 'oairecord', 'file', )
+    readonly_fields = ('date', )
+    search_fields = ('paper__pk', 'paper__title')
+
+class LicenseAdmin(admin.ModelAdmin):
+    list_display = ('name', 'uri')
+    search_fields = ('name', 'uri', 'licensechooser__transmit_id')
 
 class RepositoryAdmin(admin.ModelAdmin):
+    fieldsets = (
+        (None, {
+            'fields': [field.name for field in Repository._meta.fields if field.name not in ['id', 'ddc']]
+        }),
+        ('Classification', {
+            'classes': ('collapse',),
+            'fields': ('ddc',),
+        }),
+    )
+    filter_horizontal = ('ddc', )
     form = RepositoryAdminForm
+    inlines = (LicenseChooserInline, )
 
+admin.site.register(DDC)
 admin.site.register(DepositRecord, DepositRecordAdmin)
 admin.site.register(Repository, RepositoryAdmin)
+admin.site.register(License, LicenseAdmin)

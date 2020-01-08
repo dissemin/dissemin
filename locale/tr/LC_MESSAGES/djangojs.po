@@ -1,0 +1,106 @@
+# Translation of Dissemin papers to Turkish (Türkçe)
+# Exported from translatewiki.net
+#
+# Author: BaRaN6161 TURK
+# Author: Grkn gll
+# Author: Mirzali
+# --
+# This file is part of the Dissemin Project
+# This file is distributed under the same license as the Dissemin package.
+#
+msgid ""
+msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-01-07 14:39+0100\n"
+"PO-Revision-Date: 2019-12-26 11:32:38+0000\n"
+"Language: tr\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-POT-Import-Date: 2019-12-12 14:04:05+0000\n"
+"X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: website/static/js/dissemin.js:202
+#, javascript-format
+msgid "%s paper found"
+msgid_plural "%s papers found"
+msgstr[0] "%s kağıt bulundu"
+
+#: website/static/js/dissemin.js:293
+msgid "Claiming..."
+msgstr "Talep ediliyor..."
+
+#: website/static/js/dissemin.js:297
+msgid "Unclaiming..."
+msgstr "Talebin iptal ediliyor..."
+
+#: website/static/js/dissemin.js:313
+msgid "Claiming failed!"
+msgstr "Talep başarısız oldu!"
+
+#: website/static/js/dissemin.js:316
+msgid "Unclaiming failed!"
+msgstr "Talep iptali başarısız oldu!"
+
+#: website/static/js/dissemin.js:321
+msgid "Exclude from my profile"
+msgstr "Profilimden hariç tut"
+
+#: website/static/js/dissemin.js:325
+msgid "Include in my profile"
+msgstr "Profilime dahil tut"
+
+#: website/static/js/dissemin.js:350
+#, fuzzy
+msgid "Adding to to-do list"
+msgstr "Yapılacaklar listesine ekleniyor"
+
+#: website/static/js/dissemin.js:354
+#, fuzzy
+msgid "Removing from to-do list"
+msgstr "Yapılacaklar listesinden kaldırılıyor"
+
+#: website/static/js/dissemin.js:600
+msgid "Preview of uploaded file"
+msgstr "Yüklenen dosyanın önizlemesi"
+
+#: website/static/js/dissemin.js:603
+msgid "Pages: "
+msgstr "Sayfalar: "
+
+#: website/static/js/dissemin.js:604
+msgid "Size: "
+msgstr "Boyut: "
+
+#: website/static/js/dissemin.js:619
+msgid "While uploading %(file)s the following error occured:"
+msgstr "%(file)s yüklenirken aşağıdaki hata oluştu:"
+
+#: website/static/js/dissemin.js:628 website/static/js/dissemin.js:683
+#: website/static/js/dissemin.js:689
+msgid "Unknown error"
+msgstr "Bilinmeyen hata"
+
+#: website/static/js/dissemin.js:673
+msgid "While fetching file from %(url)s the following error occured:"
+msgstr "%(url)s dosyasından dosya getirilirken aşağıdaki hata oluştu:"
+
+#: website/static/js/dissemin.js:760
+msgid "Sorry, we could not fill this for you."
+msgstr "Üzgünüz, bunu sizin için dolduramadık."
+
+#: website/static/js/dissemin.js:761
+msgid "Trying to fill this field automatically for you..."
+msgstr "Bu alanı sizin için otomatik olarak doldurmaya çalışıyor..."
+
+#: website/static/js/dissemin.js:795
+msgid "You have not selected a file for upload."
+msgstr "Yüklemek için bir dosya seçmediniz."
+
+#: website/static/js/dissemin.js:822
+msgid "Dissemin encountered an error, please try again later."
+msgstr "Dissemin bir hatayla karşılaştı, lütfen daha sonra tekrar deneyin."
+
+#: website/static/js/moment.min.js:1
+msgid ": "
+msgstr ": "

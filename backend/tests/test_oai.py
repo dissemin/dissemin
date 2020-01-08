@@ -20,15 +20,19 @@
 
 
 
-from mock import patch
-import unittest
-import os
 import codecs
-from backend.oai import OaiPaperSource
-from django.test import TestCase
+import os
+import pytest
+import unittest
+
+from mock import patch
 from oaipmh.error import CannotDisseminateFormatError
 from oaipmh.error import IdDoesNotExistError
 from oaipmh.client import Client
+
+from django.test import TestCase
+
+from backend.oai import OaiPaperSource
 from papers.models import OaiRecord
 from papers.models import OaiSource
 from papers.models import Paper
@@ -129,6 +133,7 @@ class OaiTest(TestCase):
                              hal_paper.bare_author_names())
         self.assertEqual(new_paper.title, hal_paper.title)
 
+    @pytest.mark.usefixtures('mock_doi')
     def test_create_match_fp(self):
         """
         Addition of an OAI record when it is matched
@@ -185,6 +190,7 @@ class OaiTest(TestCase):
         self.assertSetEqual(set(new_paper.oairecords), records)
 
 
+    @pytest.mark.usefixtures('mock_doi')
     def test_create_match_doi(self):
         """
         Addition of an OAI record when it is matched
@@ -209,6 +215,7 @@ class OaiTest(TestCase):
         records.add(OaiRecord.objects.get(identifier=first_id))
         self.assertEqual(set(new_paper.oairecords), records)
 
+    @pytest.mark.usefixtures('mock_doi')
     def test_update_pdf_url(self):
         """
         Two OAI records share the same splash URL, but
@@ -220,7 +227,7 @@ class OaiTest(TestCase):
         # Create a paper from Crossref
         first = Paper.create_by_doi('10.1007/s10858-015-9994-8')
         # initially the PDF url should be empty
-        self.assertEqual(first.oairecords[0].pdf_url, None)
+        assert not first.oairecords[0].pdf_url
 
         # then we import a new identifier
         new_paper = self.create(

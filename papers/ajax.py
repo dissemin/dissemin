@@ -18,16 +18,21 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 
+import logging
 
-from django.conf.urls import url
+from celery.exceptions import TimeoutError
+from djgeojson.views import GeoJSONLayerView
+from functools import wraps
+from jsonview.decorators import json_view
+
 from django.contrib.auth.decorators import user_passes_test
+from django.core.exceptions import MultipleObjectsReturned
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
+from django.utils.translation import gettext as _
 from django.views.decorators.http import require_POST
-from djgeojson.views import GeoJSONLayerView
-from celery.exceptions import TimeoutError
-from jsonview.decorators import json_view
+
 from papers.models import Paper
 from papers.models import Researcher
 from papers.models import Institution
@@ -35,6 +40,40 @@ from papers.user import is_admin
 from papers.user import is_authenticated
 from papers.utils import kill_html
 from papers.utils import sanitize_html
+
+
+logger = logging.getLogger('dissemin.' + __name__)
+
+
+def login_required_ajax(function):
+    """
+    Decorator that sends 401 as response to not authenticated ajax request
+    """
+    def decorator(view_func):
+        @wraps(view_func)
+        def _wrapper_func(request, *args, **kwargs):
+            if request.user.is_authenticated:
+                return view_func(request, *args, **kwargs)
+            else:
+                return HttpResponse(status=401)
+        return _wrapper_func
+
+    return decorator(function)
+
+
+def ajax_required(function):
+    """
+    Decorator that sends 400 as response if not an ajax request
+    """
+    def decorator(view_func):
+        @wraps(view_func)
+        def _wrapper_func(request, *args, **kwargs):
+            if request.is_ajax():
+                return view_func(request, *args, **kwargs)
+            else:
+                return HttpResponse(status=400)
+        return _wrapper_func
+    return decorator(function)
 
 
 @json_view
@@ -183,6 +222,67 @@ def waitForConsolidatedField(request):
         return {'success': success, 'message': 'Invalid field'}, 401
     return {'success': success, 'value': value}
 
+
+@login_required_ajax
+@ajax_required
+@json_view
+@require_POST
+def todo_list_add(request):
+    """
+    Adds a paper from a users todolist
+    """
+    body = {
+        'success_msg' : _('Remove from to-do list'),
+        'error_msg' : _('Marking failed'),
+        'data-action': 'unmark',
+    }
+    paper_pk = request.POST.get('paper_pk', None)
+    if paper_pk is None:
+        return body, 400
+    try:
+        paper = Paper.objects.get(pk=int(paper_pk))
+    except (ObjectDoesNotExist, MultipleObjectsReturned, ValueError):
+        return body, 404
+
+    try:
+        paper.todolist.add(request.user)
+    except Exception as e:
+        logger.exception(e)
+        return body, 500
+
+    return body, 200
+
+
+@login_required_ajax
+@ajax_required
+@json_view
+@require_POST
+def todo_list_remove(request):
+    """
+    Removes a paper from a users todolist
+    """
+    body = {
+        'success_msg' : _('Mark for later upload'),
+        'error_msg' : _('Removing failed'),
+        'data-action': 'mark',
+    }
+    paper_pk = request.POST.get('paper_pk', None)
+    if paper_pk is None:
+        return body, 400
+    try:
+        paper = Paper.objects.get(pk=int(paper_pk))
+    except (ObjectDoesNotExist, MultipleObjectsReturned, ValueError):
+        return body, 404
+
+    try:
+        paper.todolist.remove(request.user)
+    except Exception as e:
+        logger.exception(e)
+        return body, 500
+
+    return body, 200
+
+
 # author management
 #@user_passes_test(is_admin)
 #@json_view
@@ -231,24 +331,3 @@ class InstitutionsMapView(GeoJSONLayerView):
 
     def get_queryset(self):
         return Institution.objects.filter(coords__isnull=False)
-
-urlpatterns = [
-    #    url(r'^annotate-paper-(?P<pk>\d+)-(?P<status>\d+)$', annotatePaper, name='ajax-annotatePaper'),
-    url(r'^delete-researcher-(?P<pk>\d+)$',
-        deleteResearcher, name='ajax-deleteResearcher'),
-    #    url(r'^change-department$', changeDepartment, name='ajax-changeDepartment'),
-    #    url(r'^change-paper$', changePaper, name='ajax-changePaper'),
-    #    url(r'^change-researcher$', changeResearcher, name='ajax-changeResearcher'),
-    #    url(r'^change-author$', changeAuthor, name='ajax-changeAuthor'),
-    #    url(r'^harvesting-status-(?P<pk>\d+)$', harvestingStatus, name='ajax-harvestingStatus'),
-    url(r'^wait-for-consolidated-field$', waitForConsolidatedField,
-        name='ajax-waitForConsolidatedField'),
-    url(r'^set-researcher-department$', setResearcherDepartment,
-        name='ajax-setResearcherDepartment'),
-    url(r'^institutions.geojson', InstitutionsMapView.as_view(),
-        name='ajax-institutions-geojson'),
-    url(r'^claim-paper$',
-        claimPaper, name='ajax-claimPaper'),
-    url(r'^unclaim-paper$',
-        unclaimPaper, name='ajax-unclaimPaper'),
-]

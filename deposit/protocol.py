@@ -22,12 +22,19 @@
 
 
 import traceback
+import logging
 
 from django.conf import settings
+from django.db.models import Q
+from django.utils.functional import cached_property
 from django.utils.translation import ugettext as _
 from papers.baremodels import BareOaiRecord
 from deposit.forms import BaseMetadataForm
 from deposit.models import DEPOSIT_STATUS_CHOICES
+from deposit.models import LicenseChooser
+
+logger = logging.getLogger('dissemin.' + __name__)
+
 
 class DepositError(Exception):
     """
@@ -45,17 +52,18 @@ class DepositResult(object):
     status should be one of DEPOSIT_STATUS_CHOICES
     """
 
-    def __init__(self, identifier=None, splash_url=None, pdf_url=None, logs=None,
-                 status='published', message=None):
+    def __init__(self, identifier=None, splash_url=None, pdf_url=None, logs=None, status='published', license = None, embargo_date=None, message=None):
         self.identifier = identifier
         self.splash_url = splash_url
         self.pdf_url = pdf_url
         self.logs = logs
-        if status not in [x for x,y in DEPOSIT_STATUS_CHOICES]:
+        if status not in [x[0] for x in DEPOSIT_STATUS_CHOICES]:
             raise ValueError('invalid status '+str(status))
         self.status = status
         self.message = message
+        self.license = None
         self.oairecord = None
+        self.embargo_date = None
         self.additional_info = []
 
 class RepositoryProtocolMeta(type):
@@ -85,17 +93,16 @@ class RepositoryProtocol(object, metaclass = RepositoryProtocolMeta):
     #. The class of the form for the deposit
     form_class = BaseMetadataForm
 
-    #: The name of the model for the user preferences
+    #: The model for the user preferences
     #: (set to None if no preferences can be set).
-    #: The format should be (app_label, model_name) otherwise.
-    preferences_model_name = None
+    preferences_model = None
 
     #: The class of the form to edit the user preferences
     preferences_form_class = None
 
     def __init__(self, repository, **kwargs):
         self.repository = repository
-        self._logs = None
+        self._logs = ''
         self.paper = None
         self.user = None
     
@@ -103,19 +110,57 @@ class RepositoryProtocol(object, metaclass = RepositoryProtocolMeta):
         """
         Return the class name if no other value is set.
         """
-        return self.__name__
+        return self.__class__.__name__
     
     def __str__(self):
         """
         Return the class name if no other value is set.
         """
-        return self.__name__ 
+        return self.__class__.__name__
 
     def protocol_identifier(self):
         """
         Returns an identifier for the protocol.
         """
         return type(self).__name__
+
+    @cached_property
+    def publication(self):
+        """
+        Sets publication / oairecord for the paper with highest prority.
+        """
+        # Fetch the first OaiRecord with highest OaiSource priority and journal as well as publisher
+        publication = self.paper.oairecord_set.filter(
+                journal__isnull=False,
+                publisher__isnull=False
+            ).select_related(
+                'journal',
+                'publisher'
+            ).order_by(
+                '-priority'
+            ).first()
+
+        # If not available, fetch the first OaiRecord with highest OaiSource priority and journal_title as well as publisher_name
+        if publication is None:
+            publication = self.paper.oairecord_set.exclude(
+                    Q(journal_title='') | Q(publisher_name='')
+                ).select_related(
+                    'journal',
+                    'publisher'
+                ).order_by(
+                    '-priority'
+                ).first()
+
+        # If none is available, take the first one ordered by priority
+        if publication is None:
+           publication = self.paper.oairecord_set.select_related(
+                    'journal',
+                    'publisher'
+                ).order_by(
+                    '-priority'
+                ).first()
+
+        return publication
 
     def init_deposit(self, paper, user):
         """
@@ -130,22 +175,113 @@ class RepositoryProtocol(object, metaclass = RepositoryProtocolMeta):
         self._logs = ''
         return True
 
+
+    @staticmethod
+    def _add_embargo_date_to_deposit_result(deposit_result, form):
+        """
+        If an embargo date does exist, add it to the deposit record
+        :param deposit_result: DepositResult
+        :param form: valid Form
+        :returns: DepositResult
+        """
+        deposit_result.embargo_date = form.cleaned_data.get('embargo', None)
+
+        return deposit_result
+
+
+    @staticmethod
+    def _add_license_to_deposit_result(deposit_result, form):
+        """
+        If a license does exist, add it to the deposit record
+        :param deposit_result: DepositResult
+        :param form: valid Form
+        :returns: DepositResult
+        """
+        lc = form.cleaned_data.get('license', None)
+        if lc:
+            deposit_result.license = lc.license
+        return deposit_result
+
+
     ### Deposit form ###
     # This section defines the form the user sees when
     # depositing a paper.
 
-    def get_form_initial_data(self):
+    def _get_ddcs(self):
+        """
+        Returns the queryset of related DDC classes of repository or ``None``
+        :returns: queryset of DDC or ``None``
+        """
+
+        ddcs = self.repository.ddc.all()
+        if ddcs:
+            return ddcs
+        else:
+            return None
+
+    def _get_licenses(self):
+        """
+        Returns the queryset of related licenses or the repository or ``None``.
+        :returns: queryset of licenses or ``None``
+        """
+
+        licenses = LicenseChooser.objects.by_repository(self.repository)
+        if licenses:
+            return licenses
+        else:
+            return None
+
+    def get_form_initial_data(self, **kwargs):
         """
         Returns the form's initial values.
         """
-        return {'paper_id':self.paper.id}
+
+        licenses = kwargs.get('licenses', None)
+
+        initial = {
+            'paper_id' : self.paper.id,
+        }
+        
+        if licenses:
+            defaults = 0
+            for license in reversed(licenses):
+                if license.default == True:
+                    initial['license'] = license
+                    defaults += 1
+            if defaults == 0:
+                logger.warning('No default license set for repository %s' % self.repository)
+                initial['license'] = licenses.first()
+            elif defaults == 2:
+                logger.warning('More than one default license set for repository %s' % self.repository)
+
+        return initial
+
+
+    def _get_form_settings(self):
+        """
+        This creates the form settings. It returns a dictionary that kann be passed as kwargs to the forms __init__. This is used to enable or disable fields and/or fill them with data
+        :returns: Dictionary with form settings
+        """
+        form_settings = {
+            'abstract_required' : self.repository.abstract_required,
+            'ddcs' : self._get_ddcs(),
+            'embargo' : self.repository.embargo,
+            'licenses' : self._get_licenses(),
+        }
+        return form_settings
+
 
     def get_form(self):
         """
         Returns the form where the user will be able to give additional metadata.
         It is prefilled with the initial data from `get_form_initial_data`
         """
-        return self.form_class(paper=self.paper, initial=self.get_form_initial_data())
+
+        form_settings = self._get_form_settings()
+
+        initial = self.get_form_initial_data(licenses=form_settings.get('licenses'))
+
+        return self.form_class(**form_settings, initial=initial)
 
     def get_bound_form(self, data):
         """
@@ -153,7 +289,9 @@ class RepositoryProtocol(object, metaclass = RepositoryProtocolMeta):
         Here, data is expected to come from a POST request generated by
         the user, ready for validation.
         """
-        return self.form_class(paper=self.paper, data=data)
+        form_settings = self._get_form_settings()
+
+        return self.form_class(**form_settings, data=data)
 
     def submit_deposit(self, pdf, form, dry_run=False):
         """
@@ -168,17 +306,14 @@ class RepositoryProtocol(object, metaclass = RepositoryProtocolMeta):
         raise NotImplementedError(
             'submit_deposit should be implemented in the RepositoryInterface instance.')
 
-    def refresh_deposit_status(self, deposit_record):
+    def refresh_deposit_status(self):
         """
-        Given the DepositRecord created by a previous deposit,
-        update its deposit status. This function will be called
-        regularly, so that we can stay in sync with the deposit
-        while it makes it way through the pipeline in the repository.
-
-        By default this does not do anything (i.e. leaves the
-        DepositRecord unchanged).
-
-        :param deposit_record: the DepositRecord to update
+        This function is meant to update deposit status. Reimplement the updating as required, by do the following:
+        1. Call this function with super()
+        2. Fetch all DepositRecords for the repository
+        3. Update their status and the corresponding OaiRecords
+        4. Save them
+        5. Update availability and update index
         """
         pass
 
@@ -215,6 +350,10 @@ class RepositoryProtocol(object, metaclass = RepositoryProtocolMeta):
                 result.oairecord = self.paper.add_oairecord(rec)
 
             settings.DEPOSIT_NOTIFICATION_CALLBACK(notification_payload)
+
+            # In case that the paper is on user todo list, remove it
+            # If it's not on the list, nothing happens here, since m2m field
+            self.paper.todolist.remove(self.user)
 
             return result
         except DepositError as e:

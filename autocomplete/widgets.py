@@ -1,8 +1,10 @@
+from django_select2.forms import HeavySelect2Widget
+
 from django import forms
 from django.conf import settings # NOQA
 from django.contrib.admin.widgets import SELECT2_TRANSLATIONS
 from django.utils.translation import get_language
-from django_select2.forms import HeavySelect2Widget
+from django.templatetags.static import static
 
 
 class Select2(HeavySelect2Widget):
@@ -31,6 +33,6 @@ class Select2(HeavySelect2Widget):
         )
 
         return forms.Media(
-            js=select2_js + i18n_file + ('libs/django_select2.js',),
+            js=select2_js + i18n_file + (static("js/django_select2.js"), ),
             css={'screen': select2_css}
         )

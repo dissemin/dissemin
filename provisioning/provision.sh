@@ -4,6 +4,9 @@ set -e
 # Show commands as they are executed
 set -x
 
+# Prevent interaction from apt with the user
+export DEBIAN_FRONTEND=noninteractive
+
 # We update the apt-get cache
 apt-get update
 # We update the system

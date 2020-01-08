@@ -1,0 +1,46 @@
+{% load i18n %}
+
+{% for message in messages %}
+    {% if message.payload.code == "IGNORED_PAPERS" %}
+        {% with papers=message.payload.papers %}
+        <div class="alert alert-warning alert-dismissible fade show messageAlert" data-message-pk="{{ message.pk }}">
+                <h5 class="text-center">
+                    {% blocktrans trimmed count papers=papers|length %}
+                        We ignored {{ papers }} paper from your ORCiD profile.
+                    {% plural %}
+                        We ignored {{ papers }} papers from your ORCiD profile.
+                    {% endblocktrans %}
+                </h5>
+                <p>{% trans 'Details:' %}</p>
+                <ul>
+                {% for paper in papers %}
+                    {% if paper.title %}
+                        {% with title=paper.title reason=skip_reason %}
+                        <li>
+                            {% if reason == "NO_AUTHOR" %}
+                                {% trans "No author" as reason_human %}
+                            {% elif reason == "NO_TITLE" %}
+                                {% trans "No title" as reason_human %}
+                            {% elif reason == "INVALID_PUB_DATE" %}
+                                {% trans "Invalid publication date" as reason_human %}
+                            {% elif reason == "NO_PUBDATE" %}
+                                {% trans "No publication date" as reason_human %}
+                            {% else %}
+                                {% trans "Paper is invalid" as reason_human %}
+                            {% endif %}
+
+                            {% trans "{{ title }} was ignored for the following reason:" %} {{ reason_human }}.
+                        </li>
+                        {% endwith %}
+                    {% else %}
+                        <li>{% trans "A paper was ignored, because is has no title." %}</li>
+                    {% endif %}
+                {% endfor %}
+                </ul>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endwith %}
+    {% endif %}
+{% endfor %}

@@ -94,6 +94,11 @@ DOI_PROXY_SUPPORTS_BATCH = True
 #DOI_PROXY_DOMAIN =  'doi.org'
 #DOI_PROXY_SUPPORTS_BATCH = False
 
+DOI_OUTDATED_DURATION = timedelta(days=180)
+# Endpoint to fetch DOI from
+DOI_RESOLVER_ENDPOINT= 'https://dx.doi.org/'
+
+
 ### CrossRef politeness options ###
 # These options determine how we identify ourselves to CrossRef.
 # It is not mandatory to provide them but it helps get a better service.
@@ -130,18 +135,21 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'rest_framework',
     'crispy_forms',
+    'website',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.orcid',
     'statistics',
     'publishers',
+    'backend',
     'papers',
     'upload',
     'deposit',
-    'deposit.zenodo',
     'deposit.hal',
     'deposit.osf',
+    'deposit.sword',
+    'deposit.zenodo',
     'autocomplete',
     'notification',
     'bootstrap_pagination',
@@ -154,15 +162,19 @@ INSTALLED_APPS = (
     'django_countries',
     'leaflet',
     'djgeojson',
-    'bootstrap_datepicker_plus',
     'django_select2',
+    'vinaigrette',
+    'tempus_dominus',
+    'sass_processor',
 )
 
-CRISPY_TEMPLATE_PACK = 'bootstrap3'
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+TEMPUS_DOMINUS_INCLUDE_ASSETS = False
 
 SELECT2_JS = None
 SELECT2_CSS = None
-SELECT2_I18N_PATH = 'libs/select2/i18n'
+SELECT2_I18N_PATH = 'js/select2/i18n'
 
 SITE_ID = 1
 
@@ -174,6 +186,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'vinaigrette.middleware.VinaigretteAdminLanguageMiddleware',
 ]
 
 AUTHENTICATION_BACKENDS = (
@@ -185,16 +198,8 @@ AUTHENTICATION_BACKENDS = (
 TEMPLATES = [
         {
             'BACKEND': 'django.template.backends.django.DjangoTemplates',
-            'DIRS': [
-                os.path.join(BASE_DIR, 'templates')
-            ],
+            'APP_DIRS' : True,
             'OPTIONS': {
-                'loaders': (
-                    ('django.template.loaders.cached.Loader', (
-                        'django.template.loaders.filesystem.Loader',
-                        'django.template.loaders.app_directories.Loader',
-                    )),
-                ),
                 'context_processors': (
                     "django.contrib.auth.context_processors.auth",
                     'django.contrib.messages.context_processors.messages',
@@ -212,19 +217,33 @@ TEMPLATES = [
         }
 ]
 
-ROOT_URLCONF = 'dissemin.urls'
+ROOT_URLCONF = 'website.urls'
 
 WSGI_APPLICATION = 'dissemin.wsgi.application'
 
 
 ### Static files (CSS, JavaScript, Images) ###
 # This defines how static files are stored and accessed.
-# https://docs.djangoproject.com/en/1.8/howto/static-files/
+# https://docs.djangoproject.com/en/2.2/howto/static-files/
 #
 # Relative URL where static files are accessed (you don't have to change this).
 STATIC_URL = '/static/'
 # Relative URL where user uploads are accessed (you don't have to change this).
 MEDIA_URL = '/media/'
+
+# SASS options
+# Precision is required by bootstrap
+SASS_PRECISION = 6
+
+SASS_PROCESSOR_INCLUDE_DIRS = [
+    os.path.join(BASE_DIR, 'templates/scss'),
+]
+
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'sass_processor.finders.CssFinder',
+]
 
 ### Celery config ###
 # Celery runs asynchronous tasks such as metadata harvesting or
@@ -261,6 +280,10 @@ CELERYBEAT_SCHEDULE = {
     'refresh_deposit_statuses': {
           'task': 'refresh_deposit_statuses',
           'schedule': timedelta(days=1),
+    },
+    'change_embargoed_to_published': {
+        'task': 'change_embargoed_to_published',
+        'schedule': timedelta(days=1),
     },
     'fetch_updates_from_romeo': {
            'task': 'fetch_updates_from_romeo',

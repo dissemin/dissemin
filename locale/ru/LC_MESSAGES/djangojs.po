@@ -1,68 +1,151 @@
 # Translation of Dissemin papers to Russian (русский)
 # Exported from translatewiki.net
 #
+# Author: DmitTrix
+# Author: Katunchik
 # Author: Mouse21
+# Author: Movses
 # Author: Okras
 # Author: Smigles
 # Author: Vlad5250
 # Author: Wirbel78
+# --
+# This file is part of the Dissemin Project
+# This file is distributed under the same license as the Dissemin package.
+#
 msgid ""
 msgstr ""
-""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-25 12:06+0100\n"
-"PO-Revision-Date: 2019-03-07 15:08:20+0000\n"
+"POT-Creation-Date: 2020-01-07 14:39+0100\n"
+"PO-Revision-Date: 2019-10-14 15:19:32+0000\n"
 "Language: ru\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2019-02-25 13:41:23+0000\n"
-"X-Generator: MediaWiki 1.33.0-alpha; Translate 2019-01-17\n"
+"X-POT-Import-Date: 2019-10-01 08:31:19+0000\n"
+"X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11) ? 0 : ( (n%10 >= 2 && n%10 <= 4 && (n%100 < 10 || n%100 >= 20)) ? 1 : 2 );\n"
 
-#: papers/static/papers/refresh.js:35
-msgid "Do not show this message anymore"
-msgstr "Не показывать это сообщение больше"
+#: website/static/js/dissemin.js:202
+#, javascript-format
+msgid "%s paper found"
+msgid_plural "%s papers found"
+msgstr[0] "%s документ найден"
+msgstr[1] "%s документа найдено"
+msgstr[2] "%s документов найдено"
 
-#: papers/static/papers/refresh.js:66
-msgid "No author"
-msgstr "Нет автора"
-
-#: papers/static/papers/refresh.js:68
-msgid "No title"
-msgstr "Без названия"
-
-#: papers/static/papers/refresh.js:70
-msgid "Invalid publication date"
-msgstr "Недействительная дата публикации"
-
-#: papers/static/papers/refresh.js:72
-msgid "No publication date"
-msgstr "Отсутствует дата публикации"
-
-#: papers/static/papers/refresh.js:74
-msgid "Paper is invalid"
+#: website/static/js/dissemin.js:293
+msgid "Claiming..."
 msgstr ""
 
-#: papers/static/papers/refresh.js:109
-msgid "We ignored %(count)s paper from your ORCiD profile."
-msgid_plural "We ignored %(count)s papers from your ORCiD profile."
-msgstr[0] "%(count)s бумагу"
-msgstr[1] "%(count)s бумаги"
-msgstr[2] "%(count)s бумаг"
+#: website/static/js/dissemin.js:297
+msgid "Unclaiming..."
+msgstr ""
 
-#: papers/static/papers/refresh.js:119
-msgid "\"%(name)s\" was ignored for the following reason: %(reason)s"
-msgstr "\"%(имя)ена\" был проигнорирован по следующей причине: %(причина)ы"
+#: website/static/js/dissemin.js:313
+msgid "Claiming failed!"
+msgstr ""
 
-#: papers/static/papers/refresh.js:127
-msgid "A paper was ignored, because it has no name"
-msgstr "Документ был проигнорирован, поскольку он не имеет названия"
+#: website/static/js/dissemin.js:316
+msgid "Unclaiming failed!"
+msgstr ""
 
-#: papers/static/papers/refresh.js:139 papers/static/papers/refresh.js:167
-msgid "Show more information"
-msgstr "Показать больше информации"
+#: website/static/js/dissemin.js:321
+msgid "Exclude from my profile"
+msgstr ""
 
-#: papers/static/papers/refresh.js:164
-msgid "Show less information"
-msgstr "Показать меньше информации"
+#: website/static/js/dissemin.js:325
+msgid "Include in my profile"
+msgstr ""
 
+#: website/static/js/dissemin.js:350
+#, fuzzy
+#| msgid "Adding to todolist"
+msgid "Adding to to-do list"
+msgstr "Добавление в список работ"
+
+#: website/static/js/dissemin.js:354
+#, fuzzy
+#| msgid "Removing from todolist"
+msgid "Removing from to-do list"
+msgstr "Удаление из списка работ"
+
+#: website/static/js/dissemin.js:600
+msgid "Preview of uploaded file"
+msgstr ""
+
+#: website/static/js/dissemin.js:603
+msgid "Pages: "
+msgstr ""
+
+#: website/static/js/dissemin.js:604
+msgid "Size: "
+msgstr ""
+
+#: website/static/js/dissemin.js:619
+msgid "While uploading %(file)s the following error occured:"
+msgstr ""
+
+#: website/static/js/dissemin.js:628 website/static/js/dissemin.js:683
+#: website/static/js/dissemin.js:689
+msgid "Unknown error"
+msgstr ""
+
+#: website/static/js/dissemin.js:673
+msgid "While fetching file from %(url)s the following error occured:"
+msgstr ""
+
+#: website/static/js/dissemin.js:760
+msgid "Sorry, we could not fill this for you."
+msgstr ""
+
+#: website/static/js/dissemin.js:761
+msgid "Trying to fill this field automatically for you..."
+msgstr ""
+
+#: website/static/js/dissemin.js:795
+msgid "You have not selected a file for upload."
+msgstr ""
+
+#: website/static/js/dissemin.js:822
+msgid "Dissemin encountered an error, please try again later."
+msgstr ""
+
+#: website/static/js/moment.min.js:1
+msgid ": "
+msgstr ""
+
+#~ msgid "Do not show this message anymore"
+#~ msgstr "Больше не показывать это сообщение"
+
+#~ msgid "No author"
+#~ msgstr "Нет автора"
+
+#~ msgid "No title"
+#~ msgstr "Без названия"
+
+#~ msgid "Invalid publication date"
+#~ msgstr "Недействительная дата публикации"
+
+#~ msgid "No publication date"
+#~ msgstr "Отсутствует дата публикации"
+
+#~ msgid "Paper is invalid"
+#~ msgstr "Ошибочный документ"
+
+#~ msgid "We ignored %(count)s paper from your ORCiD profile."
+#~ msgid_plural "We ignored %(count)s papers from your ORCiD profile."
+#~ msgstr[0] "Мы проигнорировали %(count)s документ из вашего профиля ORCiD."
+#~ msgstr[1] "Мы проигнорировали %(count)s документа из вашего профиля ORCiD."
+#~ msgstr[2] "Мы проигнорировали %(count)s документов из вашего профиля ORCiD."
+
+#~ msgid "\"%(name)s\" was ignored for the following reason: %(reason)s"
+#~ msgstr "\"%(имя)ена\" был проигнорирован по следующей причине: %(причина)ы"
+
+#~ msgid "A paper was ignored, because it has no name"
+#~ msgstr "Документ был проигнорирован, поскольку он не имеет названия"
+
+#~ msgid "Show more information"
+#~ msgstr "Показать больше информации"
+
+#~ msgid "Show less information"
+#~ msgstr "Показать меньше информации"

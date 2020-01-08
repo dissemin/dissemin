@@ -1,0 +1,454 @@
+{
+    "indexed":{
+        "date-parts":[
+            [
+                2019,
+                5,
+                19
+            ]
+        ],
+        "date-time":"2019-05-19T00:10:49Z",
+        "timestamp":1558224649969
+    },
+    "reference-count":28,
+    "publisher":"Springer Science and Business Media LLC",
+    "issue":"1-2",
+    "license":[
+        {
+            "URL":"http:\/\/www.springer.com\/tdm",
+            "start":{
+                "date-parts":[
+                    [
+                        2000,
+                        6,
+                        1
+                    ]
+                ],
+                "date-time":"2000-06-01T00:00:00Z",
+                "timestamp":959817600000
+            },
+            "delay-in-days":0,
+            "content-version":"tdm"
+        }
+    ],
+    "content-domain":{
+        "domain":[
+
+        ],
+        "crossmark-restriction":false
+    },
+    "published-print":{
+        "date-parts":[
+            [
+                2000,
+                6
+            ]
+        ]
+    },
+    "DOI":"10.1007\/bf02702259",
+    "type":"article-journal",
+    "created":{
+        "date-parts":[
+            [
+                2007,
+                10,
+                11
+            ]
+        ],
+        "date-time":"2007-10-11T07:12:55Z",
+        "timestamp":1192086775000
+    },
+    "page":"19-27",
+    "source":"Crossref",
+    "is-referenced-by-count":1,
+    "title":"Nature of the background ultraviolet radiation field at high redshifts",
+    "prefix":"10.1007",
+    "volume":"21",
+    "author":[
+        {
+            "given":"Archana",
+            "family":"Samantaray",
+            "sequence":"first",
+            "affiliation":[
+
+            ]
+        },
+        {
+            "given":"Pushpa",
+            "family":"Khare",
+            "sequence":"additional",
+            "affiliation":[
+
+            ]
+        }
+    ],
+    "member":"297",
+    "reference":[
+        {
+            "key":"BF02702259_CR1",
+            "doi-asserted-by":"crossref",
+            "first-page":"701",
+            "DOI":"10.1086\/149589",
+            "volume":"152",
+            "author":"J. N. Bahcall",
+            "year":"1968",
+            "unstructured":"Bahcall, J. N., Wolf, R. A. 1968,Astrophys. J.,152, 701.",
+            "journal-title":"Astrophys. J."
+        },
+        {
+            "key":"BF02702259_CR2",
+            "doi-asserted-by":"crossref",
+            "first-page":"570",
+            "DOI":"10.1086\/166217",
+            "volume":"327",
+            "author":"S. Bajtlik",
+            "year":"1988",
+            "unstructured":"Bajtlik, S., Duncan, R. C, Ostriker, J. P. 1988,Astrophys. J.,327, 570.",
+            "journal-title":"Astrophys. J."
+        },
+        {
+            "key":"BF02702259_CR3",
+            "doi-asserted-by":"crossref",
+            "first-page":"1",
+            "DOI":"10.1086\/191937",
+            "volume":"91",
+            "author":"J. Bechtold",
+            "year":"1994",
+            "unstructured":"Bechtold, J. 1994,Astrophys. J. SuppL,91, 1.",
+            "journal-title":"Astrophys. J. SuppL"
+        },
+        {
+            "key":"BF02702259_CR4",
+            "unstructured":"Bechtold, J. 1995 inQSO absorption lines (ed) G. Meylan (Springer), p. 253."
+        },
+        {
+            "key":"BF02702259_CR5",
+            "first-page":"1",
+            "volume":"169",
+            "author":"J. Bergeron",
+            "year":"1986",
+            "unstructured":"Bergeron, J., Stasinska, G. 1986,Astr. Astrophys.,169, 1.",
+            "journal-title":"Astr. Astrophys."
+        },
+        {
+            "key":"BF02702259_CR6",
+            "doi-asserted-by":"crossref",
+            "first-page":"497",
+            "DOI":"10.1086\/190899",
+            "volume":"53",
+            "author":"G. Bruzal",
+            "year":"1983",
+            "unstructured":"Bruzal, G. 1983,Astrophys. J. Suppl,53, 497.",
+            "journal-title":"Astrophys. J. Suppl"
+        },
+        {
+            "key":"BF02702259_CR7",
+            "doi-asserted-by":"crossref",
+            "first-page":"59",
+            "DOI":"10.1086\/300910",
+            "volume":"118",
+            "author":"C. W. Churchill",
+            "year":"1999",
+            "unstructured":"Churchill, C. W., Charlton, J. C. 1999,Astr. J.,118, 59.",
+            "journal-title":"Astr. J."
+        },
+        {
+            "key":"BF02702259_CR8",
+            "doi-asserted-by":"crossref",
+            "first-page":"552",
+            "DOI":"10.1093\/mnras\/284.3.552",
+            "volume":"284",
+            "author":"A. J. Cooke",
+            "year":"1996",
+            "unstructured":"Cooke, A. J., Espey, B., Carswell, R. F. 1996,Mon. Not. R. astr. Soc,284, 552.",
+            "journal-title":"Mon. Not. R. astr. Soc"
+        },
+        {
+            "key":"BF02702259_CR9",
+            "doi-asserted-by":"crossref",
+            "first-page":"133",
+            "DOI":"10.1007\/BF02714874",
+            "volume":"18",
+            "author":"S. Das",
+            "year":"1997",
+            "unstructured":"Das, S., Khare, P. 1997,J. Astr. Astrophys.,18, 133.",
+            "journal-title":"J. Astr. Astrophys."
+        },
+        {
+            "key":"BF02702259_CR10",
+            "doi-asserted-by":"crossref",
+            "first-page":"479",
+            "DOI":"10.1086\/172151",
+            "volume":"402",
+            "author":"S. M. Fall",
+            "year":"1993",
+            "unstructured":"Fall, S. M., Pei, Y. C. 1993,Astrophys. J.,402, 479.",
+            "journal-title":"Astrophys. J."
+        },
+        {
+            "key":"BF02702259_CR11",
+            "doi-asserted-by":"crossref",
+            "first-page":"17",
+            "DOI":"10.1086\/192071",
+            "volume":"94",
+            "author":"F. X. Fan",
+            "year":"1994",
+            "unstructured":"Fan, F. X., Tytler, D. 1994,Astrophys. J. Suppl,94, 17.",
+            "journal-title":"Astrophys. J. Suppl"
+        },
+        {
+            "key":"BF02702259_CR12",
+            "doi-asserted-by":"crossref",
+            "first-page":"191",
+            "DOI":"10.1086\/192257",
+            "volume":"102",
+            "author":"M. L. Giroux",
+            "year":"1996",
+            "unstructured":"Giroux, M. L., Shapiro, P. R. 1996,Astrophys. J. Suppl.,102, 191.",
+            "journal-title":"Astrophys. J. Suppl."
+        },
+        {
+            "key":"BF02702259_CR13",
+            "doi-asserted-by":"crossref",
+            "first-page":"137",
+            "DOI":"10.1086\/173220",
+            "volume":"416",
+            "author":"E. Giallongo",
+            "year":"1993",
+            "unstructured":"Giallongo, E., Cristiani, S., Fontana, A., Travese, D. 1993,Astrophys. J.,416, 137.",
+            "journal-title":"Astrophys. J."
+        },
+        {
+            "key":"BF02702259_CR14",
+            "unstructured":"Green, R. F., York, D. G., Huang, K., Bechtold, J., Welty, D., Carlson, M., Khare, P., Kulkarni, V. 1995, inQSO absorption lines, (ed) G. Meylan (Springer), p. 85."
+        },
+        {
+            "key":"BF02702259_CR15",
+            "unstructured":"Haardt, F., Madau, P. 1996,461, 20."
+        },
+        {
+            "key":"BF02702259_CR16",
+            "doi-asserted-by":"crossref",
+            "first-page":"13",
+            "DOI":"10.1093\/pasj\/50.1.13",
+            "volume":"50",
+            "author":"P. Khare",
+            "year":"1998",
+            "unstructured":"Khare, P., Ikeuchi, S. 1998,PASJ,50, 13.",
+            "journal-title":"PASJ"
+        },
+        {
+            "key":"BF02702259_CR17",
+            "doi-asserted-by":"crossref",
+            "first-page":"L5",
+            "DOI":"10.1086\/311857",
+            "volume":"512",
+            "author":"D. Kirkman",
+            "year":"1999",
+            "unstructured":"Kirkman, D., Tytler, D. 1999,Astrophys. J.,512, L5.",
+            "journal-title":"Astrophys. J."
+        },
+        {
+            "key":"BF02702259_CR18",
+            "doi-asserted-by":"crossref",
+            "first-page":"297",
+            "DOI":"10.1093\/mnras\/279.1.197",
+            "volume":"279",
+            "author":"V. P. Kulkarni",
+            "year":"1996",
+            "unstructured":"Kulkarni, V. P., Huang, K., Green, R. F., Bechtold, J., Welty, D. E., York, D. G. 1996,Mon. Not. R. astr. Soc,279, 297.",
+            "journal-title":"Mon. Not. R. astr. Soc"
+        },
+        {
+            "key":"BF02702259_CR19",
+            "doi-asserted-by":"crossref",
+            "first-page":"475",
+            "DOI":"10.1086\/192373",
+            "volume":"107",
+            "author":"L. Lu",
+            "year":"1996",
+            "unstructured":"Lu, L., Sargent, W. L. W., Barlow, T. A., Churchill, C. W., Vogt, S. S. 1996,Astrophys. J. Suppl,107, 475.",
+            "journal-title":"Astrophys. J. Suppl"
+        },
+        {
+            "key":"BF02702259_CR20",
+            "doi-asserted-by":"crossref",
+            "first-page":"551",
+            "DOI":"10.1086\/176751",
+            "volume":"457",
+            "author":"P. Madau",
+            "year":"1996",
+            "unstructured":"Madau, P., Shull, J. M. 1996,Astrophys. J.,457, 551.",
+            "journal-title":"Astrophys. J."
+        },
+        {
+            "key":"BF02702259_CR21",
+            "doi-asserted-by":"crossref",
+            "first-page":"40",
+            "DOI":"10.1086\/164663",
+            "volume":"310",
+            "author":"S. L. Morris",
+            "year":"1986",
+            "unstructured":"Morris, S. L., Weymann, R. J., Foltz, C. B., Turnshek, D. A., Shectrnan, S., Price, S., Bonson, J. A. 1986,Astrophys. J.,310, 40.",
+            "journal-title":"Astrophys. J."
+        },
+        {
+            "key":"BF02702259_CR22",
+            "doi-asserted-by":"crossref",
+            "first-page":"79",
+            "DOI":"10.1086\/174041",
+            "volume":"426",
+            "author":"M. Pettini",
+            "year":"1994",
+            "unstructured":"Pettini, M., Smith, L. J., Hunstead, R. W., King, D. L. 1994,Astrophys. J.,426, 79.",
+            "journal-title":"Astrophys. J."
+        },
+        {
+            "key":"BF02702259_CR23",
+            "doi-asserted-by":"crossref",
+            "first-page":"L71",
+            "DOI":"10.1086\/311849",
+            "volume":"511",
+            "author":"J. X. Prochaska",
+            "year":"1999",
+            "unstructured":"Prochaska, J. X. 1999,Astrophys. J.,511, L71.",
+            "journal-title":"Astrophys. J."
+        },
+        {
+            "key":"BF02702259_CR24",
+            "doi-asserted-by":"crossref",
+            "first-page":"369",
+            "DOI":"10.1086\/313200",
+            "volume":"121",
+            "author":"J. X. Prochaska",
+            "year":"1999",
+            "unstructured":"Prochaska, J. X., Wolfe, A. M. 1999,Astrophys. J. Suppl,121, 369.",
+            "journal-title":"Astrophys. J. Suppl"
+        },
+        {
+            "key":"BF02702259_CR25",
+            "doi-asserted-by":"crossref",
+            "first-page":"576",
+            "DOI":"10.1086\/306894",
+            "volume":"513",
+            "author":"G. T. Richards",
+            "year":"1999",
+            "unstructured":"Richards, G. T., York, D. G., Yanny, B., Kollgaard, R. I., Laurent-Muehleisen Vanden Berk D. E. 1999,Astrophys. J.,513, 576.",
+            "journal-title":"Astrophys. J."
+        },
+        {
+            "key":"BF02702259_CR26",
+            "doi-asserted-by":"crossref",
+            "first-page":"81",
+            "DOI":"10.1093\/mnras\/271.1.81",
+            "volume":"271",
+            "author":"R. Srianand",
+            "year":"1994",
+            "unstructured":"Srianand, R., Khare, P. 1994,Mon. Not. R. astr. Soc,271, 81.",
+            "journal-title":"Mon. Not. R. astr. Soc"
+        },
+        {
+            "key":"BF02702259_CR27",
+            "doi-asserted-by":"crossref",
+            "first-page":"643",
+            "DOI":"10.1086\/175636",
+            "volume":"444",
+            "author":"R. Srianand",
+            "year":"1995",
+            "unstructured":"Srianand, R., Khare, P. 1995,Astrophys. J.,444, 643.",
+            "journal-title":"Astrophys. J."
+        },
+        {
+            "key":"BF02702259_CR28",
+            "doi-asserted-by":"crossref",
+            "first-page":"891",
+            "DOI":"10.1086\/157024",
+            "volume":"229",
+            "author":"P. J. Young",
+            "year":"1979",
+            "unstructured":"Young, P. J., Sargent, W. L. W, Boksenberg, A., Carswell, R. F., Whelan, J. A. 1979,Astrophys. J.,229, 891.",
+            "journal-title":"Astrophys. J."
+        }
+    ],
+    "container-title":"Journal of Astrophysics and Astronomy",
+    "original-title":[
+
+    ],
+    "language":"en",
+    "link":[
+        {
+            "URL":"http:\/\/link.springer.com\/content\/pdf\/10.1007\/BF02702259.pdf",
+            "content-type":"application\/pdf",
+            "content-version":"vor",
+            "intended-application":"text-mining"
+        },
+        {
+            "URL":"http:\/\/link.springer.com\/article\/10.1007\/BF02702259\/fulltext.html",
+            "content-type":"text\/html",
+            "content-version":"vor",
+            "intended-application":"text-mining"
+        },
+        {
+            "URL":"http:\/\/link.springer.com\/content\/pdf\/10.1007\/BF02702259",
+            "content-type":"unspecified",
+            "content-version":"vor",
+            "intended-application":"similarity-checking"
+        }
+    ],
+    "deposited":{
+        "date-parts":[
+            [
+                2019,
+                5,
+                18
+            ]
+        ],
+        "date-time":"2019-05-18T23:53:54Z",
+        "timestamp":1558223634000
+    },
+    "score":1.0,
+    "subtitle":[
+
+    ],
+    "short-title":[
+
+    ],
+    "issued":{
+        "date-parts":[
+            [
+                2000,
+                6
+            ]
+        ]
+    },
+    "references-count":28,
+    "journal-issue":{
+        "published-print":{
+            "date-parts":[
+                [
+                    2000,
+                    6
+                ]
+            ]
+        },
+        "issue":"1-2"
+    },
+    "alternative-id":[
+        "BF02702259"
+    ],
+    "URL":"http:\/\/dx.doi.org\/10.1007\/BF02702259",
+    "relation":{
+        "cites":[
+
+        ]
+    },
+    "ISSN":[
+        "0250-6335",
+        "0973-7758"
+    ],
+    "subject":[
+        "Space and Planetary Science",
+        "Astronomy and Astrophysics"
+    ],
+    "container-title-short":"J Astrophys Astron"
+}

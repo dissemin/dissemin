@@ -1,9 +1,7 @@
 import os
-import pytest
 
 from lxml import etree
 
-@pytest.mark.usefixtures('dissemin_xsd_1_0')
 class TestDisseminXSD(object):
     '''
     Tests for the Dissemin XSD scheme. Validates against w3c xml schema
@@ -20,28 +18,15 @@ class TestDisseminXSD(object):
         xmlschema.assertValid(dissemin_xsd)
 
 
-@pytest.mark.usefixtures('dissemin_xml_1_0', 'dissemin_xsd_1_0')
 class TestDisseminXML_1_0(object):
     '''
     Validates XML against XSD to make sure that XSD validates as intended.
     '''
 
-    def test_all_elements(self):
+    @staticmethod
+    def test_all_elements(dissemin_xml_1_0, dissemin_xsd_1_0):
         '''
         Tests if the document with all elements and attributes is valid.
         '''
 
-        self.dissemin_schema.assertValid(self.dissemin_xml)
-    
-    def test_optional_fields(self):
-        '''
-        The following elements are optional: orcid, isContributor, identicalInstitution, licenseURI, licenseShortName
-        '''
-
-        for i in range(3):
-            self.dissemin_xml[0].remove(self.dissemin_xml[0][4])
-        for i in range(2):
-            self.dissemin_xml[1][0].remove(self.dissemin_xml[1][0][1])
-        self.dissemin_schema.assertValid(self.dissemin_xml)
-
-
+        dissemin_xsd_1_0.assertValid(dissemin_xml_1_0)

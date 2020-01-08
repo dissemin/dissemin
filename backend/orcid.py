@@ -19,18 +19,14 @@
 #
 
 
-
-#from requests.exceptions import RequestException
-#import json, requests
-import os
-import os.path as path
-import json
 import logging
-from backend.crossref import convert_to_name_pair
-from backend.crossref import CrossRefAPI
-from backend.crossref import fetch_dois
-from backend.papersource import PaperSource
+import json
+import os
+
 from django.conf import settings
+
+from backend.citeproc import CrossRef
+from backend.papersource import PaperSource
 from notification.api import add_notification_for
 from notification.api import delete_notification_per_tag
 import notification.levels as notification_levels
@@ -38,20 +34,63 @@ from papers.baremodels import BareOaiRecord
 from papers.baremodels import BarePaper
 from papers.errors import MetadataSourceException
 from papers.models import OaiSource
+from papers.models import OaiRecord
 from papers.models import Researcher
+from papers.models import Paper
 from papers.orcid import OrcidProfile
 from papers.orcid import affiliate_author_with_orcid
 from papers.utils import validate_orcid
+from search import SearchQuerySet
 
 logger = logging.getLogger('dissemin.' + __name__)
 
 ### Paper fetching ####
 
 class OrcidPaperSource(PaperSource):
-    
+
     def __init__(self, *args, **kwargs):
         super(OrcidPaperSource, self).__init__(*args, **kwargs)
         self.oai_source = OaiSource.objects.get(identifier='orcid')
+
+    def _enhance_paper(self, paper, ref_name, orcid_id):
+        """
+        Enahnces a paper if possible
+        This means: Adding researcher and OaiRecord
+        :params paper: The paper
+        :params ref_name: Reference name to associate orcid
+        :params orcid_id: orcid
+        """
+        if paper is not None:
+            # We try to find the author of the given orcid_id
+            # If this changes the orcid list of the paper, we do change, else not
+            orcids = affiliate_author_with_orcid(ref_name, orcid_id, paper.author_name_pairs())
+            for author in paper.authors_list:
+                if author['orcid'] == orcid_id:
+                    author['orcid'] = None
+                    author['researcher_id'] = None
+
+            orcids = [new or old for (new, old) in zip(orcids, paper.orcids())]
+            if orcids != paper.orcids:
+                for author, orcid in zip(paper.authors_list, orcids):
+                    author['orcid'] = orcid
+                paper = self.associate_researchers(paper)
+                paper.save()
+                paper.update_index()
+
+            try:
+                OaiRecord.objects.get(
+                    identifier=self._oai_id_for_doi(orcid_id, paper.get_doi().lower()),
+                    source=self.oai_source,
+                )
+            except OaiRecord.DoesNotExist:
+                OaiRecord.objects.create(
+                    about=paper,
+                    identifier=self._oai_id_for_doi(orcid_id, paper.get_doi().lower()),
+                    pubtype=paper.doctype,
+                    splash_url='https://{}/{}'.format(settings.ORCID_BASE_DOMAIN, orcid_id),
+                    source=self.oai_source,
+                )
+        return paper
 
     def fetch_papers(self, researcher, profile=None):
         if not researcher:
@@ -84,50 +123,27 @@ class OrcidPaperSource(PaperSource):
 
         paper.add_oairecord(record)
 
-        return paper
+        try:
+            p = Paper.from_bare(paper)
+            p = self.associate_researchers(p)
+            p.save()
+            p.update_index()
+        except ValueError:
+            p = None
 
-    def fetch_crossref_incrementally(self, cr_api, orcid_id):
-        # If we are using the ORCID sandbox, then do not look for papers from CrossRef
-        # as the ORCID ids they contain are production ORCID ids (not fake
-        # ones).
-        if settings.ORCID_BASE_DOMAIN != 'orcid.org':
-            return
+        return p
 
-        for metadata in cr_api.fetch_all_papers({'orcid': orcid_id}):
-            try:
-                paper = cr_api.save_doi_metadata(metadata)
-                if paper:
-                    yield True, paper
-                else:
-                    yield False, metadata
-            except ValueError:
-                logger.exception("Saving CrossRef record from ORCID with id %s failed" % orcid_id)
-    
     def _oai_id_for_doi(self, orcid_id, doi):
         return 'orcid:{}:{}'.format(orcid_id, doi)
 
-    def fetch_metadata_from_dois(self, cr_api, ref_name, orcid_id, dois):
-        doi_metadata = fetch_dois(dois)
-        for metadata in doi_metadata:
-            try:
-                authors = list(map(convert_to_name_pair, metadata['author']))
-                orcids = affiliate_author_with_orcid(
-                    ref_name, orcid_id, authors)
-                paper = cr_api.save_doi_metadata(metadata, orcids)
-                if not paper:
-                    yield False, metadata
-                    continue
-
-                record = BareOaiRecord(
-                        source=self.oai_source,
-                        identifier=self._oai_id_for_doi(orcid_id, metadata['DOI']),
-                        splash_url='https://%s/%s' % (
-                            settings.ORCID_BASE_DOMAIN, orcid_id),
-                        pubtype=paper.doctype)
-                paper.add_oairecord(record)
-                yield True, paper
-            except (KeyError, ValueError, TypeError):
-                yield False, metadata
+    def fetch_metadata_from_dois(self, ref_name, orcid_id, dois):
+        crossref_papers = CrossRef.fetch_batch(dois)
+        for paper, doi in zip(crossref_papers, dois):
+            if paper is None:
+                # We try with DOI resolver
+                # This functions does check first on our database if we have an entry
+                Paper.create_by_doi(doi)
+            yield self._enhance_paper(paper, ref_name, orcid_id)
 
     def warn_user_of_ignored_papers(self, ignored_papers):
         if self.researcher is None:
@@ -147,6 +163,29 @@ class OrcidPaperSource(PaperSource):
                                     'backend_orcid'
                                     )
 
+    def link_existing_papers(self, researcher):
+        """
+        Search for papers which bear the ORCID id of the researcher,
+        but which are not linked to the researcher itself, and updates them
+        to link to the researcher.
+        """
+        queryset = SearchQuerySet().models(Paper).filter(orcids=researcher.orcid).load_all()
+        papers_to_update = []
+        for search_result in queryset:
+            paper = search_result.object
+            if researcher.id not in paper.researcher_ids:
+                new_authors = paper.authors
+                for author in new_authors:
+                    if author.orcid == researcher.orcid:
+                        author.researcher_id = researcher.id
+                paper.authors_list = [author.serialize() for author in new_authors]
+                papers_to_update.append(paper)
+                paper.update_index()
+
+        if papers_to_update:
+            Paper.objects.bulk_update(papers_to_update, ['authors_list'])
+
+
     def fetch_orcid_records(self, orcid_identifier, profile=None, use_doi=True):
         """
         Queries ORCiD to retrieve the publications associated with a given ORCiD.
@@ -157,8 +196,6 @@ class OrcidPaperSource(PaperSource):
         :returns: a generator, where all the papers found are yielded. (some of them could be in
                 free form, hence not imported)
         """
-        cr_api = CrossRefAPI()
-
         # Cleanup iD:
         orcid_id = validate_orcid(orcid_identifier)
         if orcid_id is None:
@@ -190,17 +227,17 @@ class OrcidPaperSource(PaperSource):
         put_codes = []
         for summary in profile.work_summaries:
             if summary.doi and use_doi:
-                dois_and_putcodes.append((summary.doi, summary.put_code))
+                dois_and_putcodes.append((summary.doi.lower(), summary.put_code))
             else:
                 put_codes.append(summary.put_code)
 
-        # 1st attempt with DOIs and CrossRef
+        # 1st attempt with DOIs
         if use_doi:
             # Let's grab papers with DOIs found in our ORCiD profile.
             dois = [doi for doi, put_code in dois_and_putcodes]
-            for idx, (success, paper_or_metadata) in enumerate(self.fetch_metadata_from_dois(cr_api, ref_name, orcid_id, dois)):
-                if success:
-                    yield paper_or_metadata # We know that this is a paper
+            for idx, paper in enumerate(self.fetch_metadata_from_dois(ref_name, orcid_id, dois)):
+                if paper is not None:
+                    yield paper
                 else:
                     put_codes.append(dois_and_putcodes[idx][1])
 
@@ -228,26 +265,24 @@ class OrcidPaperSource(PaperSource):
     def fetch_and_save(self, researcher, profile=None):
         """
         Fetch papers and save them to the database.
-
-        :param incremental: When set to true, papers are clustered
-            and commited one after the other. This is useful when
-            papers are fetched on the fly for an user.
         """
         count = 0
-        for p in self.fetch_papers(researcher, profile=profile):
-            try:
-                self.save_paper(p, researcher)
-            except ValueError:
-                continue
-            if self.max_results is not None and count >= self.max_results:
-                break
+        if not researcher:
+            return
+        if researcher.orcid:
+            if researcher.empty_orcid_profile == None:
+                self.update_empty_orcid(researcher, True)
 
-            count += 1
+            for p in self.fetch_orcid_records(researcher.orcid, profile=profile):
+                if self.max_results is not None and count >= self.max_results:
+                    break
+
+                count += 1
 
 
     def bulk_import(self, directory, fetch_papers=True, use_doi=False):
         """
-        Bulk-imports ORCID profiles from a dmup
+        Bulk-imports ORCID profiles from a dump
         (warning: this still uses our DOI cache).
         The directory should contain json versions
         of orcid profiles, as in the official ORCID
@@ -261,7 +296,7 @@ class OrcidPaperSource(PaperSource):
                 #if not seen:
                 #    continue
 
-                with open(path.join(root, fname), 'r') as f:
+                with open(os.path.join(root, fname), 'r') as f:
                     try:
                         profile = json.load(f)
                         orcid = profile['orcid-profile'][

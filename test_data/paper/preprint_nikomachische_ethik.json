@@ -1,0 +1,20 @@
+{
+    "title":"Nikomachische Ethik",
+    "fingerprint":"nikomachische-ethik-artistoteles",
+    "pubdate":"0344-01-01",
+    "authors_list":[
+        {
+            "name":{
+                "full":"aristoteles",
+                "first":"Aristoteles",
+                "last":"Stageira"
+            },
+            "orcid": null,
+            "affiliation":null,
+            "researcher_id":null
+        }
+    ],
+    "visible":true,
+    "doctype":"preprint",
+    "oa_status":"OK"
+}

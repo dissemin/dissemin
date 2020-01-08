@@ -1,0 +1,657 @@
+{
+    "indexed":{
+        "date-parts":[
+            [
+                2019,
+                9,
+                6
+            ]
+        ],
+        "date-time":"2019-09-06T13:07:29Z",
+        "timestamp":1567775249448
+    },
+    "reference-count":41,
+    "publisher":"Springer Nature",
+    "issue":"4",
+    "license":[
+        {
+            "URL":"http:\/\/creativecommons.org\/licenses\/by\/4.0",
+            "start":{
+                "date-parts":[
+                    [
+                        2015,
+                        10,
+                        28
+                    ]
+                ],
+                "date-time":"2015-10-28T00:00:00Z",
+                "timestamp":1445990400000
+            },
+            "delay-in-days":0,
+            "content-version":"unspecified"
+        }
+    ],
+    "funder":[
+        {
+            "DOI":"10.13039\/501100000781",
+            "name":"European Research Council",
+            "doi-asserted-by":"publisher",
+            "award":[
+                "279519"
+            ]
+        },
+        {
+            "name":"Sciex",
+            "award":[
+                "12.251"
+            ]
+        },
+        {
+            "name":"7th Framework Programme - Capacities",
+            "award":[
+                "FP7- REGPOT-2011-1"
+            ]
+        }
+    ],
+    "content-domain":{
+        "domain":[
+            "link.springer.com"
+        ],
+        "crossmark-restriction":false
+    },
+    "published-print":{
+        "date-parts":[
+            [
+                2015,
+                12
+            ]
+        ]
+    },
+    "DOI":"10.1007\/s10858-015-9994-8",
+    "type":"article-journal",
+    "created":{
+        "date-parts":[
+            [
+                2015,
+                10,
+                28
+            ]
+        ],
+        "date-time":"2015-10-28T07:27:42Z",
+        "timestamp":1446017262000
+    },
+    "page":"353-365",
+    "update-policy":"http:\/\/dx.doi.org\/10.1007\/springer_crossmark_policy",
+    "source":"Crossref",
+    "is-referenced-by-count":2,
+    "title":"Cross-correlated relaxation measurements under adiabatic sweeps: determination of local order in proteins",
+    "prefix":"10.1007",
+    "volume":"63",
+    "author":[
+        {
+            "given":"Pavel",
+            "family":"Kade\u0159\u00e1vek",
+            "sequence":"first",
+            "affiliation":[
+
+            ]
+        },
+        {
+            "given":"Sarina",
+            "family":"Grutsch",
+            "sequence":"additional",
+            "affiliation":[
+
+            ]
+        },
+        {
+            "given":"Nicola",
+            "family":"Salvi",
+            "sequence":"additional",
+            "affiliation":[
+
+            ]
+        },
+        {
+            "given":"Martin",
+            "family":"Tollinger",
+            "sequence":"additional",
+            "affiliation":[
+
+            ]
+        },
+        {
+            "given":"Luk\u00e1\u0161",
+            "family":"\u017d\u00eddek",
+            "sequence":"additional",
+            "affiliation":[
+
+            ]
+        },
+        {
+            "given":"Geoffrey",
+            "family":"Bodenhausen",
+            "sequence":"additional",
+            "affiliation":[
+
+            ]
+        },
+        {
+            "given":"Fabien",
+            "family":"Ferrage",
+            "sequence":"additional",
+            "affiliation":[
+
+            ]
+        }
+    ],
+    "member":"297",
+    "published-online":{
+        "date-parts":[
+            [
+                2015,
+                10,
+                28
+            ]
+        ]
+    },
+    "reference":[
+        {
+            "key":"9994_CR1",
+            "author":"A Abragam",
+            "year":"1961",
+            "unstructured":"Abragam A (1961) The principles of nuclear magnetism. Clarendon Press, Oxford",
+            "volume-title":"The principles of nuclear magnetism"
+        },
+        {
+            "key":"9994_CR2",
+            "doi-asserted-by":"crossref",
+            "first-page":"1480",
+            "DOI":"10.1021\/ja910098s",
+            "volume":"132",
+            "author":"R Auer",
+            "year":"2010",
+            "unstructured":"Auer R, Kloiber K, Vavrinska A, Geist L, Coudevylle N, Konrat R (2010) Pharmacophore mapping via cross-relaxation during adiabatic fast passage. J Am Chem Soc 132:1480\u20131481. doi: 10.1021\/ja910098s",
+            "journal-title":"J Am Chem Soc"
+        },
+        {
+            "key":"9994_CR3",
+            "doi-asserted-by":"crossref",
+            "first-page":"35",
+            "DOI":"10.1007\/s10858-011-9539-8",
+            "volume":"51",
+            "author":"R Auer",
+            "year":"2011",
+            "unstructured":"Auer R, Tollinger M, Kuprov I, Konrat R, Kloiber K (2011) Mathematical treatment of adiabatic fast passage pulses for the computation of nuclear spin relaxation rates in proteins with conformational exchange. J Biomol NMR 51:35\u201347. doi: 10.1007\/s10858-011-9539-8",
+            "journal-title":"J Biomol NMR"
+        },
+        {
+            "key":"9994_CR4",
+            "doi-asserted-by":"crossref",
+            "first-page":"293",
+            "DOI":"10.1006\/jmra.1993.1107",
+            "volume":"102",
+            "author":"JM B\u00f6hlen",
+            "year":"1993",
+            "unstructured":"B\u00f6hlen JM, Bodenhausen G (1993) Experimental aspects of chirp NMR spectroscopy. J Magn Reson Ser A 102:293\u2013301. doi: 10.1006\/jmra.1993.1107",
+            "journal-title":"J Magn Reson Ser A"
+        },
+        {
+            "key":"9994_CR5",
+            "first-page":"183",
+            "volume":"90",
+            "author":"JM B\u00f6hlen",
+            "year":"1990",
+            "unstructured":"B\u00f6hlen JM, Burghardt I, Rey M, Bodenhausen G (1990) Frequency modulated \u201cChirp\u201d pulses for broadband inversion recovery in magnetic resonance. J Magn Reson 90:183\u2013191. doi: 10.1016\/0022-2364(90)90377-L",
+            "journal-title":"J Magn Reson"
+        },
+        {
+            "key":"9994_CR6",
+            "doi-asserted-by":"crossref",
+            "first-page":"1434",
+            "DOI":"10.1110\/ps.033803.107",
+            "volume":"17",
+            "author":"RL Croke",
+            "year":"2005",
+            "unstructured":"Croke RL, Sallum CO, Watson E, Watt ED, Alexandrescu AT (2005) Hydrogen exchange of monomeric $$\\alpha$$ \u03b1 -synuclein shows unfolded structure persists at physiological temperature and is independent of molecular crowding in Escherichia coli. Protein Sci. 17:1434\u20131445. doi: 10.1110\/ps.033803.107",
+            "journal-title":"Protein Sci."
+        },
+        {
+            "key":"9994_CR7",
+            "doi-asserted-by":"crossref",
+            "first-page":"277",
+            "DOI":"10.1007\/BF00197809",
+            "volume":"6",
+            "author":"F Delaglio",
+            "year":"1995",
+            "unstructured":"Delaglio F, Grzesiek S, Vuister GW, Zhu G, Pfeifer J, Bax A (1995) NMRPipe: a multidimensional spectral processing system based on UNIX pipes. J Biomol NMR 6:277\u2013293. doi: 10.1007\/BF00197809",
+            "journal-title":"J Biomol NMR"
+        },
+        {
+            "key":"9994_CR8",
+            "author":"JW Eaton",
+            "year":"2009",
+            "unstructured":"Eaton JW, Bateman D, Hauberg S (2009) GNU Octave version 3.0.1 manual: a high-level interactive language for numerical computations. CreateSpace Independent Publishing Platform, Seattle",
+            "volume-title":"GNU Octave version 3.0.1 manual: a high-level interactive language for numerical computations"
+        },
+        {
+            "key":"9994_CR9",
+            "doi-asserted-by":"crossref",
+            "first-page":"153",
+            "DOI":"10.1007\/BF00211779",
+            "volume":"6",
+            "author":"NA Farrow",
+            "year":"1995",
+            "unstructured":"Farrow NA, Zhang O, Szabo A, Torchia DA, Kay LE (1995) Spectral density function mapping using $$^{15}\\text{N}$$ 15 N relaxation data exclusively. J Biomol NMR 6:153\u2013162",
+            "journal-title":"J Biomol NMR"
+        },
+        {
+            "key":"9994_CR10",
+            "doi-asserted-by":"crossref",
+            "first-page":"6048",
+            "DOI":"10.1021\/ja809526q",
+            "volume":"131",
+            "author":"F Ferrage",
+            "year":"2009",
+            "unstructured":"Ferrage F, Cowburn D, Ghose R (2009) Accurate sampling of high frequency motions in proteins by steady-state $$^{15}\\text{N}{}^{1}\\text{H}$$ 15 N 1 H nuclear Overhauser effect measurements in the presence of cross-correlated relaxation. J Am Chem Soc 131:6048\u20136049. doi: 10.1021\/ja809526q",
+            "journal-title":"J Am Chem Soc"
+        },
+        {
+            "key":"9994_CR12",
+            "doi-asserted-by":"crossref",
+            "first-page":"1281",
+            "DOI":"10.1080\/00268979909483072",
+            "volume":"96",
+            "author":"R Ghose",
+            "year":"1999",
+            "unstructured":"Ghose R, Eykyn TR, Bodenhausen G (1999) Average Liouvillian theory revisited: cross-correlated relaxation between chemical shift anisotropy and dipolar couplings in the rotating frame in nuclear magnetic resonance. Mol Phys 96:1281\u20131288",
+            "journal-title":"Mol Phys"
+        },
+        {
+            "key":"9994_CR13",
+            "doi-asserted-by":"crossref",
+            "first-page":"152",
+            "DOI":"10.1002\/(SICI)1099-0534(2000)12:3<152::AID-CMR4>3.0.CO;2-P",
+            "volume":"12",
+            "author":"R Ghose",
+            "year":"2000",
+            "unstructured":"Ghose R (2000) Average Liouvillian theory in nuclear magnetic resonance - Principles, properties, and applications. Concepts Magn Reson 12:152\u2013172",
+            "journal-title":"Concepts Magn Reson"
+        },
+        {
+            "key":"9994_CR14",
+            "unstructured":"Goddard TD, Kneller DG (2006) Sparky. UCSF, San Francisco"
+        },
+        {
+            "issue":"224",
+            "key":"9994_CR15",
+            "first-page":"507",
+            "volume":"131",
+            "author":"B Halle",
+            "year":"2009",
+            "unstructured":"Halle B (2009) The physical basis of model-free analysis of NMR relaxation data from proteins and complex fluids. J Chem Phys 131(224):507. doi: 10.1063\/1.3269991",
+            "journal-title":"J Chem Phys"
+        },
+        {
+            "key":"9994_CR16",
+            "doi-asserted-by":"crossref",
+            "first-page":"500",
+            "DOI":"10.1021\/ja00393a004",
+            "volume":"103",
+            "author":"B Halle",
+            "year":"1981",
+            "unstructured":"Halle B, Andersson T, Fors\u00e9n S, Lindman B (1981) Protein hydration from water oxygen-17 magnetic relaxation. J Am Chem Soc 103:500\u2013508. doi: 10.1021\/ja00393a004",
+            "journal-title":"J Am Chem Soc"
+        },
+        {
+            "key":"9994_CR17",
+            "doi-asserted-by":"crossref",
+            "first-page":"179",
+            "DOI":"10.1016\/j.jmr.2010.11.008",
+            "volume":"208",
+            "author":"HJ Hogben",
+            "year":"2011",
+            "unstructured":"Hogben HJ, Krzystyniak M, Charnock GTP, Hore PJ, Kuprov I (2011) Spinach A software library for simulation of spin dynamics in large spin systems. J Magn Reson 208:179\u2013194. doi: 10.1016\/j.jmr.2010.11.008",
+            "journal-title":"J Magn Reson"
+        },
+        {
+            "key":"9994_CR18",
+            "doi-asserted-by":"crossref",
+            "first-page":"3162",
+            "DOI":"10.1021\/bi00010a005",
+            "volume":"34",
+            "author":"R Ishima",
+            "year":"1995",
+            "unstructured":"Ishima R, Nagayama K (1995a) Protein backbone dynamics revealed by quasi spectral density function analysis of amide N-15 nuclei. Biochemistry 34:3162\u20133171. doi: 10.1021\/bi00010a005",
+            "journal-title":"Biochemistry"
+        },
+        {
+            "key":"9994_CR19",
+            "doi-asserted-by":"crossref",
+            "first-page":"73",
+            "DOI":"10.1006\/jmrb.1995.1104",
+            "volume":"108",
+            "author":"R Ishima",
+            "year":"1995",
+            "unstructured":"Ishima R, Nagayama K (1995b) Quasi-spectral-density function analysis for nitrogen-15 nuclei in proteins. J Magn Reson Ser B 108:73\u201376. doi: 10.1006\/jmrb.1995.1104",
+            "journal-title":"J Magn Reson Ser B"
+        },
+        {
+            "key":"9994_CR20",
+            "doi-asserted-by":"crossref",
+            "first-page":"193",
+            "DOI":"10.1007\/s10858-014-9816-4",
+            "volume":"58",
+            "author":"P Kade\u0159\u00e1vek",
+            "year":"2014",
+            "unstructured":"Kade\u0159\u00e1vek P, Zapletal V, Rabatinov\u00e1 A, Kr\u00e1sn\u00fd L, Sklen\u00e1\u0159 V, \u017d\u00eddek L (2014) Spectral density mapping protocols for analysis of molecular motions in disordered proteins. J Biomol NMR 58:193\u2013207. doi: 10.1007\/s10858-014-9816-4",
+            "journal-title":"J Biomol NMR"
+        },
+        {
+            "key":"9994_CR21",
+            "doi-asserted-by":"crossref",
+            "first-page":"213",
+            "DOI":"10.1023\/A:1008324721356",
+            "volume":"13",
+            "author":"R Konrat",
+            "year":"1999",
+            "unstructured":"Konrat R, Tollinger M (1999) Heteronuclear relaxation in time-dependent spin systems: $$^{15}\\text{N}$$ 15 N - $$\\text{T}_{1\\rho }$$ T 1 \u03c1 dispersion during adiabatic fast passage. J Biomol NMR 13:213\u2013221. doi: 10.1023\/A:1008324721356",
+            "journal-title":"J Biomol NMR"
+        },
+        {
+            "key":"9994_CR22",
+            "doi-asserted-by":"crossref",
+            "first-page":"197",
+            "DOI":"10.1016\/S0079-6565(00)00028-5",
+            "volume":"38",
+            "author":"DM Korzhnev",
+            "year":"2001",
+            "unstructured":"Korzhnev DM, Billeter M, Arseniev AS, Orekhov VY (2001) NMR studies of Brownian tumbling and internal motions in proteins. Prog Nucl Magn Reson Spectrosc 38:197\u2013266. doi: 10.1016\/S0079-6565(00)00028-5",
+            "journal-title":"Prog Nucl Magn Reson Spectrosc"
+        },
+        {
+            "key":"9994_CR23",
+            "doi-asserted-by":"crossref",
+            "first-page":"7905",
+            "DOI":"10.1021\/ja980832l",
+            "volume":"120",
+            "author":"CD Kroenke",
+            "year":"1998",
+            "unstructured":"Kroenke CD, Loria JP, Lee LK, Rance M, Palmer AG (1998) Longitudinal and transverse $$^{1}\\text{H}$$ 1 H - $$^{15}\\text{N}$$ 15 N dipolar\/ $$^{15}\\text{N}$$ 15 N chemical shift anisotropy relaxation interference: Unambiguous determination of rotational diffusion tensors and chemical exchange effects in biological macromolecules. J Am Chem Soc 120:7905\u20137915. doi: 10.1021\/ja980832l",
+            "journal-title":"J Am Chem Soc"
+        },
+        {
+            "key":"9994_CR24",
+            "doi-asserted-by":"crossref",
+            "first-page":"273",
+            "DOI":"10.1006\/jmra.1995.1179",
+            "volume":"115",
+            "author":"E Kup\u010de",
+            "year":"1995",
+            "unstructured":"Kup\u010de E, Freeman R (1995) Adiabatic pulses for wide-band inversion and broad-band decoupling. J Magn Reson Ser A 115:273\u2013276. doi: 10.1006\/jmra.1995.1179",
+            "journal-title":"J Magn Reson Ser A"
+        },
+        {
+            "key":"9994_CR25",
+            "doi-asserted-by":"crossref",
+            "first-page":"209",
+            "DOI":"10.1007\/s10858-012-9626-5",
+            "volume":"53",
+            "author":"NA Lakomek",
+            "year":"2012",
+            "unstructured":"Lakomek NA, Ying J, Bax A (2012) Measurement of $$^{15}\\text{N}$$ 15 N relaxation rates in perdeuterated proteins by TROSY-based methods. J Biomol NMR 53:209\u2013221. doi: 10.1007\/s10858-012-9626-5",
+            "journal-title":"J Biomol NMR"
+        },
+        {
+            "key":"9994_CR26",
+            "doi-asserted-by":"crossref",
+            "first-page":"3124",
+            "DOI":"10.1103\/PhysRevLett.69.3124",
+            "volume":"69",
+            "author":"MH Levitt",
+            "year":"1992",
+            "unstructured":"Levitt MH, Bari LD (1992) Steady state in magnetic-resonance pulse experiments. Phys Rev Lett 69:3124\u20133127. doi: 10.1103\/PhysRevLett.69.3124",
+            "journal-title":"Phys Rev Lett"
+        },
+        {
+            "key":"9994_CR27",
+            "doi-asserted-by":"crossref",
+            "first-page":"4546",
+            "DOI":"10.1021\/ja00381a009",
+            "volume":"104",
+            "author":"G Lipari",
+            "year":"1982",
+            "unstructured":"Lipari G, Szabo A (1982a) Model-free approach to the interpretation of nuclear magnetic resonance relaxation in macromolecules 1. Theory and range of validity. J Am Chem Soc 104:4546\u20134559. doi: 10.1021\/ja00381a009",
+            "journal-title":"J Am Chem Soc"
+        },
+        {
+            "key":"9994_CR28",
+            "doi-asserted-by":"crossref",
+            "first-page":"4559",
+            "DOI":"10.1021\/ja00381a010",
+            "volume":"104",
+            "author":"G Lipari",
+            "year":"1982",
+            "unstructured":"Lipari G, Szabo A (1982b) Model-free approach to the interpretation of nuclear magnetic resonance relaxation in macromolecules 2. Analysis of experimental results. J Am Chem Soc 104:4559\u20134570. doi: 10.1021\/ja00381a010",
+            "journal-title":"J Am Chem Soc"
+        },
+        {
+            "key":"9994_CR29",
+            "doi-asserted-by":"crossref",
+            "first-page":"9979",
+            "DOI":"10.1021\/ja1038787",
+            "volume":"132",
+            "author":"S Mangia",
+            "year":"2010",
+            "unstructured":"Mangia S, Traaseth NJ, Veglia G, Garwood M, Michaeli S (2010) Probing slow protein dynamics by adiabatic $$R_{1\\rho }$$ R 1 \u03c1 and $$R_{2\\rho }$$ R 2 \u03c1 NMR experiments. J Am Chem Soc 132:9979\u20139981. doi: 10.1021\/ja1038787",
+            "journal-title":"J Am Chem Soc"
+        },
+        {
+            "key":"9994_CR30",
+            "unstructured":"MATLAB and statistics toolbox release R2014a, The MathWorks, Inc, Natick, Massachusetts, United States"
+        },
+        {
+            "key":"9994_CR31",
+            "doi-asserted-by":"crossref",
+            "first-page":"932",
+            "DOI":"10.1038\/nsb1101-932",
+            "volume":"8",
+            "author":"FAA Mulder",
+            "year":"2001",
+            "unstructured":"Mulder FAA, Mittermaier A, Hon B, Dahlquist FW (2001) Studying excited states of proteins by NMR spectroscopy. Nat Struct Biol 8:932\u2013935. doi: 10.1038\/nsb1101-932",
+            "journal-title":"Nat Struct Biol"
+        },
+        {
+            "key":"9994_CR32",
+            "doi-asserted-by":"crossref",
+            "first-page":"204",
+            "DOI":"10.1016\/S0076-6879(01)39315-1",
+            "volume":"339",
+            "author":"AG Palmer III",
+            "year":"2001",
+            "unstructured":"Palmer AG III, Kroenke CD, Loria JP (2001) Nuclear magnetic resonance methods for quantifying microsecond-to-millisecond motions in biological macromolecules. Methods Enzymol 339:204\u2013238",
+            "journal-title":"Methods Enzymol"
+        },
+        {
+            "key":"9994_CR33",
+            "doi-asserted-by":"crossref",
+            "first-page":"258",
+            "DOI":"10.1016\/S1090-7807(02)00190-8",
+            "volume":"161",
+            "author":"P Pelupessy",
+            "year":"2003",
+            "unstructured":"Pelupessy P, Espallargas GM, Bodenhausen G (2003) Symmetrical reconversion: measuring cross-correlation rates with enhanced accuracy. J Magn Res 161:258\u2013264. doi: 10.1016\/S1090-7807(02)00190-8",
+            "journal-title":"J Magn Res"
+        },
+        {
+            "key":"9994_CR34",
+            "doi-asserted-by":"crossref",
+            "first-page":"134508",
+            "DOI":"10.1063\/1.2715583",
+            "volume":"126",
+            "author":"P Pelupessy",
+            "year":"2007",
+            "unstructured":"Pelupessy P, Ferrage F, Bodenhausen G (2007) Accurate measurement of longitudinal cross-relaxation rates in nuclear magnetic resonance. J Chem Phys 126:134508. doi: 10.1063\/1.2715583",
+            "journal-title":"J Chem Phys"
+        },
+        {
+            "key":"9994_CR35",
+            "first-page":"308",
+            "volume":"98",
+            "author":"JW Peng",
+            "year":"1992",
+            "unstructured":"Peng JW, Wagner G (1992a) Mapping of spectral density-functions using heteronuclear NMR relaxation measurements. J Magn Reson 98:308\u2013332. doi: 10.1016\/0022-2364(92)90135-T",
+            "journal-title":"J Magn Reson"
+        },
+        {
+            "key":"9994_CR36",
+            "doi-asserted-by":"crossref",
+            "first-page":"8571",
+            "DOI":"10.1021\/bi00151a027",
+            "volume":"31",
+            "author":"JW Peng",
+            "year":"1992",
+            "unstructured":"Peng JW, Wagner G (1992b) Mapping of the spectral densities of N\u2013H bond motions in Eglin c using heteronuclear relaxation experiments. Biochemistry 31:8571\u20138586. doi: 10.1021\/bi00151a027",
+            "journal-title":"Biochemistry"
+        },
+        {
+            "key":"9994_CR37",
+            "doi-asserted-by":"crossref",
+            "first-page":"1",
+            "DOI":"10.1016\/B978-1-4832-3114-3.50007-6",
+            "volume":"1",
+            "author":"AG Redfield",
+            "year":"1965",
+            "unstructured":"Redfield AG (1965) The theory of relaxation processes. Adv Magn Reson 1:1\u201332",
+            "journal-title":"Adv Magn Reson"
+        },
+        {
+            "key":"9994_CR38",
+            "doi-asserted-by":"crossref",
+            "first-page":"726",
+            "DOI":"10.1016\/j.jmb.2008.05.040",
+            "volume":"380",
+            "author":"P Schanda",
+            "year":"2008",
+            "unstructured":"Schanda P, Brutscher B, Konrat R, Tollinger M (2008) Folding of the KIX domain: characterization of the equilibrium analog of a folding intermediate using $$^{15}\\text{N}\/{}^{13}\\text{C}$$ 15 N \/ 13 C relaxation dispersion and fast $$^{1}\\text{H}\/{}^2\\text{H}$$ 1 H \/ 2 H amide exchange NMR spectroscopy. J Mol Biol 380:726\u2013741. doi: 10.1016\/j.jmb.2008.05.040",
+            "journal-title":"J Mol Biol"
+        },
+        {
+            "key":"9994_CR39",
+            "doi-asserted-by":"crossref",
+            "first-page":"8885",
+            "DOI":"10.1021\/bi0607305",
+            "volume":"45",
+            "author":"M Tollinger",
+            "year":"2006",
+            "unstructured":"Tollinger M, Kloiber K, Agoston B, Dorigoni C, Lichtenecker R, Schmid W, Konrat R (2006) An isolated helix persists in a sparsely populated form of KIX under native conditions. Biochemistry 45:8885\u20138893. doi: 10.1021\/bi0607305",
+            "journal-title":"Biochemistry"
+        },
+        {
+            "key":"9994_CR40",
+            "doi-asserted-by":"crossref",
+            "first-page":"11",
+            "DOI":"10.1007\/s10858-006-9131-9",
+            "volume":"38",
+            "author":"ER Valentine",
+            "year":"2007",
+            "unstructured":"Valentine ER, Ferrage F, Massi F, Cowburn D, Palmer AG III (2007) Joint composite-rotation adiabatic-sweep isotope filtration. J Biomol NMR 38:11\u201322. doi: 10.1007\/s10858-006-9131-9",
+            "journal-title":"J Biomol NMR"
+        },
+        {
+            "key":"9994_CR41",
+            "first-page":"728",
+            "volume":"89",
+            "author":"R Wangsness",
+            "year":"1953",
+            "unstructured":"Wangsness R, Bloch F (1953) The dynamical theory of nuclear induction. Phys Rev Lett 89:728\u2013739. doi: 10.1103\/PhysRev.89.728",
+            "journal-title":"Phys Rev Lett"
+        },
+        {
+            "key":"9994_CR42",
+            "unstructured":"Wolfram Research Inc. (2012) Mathematica"
+        }
+    ],
+    "container-title":"Journal of Biomolecular NMR",
+    "original-title":[
+
+    ],
+    "language":"en",
+    "link":[
+        {
+            "URL":"http:\/\/link.springer.com\/content\/pdf\/10.1007\/s10858-015-9994-8.pdf",
+            "content-type":"application\/pdf",
+            "content-version":"vor",
+            "intended-application":"text-mining"
+        },
+        {
+            "URL":"http:\/\/link.springer.com\/article\/10.1007\/s10858-015-9994-8\/fulltext.html",
+            "content-type":"text\/html",
+            "content-version":"vor",
+            "intended-application":"text-mining"
+        },
+        {
+            "URL":"http:\/\/link.springer.com\/content\/pdf\/10.1007\/s10858-015-9994-8",
+            "content-type":"unspecified",
+            "content-version":"vor",
+            "intended-application":"similarity-checking"
+        }
+    ],
+    "deposited":{
+        "date-parts":[
+            [
+                2019,
+                3,
+                26
+            ]
+        ],
+        "date-time":"2019-03-26T19:06:24Z",
+        "timestamp":1553627184000
+    },
+    "score":1.0,
+    "subtitle":[
+
+    ],
+    "short-title":[
+
+    ],
+    "issued":{
+        "date-parts":[
+            [
+                2015,
+                10,
+                28
+            ]
+        ]
+    },
+    "references-count":41,
+    "journal-issue":{
+        "published-print":{
+            "date-parts":[
+                [
+                    2015,
+                    12
+                ]
+            ]
+        },
+        "issue":"4"
+    },
+    "alternative-id":[
+        "9994"
+    ],
+    "URL":"http:\/\/dx.doi.org\/10.1007\/s10858-015-9994-8",
+    "relation":{
+        "cites":[
+
+        ]
+    },
+    "ISSN":[
+        "0925-2738",
+        "1573-5001"
+    ],
+    "subject":[
+        "Spectroscopy",
+        "Biochemistry"
+    ],
+    "container-title-short":"J Biomol NMR"
+}

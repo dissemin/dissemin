@@ -62,3 +62,6 @@ dissemin_media/
 
 # API keys
 *_api_key
+
+# Static file from SASS
+tmp_static/

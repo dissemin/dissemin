@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mets:mets xmlns:mets="http://www.loc.gov/METS/" xmlns:ds="https://dissem.in/deposit/terms/" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mods="http://www.loc.gov/mods/v3">
+  <mets:metsHdr>
+    <mets:agent ROLE="CREATOR" TYPE="ORGANIZATION">
+      <mets:name>Dissemin</mets:name>
+    </mets:agent>
+  </mets:metsHdr>
+  <mets:dmdSec ID="d_dmd_1">
+    <mets:mdWrap MDTYPE="OTHER">
+      <mets:xmlData>
+        <mods:mods version="3.7">
+          <mods:relatedItem>
+            <mods:titleInfo>
+              <mods:title>Current Protocols in Molecular Biology</mods:title>
+            </mods:titleInfo>
+          </mods:relatedItem>
+          <mods:abstract>Chromatin Interaction Analysis using Paired-End Tag sequencing (ChIA-PET) is a technique developed for large-scale, de novo analysis of higher-order chromatin structures. Cells are treated with formaldehyde to cross-link chromatin interactions, DNA segments bound by protein factors are enriched by chromatin immunoprecipitation, and interacting DNA fragments are then captured by proximity ligation. The Paired-End Tag (PET) strategy is applied to the construction of ChIA-PET libraries, which are sequenced by high-throughput next-generation sequencing technologies. Finally, raw PET sequences are subjected to bioinformatics analysis, resulting in a genome-wide map of binding sites and chromatin interactions mediated by the protein factor under study. This unit describes ChIA-PET for genome-wide analysis of chromatin interactions in mammalian cells, with the application of Roche/454 and Illumina sequencing technologies. Curr. Protoc. Mol. Biol. 89:21.15.1-21.15.25. © 2010 by John Wiley &amp;amp; Sons, Inc.</mods:abstract>
+          <mods:originInfo>
+            <mods:dateIssued encoding="w3cdtf">2010-01-01</mods:dateIssued>
+            <mods:publisher>Wiley-Blackwell</mods:publisher>
+          </mods:originInfo>
+          <mods:identifier type="doi">10.1002/0471142727.mb2115s89</mods:identifier>
+          <mods:language>
+            <mods:languageTerm type="code" authority="rfc3066">en</mods:languageTerm>
+          </mods:language>
+          <mods:classification authority="ddc">570</mods:classification>
+          <mods:classification authority="ddc">610</mods:classification>
+          <mods:name type="personal">
+            <mods:namePart type="family">Fullwood</mods:namePart>
+            <mods:namePart type="given">Melissa J.</mods:namePart>
+          </mods:name>
+          <mods:name type="personal">
+            <mods:namePart type="family">Han</mods:namePart>
+            <mods:namePart type="given">Yuyuan</mods:namePart>
+          </mods:name>
+          <mods:name type="personal">
+            <mods:namePart type="family">Wei</mods:namePart>
+            <mods:namePart type="given">Chia-Lin</mods:namePart>
+          </mods:name>
+          <mods:name type="personal">
+            <mods:namePart type="family">Ruan</mods:namePart>
+            <mods:namePart type="given">Xiaoan</mods:namePart>
+          </mods:name>
+          <mods:name type="personal">
+            <mods:namePart type="family">Ruan</mods:namePart>
+            <mods:namePart type="given">Yijun</mods:namePart>
+          </mods:name>
+          <mods:titleInfo>
+            <mods:title>Chromatin Interaction Analysis Using Paired-End Tag Sequencing</mods:title>
+          </mods:titleInfo>
+          <mods:genre>reference-entry</mods:genre>
+        </mods:mods>
+      </mets:xmlData>
+    </mets:mdWrap>
+  </mets:dmdSec>
+  <mets:amdSec ID="d_amd_1">
+    <mets:rightsMD ID="d_rightsmd_1">
+      <mets:mdWrap MDTYPE="OTHER">
+        <mets:xmlData>
+          <ds:dissemin version="1.0">
+            <ds:depositor>
+              <ds:authentication>orcid</ds:authentication>
+              <ds:firstName>Gottfried</ds:firstName>
+              <ds:lastName>Leibniz</ds:lastName>
+              <ds:email>gottfried.leibniz@tib.eu</ds:email>
+              <ds:orcid>2543-2454-2345-234X</ds:orcid>
+              <ds:isContributor>false</ds:isContributor>
+            </ds:depositor>
+            <ds:publication>
+              <ds:license>
+                <ds:licenseName>Creative Commons Attribution 4.0 International (CC BY 4.0)</ds:licenseName>
+                <ds:licenseURI>https://creativecommons.org/licenses/by/4.0/</ds:licenseURI>
+                <ds:licenseTransmitId>cc_by-40</ds:licenseTransmitId>
+              </ds:license>
+              <ds:disseminId>18</ds:disseminId>
+            </ds:publication>
+          </ds:dissemin>
+        </mets:xmlData>
+      </mets:mdWrap>
+    </mets:rightsMD>
+  </mets:amdSec>
+  <mets:fileSec>
+    <mets:fileGrp>
+      <mets:file ID="d_file_1">
+        <mets:FLocat xlink:href="document.pdf" LOCTYPE="URL"/>
+      </mets:file>
+    </mets:fileGrp>
+  </mets:fileSec>
+  <mets:structMap>
+    <mets:div DMDID="d_dmd_1">
+      <mets:div>
+        <mets:fptr FILEID="d_file_1"/>
+      </mets:div>
+    </mets:div>
+  </mets:structMap>
+</mets:mets>

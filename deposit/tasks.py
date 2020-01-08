@@ -21,21 +21,33 @@
 
 
 import logging
+
 from celery import shared_task
+from datetime import date
+
 from backend.utils import run_only_once
 from deposit.models import DepositRecord
+from deposit.models import Repository
 
 logger = logging.getLogger('dissemin.' + __name__)
+
+
+@shared_task(name='change_embargoed_to_published')
+@run_only_once('change_embargoed_to_published')
+def change_embargoed_to_published():
+    """
+    This function changes all DepositRecord with status ``embargoed`` to ``published`` with today ``publication_date``
+    """
+    n = DepositRecord.objects.filter(status='embargoed', pub_date__lte=date.today()).update(status='published')
+    logger.info("Changed deposit status from 'embargoed' to 'published' for {} DepositRecords".format(n))
+
+
 
 @shared_task(name='refresh_deposit_statuses')
 @run_only_once('refresh_deposit_statuses')
 def refresh_deposit_statuses():
     # only run it on DepositRecords that have initially succeeded:
     # ignore 'failed' and 'faked' statuses
-    for d in DepositRecord.objects.filter(status__in=
-            ['pending','published','refused','deleted']).select_related('repository'):
-        logger.info(d.status)
-        protocol = d.repository.get_implementation()
-        if protocol:
-            protocol.refresh_deposit_status(d)
-
+    for repository in Repository.objects.all():
+        protocol = repository.get_implementation()
+        protocol.refresh_deposit_status()

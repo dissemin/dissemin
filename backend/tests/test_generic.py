@@ -44,10 +44,6 @@ TEST_INDEX = {
     },
 }
 
-def get_researcher_by_name(first, last):
-    n = Name.lookup_name((first, last))
-    return Researcher.objects.get(name=n)
-
 
 def check_paper(asserter, paper):
     """
@@ -72,8 +68,6 @@ class PaperSourceTest(TestCase):
 
     def test_fetch(self):
         papers = list(self.source.fetch_papers(self.researcher))
-        for paper in papers:
-            paper = Paper.from_bare(paper)
         self.assertTrue(len(papers) > 1)
         self.check_papers(papers)
 

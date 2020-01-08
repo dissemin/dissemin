@@ -2,62 +2,141 @@
 # Exported from translatewiki.net
 #
 # Author: Joetaras
+# --
+# This file is part of the Dissemin Project
+# This file is distributed under the same license as the Dissemin package.
+#
 msgid ""
 msgstr ""
-""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-25 12:06+0100\n"
-"PO-Revision-Date: 2019-04-11 15:43:49+0000\n"
+"POT-Creation-Date: 2020-01-07 14:39+0100\n"
+"PO-Revision-Date: 2019-10-14 15:19:31+0000\n"
 "Language: nap-x-tara\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2019-02-25 13:41:23+0000\n"
-"X-Generator: MediaWiki 1.33.0-alpha; Translate 2019-01-17\n"
+"X-POT-Import-Date: 2019-10-01 08:31:19+0000\n"
+"X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: papers/static/papers/refresh.js:35
-msgid "Do not show this message anymore"
-msgstr "Nò ffà 'ndrucà cchiù stu messàgge"
+#: website/static/js/dissemin.js:202
+#, javascript-format
+msgid "%s paper found"
+msgid_plural "%s papers found"
+msgstr[0] "%s fogghie acchiate"
+msgstr[1] "%s"
 
-#: papers/static/papers/refresh.js:66
-msgid "No author"
-msgstr "Nisciune autore"
+#: website/static/js/dissemin.js:293
+msgid "Claiming..."
+msgstr ""
 
-#: papers/static/papers/refresh.js:68
-msgid "No title"
-msgstr "Nisciune titole"
+#: website/static/js/dissemin.js:297
+msgid "Unclaiming..."
+msgstr ""
 
-#: papers/static/papers/refresh.js:70
-msgid "Invalid publication date"
-msgstr "Date de pubblecazione invalide"
+#: website/static/js/dissemin.js:313
+msgid "Claiming failed!"
+msgstr ""
 
-#: papers/static/papers/refresh.js:72
-msgid "No publication date"
-msgstr "Nisciuna date de pubblecazione"
+#: website/static/js/dissemin.js:316
+msgid "Unclaiming failed!"
+msgstr ""
 
-#: papers/static/papers/refresh.js:74
-msgid "Paper is invalid"
-msgstr "'A carte jè invalide"
+#: website/static/js/dissemin.js:321
+msgid "Exclude from my profile"
+msgstr ""
 
-#: papers/static/papers/refresh.js:109
-msgid "We ignored %(count)s paper from your ORCiD profile."
-msgid_plural "We ignored %(count)s papers from your ORCiD profile."
-msgstr[0] "%(count)s carte da 'u profile tune de ORCiD."
-msgstr[1] "%(count)s carte da 'u profile tune de ORCiD."
+#: website/static/js/dissemin.js:325
+msgid "Include in my profile"
+msgstr ""
 
-#: papers/static/papers/refresh.js:119
-msgid "\"%(name)s\" was ignored for the following reason: %(reason)s"
-msgstr "\"%(name)s\" onne state cacate pe stu mutive: %(reason)s"
+#: website/static/js/dissemin.js:350
+#, fuzzy
+#| msgid "Adding to todolist"
+msgid "Adding to to-do list"
+msgstr "Stoche a mette jndr'à l'elenghe de le cose da fà"
 
-#: papers/static/papers/refresh.js:127
-msgid "A paper was ignored, because it has no name"
-msgstr "'Na carte ha state cacate, purcé non ge tène 'nu nome"
+#: website/static/js/dissemin.js:354
+#, fuzzy
+#| msgid "Removing from todolist"
+msgid "Removing from to-do list"
+msgstr "Stoche a lève da l'elenghe de le cose da fà"
 
-#: papers/static/papers/refresh.js:139 papers/static/papers/refresh.js:167
-msgid "Show more information"
-msgstr "Fà 'ndrucà cchiù 'mbormaziune"
+#: website/static/js/dissemin.js:600
+msgid "Preview of uploaded file"
+msgstr ""
 
-#: papers/static/papers/refresh.js:164
-msgid "Show less information"
-msgstr "Fà 'ndrucà mene 'mbormaziune"
+#: website/static/js/dissemin.js:603
+msgid "Pages: "
+msgstr ""
 
+#: website/static/js/dissemin.js:604
+msgid "Size: "
+msgstr ""
+
+#: website/static/js/dissemin.js:619
+msgid "While uploading %(file)s the following error occured:"
+msgstr ""
+
+#: website/static/js/dissemin.js:628 website/static/js/dissemin.js:683
+#: website/static/js/dissemin.js:689
+msgid "Unknown error"
+msgstr ""
+
+#: website/static/js/dissemin.js:673
+msgid "While fetching file from %(url)s the following error occured:"
+msgstr ""
+
+#: website/static/js/dissemin.js:760
+msgid "Sorry, we could not fill this for you."
+msgstr ""
+
+#: website/static/js/dissemin.js:761
+msgid "Trying to fill this field automatically for you..."
+msgstr ""
+
+#: website/static/js/dissemin.js:795
+msgid "You have not selected a file for upload."
+msgstr ""
+
+#: website/static/js/dissemin.js:822
+msgid "Dissemin encountered an error, please try again later."
+msgstr ""
+
+#: website/static/js/moment.min.js:1
+msgid ": "
+msgstr ""
+
+#~ msgid "Do not show this message anymore"
+#~ msgstr "Nò ffà 'ndrucà cchiù stu messàgge"
+
+#~ msgid "No author"
+#~ msgstr "Nisciune autore"
+
+#~ msgid "No title"
+#~ msgstr "Nisciune titole"
+
+#~ msgid "Invalid publication date"
+#~ msgstr "Date de pubblecazione invalide"
+
+#~ msgid "No publication date"
+#~ msgstr "Nisciuna date de pubblecazione"
+
+#~ msgid "Paper is invalid"
+#~ msgstr "'A carte jè invalide"
+
+#~ msgid "We ignored %(count)s paper from your ORCiD profile."
+#~ msgid_plural "We ignored %(count)s papers from your ORCiD profile."
+#~ msgstr[0] "Amme cacate %(count)s carte da 'u profile tune de ORCiD."
+#~ msgstr[1] "Amme cacate %(count)s carte da 'u profile tune de ORCiD."
+
+#~ msgid "\"%(name)s\" was ignored for the following reason: %(reason)s"
+#~ msgstr "\"%(name)s\" onne state cacate pe stu mutive: %(reason)s"
+
+#~ msgid "A paper was ignored, because it has no name"
+#~ msgstr "'Na carte ha state cacate, purcé non ge tène 'nu nome"
+
+#~ msgid "Show more information"
+#~ msgstr "Fà 'ndrucà cchiù 'mbormaziune"
+
+#~ msgid "Show less information"
+#~ msgstr "Fà 'ndrucà mene 'mbormaziune"

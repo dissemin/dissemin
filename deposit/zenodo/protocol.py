@@ -32,7 +32,6 @@ from deposit.protocol import DepositResult
 from deposit.protocol import RepositoryProtocol
 from deposit.registry import protocol_registry
 from deposit.zenodo.forms import ZenodoForm
-from deposit.zenodo.forms import ZENODO_DEFAULT_LICENSE_CHOICE
 from papers.utils import kill_html
 from papers.utils import extract_domain
 
@@ -41,6 +40,7 @@ class ZenodoProtocol(RepositoryProtocol):
     """
     A protocol to submit using the Zenodo API
     """
+
     form_class = ZenodoForm
 
     def __init__(self, repository, **kwargs):
@@ -107,9 +107,8 @@ class ZenodoProtocol(RepositoryProtocol):
                 return False
         return True
 
-    def get_form_initial_data(self):
-        data = super(ZenodoProtocol, self).get_form_initial_data()
-        data['license'] = ZENODO_DEFAULT_LICENSE_CHOICE
+    def get_form_initial_data(self, **kwargs):
+        data = super(ZenodoProtocol, self).get_form_initial_data(**kwargs)
         if self.paper.abstract:
             data['abstract'] = kill_html(self.paper.abstract)
         else:
@@ -123,6 +122,8 @@ class ZenodoProtocol(RepositoryProtocol):
         api_url_with_key = self.api_url+'?access_token='+api_key
 
         deposit_result = DepositResult()
+        # Set the license for the deposit result if delivered
+        deposit_result = self._add_license_to_deposit_result(deposit_result, form)
 
         # Checking the access token
         self.log("### Checking the access token")
@@ -249,7 +250,7 @@ class ZenodoProtocol(RepositoryProtocol):
         # Access right: TODO
 
         # License
-        metadata['license'] = form.cleaned_data['license']
+        metadata['license'] = form.cleaned_data['license'].transmit_id
 
         # Embargo date: TODO
 
