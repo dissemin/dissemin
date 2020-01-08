@@ -245,8 +245,7 @@ class OaiPaperSource(PaperSource):  # TODO: this should not inherit from PaperSo
                     if paper is not None:
                         try:
                             with transaction.atomic():
-                                saved = Paper.from_bare(paper)
-                            return saved
+                                Paper.from_bare(paper)
                         except ValueError:
                             logger.exception("Ignoring invalid paper with identifier ", paper.oairecords[0].identifier)
 
