@@ -170,7 +170,7 @@ class OAIDCTranslator(OaiTranslator):
         keywords = ' | '.join(metadata['subject'])
         contributors = ' '.join(metadata['contributor'])[:4096]
 
-        typenorms = ['typenorm:'+tn for tn in metadata.get('typenorm', [])]
+        typenorms = ['base:{}'.format(tn) for tn in metadata.get('typenorm', [])]
         pubtype_list = metadata.get('type', []) + typenorms
         pubtype = None
         for raw_pubtype in pubtype_list:
