@@ -49,8 +49,8 @@ This has to be done in a dedicated file, ``deposit/newprotocol/protocol.py``, by
 Let us see how we can access the data provided by Dissemin to perform the upload.
 The paper to be deposited is available in ``self.paper``, as a :class:`~papers.models.Paper` instance.
 This gives you access to all we know about the paper: title, authors, sources, bibliographic information, identifiers, publisher's policy, and so on.
-You can either access it directly from the attributes of the paper, for instance with ``self.paper.title``, or use the JSON representation that we generate for `the API <https://dev.dissem.in/api.html>`_, which can be generated using ``self.paper.json()``.
-For instance, ``self.paper.json()['title']`` gives you the title.
+You can either access it directly from the attributes of the paper, for instance with ``self.paper.title``, or use the class ``deposit.utils.MetadataConverter`` where you can access all information directly.
+This in particular useful for the OaiRecords, since you do not need to gather the data from those.
 
 With all this information you create metadata that you deliver with the pdf file.
 
