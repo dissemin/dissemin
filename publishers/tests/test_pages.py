@@ -16,6 +16,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 
+import pytest
 
 from papers.models import Paper
 from publishers.tests.test_romeo import RomeoAPIStub
@@ -34,6 +35,7 @@ class TestJournalPage():
         publisher = journal.publisher
         check_page(200, 'publisher', kwargs={'pk': publisher.pk, 'slug': publisher.slug})
 
+    @pytest.mark.usefixtures('mock_doi')
     def test_publisher_url(self, db, check_page):
         api = RomeoAPIStub()
         api.fetch_journal({'issn':'1860-949X'})
