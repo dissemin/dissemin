@@ -5,11 +5,13 @@ import logging
 
 from datetime import datetime
 from io import BytesIO
+from itertools import chain
 from lxml import etree
 from zipfile import ZipFile
 
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.exceptions import MultipleObjectsReturned
+from django.utils.functional import cached_property
 from django.utils.translation import ugettext as _
 
 from deposit.models import DepositRecord
@@ -19,7 +21,9 @@ from deposit.protocol import DepositResult
 from deposit.protocol import RepositoryProtocol
 from deposit.registry import protocol_registry
 from deposit.sword.forms import SWORDMETSForm
+from deposit.utils import MetadataConverter
 
+from papers.models import OaiRecord
 from papers.models import Researcher
 
 logger = logging.getLogger('dissemin.' + __name__)
@@ -52,6 +56,16 @@ class SWORDMETSProtocol(RepositoryProtocol):
 
     # The class of the form for the deposit
     form_class = SWORDMETSForm
+
+    @cached_property
+    def paper_metadata(self):
+        """
+        Gives access to a dict of the metadata from the paper and its OaiRecords.
+        """
+        prefered_records = self._get_prefered_records()
+        mc = MetadataConverter(self.paper, prefered_records)
+        return mc.metadata()
+
 
     def _get_deposit_result(self, response):
         """
@@ -219,9 +233,9 @@ class SWORDMETSProtocol(RepositoryProtocol):
             ds_embargo = etree.SubElement(ds_publication, DS + 'embargoDate')
             ds_embargo.text = embargo.isoformat()
 
-        if self.publication.publisher is not None:
+        if self.paper_metadata.get('romeo_id') is not None:
             ds_romeo = etree.SubElement(ds_publication, DS + 'romeoId')
-            ds_romeo.text = str(self.publication.publisher.romeo_id)
+            ds_romeo.text = self.paper_metadata.get('romeo_id')
 
         return ds
 
@@ -256,6 +270,21 @@ class SWORDMETSProtocol(RepositoryProtocol):
                     data['email'] = r.email
 
         return data
+
+
+    def _get_prefered_records(self):
+        """
+        Returns the prefered records, that is CrossRef, then BASE
+        """
+        crossref = OaiRecord.objects.filter(
+            about=self.paper,
+            source__identifier='crossref',
+        )
+        base = OaiRecord.objects.filter(
+            about=self.paper,
+            source__identifier='base'
+        )
+        return list(chain(crossref, base))
 
 
     def refresh_deposit_status(self):
@@ -421,29 +450,21 @@ class SWORDMETSMODSProtocol(SWORDMETSProtocol):
         mods_date_issued.set('encoding', 'w3cdtf')
         mods_date_issued.text = str(self.paper.pubdate)
 
-        # Identifier / DOI and relatedItem
-        if self.publication:
-            # DOI
-            if self.publication.doi:
-                mods_doi = etree.SubElement(mods_xml, MODS + 'identifier')
-                mods_doi.set('type', 'doi')
-                mods_doi.text = self.publication.doi
+        # DOI
+        if self.paper_metadata.get('doi'):
+            mods_doi = etree.SubElement(mods_xml, MODS + 'identifier')
+            mods_doi.set('type', 'doi')
+            mods_doi.text = self.paper_metadata.get('doi')
 
-            # Publisher
-            publisher = self.publication.publisher
-            if self.publication.publisher is not None:
-                publisher = self.publication.publisher.name
-            else:
-                publisher = self.publication.publisher_name
+        # Publisher
+        if self.paper_metadata.get('publisher'):
+            mods_publisher = etree.SubElement(mods_origin_info, MODS + 'publisher')
+            mods_publisher.text = self.paper_metadata.get('publisher')
 
-            if publisher is not None:
-                mods_publisher = etree.SubElement(mods_origin_info, MODS + 'publisher')
-                mods_publisher.text = publisher
-
-            # relatedItem
-            related_item = self._get_xml_metadata_relatedItem()
-            if related_item is not None:
-                mods_xml.insert(0, related_item)
+        # relatedItem
+        related_item = self._get_xml_metadata_relatedItem()
+        if related_item is not None:
+            mods_xml.insert(0, related_item)
 
         # Language
         if len(form.cleaned_data['abstract']) >= 256:
@@ -499,49 +520,38 @@ class SWORDMETSMODSProtocol(SWORDMETSProtocol):
         related_item = None
         related_item_data = dict()
 
-        # We set the title and publisher, but prefer values from Journal or Publisher object if available
-        journal = self.publication.journal
-        issn = None
-        eissn = None
-        if self.publication.journal is not None:
-            journal = self.publication.journal.title
-            issn = self.publication.journal.issn
-            eissn = self.publication.journal.essn
-        else:
-            journal = self.publication.journal_title
-
-        # Set the title
-        if journal is not None:
+        # Set the journal title
+        if self.paper_metadata.get('journal'):
             related_item_title_info = etree.Element(MODS + 'titleInfo')
             related_item_title = etree.SubElement(related_item_title_info, MODS + 'title')
-            related_item_title.text = journal
+            related_item_title.text = self.paper_metadata.get('journal')
             related_item_data['title'] = related_item_title_info
 
         # Set issn
-        if issn is not None:
+        if self.paper_metadata.get('issn'):
             related_item_issn = etree.Element(MODS + 'identifier')
             related_item_issn.set('type', 'issn')
-            related_item_issn.text = issn
+            related_item_issn.text = self.paper_metadata.get('issn')
             related_item_data['issn'] = related_item_issn
 
-        # Set issn
-        if eissn is not None:
+        # Set essn
+        if self.paper_metadata.get('essn'):
             related_item_eissn = etree.Element(MODS + 'identifier')
             related_item_eissn.set('type', 'eissn')
-            related_item_eissn.text = eissn
+            related_item_eissn.text = self.paper_metadata.get('essn')
             related_item_data['eissn'] = related_item_eissn
 
         # relatedItem - part
         part = dict()
 
         # Set pages
-        if self.publication.pages is not None:
-            pages = self.publication.pages.split('-', 1)
+        if self.paper_metadata.get('pages'):
+            pages = self.paper_metadata.get('pages').split('-', 1)
             related_item_pages = etree.Element(MODS + 'extent')
             related_item_pages.set('unit', 'pages')
             if len(pages) == 1:
                 related_item_pages_total = etree.SubElement(related_item_pages, MODS + 'total')
-                related_item_pages_total.text = self.publication.pages
+                related_item_pages_total.text = pages[0]
                 part['pages'] = related_item_pages
             else:
                 start = pages[0]
@@ -553,19 +563,19 @@ class SWORDMETSMODSProtocol(SWORDMETSProtocol):
                 part['pages'] = related_item_pages
 
         # Set issue
-        if self.publication.issue is not None:
+        if self.paper_metadata.get('issue'):
             related_item_issue = etree.Element(MODS + 'detail')
             related_item_issue.set('type', 'issue')
             related_item_issue_number = etree.SubElement(related_item_issue, MODS + 'number')
-            related_item_issue_number.text = self.publication.issue
+            related_item_issue_number.text = self.paper_metadata.get('issue')
             part['issue'] = related_item_issue
 
         # Set volume
-        if self.publication.volume is not None:
+        if self.paper_metadata.get('volume'):
             related_item_volume = etree.Element(MODS + 'detail')
             related_item_volume.set('type', 'volume')
             related_item_volume_number = etree.SubElement(related_item_volume, MODS + 'number')
-            related_item_volume_number.text = self.publication.volume
+            related_item_volume_number.text = self.paper_metadata.get('volume')
             part['volume'] = related_item_volume
 
         # Make parts if existing
