@@ -10,13 +10,14 @@
 #
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-07 14:39+0100\n"
-"PO-Revision-Date: 2019-12-19 14:06:26+0000\n"
+"PO-Revision-Date: 2020-01-09 19:06:58+0000\n"
 "Language: mk\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2019-12-18 15:15:00+0000\n"
+"X-POT-Import-Date: 2020-01-07 15:30:33+0000\n"
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=2; plural=(n == 1 || n%10 == 1) ? 0 : 1;\n"
 
@@ -1090,19 +1091,16 @@ msgstr "Историја"
 
 #: model-gettext.py:101
 #, fuzzy
-#| msgid "Computer science"
 msgid "Data processing & computer science"
 msgstr "Информатика"
 
 #: model-gettext.py:102
 #, fuzzy
-#| msgid "Political science"
 msgid "Military science"
 msgstr "Политикологија"
 
 #: model-gettext.py:103
 #, fuzzy
-#| msgid "Other languages"
 msgid "Other Germanic languages"
 msgstr "Други јазици"
 
@@ -1201,7 +1199,6 @@ msgstr ""
 
 #: model-gettext.py:126
 #, fuzzy
-#| msgid "preprint"
 msgid "TUprints"
 msgstr "првична верзија"
 
@@ -2889,3 +2886,4 @@ msgstr "Грешка при заверката"
 #, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr ""
+

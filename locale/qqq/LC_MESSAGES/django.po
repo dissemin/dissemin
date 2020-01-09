@@ -14,13 +14,14 @@
 #
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-07 14:39+0100\n"
-"PO-Revision-Date: 2019-12-19 14:06:35+0000\n"
+"PO-Revision-Date: 2020-01-09 19:07:01+0000\n"
 "Language: qqq\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2019-12-18 15:15:00+0000\n"
+"X-POT-Import-Date: 2020-01-07 15:30:33+0000\n"
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
@@ -1073,13 +1074,11 @@ msgstr "သမိုင်း"
 
 #: model-gettext.py:101
 #, fuzzy
-#| msgid "Computer science"
 msgid "Data processing & computer science"
 msgstr "ကွန်ပျူတာသိပ္ပံ"
 
 #: model-gettext.py:102
 #, fuzzy
-#| msgid "Computer science"
 msgid "Military science"
 msgstr "ကွန်ပျူတာသိပ္ပံ"
 
@@ -2827,3 +2826,4 @@ msgstr ""
 #, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr ""
+

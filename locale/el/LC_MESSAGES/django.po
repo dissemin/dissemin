@@ -1,6 +1,7 @@
 # Translation of Dissemin website to Greek (Ελληνικά)
 # Exported from translatewiki.net
 #
+# Author: Babispan
 # Author: Becks
 # Author: Geraki
 # Author: GhotuoIncubator
@@ -12,13 +13,14 @@
 #
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-07 14:39+0100\n"
-"PO-Revision-Date: 2019-12-31 06:25:06+0000\n"
+"PO-Revision-Date: 2020-01-09 19:06:57+0000\n"
 "Language: el\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2019-12-18 15:15:00+0000\n"
+"X-POT-Import-Date: 2020-01-07 15:30:33+0000\n"
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -1097,21 +1099,16 @@ msgid "History of other areas"
 msgstr "Ιστορία"
 
 #: model-gettext.py:101
-#, fuzzy
-#| msgid "Computer science"
 msgid "Data processing & computer science"
-msgstr "Επιστήμη υπολογιστών"
+msgstr "Επιστήμη επεξεργασίας δεδομένων και υπολογιστικών συστημάτων"
 
 #: model-gettext.py:102
-#, fuzzy
-#| msgid "Political science"
 msgid "Military science"
-msgstr "Πολιτικές επιστήμες"
+msgstr "Στρατιωτική επιστήμη"
 
 #: model-gettext.py:103
-#, fuzzy
 msgid "Other Germanic languages"
-msgstr "Αλλαγή γλώσσας"
+msgstr "Άλλες γερμανικές γλώσσες"
 
 #: model-gettext.py:104
 msgid "Public performances"
@@ -1130,9 +1127,8 @@ msgid "Athletic & outdoor sports & games"
 msgstr ""
 
 #: model-gettext.py:108
-#, fuzzy
 msgid "Other Germanic literatures"
-msgstr "Λογοτεχνία"
+msgstr "Άλλα γερμανικά λογοτεχνικά κείμενα"
 
 #: model-gettext.py:109
 msgid "Germany & neighboring central European countries"
@@ -1208,7 +1204,6 @@ msgstr ""
 
 #: model-gettext.py:126
 #, fuzzy
-#| msgid "preprint"
 msgid "TUprints"
 msgstr "Προεκτύπωση"
 
@@ -1486,7 +1481,7 @@ msgstr ""
 #, python-format
 msgctxt "as in: _Journal article published in 2017 by_ Tom Smith, Nicole Allen"
 msgid "%(doctype)s published in %(year)s by"
-msgstr "%(doctype)s δημοσιεύθηκε το %(year)s"
+msgstr "%(doctype)s δημοσιεύθηκε το %(year)s από"
 
 #: papers/templates/papers/paper.html:46
 #, fuzzy, python-format
@@ -2610,7 +2605,7 @@ msgstr "Ενθαρρύνετε τους ερευνητές να χρησιμοπ
 
 #: website/templates/dissemin/faq.html:559
 msgid "Star <a href=\"https://github.com/dissemin/dissemin\">our GitHub project</a>!"
-msgstr "Βαθμολογήστε με αστέρια <a href=\"https://github.com/dissemin/dissemin\">το πρότζεκτ μας στο GitHub</a>!"
+msgstr "Βαθμολογήστε με αστέρια <a href=\"https://github.com/dissemin/dissemin\">το GitHub project μας</a>!"
 
 #: website/templates/dissemin/faq.html:564
 msgid "<a href=\"https://association.dissem.in/#dons\">Donations are accepted</a>."
@@ -2899,3 +2894,4 @@ msgstr ""
 #, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr ""
+

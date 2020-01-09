@@ -12,13 +12,14 @@
 #
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-07 14:39+0100\n"
-"PO-Revision-Date: 2019-12-23 14:46:33+0000\n"
+"PO-Revision-Date: 2020-01-09 19:06:58+0000\n"
 "Language: ko\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2019-12-18 15:15:00+0000\n"
+"X-POT-Import-Date: 2020-01-07 15:30:33+0000\n"
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
@@ -1058,22 +1059,17 @@ msgid "History of other areas"
 msgstr "기타 분야의 역사"
 
 #: model-gettext.py:101
-#, fuzzy
-#| msgid "Computer science"
 msgid "Data processing & computer science"
-msgstr "컴퓨터 과학"
+msgstr "데이터 처리 및 컴퓨터 과학"
 
 #: model-gettext.py:102
 #, fuzzy
-#| msgid "Political science"
 msgid "Military science"
 msgstr "정치학"
 
 #: model-gettext.py:103
-#, fuzzy
-#| msgid "Other languages"
 msgid "Other Germanic languages"
-msgstr "다른 언어"
+msgstr "다른 게르만 언어"
 
 #: model-gettext.py:104
 msgid "Public performances"
@@ -1092,10 +1088,8 @@ msgid "Athletic & outdoor sports & games"
 msgstr ""
 
 #: model-gettext.py:108
-#, fuzzy
-#| msgid "Other literatures"
 msgid "Other Germanic literatures"
-msgstr "다른 문헌"
+msgstr "다른 게르만어 문헌"
 
 #: model-gettext.py:109
 msgid "Germany & neighboring central European countries"
@@ -2826,3 +2820,4 @@ msgstr "인증 오류"
 #, fuzzy, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr "인증을 실패했습니다.<a href=\"/\">로그인 페이지로 돌아갑니다.</a>"
+

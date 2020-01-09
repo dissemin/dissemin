@@ -13,13 +13,14 @@
 #
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-07 14:39+0100\n"
-"PO-Revision-Date: 2020-01-06 16:41:08+0000\n"
+"PO-Revision-Date: 2020-01-09 19:07:00+0000\n"
 "Language: sv\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2019-12-18 15:15:00+0000\n"
+"X-POT-Import-Date: 2020-01-07 15:30:33+0000\n"
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -1094,13 +1095,11 @@ msgstr "Afrikas historia"
 
 #: model-gettext.py:101
 #, fuzzy
-#| msgid "Computer science"
 msgid "Data processing & computer science"
 msgstr "Datavetenskap"
 
 #: model-gettext.py:102
 #, fuzzy
-#| msgid "Political science"
 msgid "Military science"
 msgstr "Statsvetenskap"
 
@@ -1856,11 +1855,7 @@ msgstr ""
 #: papers/views.py:278
 #, fuzzy
 msgid "Invalid ORCID profile. Please make sure it includes a public name."
-msgstr ""
-"\n"
-"                            Ogiltig ORCID-profil.\n"
-"                            Se till att den innehåller ett offentligt namn.\n"
-"                            "
+msgstr "\n                            Ogiltig ORCID-profil.\n                            Se till att den innehåller ett offentligt namn.\n                            "
 
 #: papers/views.py:281
 msgid "Invalid ORCID profile."
@@ -2181,10 +2176,7 @@ msgstr "Åtkomst till PDF nekades."
 #: website/templates/403.html:13
 #, fuzzy, python-format
 msgid "The access to the requested page has been denied. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr ""
-"\n"
-"            Sidan du begärde kunde inte hittas. <a href=\"/\">Gå tillbaka till hemsidan.</a>\n"
-"           "
+msgstr "\n            Sidan du begärde kunde inte hittas. <a href=\"/\">Gå tillbaka till hemsidan.</a>\n           "
 
 #: website/templates/404.html:6 website/templates/404.html:10
 msgid "Page not found"
@@ -2893,3 +2885,4 @@ msgstr ""
 #, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr ""
+

@@ -13,13 +13,14 @@
 #
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-07 14:39+0100\n"
-"PO-Revision-Date: 2019-12-19 14:06:17+0000\n"
+"PO-Revision-Date: 2020-01-09 19:06:56+0000\n"
 "Language: ar\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2019-12-18 15:15:00+0000\n"
+"X-POT-Import-Date: 2020-01-07 15:30:33+0000\n"
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=6; plural=(n == 0) ? 0 : ( (n == 1) ? 1 : ( (n == 2) ? 2 : ( (n%100 >= 3 && n%100 <= 10) ? 3 : ( (n%100 >= 11 && n%100 <= 99) ? 4 : 5 ) ) ) );\n"
 
@@ -538,9 +539,7 @@ msgstr "إيداع"
 #: deposit/templates/deposit/start.html:64
 #, python-format
 msgid "You can deposit the full text of your article. Dissemin will send it to a repository where it will be made freely available. By depositing your article via Dissemin, you agree to our <a href=\"%(tosurl)s\">terms of service</a>."
-msgstr ""
-"يمكنك إيداع النص الكامل لمقالتك، وسوف يرسله ديسمين إلى مستودع حيث سيُتَاح بحرية،\n"
-"            ، من خلال إيداع مقالتك عبر ديسيمين، فإنك توافق على <a href=\"%(tosurl)s\">شروط الخدمة</a>."
+msgstr "يمكنك إيداع النص الكامل لمقالتك، وسوف يرسله ديسمين إلى مستودع حيث سيُتَاح بحرية،\n            ، من خلال إيداع مقالتك عبر ديسيمين، فإنك توافق على <a href=\"%(tosurl)s\">شروط الخدمة</a>."
 
 #: deposit/templates/deposit/start.html:73
 msgid "You do not appear to be one of the authors of this paper. By using this form, you certify that you have the permission to upload it on their behalf."
@@ -1062,19 +1061,16 @@ msgstr "تاريخ المناطق الأخرى"
 
 #: model-gettext.py:101
 #, fuzzy
-#| msgid "Computer science"
 msgid "Data processing & computer science"
 msgstr "علم الحاسوب"
 
 #: model-gettext.py:102
 #, fuzzy
-#| msgid "Political science"
 msgid "Military science"
 msgstr "العلوم السياسية"
 
 #: model-gettext.py:103
 #, fuzzy
-#| msgid "Other languages"
 msgid "Other Germanic languages"
 msgstr "لغات أخرى"
 
@@ -1096,7 +1092,6 @@ msgstr ""
 
 #: model-gettext.py:108
 #, fuzzy
-#| msgid "Other literatures"
 msgid "Other Germanic literatures"
 msgstr "آداب أخرى"
 
@@ -1134,13 +1129,11 @@ msgstr "ترخيص مفتوح آخر"
 
 #: model-gettext.py:118
 #, fuzzy
-#| msgid "Creative Commons Attribution-NonCommerical 4.0 International (CC BY-NC 4.0)"
 msgid "Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)"
 msgstr "المشاع الإبداعي النسبة 4.0 (CC BY 4.0)"
 
 #: model-gettext.py:119
 #, fuzzy
-#| msgid "Creative Commons Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0)"
 msgid "Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)"
 msgstr "المشاع الإبداعي النسبة 4.0 (CC BY 4.0)"
 
@@ -1171,7 +1164,6 @@ msgstr "يديره مركز العلوم المفتوحة، OSF يتيح لك م
 
 #: model-gettext.py:126
 #, fuzzy
-#| msgid "preprint"
 msgid "TUprints"
 msgstr "ما قبل الطباعة"
 
@@ -2511,9 +2503,7 @@ msgstr "أولا، لاحظ أن ديسمين لا يمثل نسخا من الم
 
 #: website/templates/dissemin/faq.html:443
 msgid "Second, at the moment, Dissemin only supports repositories with a crawlable API that follows the <a href=\"https://www.openarchives.org/OAI/openarchivesprotocol.html\">OAI-PMH protocol</a>, and is <a href=\"https://www.base-search.net/about/en/suggest.php\">registered</a> in <a href=\"https://www.base-search.net/\">BASE</a>. We have a <a href=\"https://github.com/dissemin/croawl\">long-term project</a> to support more repositories by crawling them, but for the moment, we do not have the resources to support repositories not covered by BASE. Hence, if you are a user of a repository and would like it to be supported by Dissemin, please contact the repository administrator and suggest them to implement OAI-PMH support and to <a href=\"https://www.base-search.net/about/en/suggest.php\">register</a> their repository in BASE."
-msgstr ""
-"ثانيا، في الوقت الحالي، يدعم ديسيمين فقط المستودعات مع واجهة برمجة تطبيقات الزاحف التي تتبع <a href=\"https://www.openarchives.org/OAI/openarchivesprotocol.html\">بروتوكول\n"
-"OAI-PMH</a>، و<a href=\"https://www.base-search.net/about/en/suggest.php\">المسجل</a> في <a href=\"https://www.base-search.net/\">بيس</a>. لدينا <a href=\"https://github.com/dissemin/croawl\">مشروع طويل الأجل</a> لدعم المزيد من المستودعات من خلال الزحف إليها، ولكن في الوقت الحالي، لا تتوفر لدينا الموارد اللازمة لدعم المستودعات التي لا يغطيها بيس، وبالتالي، إذا كنت مستخدما للمستودع وترغب في أن يكون مدعوما من قبل ديسيمين، يُرجَى الاتصال بمسؤول المستودع واقتراح تنفيذ دعم OAI-PMH <a href=\"https://www.base-search.net/about/en/suggest.php\">تسجيل</a> مستودعهم في بيس"
+msgstr "ثانيا، في الوقت الحالي، يدعم ديسيمين فقط المستودعات مع واجهة برمجة تطبيقات الزاحف التي تتبع <a href=\"https://www.openarchives.org/OAI/openarchivesprotocol.html\">بروتوكول\nOAI-PMH</a>، و<a href=\"https://www.base-search.net/about/en/suggest.php\">المسجل</a> في <a href=\"https://www.base-search.net/\">بيس</a>. لدينا <a href=\"https://github.com/dissemin/croawl\">مشروع طويل الأجل</a> لدعم المزيد من المستودعات من خلال الزحف إليها، ولكن في الوقت الحالي، لا تتوفر لدينا الموارد اللازمة لدعم المستودعات التي لا يغطيها بيس، وبالتالي، إذا كنت مستخدما للمستودع وترغب في أن يكون مدعوما من قبل ديسيمين، يُرجَى الاتصال بمسؤول المستودع واقتراح تنفيذ دعم OAI-PMH <a href=\"https://www.base-search.net/about/en/suggest.php\">تسجيل</a> مستودعهم في بيس"
 
 #: website/templates/dissemin/faq.html:448
 msgid "If the repository is registered in BASE, please <a href=\"https://www.base-search.net/\">search in BASE</a> to check that your article is there. If it is, then this may be a bug of Dissemin; please file an <a href=\"https://github.com/dissemin/dissemin/issues\">issue</a> describing the problem, or send a message to <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>."
@@ -2591,13 +2581,11 @@ msgstr "<a href=\"https://association.dissem.in/#dons\">يتم قبول التب
 
 #: website/templates/dissemin/faq.html:572
 msgid "The source code is available <a href=\"https://github.com/dissemin/dissemin\">on GitHub</a>."
-msgstr ""
-"شفرة المصدر متاحة <a href=\"https://github.com/dissemin/dissemin\">في\n"
-"جيت هب</a>."
+msgstr "شفرة المصدر متاحة <a href=\"https://github.com/dissemin/dissemin\">في\nجيت هب</a>."
 
 #: website/templates/dissemin/faq.html:579
 msgid "Yes! We even have <a href=\"https://dissemin.readthedocs.io/en/latest/api.html\">an API</a>. If it does not suit your needs, please don't hesitate to get in touch by writing to <a href=\"mailto:hello@dissem.in\">hello@dissem.in</a>."
-msgstr "نعم! لدينا حتى <a href=\"https://dissemin.readthedocs.io/en/latest/api.html\">an API</a>واجهة برمجة تطبيقات</a>، إذا كانت لا تناسب احتياجاتك، فيٌرجَى عدم التردد في الاتصال بنا عن طريق الكتابة إلى <a href=\"mailto:hello@dissem.in\">hello@dissem.in</a>."
+msgstr "نعم! لدينا حتى <a href=\"https://dissemin.readthedocs.io/en/latest/api.html\">an API</a>واجهة برمجة تطبيقات، إذا كانت لا تناسب احتياجاتك، فيٌرجَى عدم التردد في الاتصال بنا عن طريق الكتابة إلى <a href=\"mailto:hello@dissem.in\">hello@dissem.in</a>."
 
 #: website/templates/dissemin/faq.html:586
 msgid "Yes! See <a href=\"https://association.dissem.in/#logos\">here</a> for links to our logos and for explanations about how you can reuse them."
@@ -2807,9 +2795,7 @@ msgstr "الإبلاغ عن إساءة استخدام"
 
 #: website/templates/dissemin/tos.html:87
 msgid "Misuse can be reported to <a href=\"mailto:support@dissem.in\">support@dissem.in</a>."
-msgstr ""
-"يمكن الإبلاغ عن أي سوء استخدام إلى: \n"
-"<a href=\"mailto:support@dissem.in\">support@dissem.in</a>"
+msgstr "يمكن الإبلاغ عن أي سوء استخدام إلى: \n<a href=\"mailto:support@dissem.in\">support@dissem.in</a>"
 
 #: website/templates/dissemin/tos.html:95
 msgid "The <a href=\"https://dissem.in\">dissem.in</a> website has been registered with <a href=\"https://www.cnil.fr/\">CNIL</a> under declaration n°1895382 v0."
@@ -2873,3 +2859,4 @@ msgstr "خطأ مصادقة"
 #, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr "فشلت المصادقة; <a href=\"%(account-login)s\">الرجوع إلى صفحة تسجيل الدخول.</a>"
+

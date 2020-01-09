@@ -12,10 +12,11 @@
 #
 msgid ""
 msgstr ""
+""
 "Project-Id-Version: dissem.in\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-07 14:39+0100\n"
-"PO-Revision-Date: 2019-12-16 14:53:35+0000\n"
+"PO-Revision-Date: 2020-01-09 19:06:56+0000\n"
 "Last-Translator: Ryan Lahfa <masterancpp@gmail.com>\n"
 "Language-Team: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language: fr\n"
@@ -111,3 +112,4 @@ msgstr "Dissemin a rencontré une erreur, veuillez essayer à nouveau plus tard.
 #: website/static/js/moment.min.js:1
 msgid ": "
 msgstr ": "
+

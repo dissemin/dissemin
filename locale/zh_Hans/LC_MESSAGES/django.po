@@ -14,13 +14,14 @@
 #
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-07 14:39+0100\n"
-"PO-Revision-Date: 2019-12-19 14:06:33+0000\n"
+"PO-Revision-Date: 2020-01-09 19:07:00+0000\n"
 "Language: zh_hans\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2019-12-18 15:15:00+0000\n"
+"X-POT-Import-Date: 2020-01-07 15:30:33+0000\n"
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
@@ -500,9 +501,8 @@ msgid "PDF URL"
 msgstr "PDF URL"
 
 #: deposit/templates/deposit/deposits.html:134
-#, fuzzy
 msgid "Status:"
-msgstr "状态"
+msgstr "状态："
 
 #: deposit/templates/deposit/deposits.html:145
 msgid "Letter of Declaration"
@@ -543,10 +543,7 @@ msgstr "存放"
 #: deposit/templates/deposit/start.html:64
 #, fuzzy, python-format
 msgid "You can deposit the full text of your article. Dissemin will send it to a repository where it will be made freely available. By depositing your article via Dissemin, you agree to our <a href=\"%(tosurl)s\">terms of service</a>."
-msgstr ""
-"\n"
-"            您可以存放您的文章全文。Dissemin将发送它到其能够自由展示的存储库。通过使用Dissemin存放您的文章，您同意我们的<a href=\"%(tosurl)s\">服务条款</a>。\n"
-"        "
+msgstr "\n            您可以存放您的文章全文。Dissemin将发送它到其能够自由展示的存储库。通过使用Dissemin存放您的文章，您同意我们的<a href=\"%(tosurl)s\">服务条款</a>。\n        "
 
 #: deposit/templates/deposit/start.html:73
 msgid "You do not appear to be one of the authors of this paper. By using this form, you certify that you have the permission to upload it on their behalf."
@@ -586,9 +583,8 @@ msgid "Repository:"
 msgstr "存储库："
 
 #: deposit/templates/deposit/start.html:192
-#, fuzzy
 msgid "Metadata:"
-msgstr "元数据"
+msgstr "元数据："
 
 #: deposit/templates/deposit/start.html:212
 #: papers/templates/papers/search_base.html:165
@@ -732,10 +728,9 @@ msgstr "计算机科学"
 
 #: model-gettext.py:3
 msgid "Bibliographies"
-msgstr ""
+msgstr "目录学"
 
 #: model-gettext.py:4
-#, fuzzy
 msgid "Library & information sciences"
 msgstr "图书馆与信息科学"
 
@@ -756,18 +751,16 @@ msgid "News media, journalism & publishing"
 msgstr ""
 
 #: model-gettext.py:9
-#, fuzzy
 msgid "Quotations"
-msgstr "出版物"
+msgstr "引文"
 
 #: model-gettext.py:10
 msgid "Manuscripts & rare books"
 msgstr ""
 
 #: model-gettext.py:12
-#, fuzzy
 msgid "Metaphysics"
-msgstr "物理学"
+msgstr "形而上学"
 
 #: model-gettext.py:13
 #, fuzzy
@@ -784,9 +777,8 @@ msgid "Philosophical schools of thought"
 msgstr "哲学"
 
 #: model-gettext.py:17
-#, fuzzy
 msgid "Philosophical logic"
-msgstr "哲学"
+msgstr "哲学逻辑"
 
 #: model-gettext.py:18
 msgid "Ethics"
@@ -801,7 +793,6 @@ msgid "Modern western philosophy"
 msgstr ""
 
 #: model-gettext.py:21
-#, fuzzy
 msgid "Religion"
 msgstr "宗教"
 
@@ -811,7 +802,7 @@ msgstr ""
 
 #: model-gettext.py:23
 msgid "The Bible"
-msgstr ""
+msgstr "圣经"
 
 #: model-gettext.py:24
 #, fuzzy
@@ -841,18 +832,16 @@ msgid "Christian denominations"
 msgstr "Dissemin管理"
 
 #: model-gettext.py:30
-#, fuzzy
 msgid "Other religions"
-msgstr "宗教"
+msgstr "其他宗教"
 
 #: model-gettext.py:31
-#, fuzzy
 msgid "Social sciences, sociology & anthropology"
-msgstr "社会人类学与民族学"
+msgstr "社会科学、社会学与人类学"
 
 #: model-gettext.py:34
 msgid "Economics"
-msgstr ""
+msgstr "经济学"
 
 #: model-gettext.py:36
 msgid "Public administration & military science"
@@ -903,18 +892,16 @@ msgid "Classical & modern Greek languages"
 msgstr ""
 
 #: model-gettext.py:50
-#, fuzzy
 msgid "Other languages"
-msgstr "更改语言"
+msgstr "其他语言"
 
 #: model-gettext.py:51
-#, fuzzy
 msgid "Science"
-msgstr "生命科学"
+msgstr "科学"
 
 #: model-gettext.py:53
 msgid "Astronomy"
-msgstr ""
+msgstr "天文学"
 
 #: model-gettext.py:56
 msgid "Earth sciences & geology"
@@ -925,9 +912,8 @@ msgid "Fossils & prehistoric life"
 msgstr ""
 
 #: model-gettext.py:58
-#, fuzzy
 msgid "Biology"
-msgstr "社会学"
+msgstr "生物学"
 
 #: model-gettext.py:59
 msgid "Plants (Botany)"
@@ -938,9 +924,8 @@ msgid "Animals (Zoology)"
 msgstr ""
 
 #: model-gettext.py:61
-#, fuzzy
 msgid "Technology"
-msgstr "心理学"
+msgstr "技术"
 
 #: model-gettext.py:62
 #, fuzzy
@@ -948,9 +933,8 @@ msgid "Medicine & health"
 msgstr "医学与健康科学"
 
 #: model-gettext.py:64
-#, fuzzy
 msgid "Agriculture"
-msgstr "建筑学"
+msgstr "农业"
 
 #: model-gettext.py:65
 msgid "Home & family management"
@@ -980,7 +964,7 @@ msgstr ""
 
 #: model-gettext.py:71
 msgid "Arts"
-msgstr ""
+msgstr "艺术"
 
 #: model-gettext.py:72
 msgid "Area planning & landscape architecture"
@@ -1078,9 +1062,8 @@ msgid "History of Europe"
 msgstr "历史"
 
 #: model-gettext.py:96
-#, fuzzy
 msgid "History of Asia"
-msgstr "历史"
+msgstr "亚洲历史"
 
 #: model-gettext.py:97
 #, fuzzy
@@ -1104,13 +1087,11 @@ msgstr "历史"
 
 #: model-gettext.py:101
 #, fuzzy
-#| msgid "Computer science"
 msgid "Data processing & computer science"
 msgstr "计算机科学"
 
 #: model-gettext.py:102
 #, fuzzy
-#| msgid "Political science"
 msgid "Military science"
 msgstr "政治学"
 
@@ -1150,24 +1131,20 @@ msgid "Creative Commons 1.0 Universal (CC0 1.0) Public Domain Dedication"
 msgstr "知识共享CC0 1.0通用"
 
 #: model-gettext.py:111
-#, fuzzy
 msgid "Creative Commons Attribution 4.0 International (CC BY 4.0)"
-msgstr "知识共享署名-相同方式共享4.0国际（CC BY 4.0）"
+msgstr "知识共享署名4.0国际（CC BY 4.0）"
 
 #: model-gettext.py:112
-#, fuzzy
 msgid "Creative Commons Attribution-ShareAlike 4.0, International (CC BY-SA 4.0)"
 msgstr "知识共享署名-相同方式共享4.0国际（CC BY 4.0）"
 
 #: model-gettext.py:113
-#, fuzzy
 msgid "Creative Commons Attribution-NonCommerical 4.0 International (CC BY-NC 4.0)"
-msgstr "知识共享署名-相同方式共享4.0国际（CC BY 4.0）"
+msgstr "知识共享署名-非商业性使用4.0国际（CC BY 4.0）"
 
 #: model-gettext.py:114
-#, fuzzy
 msgid "Creative Commons Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0)"
-msgstr "知识共享署名-相同方式共享4.0国际（CC BY 4.0）"
+msgstr "知识共享署名-禁止演绎4.0国际（CC BY 4.0）"
 
 #: model-gettext.py:115
 msgid "Free for private use; right holder retains other rights, including distribution"
@@ -1197,7 +1174,7 @@ msgstr ""
 
 #: model-gettext.py:122
 msgid "HAL"
-msgstr ""
+msgstr "HAL"
 
 #: model-gettext.py:123
 msgid "HAL is a  multidisciplinary open archive, sustained by the French Research Ministry."
@@ -1214,7 +1191,6 @@ msgstr ""
 
 #: model-gettext.py:126
 #, fuzzy
-#| msgid "preprint"
 msgid "TUprints"
 msgstr "预印本"
 
@@ -1455,7 +1431,7 @@ msgstr[0] ""
 
 #: papers/templates/papers/messages.html:14
 msgid "Details:"
-msgstr ""
+msgstr "详情："
 
 #: papers/templates/papers/messages.html:21
 #, fuzzy
@@ -1496,18 +1472,15 @@ msgid "%(doctype)s published in %(year)s by"
 msgstr "出版于"
 
 #: papers/templates/papers/paper.html:46
-#, fuzzy, python-format
+#, python-format
 msgctxt "as in: _Published in 2017 by_ Tom Smith, Nicole Allen"
 msgid "Published in %(year)s by"
-msgstr "出版于"
+msgstr "出版于%(year)s由"
 
 #: papers/templates/papers/paper.html:56
 #, fuzzy, python-format
 msgid "and <a href=\"#\" id=\"showAllAuthors\">%(nb_remaining_authors)s other authors.</a>"
-msgstr ""
-"\n"
-"            以及<a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s位其他作者</a>\n"
-"            "
+msgstr "\n            以及<a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s位其他作者</a>\n            "
 
 #: papers/templates/papers/paper.html:62
 #, fuzzy
@@ -1566,7 +1539,7 @@ msgstr "以及%(remaining_authors)s位其他作者"
 
 #: papers/templates/papers/paper_list.html:55
 msgid "from"
-msgstr ""
+msgstr "从"
 
 #: papers/templates/papers/paper_list.html:57
 #: papers/templates/papers/policies.html:17
@@ -1870,10 +1843,7 @@ msgstr ""
 #: papers/views.py:278
 #, fuzzy
 msgid "Invalid ORCID profile. Please make sure it includes a public name."
-msgstr ""
-"\n"
-"                            无效的ORCID详情。请确保它包含公开名称。\n"
-"                            "
+msgstr "\n                            无效的ORCID详情。请确保它包含公开名称。\n                            "
 
 #: papers/views.py:281
 msgid "Invalid ORCID profile."
@@ -1924,7 +1894,7 @@ msgstr "按出版商方针"
 
 #: publishers/forms.py:38
 msgid "Order"
-msgstr ""
+msgstr "顺序"
 
 #: publishers/models.py:39 website/templates/dissemin/faq.html:292
 msgid "Open access"
@@ -2192,10 +2162,7 @@ msgstr "访问PDF被拒绝。"
 #: website/templates/403.html:13
 #, fuzzy, python-format
 msgid "The access to the requested page has been denied. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr ""
-"\n"
-"            找不到您请求的页面。<a href=\"/\">返回首页。</a>\n"
-"           "
+msgstr "\n            找不到您请求的页面。<a href=\"/\">返回首页。</a>\n           "
 
 #: website/templates/404.html:6 website/templates/404.html:10
 msgid "Page not found"
@@ -2204,10 +2171,7 @@ msgstr "找不到页面"
 #: website/templates/404.html:13
 #, fuzzy, python-format
 msgid "The page you requested could not be found. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr ""
-"\n"
-"            找不到您请求的页面。<a href=\"/\">返回首页。</a>\n"
-"           "
+msgstr "\n            找不到您请求的页面。<a href=\"/\">返回首页。</a>\n           "
 
 #: website/templates/500.html:6 website/templates/500.html:10
 #, fuzzy
@@ -2217,10 +2181,7 @@ msgstr "内部错误"
 #: website/templates/500.html:13
 #, fuzzy, python-format
 msgid "Your request triggered an internal server error. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr ""
-"\n"
-"            您的请求触发了内部错误。<a href=\"/\">返回首页。</a>\n"
-"           "
+msgstr "\n            您的请求触发了内部错误。<a href=\"/\">返回首页。</a>\n           "
 
 #: website/templates/admin/base_site.html:5
 #: website/templates/admin/base_site.html:8
@@ -2454,7 +2415,7 @@ msgstr ""
 
 #: website/templates/dissemin/faq.html:286
 msgid "Description"
-msgstr ""
+msgstr "说明"
 
 #: website/templates/dissemin/faq.html:295
 msgid "<strong>Open access:</strong><br /> The full text is made freely available by the publisher (in a fully open access or hybrid journal)."
@@ -2932,7 +2893,5 @@ msgstr "验证错误"
 #: website/templates/socialaccount/authentication_error.html:15
 #, fuzzy, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
-msgstr ""
-"\n"
-"            验证失败。<a href=\"/\">返回登录页面。</a>\n"
-"           "
+msgstr "\n            验证失败。<a href=\"/\">返回登录页面。</a>\n           "
+

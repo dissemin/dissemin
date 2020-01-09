@@ -16,13 +16,14 @@
 #
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-07 14:39+0100\n"
-"PO-Revision-Date: 2019-12-19 14:06:20+0000\n"
+"PO-Revision-Date: 2020-01-09 19:06:57+0000\n"
 "Language: de\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2019-12-18 15:15:00+0000\n"
+"X-POT-Import-Date: 2020-01-07 15:30:33+0000\n"
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -1058,47 +1059,43 @@ msgstr "Geschichte anderer Gebiete"
 
 #: model-gettext.py:101
 #, fuzzy
-#| msgid "Computer science"
 msgid "Data processing & computer science"
 msgstr "Informatik"
 
 #: model-gettext.py:102
 #, fuzzy
-#| msgid "Political science"
 msgid "Military science"
 msgstr "Politikwissenschaft"
 
 #: model-gettext.py:103
 #, fuzzy
-#| msgid "Other languages"
 msgid "Other Germanic languages"
 msgstr "Andere Sprachen"
 
 #: model-gettext.py:104
 msgid "Public performances"
-msgstr ""
+msgstr "Öffentliche Darbietungen"
 
 #: model-gettext.py:105
 msgid "Stage presentations"
-msgstr ""
+msgstr "Bühnenkunst"
 
 #: model-gettext.py:106
 msgid "Indoor games & amusements"
-msgstr ""
+msgstr "Spiele und Freizeitaktivitäten für drinnen"
 
 #: model-gettext.py:107
 msgid "Athletic & outdoor sports & games"
-msgstr ""
+msgstr "Sportarten, Sportspiele"
 
 #: model-gettext.py:108
 #, fuzzy
-#| msgid "Other literatures"
 msgid "Other Germanic literatures"
 msgstr "Literaturen anderer Sprachen"
 
 #: model-gettext.py:109
 msgid "Germany & neighboring central European countries"
-msgstr ""
+msgstr "Mitteleuropa, Deutschland"
 
 #: model-gettext.py:110
 msgid "Creative Commons 1.0 Universal (CC0 1.0) Public Domain Dedication"
@@ -1130,13 +1127,11 @@ msgstr "Andere freie Lizenz"
 
 #: model-gettext.py:118
 #, fuzzy
-#| msgid "Creative Commons Attribution-NonCommerical 4.0 International (CC BY-NC 4.0)"
 msgid "Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)"
 msgstr "Creative Commons Namensnennung - Nicht kommerziell 4.0 International (CC BY-NC 4.0)"
 
 #: model-gettext.py:119
 #, fuzzy
-#| msgid "Creative Commons Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0)"
 msgid "Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)"
 msgstr "Creative Commons Namensnennung - Keine Bearbeitungen 4.0 International (CC BY-ND 4.0)"
 
@@ -1166,13 +1161,12 @@ msgstr "OSF wird vom Center for Open Science betrieben und ermöglicht es dir, P
 
 #: model-gettext.py:126
 #, fuzzy
-#| msgid "preprint"
 msgid "TUprints"
 msgstr "Preprint"
 
 #: model-gettext.py:127
 msgid "TUprints is the open access repository for all current and former members of the Technical University Darmstadt."
-msgstr ""
+msgstr "TUprints ist das Open Access Repositorium für alle aktuellen und ehemaligen Angehörige und Mitglieder der TU Darmstadt."
 
 #: notification/models.py:62
 msgid "inboxes"
@@ -1473,7 +1467,7 @@ msgstr "<p>Die Publikation wurde hochgeladen auf <a class=\"alert-link\" href=\"
 
 #: papers/templates/papers/paper.html:90
 msgid "Letter of Declaration needed!"
-msgstr "Autorenerkläarung nötig!"
+msgstr "Autorenerklärung nötig!"
 
 #: papers/templates/papers/paper.html:93
 #, python-format
@@ -2823,3 +2817,4 @@ msgstr "Authentifizierungsfehler"
 #, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr "Authentifizierung fehlgeschlagen. <a href=\"%(account-login)s\">Zurück zur Anmeldeseite gehen.</a>"
+

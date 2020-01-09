@@ -12,13 +12,14 @@
 #
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-07 14:39+0100\n"
-"PO-Revision-Date: 2020-01-06 16:41:08+0000\n"
+"PO-Revision-Date: 2020-01-09 19:06:59+0000\n"
 "Language: pt\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2019-12-18 15:15:00+0000\n"
+"X-POT-Import-Date: 2020-01-07 15:30:33+0000\n"
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -1077,13 +1078,11 @@ msgstr "História de outras áreas"
 
 #: model-gettext.py:101
 #, fuzzy
-#| msgid "Computer science"
 msgid "Data processing & computer science"
 msgstr "Informática"
 
 #: model-gettext.py:102
 #, fuzzy
-#| msgid "Political science"
 msgid "Military science"
 msgstr "Ciência política"
 
@@ -1185,10 +1184,8 @@ msgid "Run by the Center for Open Science, OSF lets you share your preprints ope
 msgstr ""
 
 #: model-gettext.py:126
-#, fuzzy
-#| msgid "preprint"
 msgid "TUprints"
-msgstr "pré-publicação"
+msgstr "TUprints"
 
 #: model-gettext.py:127
 msgid "TUprints is the open access repository for all current and former members of the Technical University Darmstadt."
@@ -1833,11 +1830,7 @@ msgstr ""
 #: papers/views.py:278
 #, fuzzy
 msgid "Invalid ORCID profile. Please make sure it includes a public name."
-msgstr ""
-"\n"
-"                            Perfil ORCID inválido.\n"
-"                            Por favor, certifique-se se incluiu um nome público.\n"
-"                            "
+msgstr "\n                            Perfil ORCID inválido.\n                            Por favor, certifique-se se incluiu um nome público.\n                            "
 
 #: papers/views.py:281
 msgid "Invalid ORCID profile."
@@ -2160,10 +2153,7 @@ msgstr "Página não encontrada"
 #: website/templates/404.html:13
 #, fuzzy, python-format
 msgid "The page you requested could not be found. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr ""
-"\n"
-"            Não foi possível encontrar a página solicitada. <a href=\"/\">Volte para a página inicial.</a>\n"
-"           "
+msgstr "\n            Não foi possível encontrar a página solicitada. <a href=\"/\">Volte para a página inicial.</a>\n           "
 
 #: website/templates/500.html:6 website/templates/500.html:10
 msgid "Internal server error"
@@ -2876,7 +2866,5 @@ msgstr "Erro de autenticação"
 #: website/templates/socialaccount/authentication_error.html:15
 #, fuzzy, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
-msgstr ""
-"\n"
-"            Ocorreu um erro na autenticação. <a href=\"/\">Volte para a página de iniciar sessão.</a>\n"
-"           "
+msgstr "\n            Ocorreu um erro na autenticação. <a href=\"/\">Volte para a página de iniciar sessão.</a>\n           "
+

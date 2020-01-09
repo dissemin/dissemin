@@ -11,13 +11,14 @@
 #
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-07 14:39+0100\n"
-"PO-Revision-Date: 2019-12-19 14:06:19+0000\n"
+"PO-Revision-Date: 2020-01-09 19:06:56+0000\n"
 "Language: br\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2019-12-18 15:15:00+0000\n"
+"X-POT-Import-Date: 2020-01-07 15:30:33+0000\n"
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
@@ -1084,19 +1085,16 @@ msgstr "Istor Azia"
 
 #: model-gettext.py:101
 #, fuzzy
-#| msgid "Computer science"
 msgid "Data processing & computer science"
 msgstr "Urzhiataerezh"
 
 #: model-gettext.py:102
 #, fuzzy
-#| msgid "Political science"
 msgid "Military science"
 msgstr "Skiantoù politikel"
 
 #: model-gettext.py:103
 #, fuzzy
-#| msgid "Other languages"
 msgid "Other Germanic languages"
 msgstr "Yezhoù all"
 
@@ -1118,7 +1116,6 @@ msgstr ""
 
 #: model-gettext.py:108
 #, fuzzy
-#| msgid "Other literatures"
 msgid "Other Germanic literatures"
 msgstr "Lennegezhioù all"
 
@@ -1197,7 +1194,6 @@ msgstr ""
 
 #: model-gettext.py:126
 #, fuzzy
-#| msgid "preprint"
 msgid "TUprints"
 msgstr "rakembann"
 
@@ -1486,10 +1482,7 @@ msgstr "Embannet e"
 #: papers/templates/papers/paper.html:56
 #, fuzzy, python-format
 msgid "and <a href=\"#\" id=\"showAllAuthors\">%(nb_remaining_authors)s other authors.</a>"
-msgstr ""
-"\n"
-"            et <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s aozerien all</a>\n"
-"            "
+msgstr "\n            et <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s aozerien all</a>\n            "
 
 #: papers/templates/papers/paper.html:62
 msgid "Show less"
@@ -2880,3 +2873,4 @@ msgstr ""
 #, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr ""
+

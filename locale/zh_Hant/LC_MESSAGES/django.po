@@ -10,10 +10,11 @@
 #
 msgid ""
 msgstr ""
+""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-07 14:39+0100\n"
-"PO-Revision-Date: 2019-12-19 14:06:33+0000\n"
+"PO-Revision-Date: 2020-01-09 19:07:00+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: zh_hant\n"
@@ -21,7 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-POT-Import-Date: 2019-12-18 15:15:00+0000\n"
+"X-POT-Import-Date: 2020-01-07 15:30:33+0000\n"
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 
 #: autocomplete/views.py:81
@@ -1054,48 +1055,40 @@ msgid "History of other areas"
 msgstr "其它地區歷史"
 
 #: model-gettext.py:101
-#, fuzzy
-#| msgid "Computer science"
 msgid "Data processing & computer science"
-msgstr "電腦科學"
+msgstr "資料處理與電腦科學"
 
 #: model-gettext.py:102
-#, fuzzy
-#| msgid "Political science"
 msgid "Military science"
-msgstr "政治學"
+msgstr "軍事學"
 
 #: model-gettext.py:103
-#, fuzzy
-#| msgid "Other languages"
 msgid "Other Germanic languages"
-msgstr "其它語言"
+msgstr "其它日耳曼語言"
 
 #: model-gettext.py:104
 msgid "Public performances"
-msgstr ""
+msgstr "公開演出"
 
 #: model-gettext.py:105
 msgid "Stage presentations"
-msgstr ""
+msgstr "舞台表演"
 
 #: model-gettext.py:106
 msgid "Indoor games & amusements"
-msgstr ""
+msgstr "室內遊戲與消遣"
 
 #: model-gettext.py:107
 msgid "Athletic & outdoor sports & games"
-msgstr ""
+msgstr "體育與戶外運動與比賽"
 
 #: model-gettext.py:108
-#, fuzzy
-#| msgid "Other literatures"
 msgid "Other Germanic literatures"
-msgstr "其它文獻"
+msgstr "其它日耳曼文學"
 
 #: model-gettext.py:109
 msgid "Germany & neighboring central European countries"
-msgstr ""
+msgstr "德國與鄰近的中歐國家"
 
 #: model-gettext.py:110
 msgid "Creative Commons 1.0 Universal (CC0 1.0) Public Domain Dedication"
@@ -1126,16 +1119,12 @@ msgid "Other open license"
 msgstr "其它開放授權"
 
 #: model-gettext.py:118
-#, fuzzy
-#| msgid "Creative Commons Attribution-NonCommerical 4.0 International (CC BY-NC 4.0)"
 msgid "Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)"
-msgstr "創用 CC 姓名標示非商業性使用 4.0 國際（CC BY 4.0）"
+msgstr "創用 CC 姓名標示-非商業性-相同方式分享 4.0 國際（CC BY 4.0）"
 
 #: model-gettext.py:119
-#, fuzzy
-#| msgid "Creative Commons Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0)"
 msgid "Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)"
-msgstr "創用 CC 姓名標示禁止改作 4.0 國際（CC BY 4.0）"
+msgstr "創用 CC 姓名標示-非商業性-禁止改作 4.0 國際（CC BY 4.0）"
 
 #: model-gettext.py:120
 msgid "Zenodo"
@@ -1162,14 +1151,12 @@ msgid "Run by the Center for Open Science, OSF lets you share your preprints ope
 msgstr "由開放科學中心運行，OSF 讓您可公開共享您的預刊本。您也可以分享與您的文章相關的補充資料、素材、或是代碼。"
 
 #: model-gettext.py:126
-#, fuzzy
-#| msgid "preprint"
 msgid "TUprints"
-msgstr "預印本"
+msgstr "TUprints"
 
 #: model-gettext.py:127
 msgid "TUprints is the open access repository for all current and former members of the Technical University Darmstadt."
-msgstr ""
+msgstr "TUprints 是讓達姆施塔特工業大學所有現任與前任成員使用的開放取用知識庫。"
 
 #: notification/models.py:62
 msgid "inboxes"
@@ -2469,9 +2456,7 @@ msgstr "然後，目前 Dissemin 僅支援遵循<a href=\"https://www.openarchiv
 
 #: website/templates/dissemin/faq.html:448
 msgid "If the repository is registered in BASE, please <a href=\"https://www.base-search.net/\">search in BASE</a> to check that your article is there. If it is, then this may be a bug of Dissemin; please file an <a href=\"https://github.com/dissemin/dissemin/issues\">issue</a> describing the problem, or send a message to <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>."
-msgstr ""
-"如果知識庫已經註冊到 BASE，請<a href=\"https://www.base-search.net/\">在 BASE 裡搜尋</a>來查看您的文章是否有出現。如果有找到的話，這可能是\n"
-" Dissemin 有程式錯誤，請在<a href=\"https://github.com/dissemin/dissemin/issues\">這裡</a>提出來描述問題，或是寄送訊息到 <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>。"
+msgstr "如果知識庫已經註冊到 BASE，請<a href=\"https://www.base-search.net/\">在 BASE 裡搜尋</a>來查看您的文章是否有出現。如果有找到的話，這可能是\n Dissemin 有程式錯誤，請在<a href=\"https://github.com/dissemin/dissemin/issues\">這裡</a>提出來描述問題，或是寄送訊息到 <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>。"
 
 #: website/templates/dissemin/faq.html:462
 msgid "Authenticating users is necessary to deposit papers on their behalf in open repositories. Besides, knowing a user's ORCID id helps us find its publications, avoiding articles authored by namesakes for instance. Logging in via ORCID will not expose any private information to Dissemin: we only have access to the public part of your ORCID record. For instance, unless you have explicitly marked your email address as public, we do not even know your email address when you log in to Dissemin via ORCID."
@@ -2503,9 +2488,7 @@ msgstr "點擊「新增至 ORCID」（Add to ORCID）來新增您的出版項目
 
 #: website/templates/dissemin/faq.html:503
 msgid "You can also add publications to your profile <em>on Dissemin</em>, by clicking the button \"Include in my profile\" in search results on Dissemin. (This button is only visible when you are logged in, and next to papers that Dissemin thinks you have authored.) You can also exclude articles from your profile in this way. Please note that these changes are local to Dissemin and are <em>not</em> propagated to your ORCID profile, because ORCID does not have a free API allowing us to propagate them."
-msgstr ""
-"您也可以<em>在 Dissemin</em> 來新增出版項目道您的個人檔案，透過在 Dissemin 搜尋結果中點擊「包含在我的個人檔案」按鍵即可。（此按鍵是要您已經有登入，而且只顯示在有被 Dissemin 判斷出是由您所編寫之論文的一旁。）您也可以用此方式在您個人檔案裡排除不需要的文章。請注意這些變動僅侷限於\n"
-"Dissemin 而<em>不會</em>影響到您的 ORCID 個人檔案，因為 ORCID 並沒有可以讓我們自由使用來更改它們內容的 API。"
+msgstr "您也可以<em>在 Dissemin</em> 來新增出版項目道您的個人檔案，透過在 Dissemin 搜尋結果中點擊「包含在我的個人檔案」按鍵即可。（此按鍵是要您已經有登入，而且只顯示在有被 Dissemin 判斷出是由您所編寫之論文的一旁。）您也可以用此方式在您個人檔案裡排除不需要的文章。請注意這些變動僅侷限於\nDissemin 而<em>不會</em>影響到您的 ORCID 個人檔案，因為 ORCID 並沒有可以讓我們自由使用來更改它們內容的 API。"
 
 #: website/templates/dissemin/faq.html:512
 #, python-format
@@ -2819,3 +2802,4 @@ msgstr "驗證錯誤"
 #, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr "驗證失敗。<a href=\"%(account-login)s\">返回登入頁面。</a>"
+

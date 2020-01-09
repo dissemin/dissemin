@@ -12,13 +12,14 @@
 #
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-07 14:39+0100\n"
-"PO-Revision-Date: 2020-01-02 13:32:00+0000\n"
+"PO-Revision-Date: 2020-01-09 19:06:57+0000\n"
 "Language: fi\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2019-12-18 15:15:00+0000\n"
+"X-POT-Import-Date: 2020-01-07 15:30:33+0000\n"
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -711,7 +712,7 @@ msgstr "Euroopanportugali"
 
 #: dissemin/settings/common.py:320
 msgid "Swedish"
-msgstr "Ruotsi"
+msgstr "ruotsi"
 
 #: model-gettext.py:2
 msgid "Computer science, knowledge & systems"
@@ -1064,19 +1065,16 @@ msgstr "Muiden alueiden historia"
 
 #: model-gettext.py:101
 #, fuzzy
-#| msgid "Computer science"
 msgid "Data processing & computer science"
 msgstr "Tietojenkäsittelytiede"
 
 #: model-gettext.py:102
 #, fuzzy
-#| msgid "Political science"
 msgid "Military science"
 msgstr "Valtiotiede"
 
 #: model-gettext.py:103
 #, fuzzy
-#| msgid "Other languages"
 msgid "Other Germanic languages"
 msgstr "Muut kielet"
 
@@ -1098,7 +1096,6 @@ msgstr ""
 
 #: model-gettext.py:108
 #, fuzzy
-#| msgid "Other literatures"
 msgid "Other Germanic literatures"
 msgstr "Muu kirjallisuus"
 
@@ -1136,13 +1133,11 @@ msgstr "Muu avoin lisenssi"
 
 #: model-gettext.py:118
 #, fuzzy
-#| msgid "Creative Commons Attribution-NonCommerical 4.0 International (CC BY-NC 4.0)"
 msgid "Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)"
 msgstr "Creative Commons Nimeä-EiKaupallinen 4.0 Kansainvälinen (CC BY-NC 4.0)"
 
 #: model-gettext.py:119
 #, fuzzy
-#| msgid "Creative Commons Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0)"
 msgid "Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)"
 msgstr "Creative Commons Nimeä-EiMuutoksia 4.0 Kansainvälinen (CC BY-ND 4.0)"
 
@@ -1173,7 +1168,6 @@ msgstr ""
 
 #: model-gettext.py:126
 #, fuzzy
-#| msgid "preprint"
 msgid "TUprints"
 msgstr "koevedos"
 
@@ -2136,10 +2130,7 @@ msgstr "Pääsy PDF-tiedostoon kiellettiin."
 #: website/templates/403.html:13
 #, fuzzy, python-format
 msgid "The access to the requested page has been denied. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr ""
-"\n"
-"            Pyytämääsi sivua ei löytynyt. <a href=\"/\">Palaa kotisivulle.</a>\n"
-"           "
+msgstr "\n            Pyytämääsi sivua ei löytynyt. <a href=\"/\">Palaa kotisivulle.</a>\n           "
 
 #: website/templates/404.html:6 website/templates/404.html:10
 msgid "Page not found"
@@ -2846,3 +2837,4 @@ msgstr "Todennusvirhe"
 #, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr "Todennus epäonnistui. <a href=\"%(account-login)s\">Palaa kirjautumissivulle.</a>"
+

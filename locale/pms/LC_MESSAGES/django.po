@@ -10,13 +10,14 @@
 #
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-07 14:39+0100\n"
-"PO-Revision-Date: 2019-12-23 14:46:34+0000\n"
+"PO-Revision-Date: 2020-01-09 19:06:59+0000\n"
 "Language: pms\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2019-12-18 15:15:00+0000\n"
+"X-POT-Import-Date: 2020-01-07 15:30:33+0000\n"
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -1050,22 +1051,16 @@ msgid "History of other areas"
 msgstr "Stòria d'àutre àree"
 
 #: model-gettext.py:101
-#, fuzzy
-#| msgid "Computer science"
 msgid "Data processing & computer science"
-msgstr "Anformàtica"
+msgstr "Tratament dij dàit e anformàtica"
 
 #: model-gettext.py:102
-#, fuzzy
-#| msgid "Political science"
 msgid "Military science"
-msgstr "Siense polìtiche"
+msgstr "Siensa militar"
 
 #: model-gettext.py:103
-#, fuzzy
-#| msgid "Other languages"
 msgid "Other Germanic languages"
-msgstr "Àutre lenghe"
+msgstr "Àutre lenghe germàniche"
 
 #: model-gettext.py:104
 msgid "Public performances"
@@ -1084,10 +1079,8 @@ msgid "Athletic & outdoor sports & games"
 msgstr ""
 
 #: model-gettext.py:108
-#, fuzzy
-#| msgid "Other literatures"
 msgid "Other Germanic literatures"
-msgstr "Àutre literature"
+msgstr "Àutre literature germàniche"
 
 #: model-gettext.py:109
 msgid "Germany & neighboring central European countries"
@@ -1122,16 +1115,12 @@ msgid "Other open license"
 msgstr "Àutra licensa lìbera"
 
 #: model-gettext.py:118
-#, fuzzy
-#| msgid "Creative Commons Attribution-NonCommerical 4.0 International (CC BY-NC 4.0)"
 msgid "Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)"
-msgstr "Creative Commons CC-By Atribussion nen comersial 4.0 Antërnassional (CC BY-NC 4.0)"
+msgstr "Creative Commons Attribution - Nen comersial - Partagi ant j'istesse condission 4.0 Antërnassional (CC BY-NC-SA 4.0)"
 
 #: model-gettext.py:119
-#, fuzzy
-#| msgid "Creative Commons Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0)"
 msgid "Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)"
-msgstr "Creative Commons Atribussion gnun derivà 4.0 Antërnassional (CC BY-ND 4.0)"
+msgstr "Creative Commons Attribution - Nen comersial - Gnun derivà 4.0 Antërnassional (CC BY-NC-ND 4.0)"
 
 #: model-gettext.py:120
 msgid "Zenodo"
@@ -1158,10 +1147,8 @@ msgid "Run by the Center for Open Science, OSF lets you share your preprints ope
 msgstr "Masentà dal Sènter për na Siensa Duverta, OSF a-j lassa partagé liberaman soe prepublicassion. A peul ëdcò partagé dij dàit adissionaj, dij materiaj o dël còdes associà a sò artìcol."
 
 #: model-gettext.py:126
-#, fuzzy
-#| msgid "preprint"
 msgid "TUprints"
-msgstr "prepublicassion"
+msgstr "TUprints"
 
 #: model-gettext.py:127
 msgid "TUprints is the open access repository for all current and former members of the Technical University Darmstadt."
@@ -2812,3 +2799,4 @@ msgstr "Eror d'autentificassion"
 #, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr "L'autentificassion a l'ha falì. <a href=\"%(account-login)s\">Torné a la pàgina d'intrada.</a>"
+

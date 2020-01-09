@@ -8,9 +8,10 @@
 #
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-07 14:39+0100\n"
-"PO-Revision-Date: 2019-12-16 14:53:36+0000\n"
+"PO-Revision-Date: 2020-01-09 19:06:56+0000\n"
 "Language: zh_hant\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -102,3 +103,4 @@ msgstr "Dissemin 出現錯誤，請稍後再試。"
 #: website/static/js/moment.min.js:1
 msgid ": "
 msgstr ": "
+

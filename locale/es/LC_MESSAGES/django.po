@@ -16,13 +16,14 @@
 #
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-07 14:39+0100\n"
-"PO-Revision-Date: 2020-01-02 13:32:00+0000\n"
+"PO-Revision-Date: 2020-01-09 19:06:57+0000\n"
 "Language: es\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2019-12-18 15:15:00+0000\n"
+"X-POT-Import-Date: 2020-01-07 15:30:33+0000\n"
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -542,9 +543,7 @@ msgstr "Depósitos"
 #: deposit/templates/deposit/start.html:64
 #, fuzzy, python-format
 msgid "You can deposit the full text of your article. Dissemin will send it to a repository where it will be made freely available. By depositing your article via Dissemin, you agree to our <a href=\"%(tosurl)s\">terms of service</a>."
-msgstr ""
-"\n"
-"             Puede depositar el texto entero de su articulo. Dissemin va enviarlo a un repositorio donde sera disponible gratuido. Depositar su articulo via Dissemin, sera de acuerdo con nuestro <a href=\"%(tosurl)s\">termes de servicio</a>"
+msgstr "\n             Puede depositar el texto entero de su articulo. Dissemin va enviarlo a un repositorio donde sera disponible gratuido. Depositar su articulo via Dissemin, sera de acuerdo con nuestro <a href=\"%(tosurl)s\">termes de servicio</a>"
 
 #: deposit/templates/deposit/start.html:73
 msgid "You do not appear to be one of the authors of this paper. By using this form, you certify that you have the permission to upload it on their behalf."
@@ -1067,22 +1066,16 @@ msgid "History of other areas"
 msgstr "Historias de otras áreas"
 
 #: model-gettext.py:101
-#, fuzzy
-#| msgid "Computer science"
 msgid "Data processing & computer science"
-msgstr "Informática"
+msgstr "Procesamiento de datos y ciencias de la computación"
 
 #: model-gettext.py:102
-#, fuzzy
-#| msgid "Political science"
 msgid "Military science"
-msgstr "Ciencias políticas"
+msgstr "Ciencia militar"
 
 #: model-gettext.py:103
-#, fuzzy
-#| msgid "Other languages"
 msgid "Other Germanic languages"
-msgstr "Otras lenguas"
+msgstr "Otras lenguas germánicas"
 
 #: model-gettext.py:104
 msgid "Public performances"
@@ -1101,14 +1094,12 @@ msgid "Athletic & outdoor sports & games"
 msgstr ""
 
 #: model-gettext.py:108
-#, fuzzy
-#| msgid "Other literatures"
 msgid "Other Germanic literatures"
-msgstr "Otras literaturas"
+msgstr "Otras literaturas germánicas"
 
 #: model-gettext.py:109
 msgid "Germany & neighboring central European countries"
-msgstr ""
+msgstr "Alemania y países vecinos de Europa central"
 
 #: model-gettext.py:110
 msgid "Creative Commons 1.0 Universal (CC0 1.0) Public Domain Dedication"
@@ -1178,14 +1169,12 @@ msgid "Run by the Center for Open Science, OSF lets you share your preprints ope
 msgstr ""
 
 #: model-gettext.py:126
-#, fuzzy
-#| msgid "preprint"
 msgid "TUprints"
-msgstr "versión original"
+msgstr "TUprints"
 
 #: model-gettext.py:127
 msgid "TUprints is the open access repository for all current and former members of the Technical University Darmstadt."
-msgstr ""
+msgstr "TUprints es el repositorio de acceso abierto para los miembros y exmiembros de la Universidad Técnica de Darmstadt."
 
 #: notification/models.py:62
 msgid "inboxes"
@@ -1461,10 +1450,7 @@ msgstr "Publicado en"
 #: papers/templates/papers/paper.html:56
 #, fuzzy, python-format
 msgid "and <a href=\"#\" id=\"showAllAuthors\">%(nb_remaining_authors)s other authors.</a>"
-msgstr ""
-"\n"
-"            y <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s otros autores</a>\n"
-"            "
+msgstr "\n            y <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s otros autores</a>\n            "
 
 #: papers/templates/papers/paper.html:62
 msgid "Show less"
@@ -2149,12 +2135,9 @@ msgid "Page not found"
 msgstr "No se encuentra la página"
 
 #: website/templates/404.html:13
-#, fuzzy, python-format
+#, python-format
 msgid "The page you requested could not be found. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr ""
-"\n"
-"            Falló la autenticación. <a href=\"/\">Volver a la página de acceso.</a>\n"
-"           "
+msgstr "No se pudo encontrar la página solicitada. <a href=\"%(index)s\">Volver a la página de inicio.</a>"
 
 #: website/templates/500.html:6 website/templates/500.html:10
 msgid "Internal server error"
@@ -2861,3 +2844,4 @@ msgstr "Error de autenticación"
 #, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr "Falló la autenticación. <a href=\"%(account-login)s\">Volver a la página de acceso.</a>"
+

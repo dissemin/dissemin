@@ -10,13 +10,14 @@
 #
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-07 14:39+0100\n"
-"PO-Revision-Date: 2019-12-19 14:06:18+0000\n"
+"PO-Revision-Date: 2020-01-09 19:06:56+0000\n"
 "Language: ast\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2019-12-18 15:15:00+0000\n"
+"X-POT-Import-Date: 2020-01-07 15:30:33+0000\n"
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -1068,13 +1069,11 @@ msgstr "Historia d'Asia"
 
 #: model-gettext.py:101
 #, fuzzy
-#| msgid "Computer science"
 msgid "Data processing & computer science"
 msgstr "Ciencies informátiques"
 
 #: model-gettext.py:102
 #, fuzzy
-#| msgid "Political science"
 msgid "Military science"
 msgstr "Ciencies polítiques"
 
@@ -1101,7 +1100,6 @@ msgstr ""
 
 #: model-gettext.py:108
 #, fuzzy
-#| msgid "Other literatures"
 msgid "Other Germanic literatures"
 msgstr "Otres lliteratures"
 
@@ -1139,13 +1137,11 @@ msgstr "Otra llicencia abierta"
 
 #: model-gettext.py:118
 #, fuzzy
-#| msgid "Creative Commons Attribution-NonCommerical 4.0 International (CC BY-NC 4.0)"
 msgid "Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)"
 msgstr "Creative Commons Attribution-NonCommerical 4.0 Internacional (CC BY-NC 4.0)"
 
 #: model-gettext.py:119
 #, fuzzy
-#| msgid "Creative Commons Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0)"
 msgid "Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)"
 msgstr "Creative Commons Attribution-NoDerivatives 4.0 Internacional (CC BY-ND 4.0)"
 
@@ -1175,10 +1171,8 @@ msgid "Run by the Center for Open Science, OSF lets you share your preprints ope
 msgstr ""
 
 #: model-gettext.py:126
-#, fuzzy
-#| msgid "preprint"
 msgid "TUprints"
-msgstr "preimpresión"
+msgstr "TUprints"
 
 #: model-gettext.py:127
 msgid "TUprints is the open access repository for all current and former members of the Technical University Darmstadt."
@@ -2851,3 +2845,4 @@ msgstr ""
 #, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr ""
+

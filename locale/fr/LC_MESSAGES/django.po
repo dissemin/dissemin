@@ -6,6 +6,7 @@
 # Author: Fitoschido
 # Author: Gomoko
 # Author: Lyokoï
+# Author: Pols12
 # Author: Thibaut120094
 # Author: Urhixidur
 # Author: Verdy p
@@ -16,10 +17,11 @@
 #
 msgid ""
 msgstr ""
+""
 "Project-Id-Version: dissem.in\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-07 14:39+0100\n"
-"PO-Revision-Date: 2019-12-19 14:06:24+0000\n"
+"PO-Revision-Date: 2020-01-09 19:06:58+0000\n"
 "Last-Translator: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language-Team: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language: fr\n"
@@ -28,7 +30,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
-"X-POT-Import-Date: 2019-12-18 15:15:00+0000\n"
+"X-POT-Import-Date: 2020-01-07 15:30:33+0000\n"
 
 #: autocomplete/views.py:81
 msgid "Current institutions"
@@ -1061,48 +1063,40 @@ msgid "History of other areas"
 msgstr "Histoire des autres domaines"
 
 #: model-gettext.py:101
-#, fuzzy
-#| msgid "Computer science"
 msgid "Data processing & computer science"
-msgstr "Informatique"
+msgstr "Traitement des données et informatique"
 
 #: model-gettext.py:102
-#, fuzzy
-#| msgid "Political science"
 msgid "Military science"
-msgstr "Science politique"
+msgstr "Science militaire"
 
 #: model-gettext.py:103
-#, fuzzy
-#| msgid "Other languages"
 msgid "Other Germanic languages"
-msgstr "Autres langues"
+msgstr "Autres langues germaniques"
 
 #: model-gettext.py:104
 msgid "Public performances"
-msgstr ""
+msgstr "Performances publiques"
 
 #: model-gettext.py:105
 msgid "Stage presentations"
-msgstr ""
+msgstr "Présentations d’étape"
 
 #: model-gettext.py:106
 msgid "Indoor games & amusements"
-msgstr ""
+msgstr "Jeux en intérieur & divertissements"
 
 #: model-gettext.py:107
 msgid "Athletic & outdoor sports & games"
-msgstr ""
+msgstr "Sports et jeux athlétiques et extérieurs"
 
 #: model-gettext.py:108
-#, fuzzy
-#| msgid "Other literatures"
 msgid "Other Germanic literatures"
-msgstr "Autres littératures"
+msgstr "Autres littératures germaniques"
 
 #: model-gettext.py:109
 msgid "Germany & neighboring central European countries"
-msgstr ""
+msgstr "Allemagne et pays voisins d’Europe centrale"
 
 #: model-gettext.py:110
 msgid "Creative Commons 1.0 Universal (CC0 1.0) Public Domain Dedication"
@@ -1133,16 +1127,12 @@ msgid "Other open license"
 msgstr "Autre licence libre"
 
 #: model-gettext.py:118
-#, fuzzy
-#| msgid "Creative Commons Attribution-NonCommerical 4.0 International (CC BY-NC 4.0)"
 msgid "Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)"
-msgstr "Creative Commons Attribution – Pas d’utilisation commerciale 4.0 International (CC BY-NC 4.0)"
+msgstr "Creative Commons Attribution – Utilisation non commerciale – Partage dans les mêmes conditions 4.0 International (CC BY-NC-SA 4.0)"
 
 #: model-gettext.py:119
-#, fuzzy
-#| msgid "Creative Commons Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0)"
 msgid "Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)"
-msgstr "Creative Commons Attribution – Pas de modification 4.0 International (CC BY-ND 4.0)"
+msgstr "Creative Commons Attribution – Utilisation non commerciale – Pas d’œuvre dérivée 4.0 International (CC BY-NC-ND 4.0)"
 
 #: model-gettext.py:120
 msgid "Zenodo"
@@ -1169,14 +1159,12 @@ msgid "Run by the Center for Open Science, OSF lets you share your preprints ope
 msgstr "Exécuté par le Center for Open Science (« centre pour une science ouverte »), l’OSF vous laisse partager librement vos prépublications. Vous pouvez aussi partager des données supplémentaires, des matériaux ou du code associé à votre article."
 
 #: model-gettext.py:126
-#, fuzzy
-#| msgid "preprint"
 msgid "TUprints"
-msgstr "prépublication"
+msgstr "TUprints"
 
 #: model-gettext.py:127
 msgid "TUprints is the open access repository for all current and former members of the Technical University Darmstadt."
-msgstr ""
+msgstr "TUprints est le dépôt en accès ouvert pour tous les membres actuels et passés de l’Université de technologie de Darmstadt."
 
 #: notification/models.py:62
 msgid "inboxes"
@@ -2827,3 +2815,4 @@ msgstr "Erreur d’authentification"
 #, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr "L’authentification a échoué. <a href=\"%(account-login)s\">Revenir à la page de connexion.</a>"
+

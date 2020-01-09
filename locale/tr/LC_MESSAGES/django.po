@@ -14,13 +14,14 @@
 #
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-07 14:39+0100\n"
-"PO-Revision-Date: 2019-12-31 06:25:08+0000\n"
+"PO-Revision-Date: 2020-01-09 19:07:00+0000\n"
 "Language: tr\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2019-12-18 15:15:00+0000\n"
+"X-POT-Import-Date: 2020-01-07 15:30:33+0000\n"
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
@@ -711,16 +712,14 @@ msgid "Swedish"
 msgstr "İsveççe"
 
 #: model-gettext.py:2
-#, fuzzy
 msgid "Computer science, knowledge & systems"
-msgstr "Bilgisayar bilimi"
+msgstr "Bilgisayar bilimi, bilgi ve sistemleri"
 
 #: model-gettext.py:3
 msgid "Bibliographies"
 msgstr "Kaynakçalar"
 
 #: model-gettext.py:4
-#, fuzzy
 msgid "Library & information sciences"
 msgstr "Kütüphane ve enformasyon bilimleri"
 
@@ -741,13 +740,12 @@ msgid "News media, journalism & publishing"
 msgstr "Haber medyası, gazetecilik ve yayıncılık"
 
 #: model-gettext.py:9
-#, fuzzy
 msgid "Quotations"
-msgstr "Eğitim"
+msgstr "Alıntılar"
 
 #: model-gettext.py:10
 msgid "Manuscripts & rare books"
-msgstr ""
+msgstr "El yazmaları ve nadir kitaplar"
 
 #: model-gettext.py:12
 msgid "Metaphysics"
@@ -759,7 +757,7 @@ msgstr "Epistemoloji"
 
 #: model-gettext.py:14
 msgid "Parapsychology & occultism"
-msgstr ""
+msgstr "Parapsikoloji ve büyü"
 
 #: model-gettext.py:15
 msgid "Philosophical schools of thought"
@@ -783,9 +781,8 @@ msgid "Modern western philosophy"
 msgstr "Eski, orta çağ ve doğu felsefesi"
 
 #: model-gettext.py:21
-#, fuzzy
 msgid "Religion"
-msgstr "Dinler"
+msgstr "Din"
 
 #: model-gettext.py:22
 msgid "Philosophy & theory of religion"
@@ -834,15 +831,15 @@ msgstr "Ekonomi"
 
 #: model-gettext.py:36
 msgid "Public administration & military science"
-msgstr ""
+msgstr "Kamu yönetimi ve askeri bilim"
 
 #: model-gettext.py:37
 msgid "Social problems & social services"
-msgstr ""
+msgstr "Sosyal sorunlar ve sosyal hizmetler"
 
 #: model-gettext.py:39
 msgid "Commerce, communications & transportation"
-msgstr ""
+msgstr "Ticaret, iletişim ve ulaşım"
 
 #: model-gettext.py:40
 msgid "Customs, etiquette & folklore"
@@ -850,7 +847,7 @@ msgstr "Gümrük, görgü kuralları ve folklor"
 
 #: model-gettext.py:41 website/templates/navbar.html:15
 msgid "Language"
-msgstr ""
+msgstr "Dil"
 
 #: model-gettext.py:43
 msgid "English & Old English languages"
@@ -889,9 +886,8 @@ msgid "Other languages"
 msgstr "Diğer edebiyatlar"
 
 #: model-gettext.py:51
-#, fuzzy
 msgid "Science"
-msgstr "Bilimsel alan"
+msgstr "Bilim"
 
 #: model-gettext.py:53
 msgid "Astronomy"
@@ -903,7 +899,7 @@ msgstr "Yer bilimleri ve jeoloji"
 
 #: model-gettext.py:57
 msgid "Fossils & prehistoric life"
-msgstr ""
+msgstr "Fosiller ve tarih öncesi yaşam"
 
 #: model-gettext.py:58
 msgid "Biology"
@@ -923,7 +919,7 @@ msgstr "Teknoloji"
 
 #: model-gettext.py:62
 msgid "Medicine & health"
-msgstr ""
+msgstr "Tıp ve sağlık"
 
 #: model-gettext.py:64
 msgid "Agriculture"
@@ -931,7 +927,7 @@ msgstr "Tarım"
 
 #: model-gettext.py:65
 msgid "Home & family management"
-msgstr ""
+msgstr "Ev ve aile yönetimi"
 
 #: model-gettext.py:66
 msgid "Management & public relations"
@@ -943,19 +939,19 @@ msgstr "Kimya Mühendisliği"
 
 #: model-gettext.py:68
 msgid "Manufacturing"
-msgstr ""
+msgstr "İmalat"
 
 #: model-gettext.py:69
 msgid "Manufacture for specific uses"
-msgstr ""
+msgstr "Özel kullanımlar için üretim"
 
 #: model-gettext.py:70
 msgid "Construction of buildings"
-msgstr ""
+msgstr "Bina inşaatı"
 
 #: model-gettext.py:71
 msgid "Arts"
-msgstr ""
+msgstr "Sanatlar"
 
 #: model-gettext.py:72
 msgid "Area planning & landscape architecture"
@@ -967,7 +963,7 @@ msgstr "Heykel, seramik ve metal işleri"
 
 #: model-gettext.py:75
 msgid "Graphic arts & decorative arts"
-msgstr ""
+msgstr "Grafik sanatlar ve dekoratif sanatlar"
 
 #: model-gettext.py:76
 msgid "Painting"
@@ -983,7 +979,7 @@ msgstr "Fotoğrafçılık, bilgisayar sanatı, film, video"
 
 #: model-gettext.py:79
 msgid "Music"
-msgstr ""
+msgstr "Müzik"
 
 #: model-gettext.py:80
 msgid "Sports, games & entertainment"
@@ -995,7 +991,7 @@ msgstr "Edebiyat, söylem ve eleştiri"
 
 #: model-gettext.py:82
 msgid "American literature in English"
-msgstr ""
+msgstr "İngiliz Amerikan edebiyatı"
 
 #: model-gettext.py:83
 #, fuzzy
@@ -1071,13 +1067,11 @@ msgstr "Kuzey Amerika Tarihi"
 
 #: model-gettext.py:101
 #, fuzzy
-#| msgid "Computer science"
 msgid "Data processing & computer science"
 msgstr "Bilgisayar bilimi"
 
 #: model-gettext.py:102
 #, fuzzy
-#| msgid "Political science"
 msgid "Military science"
 msgstr "Siyaset bilimi"
 
@@ -1088,57 +1082,52 @@ msgstr "Diğer edebiyatlar"
 
 #: model-gettext.py:104
 msgid "Public performances"
-msgstr ""
+msgstr "Kamu performansları"
 
 #: model-gettext.py:105
 msgid "Stage presentations"
-msgstr ""
+msgstr "Sahne sunumları"
 
 #: model-gettext.py:106
 msgid "Indoor games & amusements"
-msgstr ""
+msgstr "İç mekan oyunları ve eğlenceleri"
 
 #: model-gettext.py:107
 msgid "Athletic & outdoor sports & games"
-msgstr ""
+msgstr "Atletik ve açık hava sporları ve oyunları"
 
 #: model-gettext.py:108
 #, fuzzy
-#| msgid "Other literatures"
 msgid "Other Germanic literatures"
 msgstr "Diğer edebiyatlar"
 
 #: model-gettext.py:109
 msgid "Germany & neighboring central European countries"
-msgstr ""
+msgstr "Almanya ve komşu orta Avrupa ülkeleri"
 
 #: model-gettext.py:110
 msgid "Creative Commons 1.0 Universal (CC0 1.0) Public Domain Dedication"
-msgstr ""
+msgstr "Creative Commons 1.0 Evrensel (CC0 1.0) Kamusal Alan Adanmışlığı"
 
 #: model-gettext.py:111
-#, fuzzy
 msgid "Creative Commons Attribution 4.0 International (CC BY 4.0)"
-msgstr "Creative Commons Attribution (CC-BY)"
+msgstr "Creative Commons Atıf 4.0 Uluslararası (CC BY 4.0)"
 
 #: model-gettext.py:112
-#, fuzzy
 msgid "Creative Commons Attribution-ShareAlike 4.0, International (CC BY-SA 4.0)"
-msgstr "Creative Commons Attribution (CC-BY)"
+msgstr "Creative Commons Atıf-BenzerPaylaşım 4.0, Uluslararası (CC BY-SA 4.0)"
 
 #: model-gettext.py:113
-#, fuzzy
 msgid "Creative Commons Attribution-NonCommerical 4.0 International (CC BY-NC 4.0)"
-msgstr "Creative Commons Attribution (CC-BY)"
+msgstr "Creative Commons Atıf-TicariOlmayan 4.0 Uluslararası (CC BY-NC 4.0)"
 
 #: model-gettext.py:114
-#, fuzzy
 msgid "Creative Commons Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0)"
-msgstr "Creative Commons Attribution (CC-BY)"
+msgstr "Creative Commons Atıf-TürevYok 4.0 Uluslararası (CC BY-ND 4.0)"
 
 #: model-gettext.py:115
 msgid "Free for private use; right holder retains other rights, including distribution"
-msgstr ""
+msgstr "Özel kullanım için ücretsiz; hak sahibi dağıtım da dahil olmak üzere diğer haklarını saklı tutar"
 
 #: model-gettext.py:116
 msgid "Other open license"
@@ -1156,37 +1145,36 @@ msgstr "Creative Commons Attribution (CC-BY)"
 
 #: model-gettext.py:120
 msgid "Zenodo"
-msgstr ""
+msgstr "Zenodo"
 
 #: model-gettext.py:121
 msgid "Zenodo is a general-purpose open repository hosted by CERN. If the document does not have a DOI yet, Zenodo will create one."
-msgstr ""
+msgstr "Zenodo, CERN tarafından barındırılan genel amaçlı bir açık veri havuzudur. Belgede henüz bir DOI yoksa Zenodo bir tane oluşturur."
 
 #: model-gettext.py:122
 msgid "HAL"
-msgstr ""
+msgstr "HAL"
 
 #: model-gettext.py:123
 msgid "HAL is a  multidisciplinary open archive, sustained by the French Research Ministry."
-msgstr ""
+msgstr "HAL, Fransız Araştırma Bakanlığı tarafından sürdürülen çok disiplinli bir açık arşivdir."
 
 #: model-gettext.py:124
 msgid "OSF preprints"
-msgstr ""
+msgstr "OSF baskıları"
 
 #: model-gettext.py:125
 msgid "Run by the Center for Open Science, OSF lets you share your preprints openly. You can also share supplemental data, materials or code associated with your article."
-msgstr ""
+msgstr "Açık Bilim Merkezi tarafından işletilen OSF, baskılarınızı açıkça paylaşmanızı sağlar. Makalenizle ilişkili ek verileri, materyalleri veya kodu da paylaşabilirsiniz."
 
 #: model-gettext.py:126
 #, fuzzy
-#| msgid "preprint"
 msgid "TUprints"
 msgstr "ön baskı"
 
 #: model-gettext.py:127
 msgid "TUprints is the open access repository for all current and former members of the Technical University Darmstadt."
-msgstr ""
+msgstr "TUprints, Darmstadt Teknik Üniversitesi'nin tüm mevcut ve eski üyeleri için açık erişim deposudur."
 
 #: notification/models.py:62
 msgid "inboxes"
@@ -1617,22 +1605,22 @@ msgstr "Adres:"
 #: papers/templates/papers/researcher.html:51
 #, python-format
 msgid "Missing publications? <a href=\"%(matching_papers_url)s\">Search for publications with a matching author name.</a>"
-msgstr ""
+msgstr "Eksik yayınlar mı var? <a href=\"%(matching_papers_url)s\">Eşleşen yazar adına sahip yayınları arayın.</a>"
 
 #: papers/templates/papers/search.html:10
 #, python-format
 msgid "Missing publications? <a class=\"showHrefPrint\" href=\"%(faq_url)s#missingPaper\">Read more about our data sources.</a>"
-msgstr ""
+msgstr "Eksik yayınlar mı var? <a class=\"showHrefPrint\" href=\"%(faq_url)s#missingPaper\">Veri kaynaklarımız hakkında daha fazla bilgi edinin.</a>"
 
 #: papers/templates/papers/search_base.html:25
 #, python-format
 msgid "%(formattedCounter)s paper found"
 msgid_plural "%(formattedCounter)s papers found"
-msgstr[0] ""
+msgstr[0] "%(formattedCounter)s kağıt bulundu"
 
 #: papers/templates/papers/search_base.html:42
 msgid "Refine"
-msgstr ""
+msgstr "Geliştir"
 
 #: papers/templates/papers/search_base.html:46
 msgid "By title"
@@ -1640,192 +1628,192 @@ msgstr "Başlığa göre"
 
 #: papers/templates/papers/search_base.html:55
 msgid "By co-authors"
-msgstr ""
+msgstr "Ortak yazarlara göre"
 
 #: papers/templates/papers/search_base.html:57
 msgid "By authors"
-msgstr ""
+msgstr "Yazarlara göre"
 
 #: papers/templates/papers/search_base.html:66
 msgid "By publication date"
-msgstr ""
+msgstr "Yayınlanma tarihine göre"
 
 #: papers/templates/papers/search_base.html:68
 msgid "after"
-msgstr ""
+msgstr "sonra"
 
 #: papers/templates/papers/search_base.html:74
 msgid "before"
-msgstr ""
+msgstr "önce"
 
 #: papers/templates/papers/search_base.html:82
 msgid "By document type"
-msgstr ""
+msgstr "Belge türüne göre"
 
 #: papers/templates/papers/search_base.html:107 publishers/forms.py:31
 msgid "Sort by"
-msgstr ""
+msgstr "Sıralama"
 
 #: papers/templates/papers/search_base.html:122
 msgid "Refine for superusers"
-msgstr ""
+msgstr "Süper kullanıcılar için hassaslaştırma"
 
 #: papers/templates/papers/search_base.html:166
 msgid "Refreshing results"
-msgstr ""
+msgstr "Sonuçları yenileme"
 
 #: papers/templatetags/statuses.py:20 papers/templatetags/statuses.py:80
 msgid "Unknown OA status"
-msgstr ""
+msgstr "Bilinmeyen AE durumu"
 
 #: papers/templatetags/statuses.py:28
 msgid "Unknown PDF status"
-msgstr ""
+msgstr "Bilinmeyen PDF durumu"
 
 #: papers/templatetags/statuses.py:34
 msgid "Preprints can be archived."
-msgstr ""
+msgstr "Matbaalar arşivlenebilir."
 
 #: papers/templatetags/statuses.py:35
 msgid "Preprints cannot be archived."
-msgstr ""
+msgstr "Matbaalar arşivlenemez."
 
 #: papers/templatetags/statuses.py:36
 msgid "Under the restrictions below, preprints can be archived."
-msgstr ""
+msgstr "Aşağıdaki kısıtlamalar altında, hazır baskılar arşivlenebilir."
 
 #: papers/templatetags/statuses.py:37
 msgid "Preprints archiving policy unclear"
-msgstr ""
+msgstr "Arşivleme ilkesini net olmayan şekilde yazdırır"
 
 #: papers/templatetags/statuses.py:38
 msgid "Preprints archiving policy unknown"
-msgstr ""
+msgstr "Matbaa arşivleme politikası bilinmiyor"
 
 #: papers/templatetags/statuses.py:39
 msgid "Postprints can be archived."
-msgstr ""
+msgstr "Baskı sonrası arşivlenebilir."
 
 #: papers/templatetags/statuses.py:40
 msgid "Postprints cannot be archived."
-msgstr ""
+msgstr "Baskı sonrası arşivlenemez."
 
 #: papers/templatetags/statuses.py:41
 msgid "Under the restrictions below, postprints can be archived."
-msgstr ""
+msgstr "Aşağıdaki kısıtlamalar altında, baskılar arşivlenebilir."
 
 #: papers/templatetags/statuses.py:42
 msgid "Postprint archiving policy unclear."
-msgstr ""
+msgstr "Baskı sonrası arşivleme politikası net değil."
 
 #: papers/templatetags/statuses.py:43
 msgid "Postprint archiving policy unknown."
-msgstr ""
+msgstr "Baskı sonrası arşivleme politikası bilinmiyor."
 
 #: papers/templatetags/statuses.py:44
 msgid "Final versions can be archived."
-msgstr ""
+msgstr "Son sürümler arşivlenebilir."
 
 #: papers/templatetags/statuses.py:45
 msgid "Final versions cannot be archived."
-msgstr ""
+msgstr "Son sürümler arşivlenemez."
 
 #: papers/templatetags/statuses.py:46
 msgid "Under the restrictions below, final versions can be archived."
-msgstr ""
+msgstr "Aşağıdaki kısıtlamalar altında, son sürümler arşivlenebilir."
 
 #: papers/templatetags/statuses.py:47
 msgid "Final version archiving policy unclear."
-msgstr ""
+msgstr "Son sürüm arşivleme politikası net değil."
 
 #: papers/templatetags/statuses.py:48
 msgid "Final version archiving policy unknown."
-msgstr ""
+msgstr "Son sürüm arşivleme politikası bilinmiyor."
 
 #: papers/templatetags/statuses.py:50
 msgid "Unknown policy"
-msgstr ""
+msgstr "Bilinmeyen politika"
 
 #: papers/templatetags/statuses.py:56
 msgid "archiving allowed."
-msgstr ""
+msgstr "arşivlemeye izin verildi."
 
 #: papers/templatetags/statuses.py:57
 msgid "archiving forbidden."
-msgstr ""
+msgstr "arşivleme yasaktır."
 
 #: papers/templatetags/statuses.py:58
 msgid "archiving restricted:"
-msgstr ""
+msgstr "arşivleme kısıtlı:"
 
 #: papers/templatetags/statuses.py:59
 msgid "policy unclear."
-msgstr ""
+msgstr "politika net değil."
 
 #: papers/templatetags/statuses.py:60 papers/templatetags/statuses.py:62
 #: papers/templatetags/statuses.py:74
 msgid "policy unknown."
-msgstr ""
+msgstr "politika bilinmiyor."
 
 #: papers/templatetags/statuses.py:68
 msgid "archiving allowed"
-msgstr ""
+msgstr "arşivlemeye izin verildi"
 
 #: papers/templatetags/statuses.py:69
 msgid "archiving forbidden"
-msgstr ""
+msgstr "arşivlemeye yasaklı"
 
 #: papers/templatetags/statuses.py:70
 msgid "archiving restricted"
-msgstr ""
+msgstr "arşivleme kısıtlandı"
 
 #: papers/templatetags/statuses.py:71
 msgid "policy unclear"
-msgstr ""
+msgstr "politika net değil"
 
 #: papers/templatetags/statuses.py:72
 msgid "policy unknown"
-msgstr ""
+msgstr "politika bilinmiyor"
 
 #: papers/templatetags/statuses.py:110
 msgid "Green circle"
-msgstr ""
+msgstr "Yeşil daire"
 
 #: papers/templatetags/statuses.py:111
 msgid "Red circle"
-msgstr ""
+msgstr "Kırmızı daire"
 
 #: papers/templatetags/statuses.py:112
 msgid "Orange circle"
-msgstr ""
+msgstr "Turuncu daire"
 
 #: papers/templatetags/statuses.py:113
 msgid "White circle"
-msgstr ""
+msgstr "Beyaz daire"
 
 #: papers/templatetags/statuses.py:114
 msgid "Question mark in circle"
-msgstr ""
+msgstr "Soru işareti daire"
 
 #: papers/views.py:88
 msgid "Dissemin requires access to your ORCID name, which is marked as private in your ORCID profile."
-msgstr ""
+msgstr "Dissemin, ORCID profilinizde özel olarak işaretlenmiş ORCID adınıza erişmenizi gerektirir."
 
 #: papers/views.py:147
 msgid "All papers"
-msgstr ""
+msgstr "Tüm makaleler"
 
 #: papers/views.py:253
 msgid "To-do list"
-msgstr ""
+msgstr "Yapılacaklar listesi"
 
 #: papers/views.py:254
 msgid "Papers on my to-do list"
-msgstr ""
+msgstr "Yapılacaklar listemdeki bildiriler"
 
 #: papers/views.py:278
 msgid "Invalid ORCID profile. Please make sure it includes a public name."
-msgstr ""
+msgstr "Geçersiz ORCID profili. Lütfen genel bir ad içerdiğinden emin olun."
 
 #: papers/views.py:281
 msgid "Invalid ORCID profile."
@@ -2603,9 +2591,8 @@ msgid "Sign up"
 msgstr "Kaydol"
 
 #: website/templates/dissemin/login.html:41
-#, fuzzy
 msgid "Not an ORCID user yet? Create an account, it is free and takes just a few seconds."
-msgstr "Henüz bir ORCID kullanıcısı değil misiniz? Yanlızca bir kaç saniyede, ücretsiz oluşturun."
+msgstr "Henüz bir ORCID kullanıcısı değil misiniz? Bir hesap oluşturun, ücretsizdir ve sadece birkaç saniye sürer."
 
 #: website/templates/dissemin/sources.html:5
 msgid "Data sources"
@@ -2841,3 +2828,4 @@ msgstr ""
 #, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr ""
+
