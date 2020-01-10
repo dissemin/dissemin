@@ -1,10 +1,10 @@
-# -*- encoding: utf-8 -*-
+import requests
 
 from django.conf import settings
+
 from papers.errors import MetadataSourceException
 from papers.utils import sanitize_html
 
-import requests
 
 ##### Zotero interface #####
 
