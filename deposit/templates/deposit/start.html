@@ -69,7 +69,7 @@
                 <!-- Alert about authorship -->
                 {% if not is_owner %}
                     <div class="alert alert-danger" role="alert">
-                        <p class="text-center"><strong>Authorship</strong></p>
+                        <p class="text-center"><strong>{% trans "Authorship" %}</strong></p>
                         {% blocktrans trimmed %}
                             You do not appear to be one of the authors of this paper. By using this form, you certify that you have the permission to upload it on their behalf.
                         {% endblocktrans %}
