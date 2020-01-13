@@ -1,10 +1,11 @@
+import logging
 import requests
 
 from django.conf import settings
 
-from papers.errors import MetadataSourceException
 from papers.utils import sanitize_html
 
+logger = logging.getLogger('dissemin.' + __name__)
 
 ##### Zotero interface #####
 
@@ -14,11 +15,22 @@ def fetch_zotero_by_DOI(doi):
     Works only with the doi_cache proxy.
     """
     try:
-        request = requests.get('https://'+settings.DOI_PROXY_DOMAIN+'/zotero/'+doi)
-        return request.json()
+        r = requests.get('https://'+settings.DOI_PROXY_DOMAIN+'/zotero/'+doi)
+    except requests.exceptions.RequestException as e:
+        logger.error(e)
+        return None
+
+    try:
+        r.raise_for_status()
+    except requests.exceptions.HTTPError as e:
+        logger.error(e)
+        return None
+
+    try:
+        return r.json()
     except ValueError as e:
-        raise MetadataSourceException('Error while fetching Zotero metadata:\nInvalid JSON response.\n' +
-                                      'Error: '+str(e))
+        logger.error(e)
+        return None
 
 
 def consolidate_publication(publi):
