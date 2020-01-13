@@ -16,7 +16,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-07 14:39+0100\n"
-"PO-Revision-Date: 2020-01-09 19:06:56+0000\n"
+"PO-Revision-Date: 2020-01-13 15:07:42+0000\n"
 "Language: ar\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1076,19 +1076,19 @@ msgstr "لغات أخرى"
 
 #: model-gettext.py:104
 msgid "Public performances"
-msgstr ""
+msgstr "العروض العامة"
 
 #: model-gettext.py:105
 msgid "Stage presentations"
-msgstr ""
+msgstr "العروض المسرحية"
 
 #: model-gettext.py:106
 msgid "Indoor games & amusements"
-msgstr ""
+msgstr "ألعاب وملاهي داخلية"
 
 #: model-gettext.py:107
 msgid "Athletic & outdoor sports & games"
-msgstr ""
+msgstr "ألعاب رياضية وألعاب في الهواء الطلق"
 
 #: model-gettext.py:108
 #, fuzzy
@@ -1097,7 +1097,7 @@ msgstr "آداب أخرى"
 
 #: model-gettext.py:109
 msgid "Germany & neighboring central European countries"
-msgstr ""
+msgstr "ألمانيا ودول أوروبا الوسطى المجاورة"
 
 #: model-gettext.py:110
 msgid "Creative Commons 1.0 Universal (CC0 1.0) Public Domain Dedication"
@@ -1169,7 +1169,7 @@ msgstr "ما قبل الطباعة"
 
 #: model-gettext.py:127
 msgid "TUprints is the open access repository for all current and former members of the Technical University Darmstadt."
-msgstr ""
+msgstr "TUprints هو مستودع الوصول المفتوح لجميع الأعضاء الحاليين والسابقين في الجامعة التقنية دارمشتات."
 
 #: notification/models.py:62
 msgid "inboxes"

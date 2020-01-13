@@ -19,7 +19,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-07 14:39+0100\n"
-"PO-Revision-Date: 2020-01-09 19:06:57+0000\n"
+"PO-Revision-Date: 2020-01-13 15:07:43+0000\n"
 "Language: de\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1999,7 +1999,7 @@ msgstr "Goldener Open Access, der Artikel ist durch den Verlag / Herausgeber fre
 
 #: statistics/models.py:49
 msgid "Available from the author"
-msgstr "Gründer Open Access, die Publikation ist bereits in einem Repositorium frei verfügbar"
+msgstr "Grüner Open Access, die Publikation ist bereits in einem Repositorium frei verfügbar"
 
 #: statistics/models.py:50
 msgid "Could be shared by the authors"
@@ -2796,9 +2796,8 @@ msgid "My profile"
 msgstr "Mein Profil"
 
 #: website/templates/navbar.html:35
-#, fuzzy
 msgid "My to-do list"
-msgstr "Merkliste"
+msgstr "Meine Merkliste"
 
 #: website/templates/navbar.html:36
 msgid "Logout"

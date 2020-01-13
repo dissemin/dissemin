@@ -13,7 +13,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-07 14:39+0100\n"
-"PO-Revision-Date: 2020-01-09 19:06:58+0000\n"
+"PO-Revision-Date: 2020-01-13 15:07:44+0000\n"
 "Language: mk\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -281,7 +281,7 @@ msgstr "HAL го одби поднесокот"
 
 #: deposit/hal/protocol.py:292
 msgid "Password"
-msgstr "Лозинка"
+msgstr "Јавка"
 
 #: deposit/hal/protocol.py:320
 msgid "Connection to HAL failed. Please try again later."

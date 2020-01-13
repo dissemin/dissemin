@@ -9,13 +9,14 @@
 #
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-07 14:39+0100\n"
-"PO-Revision-Date: 2019-10-14 15:19:14+0000\n"
+"PO-Revision-Date: 2020-01-13 15:07:42+0000\n"
 "Language: diq\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2019-10-01 08:31:19+0000\n"
+"X-POT-Import-Date: 2019-12-12 14:04:05+0000\n"
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -28,92 +29,78 @@ msgstr[1] "%s peli vêniyayi"
 
 #: website/static/js/dissemin.js:293
 msgid "Claiming..."
-msgstr ""
+msgstr "Taleb beno..."
 
 #: website/static/js/dissemin.js:297
 msgid "Unclaiming..."
-msgstr ""
+msgstr "Telabo texelneyêno..."
 
 #: website/static/js/dissemin.js:313
 msgid "Claiming failed!"
-msgstr ""
+msgstr "Taleb hewl nêbiyo"
 
 #: website/static/js/dissemin.js:316
 msgid "Unclaiming failed!"
-msgstr ""
+msgstr "Texelneyışê talebi hewl nêbiyo!"
 
 #: website/static/js/dissemin.js:321
 msgid "Exclude from my profile"
-msgstr ""
+msgstr "Profilê mı ra ca tepışe"
 
 #: website/static/js/dissemin.js:325
 msgid "Include in my profile"
-msgstr ""
+msgstr "Profilê mı de tepışe"
 
 #: website/static/js/dissemin.js:350
 msgid "Adding to to-do list"
-msgstr ""
+msgstr "Cı kerê lista kerdışan"
 
 #: website/static/js/dissemin.js:354
 msgid "Removing from to-do list"
-msgstr ""
+msgstr "Lista kerdışan ra veciyeno"
 
 #: website/static/js/dissemin.js:600
 msgid "Preview of uploaded file"
-msgstr ""
+msgstr "Verqaytê dosyaya bar bıyayiye"
 
 #: website/static/js/dissemin.js:603
 msgid "Pages: "
-msgstr ""
+msgstr "Peli : "
 
 #: website/static/js/dissemin.js:604
 msgid "Size: "
-msgstr ""
+msgstr "Ebat: "
 
 #: website/static/js/dissemin.js:619
 msgid "While uploading %(file)s the following error occured:"
-msgstr ""
+msgstr "%(file)s bar bıyayış de ena xeta veciye :"
 
 #: website/static/js/dissemin.js:628 website/static/js/dissemin.js:683
 #: website/static/js/dissemin.js:689
 msgid "Unknown error"
-msgstr ""
+msgstr "Xetaya nêzanıtiye"
 
 #: website/static/js/dissemin.js:673
 msgid "While fetching file from %(url)s the following error occured:"
-msgstr ""
+msgstr "Dosyay %(url)s ra Dosya ardış de xetay cêri veciyê:"
 
 #: website/static/js/dissemin.js:760
 msgid "Sorry, we could not fill this for you."
-msgstr ""
+msgstr "Qısur mewni, ma nêşa ney seba şıma pır kerê"
 
 #: website/static/js/dissemin.js:761
 msgid "Trying to fill this field automatically for you..."
-msgstr ""
+msgstr "Enê cayi mayê kem ke seba şıma otomatik pır kerê..."
 
 #: website/static/js/dissemin.js:795
 msgid "You have not selected a file for upload."
-msgstr ""
+msgstr "Seba bar kerdışi yew dosya weçinê"
 
 #: website/static/js/dissemin.js:822
 msgid "Dissemin encountered an error, please try again later."
-msgstr ""
+msgstr "Dissemin dustê yew xeta amê, kerem kerê dıme reyna bıcerrebnê."
 
 #: website/static/js/moment.min.js:1
 msgid ": "
-msgstr ""
+msgstr ": "
 
-#~ msgid "Do not show this message anymore"
-#~ msgstr "Ena mesaci qet fına measne"
-
-#~ msgid "No author"
-#~ msgstr "Nuştekar çıniyo"
-
-#~ msgid "No title"
-#~ msgstr "Sername çıniyo"
-
-#~ msgid "Show more information"
-#~ msgstr "Zêde melumati bımocne"
-
-#~ msgid "Show less information"
-#~ msgstr "Dehana tay melumati bımocne"

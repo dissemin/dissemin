@@ -15,7 +15,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-07 14:39+0100\n"
-"PO-Revision-Date: 2020-01-09 19:06:59+0000\n"
+"PO-Revision-Date: 2020-01-13 15:07:45+0000\n"
 "Language: pt\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1077,23 +1077,20 @@ msgid "History of other areas"
 msgstr "História de outras áreas"
 
 #: model-gettext.py:101
-#, fuzzy
 msgid "Data processing & computer science"
-msgstr "Informática"
+msgstr "Processamento de dados e informática"
 
 #: model-gettext.py:102
-#, fuzzy
 msgid "Military science"
-msgstr "Ciência política"
+msgstr "Ciência militar"
 
 #: model-gettext.py:103
-#, fuzzy
 msgid "Other Germanic languages"
-msgstr "Alterar língua"
+msgstr "Outras línguas germânicas"
 
 #: model-gettext.py:104
 msgid "Public performances"
-msgstr ""
+msgstr "Exibições públicas"
 
 #: model-gettext.py:105
 msgid "Stage presentations"
@@ -1101,16 +1098,15 @@ msgstr ""
 
 #: model-gettext.py:106
 msgid "Indoor games & amusements"
-msgstr ""
+msgstr "Jogos e diversões em recinto fechado"
 
 #: model-gettext.py:107
 msgid "Athletic & outdoor sports & games"
 msgstr ""
 
 #: model-gettext.py:108
-#, fuzzy
 msgid "Other Germanic literatures"
-msgstr "Literatura"
+msgstr "Outras literaturas germânicas"
 
 #: model-gettext.py:109
 msgid "Germany & neighboring central European countries"
@@ -1150,14 +1146,12 @@ msgid "Other open license"
 msgstr "Outra licença aberta"
 
 #: model-gettext.py:118
-#, fuzzy
 msgid "Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)"
-msgstr "Creative Commons CC-By Atribuição 4.0 Internacional (CC BY 4.0)"
+msgstr "Creative Commons Atribuição-NãoComercial-PartilhaIgual 4.0 Internacional (CC BY-NC-SA 4.0)"
 
 #: model-gettext.py:119
-#, fuzzy
 msgid "Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)"
-msgstr "Creative Commons CC-By Atribuição 4.0 Internacional (CC BY 4.0)"
+msgstr "Creative Commons Atribuição-NãoComercial-SemDerivações 4.0 Internacional (CC BY-NC-ND 4.0)"
 
 #: model-gettext.py:120
 msgid "Zenodo"
