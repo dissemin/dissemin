@@ -9,6 +9,9 @@ import urllib3.contrib.pyopenssl
 
 from .common import *
 
+# We delete the logger 'dissemin', so that it goes to root logger and gets catched by pytest caplog fixture
+del LOGGING['loggers']['dissemin']
+
 # They are the domains under which your Dissemin instance should
 # be reachable.
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
