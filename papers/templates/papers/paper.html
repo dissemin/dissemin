@@ -96,6 +96,15 @@
                         {% endwith %}
                     </div>
                     {% endif %}
+                {% if deposit.repository.goa_service %}
+                    {% with goa_service=deposit.repository.goa_service %}
+                        <div class="alert alert-info" role="alert">
+                            <p><center><strong>{{ goa_service.heading }}</strong></center></p>
+                            <p>{{ goa_service.description }}</p>
+                            <p><a href="{{ goa_service.learn_more_url }}" class="btn btn-info">Learn more!</a></p>
+                        </div>
+                    {% endwith %}
+                {% endif %}
                 {% else %}
                     {% for deposit in pending_deposits %}
                         <div class="alert alert-success" role="alert">

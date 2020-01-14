@@ -28,6 +28,7 @@ Localized Models
 Currently the following models use translations:
 
 * DDC (field ``name``) in ``deposit.models``
+* GreenOpenAccessService (fields ``heading, text``) in ``deposit.models``
 * License (field ``name``) in ``deposit.models``
 * Repository (fields ``name, description``) in ``deposit.models``
 

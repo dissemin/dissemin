@@ -132,6 +132,12 @@ Of course they can regenerate this letter at any point in time as long you haven
 
 We provide an :download:`example letter of declaratio n<examples/letter_of_declaration_ulb_darmstadt.pdf>` of ULB Darmstadt, so you have some imagination how it finally looks like.
 
+Green Open Access Service
+-------------------------
+This means a service where the repository administration supports the researchers, e.g. by publishing on behalf of the researchers, which may include checking the rights, get in contact with the publishers and so on.
+
+Dissemin allows to advertise this service after a successful deposit in your repository. The user will get a notification with a short text and a link that describes your service.
+
 
 How to add your repository
 ==========================
