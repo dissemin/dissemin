@@ -59,6 +59,8 @@ Installation instructions for the web frontend
 First, install the following dependencies (debian packages)
 ``postgresql postgresql-server-dev-all postgresql-client python3-venv build-essential libxml2-dev libxslt1-dev python3-dev gettext libjpeg-dev libffi-dev libmagickwand-dev``
 
+Make also sure to have `pdftk` installed.
+
 Then, build a virtual environment to isolate all the python
 dependencies::
 

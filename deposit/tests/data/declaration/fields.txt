@@ -1,0 +1,42 @@
+---
+FieldType: Text
+FieldName: Textfeld 1
+FieldFlags: 0
+FieldValue: 
+FieldJustification: Left
+---
+FieldType: Button
+FieldName: Markierfeld 1
+FieldFlags: 0
+FieldValue: Off
+FieldJustification: Left
+FieldStateOption: Off
+FieldStateOption: Yes
+---
+FieldType: Button
+FieldName: Optionsfeld 1
+FieldFlags: 49152
+FieldValue: Off
+FieldJustification: Left
+FieldStateOption: 
+FieldStateOption: Off
+---
+FieldType: Text
+FieldName: Datumsfeld 1
+FieldFlags: 0
+FieldValue: 
+FieldJustification: Left
+---
+FieldType: Text
+FieldName: Numerisches Feld 1
+FieldFlags: 0
+FieldValue: 
+FieldJustification: Left
+---
+FieldType: Button
+FieldName: RadioGroup1
+FieldFlags: 49152
+FieldValue: Off
+FieldJustification: Left
+FieldStateOption: 1
+FieldStateOption: Off

@@ -2,8 +2,6 @@
 Configuring Repositories
 ========================
 
-If a repositories and a suitable protocol is programmed, adding is easy.
-
 Repositories
 ============
 
@@ -71,3 +69,27 @@ Each license consists of its name and its URI. If your license does not provide 
 
 .. note::
     You can localize your licenses name, see :doc:`localization` for further information.
+
+Creating a Letter of Declaration
+================================
+
+The letter of declaration is a sensitive document since it has a legal character.
+
+To maintain the legal character, Dissemin does ship to letter of declaration as it is designed by the repository administration.
+
+There are ways to handle this:
+
+1. Serve the user the letter and let him fill in everything
+2. Fill in the letter with forms
+3. Set the letter in python using ``reportlab``
+
+The second way is the least effort and keeps the corporate design easily.
+
+First, inspect the pdf forms with ``pdftk`` using ``pdftk <pdf> dump_data_fields > fields.txt``. Then in ``fields.txt`` you can see the form fields and their names. Identify the names and values.
+
+Next, place the file with a meaningful name in ``deposit/declarations/pdf_templates/``.
+
+Now, some things need to be coded in Python.
+In ``deposit/declaration.py`` add a new function.
+Let it create a ``list`` of ``(Field name, Value)`` with the necessary values and pass it together with the path to the file to the function ``fill_forms``. By default, all forms will be replaced with plain text. If you want to keep the forms, pass ``flatten=False`` als additional parameter.
+The return value of ``fill_forms`` is a ``io.BytesIO`` that you just return. The rest is done by the view.
