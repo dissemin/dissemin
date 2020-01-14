@@ -10,6 +10,10 @@ class OIDatePicker(DatePicker):
         'append': 'oi oi-calendar',
     }
     oi_options = {
+        'buttons' : {
+            'showClear' : True,
+            'showClose' : True,
+        },
         'icons' : {
             'clear': 'oi oi-delete',
             'close': 'oi oi-circle-x',
@@ -21,21 +25,16 @@ class OIDatePicker(DatePicker):
             'today': 'oi oi-target',
             'up': 'oi oi-chevron-up',
         },
+        'useCurrent' : False,
     }
 
-    def __init__(self, attrs=None, options=None):
+    def __init__(self, attrs={}, options={}):
         """
         Merges attrs and options into our own definitions
         """
 
-        if isinstance(attrs, dict):
-            attrs = {**self.oi_attrs, **attrs}
-        else:
-            attrs = self.oi_attrs
+        attrs = {**self.oi_attrs, **attrs}
 
-        if isinstance(options, dict):
-            options = {**self.oi_options, **options}
-        else:
-            options = self.oi_options
+        options = {**self.oi_options, **options}
 
         super().__init__(attrs, options)

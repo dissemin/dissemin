@@ -79,7 +79,7 @@ class PaperSearchForm(SearchForm):
     DATE_FORMATS = ['%Y-%m-%d', '%Y-%m', '%Y']
     pub_after = forms.DateField(
         input_formats=DATE_FORMATS,
-        widget=OIDatePicker,
+        widget=OIDatePicker(),
         required=False
     )
     pub_before = forms.DateField(
