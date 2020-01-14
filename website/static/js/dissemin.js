@@ -207,19 +207,17 @@ function updateSearch (ajaxUrl, data=null, new_browser_url=false) {
                 )
             );
             if (new_browser_url === true) {
-                console.log("spam");
-                console.log(data);
                 window.history.pushState(result, "", "?" + jQuery.param(data));
             }
         },
         timeout : 5000, // 5 seconds
         url : ajaxUrl
+    }).done(function() {
+        // turn bird off
+        $("#paperSearchWaitingArea").toggleClass("d-none d-flex");
+        // remove opacity
+        $("#paperSearchResults").css("opacity", "");
     });
-
-    // turn bird off
-    $("#paperSearchWaitingArea").toggleClass("d-none d-flex");
-    // remove opacity
-    $("#paperSearchResults").css("opacity", "");
 }
 
 /* If filter by OA status, we immediately refresh the results, otherwise the user needs to confirm */
