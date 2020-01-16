@@ -1,10 +1,11 @@
 .. _page-ide:
 
-Setting up Dissemin for development in an IDE
+Setting up Dissemin for Development in an IDE
 ==============================================
 
 This page lists some possible ways to set up Dissemin locally for development, including setting up an IDE to edit Dissemin conveniently.
-First, you need to install Dissemin locally: see :ref:`page-install` for that. In particular, you will need to have postgres, redis and elasticsearch instanced running during development, as these services are required to run the tests.
+First, you need to install Dissemin locally: see :ref:`page-installation` for that.
+In particular, you will need to have postgres, redis and elasticsearch instanced running during development, as these services are required to run the tests.
 
 Eclipse and PyDev
 -----------------

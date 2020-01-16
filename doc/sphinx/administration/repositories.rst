@@ -43,11 +43,12 @@ Parent can be any of the class in ``100*i for i in range(10)``.
 This groups the DDC when displayed to the user.
 
 .. note::
-    You can localize your DDC name, see :doc:`localization` for further information.
+    You can localize your DDC name, see :doc:`../contributing/localization` for further information.
 
 
 Green Open Access Service
 =========================
+
 Under ``goa_service`` you can add some information about a possible green open access service. Leave this empty if you do not want a message shown to the user.
 
 The GOAS object requires
@@ -57,7 +58,7 @@ The GOAS object requires
 * ``learn_more_url`` - URL to the webpage with more information about this service
 
 .. note::
-    You can localize your DDC name, see :doc:`localization` for further information.
+    You can localize your DDC name, see :doc:`../contributing/localization` for further information.
 
 
 Licenses
@@ -68,7 +69,7 @@ On the admin site in the section ``Deposit`` you find your licenses. You can add
 Each license consists of its name and its URI. If your license does not provide a URI, you can use the namespace ``https://dissem.in/deposit/license/``.
 
 .. note::
-    You can localize your licenses name, see :doc:`localization` for further information.
+    You can localize your licenses name, see :doc:`../contributing/localization` for further information.
 
 Creating a Letter of Declaration
 ================================
