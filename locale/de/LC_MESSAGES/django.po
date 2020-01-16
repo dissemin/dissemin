@@ -19,7 +19,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-07 14:39+0100\n"
-"PO-Revision-Date: 2020-01-13 15:07:43+0000\n"
+"PO-Revision-Date: 2020-01-16 14:29:31+0000\n"
 "Language: de\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2374,7 +2374,7 @@ msgstr "Pre/Postprints erlaubt und Volltext ist verfügbar"
 
 #: website/templates/dissemin/faq.html:306
 msgid "<strong>Pre/post prints allowed and full text available:</strong><br /> The full text is available in a repository, but might not be freely available from the publisher itself. This is in line with the publishing policy and is called green open access or self-archiving."
-msgstr "<strong>Pre- oder Postprints dürfen frei veröffentlicht werden und sind als Volltext verfügbar:</strong><br /> Der Volltext ist in einem Repositorium frei verfügbar, aber nicht unbedingt bei dem Verlag frei zugänglich. Diese Art der Veröffentlichung heißt Green Open Access und ist durch die Publikationsrichtlinien des Verlags oder des Zweitveröffentlichungsrecht erlaubt."
+msgstr "<strong>Pre- oder Postprints dürfen frei veröffentlicht werden und sind als Volltext verfügbar:</strong><br /> Der Volltext ist in einem Repositorium frei verfügbar, aber nicht unbedingt bei dem Verlag frei zugänglich. Diese Art der Veröffentlichung heißt Grüner Open Access und ist durch die Publikationsrichtlinien des Verlags oder des Zweitveröffentlichungsrecht erlaubt."
 
 #: website/templates/dissemin/faq.html:314
 msgid "Pre/post prints allowed but full text unavailable"
@@ -2423,7 +2423,7 @@ msgstr "Da es viele Wissenschaftler_innen mit identischem Namen gibt, sind einig
 
 #: website/templates/dissemin/faq.html:378
 msgid "Some repositories might not be covered by any of our sources, so a paper might be marked as unavailable while it is available."
-msgstr "Einige Repositorien werden von unseren Metadatenquellen nicht indiziert, sodass eine Veröffentlichung fälschlicherweise als nicht veröffentlich gekennzeichnet ist."
+msgstr "Einige Repositorien werden von unseren Metadatenquellen nicht indiziert, sodass eine Veröffentlichung fälschlicherweise als nicht veröffentlicht gekennzeichnet ist."
 
 #: website/templates/dissemin/faq.html:383
 msgid "Some papers might be marked as available but actually are not, for instance because they have been deleted."
@@ -2461,7 +2461,7 @@ msgstr "Ist der Fehler in keiner Quelle zu finden, verfasse bitte einen detailli
 
 #: website/templates/dissemin/faq.html:438
 msgid "First, note that Dissemin does not account for copies of articles that are only available on a personal homepage or a similar website. This is deliberate, because we believe that <a href=\"#repositoriesRock\">articles should be hosted in repositories</a>."
-msgstr "Dissemin verzeichnet keine Publikationen, die auf eigenen Websiten oder dergleichen verfügbar sind. Das ist auch beabsichtigt, weil meinen, dass <a href=\"#repositoriesRock\">Publikationen stattdessen in Repositorien zugänglich sein sollten</a>."
+msgstr "Dissemin verzeichnet keine Publikationen, die auf eigenen Websiten oder dergleichen verfügbar sind. Das ist auch beabsichtigt, weil wir meinen, dass <a href=\"#repositoriesRock\">Publikationen stattdessen in Repositorien zugänglich sein sollten</a>."
 
 #: website/templates/dissemin/faq.html:443
 msgid "Second, at the moment, Dissemin only supports repositories with a crawlable API that follows the <a href=\"https://www.openarchives.org/OAI/openarchivesprotocol.html\">OAI-PMH protocol</a>, and is <a href=\"https://www.base-search.net/about/en/suggest.php\">registered</a> in <a href=\"https://www.base-search.net/\">BASE</a>. We have a <a href=\"https://github.com/dissemin/croawl\">long-term project</a> to support more repositories by crawling them, but for the moment, we do not have the resources to support repositories not covered by BASE. Hence, if you are a user of a repository and would like it to be supported by Dissemin, please contact the repository administrator and suggest them to implement OAI-PMH support and to <a href=\"https://www.base-search.net/about/en/suggest.php\">register</a> their repository in BASE."
