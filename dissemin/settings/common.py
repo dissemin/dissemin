@@ -303,21 +303,22 @@ BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 43200}
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 LANGUAGE_CODE = 'en-us'
-POSSIBLE_LANGUAGE_CODES = ['ar', 'bt-br', 'nl', 'en', 'fi', 'pt', 'fr', 'de', 'hi', 'ko', 'mk', 'pms', 'es', 'zh-hans', 'zh-hant', 'sv']
+POSSIBLE_LANGUAGE_CODES = ['ar', 'de', 'en', 'es', 'fi', 'fr', 'hi', 'ko', 'mk', 'nl', 'pms', 'pt', 'pt-br', 'sv', 'tr', 'zh-hans', 'zh-hant']
 LANGUAGES = [
     ('ar', _('Arabic')),
+    ('de', _('German')),
     ('en', _('English')),
+    ('es', _('Spanish')),
     ('fi', _('Finnish')),
     ('fr', _('French')),
     ('ko', _('Korean')),
-    ('es', _('Spanish')),
+    ('mk', _('Macedonian')),
+    ('pt', _('European Portuguese')),
+    ('pt-br', _('Brazilian Portuguese')),
+    ('sv', _('Swedish')),
+    ('tr', _('Turkish')),
     ('zh-hans', _('Simplified Chinese')),
     ('zh-hant', _('Traditional Chinese')),
-    ('mk', _('Macedonian')),
-    ('de', _('German')),
-    ('pt-br', _('Brazilian Portuguese')),
-    ('pt', _('European Portuguese')),
-    ('sv', _('Swedish')),
 ]
 
 EXTRA_LANG_INFO = {
