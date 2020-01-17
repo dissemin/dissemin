@@ -2,7 +2,6 @@ import io
 import logging
 import os
 import subprocess
-import sys
 
 from copy import copy
 from datetime import date
@@ -23,14 +22,6 @@ from reportlab.pdfgen import canvas
 from django.conf import settings
 
 logger = logging.getLogger('dissemin.' + __name__)
-
-# Get the current module name to load functions by name
-current_module = sys.modules[__name__]
-
-# The dict contains the available functions and an admin-friendly name
-REGISTERED_DECLARATION_FUNCTIONS = {
-    'declaration_ulb_darmstadt' : 'ULB Darmstadt',
-}
 
 
 def get_declaration_pdf(deposit_record, user):
