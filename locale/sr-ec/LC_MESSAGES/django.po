@@ -15,7 +15,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-07 14:39+0100\n"
-"PO-Revision-Date: 2020-01-09 19:06:59+0000\n"
+"PO-Revision-Date: 2020-01-20 10:31:29+0000\n"
 "Language: sr-Cyrl\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1061,19 +1061,16 @@ msgid "History of other areas"
 msgstr "Историја других области"
 
 #: model-gettext.py:101
-#, fuzzy
 msgid "Data processing & computer science"
-msgstr "Информатика"
+msgstr "Обрада података и информатика"
 
 #: model-gettext.py:102
-#, fuzzy
 msgid "Military science"
-msgstr "Политичке науке"
+msgstr "Војна наука"
 
 #: model-gettext.py:103
-#, fuzzy
 msgid "Other Germanic languages"
-msgstr "Остали језици"
+msgstr "Остали германски језици"
 
 #: model-gettext.py:104
 msgid "Public performances"
@@ -1092,9 +1089,8 @@ msgid "Athletic & outdoor sports & games"
 msgstr ""
 
 #: model-gettext.py:108
-#, fuzzy
 msgid "Other Germanic literatures"
-msgstr "Остала литература"
+msgstr "Остала германска литература"
 
 #: model-gettext.py:109
 msgid "Germany & neighboring central European countries"
@@ -1167,9 +1163,8 @@ msgid "Run by the Center for Open Science, OSF lets you share your preprints ope
 msgstr ""
 
 #: model-gettext.py:126
-#, fuzzy
 msgid "TUprints"
-msgstr "предштампа"
+msgstr "TUprints"
 
 #: model-gettext.py:127
 msgid "TUprints is the open access repository for all current and former members of the Technical University Darmstadt."

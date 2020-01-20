@@ -13,7 +13,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-07 14:39+0100\n"
-"PO-Revision-Date: 2020-01-13 15:07:44+0000\n"
+"PO-Revision-Date: 2020-01-20 10:31:28+0000\n"
 "Language: mk\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2640,7 +2640,7 @@ msgstr ""
 #: website/templates/dissemin/login.html:39
 #: website/templates/dissemin/login.html:45
 msgid "Sign up"
-msgstr "Регистрација"
+msgstr "Зачленување"
 
 #: website/templates/dissemin/login.html:41
 msgid "Not an ORCID user yet? Create an account, it is free and takes just a few seconds."
