@@ -24,14 +24,14 @@ from django.conf import settings
 logger = logging.getLogger('dissemin.' + __name__)
 
 
-def get_declaration_pdf(deposit_record, user):
+def get_declaration_pdf(deposit_record):
     """
     This function creates for a given deposit the letter of declaration. If this does not succeed, it raises an exception.
     :param deposit: DepositRecord containing information for declaration
     :returns: BytesIO containing pdf or raises Exception
     """
     declaration_name = deposit_record.repository.letter_declaration
-    pdf_io = REGISTERED_DECLARATION_FUNCTIONS[declaration_name](deposit_record, user)
+    pdf_io = REGISTERED_DECLARATION_FUNCTIONS[declaration_name](deposit_record)
     return pdf_io
 
 
@@ -80,7 +80,7 @@ def fill_forms(pdf_path, fields, flatten=True):
     return pdf
 
 
-def declaration_ulb_darmstadt(deposit_record, user):
+def declaration_ulb_darmstadt(deposit_record):
     """
     Takes a deposit and creates authors declaration for ULB Darmstadt and returns that.
     This function follows the corporate design of TUDA.
@@ -231,7 +231,7 @@ def declaration_ulb_darmstadt(deposit_record, user):
 
     tuprints_id = deposit_record.identifier
 
-    signer = user.first_name + ' ' + user.last_name
+    signer = deposit_record.user.first_name + ' ' + deposit_record.user.last_name
 
     work_text = """
     <br/>
