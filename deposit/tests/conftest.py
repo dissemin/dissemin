@@ -1,6 +1,7 @@
 import pytest
 
 from deposit.models import DepositRecord
+from deposit.models import LetterOfDeclaration
 from upload.models import UploadedPDF
 
 
@@ -20,7 +21,10 @@ def deposit_record(request, db, book_god_of_the_labyrinth, authenticated_client,
     """
     A simple deposit record with all necessary data
     """
-    dummy_repository.letter_declaration = 'test_pdf_generator'
+    loc = LetterOfDeclaration.objects.create(
+        function_key= 'test_pdf_generator'
+    )
+    dummy_repository.letter_declaration = loc
     dummy_repository.save()
     dr = DepositRecord.objects.create(
         paper=book_god_of_the_labyrinth,

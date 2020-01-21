@@ -5,6 +5,7 @@ from django.urls import reverse
 
 import deposit.views
 
+from deposit.models import LetterOfDeclaration
 from deposit.views import get_all_repositories_and_protocols
 
 class TestDepositView():
@@ -41,15 +42,30 @@ class TestLetterDeclarationView():
         check_status(404, 'letter-of-declaration', args=[1])
 
 
-    @pytest.mark.parametrize('letter_declaration, status', [('', 'pending'), ('test_pdf_generator', 'published'), ('', 'published')])
-    def test_letter_not_found(self, check_status, letter_declaration, status):
+    def test_letter_not_set(self, check_status):
         """
-        A deposit record is found, but conditionds for generating one are not satisfied
+        If no letter is set, must return 404
         """
-        self.dr.repository.letter_declaration = letter_declaration
+        self.dr.repository.letter_declaration = None
         self.dr.repository.save()
 
-        self.dr.status = status
+        self.dr.status = 'pending'
+        self.dr.save()
+
+        check_status(404, 'letter-of-declaration', args=[self.dr.pk])
+
+
+    def test_letter_deposit_published(self, check_status):
+        """
+        If the deposit status is not pending, must return 404
+        """
+        loc = LetterOfDeclaration.objects.create(
+            function_key='test_pdf_generator'
+        )
+        self.dr.repository.letter_declaration = loc
+        self.dr.repository.save()
+
+        self.dr.status = 'published'
         self.dr.save()
 
         check_status(404, 'letter-of-declaration', args=[self.dr.pk])

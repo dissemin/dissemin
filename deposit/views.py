@@ -345,7 +345,7 @@ class LetterDeclarationView(LoginRequiredMixin, View):
         if dr.user != request.user:
             return HttpResponseForbidden(_("Access to this ressource not allowed."))
         # If the repository requires a letter of declaration, we try to create the pdf, otherwise we return 404.
-        if dr.repository.letter_declaration != '' and dr.status == "pending":
+        if dr.repository.letter_declaration is not None and dr.status == "pending":
             pdf = get_declaration_pdf(dr)
             pdf.seek(0)
             filename = _("Declaration {}.pdf").format(dr.paper.title)

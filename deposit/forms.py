@@ -237,6 +237,24 @@ class UserPreferencesForm(forms.ModelForm):
             Submit('submit', _('Save')),
         )
 
+
+class LetterOfDeclarationAdminForm(forms.ModelForm):
+    """
+    We change here the widget for choosing a function that generates a letter of declaration
+    Instead of a free text field, we use a dropdown with a list of function keys (i.e. human readable names)
+    """
+
+    def __init__(self, *args, **kwargs):
+        """
+        Letter of Declaration
+        Get the list of user friendly names of the generating functions. We need them as tuple for djangos choices
+        """
+        super().__init__(*args, **kwargs)
+
+        choices = sorted([(value, value) for value in REGISTERED_DECLARATION_FUNCTIONS], key=lambda item: item[1])
+        self.fields['function_key'].widget = forms.Select(choices=choices)
+
+
 class RepositoryAdminForm(forms.ModelForm):
     """
     We change here to widgets for chosing the Protocol and the Declaration.
@@ -262,9 +280,3 @@ class RepositoryAdminForm(forms.ModelForm):
         # Sort and populate the form
         choices = sorted(choices, key=lambda protocol: protocol[1].lower(),)
         self.fields['protocol'].widget = forms.Select(choices=choices)
-
-        # Letter of Declaration
-        # Get the list of user friendly names of the generating functions. We need them as tuple for djangos choices
-        choices = [(value, value) for value in REGISTERED_DECLARATION_FUNCTIONS]
-        choices = [('', None)] + sorted(choices, key=lambda item: item[1])
-        self.fields['letter_declaration'].widget = forms.Select(choices=choices)

@@ -112,6 +112,31 @@ class GreenOpenAccessService(models.Model):
 vinaigrette.register(GreenOpenAccessService, ['heading', 'text'])
 
 
+class LetterOfDeclaration(models.Model):
+    """
+    A model to store information about the letter of declaration.
+
+    Currently, after uploading in a repository with support, text is shown as alert.
+    """
+
+    #: Heading to display after deposit
+    heading = models.TextField()
+    #: Text to display after deposit
+    text = models.TextField()
+    #: Text for the link that leads to download
+    url_text = models.CharField(max_length=100)
+    #: Human readable function that generates letter
+    function_key = models.CharField(max_length=256)
+
+    def __str__(self):
+        """
+        String represenation of object
+        """
+        return self.function_key
+
+vinaigrette.register(LetterOfDeclaration, ['heading', 'text', 'url_text'])
+
+
 class License(models.Model):
     """
     A model to store licenses. Each repository chooses licenses from this model.
@@ -187,7 +212,7 @@ class Repository(models.Model, CachingMixin):
     #: Optionally set DDC. If none selected, form will be omitted
     ddc = models.ManyToManyField(DDC, blank=True)
     #: Optionally choose a letter of declaration to finish deposition
-    letter_declaration = models.CharField(max_length=256, blank=True)
+    letter_declaration = models.ForeignKey(LetterOfDeclaration, null=True, on_delete=models.SET_NULL)
     #: Embargo
     embargo = models.CharField(max_length=24, blank=False, choices=FORM_FIELD_CHOICES, default='none')
     #: Green open access service

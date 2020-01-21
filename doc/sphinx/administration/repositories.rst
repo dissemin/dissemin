@@ -122,7 +122,7 @@ The letter of declaration is a sensitive document since it has a legal character
 
 To maintain the legal character, Dissemin does ship to letter of declaration as it is designed by the repository administration.
 
-There are ways to handle this:
+There are three ways to handle this:
 
 1. Serve the user the letter and let him fill in everything
 2. Fill in the letter with forms
@@ -136,5 +136,26 @@ Next, place the file with a meaningful name in ``deposit/declarations/pdf_templa
 
 Now, some things need to be coded in Python.
 In ``deposit/declaration.py`` add a new function.
-Let it create a ``list`` of ``(Field name, Value)`` with the necessary values and pass it together with the path to the file to the function ``fill_forms``. By default, all forms will be replaced with plain text. If you want to keep the forms, pass ``flatten=False`` als additional parameter.
-The return value of ``fill_forms`` is a ``io.BytesIO`` that you just return. The rest is done by the view.
+Let it create a ``list`` of ``(Field name, Value)`` with the necessary values and pass it together with the path to the file to the function ``fill_forms``.
+By default, all forms will be replaced with plain text.
+If you want to keep the forms, pass ``flatten=False`` als additional parameter.
+The return value of ``fill_forms`` is a ``io.BytesIO`` that you just return.
+
+In order to make your new function available to the repository, add the function with a meaningful key to ``REGISTERED_DECLARATION_FUNCTIONS``.
+
+In the admin section you can then add a new letter of declaration.
+
+Here you can set a text about a possible alert after the user deposits into a repository.
+The object requires
+
+* ``heading`` - Heading, e.g. 'Contract required!'.
+* ``text`` - A short text displayed to the user.
+* ``url_text`` - Text of the download button.
+* ``function key`` - The function that generates the letter.
+
+.. note::
+    You can localize your letter of declaration alerts, see :doc:`../contributing/localization` for further information.
+
+See also :ref:`libraries-services-lod`.
+
+After this is done, you can choose a letter od declaration object for your repository and it will display!

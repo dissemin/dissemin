@@ -30,7 +30,7 @@ def get_declaration_pdf(deposit_record):
     :param deposit: DepositRecord containing information for declaration
     :returns: BytesIO containing pdf or raises Exception
     """
-    declaration_name = deposit_record.repository.letter_declaration
+    declaration_name = deposit_record.repository.letter_declaration.function_key
     pdf_io = REGISTERED_DECLARATION_FUNCTIONS[declaration_name](deposit_record)
     return pdf_io
 

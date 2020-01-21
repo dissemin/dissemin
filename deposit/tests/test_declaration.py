@@ -42,8 +42,6 @@ class TestDeclarationLetters():
         """
         This tests the letter of declaration for ULB Darmstadt.
         """
-        self.dr.repository.save()
-
         self.client.user.first_name = 'Jose'
         self.client.user.last_name = 'Saramago'
 
