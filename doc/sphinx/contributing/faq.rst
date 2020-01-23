@@ -1,9 +1,9 @@
-.. _page-contributing_faq:
+==========
+FAQ & Tips
+==========
 
-FAQ for contributing to Dissemin
-================================
-
-Here are some frequently asked questions and tips for getting started to work and contribute to Dissemin. The best idea to start hacking on Dissemin is probably to use the VM (Vagrant method from :ref:`page-install`).
+Here are some frequently asked questions and tips for getting started to work and contribute to Dissemin.
+The best idea to start hacking on Dissemin is probably to use the VM (Vagrant method from :ref:`installation_vagrant`).
 
 Fetching a specific paper by DOI
 --------------------------------

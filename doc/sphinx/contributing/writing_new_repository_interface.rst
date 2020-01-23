@@ -1,20 +1,21 @@
-Writing an interface for a new repository
-=========================================
+=====================================
+Writing an Interface for a Repository
+=====================================
 
 Writing an interface for a new repository is very easy!
 Here is a quick tutorial, whose only requirements are some familiarity with Python, and have a running instance of Dissemin.
 
-First, check that the repository you want to create an interface for has an API that allows that.
-This can either be a REST API or SWORD-Protocl or something else - depending on the repositoriy.
+First, you check that the repository of interest has an API that allows that.
+This can either be a REST API or SWORD-Protocol or something else - depending on the repositoriy.
 
 Implementing the protocol
--------------------------
+=========================
 
 Protocol implementations are stored as submodules of the :mod:`deposit` module.
 So for a new protocol you create a new folder and create a ``__init__.py`` to activate it.
 In case you rely on SWORDv2 with METS you can add a subclass into its ``protocol.py``.
 
-To tell Dissemin how to interact with the repository, we need to write an implementation of that protocol.
+To tell Dissemin how to interact with the repository, you need to write an implementation of that protocol.
 This has to be done in a dedicated file, ``deposit/newprotocol/protocol.py``, by creating a subclass of :class:`~deposit.protocol.RepositoryProtocol`::
 
     from django.utils.translation import ugettext as _
@@ -75,7 +76,7 @@ You can use the embedded logger, so that your log messages will be saved by Diss
    self.log("Do not forget to log the responses you get from the server.")
 
 Testing the protocol
---------------------
+====================
 
 So now, how do you test this protocol implementation?
 Instead of testing it manually by yourself, you are encouraged to take advantage of the testing framework available in Dissemin.
@@ -83,12 +84,12 @@ You will write test cases, that check the behaviour of your implementation for p
 
 We provide currently 20 examples of metadata that you can use as fixtures.
 Additionally we have fixtures for various settings of the repository, e.g. Dewey Decimal Class and Licenses.
-You find the data in JSON in ``test_data``.
+You find the data as JSON in ``test_data``.
 The best way is probably to get familiar with `pytest` and check out the examples in ``deposit.sword.tests``.
 Your tests should be a subclass of :class:`deposit.tests.test_protocol.MetaTestProtocol` as this defines some tests that every protocol should pass.
 
 Using the protocol
-------------------
+==================
 
 So now you have your shiny new protocol implementation and you want to use it.
 
@@ -118,7 +119,7 @@ If you have used the provided log function, the logs of your deposits are availa
 To debug the protocol directly from the site, you can enable Django's ``settings.DEBUG`` (in ``dissemin/settings.py``) so that exceptions raised by your code are popped up to the user.
 
 Adding extra metadata with forms
---------------------------------
+================================
 
 What if the repository you submit to requires additional metadata, that Dissemin does not always provide? 
 We need to add a field in the deposit form to let the user fill this gap.
@@ -171,7 +172,7 @@ Then, we need to bind this form to our protocol. This looks like::
             pass
 
 Helping Repository Administrators
----------------------------------
+=================================
 
 To help administrators of repsitories, you should provide sample data that they can use to test the ingest.
 For this we use once again pytest.

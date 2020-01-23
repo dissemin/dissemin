@@ -1,15 +1,14 @@
-.. _page-localization:
-
 ============
 Localization
 ============
 
-Translations are hosted at `TranslateWiki
-<https://translatewiki.net/wiki/Translating:Dissemin>`_, for an easy-to-use
-interface for translations and statistics.
-
 We use `Django's standard localization system <https://docs.djangoproject.com/en/2.2/topics/i18n/>`_, based on i18n.
-This lets us translate strings in various places:
+This lets us translate strings in various places.
+
+Localization in Files
+=====================
+
+Most localizations are in files:
 
 * in Python code, use ``_("some translatable text")``, where ``_`` is imported by ``from django.utils.translation import ugettext_lazy as _``
 * in Javascript code, use ``gettext("some translatable text")``
@@ -32,12 +31,17 @@ Currently the following models use translations:
 * License (field ``name``) in ``deposit.models``
 * Repository (fields ``name, description``) in ``deposit.models``
 
-For localization we use `django-vinaigrette <https://pypi.org/project/django-vinaigrette/>`_. Please read their documentation for further information. In short: You have to keep in mind that:
+For localization we use `django-vinaigrette <https://pypi.org/project/django-vinaigrette/>`_.
+Please read their documentation for further information. 
+In short: You have to keep in mind that:
 
 * in admin interface you do not see the localized strings,
 * you should add only English in the admin interface,
 * you will have to recreate the ``*.po`` files and add the translation manually (see below),
-* your local translations do not interact with TranslateWiki.
+* your *local* translations do not interact with TranslateWiki.
+
+From our production environment we have extracted strings from above models.
+They are stored in ``model-gettext.py`` so that we have them available for TranslateWiki.
 
 Generating PO files
 ===================
@@ -48,6 +52,10 @@ The important thing when generating PO files locally is to preserve the strings 
 
 Vinaigrette saves the strings to be translated in a file called ``vinaigrette-deleteme.py``.
 Usually this files is going to be deleted, but we keep it as it carries our translation strings from the models.
+
+Since we use TranslateWiki, we please do not generate any ``.po`` files, as there is a high chance of a merge conflict. Just state that your PR uses localizations, then the Dissemin team will generate to ``.po`` files.
+
+Unless you need localization in your development environment, you can ignore the following sections.
 
 
 Generate locally
@@ -92,4 +100,3 @@ Available Languages
 ===================
 
 You can change the set of available languages for your installation in ``dissemin/settings/common.py`` by changing the ``LANGUAGES`` list, e.g. by commenting or uncommenting the corresponding lines.
-

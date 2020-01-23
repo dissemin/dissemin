@@ -30,7 +30,7 @@ The same holds for other backend services, you can check the very last lines of 
 [provisioning/provision.sh](https://github.com/dissemin/dissemin/blob/master/provisioning/provision.sh)
 to find out how to start them.
 
-See the [full installation instructions](https://dissemin.readthedocs.io/en/latest/install.html), which include alternative methods.
+See the [full installation instructions](https://dissemin.readthedocs.io/en/latest/installation/index.html), which include alternative methods.
 
 
 ## Contributing
@@ -50,16 +50,12 @@ incomplete.
 Translations are hosted at [TranslateWiki](https://translatewiki.net/wiki/Translating:Dissemin) for an easy-to-use interface for translations and statistics.
 We are always looking for translators for all languages.
 
-Dissem.in uses the [Django's standard localization system](https://docs.djangoproject.com/en/2.2/topics/i18n/), which makes it easy to contribute new translations.
-
-See the [full details on how to contribute translations](https://dissemin.readthedocs.io/en/latest/localization.html).
-
 
 ### Writing an interface for a new repository
 
 Writing an interface for a new repository, so that Dissem.in could upload to this repository, is very easy!
 
-A [full tutorial](https://dissemin.readthedocs.io/en/latest/writing_new_repository_interface.html) is available.
+A [full tutorial](https://dissemin.readthedocs.io/en/latest/contributing/writing_new_repository_interface.html) is available.
 
 
 ## Links

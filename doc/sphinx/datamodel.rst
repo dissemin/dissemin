@@ -1,5 +1,6 @@
 .. _page-datamodel:
 
+==========
 Data model
 ==========
 

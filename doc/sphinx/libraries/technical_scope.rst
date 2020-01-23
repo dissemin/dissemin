@@ -8,27 +8,25 @@ For now we describe the `SWORDv2 protocol <http://swordapp.org/sword-v2/sword-v2
 SWORDv2
 =======
 
-To some extend the SWORDv2 protocl is easy to use as it involes just some basic HTTP stuff.
+To some extend the SWORDv2 protocol is easy to use as it involes just some basic HTTP operations.
 We decided to use its packaging capability, because this way we can easily ship metadata and document at the same time.
 
 METS
 ----
 
 We use the `Metdata Encoding \& Transmission Standard (METS) <https://www.loc.gov/standards/mets/>`_ to ship our metadata and describe what is delivered.
-Most repositories are able to ingest a METS-package.
+Most repositories are able to ingest a METS package.
 
 We try to keep our METS as simple as possible.
 Currently we populate only ``dmdSec``, ``amdSec/rightsMD``, ``fileSec`` and ``structSec``.
 
 * ``dmdSec`` contains the bibliographic metadata
-* ``amdSec/rightsMD`` contains information about the depositor, the license and additional dissemin related information. You find the documentation in :ref:`non-bibliographic-metadata-label`.
+* ``amdSec/rightsMD`` contains information about the depositor, the license and additional Dissemin related information. You find the documentation in `Dissemin Metadata`_.
 
 We deliver two files per package:
 
 * ``mets.xml`` - containing the metadata
 * ``document.pdf`` - the document to be deposited
-
-We provide an :download:`illustrating example <examples/mets.xml>` using Dublin Core.
 
 We set the following headers::
 
@@ -80,7 +78,7 @@ We ship the ddc number as three-digit-number, i.e. filling up with leading zeros
 Dissemin Metadata
 -----------------
 
-MODS does not completely fit our needs in term of metadata.
+MODS does not completely fit our needs in terms of metadata.
 Thus we add our own metadata that extends the MODS metadata.
 
 We ship the following data:
@@ -102,7 +100,7 @@ DisseminID            This ID refers to the publication in Dissemin. This ID is 
 
 If you need more information for your workflow, please contact us. We can add additional fields.
 
-You can find our schema for :download:`download <../../deposit/schema/dissemin_v1.0.xsd>` in Version 1.0.
+You can find our schema for :download:`download <../../../deposit/schema/dissemin_v1.0.xsd>` in Version 1.0.
 
 Examples and Scripts
 --------------------
@@ -111,17 +109,17 @@ To support you in your local implementation we have some examples and scripts.
 
 Examples
 ~~~~~~~~
-The examples res authentic, i.e. they are created with Dissemin and represent how the metadata documents will loke like.
+The examples are authentic, i.e. they are created with Dissemin and represent how the metadata documents will loke like.
 For earch document type there is one or more example.
 They cover different cases like dewey decimal class or embargo.
 
-* :download:`mods.zip <examples/mods.zip>`
+* :download:`mods.zip <../examples/mods.zip>`
 
 
 Upload scripts
 ~~~~~~~~~~~~~~
 
-You can download our :download:`script <examples/upload_mets.zip>` for testing your implementations.
+You can download our :download:`script <../examples/upload_mets.zip>` for testing your implementations.
 The HTTP-request is identical to that in Dissemin.
 You find usage instructions in the README.md inside of the packaging.
 
@@ -178,7 +176,7 @@ EPrints 3 has been successfully be connected to Dissemin.
 Zaharina Stoynova from ULB Darmstadt has worked on a plugin to ingest Dissemins metadata.
 As it is probably not possible to use it directly, please make the necessary changes as you require.
 
-:download:`broker_eprints_3.zip <examples/broker_eprints_3.zip>`
+:download:`broker_eprints_3.zip <../examples/broker_eprints_3.zip>`
 
 The package consists of two files:
 
