@@ -77,6 +77,7 @@ script:
   - python manage.py compilemessages --exclude qqq
   - coverage run --source=backend,deposit,dissemin,papers,statistics,upload,website --omit="*/migrations/*,dissemin/settings/*" -m py.test
   - python manage.py compilescss
+  - sphinx-build -q -W -b html -d _build/doctrees doc/sphinx doc/sphinx/_build/html
 
 after_success:
   - coveralls
