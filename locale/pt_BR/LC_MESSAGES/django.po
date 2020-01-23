@@ -13,7 +13,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-07 14:39+0100\n"
-"PO-Revision-Date: 2020-01-09 19:06:59+0000\n"
+"PO-Revision-Date: 2020-01-23 15:08:12+0000\n"
 "Language: pt_br\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -300,7 +300,7 @@ msgstr "Publicação pendente"
 
 #: deposit/models.py:47
 msgid "Embargo"
-msgstr ""
+msgstr "Restrição de transmissão pública"
 
 #: deposit/models.py:48
 msgid "Published"
@@ -582,7 +582,7 @@ msgstr ""
 
 #: deposit/templates/deposit/start.html:213
 msgid "Submitting paper to repository"
-msgstr ""
+msgstr "Submetendo trabalho ao repositório"
 
 #: deposit/views.py:80
 msgid "This repository is currently not enabled."
@@ -598,7 +598,7 @@ msgstr "Este repositório não pôde ser encontrado."
 
 #: deposit/views.py:261
 msgid "Not all fields have been filled correctly."
-msgstr ""
+msgstr "Nem todos os campos foram preenchidos corretamente."
 
 #: deposit/views.py:270
 msgid "This repository cannot be used for this paper."
