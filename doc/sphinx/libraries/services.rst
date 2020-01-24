@@ -21,6 +21,8 @@ Of course they can regenerate this letter at any point in time as long you haven
 
 We provide an :download:`example letter of declaratio n<../examples/letter_of_declaration_ulb_darmstadt.pdf>` of ULB Darmstadt, so you have some imagination how it finally looks like.
 
+.. _libraries-services-goa:
+
 Green Open Access Service
 =========================
 
