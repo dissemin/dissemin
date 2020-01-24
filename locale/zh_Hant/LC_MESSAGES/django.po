@@ -10,10 +10,9 @@
 #
 msgid ""
 msgstr ""
-""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-07 14:39+0100\n"
+"POT-Creation-Date: 2020-01-24 17:53+0100\n"
 "PO-Revision-Date: 2020-01-09 19:07:00+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -49,7 +48,7 @@ msgstr "知識庫"
 msgid "Invalid full text identifier."
 msgstr "無效的全文識別。"
 
-#: deposit/forms.py:144 papers/templates/papers/paper.html:160
+#: deposit/forms.py:144 papers/templates/papers/paper.html:168
 msgid "Abstract"
 msgstr "摘要"
 
@@ -318,16 +317,16 @@ msgstr "被知識庫拒絕"
 msgid "Deleted"
 msgstr "已刪除"
 
-#: deposit/models.py:290 deposit/templates/deposit/start.html:205
+#: deposit/models.py:340 deposit/templates/deposit/start.html:205
 #: deposit/views.py:120
 msgid "Deposit"
 msgstr "存放"
 
-#: deposit/models.py:343
+#: deposit/models.py:393
 msgid "We will use this email address to notify you when your deposits are accepted."
 msgstr "當您的存放內容被接受時，我們會使用此電子郵件地址來通知您。"
 
-#: deposit/models.py:349
+#: deposit/models.py:399
 msgid "This repository will be used by default for your deposits."
 msgstr "此知識庫將會被使用成您預設的存放點。"
 
@@ -339,7 +338,7 @@ msgstr "創用 CC — CC0 1.0 通用"
 msgid "Creative Commons CC-By Attribution 4.0 International (CC BY 4.0)"
 msgstr "創用 CC 姓名標示 4.0 國際（CC BY 4.0）"
 
-#: deposit/osf/forms.py:40 deposit/osf/forms.py:51 model-gettext.py:117
+#: deposit/osf/forms.py:40 deposit/osf/forms.py:51 model-gettext.py:122
 msgid "No license"
 msgstr "沒有授權"
 
@@ -435,7 +434,7 @@ msgstr "無法刪除專案。"
 msgid "Unable to make the project public."
 msgstr "無法讓專案公開。"
 
-#: deposit/protocol.py:368
+#: deposit/protocol.py:328
 msgid "Failed to connect to the repository. Please try again later."
 msgstr "連接至知識庫失敗。請稍後再試。"
 
@@ -443,15 +442,15 @@ msgstr "連接至知識庫失敗。請稍後再試。"
 msgid "E-mail"
 msgstr "電子郵件"
 
-#: deposit/sword/protocol.py:67
+#: deposit/sword/protocol.py:81
 msgid "The repository {} returned invalid XML"
 msgstr "知識庫 {} 回傳無效的 XML"
 
-#: deposit/sword/protocol.py:295
+#: deposit/sword/protocol.py:325
 msgid "Username or password not provided for this repository. Please contact the Dissemin team."
 msgstr "未提供此知識庫使用者名稱或密碼，請聯絡 Dissemin 團隊。"
 
-#: deposit/sword/protocol.py:320
+#: deposit/sword/protocol.py:350
 msgid "Unable to deposit to repository"
 msgstr "無法存放到知識庫"
 
@@ -536,6 +535,12 @@ msgstr "存放中"
 #, python-format
 msgid "You can deposit the full text of your article. Dissemin will send it to a repository where it will be made freely available. By depositing your article via Dissemin, you agree to our <a href=\"%(tosurl)s\">terms of service</a>."
 msgstr "您可以存放您文章的全文。Dissemin 將會發送它到可自由取用的知識庫裡。透過 Dissemin 存放您的文章，代表您同意我們的<a href=\"%(tosurl)s\">服務條款</a>。"
+
+#: deposit/templates/deposit/start.html:72
+#, fuzzy
+#| msgid "Authors"
+msgid "Authorship"
+msgstr "作者"
 
 #: deposit/templates/deposit/start.html:73
 msgid "You do not appear to be one of the authors of this paper. By using this form, you certify that you have the permission to upload it on their behalf."
@@ -663,52 +668,56 @@ msgid "Arabic"
 msgstr "阿拉伯語"
 
 #: dissemin/settings/common.py:309
-msgid "English"
-msgstr "English"
-
-#: dissemin/settings/common.py:310
-msgid "Finnish"
-msgstr "芬蘭語"
-
-#: dissemin/settings/common.py:311
-msgid "French"
-msgstr "Français"
-
-#: dissemin/settings/common.py:312
-msgid "Korean"
-msgstr "韓語"
-
-#: dissemin/settings/common.py:313
-msgid "Spanish"
-msgstr "西班牙語"
-
-#: dissemin/settings/common.py:314
-msgid "Simplified Chinese"
-msgstr "简体中文"
-
-#: dissemin/settings/common.py:315
-msgid "Traditional Chinese"
-msgstr "繁體中文"
-
-#: dissemin/settings/common.py:316
-msgid "Macedonian"
-msgstr "Македонски"
-
-#: dissemin/settings/common.py:317
 msgid "German"
 msgstr "德語"
 
-#: dissemin/settings/common.py:318
-msgid "Brazilian Portuguese"
-msgstr "巴西葡萄牙語"
+#: dissemin/settings/common.py:310
+msgid "English"
+msgstr "English"
 
-#: dissemin/settings/common.py:319
+#: dissemin/settings/common.py:311
+msgid "Spanish"
+msgstr "西班牙語"
+
+#: dissemin/settings/common.py:312
+msgid "Finnish"
+msgstr "芬蘭語"
+
+#: dissemin/settings/common.py:313
+msgid "French"
+msgstr "Français"
+
+#: dissemin/settings/common.py:314
+msgid "Korean"
+msgstr "韓語"
+
+#: dissemin/settings/common.py:315
+msgid "Macedonian"
+msgstr "Македонски"
+
+#: dissemin/settings/common.py:316
 msgid "European Portuguese"
 msgstr "歐洲葡萄牙語"
 
-#: dissemin/settings/common.py:320
+#: dissemin/settings/common.py:317
+msgid "Brazilian Portuguese"
+msgstr "巴西葡萄牙語"
+
+#: dissemin/settings/common.py:318
 msgid "Swedish"
 msgstr "瑞典語"
+
+#: dissemin/settings/common.py:319
+msgid "Turkish"
+msgstr ""
+
+#: dissemin/settings/common.py:320
+msgid "Simplified Chinese"
+msgstr "简体中文"
+
+#: dissemin/settings/common.py:321
+msgid "Traditional Chinese"
+msgstr "繁體中文"
 
 #: model-gettext.py:2
 msgid "Computer science, knowledge & systems"
@@ -1091,70 +1100,101 @@ msgid "Germany & neighboring central European countries"
 msgstr "德國與鄰近的中歐國家"
 
 #: model-gettext.py:110
+#, fuzzy
+#| msgid "Green Open Access"
+msgid "Green Open Access Service"
+msgstr "綠色開放取用"
+
+#: model-gettext.py:111
+msgid ""
+"Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n"
+"<br/>\n"
+"Contact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
+msgstr ""
+
+#: model-gettext.py:112
+msgid "TUprints contract required!"
+msgstr ""
+
+#: model-gettext.py:113
+msgid ""
+"For every document, that you upload via Dissemin we need once a TUprints contract.\n"
+"Please fill in the contract and send a printed and signed copy to:\n"
+"<br>\n"
+"ULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
+msgstr ""
+
+#: model-gettext.py:114
+#, fuzzy
+#| msgid "Download"
+msgid "Download contract"
+msgstr "下載"
+
+#: model-gettext.py:115
 msgid "Creative Commons 1.0 Universal (CC0 1.0) Public Domain Dedication"
 msgstr "創用 CC — CC0 1.0 通用公眾領域貢獻"
 
-#: model-gettext.py:111
+#: model-gettext.py:116
 msgid "Creative Commons Attribution 4.0 International (CC BY 4.0)"
 msgstr "創用 CC 姓名標示 4.0 國際（CC BY 4.0）"
 
-#: model-gettext.py:112
+#: model-gettext.py:117
 msgid "Creative Commons Attribution-ShareAlike 4.0, International (CC BY-SA 4.0)"
 msgstr "創用 CC 姓名標示相同方式分享 4.0 國際（CC BY 4.0）"
 
-#: model-gettext.py:113
+#: model-gettext.py:118
 msgid "Creative Commons Attribution-NonCommerical 4.0 International (CC BY-NC 4.0)"
 msgstr "創用 CC 姓名標示非商業性使用 4.0 國際（CC BY 4.0）"
 
-#: model-gettext.py:114
+#: model-gettext.py:119
 msgid "Creative Commons Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0)"
 msgstr "創用 CC 姓名標示禁止改作 4.0 國際（CC BY 4.0）"
 
-#: model-gettext.py:115
+#: model-gettext.py:120
 msgid "Free for private use; right holder retains other rights, including distribution"
 msgstr "免費供私人使用，權利持有者保留其它權利，包含分發部份"
 
-#: model-gettext.py:116
+#: model-gettext.py:121
 msgid "Other open license"
 msgstr "其它開放授權"
 
-#: model-gettext.py:118
+#: model-gettext.py:123
 msgid "Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)"
 msgstr "創用 CC 姓名標示-非商業性-相同方式分享 4.0 國際（CC BY 4.0）"
 
-#: model-gettext.py:119
+#: model-gettext.py:124
 msgid "Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)"
 msgstr "創用 CC 姓名標示-非商業性-禁止改作 4.0 國際（CC BY 4.0）"
 
-#: model-gettext.py:120
+#: model-gettext.py:125
 msgid "Zenodo"
 msgstr "Zenodo"
 
-#: model-gettext.py:121
+#: model-gettext.py:126
 msgid "Zenodo is a general-purpose open repository hosted by CERN. If the document does not have a DOI yet, Zenodo will create one."
 msgstr "Zenodo 是由 CERN 所托管的一般通用知識庫。若文件尚未有 DOI，Zenodo 會建立一個。"
 
-#: model-gettext.py:122
+#: model-gettext.py:127
 msgid "HAL"
 msgstr "HAL"
 
-#: model-gettext.py:123
+#: model-gettext.py:128
 msgid "HAL is a  multidisciplinary open archive, sustained by the French Research Ministry."
 msgstr "HAL 是多學科的開放存檔，由法國研究部（French Research Ministry）所提供。"
 
-#: model-gettext.py:124
+#: model-gettext.py:129
 msgid "OSF preprints"
 msgstr "OSF 預印本"
 
-#: model-gettext.py:125
+#: model-gettext.py:130
 msgid "Run by the Center for Open Science, OSF lets you share your preprints openly. You can also share supplemental data, materials or code associated with your article."
 msgstr "由開放科學中心運行，OSF 讓您可公開共享您的預刊本。您也可以分享與您的文章相關的補充資料、素材、或是代碼。"
 
-#: model-gettext.py:126
+#: model-gettext.py:131
 msgid "TUprints"
 msgstr "TUprints"
 
-#: model-gettext.py:127
+#: model-gettext.py:132
 msgid "TUprints is the open access repository for all current and former members of the Technical University Darmstadt."
 msgstr "TUprints 是讓達姆施塔特工業大學所有現任與前任成員使用的開放取用知識庫。"
 
@@ -1373,7 +1413,7 @@ msgid "Format"
 msgstr "格式"
 
 #: papers/templates/papers/export_citation_modal.html:31
-#: papers/templates/papers/paper.html:146
+#: papers/templates/papers/paper.html:154
 #: papers/templates/papers/paper_list.html:55
 msgid "Download"
 msgstr "下載"
@@ -1446,7 +1486,7 @@ msgstr "存放完成！"
 msgid "<p>This paper was successfully deposited and is now freely available at <a class=\"alert-link\" href=\"%(splash_url)s\">this address.</a></p>"
 msgstr "<p>此論文已存放成功，並可在<a class=\"alert-link\" href=\"%(splash_url)s\">此連結</a>裡自由取得。</p>"
 
-#: papers/templates/papers/paper.html:81 papers/templates/papers/paper.html:105
+#: papers/templates/papers/paper.html:81 papers/templates/papers/paper.html:113
 msgid "Deposit almost accomplished!"
 msgstr "存放快完成了！"
 
@@ -1455,30 +1495,21 @@ msgstr "存放快完成了！"
 msgid "<p>This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(splash_url)s\">this address</a> after validation by the repository administrators.</p>"
 msgstr "此論文已被存放在 <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a> 裡。由知識庫管理員給確認後，全文內容將在<a class=\"alert-link\" href=\"%(splash_url)s\">此連結</a>可用。"
 
-#: papers/templates/papers/paper.html:90
-msgid "Letter of Declaration needed!"
-msgstr "需要聲明書！"
-
-#: papers/templates/papers/paper.html:93
-#, python-format
-msgid "<p>The repository %(deposit.repository.name)s requires a letter of declaration to publish this publication. Please <a class=\"alert-link\" href=\"%(letter_url)s\">download</a> the letter, sign it and send it to the repository administration.</p>"
-msgstr "<p>知識庫 %(deposit.repository.name)s 需要聲明書來發佈此出版物。請<a class=\"alert-link\" href=\"%(letter_url)s\">下載書信</a>後，簽名並發送給知識庫管理單位。</p>"
-
-#: papers/templates/papers/paper.html:106
+#: papers/templates/papers/paper.html:114
 #, python-format
 msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(deposit_url)s\">this address</a> after validation by the repository administrators."
 msgstr "此論文已被存放在 <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a> 裡。由知識庫管理員給確認後，全文內容將在<a class=\"alert-link\" href=\"%(deposit_url)s\">此位址</a>可用。"
 
-#: papers/templates/papers/paper.html:119
+#: papers/templates/papers/paper.html:127
 #, python-format
 msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(deposit_url)s\">this address</a> from <strong>%(pub_date|localize)s</strong> on due to an embargo."
 msgstr "此論文已被存放在 <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a> 裡。出於限制緣故，全文內容是從<strong>%(pub_date|localize)s</strong>開始在<a class=\"alert-link\" href=\"%(deposit_url)s\">此位址</a>可用。"
 
-#: papers/templates/papers/paper.html:144
+#: papers/templates/papers/paper.html:152
 msgid "Full text:"
 msgstr "全文："
 
-#: papers/templates/papers/paper.html:148 statistics/models.py:66
+#: papers/templates/papers/paper.html:156 statistics/models.py:66
 msgid "Unavailable"
 msgstr "不可用"
 
@@ -1803,16 +1834,16 @@ msgstr "創作出自"
 msgid "Paper view expects a DOI or a pk"
 msgstr "論文檢視需要 DOI 或 pk"
 
-#: papers/views.py:384
+#: papers/views.py:382
 #, python-format
 msgid "No %(verbose_name)s found matching the query"
 msgstr "找不到符合查詢的%(verbose_name)s"
 
-#: papers/views.py:388
+#: papers/views.py:386
 msgid "This paper has been deleted."
 msgstr "此論文已被刪除。"
 
-#: papers/views.py:433
+#: papers/views.py:431
 msgid "Invalid DOI."
 msgstr "無效 DOI。"
 
@@ -2043,6 +2074,10 @@ msgstr "URL"
 #: upload/templates/upload/widget.html:3
 msgid "Select here the full text of your article. PDF files only, maximum size:"
 msgstr "在此選擇您文章的全文。僅限 PDF 檔案，最大大小："
+
+#: upload/templates/upload/widget.html:10
+msgid "Click or drop here"
+msgstr ""
 
 #: upload/templates/upload/widget.html:15
 #, fuzzy
@@ -2456,7 +2491,9 @@ msgstr "然後，目前 Dissemin 僅支援遵循<a href=\"https://www.openarchiv
 
 #: website/templates/dissemin/faq.html:448
 msgid "If the repository is registered in BASE, please <a href=\"https://www.base-search.net/\">search in BASE</a> to check that your article is there. If it is, then this may be a bug of Dissemin; please file an <a href=\"https://github.com/dissemin/dissemin/issues\">issue</a> describing the problem, or send a message to <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>."
-msgstr "如果知識庫已經註冊到 BASE，請<a href=\"https://www.base-search.net/\">在 BASE 裡搜尋</a>來查看您的文章是否有出現。如果有找到的話，這可能是\n Dissemin 有程式錯誤，請在<a href=\"https://github.com/dissemin/dissemin/issues\">這裡</a>提出來描述問題，或是寄送訊息到 <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>。"
+msgstr ""
+"如果知識庫已經註冊到 BASE，請<a href=\"https://www.base-search.net/\">在 BASE 裡搜尋</a>來查看您的文章是否有出現。如果有找到的話，這可能是\n"
+" Dissemin 有程式錯誤，請在<a href=\"https://github.com/dissemin/dissemin/issues\">這裡</a>提出來描述問題，或是寄送訊息到 <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>。"
 
 #: website/templates/dissemin/faq.html:462
 msgid "Authenticating users is necessary to deposit papers on their behalf in open repositories. Besides, knowing a user's ORCID id helps us find its publications, avoiding articles authored by namesakes for instance. Logging in via ORCID will not expose any private information to Dissemin: we only have access to the public part of your ORCID record. For instance, unless you have explicitly marked your email address as public, we do not even know your email address when you log in to Dissemin via ORCID."
@@ -2488,7 +2525,9 @@ msgstr "點擊「新增至 ORCID」（Add to ORCID）來新增您的出版項目
 
 #: website/templates/dissemin/faq.html:503
 msgid "You can also add publications to your profile <em>on Dissemin</em>, by clicking the button \"Include in my profile\" in search results on Dissemin. (This button is only visible when you are logged in, and next to papers that Dissemin thinks you have authored.) You can also exclude articles from your profile in this way. Please note that these changes are local to Dissemin and are <em>not</em> propagated to your ORCID profile, because ORCID does not have a free API allowing us to propagate them."
-msgstr "您也可以<em>在 Dissemin</em> 來新增出版項目道您的個人檔案，透過在 Dissemin 搜尋結果中點擊「包含在我的個人檔案」按鍵即可。（此按鍵是要您已經有登入，而且只顯示在有被 Dissemin 判斷出是由您所編寫之論文的一旁。）您也可以用此方式在您個人檔案裡排除不需要的文章。請注意這些變動僅侷限於\nDissemin 而<em>不會</em>影響到您的 ORCID 個人檔案，因為 ORCID 並沒有可以讓我們自由使用來更改它們內容的 API。"
+msgstr ""
+"您也可以<em>在 Dissemin</em> 來新增出版項目道您的個人檔案，透過在 Dissemin 搜尋結果中點擊「包含在我的個人檔案」按鍵即可。（此按鍵是要您已經有登入，而且只顯示在有被 Dissemin 判斷出是由您所編寫之論文的一旁。）您也可以用此方式在您個人檔案裡排除不需要的文章。請注意這些變動僅侷限於\n"
+"Dissemin 而<em>不會</em>影響到您的 ORCID 個人檔案，因為 ORCID 並沒有可以讓我們自由使用來更改它們內容的 API。"
 
 #: website/templates/dissemin/faq.html:512
 #, python-format
@@ -2664,15 +2703,19 @@ msgstr "作為圖書館，您可以使用 Dissemin 來找尋在付費牆背後�
 msgid "You can advertise Dissemin to your researchers and show them how easy it is to liberate their publications!"
 msgstr "您可以向您的研究人員宣傳與展示 Dissemin，來讓他們知道釋出他們的出版物有多麼容易！"
 
-#: website/templates/dissemin/start_page.html:131
+#: website/templates/dissemin/start_page.html:122
+msgid "Learn more!"
+msgstr ""
+
+#: website/templates/dissemin/start_page.html:132
 msgid "Network of Partners"
 msgstr "合作夥伴網絡"
 
-#: website/templates/dissemin/start_page.html:134
+#: website/templates/dissemin/start_page.html:135
 msgid "Partners"
 msgstr "合作夥伴"
 
-#: website/templates/dissemin/start_page.html:135
+#: website/templates/dissemin/start_page.html:136
 msgid "Dissemin would not be possible without the support of our partners:"
 msgstr "沒有我們夥伴的支援，Dissemin 是無法運作的："
 
@@ -2803,3 +2846,8 @@ msgstr "驗證錯誤"
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr "驗證失敗。<a href=\"%(account-login)s\">返回登入頁面。</a>"
 
+#~ msgid "Letter of Declaration needed!"
+#~ msgstr "需要聲明書！"
+
+#~ msgid "<p>The repository %(deposit.repository.name)s requires a letter of declaration to publish this publication. Please <a class=\"alert-link\" href=\"%(letter_url)s\">download</a> the letter, sign it and send it to the repository administration.</p>"
+#~ msgstr "<p>知識庫 %(deposit.repository.name)s 需要聲明書來發佈此出版物。請<a class=\"alert-link\" href=\"%(letter_url)s\">下載書信</a>後，簽名並發送給知識庫管理單位。</p>"

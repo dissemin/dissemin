@@ -12,9 +12,8 @@
 #
 msgid ""
 msgstr ""
-""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-07 14:39+0100\n"
+"POT-Creation-Date: 2020-01-24 17:53+0100\n"
 "PO-Revision-Date: 2020-01-09 19:06:57+0000\n"
 "Language: fi\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -47,7 +46,7 @@ msgstr "Koodivaranto"
 msgid "Invalid full text identifier."
 msgstr "Kokotekstitunniste ei kelpaa."
 
-#: deposit/forms.py:144 papers/templates/papers/paper.html:160
+#: deposit/forms.py:144 papers/templates/papers/paper.html:168
 msgid "Abstract"
 msgstr "Tiivistelmä"
 
@@ -317,16 +316,16 @@ msgstr "Koodivarannon hylkäämä"
 msgid "Deleted"
 msgstr "Poistettu"
 
-#: deposit/models.py:290 deposit/templates/deposit/start.html:205
+#: deposit/models.py:340 deposit/templates/deposit/start.html:205
 #: deposit/views.py:120
 msgid "Deposit"
 msgstr "Tallenna"
 
-#: deposit/models.py:343
+#: deposit/models.py:393
 msgid "We will use this email address to notify you when your deposits are accepted."
 msgstr "Käytämme tätä sähköpostiosoitetta ilmoittaaksemme sinulle, kun talletuksesi on hyväksytty."
 
-#: deposit/models.py:349
+#: deposit/models.py:399
 msgid "This repository will be used by default for your deposits."
 msgstr "Tätä koodivarantoa käytetään oletuksena talletuksillesi."
 
@@ -338,7 +337,7 @@ msgstr "Creative Commons CC0 1.0 Yleismaailmallinen"
 msgid "Creative Commons CC-By Attribution 4.0 International (CC BY 4.0)"
 msgstr "Creative Commons CC-By Nimeä 4.0 Kansainvälinen (CC BY 4.0)"
 
-#: deposit/osf/forms.py:40 deposit/osf/forms.py:51 model-gettext.py:117
+#: deposit/osf/forms.py:40 deposit/osf/forms.py:51 model-gettext.py:122
 msgid "No license"
 msgstr "Ei lisenssiä"
 
@@ -434,7 +433,7 @@ msgstr "Projektia ei voitu poistaa."
 msgid "Unable to make the project public."
 msgstr "Projektia ei voitu julkistaa."
 
-#: deposit/protocol.py:368
+#: deposit/protocol.py:328
 msgid "Failed to connect to the repository. Please try again later."
 msgstr "Yhteyden muodostaminen koodivarantoon epäonnistui. Yritä myöhemmin uudelleen."
 
@@ -442,16 +441,16 @@ msgstr "Yhteyden muodostaminen koodivarantoon epäonnistui. Yritä myöhemmin uu
 msgid "E-mail"
 msgstr "Sähköpostiosoite"
 
-#: deposit/sword/protocol.py:67
+#: deposit/sword/protocol.py:81
 #, fuzzy
 msgid "The repository {} returned invalid XML"
 msgstr "Tämä koodivaranto ei ole käytettävissä tälle asiakirjalle."
 
-#: deposit/sword/protocol.py:295
+#: deposit/sword/protocol.py:325
 msgid "Username or password not provided for this repository. Please contact the Dissemin team."
 msgstr "Käyttäjänimeä tai salasanaa ei ole annettu tälle koodivarannolle. Ota yhteyttä Dissemin-tiimiin."
 
-#: deposit/sword/protocol.py:320
+#: deposit/sword/protocol.py:350
 #, fuzzy
 msgid "Unable to deposit to repository"
 msgstr "Projektia ei voitu poistaa."
@@ -539,6 +538,12 @@ msgstr "Tallettaminen"
 #, python-format
 msgid "You can deposit the full text of your article. Dissemin will send it to a repository where it will be made freely available. By depositing your article via Dissemin, you agree to our <a href=\"%(tosurl)s\">terms of service</a>."
 msgstr ""
+
+#: deposit/templates/deposit/start.html:72
+#, fuzzy
+#| msgid "Authors"
+msgid "Authorship"
+msgstr "Tekijät"
 
 #: deposit/templates/deposit/start.html:73
 msgid "You do not appear to be one of the authors of this paper. By using this form, you certify that you have the permission to upload it on their behalf."
@@ -667,52 +672,56 @@ msgid "Arabic"
 msgstr "Arabia"
 
 #: dissemin/settings/common.py:309
-msgid "English"
-msgstr "Englanti"
-
-#: dissemin/settings/common.py:310
-msgid "Finnish"
-msgstr "suomi"
-
-#: dissemin/settings/common.py:311
-msgid "French"
-msgstr "Ranska"
-
-#: dissemin/settings/common.py:312
-msgid "Korean"
-msgstr "Korea"
-
-#: dissemin/settings/common.py:313
-msgid "Spanish"
-msgstr "Espanja"
-
-#: dissemin/settings/common.py:314
-msgid "Simplified Chinese"
-msgstr "Yksinkertainen kiina"
-
-#: dissemin/settings/common.py:315
-msgid "Traditional Chinese"
-msgstr "Perinteinen Kiina"
-
-#: dissemin/settings/common.py:316
-msgid "Macedonian"
-msgstr "Makedonia"
-
-#: dissemin/settings/common.py:317
 msgid "German"
 msgstr "Saksa"
 
-#: dissemin/settings/common.py:318
-msgid "Brazilian Portuguese"
-msgstr "Brasilianportugali"
+#: dissemin/settings/common.py:310
+msgid "English"
+msgstr "Englanti"
 
-#: dissemin/settings/common.py:319
+#: dissemin/settings/common.py:311
+msgid "Spanish"
+msgstr "Espanja"
+
+#: dissemin/settings/common.py:312
+msgid "Finnish"
+msgstr "suomi"
+
+#: dissemin/settings/common.py:313
+msgid "French"
+msgstr "Ranska"
+
+#: dissemin/settings/common.py:314
+msgid "Korean"
+msgstr "Korea"
+
+#: dissemin/settings/common.py:315
+msgid "Macedonian"
+msgstr "Makedonia"
+
+#: dissemin/settings/common.py:316
 msgid "European Portuguese"
 msgstr "Euroopanportugali"
 
-#: dissemin/settings/common.py:320
+#: dissemin/settings/common.py:317
+msgid "Brazilian Portuguese"
+msgstr "Brasilianportugali"
+
+#: dissemin/settings/common.py:318
 msgid "Swedish"
 msgstr "ruotsi"
+
+#: dissemin/settings/common.py:319
+msgid "Turkish"
+msgstr ""
+
+#: dissemin/settings/common.py:320
+msgid "Simplified Chinese"
+msgstr "Yksinkertainen kiina"
+
+#: dissemin/settings/common.py:321
+msgid "Traditional Chinese"
+msgstr "Perinteinen Kiina"
 
 #: model-gettext.py:2
 msgid "Computer science, knowledge & systems"
@@ -1104,74 +1113,105 @@ msgid "Germany & neighboring central European countries"
 msgstr ""
 
 #: model-gettext.py:110
+#, fuzzy
+#| msgid "Green Open Access"
+msgid "Green Open Access Service"
+msgstr "Vihreä open access"
+
+#: model-gettext.py:111
+msgid ""
+"Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n"
+"<br/>\n"
+"Contact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
+msgstr ""
+
+#: model-gettext.py:112
+msgid "TUprints contract required!"
+msgstr ""
+
+#: model-gettext.py:113
+msgid ""
+"For every document, that you upload via Dissemin we need once a TUprints contract.\n"
+"Please fill in the contract and send a printed and signed copy to:\n"
+"<br>\n"
+"ULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
+msgstr ""
+
+#: model-gettext.py:114
+#, fuzzy
+#| msgid "Download"
+msgid "Download contract"
+msgstr "Lataa"
+
+#: model-gettext.py:115
 msgid "Creative Commons 1.0 Universal (CC0 1.0) Public Domain Dedication"
 msgstr "Creative Commons 1.0 Yleismaailmallinen (CC0 1.0) Public Domain -lausuma"
 
-#: model-gettext.py:111
+#: model-gettext.py:116
 msgid "Creative Commons Attribution 4.0 International (CC BY 4.0)"
 msgstr "Creative Commons Nimeä 4.0 Kansainvälinen (CC BY 4.0)"
 
-#: model-gettext.py:112
+#: model-gettext.py:117
 msgid "Creative Commons Attribution-ShareAlike 4.0, International (CC BY-SA 4.0)"
 msgstr "Creative Commons Nimeä-JaaSamoin 4.0 Kansainvälinen (CC BY-SA 4.0)"
 
-#: model-gettext.py:113
+#: model-gettext.py:118
 msgid "Creative Commons Attribution-NonCommerical 4.0 International (CC BY-NC 4.0)"
 msgstr "Creative Commons Nimeä-EiKaupallinen 4.0 Kansainvälinen (CC BY-NC 4.0)"
 
-#: model-gettext.py:114
+#: model-gettext.py:119
 msgid "Creative Commons Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0)"
 msgstr "Creative Commons Nimeä-EiMuutoksia 4.0 Kansainvälinen (CC BY-ND 4.0)"
 
-#: model-gettext.py:115
+#: model-gettext.py:120
 msgid "Free for private use; right holder retains other rights, including distribution"
 msgstr "Ilmaiseksi yksityiskäyttöön; oikeudenhaltija säilyttää muut oikeudet, mukaan lukien jakelu"
 
-#: model-gettext.py:116
+#: model-gettext.py:121
 msgid "Other open license"
 msgstr "Muu avoin lisenssi"
 
-#: model-gettext.py:118
+#: model-gettext.py:123
 #, fuzzy
 msgid "Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)"
 msgstr "Creative Commons Nimeä-EiKaupallinen 4.0 Kansainvälinen (CC BY-NC 4.0)"
 
-#: model-gettext.py:119
+#: model-gettext.py:124
 #, fuzzy
 msgid "Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)"
 msgstr "Creative Commons Nimeä-EiMuutoksia 4.0 Kansainvälinen (CC BY-ND 4.0)"
 
-#: model-gettext.py:120
+#: model-gettext.py:125
 msgid "Zenodo"
 msgstr "Zenodo"
 
-#: model-gettext.py:121
+#: model-gettext.py:126
 msgid "Zenodo is a general-purpose open repository hosted by CERN. If the document does not have a DOI yet, Zenodo will create one."
 msgstr ""
 
-#: model-gettext.py:122
+#: model-gettext.py:127
 msgid "HAL"
 msgstr "HAL"
 
-#: model-gettext.py:123
+#: model-gettext.py:128
 msgid "HAL is a  multidisciplinary open archive, sustained by the French Research Ministry."
 msgstr ""
 
-#: model-gettext.py:124
+#: model-gettext.py:129
 #, fuzzy
 msgid "OSF preprints"
 msgstr "koevedos"
 
-#: model-gettext.py:125
+#: model-gettext.py:130
 msgid "Run by the Center for Open Science, OSF lets you share your preprints openly. You can also share supplemental data, materials or code associated with your article."
 msgstr ""
 
-#: model-gettext.py:126
+#: model-gettext.py:131
 #, fuzzy
 msgid "TUprints"
 msgstr "koevedos"
 
-#: model-gettext.py:127
+#: model-gettext.py:132
 msgid "TUprints is the open access repository for all current and former members of the Technical University Darmstadt."
 msgstr ""
 
@@ -1392,7 +1432,7 @@ msgid "Format"
 msgstr "Muoto"
 
 #: papers/templates/papers/export_citation_modal.html:31
-#: papers/templates/papers/paper.html:146
+#: papers/templates/papers/paper.html:154
 #: papers/templates/papers/paper_list.html:55
 msgid "Download"
 msgstr "Lataa"
@@ -1470,7 +1510,7 @@ msgstr ""
 msgid "<p>This paper was successfully deposited and is now freely available at <a class=\"alert-link\" href=\"%(splash_url)s\">this address.</a></p>"
 msgstr ""
 
-#: papers/templates/papers/paper.html:81 papers/templates/papers/paper.html:105
+#: papers/templates/papers/paper.html:81 papers/templates/papers/paper.html:113
 msgid "Deposit almost accomplished!"
 msgstr ""
 
@@ -1479,30 +1519,21 @@ msgstr ""
 msgid "<p>This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(splash_url)s\">this address</a> after validation by the repository administrators.</p>"
 msgstr ""
 
-#: papers/templates/papers/paper.html:90
-msgid "Letter of Declaration needed!"
-msgstr ""
-
-#: papers/templates/papers/paper.html:93
-#, python-format
-msgid "<p>The repository %(deposit.repository.name)s requires a letter of declaration to publish this publication. Please <a class=\"alert-link\" href=\"%(letter_url)s\">download</a> the letter, sign it and send it to the repository administration.</p>"
-msgstr ""
-
-#: papers/templates/papers/paper.html:106
+#: papers/templates/papers/paper.html:114
 #, python-format
 msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(deposit_url)s\">this address</a> after validation by the repository administrators."
 msgstr ""
 
-#: papers/templates/papers/paper.html:119
+#: papers/templates/papers/paper.html:127
 #, python-format
 msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(deposit_url)s\">this address</a> from <strong>%(pub_date|localize)s</strong> on due to an embargo."
 msgstr ""
 
-#: papers/templates/papers/paper.html:144
+#: papers/templates/papers/paper.html:152
 msgid "Full text:"
 msgstr "Koko teksti:"
 
-#: papers/templates/papers/paper.html:148 statistics/models.py:66
+#: papers/templates/papers/paper.html:156 statistics/models.py:66
 msgid "Unavailable"
 msgstr "Ei saatavissa"
 
@@ -1828,16 +1859,16 @@ msgstr "kirjoittanut"
 msgid "Paper view expects a DOI or a pk"
 msgstr ""
 
-#: papers/views.py:384
+#: papers/views.py:382
 #, python-format
 msgid "No %(verbose_name)s found matching the query"
 msgstr ""
 
-#: papers/views.py:388
+#: papers/views.py:386
 msgid "This paper has been deleted."
 msgstr ""
 
-#: papers/views.py:433
+#: papers/views.py:431
 msgid "Invalid DOI."
 msgstr "Virheellinen DOI."
 
@@ -2073,6 +2104,10 @@ msgstr "URL"
 msgid "Select here the full text of your article. PDF files only, maximum size:"
 msgstr "Valitse täältä artikkelin koko teksti. Vain PDF-tiedostot, enimmäiskoko:"
 
+#: upload/templates/upload/widget.html:10
+msgid "Click or drop here"
+msgstr ""
+
 #: upload/templates/upload/widget.html:15
 #, fuzzy
 msgid "Or enter a URL:"
@@ -2130,7 +2165,10 @@ msgstr "Pääsy PDF-tiedostoon kiellettiin."
 #: website/templates/403.html:13
 #, fuzzy, python-format
 msgid "The access to the requested page has been denied. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr "\n            Pyytämääsi sivua ei löytynyt. <a href=\"/\">Palaa kotisivulle.</a>\n           "
+msgstr ""
+"\n"
+"            Pyytämääsi sivua ei löytynyt. <a href=\"/\">Palaa kotisivulle.</a>\n"
+"           "
 
 #: website/templates/404.html:6 website/templates/404.html:10
 msgid "Page not found"
@@ -2699,15 +2737,19 @@ msgstr ""
 msgid "You can advertise Dissemin to your researchers and show them how easy it is to liberate their publications!"
 msgstr ""
 
-#: website/templates/dissemin/start_page.html:131
+#: website/templates/dissemin/start_page.html:122
+msgid "Learn more!"
+msgstr ""
+
+#: website/templates/dissemin/start_page.html:132
 msgid "Network of Partners"
 msgstr ""
 
-#: website/templates/dissemin/start_page.html:134
+#: website/templates/dissemin/start_page.html:135
 msgid "Partners"
 msgstr "Yhteistyökumppanit"
 
-#: website/templates/dissemin/start_page.html:135
+#: website/templates/dissemin/start_page.html:136
 msgid "Dissemin would not be possible without the support of our partners:"
 msgstr "Dissemin ei olisi olemassa ilman yhteistyökumppaneidemme tukea:"
 
@@ -2837,4 +2879,3 @@ msgstr "Todennusvirhe"
 #, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr "Todennus epäonnistui. <a href=\"%(account-login)s\">Palaa kirjautumissivulle.</a>"
-

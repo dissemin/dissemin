@@ -9,9 +9,8 @@
 #
 msgid ""
 msgstr ""
-""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-07 14:39+0100\n"
+"POT-Creation-Date: 2020-01-24 17:53+0100\n"
 "PO-Revision-Date: 2020-01-09 19:06:58+0000\n"
 "Language: lb\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -47,7 +46,7 @@ msgstr "Dossier"
 msgid "Invalid full text identifier."
 msgstr ""
 
-#: deposit/forms.py:144 papers/templates/papers/paper.html:160
+#: deposit/forms.py:144 papers/templates/papers/paper.html:168
 msgid "Abstract"
 msgstr "Resumé"
 
@@ -317,16 +316,16 @@ msgstr ""
 msgid "Deleted"
 msgstr "Geläscht"
 
-#: deposit/models.py:290 deposit/templates/deposit/start.html:205
+#: deposit/models.py:340 deposit/templates/deposit/start.html:205
 #: deposit/views.py:120
 msgid "Deposit"
 msgstr ""
 
-#: deposit/models.py:343
+#: deposit/models.py:393
 msgid "We will use this email address to notify you when your deposits are accepted."
 msgstr ""
 
-#: deposit/models.py:349
+#: deposit/models.py:399
 msgid "This repository will be used by default for your deposits."
 msgstr ""
 
@@ -338,7 +337,7 @@ msgstr "Creative Commons CC0 1.0 Universal"
 msgid "Creative Commons CC-By Attribution 4.0 International (CC BY 4.0)"
 msgstr ""
 
-#: deposit/osf/forms.py:40 deposit/osf/forms.py:51 model-gettext.py:117
+#: deposit/osf/forms.py:40 deposit/osf/forms.py:51 model-gettext.py:122
 msgid "No license"
 msgstr "Keng Lizenz"
 
@@ -434,7 +433,7 @@ msgstr ""
 msgid "Unable to make the project public."
 msgstr ""
 
-#: deposit/protocol.py:368
+#: deposit/protocol.py:328
 msgid "Failed to connect to the repository. Please try again later."
 msgstr ""
 
@@ -442,15 +441,15 @@ msgstr ""
 msgid "E-mail"
 msgstr "E-Mail"
 
-#: deposit/sword/protocol.py:67
+#: deposit/sword/protocol.py:81
 msgid "The repository {} returned invalid XML"
 msgstr ""
 
-#: deposit/sword/protocol.py:295
+#: deposit/sword/protocol.py:325
 msgid "Username or password not provided for this repository. Please contact the Dissemin team."
 msgstr ""
 
-#: deposit/sword/protocol.py:320
+#: deposit/sword/protocol.py:350
 msgid "Unable to deposit to repository"
 msgstr ""
 
@@ -536,6 +535,11 @@ msgstr ""
 #, python-format
 msgid "You can deposit the full text of your article. Dissemin will send it to a repository where it will be made freely available. By depositing your article via Dissemin, you agree to our <a href=\"%(tosurl)s\">terms of service</a>."
 msgstr ""
+
+#: deposit/templates/deposit/start.html:72
+#, fuzzy
+msgid "Authorship"
+msgstr "No Auteuren"
 
 #: deposit/templates/deposit/start.html:73
 msgid "You do not appear to be one of the authors of this paper. By using this form, you certify that you have the permission to upload it on their behalf."
@@ -664,52 +668,56 @@ msgid "Arabic"
 msgstr "Arabesch"
 
 #: dissemin/settings/common.py:309
-msgid "English"
-msgstr "Englesch"
-
-#: dissemin/settings/common.py:310
-msgid "Finnish"
-msgstr "Finnesch"
-
-#: dissemin/settings/common.py:311
-msgid "French"
-msgstr "Franséisch"
-
-#: dissemin/settings/common.py:312
-msgid "Korean"
-msgstr "Koreanesch"
-
-#: dissemin/settings/common.py:313
-msgid "Spanish"
-msgstr "Spuenesch"
-
-#: dissemin/settings/common.py:314
-msgid "Simplified Chinese"
-msgstr "Vereinfacht Chinesesch"
-
-#: dissemin/settings/common.py:315
-msgid "Traditional Chinese"
-msgstr ""
-
-#: dissemin/settings/common.py:316
-msgid "Macedonian"
-msgstr "Mazedonesch"
-
-#: dissemin/settings/common.py:317
 msgid "German"
 msgstr "Däitsch"
 
-#: dissemin/settings/common.py:318
-msgid "Brazilian Portuguese"
-msgstr ""
+#: dissemin/settings/common.py:310
+msgid "English"
+msgstr "Englesch"
 
-#: dissemin/settings/common.py:319
+#: dissemin/settings/common.py:311
+msgid "Spanish"
+msgstr "Spuenesch"
+
+#: dissemin/settings/common.py:312
+msgid "Finnish"
+msgstr "Finnesch"
+
+#: dissemin/settings/common.py:313
+msgid "French"
+msgstr "Franséisch"
+
+#: dissemin/settings/common.py:314
+msgid "Korean"
+msgstr "Koreanesch"
+
+#: dissemin/settings/common.py:315
+msgid "Macedonian"
+msgstr "Mazedonesch"
+
+#: dissemin/settings/common.py:316
 msgid "European Portuguese"
 msgstr ""
 
-#: dissemin/settings/common.py:320
+#: dissemin/settings/common.py:317
+msgid "Brazilian Portuguese"
+msgstr ""
+
+#: dissemin/settings/common.py:318
 msgid "Swedish"
 msgstr "Schweedesch"
+
+#: dissemin/settings/common.py:319
+msgid "Turkish"
+msgstr ""
+
+#: dissemin/settings/common.py:320
+msgid "Simplified Chinese"
+msgstr "Vereinfacht Chinesesch"
+
+#: dissemin/settings/common.py:321
+msgid "Traditional Chinese"
+msgstr ""
 
 #: model-gettext.py:2
 #, fuzzy
@@ -1119,70 +1127,99 @@ msgid "Germany & neighboring central European countries"
 msgstr ""
 
 #: model-gettext.py:110
-msgid "Creative Commons 1.0 Universal (CC0 1.0) Public Domain Dedication"
-msgstr "Creative Commons 1.0 Universal (CC0 1.0) Public Domain Dedication"
+msgid "Green Open Access Service"
+msgstr ""
 
 #: model-gettext.py:111
-msgid "Creative Commons Attribution 4.0 International (CC BY 4.0)"
+msgid ""
+"Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n"
+"<br/>\n"
+"Contact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
 msgstr ""
 
 #: model-gettext.py:112
-msgid "Creative Commons Attribution-ShareAlike 4.0, International (CC BY-SA 4.0)"
+msgid "TUprints contract required!"
 msgstr ""
 
 #: model-gettext.py:113
-msgid "Creative Commons Attribution-NonCommerical 4.0 International (CC BY-NC 4.0)"
+msgid ""
+"For every document, that you upload via Dissemin we need once a TUprints contract.\n"
+"Please fill in the contract and send a printed and signed copy to:\n"
+"<br>\n"
+"ULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
 msgstr ""
 
 #: model-gettext.py:114
-msgid "Creative Commons Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0)"
-msgstr ""
+#, fuzzy
+#| msgid "Download"
+msgid "Download contract"
+msgstr "Eroflueden"
 
 #: model-gettext.py:115
-msgid "Free for private use; right holder retains other rights, including distribution"
-msgstr ""
+msgid "Creative Commons 1.0 Universal (CC0 1.0) Public Domain Dedication"
+msgstr "Creative Commons 1.0 Universal (CC0 1.0) Public Domain Dedication"
 
 #: model-gettext.py:116
-msgid "Other open license"
-msgstr "Aner fräi Lizenzen"
+msgid "Creative Commons Attribution 4.0 International (CC BY 4.0)"
+msgstr ""
+
+#: model-gettext.py:117
+msgid "Creative Commons Attribution-ShareAlike 4.0, International (CC BY-SA 4.0)"
+msgstr ""
 
 #: model-gettext.py:118
-msgid "Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)"
+msgid "Creative Commons Attribution-NonCommerical 4.0 International (CC BY-NC 4.0)"
 msgstr ""
 
 #: model-gettext.py:119
-msgid "Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)"
+msgid "Creative Commons Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0)"
 msgstr ""
 
 #: model-gettext.py:120
-msgid "Zenodo"
+msgid "Free for private use; right holder retains other rights, including distribution"
 msgstr ""
 
 #: model-gettext.py:121
-msgid "Zenodo is a general-purpose open repository hosted by CERN. If the document does not have a DOI yet, Zenodo will create one."
-msgstr ""
-
-#: model-gettext.py:122
-msgid "HAL"
-msgstr ""
+msgid "Other open license"
+msgstr "Aner fräi Lizenzen"
 
 #: model-gettext.py:123
-msgid "HAL is a  multidisciplinary open archive, sustained by the French Research Ministry."
+msgid "Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)"
 msgstr ""
 
 #: model-gettext.py:124
-msgid "OSF preprints"
+msgid "Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)"
 msgstr ""
 
 #: model-gettext.py:125
-msgid "Run by the Center for Open Science, OSF lets you share your preprints openly. You can also share supplemental data, materials or code associated with your article."
+msgid "Zenodo"
 msgstr ""
 
 #: model-gettext.py:126
-msgid "TUprints"
+msgid "Zenodo is a general-purpose open repository hosted by CERN. If the document does not have a DOI yet, Zenodo will create one."
 msgstr ""
 
 #: model-gettext.py:127
+msgid "HAL"
+msgstr ""
+
+#: model-gettext.py:128
+msgid "HAL is a  multidisciplinary open archive, sustained by the French Research Ministry."
+msgstr ""
+
+#: model-gettext.py:129
+msgid "OSF preprints"
+msgstr ""
+
+#: model-gettext.py:130
+msgid "Run by the Center for Open Science, OSF lets you share your preprints openly. You can also share supplemental data, materials or code associated with your article."
+msgstr ""
+
+#: model-gettext.py:131
+msgid "TUprints"
+msgstr ""
+
+#: model-gettext.py:132
 msgid "TUprints is the open access repository for all current and former members of the Technical University Darmstadt."
 msgstr ""
 
@@ -1404,7 +1441,7 @@ msgid "Format"
 msgstr "Format"
 
 #: papers/templates/papers/export_citation_modal.html:31
-#: papers/templates/papers/paper.html:146
+#: papers/templates/papers/paper.html:154
 #: papers/templates/papers/paper_list.html:55
 msgid "Download"
 msgstr "Eroflueden"
@@ -1483,7 +1520,7 @@ msgstr ""
 msgid "<p>This paper was successfully deposited and is now freely available at <a class=\"alert-link\" href=\"%(splash_url)s\">this address.</a></p>"
 msgstr ""
 
-#: papers/templates/papers/paper.html:81 papers/templates/papers/paper.html:105
+#: papers/templates/papers/paper.html:81 papers/templates/papers/paper.html:113
 msgid "Deposit almost accomplished!"
 msgstr ""
 
@@ -1492,30 +1529,21 @@ msgstr ""
 msgid "<p>This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(splash_url)s\">this address</a> after validation by the repository administrators.</p>"
 msgstr ""
 
-#: papers/templates/papers/paper.html:90
-msgid "Letter of Declaration needed!"
-msgstr ""
-
-#: papers/templates/papers/paper.html:93
-#, python-format
-msgid "<p>The repository %(deposit.repository.name)s requires a letter of declaration to publish this publication. Please <a class=\"alert-link\" href=\"%(letter_url)s\">download</a> the letter, sign it and send it to the repository administration.</p>"
-msgstr ""
-
-#: papers/templates/papers/paper.html:106
+#: papers/templates/papers/paper.html:114
 #, python-format
 msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(deposit_url)s\">this address</a> after validation by the repository administrators."
 msgstr ""
 
-#: papers/templates/papers/paper.html:119
+#: papers/templates/papers/paper.html:127
 #, python-format
 msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(deposit_url)s\">this address</a> from <strong>%(pub_date|localize)s</strong> on due to an embargo."
 msgstr ""
 
-#: papers/templates/papers/paper.html:144
+#: papers/templates/papers/paper.html:152
 msgid "Full text:"
 msgstr "Integralen Text:"
 
-#: papers/templates/papers/paper.html:148 statistics/models.py:66
+#: papers/templates/papers/paper.html:156 statistics/models.py:66
 msgid "Unavailable"
 msgstr "Net disponibel"
 
@@ -1844,16 +1872,16 @@ msgstr "Publizéiert vum"
 msgid "Paper view expects a DOI or a pk"
 msgstr ""
 
-#: papers/views.py:384
+#: papers/views.py:382
 #, python-format
 msgid "No %(verbose_name)s found matching the query"
 msgstr ""
 
-#: papers/views.py:388
+#: papers/views.py:386
 msgid "This paper has been deleted."
 msgstr "Dëst Dokument gouf geläscht."
 
-#: papers/views.py:433
+#: papers/views.py:431
 #, fuzzy
 msgid "Invalid DOI."
 msgstr "Net valabele PDF-fichier."
@@ -2088,6 +2116,10 @@ msgstr "URL"
 
 #: upload/templates/upload/widget.html:3
 msgid "Select here the full text of your article. PDF files only, maximum size:"
+msgstr ""
+
+#: upload/templates/upload/widget.html:10
+msgid "Click or drop here"
 msgstr ""
 
 #: upload/templates/upload/widget.html:15
@@ -2709,15 +2741,19 @@ msgstr ""
 msgid "You can advertise Dissemin to your researchers and show them how easy it is to liberate their publications!"
 msgstr ""
 
-#: website/templates/dissemin/start_page.html:131
+#: website/templates/dissemin/start_page.html:122
+msgid "Learn more!"
+msgstr ""
+
+#: website/templates/dissemin/start_page.html:132
 msgid "Network of Partners"
 msgstr ""
 
-#: website/templates/dissemin/start_page.html:134
+#: website/templates/dissemin/start_page.html:135
 msgid "Partners"
 msgstr "Partner"
 
-#: website/templates/dissemin/start_page.html:135
+#: website/templates/dissemin/start_page.html:136
 msgid "Dissemin would not be possible without the support of our partners:"
 msgstr ""
 
@@ -2849,4 +2885,3 @@ msgstr ""
 #, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr ""
-

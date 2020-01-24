@@ -13,9 +13,8 @@
 #
 msgid ""
 msgstr ""
-""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-07 14:39+0100\n"
+"POT-Creation-Date: 2020-01-24 17:53+0100\n"
 "PO-Revision-Date: 2020-01-16 14:29:30+0000\n"
 "Language: ar\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -48,7 +47,7 @@ msgstr "المستودع"
 msgid "Invalid full text identifier."
 msgstr "معرف النص الكامل غير صالح."
 
-#: deposit/forms.py:144 papers/templates/papers/paper.html:160
+#: deposit/forms.py:144 papers/templates/papers/paper.html:168
 msgid "Abstract"
 msgstr "نبذة مختصرة"
 
@@ -318,16 +317,16 @@ msgstr "مرفوض من قبل المستودع"
 msgid "Deleted"
 msgstr "تم الحذف"
 
-#: deposit/models.py:290 deposit/templates/deposit/start.html:205
+#: deposit/models.py:340 deposit/templates/deposit/start.html:205
 #: deposit/views.py:120
 msgid "Deposit"
 msgstr "الوديعة"
 
-#: deposit/models.py:343
+#: deposit/models.py:393
 msgid "We will use this email address to notify you when your deposits are accepted."
 msgstr "سنستخدم عنوان البريد الإلكتروني هذا لإعلامك عند قبول الودائع."
 
-#: deposit/models.py:349
+#: deposit/models.py:399
 msgid "This repository will be used by default for your deposits."
 msgstr "سيتم استخدام هذا المستودع افتراضيا لودائعك."
 
@@ -339,7 +338,7 @@ msgstr "المشاع الإبداعي CC0 1.0 العالمي"
 msgid "Creative Commons CC-By Attribution 4.0 International (CC BY 4.0)"
 msgstr "المشاع الإبداعي النسبة 4.0 (CC BY 4.0)"
 
-#: deposit/osf/forms.py:40 deposit/osf/forms.py:51 model-gettext.py:117
+#: deposit/osf/forms.py:40 deposit/osf/forms.py:51 model-gettext.py:122
 msgid "No license"
 msgstr "لا ترخيص"
 
@@ -435,7 +434,7 @@ msgstr "غير قادر على حذف المشروع"
 msgid "Unable to make the project public."
 msgstr "تعذر جعل المشروع عاما."
 
-#: deposit/protocol.py:368
+#: deposit/protocol.py:328
 msgid "Failed to connect to the repository. Please try again later."
 msgstr "فشل الاتصال بالمستودع; الرجاء معاودة المحاولة في وقت لاحق."
 
@@ -443,16 +442,16 @@ msgstr "فشل الاتصال بالمستودع; الرجاء معاودة ال
 msgid "E-mail"
 msgstr "البريد الإلكتروني"
 
-#: deposit/sword/protocol.py:67
+#: deposit/sword/protocol.py:81
 #, fuzzy
 msgid "The repository {} returned invalid XML"
 msgstr "تعذر العثور على هذا المستودع."
 
-#: deposit/sword/protocol.py:295
+#: deposit/sword/protocol.py:325
 msgid "Username or password not provided for this repository. Please contact the Dissemin team."
 msgstr "اسم المستخدم أو كلمة المرور غير متوفرة لهذا المستود؛. يرُجَى الاتصال بفريق ديسيمين."
 
-#: deposit/sword/protocol.py:320
+#: deposit/sword/protocol.py:350
 #, fuzzy
 msgid "Unable to deposit to repository"
 msgstr "تعذر إنشاء الطباعة المسبقة."
@@ -539,7 +538,14 @@ msgstr "إيداع"
 #: deposit/templates/deposit/start.html:64
 #, python-format
 msgid "You can deposit the full text of your article. Dissemin will send it to a repository where it will be made freely available. By depositing your article via Dissemin, you agree to our <a href=\"%(tosurl)s\">terms of service</a>."
-msgstr "يمكنك إيداع النص الكامل لمقالتك، وسوف يرسله ديسمين إلى مستودع حيث سيُتَاح بحرية،\n            ، من خلال إيداع مقالتك عبر ديسيمين، فإنك توافق على <a href=\"%(tosurl)s\">شروط الخدمة</a>."
+msgstr ""
+"يمكنك إيداع النص الكامل لمقالتك، وسوف يرسله ديسمين إلى مستودع حيث سيُتَاح بحرية،\n"
+"            ، من خلال إيداع مقالتك عبر ديسيمين، فإنك توافق على <a href=\"%(tosurl)s\">شروط الخدمة</a>."
+
+#: deposit/templates/deposit/start.html:72
+#, fuzzy
+msgid "Authorship"
+msgstr "حسب المؤلفين"
 
 #: deposit/templates/deposit/start.html:73
 msgid "You do not appear to be one of the authors of this paper. By using this form, you certify that you have the permission to upload it on their behalf."
@@ -668,52 +674,56 @@ msgid "Arabic"
 msgstr "العربية"
 
 #: dissemin/settings/common.py:309
-msgid "English"
-msgstr "الإنجليزية"
-
-#: dissemin/settings/common.py:310
-msgid "Finnish"
-msgstr "الفنلندية"
-
-#: dissemin/settings/common.py:311
-msgid "French"
-msgstr "الفرنسية"
-
-#: dissemin/settings/common.py:312
-msgid "Korean"
-msgstr "الكورية"
-
-#: dissemin/settings/common.py:313
-msgid "Spanish"
-msgstr "الإسبانية"
-
-#: dissemin/settings/common.py:314
-msgid "Simplified Chinese"
-msgstr "الصينية المبسطة"
-
-#: dissemin/settings/common.py:315
-msgid "Traditional Chinese"
-msgstr "الصينية التقليدية"
-
-#: dissemin/settings/common.py:316
-msgid "Macedonian"
-msgstr "المقدونية"
-
-#: dissemin/settings/common.py:317
 msgid "German"
 msgstr "الألمانية"
 
-#: dissemin/settings/common.py:318
-msgid "Brazilian Portuguese"
-msgstr "البرتغالية البرازيلية"
+#: dissemin/settings/common.py:310
+msgid "English"
+msgstr "الإنجليزية"
 
-#: dissemin/settings/common.py:319
+#: dissemin/settings/common.py:311
+msgid "Spanish"
+msgstr "الإسبانية"
+
+#: dissemin/settings/common.py:312
+msgid "Finnish"
+msgstr "الفنلندية"
+
+#: dissemin/settings/common.py:313
+msgid "French"
+msgstr "الفرنسية"
+
+#: dissemin/settings/common.py:314
+msgid "Korean"
+msgstr "الكورية"
+
+#: dissemin/settings/common.py:315
+msgid "Macedonian"
+msgstr "المقدونية"
+
+#: dissemin/settings/common.py:316
 msgid "European Portuguese"
 msgstr "البرتغالية الأوروبية"
 
-#: dissemin/settings/common.py:320
+#: dissemin/settings/common.py:317
+msgid "Brazilian Portuguese"
+msgstr "البرتغالية البرازيلية"
+
+#: dissemin/settings/common.py:318
 msgid "Swedish"
 msgstr "السويدية"
+
+#: dissemin/settings/common.py:319
+msgid "Turkish"
+msgstr ""
+
+#: dissemin/settings/common.py:320
+msgid "Simplified Chinese"
+msgstr "الصينية المبسطة"
+
+#: dissemin/settings/common.py:321
+msgid "Traditional Chinese"
+msgstr "الصينية التقليدية"
 
 #: model-gettext.py:2
 msgid "Computer science, knowledge & systems"
@@ -1100,74 +1110,104 @@ msgid "Germany & neighboring central European countries"
 msgstr "ألمانيا ودول أوروبا الوسطى المجاورة"
 
 #: model-gettext.py:110
+#, fuzzy
+msgid "Green Open Access Service"
+msgstr "الوصول المفتوح الأخضر"
+
+#: model-gettext.py:111
+msgid ""
+"Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n"
+"<br/>\n"
+"Contact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
+msgstr ""
+
+#: model-gettext.py:112
+msgid "TUprints contract required!"
+msgstr ""
+
+#: model-gettext.py:113
+msgid ""
+"For every document, that you upload via Dissemin we need once a TUprints contract.\n"
+"Please fill in the contract and send a printed and signed copy to:\n"
+"<br>\n"
+"ULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
+msgstr ""
+
+#: model-gettext.py:114
+#, fuzzy
+#| msgid "Download"
+msgid "Download contract"
+msgstr "تنزيل"
+
+#: model-gettext.py:115
 msgid "Creative Commons 1.0 Universal (CC0 1.0) Public Domain Dedication"
 msgstr "المشاع الإبداعي العالمي (CC0 1.0) تخصيص الملكية العامة"
 
-#: model-gettext.py:111
+#: model-gettext.py:116
 msgid "Creative Commons Attribution 4.0 International (CC BY 4.0)"
 msgstr "المشاع الإبداعي النسبة 4.0 (CC BY 4.0)"
 
-#: model-gettext.py:112
+#: model-gettext.py:117
 msgid "Creative Commons Attribution-ShareAlike 4.0, International (CC BY-SA 4.0)"
 msgstr "المشاع الإبداعي النسبة 4.0 (CC BY 4.0)"
 
-#: model-gettext.py:113
+#: model-gettext.py:118
 msgid "Creative Commons Attribution-NonCommerical 4.0 International (CC BY-NC 4.0)"
 msgstr "المشاع الإبداعي النسبة 4.0 (CC BY 4.0)"
 
-#: model-gettext.py:114
+#: model-gettext.py:119
 msgid "Creative Commons Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0)"
 msgstr "المشاع الإبداعي النسبة 4.0 (CC BY 4.0)"
 
-#: model-gettext.py:115
+#: model-gettext.py:120
 msgid "Free for private use; right holder retains other rights, including distribution"
 msgstr "مجاني للاستخدام الخاص; صاحب الحقوق يحتفظ بالحقوق الأخرى، بما في ذلك التوزيع"
 
-#: model-gettext.py:116
+#: model-gettext.py:121
 msgid "Other open license"
 msgstr "ترخيص مفتوح آخر"
 
-#: model-gettext.py:118
+#: model-gettext.py:123
 #, fuzzy
 msgid "Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)"
 msgstr "المشاع الإبداعي النسبة 4.0 (CC BY 4.0)"
 
-#: model-gettext.py:119
+#: model-gettext.py:124
 #, fuzzy
 msgid "Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)"
 msgstr "المشاع الإبداعي النسبة 4.0 (CC BY 4.0)"
 
-#: model-gettext.py:120
+#: model-gettext.py:125
 msgid "Zenodo"
 msgstr "زينودو"
 
-#: model-gettext.py:121
+#: model-gettext.py:126
 msgid "Zenodo is a general-purpose open repository hosted by CERN. If the document does not have a DOI yet, Zenodo will create one."
 msgstr "زينودو هو مستودع مفتوح للأغراض العامة تستضيفه سيرن، إذا لم يكن المستند يحتوي على معرف الوثيقة الرقمية بعد، فسيقوم زينودو بإنشاء واحد."
 
-#: model-gettext.py:122
+#: model-gettext.py:127
 msgid "HAL"
 msgstr "فرط المقالات على الإنترنت"
 
-#: model-gettext.py:123
+#: model-gettext.py:128
 msgid "HAL is a  multidisciplinary open archive, sustained by the French Research Ministry."
 msgstr "فرط المقالات على الإنترنت هو أرشيف مفتوح متعدد التخصصات، تدعمه وزارة البحوث الفرنسية."
 
-#: model-gettext.py:124
+#: model-gettext.py:129
 #, fuzzy
 msgid "OSF preprints"
 msgstr "ما قبل الطباعة"
 
-#: model-gettext.py:125
+#: model-gettext.py:130
 msgid "Run by the Center for Open Science, OSF lets you share your preprints openly. You can also share supplemental data, materials or code associated with your article."
 msgstr "يديره مركز العلوم المفتوحة، OSF يتيح لك مشاركة بصماتك علانيةً، يمكنك أيضا مشاركة البيانات التكميلية أو المواد أو الكود المرتبط بمقالتك."
 
-#: model-gettext.py:126
+#: model-gettext.py:131
 #, fuzzy
 msgid "TUprints"
 msgstr "ما قبل الطباعة"
 
-#: model-gettext.py:127
+#: model-gettext.py:132
 msgid "TUprints is the open access repository for all current and former members of the Technical University Darmstadt."
 msgstr "TUprints هو مستودع الوصول المفتوح لجميع الأعضاء الحاليين والسابقين في الجامعة التقنية دارمشتات."
 
@@ -1391,7 +1431,7 @@ msgid "Format"
 msgstr "الصيغة"
 
 #: papers/templates/papers/export_citation_modal.html:31
-#: papers/templates/papers/paper.html:146
+#: papers/templates/papers/paper.html:154
 #: papers/templates/papers/paper_list.html:55
 msgid "Download"
 msgstr "تنزيل"
@@ -1474,7 +1514,7 @@ msgstr "أُنجِز الإيداع!"
 msgid "<p>This paper was successfully deposited and is now freely available at <a class=\"alert-link\" href=\"%(splash_url)s\">this address.</a></p>"
 msgstr "<p>تم إيداع هذه الورقة بنجاح وهي الآن متاحة مجانا في <a class=\"alert-link\" href=\"%(splash_url)s\">هذا العنوان.</a></p>"
 
-#: papers/templates/papers/paper.html:81 papers/templates/papers/paper.html:105
+#: papers/templates/papers/paper.html:81 papers/templates/papers/paper.html:113
 msgid "Deposit almost accomplished!"
 msgstr "الإيداع أُنجِز تقريبا!"
 
@@ -1483,30 +1523,21 @@ msgstr "الإيداع أُنجِز تقريبا!"
 msgid "<p>This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(splash_url)s\">this address</a> after validation by the repository administrators.</p>"
 msgstr "<p>تم إيداع هذه الورقة في <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>، سيتوفر النص الكامل في <a class=\"alert-link\" href=\"%(splash_url)s\">this address</a> بعد التحقق بواسطة إداريي المستودع."
 
-#: papers/templates/papers/paper.html:90
-msgid "Letter of Declaration needed!"
-msgstr "خطاب الإعلان مطلوب!"
-
-#: papers/templates/papers/paper.html:93
-#, python-format
-msgid "<p>The repository %(deposit.repository.name)s requires a letter of declaration to publish this publication. Please <a class=\"alert-link\" href=\"%(letter_url)s\">download</a> the letter, sign it and send it to the repository administration.</p>"
-msgstr "<p> يتطلب المستودع %(deposit.repository.name)s خطاب إعلان لنشر هذا المنشور؛ الرجاء <a class=\"alert-link\" href=\"%(letter_url)s\">تنزيل</a> الخطاب وتوقيعه وإرساله إلى إدارة المستودع.</p>"
-
-#: papers/templates/papers/paper.html:106
+#: papers/templates/papers/paper.html:114
 #, python-format
 msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(deposit_url)s\">this address</a> after validation by the repository administrators."
 msgstr "تم إيداع هذه الورقة في <a href=\"%(repo_url)s\">%(repo_name)s</a>، سيتوفر النص الكامل في class=\"alert-link\" <a href=\"%(deposit_url)s\">هذا العنوان</a> بعد التحقق بواسطة إداريي المستودع."
 
-#: papers/templates/papers/paper.html:119
+#: papers/templates/papers/paper.html:127
 #, fuzzy, python-format
 msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(deposit_url)s\">this address</a> from <strong>%(pub_date|localize)s</strong> on due to an embargo."
 msgstr "تم إيداع هذه الورقة في <a href=\"%(repo_url)s\">%(repo_name)s</a>، سيتوفر النص الكامل في class=\"alert-link\" <a href=\"%(deposit_url)s\">هذا العنوان</a> بعد التحقق بواسطة إداريي المستودع."
 
-#: papers/templates/papers/paper.html:144
+#: papers/templates/papers/paper.html:152
 msgid "Full text:"
 msgstr "النص الكامل:"
 
-#: papers/templates/papers/paper.html:148 statistics/models.py:66
+#: papers/templates/papers/paper.html:156 statistics/models.py:66
 msgid "Unavailable"
 msgstr "غير متوفر"
 
@@ -1837,16 +1868,16 @@ msgstr "تأليف"
 msgid "Paper view expects a DOI or a pk"
 msgstr "عرض الصفحة تتوقع DOI أو pk"
 
-#: papers/views.py:384
+#: papers/views.py:382
 #, python-format
 msgid "No %(verbose_name)s found matching the query"
 msgstr "لم يتم العثور على %(verbose_name)s يطابق الاستعلام"
 
-#: papers/views.py:388
+#: papers/views.py:386
 msgid "This paper has been deleted."
 msgstr "هذه الصفحة تم حذفها."
 
-#: papers/views.py:433
+#: papers/views.py:431
 msgid "Invalid DOI."
 msgstr "معرف الوثيقة الرقمية غير صالح."
 
@@ -2091,6 +2122,10 @@ msgstr "مسار"
 #: upload/templates/upload/widget.html:3
 msgid "Select here the full text of your article. PDF files only, maximum size:"
 msgstr "حدد هنا النص الكامل لمقالتك، ملفات PDF فقط، الحد الأقصى للحجم:"
+
+#: upload/templates/upload/widget.html:10
+msgid "Click or drop here"
+msgstr ""
 
 #: upload/templates/upload/widget.html:15
 msgid "Or enter a URL:"
@@ -2503,7 +2538,9 @@ msgstr "أولا، لاحظ أن ديسمين لا يمثل نسخا من الم
 
 #: website/templates/dissemin/faq.html:443
 msgid "Second, at the moment, Dissemin only supports repositories with a crawlable API that follows the <a href=\"https://www.openarchives.org/OAI/openarchivesprotocol.html\">OAI-PMH protocol</a>, and is <a href=\"https://www.base-search.net/about/en/suggest.php\">registered</a> in <a href=\"https://www.base-search.net/\">BASE</a>. We have a <a href=\"https://github.com/dissemin/croawl\">long-term project</a> to support more repositories by crawling them, but for the moment, we do not have the resources to support repositories not covered by BASE. Hence, if you are a user of a repository and would like it to be supported by Dissemin, please contact the repository administrator and suggest them to implement OAI-PMH support and to <a href=\"https://www.base-search.net/about/en/suggest.php\">register</a> their repository in BASE."
-msgstr "ثانيا، في الوقت الحالي، يدعم ديسيمين فقط المستودعات مع واجهة برمجة تطبيقات الزاحف التي تتبع <a href=\"https://www.openarchives.org/OAI/openarchivesprotocol.html\">بروتوكول\nOAI-PMH</a>، و<a href=\"https://www.base-search.net/about/en/suggest.php\">المسجل</a> في <a href=\"https://www.base-search.net/\">بيس</a>. لدينا <a href=\"https://github.com/dissemin/croawl\">مشروع طويل الأجل</a> لدعم المزيد من المستودعات من خلال الزحف إليها، ولكن في الوقت الحالي، لا تتوفر لدينا الموارد اللازمة لدعم المستودعات التي لا يغطيها بيس، وبالتالي، إذا كنت مستخدما للمستودع وترغب في أن يكون مدعوما من قبل ديسيمين، يُرجَى الاتصال بمسؤول المستودع واقتراح تنفيذ دعم OAI-PMH <a href=\"https://www.base-search.net/about/en/suggest.php\">تسجيل</a> مستودعهم في بيس"
+msgstr ""
+"ثانيا، في الوقت الحالي، يدعم ديسيمين فقط المستودعات مع واجهة برمجة تطبيقات الزاحف التي تتبع <a href=\"https://www.openarchives.org/OAI/openarchivesprotocol.html\">بروتوكول\n"
+"OAI-PMH</a>، و<a href=\"https://www.base-search.net/about/en/suggest.php\">المسجل</a> في <a href=\"https://www.base-search.net/\">بيس</a>. لدينا <a href=\"https://github.com/dissemin/croawl\">مشروع طويل الأجل</a> لدعم المزيد من المستودعات من خلال الزحف إليها، ولكن في الوقت الحالي، لا تتوفر لدينا الموارد اللازمة لدعم المستودعات التي لا يغطيها بيس، وبالتالي، إذا كنت مستخدما للمستودع وترغب في أن يكون مدعوما من قبل ديسيمين، يُرجَى الاتصال بمسؤول المستودع واقتراح تنفيذ دعم OAI-PMH <a href=\"https://www.base-search.net/about/en/suggest.php\">تسجيل</a> مستودعهم في بيس"
 
 #: website/templates/dissemin/faq.html:448
 msgid "If the repository is registered in BASE, please <a href=\"https://www.base-search.net/\">search in BASE</a> to check that your article is there. If it is, then this may be a bug of Dissemin; please file an <a href=\"https://github.com/dissemin/dissemin/issues\">issue</a> describing the problem, or send a message to <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>."
@@ -2581,7 +2618,9 @@ msgstr "<a href=\"https://association.dissem.in/#dons\">يتم قبول التب
 
 #: website/templates/dissemin/faq.html:572
 msgid "The source code is available <a href=\"https://github.com/dissemin/dissemin\">on GitHub</a>."
-msgstr "شفرة المصدر متاحة <a href=\"https://github.com/dissemin/dissemin\">في\nجيت هب</a>."
+msgstr ""
+"شفرة المصدر متاحة <a href=\"https://github.com/dissemin/dissemin\">في\n"
+"جيت هب</a>."
 
 #: website/templates/dissemin/faq.html:579
 msgid "Yes! We even have <a href=\"https://dissemin.readthedocs.io/en/latest/api.html\">an API</a>. If it does not suit your needs, please don't hesitate to get in touch by writing to <a href=\"mailto:hello@dissem.in\">hello@dissem.in</a>."
@@ -2720,15 +2759,19 @@ msgstr "كمكتبة، يمكنك استخدام ديسيمين للعثور ع�
 msgid "You can advertise Dissemin to your researchers and show them how easy it is to liberate their publications!"
 msgstr "يمكنك الإعلان عن ديسيمين للباحثين وإظهاره لهم، كم هو سهل تحرير منشوراتهم!"
 
-#: website/templates/dissemin/start_page.html:131
+#: website/templates/dissemin/start_page.html:122
+msgid "Learn more!"
+msgstr ""
+
+#: website/templates/dissemin/start_page.html:132
 msgid "Network of Partners"
 msgstr "شبكة الشركاء"
 
-#: website/templates/dissemin/start_page.html:134
+#: website/templates/dissemin/start_page.html:135
 msgid "Partners"
 msgstr "الشركاء"
 
-#: website/templates/dissemin/start_page.html:135
+#: website/templates/dissemin/start_page.html:136
 msgid "Dissemin would not be possible without the support of our partners:"
 msgstr "لن يكون ديسيمين ممكنا دون دعم شركائنا:"
 
@@ -2795,7 +2838,9 @@ msgstr "الإبلاغ عن إساءة استخدام"
 
 #: website/templates/dissemin/tos.html:87
 msgid "Misuse can be reported to <a href=\"mailto:support@dissem.in\">support@dissem.in</a>."
-msgstr "يمكن الإبلاغ عن أي سوء استخدام إلى: \n<a href=\"mailto:support@dissem.in\">support@dissem.in</a>"
+msgstr ""
+"يمكن الإبلاغ عن أي سوء استخدام إلى: \n"
+"<a href=\"mailto:support@dissem.in\">support@dissem.in</a>"
 
 #: website/templates/dissemin/tos.html:95
 msgid "The <a href=\"https://dissem.in\">dissem.in</a> website has been registered with <a href=\"https://www.cnil.fr/\">CNIL</a> under declaration n°1895382 v0."
@@ -2860,3 +2905,8 @@ msgstr "خطأ مصادقة"
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr "فشلت المصادقة; <a href=\"%(account-login)s\">الرجوع إلى صفحة تسجيل الدخول.</a>"
 
+#~ msgid "Letter of Declaration needed!"
+#~ msgstr "خطاب الإعلان مطلوب!"
+
+#~ msgid "<p>The repository %(deposit.repository.name)s requires a letter of declaration to publish this publication. Please <a class=\"alert-link\" href=\"%(letter_url)s\">download</a> the letter, sign it and send it to the repository administration.</p>"
+#~ msgstr "<p> يتطلب المستودع %(deposit.repository.name)s خطاب إعلان لنشر هذا المنشور؛ الرجاء <a class=\"alert-link\" href=\"%(letter_url)s\">تنزيل</a> الخطاب وتوقيعه وإرساله إلى إدارة المستودع.</p>"

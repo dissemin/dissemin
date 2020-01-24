@@ -16,9 +16,8 @@
 #
 msgid ""
 msgstr ""
-""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-07 14:39+0100\n"
+"POT-Creation-Date: 2020-01-24 17:53+0100\n"
 "PO-Revision-Date: 2020-01-16 14:29:31+0000\n"
 "Language: de\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -51,7 +50,7 @@ msgstr "Repositorium"
 msgid "Invalid full text identifier."
 msgstr "Ungültiger Volltextidentifikator."
 
-#: deposit/forms.py:144 papers/templates/papers/paper.html:160
+#: deposit/forms.py:144 papers/templates/papers/paper.html:168
 msgid "Abstract"
 msgstr "Zusammenfassung"
 
@@ -320,16 +319,16 @@ msgstr "Vom Repositorium abgelehnt"
 msgid "Deleted"
 msgstr "Gelöscht"
 
-#: deposit/models.py:290 deposit/templates/deposit/start.html:205
+#: deposit/models.py:340 deposit/templates/deposit/start.html:205
 #: deposit/views.py:120
 msgid "Deposit"
 msgstr "Absenden"
 
-#: deposit/models.py:343
+#: deposit/models.py:393
 msgid "We will use this email address to notify you when your deposits are accepted."
 msgstr "Wir werden diese E-Mail-Adresse verwenden, um Dir mitzuteilen, wenn deine Uploads akzeptiert wurden."
 
-#: deposit/models.py:349
+#: deposit/models.py:399
 msgid "This repository will be used by default for your deposits."
 msgstr "Dieses Repositorium wird standardmäßig verwendet."
 
@@ -341,7 +340,7 @@ msgstr "Creative Commons CC0 1.0 Universal"
 msgid "Creative Commons CC-By Attribution 4.0 International (CC BY 4.0)"
 msgstr "Creative Commons CC-By Attribution 4.0 International (CC BY 4.0)"
 
-#: deposit/osf/forms.py:40 deposit/osf/forms.py:51 model-gettext.py:117
+#: deposit/osf/forms.py:40 deposit/osf/forms.py:51 model-gettext.py:122
 msgid "No license"
 msgstr "Keine Lizenz vorhanden"
 
@@ -437,7 +436,7 @@ msgstr "Löschen des Projekts nicht möglich."
 msgid "Unable to make the project public."
 msgstr "Veröffentlichen des Projekts nicht möglich."
 
-#: deposit/protocol.py:368
+#: deposit/protocol.py:328
 msgid "Failed to connect to the repository. Please try again later."
 msgstr "Verbindung zum Repositorium konnte nicht hergestellt werden. Bitte versuche es später nochmal."
 
@@ -445,15 +444,15 @@ msgstr "Verbindung zum Repositorium konnte nicht hergestellt werden. Bitte versu
 msgid "E-mail"
 msgstr "E-Mail"
 
-#: deposit/sword/protocol.py:67
+#: deposit/sword/protocol.py:81
 msgid "The repository {} returned invalid XML"
 msgstr "Das Repositorium {} antwortete mit invalidem XML"
 
-#: deposit/sword/protocol.py:295
+#: deposit/sword/protocol.py:325
 msgid "Username or password not provided for this repository. Please contact the Dissemin team."
 msgstr "Anmeldename oder Passwort sind für dieses Repositorium nicht hinterlegt. Bitte kontaktiere das Dissemin Team."
 
-#: deposit/sword/protocol.py:320
+#: deposit/sword/protocol.py:350
 msgid "Unable to deposit to repository"
 msgstr "Hochladen in Repositorium ist fehlgeschlagen"
 
@@ -538,6 +537,12 @@ msgstr "Ablegen"
 #, python-format
 msgid "You can deposit the full text of your article. Dissemin will send it to a repository where it will be made freely available. By depositing your article via Dissemin, you agree to our <a href=\"%(tosurl)s\">terms of service</a>."
 msgstr "Du kannst den Volltext Deiner Publikation ablegen. Dissemin transferiert sie zu einem Repositorium, wo frei darauf zugegriffen werden kann. Mit der Ablage Deines Artikels über Dissemin stimmst du den <a href=\"%(tosurl)s\">Nutzungsbedingungen</a> zu."
+
+#: deposit/templates/deposit/start.html:72
+#, fuzzy
+#| msgid "Authors"
+msgid "Authorship"
+msgstr "Autoren"
 
 #: deposit/templates/deposit/start.html:73
 msgid "You do not appear to be one of the authors of this paper. By using this form, you certify that you have the permission to upload it on their behalf."
@@ -666,52 +671,56 @@ msgid "Arabic"
 msgstr "Arabisch"
 
 #: dissemin/settings/common.py:309
-msgid "English"
-msgstr "Englisch"
-
-#: dissemin/settings/common.py:310
-msgid "Finnish"
-msgstr "Finnisch"
-
-#: dissemin/settings/common.py:311
-msgid "French"
-msgstr "Französisch"
-
-#: dissemin/settings/common.py:312
-msgid "Korean"
-msgstr "Koreanisch"
-
-#: dissemin/settings/common.py:313
-msgid "Spanish"
-msgstr "Spanisch"
-
-#: dissemin/settings/common.py:314
-msgid "Simplified Chinese"
-msgstr "Vereinfachtes Chinesisch"
-
-#: dissemin/settings/common.py:315
-msgid "Traditional Chinese"
-msgstr "Traditionelles Chinesisch"
-
-#: dissemin/settings/common.py:316
-msgid "Macedonian"
-msgstr "Mazedonisch"
-
-#: dissemin/settings/common.py:317
 msgid "German"
 msgstr "Deutsch"
 
-#: dissemin/settings/common.py:318
-msgid "Brazilian Portuguese"
-msgstr "Brasilianisches Portugiesisch"
+#: dissemin/settings/common.py:310
+msgid "English"
+msgstr "Englisch"
 
-#: dissemin/settings/common.py:319
+#: dissemin/settings/common.py:311
+msgid "Spanish"
+msgstr "Spanisch"
+
+#: dissemin/settings/common.py:312
+msgid "Finnish"
+msgstr "Finnisch"
+
+#: dissemin/settings/common.py:313
+msgid "French"
+msgstr "Französisch"
+
+#: dissemin/settings/common.py:314
+msgid "Korean"
+msgstr "Koreanisch"
+
+#: dissemin/settings/common.py:315
+msgid "Macedonian"
+msgstr "Mazedonisch"
+
+#: dissemin/settings/common.py:316
 msgid "European Portuguese"
 msgstr "Europäisches Portugiesisch"
 
-#: dissemin/settings/common.py:320
+#: dissemin/settings/common.py:317
+msgid "Brazilian Portuguese"
+msgstr "Brasilianisches Portugiesisch"
+
+#: dissemin/settings/common.py:318
 msgid "Swedish"
 msgstr "Schwedisch"
+
+#: dissemin/settings/common.py:319
+msgid "Turkish"
+msgstr ""
+
+#: dissemin/settings/common.py:320
+msgid "Simplified Chinese"
+msgstr "Vereinfachtes Chinesisch"
+
+#: dissemin/settings/common.py:321
+msgid "Traditional Chinese"
+msgstr "Traditionelles Chinesisch"
 
 #: model-gettext.py:2
 msgid "Computer science, knowledge & systems"
@@ -1098,73 +1107,104 @@ msgid "Germany & neighboring central European countries"
 msgstr "Mitteleuropa, Deutschland"
 
 #: model-gettext.py:110
+#, fuzzy
+#| msgid "Green Open Access"
+msgid "Green Open Access Service"
+msgstr "Grüner Open Access"
+
+#: model-gettext.py:111
+msgid ""
+"Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n"
+"<br/>\n"
+"Contact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
+msgstr ""
+
+#: model-gettext.py:112
+msgid "TUprints contract required!"
+msgstr ""
+
+#: model-gettext.py:113
+msgid ""
+"For every document, that you upload via Dissemin we need once a TUprints contract.\n"
+"Please fill in the contract and send a printed and signed copy to:\n"
+"<br>\n"
+"ULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
+msgstr ""
+
+#: model-gettext.py:114
+#, fuzzy
+#| msgid "Download"
+msgid "Download contract"
+msgstr "Herunterladen"
+
+#: model-gettext.py:115
 msgid "Creative Commons 1.0 Universal (CC0 1.0) Public Domain Dedication"
 msgstr "Creative Commons CC0 1.0 Universell (CC0 1.0) Public Domain Dedication"
 
-#: model-gettext.py:111
+#: model-gettext.py:116
 msgid "Creative Commons Attribution 4.0 International (CC BY 4.0)"
 msgstr "Creative Commons Namensnennung 4.0 International (CC BY 4.0)"
 
-#: model-gettext.py:112
+#: model-gettext.py:117
 msgid "Creative Commons Attribution-ShareAlike 4.0, International (CC BY-SA 4.0)"
 msgstr "Creative Commons Namensnennung - Weitergabe unter gleichen Bedingungen 4.0 International (CC BY-SA 4.0)"
 
-#: model-gettext.py:113
+#: model-gettext.py:118
 msgid "Creative Commons Attribution-NonCommerical 4.0 International (CC BY-NC 4.0)"
 msgstr "Creative Commons Namensnennung - Nicht kommerziell 4.0 International (CC BY-NC 4.0)"
 
-#: model-gettext.py:114
+#: model-gettext.py:119
 msgid "Creative Commons Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0)"
 msgstr "Creative Commons Namensnennung - Keine Bearbeitungen 4.0 International (CC BY-ND 4.0)"
 
-#: model-gettext.py:115
+#: model-gettext.py:120
 msgid "Free for private use; right holder retains other rights, including distribution"
 msgstr "Kostenlos zur privaten Nutzung; Rechteinhaber erhalten andere Rechte, inklusive Verbreitung."
 
-#: model-gettext.py:116
+#: model-gettext.py:121
 msgid "Other open license"
 msgstr "Andere freie Lizenz"
 
-#: model-gettext.py:118
+#: model-gettext.py:123
 #, fuzzy
 msgid "Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)"
 msgstr "Creative Commons Namensnennung - Nicht kommerziell 4.0 International (CC BY-NC 4.0)"
 
-#: model-gettext.py:119
+#: model-gettext.py:124
 #, fuzzy
 msgid "Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)"
 msgstr "Creative Commons Namensnennung - Keine Bearbeitungen 4.0 International (CC BY-ND 4.0)"
 
-#: model-gettext.py:120
+#: model-gettext.py:125
 msgid "Zenodo"
 msgstr "Zenodo"
 
-#: model-gettext.py:121
+#: model-gettext.py:126
 msgid "Zenodo is a general-purpose open repository hosted by CERN. If the document does not have a DOI yet, Zenodo will create one."
 msgstr "Zenodo ist ein allgemeines, offene Repositorium, das vom CERN betrieben wird. Falls das Dokument noch keine DOI hat, wird Zenodo eine erstellen."
 
-#: model-gettext.py:122
+#: model-gettext.py:127
 msgid "HAL"
 msgstr "HAL"
 
-#: model-gettext.py:123
+#: model-gettext.py:128
 msgid "HAL is a  multidisciplinary open archive, sustained by the French Research Ministry."
 msgstr "HAL ist ein multidisziplinäres, offenes Archiv, das vom französischen Wissenschaftministerium getragen wird."
 
-#: model-gettext.py:124
+#: model-gettext.py:129
 msgid "OSF preprints"
 msgstr "OSF Preprint"
 
-#: model-gettext.py:125
+#: model-gettext.py:130
 msgid "Run by the Center for Open Science, OSF lets you share your preprints openly. You can also share supplemental data, materials or code associated with your article."
 msgstr "OSF wird vom Center for Open Science betrieben und ermöglicht es dir, Preprints zu veröffentlichen. Du kannst auch Forschungsdaten Quelltexte und sonstige Materialien anhängen."
 
-#: model-gettext.py:126
+#: model-gettext.py:131
 #, fuzzy
 msgid "TUprints"
 msgstr "Preprint"
 
-#: model-gettext.py:127
+#: model-gettext.py:132
 msgid "TUprints is the open access repository for all current and former members of the Technical University Darmstadt."
 msgstr "TUprints ist das Open Access Repositorium für alle aktuellen und ehemaligen Angehörige und Mitglieder der TU Darmstadt."
 
@@ -1382,7 +1422,7 @@ msgid "Format"
 msgstr "Format"
 
 #: papers/templates/papers/export_citation_modal.html:31
-#: papers/templates/papers/paper.html:146
+#: papers/templates/papers/paper.html:154
 #: papers/templates/papers/paper_list.html:55
 msgid "Download"
 msgstr "Herunterladen"
@@ -1456,7 +1496,7 @@ msgstr "Upload erledigt!"
 msgid "<p>This paper was successfully deposited and is now freely available at <a class=\"alert-link\" href=\"%(splash_url)s\">this address.</a></p>"
 msgstr "<p>Die Publikation wurde erfolgreich hochgeladen und ist jetzt <a class=\"alert-link\" href=\"%(splash_url)s\">hier</a> frei verfügbar.</p>"
 
-#: papers/templates/papers/paper.html:81 papers/templates/papers/paper.html:105
+#: papers/templates/papers/paper.html:81 papers/templates/papers/paper.html:113
 msgid "Deposit almost accomplished!"
 msgstr "Upload fast erledigt!"
 
@@ -1465,30 +1505,21 @@ msgstr "Upload fast erledigt!"
 msgid "<p>This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(splash_url)s\">this address</a> after validation by the repository administrators.</p>"
 msgstr "<p>Die Publikation wurde hochgeladen auf <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. Der Volltest wird unter <a class=\"alert-link\" href=\"%(splash_url)s\">dieser Adresse</a> verfügbar sein, wenn er den Moderationsprozess des Repositoriums absolviert hat.</p>"
 
-#: papers/templates/papers/paper.html:90
-msgid "Letter of Declaration needed!"
-msgstr "Autorenerklärung nötig!"
-
-#: papers/templates/papers/paper.html:93
-#, python-format
-msgid "<p>The repository %(deposit.repository.name)s requires a letter of declaration to publish this publication. Please <a class=\"alert-link\" href=\"%(letter_url)s\">download</a> the letter, sign it and send it to the repository administration.</p>"
-msgstr "<p>Für das Veröffentlichen im Repositorium %(deposit.repository.name)s ist eine Autorenerklärung notwendig. <a class=\"alert-link\" href=\"%(letter_url)s\">Lade</a> ihn bitte herunter, unterschreibe ihn und schicke ihn an den Repositoriumsbetreiber."
-
-#: papers/templates/papers/paper.html:106
+#: papers/templates/papers/paper.html:114
 #, python-format
 msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(deposit_url)s\">this address</a> after validation by the repository administrators."
 msgstr "<strong>Fast geschafft!</strong> Die Publikation wurde erfolgreich bei <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a> eingereicht. Der Volltext wird nach Überprüfung durch die Repositoriumsverwaltung unter <a class=\"alert-link\" href=\"%(deposit_url)s\">dieser Adresse</a> verfügbar sein."
 
-#: papers/templates/papers/paper.html:119
+#: papers/templates/papers/paper.html:127
 #, python-format
 msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(deposit_url)s\">this address</a> from <strong>%(pub_date|localize)s</strong> on due to an embargo."
 msgstr "Die Publikation wurde in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a> abgelegt. Der Volltext wird wegen eines Embargos erst ab <strong>%(pub_date|localize)s</strong> unter <a class=\"alert-link\" href=\"%(deposit_url)s\">dieser Adresse</a> verfügbar sein."
 
-#: papers/templates/papers/paper.html:144
+#: papers/templates/papers/paper.html:152
 msgid "Full text:"
 msgstr "Volltext:"
 
-#: papers/templates/papers/paper.html:148 statistics/models.py:66
+#: papers/templates/papers/paper.html:156 statistics/models.py:66
 msgid "Unavailable"
 msgstr "Nicht verfügbar"
 
@@ -1814,16 +1845,16 @@ msgstr "verfasst von"
 msgid "Paper view expects a DOI or a pk"
 msgstr "Die Ansicht von Publikationen erwartet einen DOI oder einen pk"
 
-#: papers/views.py:384
+#: papers/views.py:382
 #, python-format
 msgid "No %(verbose_name)s found matching the query"
 msgstr "Kein %(verbose_name)s passend zur Abfrage gefunden"
 
-#: papers/views.py:388
+#: papers/views.py:386
 msgid "This paper has been deleted."
 msgstr "Diese Publikation wurde gelöscht."
 
-#: papers/views.py:433
+#: papers/views.py:431
 msgid "Invalid DOI."
 msgstr "Ungültige DOI."
 
@@ -2057,6 +2088,10 @@ msgstr "URL"
 #: upload/templates/upload/widget.html:3
 msgid "Select here the full text of your article. PDF files only, maximum size:"
 msgstr "Wähle hier den Volltext Deines Artikels. Nur PDF-Dateien, maximale Größe:"
+
+#: upload/templates/upload/widget.html:10
+msgid "Click or drop here"
+msgstr ""
 
 #: upload/templates/upload/widget.html:15
 msgid "Or enter a URL:"
@@ -2678,15 +2713,19 @@ msgstr "Bibliotheken können Dissemin einsetzen, um Publikationen der Wissenscha
 msgid "You can advertise Dissemin to your researchers and show them how easy it is to liberate their publications!"
 msgstr "Ihr könnt Dissemin bei den Wissenschaftler_innen eurer Institution bewerben und ihnen zeigen, wie einfach sie ihre Publikationen frei verfügbar machen können."
 
-#: website/templates/dissemin/start_page.html:131
+#: website/templates/dissemin/start_page.html:122
+msgid "Learn more!"
+msgstr ""
+
+#: website/templates/dissemin/start_page.html:132
 msgid "Network of Partners"
 msgstr "Partner Netzwerk"
 
-#: website/templates/dissemin/start_page.html:134
+#: website/templates/dissemin/start_page.html:135
 msgid "Partners"
 msgstr "Partner"
 
-#: website/templates/dissemin/start_page.html:135
+#: website/templates/dissemin/start_page.html:136
 msgid "Dissemin would not be possible without the support of our partners:"
 msgstr "Dissemin wäre nicht möglich ohne die Unterstützung unseres Netzwerks:"
 
@@ -2817,3 +2856,8 @@ msgstr "Authentifizierungsfehler"
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr "Authentifizierung fehlgeschlagen. <a href=\"%(account-login)s\">Zurück zur Anmeldeseite gehen.</a>"
 
+#~ msgid "Letter of Declaration needed!"
+#~ msgstr "Autorenerklärung nötig!"
+
+#~ msgid "<p>The repository %(deposit.repository.name)s requires a letter of declaration to publish this publication. Please <a class=\"alert-link\" href=\"%(letter_url)s\">download</a> the letter, sign it and send it to the repository administration.</p>"
+#~ msgstr "<p>Für das Veröffentlichen im Repositorium %(deposit.repository.name)s ist eine Autorenerklärung notwendig. <a class=\"alert-link\" href=\"%(letter_url)s\">Lade</a> ihn bitte herunter, unterschreibe ihn und schicke ihn an den Repositoriumsbetreiber."

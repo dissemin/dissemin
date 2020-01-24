@@ -15,9 +15,8 @@
 #
 msgid ""
 msgstr ""
-""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-07 14:39+0100\n"
+"POT-Creation-Date: 2020-01-24 17:53+0100\n"
 "PO-Revision-Date: 2020-01-09 19:06:58+0000\n"
 "Language: nl\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -53,7 +52,7 @@ msgstr "Opslagplaats"
 msgid "Invalid full text identifier."
 msgstr "Ongeldige aanduiding in volledige tekst."
 
-#: deposit/forms.py:144 papers/templates/papers/paper.html:160
+#: deposit/forms.py:144 papers/templates/papers/paper.html:168
 msgid "Abstract"
 msgstr "Samenvatting"
 
@@ -323,16 +322,16 @@ msgstr "Door de opslagplaats geweigerd"
 msgid "Deleted"
 msgstr "Verwijderd"
 
-#: deposit/models.py:290 deposit/templates/deposit/start.html:205
+#: deposit/models.py:340 deposit/templates/deposit/start.html:205
 #: deposit/views.py:120
 msgid "Deposit"
 msgstr "Overboeken"
 
-#: deposit/models.py:343
+#: deposit/models.py:393
 msgid "We will use this email address to notify you when your deposits are accepted."
 msgstr "We gebruiken dit e-mailadres om je op de hoogte te brengen zodra je overboekingen zijn aanvaard."
 
-#: deposit/models.py:349
+#: deposit/models.py:399
 msgid "This repository will be used by default for your deposits."
 msgstr "Deze opslagplaats wordt standaard voor je overboekingen gebruikt."
 
@@ -344,7 +343,7 @@ msgstr "Creative Commons CC0 1.0 Universeel"
 msgid "Creative Commons CC-By Attribution 4.0 International (CC BY 4.0)"
 msgstr "Creative Commons CC-By Attribution 4.0 Internationaal (CC BY 4.0)"
 
-#: deposit/osf/forms.py:40 deposit/osf/forms.py:51 model-gettext.py:117
+#: deposit/osf/forms.py:40 deposit/osf/forms.py:51 model-gettext.py:122
 msgid "No license"
 msgstr "Geen vergunning"
 
@@ -440,7 +439,7 @@ msgstr "Kan het project niet verwijderen."
 msgid "Unable to make the project public."
 msgstr "Kan het project niet openbaar maken."
 
-#: deposit/protocol.py:368
+#: deposit/protocol.py:328
 msgid "Failed to connect to the repository. Please try again later."
 msgstr "Kan geen verbinding met de opslagplaats maken. Probeer het later opnieuw."
 
@@ -448,16 +447,16 @@ msgstr "Kan geen verbinding met de opslagplaats maken. Probeer het later opnieuw
 msgid "E-mail"
 msgstr "E-mail"
 
-#: deposit/sword/protocol.py:67
+#: deposit/sword/protocol.py:81
 #, fuzzy
 msgid "The repository {} returned invalid XML"
 msgstr "Kan deze opslagplaats niet vinden."
 
-#: deposit/sword/protocol.py:295
+#: deposit/sword/protocol.py:325
 msgid "Username or password not provided for this repository. Please contact the Dissemin team."
 msgstr ""
 
-#: deposit/sword/protocol.py:320
+#: deposit/sword/protocol.py:350
 #, fuzzy
 msgid "Unable to deposit to repository"
 msgstr "Kan geen voordruk maken."
@@ -545,7 +544,17 @@ msgstr "Overboeken"
 #: deposit/templates/deposit/start.html:64
 #, fuzzy, python-format
 msgid "You can deposit the full text of your article. Dissemin will send it to a repository where it will be made freely available. By depositing your article via Dissemin, you agree to our <a href=\"%(tosurl)s\">terms of service</a>."
-msgstr "\n            Je kunt het artikel met volledige inhoud overboeken. Dissemin verzendt het artikel naar een opslagplaats en maakt 'm kosteloos beschikbaar.\n            Door je artikel via Dissemin over te boeken,\n            ga je akkoord met onze <a href=\"%(tosurl)s\">dienstvoorwaarden</a>.\n        "
+msgstr ""
+"\n"
+"            Je kunt het artikel met volledige inhoud overboeken. Dissemin verzendt het artikel naar een opslagplaats en maakt 'm kosteloos beschikbaar.\n"
+"            Door je artikel via Dissemin over te boeken,\n"
+"            ga je akkoord met onze <a href=\"%(tosurl)s\">dienstvoorwaarden</a>.\n"
+"        "
+
+#: deposit/templates/deposit/start.html:72
+#, fuzzy
+msgid "Authorship"
+msgstr "Op auteurs"
 
 #: deposit/templates/deposit/start.html:73
 msgid "You do not appear to be one of the authors of this paper. By using this form, you certify that you have the permission to upload it on their behalf."
@@ -677,52 +686,56 @@ msgid "Arabic"
 msgstr "Arabisch"
 
 #: dissemin/settings/common.py:309
-msgid "English"
-msgstr "Engels"
-
-#: dissemin/settings/common.py:310
-msgid "Finnish"
-msgstr "Fins"
-
-#: dissemin/settings/common.py:311
-msgid "French"
-msgstr "Frans"
-
-#: dissemin/settings/common.py:312
-msgid "Korean"
-msgstr "Koreaans"
-
-#: dissemin/settings/common.py:313
-msgid "Spanish"
-msgstr "Spaans"
-
-#: dissemin/settings/common.py:314
-msgid "Simplified Chinese"
-msgstr "Vereenvoudigd Chinees"
-
-#: dissemin/settings/common.py:315
-msgid "Traditional Chinese"
-msgstr "Traditioneel Chinees"
-
-#: dissemin/settings/common.py:316
-msgid "Macedonian"
-msgstr "Macedonisch"
-
-#: dissemin/settings/common.py:317
 msgid "German"
 msgstr "Duits"
 
-#: dissemin/settings/common.py:318
-msgid "Brazilian Portuguese"
-msgstr "Braziliaans Portugees"
+#: dissemin/settings/common.py:310
+msgid "English"
+msgstr "Engels"
 
-#: dissemin/settings/common.py:319
+#: dissemin/settings/common.py:311
+msgid "Spanish"
+msgstr "Spaans"
+
+#: dissemin/settings/common.py:312
+msgid "Finnish"
+msgstr "Fins"
+
+#: dissemin/settings/common.py:313
+msgid "French"
+msgstr "Frans"
+
+#: dissemin/settings/common.py:314
+msgid "Korean"
+msgstr "Koreaans"
+
+#: dissemin/settings/common.py:315
+msgid "Macedonian"
+msgstr "Macedonisch"
+
+#: dissemin/settings/common.py:316
 msgid "European Portuguese"
 msgstr "Europees Portugees"
 
-#: dissemin/settings/common.py:320
+#: dissemin/settings/common.py:317
+msgid "Brazilian Portuguese"
+msgstr "Braziliaans Portugees"
+
+#: dissemin/settings/common.py:318
 msgid "Swedish"
 msgstr "Zweeds"
+
+#: dissemin/settings/common.py:319
+msgid "Turkish"
+msgstr ""
+
+#: dissemin/settings/common.py:320
+msgid "Simplified Chinese"
+msgstr "Vereenvoudigd Chinees"
+
+#: dissemin/settings/common.py:321
+msgid "Traditional Chinese"
+msgstr "Traditioneel Chinees"
 
 #: model-gettext.py:2
 #, fuzzy
@@ -1139,78 +1152,108 @@ msgstr ""
 
 #: model-gettext.py:110
 #, fuzzy
+msgid "Green Open Access Service"
+msgstr "Vrije toegang met de kleur groen"
+
+#: model-gettext.py:111
+msgid ""
+"Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n"
+"<br/>\n"
+"Contact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
+msgstr ""
+
+#: model-gettext.py:112
+msgid "TUprints contract required!"
+msgstr ""
+
+#: model-gettext.py:113
+msgid ""
+"For every document, that you upload via Dissemin we need once a TUprints contract.\n"
+"Please fill in the contract and send a printed and signed copy to:\n"
+"<br>\n"
+"ULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
+msgstr ""
+
+#: model-gettext.py:114
+#, fuzzy
+#| msgid "Download"
+msgid "Download contract"
+msgstr "Ophalen"
+
+#: model-gettext.py:115
+#, fuzzy
 msgid "Creative Commons 1.0 Universal (CC0 1.0) Public Domain Dedication"
 msgstr "Creative Commons CC0 1.0 Universeel"
 
-#: model-gettext.py:111
+#: model-gettext.py:116
 #, fuzzy
 msgid "Creative Commons Attribution 4.0 International (CC BY 4.0)"
 msgstr "Creative Commons CC-By Attribution 4.0 Internationaal (CC BY 4.0)"
 
-#: model-gettext.py:112
+#: model-gettext.py:117
 #, fuzzy
 msgid "Creative Commons Attribution-ShareAlike 4.0, International (CC BY-SA 4.0)"
 msgstr "Creative Commons CC-By Attribution 4.0 Internationaal (CC BY 4.0)"
 
-#: model-gettext.py:113
+#: model-gettext.py:118
 #, fuzzy
 msgid "Creative Commons Attribution-NonCommerical 4.0 International (CC BY-NC 4.0)"
 msgstr "Creative Commons CC-By Attribution 4.0 Internationaal (CC BY 4.0)"
 
-#: model-gettext.py:114
+#: model-gettext.py:119
 #, fuzzy
 msgid "Creative Commons Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0)"
 msgstr "Creative Commons CC-By Attribution 4.0 Internationaal (CC BY 4.0)"
 
-#: model-gettext.py:115
+#: model-gettext.py:120
 msgid "Free for private use; right holder retains other rights, including distribution"
 msgstr ""
 
-#: model-gettext.py:116
+#: model-gettext.py:121
 msgid "Other open license"
 msgstr "Overige openvergunning"
 
-#: model-gettext.py:118
+#: model-gettext.py:123
 #, fuzzy
 msgid "Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)"
 msgstr "Creative Commons CC-By Attribution 4.0 Internationaal (CC BY 4.0)"
 
-#: model-gettext.py:119
+#: model-gettext.py:124
 #, fuzzy
 msgid "Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)"
 msgstr "Creative Commons CC-By Attribution 4.0 Internationaal (CC BY 4.0)"
 
-#: model-gettext.py:120
+#: model-gettext.py:125
 msgid "Zenodo"
 msgstr ""
 
-#: model-gettext.py:121
+#: model-gettext.py:126
 msgid "Zenodo is a general-purpose open repository hosted by CERN. If the document does not have a DOI yet, Zenodo will create one."
 msgstr ""
 
-#: model-gettext.py:122
+#: model-gettext.py:127
 msgid "HAL"
 msgstr ""
 
-#: model-gettext.py:123
+#: model-gettext.py:128
 msgid "HAL is a  multidisciplinary open archive, sustained by the French Research Ministry."
 msgstr ""
 
-#: model-gettext.py:124
+#: model-gettext.py:129
 #, fuzzy
 msgid "OSF preprints"
 msgstr "voordruk"
 
-#: model-gettext.py:125
+#: model-gettext.py:130
 msgid "Run by the Center for Open Science, OSF lets you share your preprints openly. You can also share supplemental data, materials or code associated with your article."
 msgstr ""
 
-#: model-gettext.py:126
+#: model-gettext.py:131
 #, fuzzy
 msgid "TUprints"
 msgstr "voordruk"
 
-#: model-gettext.py:127
+#: model-gettext.py:132
 msgid "TUprints is the open access repository for all current and former members of the Technical University Darmstadt."
 msgstr ""
 
@@ -1433,7 +1476,7 @@ msgid "Format"
 msgstr ""
 
 #: papers/templates/papers/export_citation_modal.html:31
-#: papers/templates/papers/paper.html:146
+#: papers/templates/papers/paper.html:154
 #: papers/templates/papers/paper_list.html:55
 msgid "Download"
 msgstr "Ophalen"
@@ -1496,7 +1539,10 @@ msgstr "Gepubliceerd op"
 #: papers/templates/papers/paper.html:56
 #, fuzzy, python-format
 msgid "and <a href=\"#\" id=\"showAllAuthors\">%(nb_remaining_authors)s other authors.</a>"
-msgstr "\n            en <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s andere auteurs</a>\n            "
+msgstr ""
+"\n"
+"            en <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s andere auteurs</a>\n"
+"            "
 
 #: papers/templates/papers/paper.html:62
 msgid "Show less"
@@ -1511,7 +1557,7 @@ msgstr ""
 msgid "<p>This paper was successfully deposited and is now freely available at <a class=\"alert-link\" href=\"%(splash_url)s\">this address.</a></p>"
 msgstr ""
 
-#: papers/templates/papers/paper.html:81 papers/templates/papers/paper.html:105
+#: papers/templates/papers/paper.html:81 papers/templates/papers/paper.html:113
 msgid "Deposit almost accomplished!"
 msgstr ""
 
@@ -1520,30 +1566,21 @@ msgstr ""
 msgid "<p>This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(splash_url)s\">this address</a> after validation by the repository administrators.</p>"
 msgstr ""
 
-#: papers/templates/papers/paper.html:90
-msgid "Letter of Declaration needed!"
-msgstr ""
-
-#: papers/templates/papers/paper.html:93
-#, python-format
-msgid "<p>The repository %(deposit.repository.name)s requires a letter of declaration to publish this publication. Please <a class=\"alert-link\" href=\"%(letter_url)s\">download</a> the letter, sign it and send it to the repository administration.</p>"
-msgstr ""
-
-#: papers/templates/papers/paper.html:106
+#: papers/templates/papers/paper.html:114
 #, fuzzy, python-format
 msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(deposit_url)s\">this address</a> after validation by the repository administrators."
 msgstr "<strong>Je bent er bijna!</strong> Dit document is naar <a href=\"%(repo_url)s\">%(repo_name)s</a> overgeboekt. De volledige tekst is beschikbaar op <a href=\"%(deposit_url)s\">dit adres</a> nadat deze door de beheerders van de opslagplaats is gecontroleerd."
 
-#: papers/templates/papers/paper.html:119
+#: papers/templates/papers/paper.html:127
 #, fuzzy, python-format
 msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(deposit_url)s\">this address</a> from <strong>%(pub_date|localize)s</strong> on due to an embargo."
 msgstr "<strong>Je bent er bijna!</strong> Dit document is naar <a href=\"%(repo_url)s\">%(repo_name)s</a> overgeboekt. De volledige tekst is beschikbaar op <a href=\"%(deposit_url)s\">dit adres</a> nadat deze door de beheerders van de opslagplaats is gecontroleerd."
 
-#: papers/templates/papers/paper.html:144
+#: papers/templates/papers/paper.html:152
 msgid "Full text:"
 msgstr "Volledige tekst:"
 
-#: papers/templates/papers/paper.html:148 statistics/models.py:66
+#: papers/templates/papers/paper.html:156 statistics/models.py:66
 msgid "Unavailable"
 msgstr "Niet beschikbaar"
 
@@ -1861,7 +1898,11 @@ msgstr ""
 #: papers/views.py:278
 #, fuzzy
 msgid "Invalid ORCID profile. Please make sure it includes a public name."
-msgstr "\n                            Ongeldig ORCID-profiel.\n                            Zorg ervoor dat het profiel een openbare naam bevat.\n                            "
+msgstr ""
+"\n"
+"                            Ongeldig ORCID-profiel.\n"
+"                            Zorg ervoor dat het profiel een openbare naam bevat.\n"
+"                            "
 
 #: papers/views.py:281
 msgid "Invalid ORCID profile."
@@ -1876,16 +1917,16 @@ msgstr "geverifieerd door "
 msgid "Paper view expects a DOI or a pk"
 msgstr ""
 
-#: papers/views.py:384
+#: papers/views.py:382
 #, python-format
 msgid "No %(verbose_name)s found matching the query"
 msgstr "Er komen geen %(verbose_name)s met deze zoekopdracht overeen"
 
-#: papers/views.py:388
+#: papers/views.py:386
 msgid "This paper has been deleted."
 msgstr ""
 
-#: papers/views.py:433
+#: papers/views.py:431
 #, fuzzy
 msgid "Invalid DOI."
 msgstr "Ongeldige URL."
@@ -2125,6 +2166,10 @@ msgstr "URL"
 msgid "Select here the full text of your article. PDF files only, maximum size:"
 msgstr "Kies hier de volledige tekst van je artikel. Alleen pdf-bestanden, maximale grootte:"
 
+#: upload/templates/upload/widget.html:10
+msgid "Click or drop here"
+msgstr ""
+
 #: upload/templates/upload/widget.html:15
 #, fuzzy
 msgid "Or enter a URL:"
@@ -2182,7 +2227,9 @@ msgstr "Toegangsaanvraag voor de pdf is geweigerd."
 #: website/templates/403.html:13
 #, fuzzy, python-format
 msgid "The access to the requested page has been denied. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr "Kan de aangevraagde pagina niet vinden. <a href=\"/\">Terug naar de startpagina.</a>\n           "
+msgstr ""
+"Kan de aangevraagde pagina niet vinden. <a href=\"/\">Terug naar de startpagina.</a>\n"
+"           "
 
 #: website/templates/404.html:6 website/templates/404.html:10
 msgid "Page not found"
@@ -2191,7 +2238,9 @@ msgstr "Pagina niet gevonden"
 #: website/templates/404.html:13
 #, fuzzy, python-format
 msgid "The page you requested could not be found. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr "Kan de aangevraagde pagina niet vinden. <a href=\"/\">Terug naar de startpagina.</a>\n           "
+msgstr ""
+"Kan de aangevraagde pagina niet vinden. <a href=\"/\">Terug naar de startpagina.</a>\n"
+"           "
 
 #: website/templates/500.html:6 website/templates/500.html:10
 #, fuzzy
@@ -2201,7 +2250,9 @@ msgstr "Interne fout"
 #: website/templates/500.html:13
 #, fuzzy, python-format
 msgid "Your request triggered an internal server error. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr "Je verzoek heeft een interne fout veroorzaakt. <a href=\"/\">Terug naar de startpagina.</a>\n           "
+msgstr ""
+"Je verzoek heeft een interne fout veroorzaakt. <a href=\"/\">Terug naar de startpagina.</a>\n"
+"           "
 
 #: website/templates/admin/base_site.html:5
 #: website/templates/admin/base_site.html:8
@@ -2764,15 +2815,19 @@ msgstr ""
 msgid "You can advertise Dissemin to your researchers and show them how easy it is to liberate their publications!"
 msgstr ""
 
-#: website/templates/dissemin/start_page.html:131
+#: website/templates/dissemin/start_page.html:122
+msgid "Learn more!"
+msgstr ""
+
+#: website/templates/dissemin/start_page.html:132
 msgid "Network of Partners"
 msgstr ""
 
-#: website/templates/dissemin/start_page.html:134
+#: website/templates/dissemin/start_page.html:135
 msgid "Partners"
 msgstr "Partners"
 
-#: website/templates/dissemin/start_page.html:135
+#: website/templates/dissemin/start_page.html:136
 msgid "Dissemin would not be possible without the support of our partners:"
 msgstr ""
 
@@ -2902,5 +2957,7 @@ msgstr "Verifiëringsfout"
 #: website/templates/socialaccount/authentication_error.html:15
 #, fuzzy, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
-msgstr "\n            Verifiëren is mislukt. <a href=\"/\">Terug naar de aanmeldpagina.</a>\n           "
-
+msgstr ""
+"\n"
+"            Verifiëren is mislukt. <a href=\"/\">Terug naar de aanmeldpagina.</a>\n"
+"           "
