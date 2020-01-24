@@ -1,3 +1,4 @@
+attrs==17.4.0
 django-debug-toolbar
 django-extensions
 html5validator

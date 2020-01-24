@@ -3,6 +3,8 @@ language: python
 python:
   - 3.5
   - 3.6
+  - 3.7
+  - 3.8
 
 sudo: false
 
@@ -14,8 +16,6 @@ addons:
        packages:
        - elasticsearch=2.4.5
        - openjdk-8-jre
-       - python-requests
-       - python-lxml
        - curl
        - libffi-dev
        - libssl-dev
@@ -54,7 +54,7 @@ before_install:
   - docker run -d -it --rm -p 8888:8888 validator/validator:latest
 
 install:
-  - pip install setuptools --upgrade
+  - pip install pip --upgrade
   - pip install psycopg2 --quiet
   - pip install -r requirements.txt --upgrade
   - pip install -r requirements-dev.txt --upgrade
