@@ -87,12 +87,11 @@
                     </div>
                     {% if deposit.letter %}
                     <div class="alert alert-info" role="alert">
-                        <p><center><strong>{% trans "Letter of Declaration needed!" %}</strong></center></p>
-                        {% url 'letter-of-declaration' deposit.pk as letter_url%}
-                        {% with repo_name=deposit.repository.name %}
-                            {% blocktrans trimmed %}
-                            <p>The repository {{ deposit.repository.name }} requires a letter of declaration to publish this publication. Please <a class="alert-link" href="{{ letter_url }}">download</a> the letter, sign it and send it to the repository administration.</p>
-                            {% endblocktrans %}
+                        {% with letter=deposit.repository.letter_declaration %}
+                            <p class="text-center font-weight-bold">{{ letter.heading }}</p>
+                            <p>{{ letter.text | safe }}</p>
+                            {% url 'letter-of-declaration' deposit.pk as letter_url%}
+                            <p><a href="{{ letter_url }}" class="btn btn-info">{{ letter.url_text }}</a></p>
                         {% endwith %}
                     </div>
                     {% endif %}

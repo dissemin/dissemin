@@ -22,10 +22,12 @@
 
 from deposit.models import DDC
 from deposit.models import DepositRecord
+from deposit.models import LetterOfDeclaration
 from deposit.models import LicenseChooser
 from deposit.models import License
 from deposit.models import GreenOpenAccessService
 from deposit.models import Repository
+from deposit.forms import LetterOfDeclarationAdminForm
 from deposit.forms import RepositoryAdminForm
 from django.contrib import admin
 
@@ -41,6 +43,9 @@ class DepositRecordAdmin(admin.ModelAdmin):
     raw_id_fields = ('paper', 'user', 'oairecord', 'file', )
     readonly_fields = ('date', )
     search_fields = ('paper__pk', 'paper__title')
+
+class LetterOfDeclarationAdmin(admin.ModelAdmin):
+    form = LetterOfDeclarationAdminForm
 
 class LicenseAdmin(admin.ModelAdmin):
     list_display = ('name', 'uri')
@@ -62,6 +67,7 @@ class RepositoryAdmin(admin.ModelAdmin):
 
 admin.site.register(DDC)
 admin.site.register(DepositRecord, DepositRecordAdmin)
+admin.site.register(LetterOfDeclaration, LetterOfDeclarationAdmin)
 admin.site.register(License, LicenseAdmin)
 admin.site.register(GreenOpenAccessService)
 admin.site.register(Repository, RepositoryAdmin)

@@ -397,7 +397,7 @@ class PaperView(SlugDetailView):
         if 'deposit' in self.request.GET:
             try:
                 pk = int(self.request.GET['deposit'])
-                dr = DepositRecord.objects.select_related('repository', 'oairecord').get(pk=pk)
+                dr = DepositRecord.objects.select_related('repository', 'repository__letter_declaration', 'oairecord').get(pk=pk)
                 if dr.paper_id == self.object.id and dr.status in ['pending', 'published']:
                     if self.request.user.is_authenticated and self.request.user == dr.user and dr.repository.letter_declaration:
                         dr.letter = True

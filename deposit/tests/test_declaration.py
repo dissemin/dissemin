@@ -42,13 +42,12 @@ class TestDeclarationLetters():
         """
         This tests the letter of declaration for ULB Darmstadt.
         """
-        self.dr.repository.save()
-
-        self.dr.license = License.objects.all().first()
-        self.dr.identifier = '5732'
-        self.dr.save()
-
         self.client.user.first_name = 'Jose'
         self.client.user.last_name = 'Saramago'
 
-        declaration_ulb_darmstadt(self.dr, self.client.user)
+        self.dr.license = License.objects.all().first()
+        self.dr.identifier = '5732'
+        self.dr.user = self.client.user
+        self.dr.save()
+
+        declaration_ulb_darmstadt(self.dr)
