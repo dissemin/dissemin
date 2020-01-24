@@ -1,0 +1,18 @@
+<Attributes xmlns="urn:mace:shibboleth:2.0:attribute-map" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <!-- eduPersonTargetedID- Identifies the user uniquely, required-->
+    <Attribute name="urn:oid:1.3.6.1.4.1.5923.1.1.1.10" id="shib-username">
+        <AttributeDecoder xsi:type="ScopedAttributeDecoder" caseSensitive="false"/>
+    </Attribute>
+
+    <!-- First name and last name to name the user, required -->
+    <Attribute name="urn:oid:2.5.4.42" id="shib-givenName"/>
+    <Attribute name="urn:oid:2.5.4.4" id="shib-sn"/>
+
+    <!-- Some repositories require email address to be sent, but there are alternatives, so not required -->
+    <Attribute name="urn:oid:0.9.2342.19200300.100.1.3" id="shib-mail"/>
+
+    <!-- ORCID is nice and used to connect with ORCID profile -->
+    <Attribute name="urn:oid:1.3.6.1.4.1.5923.1.1.1.16" id="shib-orcid"/>
+
+</Attributes>

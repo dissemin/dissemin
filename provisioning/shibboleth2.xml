@@ -1,0 +1,260 @@
+<SPConfig xmlns="urn:mace:shibboleth:3.0:native:sp:config"
+    xmlns:conf="urn:mace:shibboleth:3.0:native:sp:config"
+    xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata"
+    xmlns:mdui="urn:oasis:names:tc:SAML:metadata:ui"
+    clockSkew="180">
+
+    <OutOfProcess tranLogFormat="%u|%s|%IDP|%i|%ac|%t|%attr|%n|%b|%E|%S|%SS|%L|%UA|%a" />
+
+    <!--
+    By default, in-memory StorageService, ReplayCache, ArtifactMap, and SessionCache
+    are used. See example-shibboleth2.xml for samples of explicitly configuring them.
+    -->
+
+    <!-- The ApplicationDefaults element is where most of Shibboleth's SAML bits are defined. -->
+    <ApplicationDefaults entityID="https://sp.dissem.in/shibboleth"
+        REMOTE_USER="eppn"
+        cipherSuites="DEFAULT:!EXP:!LOW:!aNULL:!eNULL:!DES:!IDEA:!SEED:!RC4:!3DES:!kRSA:!SSLv2:!SSLv3:!TLSv1:!TLSv1.1">
+
+        <!--
+        Controls session lifetimes, address checks, cookie handling, and the protocol handlers.
+        Each Application has an effectively unique handlerURL, which defaults to "/Shibboleth.sso"
+        and should be a relative path, with the SP computing the full value based on the virtual
+        host. Using handlerSSL="true" will force the protocol to be https. You should also set
+        cookieProps to "https" for SSL-only sites. Note that while we default checkAddress to
+        "false", this makes an assertion stolen in transit easier for attackers to misuse.
+        -->
+        <Sessions lifetime="28800"
+            timeout="3600"
+            relayState="ss:mem"
+            checkAddress="false"
+            handlerSSL="true"
+            cookieProps="https">
+
+            <SSO discoveryProtocol="SAMLDS"
+                discoveryURL="https://dissem.in/static/shib/shibboleth-embedded-ds-1.2.2/" >
+                SAML2
+            </SSO>
+
+            <Logout>SAML2 Local</Logout>
+
+            <!-- Administrative logout. -->
+            <LogoutInitiator type="Admin" Location="/Logout/Admin" acl="127.0.0.1 ::1" />
+
+            <!-- Extension service that generates "approximate" metadata based on SP configuration. -->
+            <Handler type="MetadataGenerator" Location="/Metadata" signing="false">
+                <!-- Other metadata that describe our service -->
+                <!-- Requested attributes, see attribute-map.xml for further information -->
+                <md:AttributeConsumingService index="0">
+                    <md:ServiceName xml:lang="en">Dissemin</md:ServiceName>
+                    <md:RequestedAttribute
+                        FriendlyName="eduPersonTargetedID"
+                        Name="urn:oid:1.3.6.1.4.1.5923.1.1.1.10"
+                        NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
+                        isRequired="true" />
+                    <md:RequestedAttribute
+                        FriendlyName="givenName"
+                        Name="urn:oid:2.5.4.42"
+                        NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
+                        isRequired="true" />
+                    <md:RequestedAttribute
+                        FriendlyName="sn"
+                        Name="urn:oid:2.5.4.4"
+                        NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
+                        isRequired="true" />
+                    <md:RequestedAttribute
+                        FriendlyName="mail"
+                        Name="urn:oid:0.9.2342.19200300.100.1.3"
+                        NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri" />
+                    <md:RequestedAttribute
+                        FriendlyName="eduPersonOrcid"
+                        Name="urn:oid:1.3.6.1.4.1.5923.1.1.1.16"
+                        NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri" />
+                </md:AttributeConsumingService>
+                <!-- Contact -->
+                <md:ContactPerson contactType="administrative">
+                    <md:GivenName>Dissemin Administration</md:GivenName>
+                    <md:EmailAddress>mailto:team@dissem.in</md:EmailAddress>
+                </md:ContactPerson>
+                <md:ContactPerson contactType="support">
+                    <md:GivenName>Dissemin Support</md:GivenName>
+                    <md:EmailAddress>mailto:team@dissem.in</md:EmailAddress>
+                </md:ContactPerson>
+                <md:ContactPerson contactType="technical">
+                    <md:GivenName>Dissemin Technical</md:GivenName>
+                    <md:EmailAddress>mailto:team@dissem.in</md:EmailAddress>
+                </md:ContactPerson>
+                <!-- Organization -->
+                <md:Organization>
+                    <md:OrganizationName xml:lang="en">Committee for the Accessibility of Publications in Sciences and Humanities</md:OrganizationName>
+                    <md:OrganizationDisplayName xml:lang="en">CAPSH</md:OrganizationDisplayName>
+                    <md:OrganizationURL xml:lang="en">https://association.dissem.in/</md:OrganizationURL>
+                </md:Organization>
+                <!-- Service -->
+                <mdui:UIInfo>
+                    <mdui:DisplayName xml:lang="en">Dissemin</mdui:DisplayName>
+                    <mdui:Description xml:lang="en">Dissemin detects papers behind paywalls and helps their authors to upload them in one click to an open repository.</mdui:Description>
+                    <mdui:Logo height="192" width="192">https://dissem.in/static/img/brand.png</mdui:Logo>
+                </mdui:UIInfo>
+            </Handler>
+
+            <!-- Status reporting service. -->
+            <Handler type="Status" Location="/Status" acl="127.0.0.1 ::1" />
+
+            <!-- Session diagnostic service. -->
+            <Handler type="Session" Location="/Session" showAttributeValues="false"/>
+
+            <!-- JSON feed of discovery information. -->
+            <Handler type="DiscoveryFeed" Location="/DiscoFeed"/>
+        </Sessions>
+
+        <!--
+        Allows overriding of error template information/filenames. You can
+        also add your own attributes with values that can be plugged into the
+        templates, e.g., helpLocation below.
+        -->
+        <Errors supportContact="team@dissem.in"
+            helpLocation="/about.html"
+            styleSheet="/shibboleth-sp/main.css"/>
+
+        <!-- edugain metadata, lacks some renater metadata -->
+        <MetadataProvider type="XML"
+            validate="true"
+            url="https://metadata.federation.renater.fr/edugain/main/main-idps-edugain-metadata.xml"
+            reloadInterval="14400"
+            backingFilePath="/etc/shibboleth/renater-edugain-idps.xml" maxRefreshDelay="7200">
+
+            <MetadataFilter type="RequireValidUntil" maxValidityInterval="2592000"/>
+	          <MetadataFilter type="Signature" certificate="renater-metadata-signing-cert-2016.pem" verifyBackup="false"/>
+
+            <DiscoveryFilter type="Blacklist"
+                matcher="EntityAttributes"
+                trimTags="true"
+                attributeName="http://macedir.org/entity-category"
+                attributeNameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
+                attributeValue="http://refeds.org/category/hide-from-discovery" />
+        </MetadataProvider>
+
+        <!-- renater metadata -->
+        <MetadataProvider type="XML"
+            validate="true"
+            url="https://metadata.federation.renater.fr/renater/main/main-idps-renater-metadata.xml"
+            reloadInterval="14400"
+            backingFilePath="/etc/shibboleth/renater-idps.xml" maxRefreshDelay="7200">
+
+            <MetadataFilter type="RequireValidUntil" maxValidityInterval="2592000"/>
+	          <MetadataFilter type="Signature" certificate="renater-metadata-signing-cert-2016.pem" verifyBackup="false"/>
+
+            <DiscoveryFilter type="Blacklist"
+                matcher="EntityAttributes"
+                trimTags="true"
+                attributeName="http://macedir.org/entity-category"
+                attributeNameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
+                attributeValue="http://refeds.org/category/hide-from-discovery" />
+        </MetadataProvider>
+
+
+        <!-- Map to extract attributes from SAML assertions. -->
+        <AttributeExtractor type="XML" validate="true" reloadChanges="false" path="attribute-map.xml"/>
+
+        <!-- Default filtering policy for recognized attributes, lets other data pass. -->
+        <AttributeFilter type="XML" validate="true" path="attribute-policy.xml"/>
+
+        <!-- Simple file-based resolvers for separate signing/encryption keys. -->
+        <CredentialResolver type="File" use="signing"
+            key="sp-signing-key.pem" certificate="sp-signing-cert.pem"/>
+        <CredentialResolver type="File" use="encryption"
+            key="sp-encrypt-key.pem" certificate="sp-encrypt-cert.pem"/>
+
+        <!-- ApplicationOverride for our sandbox -->
+        <ApplicationOverride id="sandbox" entityID="https://sp.sandbox.dissem.in/shibboleth">
+            <Sessions lifetime="28800"
+                timeout="3600"
+                relayState="ss:mem"
+                checkAddress="false"
+                handlerSSL="true"
+                cookieProps="https">
+                <!-- We have a different discoveryURL, setting via ContentSetting does not work for SP v 3.0.4 -->
+                <SSO discoveryProtocol="SAMLDS"
+                    discoveryURL="https://sandbox.dissem.in/static/shib/shibboleth-embedded-ds-1.2.2/" >
+                    SAML2
+                </SSO>
+                <!-- We want slighty different description and name to make clear that this is our sandbox.
+                    Unfortunately we have to rewrite everything since the handler is completely overwridden. -->
+                <Handler type="MetadataGenerator" Location="/Metadata" signing="false">
+                    <!-- Other metadata that describe our service -->
+                    <!-- Requested attributes, see attribute-map.xml for further information -->
+                    <md:AttributeConsumingService index="0">
+                        <md:ServiceName xml:lang="en">Dissemin sandbox</md:ServiceName>
+                        <md:RequestedAttribute
+                            FriendlyName="eduPersonTargetedID"
+                            Name="urn:oid:1.3.6.1.4.1.5923.1.1.1.10"
+                            NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
+                            isRequired="true" />
+                        <md:RequestedAttribute
+                            FriendlyName="givenName"
+                            Name="urn:oid:2.5.4.42"
+                            NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
+                            isRequired="true" />
+                        <md:RequestedAttribute
+                            FriendlyName="sn"
+                            Name="urn:oid:2.5.4.4"
+                            NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
+                            isRequired="true" />
+                        <md:RequestedAttribute
+                            FriendlyName="mail"
+                            Name="urn:oid:0.9.2342.19200300.100.1.3"
+                            NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri" />
+                        <md:RequestedAttribute
+                            FriendlyName="eduPersonOrcid"
+                            Name="urn:oid:1.3.6.1.4.1.5923.1.1.1.16"
+                            NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri" />
+                    </md:AttributeConsumingService>
+                    <!-- Contact -->
+                    <md:ContactPerson contactType="administrative">
+                        <md:GivenName>Dissemin Administration</md:GivenName>
+                        <md:EmailAddress>mailto:team@dissem.in</md:EmailAddress>
+                    </md:ContactPerson>
+                    <!-- Organization -->
+                    <md:Organization>
+                        <md:OrganizationName xml:lang="en">Committee for the Accessibility of Publications in Sciences and Humanities</md:OrganizationName>
+                        <md:OrganizationDisplayName xml:lang="en">CAPSH</md:OrganizationDisplayName>
+                        <md:OrganizationURL xml:lang="en">https://association.dissem.in/</md:OrganizationURL>
+                    </md:Organization>
+                    <mdui:UIInfo>
+                        <mdui:DisplayName xml:lang="en">Dissemin Sandbox</mdui:DisplayName>
+                        <!--
+                        <mdui:Description xml:lang="en">Dissemin detects papers behind paywalls and helps their authors to upload them in one click to an open repository.</mdui:Description>
+                        -->
+                        <mdui:Logo height="192" width="192">https://sandbox.dissem.in/static/img/brand.png</mdui:Logo>
+                    </mdui:UIInfo>
+                </Handler>
+            </Sessions>
+            <!-- We have different federation metadata, i.e. test federation metadata -->
+            <MetadataProvider type="XML"
+                validate="true"
+                url="https://metadata.federation.renater.fr/test/preview/preview-idps-renater-test-metadata.xml"
+                reloadInterval="14400"
+                backingFilePath="/etc/shibboleth/renater-test-idps.xml" maxRefreshDelay="7200">
+
+                <MetadataFilter type="RequireValidUntil" maxValidityInterval="2592000"/>
+	              <MetadataFilter type="Signature" certificate="renater-metadata-signing-cert-2016.pem" verifyBackup="false"/>
+
+                <DiscoveryFilter type="Blacklist"
+                    matcher="EntityAttributes"
+                    trimTags="true"
+                    attributeName="http://macedir.org/entity-category"
+                    attributeNameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
+                    attributeValue="http://refeds.org/category/hide-from-discovery" />
+            </MetadataProvider>
+        </ApplicationOverride>
+
+    </ApplicationDefaults>
+
+    <!-- Policies that determine how to process and authenticate runtime messages. -->
+    <SecurityPolicyProvider type="XML" validate="true" path="security-policy.xml"/>
+
+    <!-- Low-level configuration about protocols and bindings available for use. -->
+    <ProtocolProvider type="XML" validate="true" reloadChanges="false" path="protocols.xml"/>
+
+</SPConfig>
