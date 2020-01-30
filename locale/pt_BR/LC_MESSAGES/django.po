@@ -10,13 +10,14 @@
 #
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-30 10:07+0100\n"
-"PO-Revision-Date: 2020-01-23 15:08:12+0000\n"
+"PO-Revision-Date: 2020-01-30 14:48:49+0000\n"
 "Language: pt_br\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2020-01-07 15:30:33+0000\n"
+"X-POT-Import-Date: 2020-01-30 09:30:27+0000\n"
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
@@ -70,7 +71,6 @@ msgstr "E-mail"
 
 #: deposit/forms.py:231
 #, fuzzy
-#| msgid "No preferred repository"
 msgid "Preferred repository"
 msgstr "Nenhum repositório preferido"
 
@@ -540,10 +540,8 @@ msgid "You can deposit the full text of your article. Dissemin will send it to a
 msgstr "Pode depositar o texto completo do seu artigo. O Dissemin irá enviá-lo para um repositório onde ficará livremente disponível. Ao depositar o seu artigo através do Dissemin, concorda com os nossos <a href=\"%(tosurl)s\">termos de serviço</a>."
 
 #: deposit/templates/deposit/start.html:72
-#, fuzzy
-#| msgid "Authors"
 msgid "Authorship"
-msgstr "Autores"
+msgstr "Autoria"
 
 #: deposit/templates/deposit/start.html:73
 msgid "You do not appear to be one of the authors of this paper. By using this form, you certify that you have the permission to upload it on their behalf."
@@ -713,7 +711,7 @@ msgstr "Sueco"
 
 #: dissemin/settings/common.py:319
 msgid "Turkish"
-msgstr ""
+msgstr "Turco"
 
 #: dissemin/settings/common.py:320
 msgid "Simplified Chinese"
@@ -1104,35 +1102,24 @@ msgid "Germany & neighboring central European countries"
 msgstr "Alemanha e países vizinhos da Europa Central"
 
 #: model-gettext.py:110
-#, fuzzy
-#| msgid "Green Open Access"
 msgid "Green Open Access Service"
-msgstr "Acesso Aberto Verde"
+msgstr "Serviço verde de acesso aberto"
 
 #: model-gettext.py:111
-msgid ""
-"Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n"
-"<br/>\n"
-"Contact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
+msgid "Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n<br/>\nContact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
 msgstr ""
 
 #: model-gettext.py:112
 msgid "TUprints contract required!"
-msgstr ""
+msgstr "É necessário um contrato TUprints!"
 
 #: model-gettext.py:113
-msgid ""
-"For every document, that you upload via Dissemin we need once a TUprints contract.\n"
-"Please fill in the contract and send a printed and signed copy to:\n"
-"<br>\n"
-"ULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
+msgid "For every document, that you upload via Dissemin we need once a TUprints contract.\nPlease fill in the contract and send a printed and signed copy to:\n<br>\nULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
 msgstr ""
 
 #: model-gettext.py:114
-#, fuzzy
-#| msgid "Download"
 msgid "Download contract"
-msgstr "Baixar"
+msgstr "Baixar contrato"
 
 #: model-gettext.py:115
 msgid "Creative Commons 1.0 Universal (CC0 1.0) Public Domain Dedication"
@@ -2089,7 +2076,7 @@ msgstr "Selecione aqui o texto completo do seu artigo. Somente arquivos PDF, tam
 
 #: upload/templates/upload/widget.html:10
 msgid "Click or drop here"
-msgstr ""
+msgstr "Clique ou solte aqui"
 
 #: upload/templates/upload/widget.html:15
 msgid "Or enter a URL:"
@@ -2719,7 +2706,7 @@ msgstr "Você pode anunciar o Dissemin para seus pesquisadores e mostrar a eles 
 
 #: website/templates/dissemin/start_page.html:122
 msgid "Learn more!"
-msgstr ""
+msgstr "Saiba mais!"
 
 #: website/templates/dissemin/start_page.html:132
 msgid "Network of Partners"
@@ -2863,10 +2850,3 @@ msgstr "Erro de autenticação"
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr "A autenticação falhou. <a href=\"%(account-login)s\">Volte para a página de entrar.</a>"
 
-#, fuzzy
-#~| msgid "E-mail"
-#~ msgid "Email"
-#~ msgstr "E-mail"
-
-#~ msgid "Letter of Declaration needed!"
-#~ msgstr "Carta de declaração necessária!"

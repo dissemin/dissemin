@@ -14,13 +14,14 @@
 #
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-30 10:07+0100\n"
-"PO-Revision-Date: 2020-01-09 19:07:00+0000\n"
+"PO-Revision-Date: 2020-01-30 14:48:50+0000\n"
 "Language: zh_hans\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2020-01-07 15:30:33+0000\n"
+"X-POT-Import-Date: 2020-01-30 09:30:27+0000\n"
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
@@ -78,7 +79,6 @@ msgstr "邮箱"
 
 #: deposit/forms.py:231
 #, fuzzy
-#| msgid "No preferred repository"
 msgid "Preferred repository"
 msgstr "没有首选存储库"
 
@@ -548,10 +548,7 @@ msgstr "存放"
 #: deposit/templates/deposit/start.html:64
 #, fuzzy, python-format
 msgid "You can deposit the full text of your article. Dissemin will send it to a repository where it will be made freely available. By depositing your article via Dissemin, you agree to our <a href=\"%(tosurl)s\">terms of service</a>."
-msgstr ""
-"\n"
-"            您可以存放您的文章全文。Dissemin将发送它到其能够自由展示的存储库。通过使用Dissemin存放您的文章，您同意我们的<a href=\"%(tosurl)s\">服务条款</a>。\n"
-"        "
+msgstr "\n            您可以存放您的文章全文。Dissemin将发送它到其能够自由展示的存储库。通过使用Dissemin存放您的文章，您同意我们的<a href=\"%(tosurl)s\">服务条款</a>。\n        "
 
 #: deposit/templates/deposit/start.html:72
 #, fuzzy
@@ -1148,10 +1145,7 @@ msgid "Green Open Access Service"
 msgstr "绿色开放访问"
 
 #: model-gettext.py:111
-msgid ""
-"Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n"
-"<br/>\n"
-"Contact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
+msgid "Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n<br/>\nContact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
 msgstr ""
 
 #: model-gettext.py:112
@@ -1159,16 +1153,11 @@ msgid "TUprints contract required!"
 msgstr ""
 
 #: model-gettext.py:113
-msgid ""
-"For every document, that you upload via Dissemin we need once a TUprints contract.\n"
-"Please fill in the contract and send a printed and signed copy to:\n"
-"<br>\n"
-"ULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
+msgid "For every document, that you upload via Dissemin we need once a TUprints contract.\nPlease fill in the contract and send a printed and signed copy to:\n<br>\nULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
 msgstr ""
 
 #: model-gettext.py:114
 #, fuzzy
-#| msgid "Download"
 msgid "Download contract"
 msgstr "下载"
 
@@ -1527,10 +1516,7 @@ msgstr "出版于%(year)s由"
 #: papers/templates/papers/paper.html:56
 #, fuzzy, python-format
 msgid "and <a href=\"#\" id=\"showAllAuthors\">%(nb_remaining_authors)s other authors.</a>"
-msgstr ""
-"\n"
-"            以及<a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s位其他作者</a>\n"
-"            "
+msgstr "\n            以及<a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s位其他作者</a>\n            "
 
 #: papers/templates/papers/paper.html:62
 #, fuzzy
@@ -1884,10 +1870,7 @@ msgstr ""
 #: papers/views.py:278
 #, fuzzy
 msgid "Invalid ORCID profile. Please make sure it includes a public name."
-msgstr ""
-"\n"
-"                            无效的ORCID详情。请确保它包含公开名称。\n"
-"                            "
+msgstr "\n                            无效的ORCID详情。请确保它包含公开名称。\n                            "
 
 #: papers/views.py:281
 msgid "Invalid ORCID profile."
@@ -2210,10 +2193,7 @@ msgstr "访问PDF被拒绝。"
 #: website/templates/403.html:13
 #, fuzzy, python-format
 msgid "The access to the requested page has been denied. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr ""
-"\n"
-"            找不到您请求的页面。<a href=\"/\">返回首页。</a>\n"
-"           "
+msgstr "\n            找不到您请求的页面。<a href=\"/\">返回首页。</a>\n           "
 
 #: website/templates/404.html:6 website/templates/404.html:10
 msgid "Page not found"
@@ -2222,10 +2202,7 @@ msgstr "找不到页面"
 #: website/templates/404.html:13
 #, fuzzy, python-format
 msgid "The page you requested could not be found. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr ""
-"\n"
-"            找不到您请求的页面。<a href=\"/\">返回首页。</a>\n"
-"           "
+msgstr "\n            找不到您请求的页面。<a href=\"/\">返回首页。</a>\n           "
 
 #: website/templates/500.html:6 website/templates/500.html:10
 #, fuzzy
@@ -2235,10 +2212,7 @@ msgstr "内部错误"
 #: website/templates/500.html:13
 #, fuzzy, python-format
 msgid "Your request triggered an internal server error. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr ""
-"\n"
-"            您的请求触发了内部错误。<a href=\"/\">返回首页。</a>\n"
-"           "
+msgstr "\n            您的请求触发了内部错误。<a href=\"/\">返回首页。</a>\n           "
 
 #: website/templates/admin/base_site.html:5
 #: website/templates/admin/base_site.html:8
@@ -2954,12 +2928,5 @@ msgstr "验证错误"
 #: website/templates/socialaccount/authentication_error.html:15
 #, fuzzy, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
-msgstr ""
-"\n"
-"            验证失败。<a href=\"/\">返回登录页面。</a>\n"
-"           "
+msgstr "\n            验证失败。<a href=\"/\">返回登录页面。</a>\n           "
 
-#, fuzzy
-#~| msgid "E-mail"
-#~ msgid "Email"
-#~ msgstr "邮箱"

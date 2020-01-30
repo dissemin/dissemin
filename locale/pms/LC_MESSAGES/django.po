@@ -10,13 +10,14 @@
 #
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-30 10:07+0100\n"
-"PO-Revision-Date: 2020-01-13 15:07:45+0000\n"
+"PO-Revision-Date: 2020-01-30 14:48:49+0000\n"
 "Language: pms\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2020-01-07 15:30:33+0000\n"
+"X-POT-Import-Date: 2020-01-30 09:30:27+0000\n"
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -70,7 +71,6 @@ msgstr "Pòsta eletrònica"
 
 #: deposit/forms.py:231
 #, fuzzy
-#| msgid "No preferred repository"
 msgid "Preferred repository"
 msgstr "Gnun depòsit preferì"
 
@@ -539,8 +539,6 @@ msgid "You can deposit the full text of your article. Dissemin will send it to a
 msgstr "A peul deposité ël test complet ëd sò artìcol. Dissemin a lo mandrà a 'n depòsit anté ch'a sarà butà a gràtis disposission ëd tuti. An depositand sò artìcol con Dissemin, chiel a aceta nòstre <a href=\"%(tosurl)s\">condission ëd servissi</a>."
 
 #: deposit/templates/deposit/start.html:72
-#, fuzzy
-#| msgid "Authors"
 msgid "Authorship"
 msgstr "Autor"
 
@@ -711,7 +709,7 @@ msgstr "Svedèis"
 
 #: dissemin/settings/common.py:319
 msgid "Turkish"
-msgstr ""
+msgstr "Turch"
 
 #: dissemin/settings/common.py:320
 msgid "Simplified Chinese"
@@ -1102,35 +1100,24 @@ msgid "Germany & neighboring central European countries"
 msgstr "Almagna e pais ëvzin d'Euròpa sentral"
 
 #: model-gettext.py:110
-#, fuzzy
-#| msgid "Green Open Access"
 msgid "Green Open Access Service"
-msgstr "Acess lìber verd"
+msgstr "Servissi d'acess lìber verd"
 
 #: model-gettext.py:111
-msgid ""
-"Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n"
-"<br/>\n"
-"Contact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
-msgstr ""
+msgid "Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n<br/>\nContact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
+msgstr "Vorërj-lo che la Biblioteca universitaria e statal ëd  Darmstadt a publichèissa soe publicassion an acess lìber verd për chieé?\n<br/>\nCh'an contata: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
 
 #: model-gettext.py:112
 msgid "TUprints contract required!"
-msgstr ""
+msgstr "Contrat TUprints necessari!"
 
 #: model-gettext.py:113
-msgid ""
-"For every document, that you upload via Dissemin we need once a TUprints contract.\n"
-"Please fill in the contract and send a printed and signed copy to:\n"
-"<br>\n"
-"ULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
-msgstr ""
+msgid "For every document, that you upload via Dissemin we need once a TUprints contract.\nPlease fill in the contract and send a printed and signed copy to:\n<br>\nULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
+msgstr "Për tut document che chiel a caria a travers Dissemin i l'oma damanca d'un contrat TUprints.\nPër piasì, ch'a compila ël contrat e ch'a na manda na còpia stampà e sot-signà a:\n<br>\nULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
 
 #: model-gettext.py:114
-#, fuzzy
-#| msgid "Download"
 msgid "Download contract"
-msgstr "Dëscarié"
+msgstr "Contrat ëd dëscariament"
 
 #: model-gettext.py:115
 msgid "Creative Commons 1.0 Universal (CC0 1.0) Public Domain Dedication"
@@ -2082,7 +2069,7 @@ msgstr "Ch'a selession-a ambelessì ël test complet ëd sò artìcol. Mach j'ar
 
 #: upload/templates/upload/widget.html:10
 msgid "Click or drop here"
-msgstr ""
+msgstr "Sgnaché o tiré ambelessì"
 
 #: upload/templates/upload/widget.html:15
 msgid "Or enter a URL:"
@@ -2704,7 +2691,7 @@ msgstr "A peul feje dl'areclam a Dissemin ai sò arsercador e mostreje coma a l'
 
 #: website/templates/dissemin/start_page.html:122
 msgid "Learn more!"
-msgstr ""
+msgstr "Savèjne ëd pi!"
 
 #: website/templates/dissemin/start_page.html:132
 msgid "Network of Partners"
@@ -2845,13 +2832,3 @@ msgstr "Eror d'autentificassion"
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr "L'autentificassion a l'ha falì. <a href=\"%(account-login)s\">Torné a la pàgina d'intrada.</a>"
 
-#, fuzzy
-#~| msgid "E-mail"
-#~ msgid "Email"
-#~ msgstr "Pòsta eletrònica"
-
-#~ msgid "Letter of Declaration needed!"
-#~ msgstr "Litra ëd diciairassion necessaria!"
-
-#~ msgid "<p>The repository %(deposit.repository.name)s requires a letter of declaration to publish this publication. Please <a class=\"alert-link\" href=\"%(letter_url)s\">download</a> the letter, sign it and send it to the repository administration.</p>"
-#~ msgstr "<p>Ël depòsit %(deposit.repository.name)s a ciama na litra ëd diciairassion për publiché sa publicassion. Për piasì <a class=\"alert-link\" href=\"%(letter_url)s\">ch'a dëscaria</a> la litra, ch'a la sot-signa e ch'a la manda a l'aministrassion dël depòsit.</p>"
