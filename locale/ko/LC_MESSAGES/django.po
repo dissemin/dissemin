@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-24 17:53+0100\n"
+"POT-Creation-Date: 2020-01-30 10:07+0100\n"
 "PO-Revision-Date: 2020-01-09 19:06:58+0000\n"
 "Language: ko\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -67,7 +67,17 @@ msgstr "라이선스"
 msgid "No preferred repository"
 msgstr "선호하는 저장소 없음"
 
-#: deposit/forms.py:237 deposit/hal/forms.py:71 deposit/osf/forms.py:134
+#: deposit/forms.py:230 deposit/sword/forms.py:15
+msgid "E-mail"
+msgstr "이메일"
+
+#: deposit/forms.py:231
+#, fuzzy
+#| msgid "No preferred repository"
+msgid "Preferred repository"
+msgstr "선호하는 저장소 없음"
+
+#: deposit/forms.py:241 deposit/hal/forms.py:71 deposit/osf/forms.py:134
 msgid "Save"
 msgstr "저장"
 
@@ -436,10 +446,6 @@ msgstr "프로젝트를 공개할 수 없습니다."
 #: deposit/protocol.py:328
 msgid "Failed to connect to the repository. Please try again later."
 msgstr "저장소 접속에 실패했습니다. 나중에 다시 시도해 주십시오."
-
-#: deposit/sword/forms.py:15
-msgid "E-mail"
-msgstr "이메일"
 
 #: deposit/sword/protocol.py:81
 msgid "The repository {} returned invalid XML"
@@ -2859,3 +2865,8 @@ msgstr "인증 오류"
 #, fuzzy, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr "인증을 실패했습니다.<a href=\"/\">로그인 페이지로 돌아갑니다.</a>"
+
+#, fuzzy
+#~| msgid "E-mail"
+#~ msgid "Email"
+#~ msgstr "이메일"

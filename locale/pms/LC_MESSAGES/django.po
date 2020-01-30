@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-24 17:53+0100\n"
+"POT-Creation-Date: 2020-01-30 10:07+0100\n"
 "PO-Revision-Date: 2020-01-13 15:07:45+0000\n"
 "Language: pms\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -64,7 +64,17 @@ msgstr "Licensa"
 msgid "No preferred repository"
 msgstr "Gnun depòsit preferì"
 
-#: deposit/forms.py:237 deposit/hal/forms.py:71 deposit/osf/forms.py:134
+#: deposit/forms.py:230 deposit/sword/forms.py:15
+msgid "E-mail"
+msgstr "Pòsta eletrònica"
+
+#: deposit/forms.py:231
+#, fuzzy
+#| msgid "No preferred repository"
+msgid "Preferred repository"
+msgstr "Gnun depòsit preferì"
+
+#: deposit/forms.py:241 deposit/hal/forms.py:71 deposit/osf/forms.py:134
 msgid "Save"
 msgstr "Argistré"
 
@@ -433,10 +443,6 @@ msgstr "Impossìbil rende ël proget pùblich."
 #: deposit/protocol.py:328
 msgid "Failed to connect to the repository. Please try again later."
 msgstr "Falì a coleghesse al depòsit. Për piasì, ch'a preuva torna pi tard."
-
-#: deposit/sword/forms.py:15
-msgid "E-mail"
-msgstr "Pòsta eletrònica"
 
 #: deposit/sword/protocol.py:81
 msgid "The repository {} returned invalid XML"
@@ -2838,6 +2844,11 @@ msgstr "Eror d'autentificassion"
 #, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr "L'autentificassion a l'ha falì. <a href=\"%(account-login)s\">Torné a la pàgina d'intrada.</a>"
+
+#, fuzzy
+#~| msgid "E-mail"
+#~ msgid "Email"
+#~ msgstr "Pòsta eletrònica"
 
 #~ msgid "Letter of Declaration needed!"
 #~ msgstr "Litra ëd diciairassion necessaria!"

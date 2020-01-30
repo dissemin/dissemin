@@ -15,7 +15,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-24 17:53+0100\n"
+"POT-Creation-Date: 2020-01-30 10:07+0100\n"
 "PO-Revision-Date: 2020-01-16 14:29:34+0000\n"
 "Language: tr\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -68,7 +68,17 @@ msgstr "Lisans"
 msgid "No preferred repository"
 msgstr "Tercih edilen depo yok"
 
-#: deposit/forms.py:237 deposit/hal/forms.py:71 deposit/osf/forms.py:134
+#: deposit/forms.py:230 deposit/sword/forms.py:15
+msgid "E-mail"
+msgstr "E-posta"
+
+#: deposit/forms.py:231
+#, fuzzy
+#| msgid "No preferred repository"
+msgid "Preferred repository"
+msgstr "Tercih edilen depo yok"
+
+#: deposit/forms.py:241 deposit/hal/forms.py:71 deposit/osf/forms.py:134
 msgid "Save"
 msgstr "Kaydet"
 
@@ -437,10 +447,6 @@ msgstr "Proje herkese açık hale getirilemiyor."
 #: deposit/protocol.py:328
 msgid "Failed to connect to the repository. Please try again later."
 msgstr "Depoya bağlanılamadı. Lütfen daha sonra tekrar deneyiniz."
-
-#: deposit/sword/forms.py:15
-msgid "E-mail"
-msgstr "E-posta"
 
 #: deposit/sword/protocol.py:81
 msgid "The repository {} returned invalid XML"
@@ -2849,6 +2855,11 @@ msgstr "Doğrulama hatası"
 #, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr "Kimlik doğrulama başarısız. <a href=\"%(account-login)s\">Giriş sayfasına geri dönün.</a>"
+
+#, fuzzy
+#~| msgid "E-mail"
+#~ msgid "Email"
+#~ msgstr "E-posta"
 
 #~ msgid "Letter of Declaration needed!"
 #~ msgstr "Beyanname gerekli!"

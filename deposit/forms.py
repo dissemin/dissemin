@@ -226,6 +226,10 @@ class UserPreferencesForm(forms.ModelForm):
         field_classes = {
             'preferred_repository': PreferredRepositoryField,
         }
+        labels = {
+            'email' : _('E-mail'),
+            'preferred_repository' : _('Preferred repository'),
+        }
 
     def __init__(self, *args, **kwargs):
         super(UserPreferencesForm, self).__init__(*args, **kwargs)

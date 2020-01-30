@@ -14,7 +14,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-24 17:53+0100\n"
+"POT-Creation-Date: 2020-01-30 10:07+0100\n"
 "PO-Revision-Date: 2020-01-09 19:06:56+0000\n"
 "Language: bn\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -69,7 +69,17 @@ msgstr "কোন লাইসেন্স নেই"
 msgid "No preferred repository"
 msgstr "পছন্দের ভান্ডার নেই"
 
-#: deposit/forms.py:237 deposit/hal/forms.py:71 deposit/osf/forms.py:134
+#: deposit/forms.py:230 deposit/sword/forms.py:15
+msgid "E-mail"
+msgstr ""
+
+#: deposit/forms.py:231
+#, fuzzy
+#| msgid "No preferred repository"
+msgid "Preferred repository"
+msgstr "পছন্দের ভান্ডার নেই"
+
+#: deposit/forms.py:241 deposit/hal/forms.py:71 deposit/osf/forms.py:134
 msgid "Save"
 msgstr "সংরক্ষণ"
 
@@ -438,10 +448,6 @@ msgstr "প্রকল্প সবার জন্য উন্মুক্ত
 #: deposit/protocol.py:328
 msgid "Failed to connect to the repository. Please try again later."
 msgstr "সংগ্রহস্থলের সাথে সংযোগ করতে ব্যর্থ। অনুগ্রহ করে পরে আবার চেষ্টা করুন।"
-
-#: deposit/sword/forms.py:15
-msgid "E-mail"
-msgstr ""
 
 #: deposit/sword/protocol.py:81
 #, fuzzy

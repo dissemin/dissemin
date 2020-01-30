@@ -16,7 +16,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-24 17:53+0100\n"
+"POT-Creation-Date: 2020-01-30 10:07+0100\n"
 "PO-Revision-Date: 2020-01-09 19:06:58+0000\n"
 "Language: nl\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -73,7 +73,17 @@ msgstr "Licentie"
 msgid "No preferred repository"
 msgstr "Geen standaardopslagplaats"
 
-#: deposit/forms.py:237 deposit/hal/forms.py:71 deposit/osf/forms.py:134
+#: deposit/forms.py:230 deposit/sword/forms.py:15
+msgid "E-mail"
+msgstr "E-mail"
+
+#: deposit/forms.py:231
+#, fuzzy
+#| msgid "No preferred repository"
+msgid "Preferred repository"
+msgstr "Geen standaardopslagplaats"
+
+#: deposit/forms.py:241 deposit/hal/forms.py:71 deposit/osf/forms.py:134
 msgid "Save"
 msgstr "Opslaan"
 
@@ -442,10 +452,6 @@ msgstr "Kan het project niet openbaar maken."
 #: deposit/protocol.py:328
 msgid "Failed to connect to the repository. Please try again later."
 msgstr "Kan geen verbinding met de opslagplaats maken. Probeer het later opnieuw."
-
-#: deposit/sword/forms.py:15
-msgid "E-mail"
-msgstr "E-mail"
 
 #: deposit/sword/protocol.py:81
 #, fuzzy
@@ -2961,3 +2967,8 @@ msgstr ""
 "\n"
 "            Verifiëren is mislukt. <a href=\"/\">Terug naar de aanmeldpagina.</a>\n"
 "           "
+
+#, fuzzy
+#~| msgid "E-mail"
+#~ msgid "Email"
+#~ msgstr "E-mail"

@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-24 17:53+0100\n"
+"POT-Creation-Date: 2020-01-30 10:07+0100\n"
 "PO-Revision-Date: 2020-01-09 19:06:58+0000\n"
 "Language: nb\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -69,7 +69,15 @@ msgstr "Ingen lisens"
 msgid "No preferred repository"
 msgstr ""
 
-#: deposit/forms.py:237 deposit/hal/forms.py:71 deposit/osf/forms.py:134
+#: deposit/forms.py:230 deposit/sword/forms.py:15
+msgid "E-mail"
+msgstr "E-mail"
+
+#: deposit/forms.py:231
+msgid "Preferred repository"
+msgstr ""
+
+#: deposit/forms.py:241 deposit/hal/forms.py:71 deposit/osf/forms.py:134
 msgid "Save"
 msgstr "Lagre"
 
@@ -439,10 +447,6 @@ msgstr "Kunne ikke gjøre prosjektet offentlig."
 #, fuzzy
 msgid "Failed to connect to the repository. Please try again later."
 msgstr "Tilkoblingen til HAL feilet. Prøv igjen senere."
-
-#: deposit/sword/forms.py:15
-msgid "E-mail"
-msgstr "E-mail"
 
 #: deposit/sword/protocol.py:81
 msgid "The repository {} returned invalid XML"
@@ -2917,3 +2921,8 @@ msgstr ""
 #, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr ""
+
+#, fuzzy
+#~| msgid "E-mail"
+#~ msgid "Email"
+#~ msgstr "E-mail"

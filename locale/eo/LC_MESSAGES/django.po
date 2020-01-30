@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-24 17:53+0100\n"
+"POT-Creation-Date: 2020-01-30 10:07+0100\n"
 "PO-Revision-Date: 2020-01-09 19:06:57+0000\n"
 "Language: eo\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -65,7 +65,17 @@ msgstr "Sen permesilo"
 msgid "No preferred repository"
 msgstr "Neniu preferata deponejo"
 
-#: deposit/forms.py:237 deposit/hal/forms.py:71 deposit/osf/forms.py:134
+#: deposit/forms.py:230 deposit/sword/forms.py:15
+msgid "E-mail"
+msgstr ""
+
+#: deposit/forms.py:231
+#, fuzzy
+#| msgid "No preferred repository"
+msgid "Preferred repository"
+msgstr "Neniu preferata deponejo"
+
+#: deposit/forms.py:241 deposit/hal/forms.py:71 deposit/osf/forms.py:134
 msgid "Save"
 msgstr "Konservi"
 
@@ -434,10 +444,6 @@ msgstr "Ne povis publikigi projekton."
 #: deposit/protocol.py:328
 msgid "Failed to connect to the repository. Please try again later."
 msgstr "Ne povis konekti deponejon. Bonvolu reprovi poste."
-
-#: deposit/sword/forms.py:15
-msgid "E-mail"
-msgstr ""
 
 #: deposit/sword/protocol.py:81
 msgid "The repository {} returned invalid XML"

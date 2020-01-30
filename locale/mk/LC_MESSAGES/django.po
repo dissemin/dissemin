@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-24 17:53+0100\n"
+"POT-Creation-Date: 2020-01-30 10:07+0100\n"
 "PO-Revision-Date: 2020-01-20 10:31:28+0000\n"
 "Language: mk\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -65,7 +65,17 @@ msgstr "Лиценца"
 msgid "No preferred repository"
 msgstr "Нема претпочитано складиште"
 
-#: deposit/forms.py:237 deposit/hal/forms.py:71 deposit/osf/forms.py:134
+#: deposit/forms.py:230 deposit/sword/forms.py:15
+msgid "E-mail"
+msgstr "Е-пошта"
+
+#: deposit/forms.py:231
+#, fuzzy
+#| msgid "No preferred repository"
+msgid "Preferred repository"
+msgstr "Нема претпочитано складиште"
+
+#: deposit/forms.py:241 deposit/hal/forms.py:71 deposit/osf/forms.py:134
 msgid "Save"
 msgstr "Зачувај"
 
@@ -434,10 +444,6 @@ msgstr "Не можам да го направам проектот како ј�
 #: deposit/protocol.py:328
 msgid "Failed to connect to the repository. Please try again later."
 msgstr "Не успеав да се поврзам со складиштето. Обидете се подоцна."
-
-#: deposit/sword/forms.py:15
-msgid "E-mail"
-msgstr "Е-пошта"
 
 #: deposit/sword/protocol.py:81
 #, fuzzy
@@ -2923,3 +2929,8 @@ msgstr "Грешка при заверката"
 #, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr ""
+
+#, fuzzy
+#~| msgid "E-mail"
+#~ msgid "Email"
+#~ msgstr "Е-пошта"

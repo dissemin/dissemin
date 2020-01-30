@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-24 17:53+0100\n"
+"POT-Creation-Date: 2020-01-30 10:07+0100\n"
 "PO-Revision-Date: 2020-01-09 19:06:56+0000\n"
 "Language: br\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -70,7 +70,17 @@ msgstr "Aotre-implijout ebet"
 msgid "No preferred repository"
 msgstr ""
 
-#: deposit/forms.py:237 deposit/hal/forms.py:71 deposit/osf/forms.py:134
+#: deposit/forms.py:230 deposit/sword/forms.py:15
+msgid "E-mail"
+msgstr ""
+
+#: deposit/forms.py:231
+#, fuzzy
+#| msgid "Repository"
+msgid "Preferred repository"
+msgstr "Kavlec'h"
+
+#: deposit/forms.py:241 deposit/hal/forms.py:71 deposit/osf/forms.py:134
 msgid "Save"
 msgstr "Enrollañ"
 
@@ -438,10 +448,6 @@ msgstr ""
 
 #: deposit/protocol.py:328
 msgid "Failed to connect to the repository. Please try again later."
-msgstr ""
-
-#: deposit/sword/forms.py:15
-msgid "E-mail"
 msgstr ""
 
 #: deposit/sword/protocol.py:81
