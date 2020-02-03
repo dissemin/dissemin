@@ -22,7 +22,7 @@ msgstr ""
 "Project-Id-Version: dissem.in\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-30 10:07+0100\n"
-"PO-Revision-Date: 2020-01-30 14:48:48+0000\n"
+"PO-Revision-Date: 2020-02-03 14:39:18+0000\n"
 "Last-Translator: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language-Team: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language: fr\n"
@@ -1127,7 +1127,7 @@ msgstr "Contrat TUprints nécessaire !"
 
 #: model-gettext.py:113
 msgid "For every document, that you upload via Dissemin we need once a TUprints contract.\nPlease fill in the contract and send a printed and signed copy to:\n<br>\nULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
-msgstr "Pour tout document que vous téléversez via Dissemin, nous avons besoin d’un contrat TUprints.\nVeuillez rmeplir le contrat et envoyer une copie imprimée et signée à :\n<br>\nULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
+msgstr "Pour tout document que vous téléversez via Dissemin, nous avons besoin d’un contrat TUprints.\nVeuillez rmeplir le contrat et envoyer une copie imprimée et signée à :\n<br>\nULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
 
 #: model-gettext.py:114
 msgid "Download contract"

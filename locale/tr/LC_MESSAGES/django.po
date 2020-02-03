@@ -17,7 +17,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-30 10:07+0100\n"
-"PO-Revision-Date: 2020-01-30 14:48:50+0000\n"
+"PO-Revision-Date: 2020-02-03 14:39:21+0000\n"
 "Language: tr\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2824,7 +2824,7 @@ msgstr "Yapılacaklar listem"
 
 #: website/templates/navbar.html:36
 msgid "Logout"
-msgstr "Çıkış"
+msgstr "Oturumu kapat"
 
 #: website/templates/navbar.html:41
 msgid "Login"
