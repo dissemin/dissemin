@@ -33,7 +33,7 @@ class TestDeclarationLettersForms():
         assert pdf.getbuffer().nbytes > 1
 
 
-@pytest.mark.usefixtures('deposit_record')
+@pytest.mark.usefixtures('lod_env')
 class TestDeclarationLetters():
     """
     Class that groups test for generating letter of deposits.
@@ -42,9 +42,6 @@ class TestDeclarationLetters():
         """
         This tests the letter of declaration for ULB Darmstadt.
         """
-        self.client.user.first_name = 'Jose'
-        self.client.user.last_name = 'Saramago'
-
         self.dr.license = License.objects.all().first()
         self.dr.identifier = '5732'
         self.dr.user = self.client.user

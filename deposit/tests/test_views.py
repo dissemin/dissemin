@@ -28,7 +28,7 @@ class TestDepositView():
             assert r[0].enabled == True
 
 
-@pytest.mark.usefixtures('deposit_record')
+@pytest.mark.usefixtures('lod_env')
 class TestLetterDeclarationView():
     """
     Tests groups various tests about the LetterDeclarationView
