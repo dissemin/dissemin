@@ -4,6 +4,7 @@ import pytest
 
 from django.conf import settings
 
+from deposit.declaration import declaration_ub_braunschweig
 from deposit.declaration import declaration_ulb_darmstadt
 from deposit.declaration import fill_forms
 from deposit.models import License
@@ -48,3 +49,29 @@ class TestDeclarationLetters():
         self.dr.save()
 
         declaration_ulb_darmstadt(self.dr)
+
+    def test_declaration_ub_braunschweig(self):
+        """
+        This tests the letter of declaration for UB Braunschweig.
+        """
+        self.dr.license = License.objects.get(uri='https://creativecommons.org/licenses/by/4.0/')
+        self.dr.identifier = '5732'
+        self.dr.user = self.client.user
+        self.dr.save()
+
+        declaration_ub_braunschweig(self.dr)
+
+    def test_declaration_ub_braunschweig_no_license_map(self, caplog):
+        """
+        This tests the letter of declaration for UB Braunschweig.
+        """
+        self.dr.license = License.objects.get(uri='https://creativecommons.org/publicdomain/zero/1.0/')
+        self.dr.identifier = '5732'
+        self.dr.user = self.client.user
+        self.dr.save()
+
+        declaration_ub_braunschweig(self.dr)
+
+        log_entry = caplog.records[0]
+        assert log_entry.name == 'dissemin.deposit.declaration'
+        assert log_entry.levelname == 'ERROR'

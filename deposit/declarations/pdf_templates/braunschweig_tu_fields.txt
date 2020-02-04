@@ -1,0 +1,79 @@
+---
+FieldType: Button
+FieldName: CCBY 40
+FieldNameAlt: CC-BY 4.0
+FieldFlags: 0
+FieldJustification: Left
+FieldStateOption: On
+---
+FieldType: Button
+FieldName: CCBYNC 40
+FieldNameAlt: CC-BY-NC 4.0
+FieldFlags: 0
+FieldJustification: Left
+FieldStateOption: On
+---
+FieldType: Button
+FieldName: CCBYNCND 40
+FieldNameAlt: CC-BY-NC-ND 4.0
+FieldFlags: 0
+FieldJustification: Left
+FieldStateOption: On
+---
+FieldType: Button
+FieldName: CCBYNCSA 40
+FieldNameAlt: CC-BY-NC-SA 4.0
+FieldFlags: 0
+FieldJustification: Left
+FieldStateOption: On
+---
+FieldType: Button
+FieldName: CCBYND 40
+FieldNameAlt: CC-BY-ND 4.0
+FieldFlags: 0
+FieldJustification: Left
+FieldStateOption: On
+---
+FieldType: Button
+FieldName: CCBYSA 40
+FieldNameAlt: CC-BY-SA 4.0
+FieldFlags: 0
+FieldJustification: Left
+FieldStateOption: On
+---
+FieldType: Button
+FieldName: Alle Rechte vorbehalten
+FieldNameAlt: Alle Rechte vorbehalten
+FieldFlags: 0
+FieldJustification: Left
+FieldStateOption: On
+---
+FieldType: Text
+FieldName: Titel der Publikation
+FieldFlags: 4096
+FieldJustification: Left
+---
+FieldType: Text
+FieldName: Autor/in
+FieldFlags: 0
+FieldJustification: Left
+---
+FieldType: Text
+FieldName: Institut
+FieldFlags: 0
+FieldJustification: Left
+---
+FieldType: Text
+FieldName: E-Mail
+FieldFlags: 0
+FieldJustification: Left
+---
+FieldType: Text
+FieldName: Telefon
+FieldFlags: 0
+FieldJustification: Left
+---
+FieldType: Text
+FieldName: Anmerkungen
+FieldFlags: 8392704
+FieldJustification: Left
