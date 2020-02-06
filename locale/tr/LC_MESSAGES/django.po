@@ -17,7 +17,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-30 10:07+0100\n"
-"PO-Revision-Date: 2020-02-03 14:39:21+0000\n"
+"PO-Revision-Date: 2020-02-06 13:54:16+0000\n"
 "Language: tr\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -425,7 +425,7 @@ msgstr "Baskı öncesi lisansı güncellenemiyor."
 
 #: deposit/osf/protocol.py:418
 msgid "No Repository endpoint provided."
-msgstr "Havuz uç noktası sağlanmadı."
+msgstr "Depo uç noktası sağlanmadı."
 
 #: deposit/osf/protocol.py:421
 msgid "No OSF token provided."
@@ -2363,7 +2363,7 @@ msgstr "Dissemin, <a href=\"%(sources_url)s\">birçok kaynaktan</a> meta veri to
 
 #: website/templates/dissemin/faq.html:253
 msgid "Dissemin is not a repository as it does not store any full text. When the full text of a publication is available, a link to the relevant page is provided. The full texts deposited through Dissemin are stored in third-party repositories such as <a href=\"https://zenodo.org\">Zenodo</a> or <a href=\"https://hal.archives-ouvertes.fr/\">HAL</a>."
-msgstr "Dissemin tam metin saklamadığı için bir havuz değildir. Bir yayının tam metni mevcut olduğunda, ilgili sayfaya bir bağlantı sağlanır. Dissemin aracılığıyla bırakılan tam metinler <a href=\"https://zenodo.org\">Zenodo</a> veya <a href=\"https://hal.archives-ouvertes.fr/\">HAL</a> gibi üçüncü taraf depolarda saklanır."
+msgstr "Dissemin tam metin saklamadığı için bir depo değildir. Bir yayının tam metni mevcut olduğunda, ilgili sayfaya bir bağlantı sağlanır. Dissemin aracılığıyla bırakılan tam metinler <a href=\"https://zenodo.org\">Zenodo</a> veya <a href=\"https://hal.archives-ouvertes.fr/\">HAL</a> gibi üçüncü taraf depolarda saklanır."
 
 #: website/templates/dissemin/faq.html:260
 msgid "Dissemin is brought to you by the <a href=\"https://association.dissem.in/\">CAPSH association</a>."
@@ -2486,7 +2486,7 @@ msgstr "İlk olarak, Dissemin'in yalnızca kişisel bir ana sayfada veya benzer 
 
 #: website/templates/dissemin/faq.html:443
 msgid "Second, at the moment, Dissemin only supports repositories with a crawlable API that follows the <a href=\"https://www.openarchives.org/OAI/openarchivesprotocol.html\">OAI-PMH protocol</a>, and is <a href=\"https://www.base-search.net/about/en/suggest.php\">registered</a> in <a href=\"https://www.base-search.net/\">BASE</a>. We have a <a href=\"https://github.com/dissemin/croawl\">long-term project</a> to support more repositories by crawling them, but for the moment, we do not have the resources to support repositories not covered by BASE. Hence, if you are a user of a repository and would like it to be supported by Dissemin, please contact the repository administrator and suggest them to implement OAI-PMH support and to <a href=\"https://www.base-search.net/about/en/suggest.php\">register</a> their repository in BASE."
-msgstr "İkincisi, şu anda Dissemin yalnızca <a href=\"https://www.openarchives.org/OAI/openarchivesprotocol.html\">OAI-PMH protokolünü</a> izleyen taranabilir bir API içeren depoları desteklemektedir. <a href=\"https://www.base-search.net/\">BASE</a> adresinde <a href=\"https://www.base-search.net/about/en/suggest.php\">kaydedildi</a>. Daha fazla depoyu tarayarak desteklemek için <a href=\"https://github.com/dissemin/croawl\">uzun vadeli bir projemiz</a> var, ancak şimdilik destekleyecek kaynaklarımız yok BASE kapsamına girmeyen depolar. Bu nedenle, bir deponun kullanıcısıysanız ve Dissemin tarafından desteklenmesini istiyorsanız, lütfen havuz yöneticisine başvurun ve onlara OAI-PMH desteğini uygulamalarını ve <a href=\"https://www.base-search.net/about/en/suggest.php\">kayıtlarını</a> BASE'e kaydedin."
+msgstr "İkincisi, şu anda Dissemin yalnızca <a href=\"https://www.openarchives.org/OAI/openarchivesprotocol.html\">OAI-PMH protokolünü</a> izleyen taranabilir bir API içeren depoları desteklemektedir. <a href=\"https://www.base-search.net/\">BASE</a> adresinde <a href=\"https://www.base-search.net/about/en/suggest.php\">kaydedildi</a>. Daha fazla depoyu tarayarak desteklemek için <a href=\"https://github.com/dissemin/croawl\">uzun vadeli bir projemiz</a> var, ancak şimdilik destekleyecek kaynaklarımız yok BASE kapsamına girmeyen depolar. Bu nedenle, bir deponun kullanıcısıysanız ve Dissemin tarafından desteklenmesini istiyorsanız, lütfen depo yöneticisine başvurun ve onlara OAI-PMH desteğini uygulamalarını ve <a href=\"https://www.base-search.net/about/en/suggest.php\">kayıtlarını</a> BASE'e kaydedin."
 
 #: website/templates/dissemin/faq.html:448
 msgid "If the repository is registered in BASE, please <a href=\"https://www.base-search.net/\">search in BASE</a> to check that your article is there. If it is, then this may be a bug of Dissemin; please file an <a href=\"https://github.com/dissemin/dissemin/issues\">issue</a> describing the problem, or send a message to <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>."

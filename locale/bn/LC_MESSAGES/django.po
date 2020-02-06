@@ -16,7 +16,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-30 10:07+0100\n"
-"PO-Revision-Date: 2020-01-30 14:48:46+0000\n"
+"PO-Revision-Date: 2020-02-06 13:54:11+0000\n"
 "Language: bn\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1146,9 +1146,8 @@ msgid "Germany & neighboring central European countries"
 msgstr ""
 
 #: model-gettext.py:110
-#, fuzzy
 msgid "Green Open Access Service"
-msgstr "প্রবেশাধিকার উন্মুক্ত"
+msgstr "সবুজ উন্মুক্ত প্রবেশাধিকার সেবা"
 
 #: model-gettext.py:111
 msgid "Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n<br/>\nContact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
