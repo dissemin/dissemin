@@ -15,7 +15,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-30 10:07+0100\n"
-"PO-Revision-Date: 2020-01-30 14:48:50+0000\n"
+"PO-Revision-Date: 2020-02-10 13:50:27+0000\n"
 "Language: sr-Cyrl\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -716,7 +716,7 @@ msgstr ""
 
 #: dissemin/settings/common.py:319
 msgid "Turkish"
-msgstr ""
+msgstr "турски"
 
 #: dissemin/settings/common.py:320
 msgid "Simplified Chinese"
@@ -2106,7 +2106,7 @@ msgstr ""
 
 #: upload/templates/upload/widget.html:10
 msgid "Click or drop here"
-msgstr ""
+msgstr "Овде притисните или пустите"
 
 #: upload/templates/upload/widget.html:15
 msgid "Or enter a URL:"
@@ -2733,7 +2733,7 @@ msgstr ""
 
 #: website/templates/dissemin/start_page.html:122
 msgid "Learn more!"
-msgstr ""
+msgstr "Сазнајте више"
 
 #: website/templates/dissemin/start_page.html:132
 msgid "Network of Partners"
