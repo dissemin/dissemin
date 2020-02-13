@@ -15,7 +15,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-30 10:07+0100\n"
-"PO-Revision-Date: 2020-02-10 13:50:27+0000\n"
+"PO-Revision-Date: 2020-02-13 11:31:59+0000\n"
 "Language: sr-Cyrl\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -73,9 +73,8 @@ msgid "E-mail"
 msgstr ""
 
 #: deposit/forms.py:231
-#, fuzzy
 msgid "Preferred repository"
-msgstr "Нема жељеног складишта"
+msgstr "Жељено складиште"
 
 #: deposit/forms.py:241 deposit/hal/forms.py:71 deposit/osf/forms.py:134
 msgid "Save"
@@ -544,9 +543,8 @@ msgid "You can deposit the full text of your article. Dissemin will send it to a
 msgstr ""
 
 #: deposit/templates/deposit/start.html:72
-#, fuzzy
 msgid "Authorship"
-msgstr "Према ауторима"
+msgstr "Ауторство"
 
 #: deposit/templates/deposit/start.html:73
 msgid "You do not appear to be one of the authors of this paper. By using this form, you certify that you have the permission to upload it on their behalf."
@@ -1111,9 +1109,8 @@ msgid "Germany & neighboring central European countries"
 msgstr ""
 
 #: model-gettext.py:110
-#, fuzzy
 msgid "Green Open Access Service"
-msgstr "Отворен приступ"
+msgstr "Услуга зеленог отвореног приступа"
 
 #: model-gettext.py:111
 msgid "Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n<br/>\nContact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
@@ -1128,9 +1125,8 @@ msgid "For every document, that you upload via Dissemin we need once a TUprints 
 msgstr ""
 
 #: model-gettext.py:114
-#, fuzzy
 msgid "Download contract"
-msgstr "Преузми"
+msgstr "Преузми уговор"
 
 #: model-gettext.py:115
 msgid "Creative Commons 1.0 Universal (CC0 1.0) Public Domain Dedication"

@@ -8,6 +8,7 @@
 # Author: Johny Weissmuller Jr
 # Author: KATRINE1992
 # Author: Macofe
+# Author: MarcoAurelio
 # Author: Pato
 # Author: Silverie04
 # --
@@ -19,7 +20,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-30 10:07+0100\n"
-"PO-Revision-Date: 2020-02-06 13:54:12+0000\n"
+"PO-Revision-Date: 2020-02-13 11:31:56+0000\n"
 "Language: es\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -723,7 +724,7 @@ msgstr "Sueco"
 
 #: dissemin/settings/common.py:319
 msgid "Turkish"
-msgstr ""
+msgstr "Turco"
 
 #: dissemin/settings/common.py:320
 msgid "Simplified Chinese"
