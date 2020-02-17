@@ -13,7 +13,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-30 10:07+0100\n"
-"PO-Revision-Date: 2020-02-03 14:39:20+0000\n"
+"PO-Revision-Date: 2020-02-17 13:54:01+0000\n"
 "Language: pt_br\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -586,7 +586,7 @@ msgstr "Metadados:"
 #: deposit/templates/deposit/start.html:212
 #: papers/templates/papers/search_base.html:165
 msgid "Paper animated bird"
-msgstr ""
+msgstr "Pássaro de papel animado"
 
 #: deposit/templates/deposit/start.html:213
 msgid "Submitting paper to repository"
@@ -1170,7 +1170,7 @@ msgstr "HAL"
 
 #: model-gettext.py:128
 msgid "HAL is a  multidisciplinary open archive, sustained by the French Research Ministry."
-msgstr ""
+msgstr "O HAL é um arquivo aberto multidisciplinar, mantido pelo Ministério de Pesquisa da França."
 
 #: model-gettext.py:129
 msgid "OSF preprints"
@@ -1368,7 +1368,7 @@ msgstr "Tipo de documento"
 
 #: papers/templates/papers/advanced_search.html:60
 msgid "Fields for superusers"
-msgstr ""
+msgstr "Campos para superusuários"
 
 #: papers/templates/papers/advanced_search.html:62
 #: papers/templates/papers/search_base.html:124
@@ -1442,11 +1442,11 @@ msgstr "O papel é inválido"
 
 #: papers/templates/papers/messages.html:32
 msgid "{{ title }} was ignored for the following reason:"
-msgstr ""
+msgstr "{{ title }} foi ignorado pelo seguinte motivo:"
 
 #: papers/templates/papers/messages.html:36
 msgid "A paper was ignored, because is has no title."
-msgstr ""
+msgstr "Um papel foi ignorado, porque não tinha título."
 
 #: papers/templates/papers/paper.html:40
 #, python-format
@@ -1461,9 +1461,9 @@ msgid "Published in %(year)s by"
 msgstr "Publicado em %(year)s por"
 
 #: papers/templates/papers/paper.html:56
-#, fuzzy, python-format
+#, python-format
 msgid "and <a href=\"#\" id=\"showAllAuthors\">%(nb_remaining_authors)s other authors.</a>"
-msgstr "e <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s outros autores</a>"
+msgstr "e <a href=\"#\" id=\"showAllAuthors\">%(nb_remaining_authors)s outros autores</a>"
 
 #: papers/templates/papers/paper.html:62
 msgid "Show less"
@@ -1557,12 +1557,11 @@ msgstr "Detalhes da política"
 #: papers/templates/papers/policies.html:70
 #: papers/templates/papers/policies.html:86
 msgid "Blue circle"
-msgstr ""
+msgstr "Círculo azul"
 
 #: papers/templates/papers/policies.html:73
-#, fuzzy
 msgid "Mark this publication for later upload."
-msgstr "Marque esta publicação para carregamento posterior"
+msgstr "Marque esta publicação para carregamento posterior."
 
 #: papers/templates/papers/policies.html:76
 msgid "Mark"
@@ -1657,7 +1656,7 @@ msgstr "Ordenar por"
 
 #: papers/templates/papers/search_base.html:122
 msgid "Refine for superusers"
-msgstr ""
+msgstr "Refinar para superusuários"
 
 #: papers/templates/papers/search_base.html:166
 msgid "Refreshing results"
@@ -1782,15 +1781,15 @@ msgstr "Círculo verde"
 
 #: papers/templatetags/statuses.py:111
 msgid "Red circle"
-msgstr ""
+msgstr "Círculo vermelho"
 
 #: papers/templatetags/statuses.py:112
 msgid "Orange circle"
-msgstr ""
+msgstr "Círculo laranja"
 
 #: papers/templatetags/statuses.py:113
 msgid "White circle"
-msgstr ""
+msgstr "Círculo branco"
 
 #: papers/templatetags/statuses.py:114
 msgid "Question mark in circle"
@@ -1989,11 +1988,11 @@ msgstr "Comunicar qualquer erro para eles"
 
 #: publishers/templates/publishers/publisher.html:51
 msgid "For superusers"
-msgstr ""
+msgstr "Para superusuários"
 
 #: publishers/templates/publishers/publisher.html:54
 msgid "Change open access status"
-msgstr ""
+msgstr "Alterar o status de acesso aberto"
 
 #: publishers/templates/publishers/publisher.html:72
 msgid "Green open access summary"
@@ -2083,11 +2082,11 @@ msgstr "Ou insira um URL:"
 
 #: upload/templates/upload/widget.html:19
 msgid "Upload from URL"
-msgstr ""
+msgstr "Carregar de um URL"
 
 #: upload/templates/upload/widget.html:27
 msgid "Fetching file and generating preview..."
-msgstr ""
+msgstr "Buscando arquivo e gerando visualização..."
 
 #: upload/templates/upload/widget.html:47
 msgid "Choose another file"

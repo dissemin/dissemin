@@ -12,7 +12,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-07 14:39+0100\n"
-"PO-Revision-Date: 2020-01-09 19:06:56+0000\n"
+"PO-Revision-Date: 2020-02-17 13:53:57+0000\n"
 "Language: pt_br\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -37,7 +37,7 @@ msgstr "Reclamando ..."
 
 #: website/static/js/dissemin.js:313
 msgid "Claiming failed!"
-msgstr ""
+msgstr "Falha na reivindicação!"
 
 #: website/static/js/dissemin.js:316
 msgid "Unclaiming failed!"
