@@ -15,7 +15,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-30 10:07+0100\n"
-"PO-Revision-Date: 2020-01-30 14:48:47+0000\n"
+"PO-Revision-Date: 2020-02-20 14:58:15+0000\n"
 "Language: fi\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1969,9 +1969,8 @@ msgstr "Hae"
 
 #: publishers/templates/publishers/list.html:56
 #: publishers/templates/publishers/publisher.html:31
-#, fuzzy
 msgid "Sources"
-msgstr "Tietolähteet"
+msgstr "Lähteet"
 
 #: publishers/templates/publishers/list.html:57
 #: publishers/templates/publishers/publisher.html:32
@@ -2290,7 +2289,7 @@ msgstr "Miten lisään julkaisuni ORCID-profiiliini?"
 
 #: website/templates/dissemin/faq.html:44
 msgid "My ORCID details on Dissemin are outdated."
-msgstr "ORCID-tietoni Disseminissa ovat vanhentuneita."
+msgstr "ORCID-tietoni Disseminissa ovat vanhentuneet."
 
 #: website/templates/dissemin/faq.html:46
 msgid "Behind the scenes"
