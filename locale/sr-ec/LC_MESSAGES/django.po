@@ -15,7 +15,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-30 10:07+0100\n"
-"PO-Revision-Date: 2020-02-24 14:39:04+0000\n"
+"PO-Revision-Date: 2020-02-27 16:11:32+0000\n"
 "Language: sr-Cyrl\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2199,7 +2199,7 @@ msgstr ""
 
 #: website/templates/dissemin/faq.html:7 website/templates/dissemin/faq.html:56
 msgid "Frequently Asked Questions"
-msgstr "Честа питања"
+msgstr "Често постављана питања"
 
 #: website/templates/dissemin/faq.html:19
 msgid "Open Access"
