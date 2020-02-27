@@ -61,7 +61,6 @@ from django.contrib.postgres.fields import JSONField
 from django.contrib.postgres.fields import ArrayField
 from django_countries.fields import CountryField
 from django_countries.fields import countries
-from djgeojson.fields import PointField
 from django.conf import settings
 from django.core.cache import cache
 from django.core.cache.utils import make_template_fragment_key
@@ -124,8 +123,6 @@ class Institution(models.Model):
     identifiers = ArrayField(models.CharField(max_length=256), null=True, blank=True)
     #: Country code
     country = CountryField(null=True, blank=True)
-    #: Coordinates
-    coords = PointField(null=True, blank=True)
 
     #: :py:class:`AccessStatistics` about the papers authored in this institution.
     stats = models.ForeignKey(AccessStatistics, null=True, blank=True, on_delete=models.CASCADE)
@@ -253,32 +250,6 @@ class Institution(models.Model):
         i.researcher_set.all().update(institution=self)
         i.department_set.all().update(institution=self)
         i.delete()
-
-    def update_coords(self, sleep_time=5):
-        """
-        Attempts to fetch the position of the institution
-        via OpenStreetMap Nominatim.
-        """
-        import requests
-        r = requests.get('http://nominatim.openstreetmap.org/search/',
-            params={
-            'q':self.name,
-            'countrycodes':self.country.code,
-            'format':'json'})
-        data = r.json()
-
-        if(len(data) > 0):
-            longitude = data[0]['lat']
-            latitude = data[0]['lon']
-            self.coords = {'type':'Point','coordinates':
-                        [float(latitude),float(longitude)]}
-            self.save(update_fields=['coords'])
-
-        if sleep_time:
-            from time import sleep
-            sleep(sleep_time)
-
-
 
 class Department(models.Model):
     """

@@ -7,7 +7,7 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('papers', '0015_add_paper_task'),
+        ('papers', '0001_initial_squashed_0038_add_index_on_last_modified'),
         ('deposit', '0001_initial'),
     ]
 

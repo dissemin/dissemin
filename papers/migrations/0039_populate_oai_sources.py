@@ -37,7 +37,7 @@ def do_nothing(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('papers', '0038_add_index_on_last_modified'),
+        ('papers', '0001_initial_squashed_0038_add_index_on_last_modified'),
     ]
 
     operations = [
