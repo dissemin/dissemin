@@ -78,7 +78,14 @@
                         {% for deposit in latest_deposits %}
                             <a href="{{ deposit.oairecord.splash_url }}" target="_blank" class="list-group-item list-group-item-action">
                                 <h5 class="mb-1">{{ deposit.paper.title }}</h5>
-                                <p class="mb-1">Published in {{ deposit.repository }} on {{ deposit.pub_date }}</p>
+                                {% with repo=deposit.repository pub_date=deposit.pub_date %}
+
+                                    <p class="mb-1">
+                                        {% blocktrans trimmed %}
+                                            Published in {{ repo }} on {{ pub_date }}
+                                        {% endblocktrans %}
+                                    </p>
+                                {% endwith %}
                             </a>
                         {% endfor %}
                     </div>
