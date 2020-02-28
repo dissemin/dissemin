@@ -323,7 +323,7 @@ $(function () {
                     obj.text(gettext("Include in my profile"));
                     obj.attr("data-action", "claim");
                     if (fadeout == "true") {
-                        $("#paper-" + paper_pk).fadeOut(300, function() { obj.remove(); });
+                        $("#paper-" + paperPk).fadeOut(300, function() { obj.remove(); });
                     }
                 }
             },
