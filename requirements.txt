@@ -5,6 +5,7 @@ bibtexparser>=1.1.0
 redis
 cryptography
 django>=2.2.0,<2.3.0
+django-admin-relation-links
 django-allauth
 django-bootstrap-pagination
 django-bulk-update
