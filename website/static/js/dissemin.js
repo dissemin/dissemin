@@ -792,7 +792,7 @@ function depositPaper() {
     var paper_pk = $("#depositForm").attr("data-paper-pk");
     var no_file = gettext("You have not selected a file for upload.")
 
-    // If no file id is present, we say, that a file is missing. Rest of the form is covered by browser validation
+    // If no file id is present, we say, that a file is missing. Rest of the form is covered by browser and server validation
     if (!$("#uploadFileId").val()) {
         $("#errorGeneral").append(
             makeAlert(no_file)
@@ -820,7 +820,7 @@ function depositPaper() {
             error_text = gettext("Dissemin encountered an error, please try again later.");
         }
         else {
-            // Since we have form valdation, we need only to llok for the file. However, the metadatafields are relatively anonymous in this version as the standard text from django ist "This fiel is required" and we would need to place it suitably.
+            // We have some form validation in the browser, but we do validation on the server as well and then yell back at the user depending on what is missing. Either an alert pops up or the field is going to be marked.
             var response = JSON.parse(xhr.responseText);
             if ('message' in response) {
                 error_text = response["message"];
@@ -832,6 +832,10 @@ function depositPaper() {
                         makeAlert(no_file)
                     );
                 }
+            }
+            // This means that the metadata form is not valid. We replace it with a new one that contains the errors.
+            if ("form_html" in response) {
+                $("#repositoryMetadataForm").html(response["form_html"]);
             }
         }
         if (error_text) {
