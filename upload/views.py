@@ -165,7 +165,7 @@ def handleUrlDownload(request):
     form = UrlDownloadForm(request.POST)
     if not form.is_valid():
         response['message'] = _('Invalid form.')
-        return response, 403
+        return response, 400
     content = None
     try:
         r = requests.get(form.cleaned_data[
