@@ -4,6 +4,7 @@
 # Author: A3nm
 # Author: Abijeet Patro
 # Author: Derugon
+# Author: Eneelk
 # Author: Fitoschido
 # Author: Gomoko
 # Author: Lyokoï
@@ -22,7 +23,7 @@ msgstr ""
 "Project-Id-Version: dissem.in\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-30 10:07+0100\n"
-"PO-Revision-Date: 2020-02-03 14:39:18+0000\n"
+"PO-Revision-Date: 2020-03-02 13:43:55+0000\n"
 "Last-Translator: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language-Team: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language: fr\n"
@@ -31,7 +32,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
-"X-POT-Import-Date: 2020-01-30 09:30:27+0000\n"
+"X-POT-Import-Date: 2020-02-28 17:30:27+0000\n"
 
 #: autocomplete/views.py:81
 msgid "Current institutions"
@@ -339,11 +340,11 @@ msgstr "Supprimé"
 msgid "Deposit"
 msgstr "Dépôt"
 
-#: deposit/models.py:393
+#: deposit/models.py:394
 msgid "We will use this email address to notify you when your deposits are accepted."
 msgstr "Nous utiliserons cette adresse de courriel pour vous prévenir une fois que vos dépôts auront été acceptés."
 
-#: deposit/models.py:399
+#: deposit/models.py:400
 msgid "This repository will be used by default for your deposits."
 msgstr "Ce dépôt sera utilisé par défaut pour vos soumissions."
 
@@ -2686,40 +2687,45 @@ msgstr "Derniers téléversements"
 msgid "Researchers use Dissemin to make sure all their publications can be accessed freely. Have a look at their latest uploads:"
 msgstr "Les chercheurs utilisent Dissemin pour s’assurer que toutes leurs publications peuvent être librement accédées. Jeter un œil sur leurs derniers téléversements :"
 
-#: website/templates/dissemin/start_page.html:94
+#: website/templates/dissemin/start_page.html:84
+#, python-format
+msgid "Published in %(repo)s on %(pub_date)s"
+msgstr "Publié dans %(repo)s le %(pub_date)s"
+
+#: website/templates/dissemin/start_page.html:101
 msgid "Access statistics"
 msgstr "Statistiques d’accès"
 
-#: website/templates/dissemin/start_page.html:95
+#: website/templates/dissemin/start_page.html:102
 msgid "Dissemin collects its data from various sources and evaluates if a given publication is freely available."
 msgstr "Dissemin collecte ses données de diverses sources et évalue si une publication donnée est librement disponible."
 
-#: website/templates/dissemin/start_page.html:116
-#: website/templates/dissemin/start_page.html:119
+#: website/templates/dissemin/start_page.html:123
+#: website/templates/dissemin/start_page.html:126
 msgid "Dissemin for Libraries"
 msgstr "Dissemin pour les bibliothèques"
 
-#: website/templates/dissemin/start_page.html:120
+#: website/templates/dissemin/start_page.html:127
 msgid "As a library you can use Dissemin to find publications of your researchers that are behind paywalls. Dissemin can upload publications directly into your institutional repository and tries to support your local worklfow as much as possible."
 msgstr "En tant que bibliothèque, vous pouvez utiliser Dissemin pour trouver des publications de vos chercheurs qui sont soumis péage. Dissemin peut télécharger les publications directement dans votre dépôt institutionnel et essaye de soutenir votre processus de travail autant que faire se peut."
 
-#: website/templates/dissemin/start_page.html:121
+#: website/templates/dissemin/start_page.html:128
 msgid "You can advertise Dissemin to your researchers and show them how easy it is to liberate their publications!"
 msgstr "Vous pouvez faire de la publicité à Dissemin auprès de vos chercheurs et leur montrer combien il est facile de libérer leurs publications !"
 
-#: website/templates/dissemin/start_page.html:122
+#: website/templates/dissemin/start_page.html:129
 msgid "Learn more!"
 msgstr "En savoir plus !"
 
-#: website/templates/dissemin/start_page.html:132
+#: website/templates/dissemin/start_page.html:139
 msgid "Network of Partners"
 msgstr "Réseau de partenaires"
 
-#: website/templates/dissemin/start_page.html:135
+#: website/templates/dissemin/start_page.html:142
 msgid "Partners"
 msgstr "Partenaires"
 
-#: website/templates/dissemin/start_page.html:136
+#: website/templates/dissemin/start_page.html:143
 msgid "Dissemin would not be possible without the support of our partners:"
 msgstr "Dissemin ne serait pas possible sans le soutien de nos partenaires :"
 

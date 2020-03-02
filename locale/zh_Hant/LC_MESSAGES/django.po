@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-30 10:07+0100\n"
-"PO-Revision-Date: 2020-01-30 14:48:51+0000\n"
+"PO-Revision-Date: 2020-03-02 13:43:58+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: zh_hant\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-POT-Import-Date: 2020-01-30 09:30:27+0000\n"
+"X-POT-Import-Date: 2020-02-28 17:30:27+0000\n"
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 
 #: autocomplete/views.py:81
@@ -331,11 +331,11 @@ msgstr "已刪除"
 msgid "Deposit"
 msgstr "存放"
 
-#: deposit/models.py:393
+#: deposit/models.py:394
 msgid "We will use this email address to notify you when your deposits are accepted."
 msgstr "當您的存放內容被接受時，我們會使用此電子郵件地址來通知您。"
 
-#: deposit/models.py:399
+#: deposit/models.py:400
 msgid "This repository will be used by default for your deposits."
 msgstr "此知識庫將會被使用成您預設的存放點。"
 
@@ -2671,40 +2671,45 @@ msgstr "最新上傳"
 msgid "Researchers use Dissemin to make sure all their publications can be accessed freely. Have a look at their latest uploads:"
 msgstr "研究人員使用 Dissemin 來確保他們的出版項目可以自由地取用。來看看他們的最新上傳："
 
-#: website/templates/dissemin/start_page.html:94
+#: website/templates/dissemin/start_page.html:84
+#, python-format
+msgid "Published in %(repo)s on %(pub_date)s"
+msgstr "於 %(pub_date)s 在 %(repo)s 出版"
+
+#: website/templates/dissemin/start_page.html:101
 msgid "Access statistics"
 msgstr "取用統計"
 
-#: website/templates/dissemin/start_page.html:95
+#: website/templates/dissemin/start_page.html:102
 msgid "Dissemin collects its data from various sources and evaluates if a given publication is freely available."
 msgstr "Dissemin 從多個來源收集資料，並評估指定出版項目是否可自由取得。"
 
-#: website/templates/dissemin/start_page.html:116
-#: website/templates/dissemin/start_page.html:119
+#: website/templates/dissemin/start_page.html:123
+#: website/templates/dissemin/start_page.html:126
 msgid "Dissemin for Libraries"
 msgstr "Dissemin 圖書館"
 
-#: website/templates/dissemin/start_page.html:120
+#: website/templates/dissemin/start_page.html:127
 msgid "As a library you can use Dissemin to find publications of your researchers that are behind paywalls. Dissemin can upload publications directly into your institutional repository and tries to support your local worklfow as much as possible."
 msgstr "作為圖書館，您可以使用 Dissemin 來找尋在付費牆背後裡您的研究人員出版物。Dissemin 可以直接上傳出版項目到您機構的知識庫，並嘗試支援您本地端的工作流程。"
 
-#: website/templates/dissemin/start_page.html:121
+#: website/templates/dissemin/start_page.html:128
 msgid "You can advertise Dissemin to your researchers and show them how easy it is to liberate their publications!"
 msgstr "您可以向您的研究人員宣傳與展示 Dissemin，來讓他們知道釋出他們的出版物有多麼容易！"
 
-#: website/templates/dissemin/start_page.html:122
+#: website/templates/dissemin/start_page.html:129
 msgid "Learn more!"
 msgstr "了解更多！"
 
-#: website/templates/dissemin/start_page.html:132
+#: website/templates/dissemin/start_page.html:139
 msgid "Network of Partners"
 msgstr "合作夥伴網絡"
 
-#: website/templates/dissemin/start_page.html:135
+#: website/templates/dissemin/start_page.html:142
 msgid "Partners"
 msgstr "合作夥伴"
 
-#: website/templates/dissemin/start_page.html:136
+#: website/templates/dissemin/start_page.html:143
 msgid "Dissemin would not be possible without the support of our partners:"
 msgstr "沒有我們夥伴的支援，Dissemin 是無法運作的："
 

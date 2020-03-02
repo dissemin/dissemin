@@ -15,11 +15,11 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-30 10:07+0100\n"
-"PO-Revision-Date: 2020-01-30 14:48:49+0000\n"
+"PO-Revision-Date: 2020-03-02 13:43:56+0000\n"
 "Language: pt\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2020-01-30 09:30:27+0000\n"
+"X-POT-Import-Date: 2020-02-28 17:30:27+0000\n"
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -331,11 +331,11 @@ msgstr "Apagado"
 msgid "Deposit"
 msgstr "Depósito"
 
-#: deposit/models.py:393
+#: deposit/models.py:394
 msgid "We will use this email address to notify you when your deposits are accepted."
 msgstr "Vamos utilizar este endereço de correio eletrónico para notificá-lo quando os seus depósitos forem aceites."
 
-#: deposit/models.py:399
+#: deposit/models.py:400
 msgid "This repository will be used by default for your deposits."
 msgstr "Este repositório será utilizado por omissão para os seus depósitos."
 
@@ -2725,41 +2725,46 @@ msgstr "Carregar"
 msgid "Researchers use Dissemin to make sure all their publications can be accessed freely. Have a look at their latest uploads:"
 msgstr ""
 
-#: website/templates/dissemin/start_page.html:94
+#: website/templates/dissemin/start_page.html:84
+#, python-format
+msgid "Published in %(repo)s on %(pub_date)s"
+msgstr ""
+
+#: website/templates/dissemin/start_page.html:101
 #, fuzzy
 msgid "Access statistics"
 msgstr "Métodos e estatísticas"
 
-#: website/templates/dissemin/start_page.html:95
+#: website/templates/dissemin/start_page.html:102
 msgid "Dissemin collects its data from various sources and evaluates if a given publication is freely available."
 msgstr ""
 
-#: website/templates/dissemin/start_page.html:116
-#: website/templates/dissemin/start_page.html:119
+#: website/templates/dissemin/start_page.html:123
+#: website/templates/dissemin/start_page.html:126
 msgid "Dissemin for Libraries"
 msgstr ""
 
-#: website/templates/dissemin/start_page.html:120
+#: website/templates/dissemin/start_page.html:127
 msgid "As a library you can use Dissemin to find publications of your researchers that are behind paywalls. Dissemin can upload publications directly into your institutional repository and tries to support your local worklfow as much as possible."
 msgstr ""
 
-#: website/templates/dissemin/start_page.html:121
+#: website/templates/dissemin/start_page.html:128
 msgid "You can advertise Dissemin to your researchers and show them how easy it is to liberate their publications!"
 msgstr ""
 
-#: website/templates/dissemin/start_page.html:122
+#: website/templates/dissemin/start_page.html:129
 msgid "Learn more!"
 msgstr ""
 
-#: website/templates/dissemin/start_page.html:132
+#: website/templates/dissemin/start_page.html:139
 msgid "Network of Partners"
 msgstr "Rede de Parceiros"
 
-#: website/templates/dissemin/start_page.html:135
+#: website/templates/dissemin/start_page.html:142
 msgid "Partners"
 msgstr "Parceiros"
 
-#: website/templates/dissemin/start_page.html:136
+#: website/templates/dissemin/start_page.html:143
 msgid "Dissemin would not be possible without the support of our partners:"
 msgstr ""
 
