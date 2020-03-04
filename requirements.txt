@@ -34,7 +34,7 @@ djangorestframework
 elasticsearch==6.3.1
 fdfgen
 httplib2
-jsonfield<3
+jsonfield
 langdetect
 libsass
 lxml
