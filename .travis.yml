@@ -10,6 +10,9 @@ python:
   - 3.7
   - 3.8
 
+cache:
+  pip
+
 addons:
     postgresql: "9.4"
     apt:
@@ -33,7 +36,6 @@ env:
     - secure: "hQg8tso/Qv4zXhP4A2ahKKhFZQSariIvUr+xqzzoTVtuN/9OuzBFjZ1UF8atM5KKGZ47fFMK2wTjbVOWjSyLH/SF3Wy8bX9oHHg1P8bXcsle6O/tfa3U/2s0UiYtThEdxp+iyQIr6cjBA0gmB0v/vFrQot91GvjlUbi70Xjfcts="
       # Zenodo Sandbox API key
     - secure: "KjRrTKrNyhv1xVl2UBtJ/qH0uFGItvxw7/pGFfPrcwxD5YAB5daePDaIGe/tlVy+lrQi0D9x1CA8MB2vm+Lf4jrfO+3ZHCkmb4ecbumPV7DxEbgFsralBx65PRRVUiDW1Oy0RyigxXNNdtNLvTVr1PYrZYD407HZnP6LrJP0ONM="
-    - PIP_DOWNLOAD_CACHE=$HOME/.pip-cache
     - USE_VNU_SERVER='YES'
 
 before_install:
@@ -81,8 +83,3 @@ script:
 
 after_success:
   - coveralls
-
-cache:
-  directories:
-  - $HOME/.pip-cache/
-
