@@ -36,7 +36,6 @@ env:
       # Zenodo Sandbox API key
     - secure: "KjRrTKrNyhv1xVl2UBtJ/qH0uFGItvxw7/pGFfPrcwxD5YAB5daePDaIGe/tlVy+lrQi0D9x1CA8MB2vm+Lf4jrfO+3ZHCkmb4ecbumPV7DxEbgFsralBx65PRRVUiDW1Oy0RyigxXNNdtNLvTVr1PYrZYD407HZnP6LrJP0ONM="
     - PIP_DOWNLOAD_CACHE=$HOME/.pip-cache
-    - USE_VNU_SERVER='YES'
 
 before_install:
   # Install latest tidy-html5
