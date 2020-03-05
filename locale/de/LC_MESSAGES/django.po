@@ -19,7 +19,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-30 10:07+0100\n"
-"PO-Revision-Date: 2020-03-02 13:43:53+0000\n"
+"PO-Revision-Date: 2020-03-05 16:28:23+0000\n"
 "Language: de\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -635,7 +635,7 @@ msgstr "Kein PDF für dr {} gefunden"
 
 #: deposit/zenodo/protocol.py:87
 msgid "This document is already in Zenodo. Zenodo refused the deposit."
-msgstr "Dieses Dokument ist bereits in HAL. HAL lehnt daher den Upload ab."
+msgstr "Dieses Dokument ist bereits in Zenodo. Zenodo lehnt daher den Upload ab."
 
 #: deposit/zenodo/protocol.py:120
 msgid "No Zenodo API key provided."
