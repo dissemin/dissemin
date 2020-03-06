@@ -29,6 +29,7 @@ There are some deployment steps that you always have to do in case of deployment
 You should keep this order.
 Make sure to have the virtual environment activated.
 
+#. Upgrade requirements with ``pip install --upgrade -r requirements.txt``
 #. Apply migrations with ``./manage.py migrate``
 #. Compile scss files with ``./manage.py compilescss``
 #. Collect static files with ``./manage.py collectstatic --ignore=*.scss``
