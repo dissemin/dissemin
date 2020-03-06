@@ -23,7 +23,6 @@ import logging
 import os
 
 from crispy_forms.templatetags.crispy_forms_filters import as_crispy_form
-from crispy_forms.utils import render_crispy_form
 from datetime import date
 from jsonview.decorators import json_view
 from ratelimit.decorators import ratelimit
@@ -36,7 +35,6 @@ from django.http import HttpResponseForbidden
 from django.http import Http404
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render
-from django.template import RequestContext
 from django.urls import reverse
 from django.urls import reverse_lazy
 from django.utils.translation import ugettext as _
@@ -273,9 +271,8 @@ def submitDeposit(request, pk):
     repositoryForm = protocol.get_bound_form(request.POST)
 
     if not repositoryForm.is_valid():
-        request_context = RequestContext(request)
-        form_html = render_crispy_form(repositoryForm, context=request_context)
-        context['form_html'] = form_html
+        context['form_html'] = as_crispy_form(repositoryForm)
+        context['message'] = _("Not all fields have been filled correctly.")
         return context, 400
 
     # Store the repository as in the user preferences

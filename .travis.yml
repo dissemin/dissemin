@@ -1,3 +1,7 @@
+os: linux
+
+dist: bionic
+
 language: python
 
 python:
@@ -6,15 +10,13 @@ python:
   - 3.7
   - 3.8
 
-sudo: false
+cache:
+  pip
 
 addons:
     postgresql: "9.4"
     apt:
-       sources:
-       - elasticsearch-2.x
        packages:
-       - elasticsearch=2.4.5
        - openjdk-8-jre
        - curl
        - libffi-dev
@@ -26,7 +28,6 @@ addons:
 services:
   - postgresql
   - redis
-  - elasticsearch
   - docker
 
 env:
@@ -35,22 +36,23 @@ env:
     - secure: "hQg8tso/Qv4zXhP4A2ahKKhFZQSariIvUr+xqzzoTVtuN/9OuzBFjZ1UF8atM5KKGZ47fFMK2wTjbVOWjSyLH/SF3Wy8bX9oHHg1P8bXcsle6O/tfa3U/2s0UiYtThEdxp+iyQIr6cjBA0gmB0v/vFrQot91GvjlUbi70Xjfcts="
       # Zenodo Sandbox API key
     - secure: "KjRrTKrNyhv1xVl2UBtJ/qH0uFGItvxw7/pGFfPrcwxD5YAB5daePDaIGe/tlVy+lrQi0D9x1CA8MB2vm+Lf4jrfO+3ZHCkmb4ecbumPV7DxEbgFsralBx65PRRVUiDW1Oy0RyigxXNNdtNLvTVr1PYrZYD407HZnP6LrJP0ONM="
-    - PIP_DOWNLOAD_CACHE=$HOME/.pip-cache
 
 before_install:
-  # Install latest tidy-html5
-  - sudo apt-get remove libtidy-0.99-0
-  - wget https://github.com/htacg/tidy-html5/releases/download/5.4.0/tidy-5.4.0-64bit.deb
-  - sudo dpkg -i tidy-5.4.0-64bit.deb
+  # Install elasticsearch 2.4.6 which is no longer included in travis bionic repo
+  - sudo update-java-alternatives --set java-1.8.0-openjdk-amd64
+  - wget https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/deb/elasticsearch/2.4.6/elasticsearch-2.4.6.deb
+  - sudo dpkg -i --force-confnew elasticsearch-2.4.6.deb
+  - sudo systemctl restart elasticsearch
   # Make imagemagick read pdf
   - sudo sed -i 's/<policy domain="coder" rights="none" pattern="PDF" \/>/<policy domain="coder" rights="read" pattern="PDF" \/>/' /etc/ImageMagick-6/policy.xml
+  # Run VNU server for faster html validation
+  - docker run -d -it --rm -p 8888:8888 validator/validator:latest
   # Rest
   - export DJANGO_SETTINGS_MODULE=dissemin.settings
   - export PYTHONPATH=$HOME/builds/dissemin/dissemin
   - export PIP_USE_MIRRORS=true
   - echo "from .travis import *" > dissemin/settings/__init__.py
   - cp dissemin/settings/secret_template.py dissemin/settings/secret.py
-  - docker run -d -it --rm -p 8888:8888 validator/validator:latest
 
 install:
   - pip install pip --upgrade
@@ -80,8 +82,3 @@ script:
 
 after_success:
   - coveralls
-
-cache:
-  directories:
-  - $HOME/.pip-cache/
-

@@ -12,7 +12,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-30 10:07+0100\n"
-"PO-Revision-Date: 2020-03-02 13:43:55+0000\n"
+"PO-Revision-Date: 2020-03-05 16:28:25+0000\n"
 "Language: lb\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -21,19 +21,16 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: autocomplete/views.py:81
-#, fuzzy
 msgid "Current institutions"
-msgstr "Institutiounen"
+msgstr "Aktuell Institutiounen"
 
 #: autocomplete/views.py:85
-#, fuzzy
 msgid "Unverified institutions"
-msgstr "Institutiounen"
+msgstr "Net iwwerpréift Institutiounen"
 
 #: autocomplete/views.py:89
-#, fuzzy
 msgid "Obsolete institutions"
-msgstr "Institutiounen"
+msgstr "Vereelzt Institutiounen"
 
 #: deposit/forms.py:88
 msgid "Upload type"
@@ -60,9 +57,8 @@ msgid "Do not publish before"
 msgstr ""
 
 #: deposit/forms.py:166 deposit/templates/deposit/deposits.html:89
-#, fuzzy
 msgid "License"
-msgstr "Keng Lizenz"
+msgstr "Lizenz"
 
 #: deposit/forms.py:215
 msgid "No preferred repository"
@@ -726,9 +722,8 @@ msgid "Traditional Chinese"
 msgstr ""
 
 #: model-gettext.py:2
-#, fuzzy
 msgid "Computer science, knowledge & systems"
-msgstr "Informatik"
+msgstr "Informatik, Wëssen & Systemer"
 
 #: model-gettext.py:3
 msgid "Bibliographies"
@@ -755,18 +750,16 @@ msgid "News media, journalism & publishing"
 msgstr ""
 
 #: model-gettext.py:9
-#, fuzzy
 msgid "Quotations"
-msgstr "Publikatiounen"
+msgstr "Zitater"
 
 #: model-gettext.py:10
 msgid "Manuscripts & rare books"
 msgstr "Manuskripter a seele Bicher"
 
 #: model-gettext.py:12
-#, fuzzy
 msgid "Metaphysics"
-msgstr "Physik"
+msgstr "Metaphysik"
 
 #: model-gettext.py:13
 msgid "Epistemology"
@@ -782,9 +775,8 @@ msgid "Philosophical schools of thought"
 msgstr "Philosophie"
 
 #: model-gettext.py:17
-#, fuzzy
 msgid "Philosophical logic"
-msgstr "Philosophie"
+msgstr "Philosophesch Logik"
 
 #: model-gettext.py:18
 msgid "Ethics"
@@ -799,9 +791,8 @@ msgid "Modern western philosophy"
 msgstr ""
 
 #: model-gettext.py:21
-#, fuzzy
 msgid "Religion"
-msgstr "Reliounen"
+msgstr "Relioun"
 
 #: model-gettext.py:22
 msgid "Philosophy & theory of religion"
@@ -837,9 +828,8 @@ msgid "Christian denominations"
 msgstr "Chrëschtenheet"
 
 #: model-gettext.py:30
-#, fuzzy
 msgid "Other religions"
-msgstr "Reliounen"
+msgstr "Aner Reliounen"
 
 #: model-gettext.py:31
 msgid "Social sciences, sociology & anthropology"
@@ -898,14 +888,12 @@ msgid "Classical & modern Greek languages"
 msgstr ""
 
 #: model-gettext.py:50
-#, fuzzy
 msgid "Other languages"
-msgstr "Sprooch"
+msgstr "Aner Sproochen"
 
 #: model-gettext.py:51
-#, fuzzy
 msgid "Science"
-msgstr "Naturwëssenschaften"
+msgstr "Wëssenschaft"
 
 #: model-gettext.py:53
 msgid "Astronomy"
@@ -920,9 +908,8 @@ msgid "Fossils & prehistoric life"
 msgstr ""
 
 #: model-gettext.py:58
-#, fuzzy
 msgid "Biology"
-msgstr "Soziologie"
+msgstr "Biologie"
 
 #: model-gettext.py:59
 msgid "Plants (Botany)"
@@ -933,19 +920,16 @@ msgid "Animals (Zoology)"
 msgstr "Déieren (Zoologie)"
 
 #: model-gettext.py:61
-#, fuzzy
 msgid "Technology"
-msgstr "Psychologie"
+msgstr "Technologie"
 
 #: model-gettext.py:62
-#, fuzzy
 msgid "Medicine & health"
-msgstr "Medezin a Gesondheetswëssenschaften"
+msgstr "Medezin & Gesondheet"
 
 #: model-gettext.py:64
-#, fuzzy
 msgid "Agriculture"
-msgstr "Architektur"
+msgstr "Landwirtschaft"
 
 #: model-gettext.py:65
 msgid "Home & family management"
@@ -956,9 +940,8 @@ msgid "Management & public relations"
 msgstr ""
 
 #: model-gettext.py:67
-#, fuzzy
 msgid "Chemical engineering"
-msgstr "Ingenieurswiesen"
+msgstr "Cheemescht Ingenieurswiesen"
 
 #: model-gettext.py:68
 msgid "Manufacturing"
@@ -1049,14 +1032,12 @@ msgid "Classical & modern Greek literatures"
 msgstr ""
 
 #: model-gettext.py:90
-#, fuzzy
 msgid "Other literatures"
-msgstr "Literatur"
+msgstr "Aner Literatur"
 
 #: model-gettext.py:92
-#, fuzzy
 msgid "Geography & travel"
-msgstr "Geographie"
+msgstr "Geographie & Reesen"
 
 #: model-gettext.py:93
 msgid "Biography & genealogy"
@@ -1071,9 +1052,8 @@ msgid "History of Europe"
 msgstr "Geschicht vun Europa"
 
 #: model-gettext.py:96
-#, fuzzy
 msgid "History of Asia"
-msgstr "Geschicht"
+msgstr "Geschicht vun Asien"
 
 #: model-gettext.py:97
 msgid "History of Africa"
@@ -1663,14 +1643,12 @@ msgid "Refine"
 msgstr ""
 
 #: papers/templates/papers/search_base.html:46
-#, fuzzy
 msgid "By title"
-msgstr "Titel"
+msgstr "Nom Titel"
 
 #: papers/templates/papers/search_base.html:55
-#, fuzzy
 msgid "By co-authors"
-msgstr "No Auteuren"
+msgstr "No Co-Auteuren"
 
 #: papers/templates/papers/search_base.html:57
 msgid "By authors"
@@ -1862,9 +1840,8 @@ msgid "Invalid ORCID profile."
 msgstr ""
 
 #: papers/views.py:309
-#, fuzzy
 msgid "authored by"
-msgstr "Publizéiert vum"
+msgstr "geschriwwe vum"
 
 #: papers/views.py:377
 msgid "Paper view expects a DOI or a pk"
@@ -1880,9 +1857,8 @@ msgid "This paper has been deleted."
 msgstr "Dëst Dokument gouf geläscht."
 
 #: papers/views.py:431
-#, fuzzy
 msgid "Invalid DOI."
-msgstr "Net valabele PDF-fichier."
+msgstr "Net valabelen DOI."
 
 #: publishers/forms.py:10
 msgid "popularity"
@@ -2854,9 +2830,8 @@ msgid "Blog"
 msgstr ""
 
 #: website/templates/navbar.html:6
-#, fuzzy
 msgid "Logo"
-msgstr "Ausloggen"
+msgstr "Logo"
 
 #: website/templates/navbar.html:24
 msgid "Translate"

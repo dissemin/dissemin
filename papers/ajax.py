@@ -21,7 +21,6 @@
 import logging
 
 from celery.exceptions import TimeoutError
-from djgeojson.views import GeoJSONLayerView
 from functools import wraps
 from jsonview.decorators import json_view
 
@@ -35,7 +34,6 @@ from django.views.decorators.http import require_POST
 
 from papers.models import Paper
 from papers.models import Researcher
-from papers.models import Institution
 from papers.user import is_admin
 from papers.user import is_authenticated
 from papers.utils import kill_html
@@ -323,11 +321,3 @@ def todo_list_remove(request):
 #        return response, 404
 
 # Publisher management
-
-
-class InstitutionsMapView(GeoJSONLayerView):
-    model = Institution
-    geometry_field = 'coords'
-
-    def get_queryset(self):
-        return Institution.objects.filter(coords__isnull=False)
