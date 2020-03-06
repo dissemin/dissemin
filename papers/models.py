@@ -1376,6 +1376,9 @@ class OaiRecord(models.Model, BareOaiRecord):
     # Cached version of source.priority
     priority = models.IntegerField(default=1)
 
+    def __str__(self):
+        return self.identifier
+
     def update_priority(self):
         super(OaiRecord, self).update_priority()
         self.save(update_fields=['priority'])

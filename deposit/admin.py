@@ -37,6 +37,13 @@ class LicenseChooserInline(admin.TabularInline):
     ordering = ('position', )
     extra = 1
 
+class DepositPreferencesAdmin(admin.ModelAdmin):
+    """
+    Meant to be subclassed by subclasses of DepositPreferences
+    """
+    raw_id_fields = ('user', )
+    search_fields = ('user__pk', 'user__username',)
+
 class DepositRecordAdmin(admin.ModelAdmin):
     list_display = ('identifier', 'paper', 'user')
     list_filter = ['repository']
