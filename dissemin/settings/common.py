@@ -161,7 +161,6 @@ INSTALLED_APPS = (
     'memoize',
     'django_countries',
     'leaflet',
-    'djgeojson',
     'django_select2',
     'vinaigrette',
     'tempus_dominus',
