@@ -57,16 +57,18 @@ You can run the test and check the output, you will see the filename.
 HTML-Validation
 ===============
 
-Dissemin hass tests for HTML validation. 
+Dissemin has tests for HTML validation.
 Usually this validation is done for the English language, but we check for all available languages on Tuesday with Travis CI.
 For this we use the Nu Markup Checker (VNU).
-There are two possibilities to have the HTML checked:
 
-1. Using ``html5validator``-package
-2. Using server validation
+Your Vagrant should be fine, since we deploy a docker image running at ``http://localhost:8888``.
+If you do not use Vagrant, make sure to have the VNU server running while your tests are running.
+You can e.g. do
 
-Per default we use the ``html5validator``, but it uses ``subprocess`` which tends to be slow for unknown reasons.
-(This really matters only if there are a lot of HTML validation tests, which is for standard development not the case.)
-To use this, you have to do nothing.
+.. code:: bash
 
-To use the server validation, make sure you have a vnu-server running at ``localhost:8888`` and set the ``SHELL``-Variable ``USE_VNU_SERVER``.
+   sudo docker run -it --restart always -p 8888:8888 validator/validator:latest
+
+This way the validator will be up and running after restarting your machine.
+
+To check a page, use the fixture ``check_html``.

@@ -1,12 +1,10 @@
 attrs==17.4.0
 django-debug-toolbar
 django-extensions
-html5validator
 pytest==4.1.1
 pytest-django
 sphinx
 sphinx_rtd_theme
 coverage
 pyflakes
-pytidylib
 responses

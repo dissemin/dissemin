@@ -19,6 +19,14 @@ Vagrant.configure("2") do |config|
   # boxes at https://atlas.hashicorp.com/search.
   config.vm.box = "debian/stretch64"
 
+  # We use VNU docker for some test (HTML-Validation)
+  # Run it here
+  config.vm.provision "docker" do |d|
+    d.run "validator/validator:latest",
+      args: "-it -p 8888:8888"
+      daemonize: true
+  end
+
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
   # accessing "localhost:8080" will access port 80 on the guest machine.

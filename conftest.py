@@ -9,7 +9,6 @@ import sys
 
 
 from datetime import date
-from html5validator import Validator as HTML5Validator
 from io import BytesIO
 from tempfile import NamedTemporaryFile
 from urllib.parse import parse_qs
@@ -477,15 +476,7 @@ def validator_tools(dissemin_base_client, settings):
             """
             with open(file_path, 'rb') as fin:
                 content = fin.read()
-            if 'USE_VNU_SERVER' in os.environ:
-                validation_result = self.validation_vnu_server(content, 'text/css')
-            else:
-                validator = HTML5Validator(
-                    errors_only=True,
-                    ignore_re=self.ignore_re,
-                    vnu_args=["--css"],
-                )
-                validation_result = validator.validate([file_path])
+            validation_result = self.validation_vnu_server(content, 'text/css')
 
             # We fetch the AssertionError and raise it, to print the file with line numbers to stderr, because the written file will be removed
             try:
@@ -496,19 +487,13 @@ def validator_tools(dissemin_base_client, settings):
                     print("{:3d} {}".format(index + 1, item))
                 raise
 
-
         def check_html(self, response, status=None):
             """
             Checks if a page returns valid html
             """
             if status is not None:
                 assert response.status_code == status
-            # If USE_VNU_SERVER is in os.environ, we use the VNU server for validation, otherwise we use html5validator / subprocess
-            # html5validator is very slow due to invoked subprocess
-            if 'USE_VNU_SERVER' in os.environ:
-                validation_result = self.validation_vnu_server(response.content)
-            else:
-                validation_result = self.validation_subprocess(response.content)
+            validation_result = self.validation_vnu_server(response.content)
 
             # We fetch the AssertionError and raise it, to print the file with line numbers to stderr, because the written file will be removed
             try:
@@ -560,7 +545,7 @@ def validator_tools(dissemin_base_client, settings):
 
         def validation_vnu_server(self, content, mime='text/html'):
             """
-            Does validation via vnu server. The postprocessing is taken from html5validator to have same output
+            Does validation via vnu server.
             :param content: content to be validated
             :param mime: MIME type
             :returns: string of errors
@@ -583,27 +568,6 @@ def validator_tools(dissemin_base_client, settings):
                 print("\n".join(r), file=sys.stderr)
 
             return len(r)
-
-        def validation_subprocess(self, content):
-            """
-            Does content validation via subprocess and returns a string of errors
-            :param content: content
-            :returns: string of errors
-            """
-            # We need a temporary file
-            with NamedTemporaryFile(delete=False) as fh:
-                fh.write(content)
-            validator = HTML5Validator(
-                errors_only=True,
-                ignore_re=self.ignore_re,
-            )
-            result = validator.validate([fh.name])
-            # tidy up the temporary file (mainly for local usage, not Travis)
-            try:
-                os.remove(fh.name)
-            except:
-                pass
-            return result
 
     vt = ValidatorTools(dissemin_base_client, settings)
     return vt
