@@ -1,0 +1,142 @@
+---
+FieldType: Text
+FieldName: Titel 1
+FieldNameAlt: Titel [1]
+FieldFlags: 8392706
+FieldJustification: Left
+---
+FieldType: Button
+FieldName: Zweitver&#246;ffentlichungsservice
+FieldNameAlt: Zweitver&#246;ffentlichungsservice
+FieldFlags: 0
+FieldJustification: Left
+FieldStateOption: Off
+FieldStateOption: On
+---
+FieldType: Button
+FieldName: Titelliste im Anhang
+FieldNameAlt: Titelliste im Anhang
+FieldFlags: 0
+FieldJustification: Left
+FieldStateOption: Off
+FieldStateOption: On
+---
+FieldType: Button
+FieldName: Einzelne Erst- und Zweitver&#246;ffentlichung
+FieldNameAlt: Einzelne Erst- und Zweitver&#246;ffentlichung
+FieldFlags: 0
+FieldJustification: Left
+FieldStateOption: Ja
+FieldStateOption: Off
+---
+FieldType: Button
+FieldName: Lizenzauswahl1
+FieldFlags: 49152
+FieldValue: Lizenzauswahl1
+FieldJustification: Left
+FieldStateOption: Lizenzauswahl1
+FieldStateOption: Lizenzauswahl1.2
+FieldStateOption: Off
+---
+FieldType: Button
+FieldName: Dissemin
+FieldNameAlt: Dissemin
+FieldFlags: 0
+FieldJustification: Left
+FieldStateOption: Ja
+FieldStateOption: Off
+---
+FieldType: Button
+FieldName: elektronisches Pflichtexemplar
+FieldNameAlt: elektronisches Pflichtexemplar
+FieldFlags: 0
+FieldJustification: Left
+FieldStateOption: Ja
+FieldStateOption: Off
+---
+FieldType: Text
+FieldName: Name Vorname Autor_in/Herausgeber_in
+FieldNameAlt: Name, Vorname
+FieldFlags: 2
+FieldJustification: Left
+---
+FieldType: Text
+FieldName: ORCID Autor_in/Herausgeber_in
+FieldNameAlt: ORCID
+FieldFlags: 2
+FieldJustification: Left
+---
+FieldType: Text
+FieldName: Einrichtung Autor_in/Herausgeber_in
+FieldNameAlt: Einrichtung Autor_in/Herausgeber_in
+FieldFlags: 2
+FieldJustification: Left
+---
+FieldType: Text
+FieldName: Dienstadresse Autor_in/Herausgeber_in
+FieldNameAlt: Dienstadresse
+FieldFlags: 2
+FieldJustification: Left
+---
+FieldType: Text
+FieldName: EMail Autor_in/Herausgeber_in
+FieldNameAlt: E-Mail Autor_in/Herausgeber_in
+FieldFlags: 2
+FieldJustification: Left
+---
+FieldType: Text
+FieldName: Lizenzauswahl1 frei
+FieldNameAlt: Lizenzauswahl1 frei
+FieldFlags: 0
+FieldJustification: Left
+---
+FieldType: Text
+FieldName: Autor_in(nen) Nachname Vorname ORCID 1
+FieldNameAlt: Autor_in(nen) (Nachname, Vorname, ORCID [1]
+FieldFlags: 2
+FieldJustification: Left
+---
+FieldType: Text
+FieldName: Lizenzauswahl3 frei
+FieldNameAlt: Lizenzauswahl3 frei
+FieldFlags: 0
+FieldJustification: Left
+---
+FieldType: Button
+FieldName: Lizenzauswahl3
+FieldFlags: 49152
+FieldValue: Lizenzauswahl3.1
+FieldJustification: Left
+FieldStateOption: Lizenzauswahl3.1
+FieldStateOption: Lizenzauswahl3.2
+FieldStateOption: Off
+---
+FieldType: Text
+FieldName: Autor_in(nen) Nachname Vorname ORCID 2
+FieldNameAlt: Autor_in(nen) (Nachname, Vorname, ORCID [2]
+FieldFlags: 0
+FieldJustification: Left
+---
+FieldType: Text
+FieldName: Autor_in(nen) Nachname Vorname ORCID 3
+FieldNameAlt: Autor_in(nen) (Nachname, Vorname, ORCID [3]
+FieldFlags: 0
+FieldJustification: Left
+---
+FieldType: Text
+FieldName: Autor_in(nen) Nachname Vorname ORCID 4
+FieldNameAlt: Autor_in(nen) (Nachname, Vorname, ORCID [4]
+FieldFlags: 0
+FieldJustification: Left
+---
+FieldType: Text
+FieldName: Ort Datum Autor_in/Herausgeber_in
+FieldNameAlt: Ort Datum Autor_in/Herausgeber_in
+FieldFlags: 2
+FieldJustification: Left
+---
+FieldType: Text
+FieldName: Ort Datum_Bibliothek
+FieldNameAlt: Ort Datum_Bibliothek
+FieldFlags: 0
+FieldJustification: Left

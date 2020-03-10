@@ -2,6 +2,7 @@ import pytest
 
 from deposit.models import DepositRecord
 from deposit.models import LetterOfDeclaration
+from papers.models import Researcher
 from upload.models import UploadedPDF
 
 
@@ -17,21 +18,34 @@ def uploaded_pdf(user_leibniz):
     return pdf
 
 @pytest.fixture
-def deposit_record(request, db, book_god_of_the_labyrinth, authenticated_client, dummy_repository, uploaded_pdf):
+def lod_env(request, db, book_god_of_the_labyrinth, authenticated_client, dummy_repository, uploaded_pdf):
     """
-    A simple deposit record with all necessary data
+    Everything you need for Letter of Declaration
     """
     loc = LetterOfDeclaration.objects.create(
         function_key= 'test_pdf_generator'
     )
     dummy_repository.letter_declaration = loc
     dummy_repository.save()
+
+    user = authenticated_client.user
+    user.first_name = 'Jose'
+    user.last_name = 'Saramago'
+    user.save()
+
     dr = DepositRecord.objects.create(
         paper=book_god_of_the_labyrinth,
-        user=authenticated_client.user,
+        user=user,
         repository=dummy_repository,
         status='pending',
         file=uploaded_pdf,
+    )
+
+    Researcher.create_by_name(
+        first=user.first_name,
+        last=user.last_name,
+        orcid="2543-2454-2345-234X",
+        user=user,
     )
 
     request.cls.dr = dr
