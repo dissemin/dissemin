@@ -25,6 +25,7 @@ from deposit.utils import MetadataConverter
 
 from papers.models import OaiRecord
 from papers.models import Researcher
+from papers.utils import kill_html
 
 logger = logging.getLogger('dissemin.' + __name__)
         
@@ -253,6 +254,11 @@ class SWORDMETSProtocol(RepositoryProtocol):
         Calls super and returns form's initial values.
         """
         data = super().get_form_initial_data(**kwargs)
+        if self.paper.abstract:
+            data['abstract'] = kill_html(self.paper.abstract)
+        else:
+            self.paper.consolidate_metadata(wait=False)
+        return data
 
         # We try to find an email, if we do not succed, that's ok
         up = UserPreferences.get_by_user(user=self.user)
