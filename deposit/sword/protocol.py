@@ -258,7 +258,6 @@ class SWORDMETSProtocol(RepositoryProtocol):
             data['abstract'] = kill_html(self.paper.abstract)
         else:
             self.paper.consolidate_metadata(wait=False)
-        return data
 
         # We try to find an email, if we do not succed, that's ok
         up = UserPreferences.get_by_user(user=self.user)
