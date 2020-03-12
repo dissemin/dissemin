@@ -334,7 +334,7 @@ class HALProtocol(RepositoryProtocol):
         to delete it. This is to reduce the number of requests
         on their side.
         """
-        for deposit_record in DepositRecord.objects.filter(status='pending').select_related('oairecord', 'oairecord__about'):
+        for deposit_record in DepositRecord.objects.filter(status='pending', repository=self.repository).select_related('oairecord', 'oairecord__about'):
             new_status = self.get_new_status(deposit_record.identifier)
             if new_status != deposit_record.status:
                 deposit_record.status = new_status
