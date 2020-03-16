@@ -6,6 +6,7 @@
 # Author: Esraa Ismail
 # Author: Kassem7899
 # Author: Meno25
+# Author: NEHAOUA
 # Author: ديفيد
 # Author: محمد أحمد عبد الفتاح
 # --
@@ -17,7 +18,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-30 10:07+0100\n"
-"PO-Revision-Date: 2020-03-02 13:43:53+0000\n"
+"PO-Revision-Date: 2020-03-16 14:41:11+0000\n"
 "Language: ar\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2759,7 +2760,7 @@ msgstr "يمكنك الإعلان عن ديسيمين للباحثين وإظه�
 
 #: website/templates/dissemin/start_page.html:129
 msgid "Learn more!"
-msgstr ""
+msgstr "معرفة المزيد!"
 
 #: website/templates/dissemin/start_page.html:139
 msgid "Network of Partners"
