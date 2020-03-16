@@ -384,7 +384,7 @@ class Citeproc():
         """
         # Check for a title
         title = utf8_truncate(data.get('title', ''), 1024)
-        if title is '':
+        if title == '':
             raise CiteprocTitleError('No title in metadata')
         return title
 

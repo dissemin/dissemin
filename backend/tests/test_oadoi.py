@@ -1,9 +1,8 @@
-# -*- encoding: utf-8 -*-
-
-
-import pytest
 import os
+import pytest
+
 import django.test
+
 from backend.oadoi import OadoiAPI
 from papers.models import Paper
 
@@ -15,6 +14,7 @@ class OadoiAPITest(django.test.TestCase):
         super(OadoiAPITest, cls).setUpClass()
         cls.testdir = os.path.dirname(os.path.abspath(__file__))
 
+    @pytest.mark.usefixtures('mock_doi')
     def test_ingest_dump(self):
         doi = '10.1080/21645515.2017.1330236'
         p = Paper.create_by_doi(doi)

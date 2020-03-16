@@ -408,7 +408,7 @@ class SWORDMETSProtocol(RepositoryProtocol):
                 pub_date = datetime.strptime(data.get('publication_date'), "%Y-%m-%d").date()
             except Exception:
                 raise
-            if pdf_url is '':
+            if pdf_url == '':
                 raise
         else:
             pub_date = None
