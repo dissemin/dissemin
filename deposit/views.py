@@ -164,7 +164,7 @@ class MyDepositsView(LoginRequiredMixin, ListView):
 
 
 
-class GlobalPreferencesView(FormView):
+class GlobalPreferencesView(LoginRequiredMixin, FormView):
     """
     View to handle the form with global repository settings
     """
@@ -200,7 +200,7 @@ class GlobalPreferencesView(FormView):
         return form_kwargs
 
 
-class RepositoryPreferencesView(FormView):
+class RepositoryPreferencesView(LoginRequiredMixin, FormView):
     """
     View to handle form of each repository having such
     """
