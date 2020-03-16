@@ -100,7 +100,7 @@
                         <div class="alert alert-info" role="alert">
                             <p><center><strong>{{ goa_service.heading }}</strong></center></p>
                             <p>{{ goa_service.text | safe }}</p>
-                            <p><a href="{{ goa_service.learn_more_url }}" class="btn btn-info">Learn more!</a></p>
+                            <p><a href="{{ goa_service.learn_more_url }}" class="btn btn-info">{% trans "Learn more!" %}</a></p>
                         </div>
                     {% endwith %}
                 {% endif %}
