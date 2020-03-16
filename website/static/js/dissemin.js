@@ -598,8 +598,8 @@ function showUploadedFileSummary(response) {
             "alt" : gettext("Preview of uploaded file")
         })
     );
-    $("#uploadedFilePages").text(gettext("Pages" + ": " + response.num_pages));
-    $("#uploadedFileSize").text(gettext("Size" + ": " + response.size));
+    $("#uploadedFilePages").text(gettext("Pages") + ": " + response.num_pages);
+    $("#uploadedFileSize").text(gettext("Size") + ": " + response.size + "MB");
     $("#uploadedFileSummary").removeClass("d-none");
 }
 
