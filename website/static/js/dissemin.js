@@ -369,7 +369,7 @@ $(function () {
                 action = data["data-action"];
                 /* If object was removed, i.e. server returned 'mark' and fadeout is true, do fadeout */
                 if (action == "mark" && fadeout == "true") {
-                    $("#paper-" + paper_pk).fadeOut(300, function() { obj.remove(); });
+                    $("#paper-" + paperPk).fadeOut(300, function() { obj.remove(); });
                 }
                 obj.attr("data-action", action);
             },
@@ -725,10 +725,10 @@ $(function() {
     $("input[type='radio'][name='radioRepository']").click(function(){
         $("#collapseRepository").collapse("hide");
         var selected = $("input[type='radio'][name='radioRepository']:checked");
-        var paper_pk = $("#depositForm").attr("data-paper-pk");
+        var paperPk = $("#depositForm").attr("data-paper-pk");
         $.ajax({
             data : {
-                "paper" : paper_pk,
+                "paper" : paperPk,
                 "repository" : selected.val()
             },
             error : function(xhr) {
@@ -789,7 +789,7 @@ function initPrefetch(p) {
 /* This does the actual deposit of the paper */
 function depositPaper() {
     var data = $("#depositForm").serializeArray();
-    var paper_pk = $("#depositForm").attr("data-paper-pk");
+    var paperPk = $("#depositForm").attr("data-paper-pk");
     var no_file = gettext("You have not selected a file for upload.")
 
     // If no file id is present, we say, that a file is missing. Rest of the form is covered by browser and server validation
@@ -806,13 +806,13 @@ function depositPaper() {
 
     $.post({
         data : data,
-        url : Urls["ajax-submit-deposit"](paper_pk)
+        url : Urls["ajax-submit-deposit"](paperPk)
     })
     .done(function (response) {
         var upload_id = response["upload_id"];
         var paper_slug = $("#depositForm").attr("data-paper-slug");
 
-        window.location.replace(Urls["paper"](paper_pk, paper_slug) + "?deposit=" + upload_id);
+        window.location.replace(Urls["paper"](paperPk, paper_slug) + "?deposit=" + upload_id);
     })
     .fail(function (xhr) {
         var error_text = "";
