@@ -490,6 +490,7 @@ class CrossRef(Citeproc):
                 url,
                 params=params,
                 headers=headers,
+                timeout=30,
                 session=s,
             )
             if cursor == '*':
@@ -504,10 +505,11 @@ class CrossRef(Citeproc):
                     try:
                         cls.to_paper(item)
                     except CiteprocError:
+                        logger.debug(CiteprocError)
                         logger.debug(item)
                     except ValueError as e:
-                        logger.exception(e)
-                        logger.info(item)
+                        logger.debug(e)
+                        logger.debug(item)
                     else:
                         new_papers += 1
             # After running ten times
