@@ -39,6 +39,21 @@ from papers.models import Paper
 #    url(r'^wait-for-consolidated-field$', waitForConsolidatedField, name='ajax-waitForConsolidatedField'),
 #)
 
+class TestPaperSearchAjax():
+
+    def test_caching_headers(self, db, dissemin_base_client):
+        """
+        Chrome does agressive caching, so we explicetely forbid caching
+        This is independent of any results
+        """
+        url = reverse('search') + '?q=spam'
+        r = dissemin_base_client.get(
+            url,
+            HTTP_X_REQUESTED_WITH='XMLHttpRequest',
+            CONTENT_TYPE='application/json',
+        )
+        assert r.status_code == 200
+        assert 'no-cache' in r['Cache-Control']
 
 class TestTodoList():
     """

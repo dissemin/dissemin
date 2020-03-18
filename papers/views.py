@@ -37,6 +37,7 @@ from django.shortcuts import redirect
 from django.shortcuts import render
 from django.template import loader
 from django.urls import reverse
+from django.utils.cache import add_never_cache_headers
 from django.utils.encoding import escape_uri_path
 from django.utils.translation import ugettext as _
 from django.utils.http import urlencode
@@ -195,11 +196,14 @@ class PaperSearchView(SearchView):
         If JSON is requested, we deliver JSON, else normal HTML
         """
         if self.request.META.get('CONTENT_TYPE') == 'application/json':
-            response = self.raw_response(context, **kwargs)
-            return HttpResponse(
-                json.dumps(response),
+            data = self.raw_response(context, **kwargs)
+            response = HttpResponse(
+                json.dumps(data),
                 content_type='application/json'
             )
+            # Chrome has agressive caching and caches XHttpResponses as well which bites with manipulation of browser history, so tell not to cache.
+            add_never_cache_headers(response)
+            return response
         return super().render_to_response(context, **kwargs)
 
     def raw_response(self, context, **kwargs):
@@ -433,4 +437,3 @@ def redirect_by_doi(request, doi):
     if paper and paper.pdf_url:
         return HttpResponsePermanentRedirect(paper.pdf_url)
     return HttpResponsePermanentRedirect(doi_to_url(doi))
-
