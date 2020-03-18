@@ -65,3 +65,6 @@ dissemin_media/
 
 # Static file from SASS
 tmp_static/
+
+# Temp files from creating letter of declarations
+deposit/tmp/
