@@ -30,6 +30,7 @@ from ratelimit.decorators import ratelimit
 from django.conf import settings
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import PermissionDenied
 from django.http import FileResponse
 from django.http import HttpResponseForbidden
 from django.http import Http404
@@ -340,7 +341,7 @@ class LetterDeclarationView(LoginRequiredMixin, View):
         dr = get_object_or_404(DepositRecord.objects.select_related('paper', 'repository', 'user', 'license'), pk=pk)
 
         if dr.user != request.user:
-            return HttpResponseForbidden(_("Access to this ressource not allowed."))
+            raise PermissionDenied
         # If the repository requires a letter of declaration, we try to create the pdf, otherwise we return 404.
         if dr.repository.letter_declaration is not None and dr.status == "pending":
             pdf = get_declaration_pdf(dr)
