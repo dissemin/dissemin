@@ -11,11 +11,11 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-07 14:39+0100\n"
-"PO-Revision-Date: 2020-01-09 19:06:56+0000\n"
+"PO-Revision-Date: 2020-03-19 14:03:31+0000\n"
 "Language: zh_hant\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2019-12-12 14:04:05+0000\n"
+"X-POT-Import-Date: 2020-03-17 02:10:16+0000\n"
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
@@ -25,78 +25,78 @@ msgid "%s paper found"
 msgid_plural "%s papers found"
 msgstr[0] "找到 %s 篇論文"
 
-#: website/static/js/dissemin.js:293
+#: website/static/js/dissemin.js:291
 msgid "Claiming..."
 msgstr "正在索取…"
 
-#: website/static/js/dissemin.js:297
+#: website/static/js/dissemin.js:295
 msgid "Unclaiming..."
 msgstr "正在取消索取…"
 
-#: website/static/js/dissemin.js:313
+#: website/static/js/dissemin.js:311
 msgid "Claiming failed!"
 msgstr "索取失敗！"
 
-#: website/static/js/dissemin.js:316
+#: website/static/js/dissemin.js:314
 msgid "Unclaiming failed!"
 msgstr "取消索取失敗！"
 
-#: website/static/js/dissemin.js:321
+#: website/static/js/dissemin.js:319
 msgid "Exclude from my profile"
 msgstr "從我的個人資料排除"
 
-#: website/static/js/dissemin.js:325
+#: website/static/js/dissemin.js:323
 msgid "Include in my profile"
 msgstr "包含在我的個人資料"
 
-#: website/static/js/dissemin.js:350
+#: website/static/js/dissemin.js:348
 #, fuzzy
 msgid "Adding to to-do list"
 msgstr "添加到待辦清單"
 
-#: website/static/js/dissemin.js:354
+#: website/static/js/dissemin.js:352
 #, fuzzy
 msgid "Removing from to-do list"
 msgstr "從待辦清單中移除"
 
-#: website/static/js/dissemin.js:600
+#: website/static/js/dissemin.js:598
 msgid "Preview of uploaded file"
 msgstr "上傳檔案預覽"
 
-#: website/static/js/dissemin.js:603
-msgid "Pages: "
-msgstr "頁面：\\"
+#: website/static/js/dissemin.js:601
+msgid "Pages"
+msgstr "頁面"
 
-#: website/static/js/dissemin.js:604
-msgid "Size: "
-msgstr "大小：\\"
+#: website/static/js/dissemin.js:602
+msgid "Size"
+msgstr "大小"
 
-#: website/static/js/dissemin.js:619
+#: website/static/js/dissemin.js:617
 msgid "While uploading %(file)s the following error occured:"
 msgstr "當上傳%(file)s時發生以下錯誤："
 
-#: website/static/js/dissemin.js:628 website/static/js/dissemin.js:683
-#: website/static/js/dissemin.js:689
+#: website/static/js/dissemin.js:626 website/static/js/dissemin.js:681
+#: website/static/js/dissemin.js:687
 msgid "Unknown error"
 msgstr "不明錯誤"
 
-#: website/static/js/dissemin.js:673
+#: website/static/js/dissemin.js:671
 msgid "While fetching file from %(url)s the following error occured:"
 msgstr "從 %(url)s 取得檔案時發生以下錯誤："
 
-#: website/static/js/dissemin.js:760
+#: website/static/js/dissemin.js:758
 msgid "Sorry, we could not fill this for you."
 msgstr "很抱歉，我們無法替您填寫此欄位。"
 
-#: website/static/js/dissemin.js:761
+#: website/static/js/dissemin.js:759
 msgid "Trying to fill this field automatically for you..."
 msgstr "正在嘗試替您自動填寫欄位…"
 
-#: website/static/js/dissemin.js:795
+#: website/static/js/dissemin.js:793
 msgid "You have not selected a file for upload."
 msgstr "您尚未選擇要上傳的檔案。"
 
-#: website/static/js/dissemin.js:822
+#: website/static/js/dissemin.js:820
 msgid "Dissemin encountered an error, please try again later."
 msgstr "Dissemin 出現錯誤，請稍後再試。"
 

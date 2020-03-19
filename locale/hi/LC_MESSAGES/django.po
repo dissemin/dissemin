@@ -11,7 +11,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-30 10:07+0100\n"
-"PO-Revision-Date: 2020-03-02 13:43:55+0000\n"
+"PO-Revision-Date: 2020-03-19 14:03:33+0000\n"
 "Language: hi\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -326,15 +326,15 @@ msgid "Deleted"
 msgstr "Deleted"
 
 #: deposit/models.py:340 deposit/templates/deposit/start.html:205
-#: deposit/views.py:120
+#: deposit/views.py:118
 msgid "Deposit"
 msgstr "Deposit"
 
-#: deposit/models.py:394
+#: deposit/models.py:393
 msgid "We will use this email address to notify you when your deposits are accepted."
 msgstr "We will use this email address to notify you when your deposits are accepted."
 
-#: deposit/models.py:400
+#: deposit/models.py:399
 msgid "This repository will be used by default for your deposits."
 msgstr "This repository will be used by default for your deposits."
 
@@ -446,16 +446,16 @@ msgstr "Unable to make the project public."
 msgid "Failed to connect to the repository. Please try again later."
 msgstr "Failed to connect to the repository. Please try again later."
 
-#: deposit/sword/protocol.py:81
+#: deposit/sword/protocol.py:82
 #, fuzzy
 msgid "The repository {} returned invalid XML"
 msgstr "This repository could not be found."
 
-#: deposit/sword/protocol.py:325
+#: deposit/sword/protocol.py:330
 msgid "Username or password not provided for this repository. Please contact the Dissemin team."
 msgstr ""
 
-#: deposit/sword/protocol.py:350
+#: deposit/sword/protocol.py:355
 #, fuzzy
 msgid "Unable to deposit to repository"
 msgstr "Unable to create the preprint."
@@ -601,40 +601,40 @@ msgstr ""
 msgid "Submitting paper to repository"
 msgstr ""
 
-#: deposit/views.py:80
+#: deposit/views.py:78
 #, fuzzy
 msgid "This repository is currently not enabled."
 msgstr "This repository could not be found."
 
-#: deposit/views.py:86
+#: deposit/views.py:84
 msgid "This repository is not available for this paper."
 msgstr "This repository is not available for this paper."
 
-#: deposit/views.py:218
+#: deposit/views.py:216
 msgid "This repository could not be found."
 msgstr "This repository could not be found."
 
-#: deposit/views.py:261
+#: deposit/views.py:259 deposit/views.py:275
 msgid "Not all fields have been filled correctly."
 msgstr ""
 
-#: deposit/views.py:270
+#: deposit/views.py:268
 msgid "This repository cannot be used for this paper."
 msgstr "This repository cannot be used for this paper."
 
-#: deposit/views.py:289
+#: deposit/views.py:286
 msgid "Access to the PDF was denied."
 msgstr "Access to the PDF was denied."
 
-#: deposit/views.py:346
+#: deposit/views.py:343
 msgid "Access to this ressource not allowed."
 msgstr ""
 
-#: deposit/views.py:351
+#: deposit/views.py:348
 msgid "Declaration {}.pdf"
 msgstr ""
 
-#: deposit/views.py:354
+#: deposit/views.py:351
 msgid "No pdf found for dr {}"
 msgstr ""
 
@@ -674,59 +674,59 @@ msgstr "Unable to submit paper metadata to Zenodo."
 msgid "Unable to publish the deposition on Zenodo."
 msgstr "Unable to publish the deposition on Zenodo."
 
-#: dissemin/settings/common.py:308
+#: dissemin/settings/common.py:307
 msgid "Arabic"
 msgstr "Arabic"
 
-#: dissemin/settings/common.py:309
+#: dissemin/settings/common.py:308
 msgid "German"
 msgstr "German"
 
-#: dissemin/settings/common.py:310
+#: dissemin/settings/common.py:309
 msgid "English"
 msgstr "English"
 
-#: dissemin/settings/common.py:311
+#: dissemin/settings/common.py:310
 msgid "Spanish"
 msgstr "Spanish"
 
-#: dissemin/settings/common.py:312
+#: dissemin/settings/common.py:311
 msgid "Finnish"
 msgstr "Finnish"
 
-#: dissemin/settings/common.py:313
+#: dissemin/settings/common.py:312
 msgid "French"
 msgstr "French"
 
-#: dissemin/settings/common.py:314
+#: dissemin/settings/common.py:313
 msgid "Korean"
 msgstr "Korean"
 
-#: dissemin/settings/common.py:315
+#: dissemin/settings/common.py:314
 msgid "Macedonian"
 msgstr "Macedonian"
 
-#: dissemin/settings/common.py:316
+#: dissemin/settings/common.py:315
 msgid "European Portuguese"
 msgstr "European Portuguese"
 
-#: dissemin/settings/common.py:317
+#: dissemin/settings/common.py:316
 msgid "Brazilian Portuguese"
 msgstr "Brazilian Portuguese"
 
-#: dissemin/settings/common.py:318
+#: dissemin/settings/common.py:317
 msgid "Swedish"
 msgstr "Swedish"
 
-#: dissemin/settings/common.py:319
+#: dissemin/settings/common.py:318
 msgid "Turkish"
 msgstr ""
 
-#: dissemin/settings/common.py:320
+#: dissemin/settings/common.py:319
 msgid "Simplified Chinese"
 msgstr "Simplified Chinese"
 
-#: dissemin/settings/common.py:321
+#: dissemin/settings/common.py:320
 msgid "Traditional Chinese"
 msgstr "Traditional Chinese"
 
@@ -1251,21 +1251,21 @@ msgstr ""
 msgid "inboxes"
 msgstr "inboxes"
 
-#: papers/ajax.py:235 papers/templates/papers/paper_list.html:77
+#: papers/ajax.py:233 papers/templates/papers/paper_list.html:77
 msgid "Remove from to-do list"
 msgstr ""
 
-#: papers/ajax.py:236
+#: papers/ajax.py:234
 #, fuzzy
 msgid "Marking failed"
 msgstr "Claiming failed!"
 
-#: papers/ajax.py:265 papers/templates/papers/paper_list.html:79
+#: papers/ajax.py:263 papers/templates/papers/paper_list.html:79
 #: papers/templates/papers/policies.html:73
 msgid "Mark for later upload"
 msgstr ""
 
-#: papers/ajax.py:266
+#: papers/ajax.py:264
 #, fuzzy
 msgid "Removing failed"
 msgstr "Claiming failed!"
@@ -1314,7 +1314,7 @@ msgstr "Thesis"
 msgid "Dataset"
 msgstr "Dataset"
 
-#: papers/baremodels.py:69 papers/models.py:100
+#: papers/baremodels.py:69 papers/models.py:99
 #: publishers/templates/publishers/policy_preprint.html:5
 msgid "Preprint"
 msgstr "Preprint"
@@ -1355,48 +1355,48 @@ msgstr "Visible"
 msgid "Invisible"
 msgstr "Invisible"
 
-#: papers/models.py:101 publishers/templates/publishers/policy_postprint.html:6
+#: papers/models.py:100 publishers/templates/publishers/policy_postprint.html:6
 msgid "Postprint"
 msgstr "Postprint"
 
-#: papers/models.py:102
+#: papers/models.py:101
 #: publishers/templates/publishers/policy_pdfversion.html:6
 msgid "Published version"
 msgstr "Published version"
 
-#: papers/models.py:106
+#: papers/models.py:105
 msgid "Preparing profile"
 msgstr "Preparing profile"
 
-#: papers/models.py:107
+#: papers/models.py:106
 msgid "Fetching publications from ORCID"
 msgstr "Fetching publications from ORCID"
 
-#: papers/models.py:108
+#: papers/models.py:107
 msgid "Fetching publications from CrossRef"
 msgstr "Fetching publications from CrossRef"
 
-#: papers/models.py:109
+#: papers/models.py:108
 msgid "Fetching publications from BASE"
 msgstr "Fetching publications from BASE"
 
-#: papers/models.py:110
+#: papers/models.py:109
 msgid "Fetching publications from CORE"
 msgstr "Fetching publications from CORE"
 
-#: papers/models.py:111
+#: papers/models.py:110
 msgid "Fetching publications from OAI-PMH"
 msgstr "Fetching publications from OAI-PMH"
 
-#: papers/models.py:112
+#: papers/models.py:111
 msgid "Clustering publications"
 msgstr "Clustering publications"
 
-#: papers/models.py:113
+#: papers/models.py:112
 msgid "Updating statistics"
 msgstr "Updating statistics"
 
-#: papers/models.py:1253 papers/views.py:144 papers/views.py:148
+#: papers/models.py:1224 papers/views.py:144 papers/views.py:148
 msgid "Papers"
 msgstr "Papers"
 
@@ -1551,6 +1551,11 @@ msgstr ""
 #: papers/templates/papers/paper.html:83
 #, python-format
 msgid "<p>This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(splash_url)s\">this address</a> after validation by the repository administrators.</p>"
+msgstr ""
+
+#: papers/templates/papers/paper.html:103
+#: website/templates/dissemin/start_page.html:129
+msgid "Learn more!"
 msgstr ""
 
 #: papers/templates/papers/paper.html:114
@@ -2802,10 +2807,6 @@ msgstr ""
 
 #: website/templates/dissemin/start_page.html:128
 msgid "You can advertise Dissemin to your researchers and show them how easy it is to liberate their publications!"
-msgstr ""
-
-#: website/templates/dissemin/start_page.html:129
-msgid "Learn more!"
 msgstr ""
 
 #: website/templates/dissemin/start_page.html:139

@@ -2,6 +2,7 @@
 # Exported from translatewiki.net
 #
 # Author: A3nm
+# Author: Eneelk
 # Author: Gomoko
 # Author: Thibaut120094
 # Author: Verdy p
@@ -16,7 +17,7 @@ msgstr ""
 "Project-Id-Version: dissem.in\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-07 14:39+0100\n"
-"PO-Revision-Date: 2020-01-09 19:06:56+0000\n"
+"PO-Revision-Date: 2020-03-19 14:03:30+0000\n"
 "Last-Translator: Ryan Lahfa <masterancpp@gmail.com>\n"
 "Language-Team: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language: fr\n"
@@ -25,7 +26,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
-"X-POT-Import-Date: 2019-12-12 14:04:05+0000\n"
+"X-POT-Import-Date: 2020-03-17 02:10:16+0000\n"
 
 #: website/static/js/dissemin.js:202
 #, javascript-format
@@ -34,78 +35,78 @@ msgid_plural "%s papers found"
 msgstr[0] "%s article trouvé"
 msgstr[1] "%s articles trouvés"
 
-#: website/static/js/dissemin.js:293
+#: website/static/js/dissemin.js:291
 msgid "Claiming..."
 msgstr "Inclusion en cours..."
 
-#: website/static/js/dissemin.js:297
+#: website/static/js/dissemin.js:295
 msgid "Unclaiming..."
 msgstr "Retrait en cours..."
 
-#: website/static/js/dissemin.js:313
+#: website/static/js/dissemin.js:311
 msgid "Claiming failed!"
 msgstr "Échec de l’inclusion !"
 
-#: website/static/js/dissemin.js:316
+#: website/static/js/dissemin.js:314
 msgid "Unclaiming failed!"
 msgstr "Échec du retrait !"
 
-#: website/static/js/dissemin.js:321
+#: website/static/js/dissemin.js:319
 msgid "Exclude from my profile"
 msgstr "Retirer de mon profil"
 
-#: website/static/js/dissemin.js:325
+#: website/static/js/dissemin.js:323
 msgid "Include in my profile"
 msgstr "Inclure dans mon profil"
 
-#: website/static/js/dissemin.js:350
+#: website/static/js/dissemin.js:348
 #, fuzzy
 msgid "Adding to to-do list"
 msgstr "Ajouter à la liste à faire"
 
-#: website/static/js/dissemin.js:354
+#: website/static/js/dissemin.js:352
 #, fuzzy
 msgid "Removing from to-do list"
 msgstr "Supprimer de la liste à faire"
 
-#: website/static/js/dissemin.js:600
+#: website/static/js/dissemin.js:598
 msgid "Preview of uploaded file"
 msgstr "Prévisualisation du fichier téléversé"
 
-#: website/static/js/dissemin.js:603
-msgid "Pages: "
-msgstr "Pages : "
+#: website/static/js/dissemin.js:601
+msgid "Pages"
+msgstr "Pages"
 
-#: website/static/js/dissemin.js:604
-msgid "Size: "
-msgstr "Taille : "
+#: website/static/js/dissemin.js:602
+msgid "Size"
+msgstr "Taille"
 
-#: website/static/js/dissemin.js:619
+#: website/static/js/dissemin.js:617
 msgid "While uploading %(file)s the following error occured:"
 msgstr "Lors du téléversement du %(file)s, l’erreur suivante est survenue :"
 
-#: website/static/js/dissemin.js:628 website/static/js/dissemin.js:683
-#: website/static/js/dissemin.js:689
+#: website/static/js/dissemin.js:626 website/static/js/dissemin.js:681
+#: website/static/js/dissemin.js:687
 msgid "Unknown error"
 msgstr "Erreur inconnue"
 
-#: website/static/js/dissemin.js:673
+#: website/static/js/dissemin.js:671
 msgid "While fetching file from %(url)s the following error occured:"
 msgstr "Lors de la récupération du fichier depuis %(url)s, l’erreur suivante s’est produite :"
 
-#: website/static/js/dissemin.js:760
+#: website/static/js/dissemin.js:758
 msgid "Sorry, we could not fill this for you."
 msgstr "Désolé, nous n’avons pas pu remplir ceci pour vous."
 
-#: website/static/js/dissemin.js:761
+#: website/static/js/dissemin.js:759
 msgid "Trying to fill this field automatically for you..."
 msgstr "Essai de remplissage automatique pour vous de ce champ en cours..."
 
-#: website/static/js/dissemin.js:795
+#: website/static/js/dissemin.js:793
 msgid "You have not selected a file for upload."
 msgstr "Vous n’avez sélectionné aucun fichier à téléverser."
 
-#: website/static/js/dissemin.js:822
+#: website/static/js/dissemin.js:820
 msgid "Dissemin encountered an error, please try again later."
 msgstr "Dissemin a rencontré une erreur, veuillez essayer à nouveau plus tard."
 

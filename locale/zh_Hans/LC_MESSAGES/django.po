@@ -18,7 +18,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-30 10:07+0100\n"
-"PO-Revision-Date: 2020-03-02 13:43:58+0000\n"
+"PO-Revision-Date: 2020-03-19 14:03:36+0000\n"
 "Language: zh_hans\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -333,15 +333,15 @@ msgid "Deleted"
 msgstr "已删除"
 
 #: deposit/models.py:340 deposit/templates/deposit/start.html:205
-#: deposit/views.py:120
+#: deposit/views.py:118
 msgid "Deposit"
 msgstr "存放"
 
-#: deposit/models.py:394
+#: deposit/models.py:393
 msgid "We will use this email address to notify you when your deposits are accepted."
 msgstr "当您的存放内容被接受时，我们将使用该电子邮件地址通知您。"
 
-#: deposit/models.py:400
+#: deposit/models.py:399
 msgid "This repository will be used by default for your deposits."
 msgstr "该存储库将默认用作您存放材料的存储库。"
 
@@ -453,16 +453,16 @@ msgstr "无法将项目公开化。"
 msgid "Failed to connect to the repository. Please try again later."
 msgstr "无法连接到存储库。请稍后重试。"
 
-#: deposit/sword/protocol.py:81
+#: deposit/sword/protocol.py:82
 #, fuzzy
 msgid "The repository {} returned invalid XML"
 msgstr "找不到此存储库。"
 
-#: deposit/sword/protocol.py:325
+#: deposit/sword/protocol.py:330
 msgid "Username or password not provided for this repository. Please contact the Dissemin team."
 msgstr ""
 
-#: deposit/sword/protocol.py:350
+#: deposit/sword/protocol.py:355
 #, fuzzy
 msgid "Unable to deposit to repository"
 msgstr "无法创建预印本。"
@@ -606,40 +606,40 @@ msgstr ""
 msgid "Submitting paper to repository"
 msgstr ""
 
-#: deposit/views.py:80
+#: deposit/views.py:78
 #, fuzzy
 msgid "This repository is currently not enabled."
 msgstr "找不到此存储库。"
 
-#: deposit/views.py:86
+#: deposit/views.py:84
 msgid "This repository is not available for this paper."
 msgstr "此存储库不适用于该论文。"
 
-#: deposit/views.py:218
+#: deposit/views.py:216
 msgid "This repository could not be found."
 msgstr "找不到此存储库。"
 
-#: deposit/views.py:261
+#: deposit/views.py:259 deposit/views.py:275
 msgid "Not all fields have been filled correctly."
 msgstr ""
 
-#: deposit/views.py:270
+#: deposit/views.py:268
 msgid "This repository cannot be used for this paper."
 msgstr "此存储库不能用于该论文。"
 
-#: deposit/views.py:289
+#: deposit/views.py:286
 msgid "Access to the PDF was denied."
 msgstr "访问PDF被拒绝。"
 
-#: deposit/views.py:346
+#: deposit/views.py:343
 msgid "Access to this ressource not allowed."
 msgstr ""
 
-#: deposit/views.py:351
+#: deposit/views.py:348
 msgid "Declaration {}.pdf"
 msgstr "声明 {}.pdf"
 
-#: deposit/views.py:354
+#: deposit/views.py:351
 msgid "No pdf found for dr {}"
 msgstr ""
 
@@ -680,59 +680,59 @@ msgstr "无法提交论文元数据至Zenodo。"
 msgid "Unable to publish the deposition on Zenodo."
 msgstr "无法在Zenodo发布存放。"
 
-#: dissemin/settings/common.py:308
+#: dissemin/settings/common.py:307
 msgid "Arabic"
 msgstr "阿拉伯语"
 
-#: dissemin/settings/common.py:309
+#: dissemin/settings/common.py:308
 msgid "German"
 msgstr "德语"
 
-#: dissemin/settings/common.py:310
+#: dissemin/settings/common.py:309
 msgid "English"
 msgstr "英语"
 
-#: dissemin/settings/common.py:311
+#: dissemin/settings/common.py:310
 msgid "Spanish"
 msgstr "西班牙语"
 
-#: dissemin/settings/common.py:312
+#: dissemin/settings/common.py:311
 msgid "Finnish"
 msgstr "芬兰语"
 
-#: dissemin/settings/common.py:313
+#: dissemin/settings/common.py:312
 msgid "French"
 msgstr "法语"
 
-#: dissemin/settings/common.py:314
+#: dissemin/settings/common.py:313
 msgid "Korean"
 msgstr "韩语"
 
-#: dissemin/settings/common.py:315
+#: dissemin/settings/common.py:314
 msgid "Macedonian"
 msgstr "马其顿语"
 
-#: dissemin/settings/common.py:316
+#: dissemin/settings/common.py:315
 msgid "European Portuguese"
 msgstr "欧洲葡萄牙语"
 
-#: dissemin/settings/common.py:317
+#: dissemin/settings/common.py:316
 msgid "Brazilian Portuguese"
 msgstr "巴西葡萄牙语"
 
-#: dissemin/settings/common.py:318
+#: dissemin/settings/common.py:317
 msgid "Swedish"
 msgstr "瑞典语"
 
-#: dissemin/settings/common.py:319
+#: dissemin/settings/common.py:318
 msgid "Turkish"
 msgstr ""
 
-#: dissemin/settings/common.py:320
+#: dissemin/settings/common.py:319
 msgid "Simplified Chinese"
 msgstr "简体中文"
 
-#: dissemin/settings/common.py:321
+#: dissemin/settings/common.py:320
 msgid "Traditional Chinese"
 msgstr "繁体中文"
 
@@ -1239,21 +1239,21 @@ msgstr ""
 msgid "inboxes"
 msgstr "收件箱"
 
-#: papers/ajax.py:235 papers/templates/papers/paper_list.html:77
+#: papers/ajax.py:233 papers/templates/papers/paper_list.html:77
 msgid "Remove from to-do list"
 msgstr "从待办事项中移除"
 
-#: papers/ajax.py:236
+#: papers/ajax.py:234
 #, fuzzy
 msgid "Marking failed"
 msgstr "声称失败！"
 
-#: papers/ajax.py:265 papers/templates/papers/paper_list.html:79
+#: papers/ajax.py:263 papers/templates/papers/paper_list.html:79
 #: papers/templates/papers/policies.html:73
 msgid "Mark for later upload"
 msgstr "标记以便稍后储入"
 
-#: papers/ajax.py:266
+#: papers/ajax.py:264
 #, fuzzy
 msgid "Removing failed"
 msgstr "声称失败！"
@@ -1302,7 +1302,7 @@ msgstr "论题"
 msgid "Dataset"
 msgstr "数据集"
 
-#: papers/baremodels.py:69 papers/models.py:100
+#: papers/baremodels.py:69 papers/models.py:99
 #: publishers/templates/publishers/policy_preprint.html:5
 msgid "Preprint"
 msgstr "预印本"
@@ -1343,48 +1343,48 @@ msgstr "可见"
 msgid "Invisible"
 msgstr "不可见"
 
-#: papers/models.py:101 publishers/templates/publishers/policy_postprint.html:6
+#: papers/models.py:100 publishers/templates/publishers/policy_postprint.html:6
 msgid "Postprint"
 msgstr "后印本"
 
-#: papers/models.py:102
+#: papers/models.py:101
 #: publishers/templates/publishers/policy_pdfversion.html:6
 msgid "Published version"
 msgstr "发行版本"
 
-#: papers/models.py:106
+#: papers/models.py:105
 msgid "Preparing profile"
 msgstr "发行详情"
 
-#: papers/models.py:107
+#: papers/models.py:106
 msgid "Fetching publications from ORCID"
 msgstr "正在从ORCID检索出版物"
 
-#: papers/models.py:108
+#: papers/models.py:107
 msgid "Fetching publications from CrossRef"
 msgstr "正在从CrossRef检索出版物"
 
-#: papers/models.py:109
+#: papers/models.py:108
 msgid "Fetching publications from BASE"
 msgstr "正在从BASE检索出版物"
 
-#: papers/models.py:110
+#: papers/models.py:109
 msgid "Fetching publications from CORE"
 msgstr "正在从CORE检索出版物"
 
-#: papers/models.py:111
+#: papers/models.py:110
 msgid "Fetching publications from OAI-PMH"
 msgstr "正在从OAI-PMH检索出版物"
 
-#: papers/models.py:112
+#: papers/models.py:111
 msgid "Clustering publications"
 msgstr "正在聚集出版物"
 
-#: papers/models.py:113
+#: papers/models.py:112
 msgid "Updating statistics"
 msgstr "正在更新统计"
 
-#: papers/models.py:1253 papers/views.py:144 papers/views.py:148
+#: papers/models.py:1224 papers/views.py:144 papers/views.py:148
 msgid "Papers"
 msgstr "论文"
 
@@ -1541,6 +1541,11 @@ msgstr ""
 #, python-format
 msgid "<p>This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(splash_url)s\">this address</a> after validation by the repository administrators.</p>"
 msgstr ""
+
+#: papers/templates/papers/paper.html:103
+#: website/templates/dissemin/start_page.html:129
+msgid "Learn more!"
+msgstr "了解更多"
 
 #: papers/templates/papers/paper.html:114
 #, fuzzy, python-format
@@ -2785,10 +2790,6 @@ msgstr ""
 #: website/templates/dissemin/start_page.html:128
 msgid "You can advertise Dissemin to your researchers and show them how easy it is to liberate their publications!"
 msgstr ""
-
-#: website/templates/dissemin/start_page.html:129
-msgid "Learn more!"
-msgstr "了解更多"
 
 #: website/templates/dissemin/start_page.html:139
 msgid "Network of Partners"

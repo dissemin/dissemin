@@ -8,13 +8,14 @@
 #
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-03-16 17:15+0100\n"
-"PO-Revision-Date: 2020-01-09 19:06:57+0000\n"
+"PO-Revision-Date: 2020-03-19 14:03:31+0000\n"
 "Language: qqq\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2019-12-12 14:04:05+0000\n"
+"X-POT-Import-Date: 2020-03-17 02:10:16+0000\n"
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
@@ -100,3 +101,4 @@ msgstr ""
 #: website/static/js/moment.min.js:1
 msgid ": "
 msgstr ""
+

@@ -17,7 +17,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-30 10:07+0100\n"
-"PO-Revision-Date: 2020-03-02 13:43:57+0000\n"
+"PO-Revision-Date: 2020-03-19 14:03:36+0000\n"
 "Language: tr\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -327,15 +327,15 @@ msgid "Deleted"
 msgstr "Silindi"
 
 #: deposit/models.py:340 deposit/templates/deposit/start.html:205
-#: deposit/views.py:120
+#: deposit/views.py:118
 msgid "Deposit"
 msgstr "Depozito"
 
-#: deposit/models.py:394
+#: deposit/models.py:393
 msgid "We will use this email address to notify you when your deposits are accepted."
 msgstr "Bu e-posta adresini, mevduatlarınız kabul edildiğinde sizi bilgilendirmek için kullanacağız."
 
-#: deposit/models.py:400
+#: deposit/models.py:399
 msgid "This repository will be used by default for your deposits."
 msgstr "Bu depo, depozitolarınız için varsayılan olarak kullanılacaktır."
 
@@ -447,15 +447,15 @@ msgstr "Proje herkese açık hale getirilemiyor."
 msgid "Failed to connect to the repository. Please try again later."
 msgstr "Depoya bağlanılamadı. Lütfen daha sonra tekrar deneyiniz."
 
-#: deposit/sword/protocol.py:81
+#: deposit/sword/protocol.py:82
 msgid "The repository {} returned invalid XML"
 msgstr "{} Deposu geçersiz XML döndürdü"
 
-#: deposit/sword/protocol.py:325
+#: deposit/sword/protocol.py:330
 msgid "Username or password not provided for this repository. Please contact the Dissemin team."
 msgstr "Bu depo için kullanıcı adı veya şifre sağlanmadı. Lütfen Dissemin ekibiyle iletişime geçin."
 
-#: deposit/sword/protocol.py:350
+#: deposit/sword/protocol.py:355
 msgid "Unable to deposit to repository"
 msgstr "Depoya oluşturamıyor"
 
@@ -595,39 +595,39 @@ msgstr "Kağıt animasyonlu kuş"
 msgid "Submitting paper to repository"
 msgstr "Depoya kağıt gönderiliyor"
 
-#: deposit/views.py:80
+#: deposit/views.py:78
 msgid "This repository is currently not enabled."
 msgstr "Bu depo şu anda etkin değil."
 
-#: deposit/views.py:86
+#: deposit/views.py:84
 msgid "This repository is not available for this paper."
 msgstr "Bu veri deposu bu makale için mevcut değil."
 
-#: deposit/views.py:218
+#: deposit/views.py:216
 msgid "This repository could not be found."
 msgstr "Bu depo bulunamadı."
 
-#: deposit/views.py:261
+#: deposit/views.py:259 deposit/views.py:275
 msgid "Not all fields have been filled correctly."
 msgstr "Tüm alanlar doğru şekilde doldurulmamış."
 
-#: deposit/views.py:270
+#: deposit/views.py:268
 msgid "This repository cannot be used for this paper."
 msgstr "Bu veri deposu bu kağıt için kullanılamaz."
 
-#: deposit/views.py:289
+#: deposit/views.py:286
 msgid "Access to the PDF was denied."
 msgstr "PDF’ye erişim reddedildi."
 
-#: deposit/views.py:346
+#: deposit/views.py:343
 msgid "Access to this ressource not allowed."
 msgstr "Bu kaynağa erişime izin verilmiyor."
 
-#: deposit/views.py:351
+#: deposit/views.py:348
 msgid "Declaration {}.pdf"
 msgstr "Beyan {}.pdf"
 
-#: deposit/views.py:354
+#: deposit/views.py:351
 msgid "No pdf found for dr {}"
 msgstr "Dr {} için pdf bulunamadı"
 
@@ -667,59 +667,59 @@ msgstr "Zenodo'ya kağıt meta verileri gönderilemiyor."
 msgid "Unable to publish the deposition on Zenodo."
 msgstr "Zenodo'da birikim yayınlanamıyor."
 
-#: dissemin/settings/common.py:308
+#: dissemin/settings/common.py:307
 msgid "Arabic"
 msgstr "Arapça"
 
-#: dissemin/settings/common.py:309
+#: dissemin/settings/common.py:308
 msgid "German"
 msgstr "Almanca"
 
-#: dissemin/settings/common.py:310
+#: dissemin/settings/common.py:309
 msgid "English"
 msgstr "İngilizce"
 
-#: dissemin/settings/common.py:311
+#: dissemin/settings/common.py:310
 msgid "Spanish"
 msgstr "İspanyolca"
 
-#: dissemin/settings/common.py:312
+#: dissemin/settings/common.py:311
 msgid "Finnish"
 msgstr "Fince"
 
-#: dissemin/settings/common.py:313
+#: dissemin/settings/common.py:312
 msgid "French"
 msgstr "Fransızca"
 
-#: dissemin/settings/common.py:314
+#: dissemin/settings/common.py:313
 msgid "Korean"
 msgstr "Korece"
 
-#: dissemin/settings/common.py:315
+#: dissemin/settings/common.py:314
 msgid "Macedonian"
 msgstr "Makedonca"
 
-#: dissemin/settings/common.py:316
+#: dissemin/settings/common.py:315
 msgid "European Portuguese"
 msgstr "Avrupa Portekizcesi"
 
-#: dissemin/settings/common.py:317
+#: dissemin/settings/common.py:316
 msgid "Brazilian Portuguese"
 msgstr "Brezilya Portekizcesi"
 
-#: dissemin/settings/common.py:318
+#: dissemin/settings/common.py:317
 msgid "Swedish"
 msgstr "İsveççe"
 
-#: dissemin/settings/common.py:319
+#: dissemin/settings/common.py:318
 msgid "Turkish"
 msgstr "Türkçe"
 
-#: dissemin/settings/common.py:320
+#: dissemin/settings/common.py:319
 msgid "Simplified Chinese"
 msgstr "Basitleştirilmiş Çince"
 
-#: dissemin/settings/common.py:321
+#: dissemin/settings/common.py:320
 msgid "Traditional Chinese"
 msgstr "Geleneksel Çince"
 
@@ -1201,20 +1201,20 @@ msgstr "TUprints, Darmstadt Teknik Üniversitesi'nin tüm mevcut ve eski üyeler
 msgid "inboxes"
 msgstr "gelen kutuları"
 
-#: papers/ajax.py:235 papers/templates/papers/paper_list.html:77
+#: papers/ajax.py:233 papers/templates/papers/paper_list.html:77
 msgid "Remove from to-do list"
 msgstr "Yapılacaklar listesinden kaldır"
 
-#: papers/ajax.py:236
+#: papers/ajax.py:234
 msgid "Marking failed"
 msgstr "İşaretleme başarısız"
 
-#: papers/ajax.py:265 papers/templates/papers/paper_list.html:79
+#: papers/ajax.py:263 papers/templates/papers/paper_list.html:79
 #: papers/templates/papers/policies.html:73
 msgid "Mark for later upload"
 msgstr "Daha sonra yüklemek için işaretle"
 
-#: papers/ajax.py:266
+#: papers/ajax.py:264
 msgid "Removing failed"
 msgstr "Kaldırma başarısız oldu"
 
@@ -1262,7 +1262,7 @@ msgstr "Tez"
 msgid "Dataset"
 msgstr "Veri kümesi"
 
-#: papers/baremodels.py:69 papers/models.py:100
+#: papers/baremodels.py:69 papers/models.py:99
 #: publishers/templates/publishers/policy_preprint.html:5
 msgid "Preprint"
 msgstr "Ön baskı"
@@ -1303,48 +1303,48 @@ msgstr "Görünür"
 msgid "Invisible"
 msgstr "Görünmez"
 
-#: papers/models.py:101 publishers/templates/publishers/policy_postprint.html:6
+#: papers/models.py:100 publishers/templates/publishers/policy_postprint.html:6
 msgid "Postprint"
 msgstr "Baskı sonrası"
 
-#: papers/models.py:102
+#: papers/models.py:101
 #: publishers/templates/publishers/policy_pdfversion.html:6
 msgid "Published version"
 msgstr "Yayınlanan sürüm"
 
-#: papers/models.py:106
+#: papers/models.py:105
 msgid "Preparing profile"
 msgstr "Profil hazırlanıyor"
 
-#: papers/models.py:107
+#: papers/models.py:106
 msgid "Fetching publications from ORCID"
 msgstr "ORCID'den yayınlar getiriliyor"
 
-#: papers/models.py:108
+#: papers/models.py:107
 msgid "Fetching publications from CrossRef"
 msgstr "CrossRef'ten yayınlar getiriliyor"
 
-#: papers/models.py:109
+#: papers/models.py:108
 msgid "Fetching publications from BASE"
 msgstr "BASE'ten yayınlar getiriliyor"
 
-#: papers/models.py:110
+#: papers/models.py:109
 msgid "Fetching publications from CORE"
 msgstr "CORE'dan yayın getiriliyor"
 
-#: papers/models.py:111
+#: papers/models.py:110
 msgid "Fetching publications from OAI-PMH"
 msgstr "OAI-PMH'den yayın getiriliyor"
 
-#: papers/models.py:112
+#: papers/models.py:111
 msgid "Clustering publications"
 msgstr "Kümeleme yayınları"
 
-#: papers/models.py:113
+#: papers/models.py:112
 msgid "Updating statistics"
 msgstr "İstatistikleri güncelleme"
 
-#: papers/models.py:1253 papers/views.py:144 papers/views.py:148
+#: papers/models.py:1224 papers/views.py:144 papers/views.py:148
 msgid "Papers"
 msgstr "Kağıtlar"
 
@@ -1492,6 +1492,11 @@ msgstr "Depozito neredeyse tamamlandı!"
 #, python-format
 msgid "<p>This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(splash_url)s\">this address</a> after validation by the repository administrators.</p>"
 msgstr "<p> Bu makale <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a> içine yerleştirilmiştir. Tam metin, depo yöneticileri tarafından onaylandıktan sonra <a class=\"alert-link\" href=\"%(splash_url)s\">bu adresinde</a> bulunabilir.</p>"
+
+#: papers/templates/papers/paper.html:103
+#: website/templates/dissemin/start_page.html:129
+msgid "Learn more!"
+msgstr "Daha fazla bilgi!"
 
 #: papers/templates/papers/paper.html:114
 #, python-format
@@ -2700,10 +2705,6 @@ msgstr "Bir kütüphane olarak, Dissemin'i araştırmacılarınızın ödeme duv
 #: website/templates/dissemin/start_page.html:128
 msgid "You can advertise Dissemin to your researchers and show them how easy it is to liberate their publications!"
 msgstr "Dissemin'i araştırmacılarınıza tanıtabilir ve yayınlarını özgürleştirmenin ne kadar kolay olduğunu gösterebilirsiniz!"
-
-#: website/templates/dissemin/start_page.html:129
-msgid "Learn more!"
-msgstr "Daha fazla bilgi!"
 
 #: website/templates/dissemin/start_page.html:139
 msgid "Network of Partners"

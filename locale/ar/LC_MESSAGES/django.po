@@ -18,7 +18,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-30 10:07+0100\n"
-"PO-Revision-Date: 2020-03-16 14:41:11+0000\n"
+"PO-Revision-Date: 2020-03-19 14:03:30+0000\n"
 "Language: ar\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -330,15 +330,15 @@ msgid "Deleted"
 msgstr "تم الحذف"
 
 #: deposit/models.py:340 deposit/templates/deposit/start.html:205
-#: deposit/views.py:120
+#: deposit/views.py:118
 msgid "Deposit"
 msgstr "الوديعة"
 
-#: deposit/models.py:394
+#: deposit/models.py:393
 msgid "We will use this email address to notify you when your deposits are accepted."
 msgstr "سنستخدم عنوان البريد الإلكتروني هذا لإعلامك عند قبول الودائع."
 
-#: deposit/models.py:400
+#: deposit/models.py:399
 msgid "This repository will be used by default for your deposits."
 msgstr "سيتم استخدام هذا المستودع افتراضيا لودائعك."
 
@@ -450,16 +450,16 @@ msgstr "تعذر جعل المشروع عاما."
 msgid "Failed to connect to the repository. Please try again later."
 msgstr "فشل الاتصال بالمستودع; الرجاء معاودة المحاولة في وقت لاحق."
 
-#: deposit/sword/protocol.py:81
+#: deposit/sword/protocol.py:82
 #, fuzzy
 msgid "The repository {} returned invalid XML"
 msgstr "تعذر العثور على هذا المستودع."
 
-#: deposit/sword/protocol.py:325
+#: deposit/sword/protocol.py:330
 msgid "Username or password not provided for this repository. Please contact the Dissemin team."
 msgstr "اسم المستخدم أو كلمة المرور غير متوفرة لهذا المستود؛. يرُجَى الاتصال بفريق ديسيمين."
 
-#: deposit/sword/protocol.py:350
+#: deposit/sword/protocol.py:355
 #, fuzzy
 msgid "Unable to deposit to repository"
 msgstr "تعذر إنشاء الطباعة المسبقة."
@@ -603,39 +603,39 @@ msgstr "طائر الورقة المتحركة"
 msgid "Submitting paper to repository"
 msgstr "جارٍ تقديم ورقة إلى المستودع"
 
-#: deposit/views.py:80
+#: deposit/views.py:78
 msgid "This repository is currently not enabled."
 msgstr "هذا المستودع غير ممكن حاليا."
 
-#: deposit/views.py:86
+#: deposit/views.py:84
 msgid "This repository is not available for this paper."
 msgstr "هذا المستودع غير متاح لهذه الورقة."
 
-#: deposit/views.py:218
+#: deposit/views.py:216
 msgid "This repository could not be found."
 msgstr "تعذر العثور على هذا المستودع."
 
-#: deposit/views.py:261
+#: deposit/views.py:259 deposit/views.py:275
 msgid "Not all fields have been filled correctly."
 msgstr "لم يتم ملء جميع الحقول بشكل صحيح."
 
-#: deposit/views.py:270
+#: deposit/views.py:268
 msgid "This repository cannot be used for this paper."
 msgstr "لا يمكن استخدام هذا المستودع لهذه الورقة."
 
-#: deposit/views.py:289
+#: deposit/views.py:286
 msgid "Access to the PDF was denied."
 msgstr "تم رفض الوصول إلى PDF."
 
-#: deposit/views.py:346
+#: deposit/views.py:343
 msgid "Access to this ressource not allowed."
 msgstr "الوصول إلى هذا المورد غير مسموح به."
 
-#: deposit/views.py:351
+#: deposit/views.py:348
 msgid "Declaration {}.pdf"
 msgstr "الإعلان {}.pdf"
 
-#: deposit/views.py:354
+#: deposit/views.py:351
 msgid "No pdf found for dr {}"
 msgstr "لم يتم العثور على pdf لـdr {}"
 
@@ -675,59 +675,59 @@ msgstr "يتعذر إرسال البيانات الوصفية الورقية إ�
 msgid "Unable to publish the deposition on Zenodo."
 msgstr "غير قادر على نشر الإيداع على زينودو."
 
-#: dissemin/settings/common.py:308
+#: dissemin/settings/common.py:307
 msgid "Arabic"
 msgstr "العربية"
 
-#: dissemin/settings/common.py:309
+#: dissemin/settings/common.py:308
 msgid "German"
 msgstr "الألمانية"
 
-#: dissemin/settings/common.py:310
+#: dissemin/settings/common.py:309
 msgid "English"
 msgstr "الإنجليزية"
 
-#: dissemin/settings/common.py:311
+#: dissemin/settings/common.py:310
 msgid "Spanish"
 msgstr "الإسبانية"
 
-#: dissemin/settings/common.py:312
+#: dissemin/settings/common.py:311
 msgid "Finnish"
 msgstr "الفنلندية"
 
-#: dissemin/settings/common.py:313
+#: dissemin/settings/common.py:312
 msgid "French"
 msgstr "الفرنسية"
 
-#: dissemin/settings/common.py:314
+#: dissemin/settings/common.py:313
 msgid "Korean"
 msgstr "الكورية"
 
-#: dissemin/settings/common.py:315
+#: dissemin/settings/common.py:314
 msgid "Macedonian"
 msgstr "المقدونية"
 
-#: dissemin/settings/common.py:316
+#: dissemin/settings/common.py:315
 msgid "European Portuguese"
 msgstr "البرتغالية الأوروبية"
 
-#: dissemin/settings/common.py:317
+#: dissemin/settings/common.py:316
 msgid "Brazilian Portuguese"
 msgstr "البرتغالية البرازيلية"
 
-#: dissemin/settings/common.py:318
+#: dissemin/settings/common.py:317
 msgid "Swedish"
 msgstr "السويدية"
 
-#: dissemin/settings/common.py:319
+#: dissemin/settings/common.py:318
 msgid "Turkish"
 msgstr "التركية"
 
-#: dissemin/settings/common.py:320
+#: dissemin/settings/common.py:319
 msgid "Simplified Chinese"
 msgstr "الصينية المبسطة"
 
-#: dissemin/settings/common.py:321
+#: dissemin/settings/common.py:320
 msgid "Traditional Chinese"
 msgstr "الصينية التقليدية"
 
@@ -1213,21 +1213,21 @@ msgstr "TUprints هو مستودع الوصول المفتوح لجميع الأ
 msgid "inboxes"
 msgstr "صندوق الوارد"
 
-#: papers/ajax.py:235 papers/templates/papers/paper_list.html:77
+#: papers/ajax.py:233 papers/templates/papers/paper_list.html:77
 msgid "Remove from to-do list"
 msgstr "إزالة من قائمة المهام"
 
-#: papers/ajax.py:236
+#: papers/ajax.py:234
 #, fuzzy
 msgid "Marking failed"
 msgstr "فشلت المطالبة!"
 
-#: papers/ajax.py:265 papers/templates/papers/paper_list.html:79
+#: papers/ajax.py:263 papers/templates/papers/paper_list.html:79
 #: papers/templates/papers/policies.html:73
 msgid "Mark for later upload"
 msgstr "تعليم للرفع لاحقا"
 
-#: papers/ajax.py:266
+#: papers/ajax.py:264
 #, fuzzy
 msgid "Removing failed"
 msgstr "فشلت المطالبة!"
@@ -1276,7 +1276,7 @@ msgstr "أطروحة"
 msgid "Dataset"
 msgstr "مجموعة بيانات"
 
-#: papers/baremodels.py:69 papers/models.py:100
+#: papers/baremodels.py:69 papers/models.py:99
 #: publishers/templates/publishers/policy_preprint.html:5
 msgid "Preprint"
 msgstr "ما قبل الطباعة"
@@ -1317,48 +1317,48 @@ msgstr "مرئي"
 msgid "Invisible"
 msgstr "غير مرئي"
 
-#: papers/models.py:101 publishers/templates/publishers/policy_postprint.html:6
+#: papers/models.py:100 publishers/templates/publishers/policy_postprint.html:6
 msgid "Postprint"
 msgstr "ما بعد الطباعة"
 
-#: papers/models.py:102
+#: papers/models.py:101
 #: publishers/templates/publishers/policy_pdfversion.html:6
 msgid "Published version"
 msgstr "النسخة المنشورة"
 
-#: papers/models.py:106
+#: papers/models.py:105
 msgid "Preparing profile"
 msgstr "تحضير الملف الشخصي"
 
-#: papers/models.py:107
+#: papers/models.py:106
 msgid "Fetching publications from ORCID"
 msgstr "جلب منشورات من ORCID"
 
-#: papers/models.py:108
+#: papers/models.py:107
 msgid "Fetching publications from CrossRef"
 msgstr "جلب منشورات من CrossRef"
 
-#: papers/models.py:109
+#: papers/models.py:108
 msgid "Fetching publications from BASE"
 msgstr "جلب منشورات من محرك بحث بيليفيلد الأكاديمي BASE"
 
-#: papers/models.py:110
+#: papers/models.py:109
 msgid "Fetching publications from CORE"
 msgstr "جلب منشورات من CORE"
 
-#: papers/models.py:111
+#: papers/models.py:110
 msgid "Fetching publications from OAI-PMH"
 msgstr "جلب منشورات من OAI-PMH"
 
-#: papers/models.py:112
+#: papers/models.py:111
 msgid "Clustering publications"
 msgstr "تجميع المنشورات"
 
-#: papers/models.py:113
+#: papers/models.py:112
 msgid "Updating statistics"
 msgstr "تحديث الإحصاءات"
 
-#: papers/models.py:1253 papers/views.py:144 papers/views.py:148
+#: papers/models.py:1224 papers/views.py:144 papers/views.py:148
 msgid "Papers"
 msgstr "أوراق"
 
@@ -1520,6 +1520,11 @@ msgstr "الإيداع أُنجِز تقريبا!"
 #, python-format
 msgid "<p>This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(splash_url)s\">this address</a> after validation by the repository administrators.</p>"
 msgstr "<p>تم إيداع هذه الورقة في <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>، سيتوفر النص الكامل في <a class=\"alert-link\" href=\"%(splash_url)s\">this address</a> بعد التحقق بواسطة إداريي المستودع."
+
+#: papers/templates/papers/paper.html:103
+#: website/templates/dissemin/start_page.html:129
+msgid "Learn more!"
+msgstr "معرفة المزيد!"
 
 #: papers/templates/papers/paper.html:114
 #, python-format
@@ -2757,10 +2762,6 @@ msgstr "كمكتبة، يمكنك استخدام ديسيمين للعثور ع�
 #: website/templates/dissemin/start_page.html:128
 msgid "You can advertise Dissemin to your researchers and show them how easy it is to liberate their publications!"
 msgstr "يمكنك الإعلان عن ديسيمين للباحثين وإظهاره لهم، كم هو سهل تحرير منشوراتهم!"
-
-#: website/templates/dissemin/start_page.html:129
-msgid "Learn more!"
-msgstr "معرفة المزيد!"
 
 #: website/templates/dissemin/start_page.html:139
 msgid "Network of Partners"

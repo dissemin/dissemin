@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-30 10:07+0100\n"
-"PO-Revision-Date: 2020-03-02 13:43:58+0000\n"
+"PO-Revision-Date: 2020-03-19 14:03:36+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: zh_hant\n"
@@ -327,15 +327,15 @@ msgid "Deleted"
 msgstr "已刪除"
 
 #: deposit/models.py:340 deposit/templates/deposit/start.html:205
-#: deposit/views.py:120
+#: deposit/views.py:118
 msgid "Deposit"
 msgstr "存放"
 
-#: deposit/models.py:394
+#: deposit/models.py:393
 msgid "We will use this email address to notify you when your deposits are accepted."
 msgstr "當您的存放內容被接受時，我們會使用此電子郵件地址來通知您。"
 
-#: deposit/models.py:400
+#: deposit/models.py:399
 msgid "This repository will be used by default for your deposits."
 msgstr "此知識庫將會被使用成您預設的存放點。"
 
@@ -447,15 +447,15 @@ msgstr "無法讓專案公開。"
 msgid "Failed to connect to the repository. Please try again later."
 msgstr "連接至知識庫失敗。請稍後再試。"
 
-#: deposit/sword/protocol.py:81
+#: deposit/sword/protocol.py:82
 msgid "The repository {} returned invalid XML"
 msgstr "知識庫 {} 回傳無效的 XML"
 
-#: deposit/sword/protocol.py:325
+#: deposit/sword/protocol.py:330
 msgid "Username or password not provided for this repository. Please contact the Dissemin team."
 msgstr "未提供此知識庫使用者名稱或密碼，請聯絡 Dissemin 團隊。"
 
-#: deposit/sword/protocol.py:350
+#: deposit/sword/protocol.py:355
 msgid "Unable to deposit to repository"
 msgstr "無法存放到知識庫"
 
@@ -595,39 +595,39 @@ msgstr "外觀為論文紙張模樣的動態鳥"
 msgid "Submitting paper to repository"
 msgstr "正在提交論文到知識庫"
 
-#: deposit/views.py:80
+#: deposit/views.py:78
 msgid "This repository is currently not enabled."
 msgstr "此知識庫目前未啟用。"
 
-#: deposit/views.py:86
+#: deposit/views.py:84
 msgid "This repository is not available for this paper."
 msgstr "此知識庫不適用於此論文。"
 
-#: deposit/views.py:218
+#: deposit/views.py:216
 msgid "This repository could not be found."
 msgstr "找不到此知識庫。"
 
-#: deposit/views.py:261
+#: deposit/views.py:259 deposit/views.py:275
 msgid "Not all fields have been filled correctly."
 msgstr "並非所有欄位都有正確填寫。"
 
-#: deposit/views.py:270
+#: deposit/views.py:268
 msgid "This repository cannot be used for this paper."
 msgstr "此知識庫不可用於此論文。"
 
-#: deposit/views.py:289
+#: deposit/views.py:286
 msgid "Access to the PDF was denied."
 msgstr "獲取 PDF 被拒絕。"
 
-#: deposit/views.py:346
+#: deposit/views.py:343
 msgid "Access to this ressource not allowed."
 msgstr "不允許取用此資源。"
 
-#: deposit/views.py:351
+#: deposit/views.py:348
 msgid "Declaration {}.pdf"
 msgstr "聲明 {}.pdf"
 
-#: deposit/views.py:354
+#: deposit/views.py:351
 msgid "No pdf found for dr {}"
 msgstr "找不到 dr {} 的 pdf"
 
@@ -667,59 +667,59 @@ msgstr "無法提交論文詮釋資料給 Zenodo。"
 msgid "Unable to publish the deposition on Zenodo."
 msgstr "無法在 Zenodo 上發表存放內容。"
 
-#: dissemin/settings/common.py:308
+#: dissemin/settings/common.py:307
 msgid "Arabic"
 msgstr "阿拉伯語"
 
-#: dissemin/settings/common.py:309
+#: dissemin/settings/common.py:308
 msgid "German"
 msgstr "德語"
 
-#: dissemin/settings/common.py:310
+#: dissemin/settings/common.py:309
 msgid "English"
 msgstr "English"
 
-#: dissemin/settings/common.py:311
+#: dissemin/settings/common.py:310
 msgid "Spanish"
 msgstr "西班牙語"
 
-#: dissemin/settings/common.py:312
+#: dissemin/settings/common.py:311
 msgid "Finnish"
 msgstr "芬蘭語"
 
-#: dissemin/settings/common.py:313
+#: dissemin/settings/common.py:312
 msgid "French"
 msgstr "Français"
 
-#: dissemin/settings/common.py:314
+#: dissemin/settings/common.py:313
 msgid "Korean"
 msgstr "韓語"
 
-#: dissemin/settings/common.py:315
+#: dissemin/settings/common.py:314
 msgid "Macedonian"
 msgstr "Македонски"
 
-#: dissemin/settings/common.py:316
+#: dissemin/settings/common.py:315
 msgid "European Portuguese"
 msgstr "歐洲葡萄牙語"
 
-#: dissemin/settings/common.py:317
+#: dissemin/settings/common.py:316
 msgid "Brazilian Portuguese"
 msgstr "巴西葡萄牙語"
 
-#: dissemin/settings/common.py:318
+#: dissemin/settings/common.py:317
 msgid "Swedish"
 msgstr "瑞典語"
 
-#: dissemin/settings/common.py:319
+#: dissemin/settings/common.py:318
 msgid "Turkish"
 msgstr "土耳其語"
 
-#: dissemin/settings/common.py:320
+#: dissemin/settings/common.py:319
 msgid "Simplified Chinese"
 msgstr "简体中文"
 
-#: dissemin/settings/common.py:321
+#: dissemin/settings/common.py:320
 msgid "Traditional Chinese"
 msgstr "繁體中文"
 
@@ -1195,20 +1195,20 @@ msgstr "TUprints 是讓達姆施塔特工業大學所有現任與前任成員使
 msgid "inboxes"
 msgstr "收件箱"
 
-#: papers/ajax.py:235 papers/templates/papers/paper_list.html:77
+#: papers/ajax.py:233 papers/templates/papers/paper_list.html:77
 msgid "Remove from to-do list"
 msgstr "從待辦清單中刪除"
 
-#: papers/ajax.py:236
+#: papers/ajax.py:234
 msgid "Marking failed"
 msgstr "標記失敗"
 
-#: papers/ajax.py:265 papers/templates/papers/paper_list.html:79
+#: papers/ajax.py:263 papers/templates/papers/paper_list.html:79
 #: papers/templates/papers/policies.html:73
 msgid "Mark for later upload"
 msgstr "標記為稍後上傳"
 
-#: papers/ajax.py:266
+#: papers/ajax.py:264
 msgid "Removing failed"
 msgstr "移除失敗"
 
@@ -1256,7 +1256,7 @@ msgstr "論題"
 msgid "Dataset"
 msgstr "資料集"
 
-#: papers/baremodels.py:69 papers/models.py:100
+#: papers/baremodels.py:69 papers/models.py:99
 #: publishers/templates/publishers/policy_preprint.html:5
 msgid "Preprint"
 msgstr "預刊本"
@@ -1297,48 +1297,48 @@ msgstr "可見"
 msgid "Invisible"
 msgstr "不可見"
 
-#: papers/models.py:101 publishers/templates/publishers/policy_postprint.html:6
+#: papers/models.py:100 publishers/templates/publishers/policy_postprint.html:6
 msgid "Postprint"
 msgstr "後刊本"
 
-#: papers/models.py:102
+#: papers/models.py:101
 #: publishers/templates/publishers/policy_pdfversion.html:6
 msgid "Published version"
 msgstr "出版版本"
 
-#: papers/models.py:106
+#: papers/models.py:105
 msgid "Preparing profile"
 msgstr "正在準備個人資料"
 
-#: papers/models.py:107
+#: papers/models.py:106
 msgid "Fetching publications from ORCID"
 msgstr "正在從 ORCID 取得出版物"
 
-#: papers/models.py:108
+#: papers/models.py:107
 msgid "Fetching publications from CrossRef"
 msgstr "正在從 CrossRef 取得出版物"
 
-#: papers/models.py:109
+#: papers/models.py:108
 msgid "Fetching publications from BASE"
 msgstr "正在從 BASE 取得出版物"
 
-#: papers/models.py:110
+#: papers/models.py:109
 msgid "Fetching publications from CORE"
 msgstr "正在從 CORE 取得出版物"
 
-#: papers/models.py:111
+#: papers/models.py:110
 msgid "Fetching publications from OAI-PMH"
 msgstr "正在從 OAI-PMH 取得出版物"
 
-#: papers/models.py:112
+#: papers/models.py:111
 msgid "Clustering publications"
 msgstr "正在聚集出版項目"
 
-#: papers/models.py:113
+#: papers/models.py:112
 msgid "Updating statistics"
 msgstr "正在更新統計內容"
 
-#: papers/models.py:1253 papers/views.py:144 papers/views.py:148
+#: papers/models.py:1224 papers/views.py:144 papers/views.py:148
 msgid "Papers"
 msgstr "論文"
 
@@ -1487,6 +1487,11 @@ msgstr "存放快完成了！"
 #, python-format
 msgid "<p>This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(splash_url)s\">this address</a> after validation by the repository administrators.</p>"
 msgstr "此論文已被存放在 <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a> 裡。由知識庫管理員給確認後，全文內容將在<a class=\"alert-link\" href=\"%(splash_url)s\">此連結</a>可用。"
+
+#: papers/templates/papers/paper.html:103
+#: website/templates/dissemin/start_page.html:129
+msgid "Learn more!"
+msgstr "了解更多！"
 
 #: papers/templates/papers/paper.html:114
 #, python-format
@@ -2696,10 +2701,6 @@ msgstr "作為圖書館，您可以使用 Dissemin 來找尋在付費牆背後�
 #: website/templates/dissemin/start_page.html:128
 msgid "You can advertise Dissemin to your researchers and show them how easy it is to liberate their publications!"
 msgstr "您可以向您的研究人員宣傳與展示 Dissemin，來讓他們知道釋出他們的出版物有多麼容易！"
-
-#: website/templates/dissemin/start_page.html:129
-msgid "Learn more!"
-msgstr "了解更多！"
 
 #: website/templates/dissemin/start_page.html:139
 msgid "Network of Partners"
