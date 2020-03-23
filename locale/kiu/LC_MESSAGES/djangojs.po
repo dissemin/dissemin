@@ -1,4 +1,4 @@
-# Translation of Dissemin papers to Zazaki (Zazaki)
+# Translation of Dissemin papers to Kirmanjki (Kırmancki)
 # Exported from translatewiki.net
 #
 # Author: Mirzali
@@ -10,13 +10,11 @@
 msgid ""
 msgstr ""
 ""
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-07 14:39+0100\n"
 "PO-Revision-Date: 2020-03-23 13:57:49+0000\n"
-"Language: diq\n"
+"X-POT-Import-Date: 2020-03-17 02:10:16+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2020-03-17 02:10:16+0000\n"
+"Language: kiu\n"
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -24,8 +22,8 @@ msgstr ""
 #, javascript-format
 msgid "%s paper found"
 msgid_plural "%s papers found"
-msgstr[0] "%s pele vêniye"
-msgstr[1] "%s peli vêniyayi"
+msgstr[0] "%s pelge vêniye"
+msgstr[1] "%s pelgi vêniyayi"
 
 #: website/static/js/dissemin.js:291
 msgid "Claiming..."

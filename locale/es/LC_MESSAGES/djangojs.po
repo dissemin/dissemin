@@ -15,7 +15,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-07 14:39+0100\n"
-"PO-Revision-Date: 2020-03-19 14:03:30+0000\n"
+"PO-Revision-Date: 2020-03-23 13:57:49+0000\n"
 "Language: es\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -67,14 +67,12 @@ msgid "Preview of uploaded file"
 msgstr ""
 
 #: website/static/js/dissemin.js:601
-#, fuzzy
 msgid "Pages"
-msgstr "Páginas: "
+msgstr "Páginas"
 
 #: website/static/js/dissemin.js:602
-#, fuzzy
 msgid "Size"
-msgstr "Tamaño: "
+msgstr "Tamaño"
 
 #: website/static/js/dissemin.js:617
 msgid "While uploading %(file)s the following error occured:"
