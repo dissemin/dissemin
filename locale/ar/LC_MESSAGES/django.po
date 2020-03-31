@@ -18,7 +18,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-30 10:07+0100\n"
-"PO-Revision-Date: 2020-03-19 14:03:30+0000\n"
+"PO-Revision-Date: 2020-03-31 13:51:14+0000\n"
 "Language: ar\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1122,15 +1122,15 @@ msgstr "الوصول المفتوح الأخضر"
 
 #: model-gettext.py:111
 msgid "Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n<br/>\nContact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
-msgstr ""
+msgstr "هل ترغب في أن تنشر جامعة ومكتبة دارمشتات منشوراتك وصولا أخضر مفتوحا لك؟\n<br/>\nاتصل بنا: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
 
 #: model-gettext.py:112
 msgid "TUprints contract required!"
-msgstr ""
+msgstr "مطلوب عقد TUprints!"
 
 #: model-gettext.py:113
 msgid "For every document, that you upload via Dissemin we need once a TUprints contract.\nPlease fill in the contract and send a printed and signed copy to:\n<br>\nULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
-msgstr ""
+msgstr "لكل مستند، تقوم بتحميله عبر Dissemin، نحتاج مرة واحدة إلى عقد TUprints.\nيرجى ملء العقد وإرسال نسخة مطبوعة وموقعة إلى:\n<br>\nULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
 
 #: model-gettext.py:114
 #, fuzzy
@@ -2128,7 +2128,7 @@ msgstr "حدد هنا النص الكامل لمقالتك، ملفات PDF فق
 
 #: upload/templates/upload/widget.html:10
 msgid "Click or drop here"
-msgstr ""
+msgstr "اضغط أو أسقط هنا"
 
 #: upload/templates/upload/widget.html:15
 msgid "Or enter a URL:"
@@ -2739,7 +2739,7 @@ msgstr "يستخدم الباحثون ديسيمين للتأكد من إمكا�
 #: website/templates/dissemin/start_page.html:84
 #, python-format
 msgid "Published in %(repo)s on %(pub_date)s"
-msgstr ""
+msgstr "منشور في %(repo)s بتاريخ %(pub_date)s"
 
 #: website/templates/dissemin/start_page.html:101
 #, fuzzy
