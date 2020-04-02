@@ -253,9 +253,9 @@ class TestCiteproc():
         assert self.test_class._get_issn(citeproc) == ''
 
 
-    @pytest.mark.usefixtures('mock_alias_publisher_increment', 'mock_journal_find', 'mock_publisher_find')
+    @pytest.mark.usefixtures('db', 'mock_alias_publisher_increment', 'mock_journal_find', 'mock_publisher_find')
     @pytest.mark.parametrize('journal', [Journal(publisher=Publisher()), None])
-    def test_get_oairecord_data(self, db, monkeypatch, container_title, issn, citeproc, journal):
+    def test_get_oairecord_data(self, monkeypatch, container_title, issn, citeproc, journal):
         """
         We do some assertions on the results, but relatively lax, as we test the called functions, too
         """
@@ -277,7 +277,7 @@ class TestCiteproc():
         assert r['splash_url'] == doi_to_url(citeproc['DOI'])
         assert r['volume'] == citeproc['volume']
 
-    @pytest.mark.usefixtures('mock_journal_find', 'mock_publisher_find')
+    @pytest.mark.usefixtures('db', 'mock_journal_find', 'mock_publisher_find')
     def test_get_oairecord_data_missing(self, monkeypatch, container_title, issn, citeproc):
         """
         Some fields may be empty, namely those with a direct get call
@@ -518,7 +518,8 @@ class TestCrossRef(TestCiteproc):
         return citeproc
 
 
-    def test_fetch_latest_records(self, db, monkeypatch):
+    @pytest.mark.usefixtures('db')
+    def test_fetch_latest_records(self, monkeypatch):
         """
         Essentially, we test if source date is updated
         """
@@ -614,7 +615,8 @@ class TestCrossRef(TestCiteproc):
         r = self.test_class.fetch_batch(dois)
         assert isinstance(r[0], Paper)
 
-    def test_fetch_day(self, db, rsps_fetch_day):
+    @pytest.mark.usefixtures('db')
+    def test_fetch_day(self, rsps_fetch_day):
         """
         Here we imitate the CrossRef API in a very simple version.
         We mock the request and inspect the params.
@@ -634,7 +636,8 @@ class TestCrossRef(TestCiteproc):
         assert query['rows'][0] == str(self.test_class.rows)
         assert query['mailto'][0] == settings.CROSSREF_MAILTO
 
-    def test_fetch_day_citeproc_error(self, db, monkeypatch, rsps_fetch_day):
+    @pytest.mark.usefixtures('db')
+    def test_fetch_day_citeproc_error(self, monkeypatch, rsps_fetch_day):
         """
         If a CiteprocError raises, do not starve
         """
@@ -644,7 +647,8 @@ class TestCrossRef(TestCiteproc):
         day = date.today()
         self.test_class._fetch_day(day)
 
-    def test_fetch_day_value_error(self, db, monkeypatch, rsps_fetch_day):
+    @pytest.mark.usefixtures('db')
+    def test_fetch_day_value_error(self, monkeypatch, rsps_fetch_day):
         """
         If a ValueError raises, do not starve
         """
@@ -714,8 +718,9 @@ class TestDOI(TestCiteproc):
 
     test_class = DOIResolver
 
+    @pytest.mark.usefixtures('db')
     @pytest.mark.parametrize('doi', ['10.1016/j.gsd.2018.08.007', '10.1109/sYnAsc.2010.88'])
-    def test_save_doi(self, db, mock_doi, doi):
+    def test_save_doi(self, mock_doi, doi):
         """
         Must save the paper
         """
@@ -729,7 +734,8 @@ class TestDOI(TestCiteproc):
         assert r.publisher_name is not ''
 
 
-    def test_save_doi_existing(self, db, mock_doi):
+    @pytest.mark.usefixtures('db')
+    def test_save_doi_existing(self, mock_doi):
         """
         If DOI is already in system, expect not a new paper, but the one from the database
         """
