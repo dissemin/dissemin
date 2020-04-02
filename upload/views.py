@@ -148,7 +148,7 @@ def save_pdf(user, orig_name, pdf_blob):
 
     response = {
             'status': 'success',
-            'size': len(pdf_blob) / 1024 / 1024, # Size in MB
+            'size': round(len(pdf_blob) / 1024 / 1024, 2), # Size in MB
             'num_pages': num_pages,
             'thumbnail': upload.thumbnail.url,
             'file_id': upload.id,
