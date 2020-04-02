@@ -165,6 +165,7 @@ INSTALLED_APPS = (
     'vinaigrette',
     'tempus_dominus',
     'sass_processor',
+    'shibboleth',
 )
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -183,6 +184,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'website.middleware.ShibbolethRemoteUserMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'vinaigrette.middleware.VinaigretteAdminLanguageMiddleware',
@@ -191,6 +193,7 @@ MIDDLEWARE = [
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
+    'website.backends.ShibbolethRemoteUserBackend',
 )
 
 
@@ -385,6 +388,16 @@ SETTINGS_EXPORT = [
     'DISPLAY_BETA_RIBBON',
     'SENTRY_DSN',
 ]
+
+# Authentication with Shibboleth
+
+SHIBBOLETH_ATTRIBUTE_MAP = {
+    'shib-username' : (True, 'username'),
+    'shib-given-name' : (True, 'first_name'),
+    'shib-sn' : (True, 'last_name'),
+    'shib-mail' : (False, 'email'),
+    'shib-orcid' : (False, 'orcid'),
+}
 
 # Logging is very important thing. Here we define some standards. We use Django logging system, so there it is easy to custimze your logging preferences.
 # To switch for 'console' to level 'DEBUG' please use prod.py resp. dev.py

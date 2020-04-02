@@ -60,3 +60,4 @@ python-dateutil # for haystack, as explained here:
 dealer
 django-select2
 bleach
+git+https://github.com/Brown-University-Library/django-shibboleth-remoteuser.git
