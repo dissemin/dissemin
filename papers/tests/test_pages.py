@@ -190,6 +190,7 @@ class TestPaperPages():
         """
         check_status(403, 'refetch-researcher', kwargs={'pk':self.r4.id}, client=authenticated_client)
 
+    @pytest.mark.usefixtures('mock_doi')
     def test_visible_paper(self, check_page):
         """
         By default, a paper accessed with its pk and slug is visible
