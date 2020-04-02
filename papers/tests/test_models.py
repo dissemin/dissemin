@@ -239,30 +239,30 @@ class InstitutionTest(django.test.TestCase):
             None)
 
 
-class ResearcherTest(django.test.TestCase):
+@pytest.mark.usefixtures('db')
+class TestResearcher:
 
     def test_creation(self):
         r = Researcher.create_by_name('George', 'Banks')
         r2 = Researcher.create_by_name(' George', ' Banks')
-        self.assertNotEqual(r, r2)
+        assert r != r2
 
         r3 = Researcher.get_or_create_by_orcid('0000-0003-2306-6531',
             instance='sandbox.orcid.org')
-        self.assertNotEqual(r, r3)
+        assert r != r3
 
     def test_empty_name(self):
         r = Researcher.create_by_name('', '')
-        self.assertEqual(r, None)
+        assert r is None
         # this ORCID has no public name in the sandbox:
         r = Researcher.get_or_create_by_orcid('0000-0002-6091-2701',
             instance='sandbox.orcid.org')
-        self.assertEqual(r, None)
+        assert r is None
 
     def test_institution(self):
         r = Researcher.get_or_create_by_orcid('0000-0002-0022-2290',
             instance='sandbox.orcid.org')
-        self.assertEqual(r.institution.name,
-                'Ecole Normale Superieure')
+        assert r.institution.name == 'Ecole Normale Superieure'
 
     def test_institution_match(self):
         # first, load a profile from someone with
@@ -275,19 +275,19 @@ class ResearcherTest(django.test.TestCase):
         # http://sandbox.orcid.org//0000-0001-6068-024
         r2 = Researcher.get_or_create_by_orcid('0000-0001-6068-0245',
             instance='sandbox.orcid.org')
-        self.assertEqual(r.institution, r2.institution)
+        assert r.institution == r2.institution
 
     def test_refresh(self):
         r = Researcher.get_or_create_by_orcid('0000-0002-0022-2290',
                     instance='sandbox.orcid.org')
-        self.assertEqual(r.institution.name, 'Ecole Normale Superieure')
+        assert r.institution.name == 'Ecole Normale Superieure'
         r.institution = None
         r.name = Name.lookup_name(('John','Doe'))
         r.save()
         r = Researcher.get_or_create_by_orcid('0000-0002-0022-2290',
                 instance='sandbox.orcid.org',
                 update=True)
-        self.assertEqual(r.institution.name, 'Ecole Normale Superieure')
+        assert r.institution.name == 'Ecole Normale Superieure'
 
 
     def test_name_conflict(self):
@@ -296,7 +296,7 @@ class ResearcherTest(django.test.TestCase):
             instance='sandbox.orcid.org')
         r2 = Researcher.get_or_create_by_orcid('0000-0003-2295-9629',
             instance='sandbox.orcid.org')
-        self.assertNotEqual(r1, r2)
+        assert r1 != r2
 
 
 class NameTest(django.test.TestCase):
