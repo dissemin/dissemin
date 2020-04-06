@@ -525,6 +525,41 @@ class Researcher(models.Model):
                 'department': self.department_id}
         return ResearcherDepartmentForm(initial=data)
 
+    def merge(self, researcher, delete_user=False):
+        """
+        Updates self by the values of researcher. Values of self get precedence other those from the given researcher
+        """
+        if not self.pk or not researcher.pk:
+            raise ValueError("Both Researcher objects need a primary key.")
+        if self.pk == researcher.pk:
+            raise ValueError("Cannot merge researcher into itself")
+        # We take values for simple field types; where we just need to copy information
+        field_names = ['name', 'user', 'department', 'institution', 'email', 'homepage', 'role', 'orcid', 'empty_orcid_profile', 'last_harvest', 'harvester', 'current_task', 'stats', 'visible']
+        for field_name in field_names:
+            if not getattr(self, field_name):
+                setattr(self, field_name, getattr(researcher, field_name))
+
+        # In the next step, we have to take over the papers
+        # We go through the papers researchers and change the Id
+        for paper in researcher.papers:
+            save = False
+            for author in paper.authors_list:
+                if author.get('researcher_id') == researcher.pk:
+                    author['researcher_id'] =  self.pk
+                    save = True
+                if author.get('orcid') == researcher.orcid:
+                    author['orcid'] = self.orcid
+                    save = True
+            if save:
+                paper.save()
+                paper.update_index()
+
+        if delete_user and researcher.user:
+            if researcher.user != self.user:
+                researcher.user.delete()
+
+        researcher.delete()
+        self.save()
 
 class Name(models.Model, BareName):
     first = models.CharField(max_length=MAX_NAME_LENGTH)

@@ -1,0 +1,46 @@
+{
+  "type": "article-journal",
+  "id": "https://doi.org/10.17192/z2016.0217",
+  "categories": [
+    "Algebra",
+    "Darstellungstheorie",
+    "Right Coideal Subalgebra",
+    "Spherical Right Coideal Subalgebra",
+    "Rechtskoidealunteralgebra",
+    "Quantum Homogeneous Space",
+    "Quantenhomogener Raum",
+    "Quantum groups (quantized enveloping\n      algebras) and related deformations",
+    "Mathematics",
+    "Mathematik",
+    "Quantengruppe , Lie-Theorie",
+    "Sphärische Rechtskoidealunteralgebra",
+    "Mathematik",
+    "Homogener Raum"
+  ],
+  "language": "en",
+  "author": [
+    {
+      "family": "Beck",
+      "given": "Stefan"
+    }
+  ],
+  "contributor": [
+    {
+      "contributorType": "Other",
+      "literal": "Heckenberger, I. (Prof. Dr.)"
+    }
+  ],
+  "issued": {
+    "date-parts": [
+      [
+        2016
+      ]
+    ]
+  },
+  "abstract": "Die vorliegende Dissertation\n      beschreibt eine neue Familie von sphärischen\n      Rechtskoidealunteralgebren in der quantisierten universellen\n      Einhüllenden vom Typ A_n. Die sphärischen\n      Rechtskoidealunteralgebren werden vermittels PBW-Elementen\n      beschrieben. Die Darstellungstheorie der\n      Rechtskoidealunteralgebren wir auf die von quantisierten\n      universellen Einhüllenden vom Typ A_n zurückgeführt. Der\n      resultierende quantenhomogene Raum wird mit einem bereits\n      bekannten verglichen.",
+  "container-title": "Philipps-Universität Marburg",
+  "DOI": "10.17192/z2016.0217",
+  "publisher": "Philipps-Universität Marburg",
+  "title": "A Family of Right Coideal Subalgebras of U_q(sl_(n+1))",
+  "URL": "http://archiv.ub.uni-marburg.de/diss/z2016/0217"
+}
