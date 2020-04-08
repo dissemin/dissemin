@@ -212,7 +212,7 @@ class Repository(models.Model, CachingMixin):
     #: Optionally set DDC. If none selected, form will be omitted
     ddc = models.ManyToManyField(DDC, blank=True)
     #: Optionally choose a letter of declaration to finish deposition
-    letter_declaration = models.ForeignKey(LetterOfDeclaration, null=True, on_delete=models.SET_NULL)
+    letter_declaration = models.ForeignKey(LetterOfDeclaration, null=True, blank=True, on_delete=models.SET_NULL)
     #: Embargo
     embargo = models.CharField(max_length=24, blank=False, choices=FORM_FIELD_CHOICES, default='none')
     #: Green open access service
