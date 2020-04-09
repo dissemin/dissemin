@@ -14,7 +14,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-30 10:07+0100\n"
-"PO-Revision-Date: 2020-03-19 14:03:31+0000\n"
+"PO-Revision-Date: 2020-04-09 13:59:58+0000\n"
 "Language: br\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -23,23 +23,20 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: autocomplete/views.py:81
-#, fuzzy
 msgid "Current institutions"
-msgstr "Ensavadurioù"
+msgstr "Ensavadurioù a-vremañ"
 
 #: autocomplete/views.py:85
-#, fuzzy
 msgid "Unverified institutions"
-msgstr "Ensavadurioù"
+msgstr "Ensavadurioù anwiriekaet"
 
 #: autocomplete/views.py:89
-#, fuzzy
 msgid "Obsolete institutions"
-msgstr "Ensavadurioù"
+msgstr "Ensavadurioù dispredet"
 
 #: deposit/forms.py:88
 msgid "Upload type"
-msgstr "Doare pellgargañ"
+msgstr "Seurt ezporzhiañ"
 
 #: deposit/forms.py:91 deposit/templates/deposit/deposits.html:46
 msgid "Repository"
@@ -55,30 +52,27 @@ msgstr "Diverradenn"
 
 #: deposit/forms.py:153
 msgid "Dewey Decimal Class"
-msgstr ""
+msgstr "Kevrennad dekvedennel Dewey"
 
 #: deposit/forms.py:160
-#, fuzzy
 msgid "Do not publish before"
-msgstr "Embanner dianav"
+msgstr "Arabat embann a-raok"
 
 #: deposit/forms.py:166 deposit/templates/deposit/deposits.html:89
-#, fuzzy
 msgid "License"
-msgstr "Aotre-implijout ebet"
+msgstr "Aotre-implijout"
 
 #: deposit/forms.py:215
 msgid "No preferred repository"
-msgstr ""
+msgstr "Kavlec'h karetañ ebet"
 
 #: deposit/forms.py:230 deposit/sword/forms.py:15
 msgid "E-mail"
-msgstr ""
+msgstr "Postel"
 
 #: deposit/forms.py:231
-#, fuzzy
 msgid "Preferred repository"
-msgstr "Kavlec'h"
+msgstr "Kavlec'h karetañ"
 
 #: deposit/forms.py:241 deposit/hal/forms.py:71 deposit/osf/forms.py:134
 msgid "Save"
@@ -90,11 +84,11 @@ msgstr "Domani enklask"
 
 #: deposit/hal/forms.py:46
 msgid "Depositing author"
-msgstr ""
+msgstr "Aozer ar fiziad"
 
 #: deposit/hal/forms.py:53
 msgid "Affiliation"
-msgstr ""
+msgstr "Emezeladur"
 
 #: deposit/hal/metadata.py:36 model-gettext.py:55
 msgid "Chemistry"
@@ -114,7 +108,7 @@ msgstr "Fizik"
 
 #: deposit/hal/metadata.py:40
 msgid "Non-linear science"
-msgstr ""
+msgstr "Skiant anlinennel"
 
 #: deposit/hal/metadata.py:41
 msgid "Cognitive science"
@@ -126,23 +120,23 @@ msgstr "Skiantoù an endro"
 
 #: deposit/hal/metadata.py:43
 msgid "Planet and Universe"
-msgstr "Planedenn ha Hollved"
+msgstr "Planedenn ha hollved"
 
 #: deposit/hal/metadata.py:44
 msgid "Biological anthropology"
-msgstr "Denoniezh viologel"
+msgstr "Antropologiezh viologel"
 
 #: deposit/hal/metadata.py:45
 msgid "Social Anthropology and ethnology"
-msgstr "Denoniezh sokial ha tudoniezh"
+msgstr "Antropologiezh sokial hag etnologiezh"
 
 #: deposit/hal/metadata.py:46
 msgid "Archaeology and Prehistory"
-msgstr "Henoniezh ha Ragistor"
+msgstr "Arkeologiezh ha Ragistor"
 
 #: deposit/hal/metadata.py:47
 msgid "Architecture, space management"
-msgstr "Savouriezh, terkañ an takad"
+msgstr "Savouriezh, terkañ egorennoù"
 
 #: deposit/hal/metadata.py:48
 msgid "Art and art history"
@@ -172,11 +166,11 @@ msgstr "Deskadurezh"
 
 #: deposit/hal/metadata.py:54
 msgid "Environmental studies"
-msgstr "Studiañ an endro"
+msgstr "Studioù an endro"
 
 #: deposit/hal/metadata.py:55
 msgid "Gender studies"
-msgstr "Sutiadennoù war ar jener"
+msgstr "Studioù war ar jener"
 
 #: deposit/hal/metadata.py:56
 msgid "Geography"
@@ -220,7 +214,7 @@ msgstr "Prederouriezh"
 
 #: deposit/hal/metadata.py:66 model-gettext.py:16
 msgid "Psychology"
-msgstr "Pskikologiezh"
+msgstr "Psikologiezh"
 
 #: deposit/hal/metadata.py:67
 msgid "Religions"
@@ -262,15 +256,15 @@ msgstr "Anv implijer HAL"
 
 #: deposit/hal/models.py:15
 msgid "If set, deposits will be associated to this HAL account."
-msgstr ""
+msgstr "Mard eo leuniet e vo liammet ar fiziadoù ouzh ar gont HAL-mañ."
 
 #: deposit/hal/protocol.py:170
 msgid "No HAL user credentials provided."
-msgstr "N'eo ket bet pourchaset an titouroù evit kevraouiñ ouzh HAL"
+msgstr "N'eus ket bet pourchaset kretadur implijer HAL ebet."
 
 #: deposit/hal/protocol.py:241
 msgid "This document is already in HAL. HAL refused the deposit."
-msgstr "Nac'het eo bet an teul-mañ gant HAL dre m'emañ an teul-mañ e HAL dija."
+msgstr "Nac'het eo bet ar fiziad gant HAL. Emañ an teul e HAL c'hoazh."
 
 #: deposit/hal/protocol.py:248
 #, python-format
@@ -299,7 +293,7 @@ msgstr "Ger-tremen"
 
 #: deposit/hal/protocol.py:320
 msgid "Connection to HAL failed. Please try again later."
-msgstr "C'hwitet eo ar c'hevreadur ouzh HAL, klaskit en-dro diwezhatoc'h."
+msgstr "C'hwitet eo kevreañ ouzh HAL? Klaskit en-dro diwezhatoc'h."
 
 #: deposit/models.py:44
 msgid "Failed"
@@ -336,7 +330,7 @@ msgstr "Fiziad"
 
 #: deposit/models.py:393
 msgid "We will use this email address to notify you when your deposits are accepted."
-msgstr "Implijout a raimp ar chomlec'h postel-mañ evit kemenn ac'hanoc'h ur wech ma vo bet degemeret ho fiziadennoù."
+msgstr "Implijout a raimp ar chomlec'h postel-mañ evit kemenn deoc'h pa vo bet degemeret ho fiziadoù."
 
 #: deposit/models.py:399
 msgid "This repository will be used by default for your deposits."
@@ -368,7 +362,7 @@ msgstr ""
 
 #: deposit/osf/forms.py:65 deposit/osf/forms.py:88 model-gettext.py:63
 msgid "Engineering"
-msgstr "Ijinierezh"
+msgstr "Ijinerezh"
 
 #: deposit/osf/forms.py:69 deposit/osf/forms.py:92
 msgid "Life Sciences"
@@ -384,7 +378,7 @@ msgstr "Skiantoù fizikel ha Jedoniezh"
 
 #: deposit/osf/forms.py:75 deposit/osf/forms.py:98
 msgid "Social and Behavioral Sciences"
-msgstr "Skiantoù sokial hag ersavel"
+msgstr "Skiantoù sokial hag emzalc'hel"
 
 #: deposit/osf/forms.py:141
 msgid "Invalid OSF identifier."
@@ -408,7 +402,7 @@ msgstr "N'eus ket gallet dilesa gant OSF."
 
 #: deposit/osf/protocol.py:230
 msgid "Unable to add contributors."
-msgstr "N'eus ket bet gallet ouzhpennañ kendaolerien."
+msgstr "N'eus ket bet gallet ouzhpennañ perzhidi."
 
 #: deposit/osf/protocol.py:257
 msgid "Unable to update the contributors of the paper."
@@ -416,7 +410,7 @@ msgstr ""
 
 #: deposit/osf/protocol.py:303
 msgid "Unable to update license."
-msgstr "N'eus ket bet gallet ouzhpennañ an aotre-implijout"
+msgstr "N'eus ket bet gallet hizivaat an aotre-implijout."
 
 #: deposit/osf/protocol.py:361
 msgid "Unable to create the preprint."
@@ -424,7 +418,7 @@ msgstr "N'eus ket bet gallet krouiñ ar ragembannadur."
 
 #: deposit/osf/protocol.py:410
 msgid "Unable to update the preprint license."
-msgstr "N'eus ket bet gallet hizivaat aotre-implijout ar ragembann."
+msgstr "N'eus ket bet gallet hizivaat aotre-implijout ar ragembannadur."
 
 #: deposit/osf/protocol.py:418
 msgid "No Repository endpoint provided."
@@ -459,14 +453,13 @@ msgid "Username or password not provided for this repository. Please contact the
 msgstr ""
 
 #: deposit/sword/protocol.py:355
-#, fuzzy
 msgid "Unable to deposit to repository"
-msgstr "N'eus ket bet gallet krouiñ ar ragembannadur."
+msgstr "N'eus ket bet gallet lakaat ur fiziad er c'havlec'h"
 
 #: deposit/templates/deposit/deposits.html:6
 #: deposit/templates/deposit/deposits.html:12 website/templates/navbar.html:33
 msgid "My deposits"
-msgstr "Ma fiziadennoù"
+msgstr "Ma fiziadoù"
 
 #: deposit/templates/deposit/deposits.html:24
 #, python-format
@@ -475,16 +468,15 @@ msgstr ""
 
 #: deposit/templates/deposit/deposits.html:36
 msgid "Paper"
-msgstr "Paper"
+msgstr "Pennad"
 
 #: deposit/templates/deposit/deposits.html:56
 msgid "Deposit date"
 msgstr "Deiziad fiziañ"
 
 #: deposit/templates/deposit/deposits.html:67
-#, fuzzy
 msgid "Publication date"
-msgstr "Dre zeiziad embann"
+msgstr "Deiziad embann"
 
 #: deposit/templates/deposit/deposits.html:78
 msgid "Deposit type"
@@ -516,9 +508,8 @@ msgid "Show"
 msgstr ""
 
 #: deposit/templates/deposit/deposits.html:176
-#, fuzzy
 msgid "No deposits yet!"
-msgstr "Ma fiziadennoù"
+msgstr "Fiziad ebet c'hoazh !"
 
 #: deposit/templates/deposit/deposits.html:177
 msgid "You have not made any deposit via Dissemin. What are you waiting for? Liberate your papers today."
@@ -549,9 +540,8 @@ msgid "You can deposit the full text of your article. Dissemin will send it to a
 msgstr ""
 
 #: deposit/templates/deposit/start.html:72
-#, fuzzy
 msgid "Authorship"
-msgstr "Dre aozerien"
+msgstr "Tadelezh aozañ"
 
 #: deposit/templates/deposit/start.html:73
 msgid "You do not appear to be one of the authors of this paper. By using this form, you certify that you have the permission to upload it on their behalf."
@@ -710,11 +700,11 @@ msgstr "Makedoneg"
 
 #: dissemin/settings/common.py:315
 msgid "European Portuguese"
-msgstr "Portugaleg europat"
+msgstr "Portugaleg Europa"
 
 #: dissemin/settings/common.py:316
 msgid "Brazilian Portuguese"
-msgstr "Portugaleg braziliat"
+msgstr "Portugaleg Brazil"
 
 #: dissemin/settings/common.py:317
 msgid "Swedish"
@@ -774,18 +764,16 @@ msgid "Metaphysics"
 msgstr "Metafizik"
 
 #: model-gettext.py:13
-#, fuzzy
 msgid "Epistemology"
-msgstr "Bevoniezh"
+msgstr "Epistemologiezh"
 
 #: model-gettext.py:14
 msgid "Parapsychology & occultism"
 msgstr ""
 
 #: model-gettext.py:15
-#, fuzzy
 msgid "Philosophical schools of thought"
-msgstr "Prederouriezh"
+msgstr "Skolioù soñjal prederouriezhel"
 
 #: model-gettext.py:17
 #, fuzzy
@@ -818,9 +806,8 @@ msgid "The Bible"
 msgstr ""
 
 #: model-gettext.py:24
-#, fuzzy
 msgid "Christianity"
-msgstr "Anvadurioù kristen"
+msgstr "Kristeniezh"
 
 #: model-gettext.py:25
 msgid "Christian practice & observance"
@@ -835,9 +822,8 @@ msgid "Christian organization, social work & worship"
 msgstr ""
 
 #: model-gettext.py:28
-#, fuzzy
 msgid "History of Christianity"
-msgstr "Istor Azia"
+msgstr "Istor ar gristeniezh"
 
 #: model-gettext.py:29
 msgid "Christian denominations"
@@ -911,7 +897,7 @@ msgstr "Yezhoù all"
 
 #: model-gettext.py:51
 msgid "Science"
-msgstr "Skiantoù"
+msgstr "Skiant"
 
 #: model-gettext.py:53
 msgid "Astronomy"
@@ -943,7 +929,7 @@ msgstr "Teknologiezh"
 
 #: model-gettext.py:62
 msgid "Medicine & health"
-msgstr "Mezegiezh & yec'hed"
+msgstr "Mezegiezh ha yec'hed"
 
 #: model-gettext.py:64
 #, fuzzy
@@ -1024,14 +1010,12 @@ msgid "English & Old English literatures"
 msgstr ""
 
 #: model-gettext.py:84
-#, fuzzy
 msgid "German & related literatures"
-msgstr "Lennegezhioù all"
+msgstr "Lennegezh alamanek ha lennegezhioù kar"
 
 #: model-gettext.py:85
-#, fuzzy
 msgid "French & related literatures"
-msgstr "Lennegezhioù all"
+msgstr "Lennegezh gallek ha lennegezhioù kar"
 
 #: model-gettext.py:86
 msgid "Italian, Romanian & related literatures"
@@ -1042,9 +1026,8 @@ msgid "Spanish, Portuguese, Galician literatures"
 msgstr ""
 
 #: model-gettext.py:88
-#, fuzzy
 msgid "Latin & Italic literatures"
-msgstr "Lennegezhioù all"
+msgstr "Lennegezh latin hag italek"
 
 #: model-gettext.py:89
 msgid "Classical & modern Greek literatures"
@@ -1060,57 +1043,48 @@ msgid "Geography & travel"
 msgstr "Douaroniezh"
 
 #: model-gettext.py:93
-#, fuzzy
 msgid "Biography & genealogy"
-msgstr "Douaroniezh"
+msgstr "Biografiezh ha genealogiezh"
 
 #: model-gettext.py:94
 msgid "History of ancient world (to ca. 499)"
 msgstr ""
 
 #: model-gettext.py:95
-#, fuzzy
 msgid "History of Europe"
-msgstr "Istor Azia"
+msgstr "Istor Europa"
 
 #: model-gettext.py:96
 msgid "History of Asia"
 msgstr "Istor Azia"
 
 #: model-gettext.py:97
-#, fuzzy
 msgid "History of Africa"
-msgstr "Istor Azia"
+msgstr "Istor Afrika"
 
 #: model-gettext.py:98
-#, fuzzy
 msgid "History of North America"
-msgstr "Istor Azia"
+msgstr "Istor Norzhamerika"
 
 #: model-gettext.py:99
-#, fuzzy
 msgid "History of South America"
-msgstr "Istor Azia"
+msgstr "Istor Suamerika"
 
 #: model-gettext.py:100
-#, fuzzy
 msgid "History of other areas"
-msgstr "Istor Azia"
+msgstr "Istor ranndirioù all"
 
 #: model-gettext.py:101
-#, fuzzy
 msgid "Data processing & computer science"
-msgstr "Urzhiataerezh"
+msgstr "Tretiñ roadennoù hag urzhiataerezh"
 
 #: model-gettext.py:102
-#, fuzzy
 msgid "Military science"
-msgstr "Skiantoù politikel"
+msgstr "Skiant vilourel"
 
 #: model-gettext.py:103
-#, fuzzy
 msgid "Other Germanic languages"
-msgstr "Yezhoù all"
+msgstr "Yezhoù germanek all"
 
 #: model-gettext.py:104
 msgid "Public performances"
@@ -1129,18 +1103,16 @@ msgid "Athletic & outdoor sports & games"
 msgstr ""
 
 #: model-gettext.py:108
-#, fuzzy
 msgid "Other Germanic literatures"
-msgstr "Lennegezhioù all"
+msgstr "Lennegezhioù germanek all"
 
 #: model-gettext.py:109
 msgid "Germany & neighboring central European countries"
 msgstr ""
 
 #: model-gettext.py:110
-#, fuzzy
 msgid "Green Open Access Service"
-msgstr "Moned frank (hent glas)"
+msgstr "Servij moned glas digor"
 
 #: model-gettext.py:111
 msgid "Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n<br/>\nContact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
@@ -1155,9 +1127,8 @@ msgid "For every document, that you upload via Dissemin we need once a TUprints 
 msgstr ""
 
 #: model-gettext.py:114
-#, fuzzy
 msgid "Download contract"
-msgstr "Pellgargañ"
+msgstr "Pellgargañ ar gevrat"
 
 #: model-gettext.py:115
 #, fuzzy
@@ -1189,19 +1160,16 @@ msgid "Free for private use; right holder retains other rights, including distri
 msgstr ""
 
 #: model-gettext.py:121
-#, fuzzy
 msgid "Other open license"
-msgstr "Relijionoù all"
+msgstr "Aotre-implijout digor all"
 
 #: model-gettext.py:123
-#, fuzzy
 msgid "Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)"
-msgstr "Creative Commons CC-By Attribution 4.0 International (CC BY 4.0)"
+msgstr "Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)"
 
 #: model-gettext.py:124
-#, fuzzy
 msgid "Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)"
-msgstr "Creative Commons CC-By Attribution 4.0 International (CC BY 4.0)"
+msgstr "Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)"
 
 #: model-gettext.py:125
 msgid "Zenodo"
@@ -1220,18 +1188,16 @@ msgid "HAL is a  multidisciplinary open archive, sustained by the French Researc
 msgstr ""
 
 #: model-gettext.py:129
-#, fuzzy
 msgid "OSF preprints"
-msgstr "rakembann"
+msgstr "Rakembann OSF"
 
 #: model-gettext.py:130
 msgid "Run by the Center for Open Science, OSF lets you share your preprints openly. You can also share supplemental data, materials or code associated with your article."
 msgstr ""
 
 #: model-gettext.py:131
-#, fuzzy
 msgid "TUprints"
-msgstr "rakembann"
+msgstr "TUprints"
 
 #: model-gettext.py:132
 msgid "TUprints is the open access repository for all current and former members of the Technical University Darmstadt."
@@ -1246,9 +1212,8 @@ msgid "Remove from to-do list"
 msgstr ""
 
 #: papers/ajax.py:234
-#, fuzzy
 msgid "Marking failed"
-msgstr "Prientiñ ar profil"
+msgstr "Merkañ c'hwitet"
 
 #: papers/ajax.py:263 papers/templates/papers/paper_list.html:79
 #: papers/templates/papers/policies.html:73
@@ -1261,7 +1226,7 @@ msgstr ""
 
 #: papers/baremodels.py:58
 msgid "Journal article"
-msgstr "Pennad en ur gelaouenn"
+msgstr "Pennad kelaouenn"
 
 #: papers/baremodels.py:59
 msgid "Proceedings article"
@@ -1269,7 +1234,7 @@ msgstr ""
 
 #: papers/baremodels.py:60
 msgid "Book chapter"
-msgstr "Pennad-levr"
+msgstr "Rannbennad levr"
 
 #: papers/baremodels.py:61
 msgid "Book"
@@ -1277,7 +1242,7 @@ msgstr "Levr"
 
 #: papers/baremodels.py:62
 msgid "Journal issue"
-msgstr "Niverenn ur gelaouenn"
+msgstr "Niverenn gelaouenn"
 
 #: papers/baremodels.py:63
 msgid "Proceedings"
@@ -1285,7 +1250,7 @@ msgstr ""
 
 #: papers/baremodels.py:64
 msgid "Entry"
-msgstr "Pennad-holloueziadur"
+msgstr "Pennger"
 
 #: papers/baremodels.py:65
 msgid "Poster"
@@ -1301,7 +1266,7 @@ msgstr "Tezenn"
 
 #: papers/baremodels.py:68
 msgid "Dataset"
-msgstr "Bank roadennoù"
+msgstr "Strobad roadennoù"
 
 #: papers/baremodels.py:69 papers/models.py:99
 #: publishers/templates/publishers/policy_preprint.html:5
@@ -1318,11 +1283,11 @@ msgstr "Anaouder ORCID direizh."
 
 #: papers/forms.py:56
 msgid "Department"
-msgstr "Departamant"
+msgstr "Kevrenn"
 
 #: papers/forms.py:58 papers/templates/papers/researcher.html:9
 msgid "Researcher"
-msgstr "Klasker"
+msgstr "Enklasker"
 
 #: papers/forms.py:71
 msgid "newest first"
@@ -1351,11 +1316,11 @@ msgstr "goudeembann"
 #: papers/models.py:101
 #: publishers/templates/publishers/policy_pdfversion.html:6
 msgid "Published version"
-msgstr "Doare embannet"
+msgstr "Stumm embannet"
 
 #: papers/models.py:105
 msgid "Preparing profile"
-msgstr "Prientiñ ar profil"
+msgstr "O prientiñ ar profil"
 
 #: papers/models.py:106
 msgid "Fetching publications from ORCID"
@@ -1379,7 +1344,7 @@ msgstr "Adtapout embannadurioù adalek OAI-PMH"
 
 #: papers/models.py:111
 msgid "Clustering publications"
-msgstr "Strollañ embannadurioù"
+msgstr "O strollañ embannadurioù"
 
 #: papers/models.py:112
 msgid "Updating statistics"
@@ -1387,7 +1352,7 @@ msgstr "Hizivaat ar stadegoù"
 
 #: papers/models.py:1224 papers/views.py:144 papers/views.py:148
 msgid "Papers"
-msgstr "Pajennoù"
+msgstr "Pennadoù"
 
 #: papers/templates/papers/advanced_search.html:8
 msgid "Advanced Search"
@@ -1399,23 +1364,20 @@ msgid "Advanced search"
 msgstr ""
 
 #: papers/templates/papers/advanced_search.html:20
-#, fuzzy
 msgid "Title"
-msgstr "titl"
+msgstr "Titl"
 
 #: papers/templates/papers/advanced_search.html:24
-#, fuzzy
 msgid "Authors"
-msgstr "Dre aozerien"
+msgstr "Aozerien"
 
 #: papers/templates/papers/advanced_search.html:26
 msgid "Search by names or ORCIDs. Separate with commas and prefix with <code>last:</code> to enforce last name search."
 msgstr ""
 
 #: papers/templates/papers/advanced_search.html:39
-#, fuzzy
 msgid "Document type"
-msgstr "Dre zoare teul"
+msgstr "Seurt teul"
 
 #: papers/templates/papers/advanced_search.html:60
 msgid "Fields for superusers"
@@ -1472,24 +1434,20 @@ msgid "Details:"
 msgstr ""
 
 #: papers/templates/papers/messages.html:21
-#, fuzzy
 msgid "No author"
-msgstr "Dre aozerien"
+msgstr "Aozer ebet"
 
 #: papers/templates/papers/messages.html:23
-#, fuzzy
 msgid "No title"
-msgstr "titl"
+msgstr "Titl ebet"
 
 #: papers/templates/papers/messages.html:25
-#, fuzzy
 msgid "Invalid publication date"
-msgstr "Dre zeiziad embann"
+msgstr "Deiziad embann direizh"
 
 #: papers/templates/papers/messages.html:27
-#, fuzzy
 msgid "No publication date"
-msgstr "Dre zeiziad embann"
+msgstr "Deiziad embann ebet"
 
 #: papers/templates/papers/messages.html:29
 msgid "Paper is invalid"
@@ -1579,7 +1537,7 @@ msgstr ""
 #: papers/templates/papers/policies.html:32
 #: papers/templates/papers/policies.html:47
 msgid "Upload"
-msgstr "Lakaat enlinenn"
+msgstr "Enporzhiañ"
 
 #: papers/templates/papers/paper_list.html:65
 msgid "Exclude from my profile"
@@ -1603,16 +1561,16 @@ msgstr "Ostilhoù"
 
 #: papers/templates/papers/paper_panel.html:64
 msgid "Search in Google Scholar"
-msgstr "Klaskit e Google Scholar"
+msgstr "Klask e Google Scholar"
 
 #: papers/templates/papers/paper_panel.html:69
 msgid "Admin zone"
-msgstr "Melestradurezh"
+msgstr "Takad melestriñ"
 
 #: papers/templates/papers/policies.html:56
 #: publishers/templates/publishers/publisher.html:92
 msgid "Policy details"
-msgstr "Munudoù politikerezh"
+msgstr "Munudoù war ar reolennoù"
 
 #: papers/templates/papers/policies.html:70
 #: papers/templates/papers/policies.html:86
@@ -1712,7 +1670,7 @@ msgstr "a-raok"
 
 #: papers/templates/papers/search_base.html:82
 msgid "By document type"
-msgstr "Dre zoare teul"
+msgstr "Dre seurt teulioù"
 
 #: papers/templates/papers/search_base.html:107 publishers/forms.py:31
 msgid "Sort by"
@@ -1724,7 +1682,7 @@ msgstr ""
 
 #: papers/templates/papers/search_base.html:166
 msgid "Refreshing results"
-msgstr "Hizivaat an disoc'hoù"
+msgstr "Freskaat an disoc'hoù"
 
 #: papers/templatetags/statuses.py:20 papers/templatetags/statuses.py:80
 msgid "Unknown OA status"
@@ -1732,7 +1690,7 @@ msgstr "Statud OA dianav"
 
 #: papers/templatetags/statuses.py:28
 msgid "Unknown PDF status"
-msgstr "Stad PDF dianav"
+msgstr "Statud ar PDF dianav"
 
 #: papers/templatetags/statuses.py:34
 msgid "Preprints can be archived."
@@ -1796,23 +1754,23 @@ msgstr ""
 
 #: papers/templatetags/statuses.py:50
 msgid "Unknown policy"
-msgstr "Politikerezh displann"
+msgstr "Politikerezh dianav"
 
 #: papers/templatetags/statuses.py:56
 msgid "archiving allowed."
-msgstr "Fiziad aotreet."
+msgstr "Aotreet diellaouiñ."
 
 #: papers/templatetags/statuses.py:57
 msgid "archiving forbidden."
-msgstr "Fiziad difennet."
+msgstr "Difennet diellaouiñ."
 
 #: papers/templatetags/statuses.py:58
 msgid "archiving restricted:"
-msgstr "Fiziad bevennet:"
+msgstr "Diellaouiñ bevennet :"
 
 #: papers/templatetags/statuses.py:59
 msgid "policy unclear."
-msgstr "Politikerezh displann"
+msgstr "Politikerezh displann."
 
 #: papers/templatetags/statuses.py:60 papers/templatetags/statuses.py:62
 #: papers/templatetags/statuses.py:74
@@ -1821,28 +1779,27 @@ msgstr "Politikerzh dianav."
 
 #: papers/templatetags/statuses.py:68
 msgid "archiving allowed"
-msgstr "Fiziad aotreet"
+msgstr "Aotreet diellaouiñ"
 
 #: papers/templatetags/statuses.py:69
 msgid "archiving forbidden"
-msgstr "Fiziad difennet"
+msgstr "Difennet diellaouiñ"
 
 #: papers/templatetags/statuses.py:70
 msgid "archiving restricted"
-msgstr "Fiziad bevennet"
+msgstr "Diellaouiñ bevennet"
 
 #: papers/templatetags/statuses.py:71
 msgid "policy unclear"
-msgstr "Politikerezh diresis"
+msgstr "Politikerezh displann"
 
 #: papers/templatetags/statuses.py:72
 msgid "policy unknown"
 msgstr "Politikerzh dianav"
 
 #: papers/templatetags/statuses.py:110
-#, fuzzy
 msgid "Green circle"
-msgstr "Moned frank (hent glas)"
+msgstr "Kelc'h glas"
 
 #: papers/templatetags/statuses.py:111
 msgid "Red circle"
@@ -1922,9 +1879,8 @@ msgid "increasing"
 msgstr "War gresk"
 
 #: publishers/forms.py:18
-#, fuzzy
 msgid "By publisher"
-msgstr "Embanner"
+msgstr "Dre embanner"
 
 #: publishers/forms.py:38
 msgid "Order"
@@ -1956,7 +1912,7 @@ msgstr ""
 
 #: publishers/models.py:44
 msgid "Policy unclear"
-msgstr "Politikerezh diresis"
+msgstr "Politikerezh displann"
 
 #: publishers/models.py:45
 msgid "For complicated policies, unknown publishers and unpublished documents."
@@ -2006,9 +1962,8 @@ msgstr "Klask"
 
 #: publishers/templates/publishers/list.html:56
 #: publishers/templates/publishers/publisher.html:31
-#, fuzzy
 msgid "Sources"
-msgstr "Mammennoù roadennoù"
+msgstr "Mammennoù"
 
 #: publishers/templates/publishers/list.html:57
 #: publishers/templates/publishers/publisher.html:32
@@ -2019,13 +1974,12 @@ msgstr ""
 #, python-format
 msgid "(%(num_total)s paper)"
 msgid_plural "(%(num_total)s papers)"
-msgstr[0] "(%(num_total)s paperenn)"
-msgstr[1] "(%(num_total)s paperennoù)"
+msgstr[0] "(%(num_total)s pennad)"
+msgstr[1] "(%(num_total)s pennad)"
 
 #: publishers/templates/publishers/list.html:96
-#, fuzzy
 msgid "No publishers found"
-msgstr "Pennad ebet kavet."
+msgstr "Embanner ebet kavet"
 
 #: publishers/templates/publishers/policy_pdfversion.html:5
 msgid "The published version is the final version of the paper, as formatted by the publisher."
@@ -2061,9 +2015,8 @@ msgid "Change open access status"
 msgstr ""
 
 #: publishers/templates/publishers/publisher.html:72
-#, fuzzy
 msgid "Green open access summary"
-msgstr "Moned frank (hent glas)"
+msgstr "Doverradenn ar moned glas frank"
 
 #: publishers/templates/publishers/publisher.html:74
 #, python-format
@@ -2223,7 +2176,7 @@ msgstr ""
 #: website/templates/admin/base_site.html:5
 #: website/templates/admin/base_site.html:8
 msgid "Dissemin administration"
-msgstr "Melestradurezh Dissemin"
+msgstr "Mererezh Dissemin"
 
 #: website/templates/base.html:66 website/templates/base.html:73
 msgid "Dissemin detects papers behind pay-walls and invites their authors to upload them in one click to an open repository."
@@ -2409,11 +2362,11 @@ msgstr ""
 
 #: website/templates/dissemin/faq.html:205
 msgid "<strong><a href=\"https://zenodo.org\">Zenodo</a></strong>, an innovative repository backed by the EU."
-msgstr "<strong><a href=\"https://zenodo.org\">Zenodo</a></strong>, ur fiziad nevezus herberc'hiet gant UE."
+msgstr "<strong><a href=\"https://zenodo.org\">Zenodo</a></strong>, ur c'havlec'h nevezus harpet gant an UE."
 
 #: website/templates/dissemin/faq.html:210
 msgid "<strong><a href=\"https://hal.archives-ouvertes.fr/\">HAL</a></strong>, a French repository managed by the <a href=\"https://www.ccsd.cnrs.fr/\">CCSD</a>."
-msgstr "<strong><a href=\"https://hal.archives-ouvertes.fr/\">HAL</a></strong>, ur fiziad gall meret gant ar <a href=\"https://www.ccsd.cnrs.fr/\">CCSD</a>."
+msgstr "<strong><a href=\"https://hal.archives-ouvertes.fr/\">HAL</a></strong>, ur c'havlec'h gall meret gant ar <a href=\"https://www.ccsd.cnrs.fr/\">CCSD</a>."
 
 #: website/templates/dissemin/faq.html:224
 msgid "Supporting more repositories requires us to write specific code for each repository. More importantly it requires the repositories to give us permission to deposit papers in bulk. We have been considering integrating the following repositories:"
@@ -2670,12 +2623,11 @@ msgstr ""
 
 #: website/templates/dissemin/sources.html:5
 msgid "Data sources"
-msgstr "Mammennoù roadennoù"
+msgstr "Mammennoù ar roadennoù"
 
 #: website/templates/dissemin/sources.html:10
-#, fuzzy
 msgid "Data Sources"
-msgstr "Mammennoù roadennoù"
+msgstr "Mammennoù ar roadennoù"
 
 #: website/templates/dissemin/sources.html:14
 msgid "<a href=\"https://www.crossref.org\">CrossRef.org</a> for traditional academic papers"
@@ -2708,9 +2660,8 @@ msgstr ""
 
 #: website/templates/dissemin/start_page.html:39
 #: website/templates/dissemin/start_page.html:42
-#, fuzzy
 msgid "Green Open Access"
-msgstr "Moned frank (hent glas)"
+msgstr "Moned glas frank"
 
 #: website/templates/dissemin/start_page.html:43
 msgid "Many researchers do not use their right to make their papers freely available online, in addition to the paywalled version of traditional publishers."
@@ -2730,9 +2681,8 @@ msgstr ""
 
 #: website/templates/dissemin/start_page.html:58
 #: website/templates/dissemin/start_page.html:61
-#, fuzzy
 msgid "Open Repositories"
-msgstr "Kavlec'h"
+msgstr "Kavlec'hioù frank"
 
 #: website/templates/dissemin/start_page.html:62
 msgid "Uploading your papers on your own webpage is not enough. Your papers are easier to find and more secure in the long-term when uploaded to arXiv, Zenodo or institutional repositories."
@@ -2740,9 +2690,8 @@ msgstr ""
 
 #: website/templates/dissemin/start_page.html:72
 #: website/templates/dissemin/start_page.html:75
-#, fuzzy
 msgid "Latest Uploads"
-msgstr "Lakaat enlinenn"
+msgstr "Enporzhiadennoù diwezhañ"
 
 #: website/templates/dissemin/start_page.html:76
 msgid "Researchers use Dissemin to make sure all their publications can be accessed freely. Have a look at their latest uploads:"
@@ -2754,9 +2703,8 @@ msgid "Published in %(repo)s on %(pub_date)s"
 msgstr ""
 
 #: website/templates/dissemin/start_page.html:101
-#, fuzzy
 msgid "Access statistics"
-msgstr "Hentennoù ha stadegoù"
+msgstr "Stadegoù moned"
 
 #: website/templates/dissemin/start_page.html:102
 msgid "Dissemin collects its data from various sources and evaluates if a given publication is freely available."
@@ -2870,7 +2818,7 @@ msgstr "API"
 
 #: website/templates/footer.html:14
 msgid "Who are we?"
-msgstr "Piv on ?"
+msgstr "Piv omp ?"
 
 #: website/templates/footer.html:15
 msgid "Donate"
