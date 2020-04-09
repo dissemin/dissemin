@@ -102,6 +102,26 @@ If you need more information for your workflow, please contact us. We can add ad
 
 You can find our schema for :download:`download <../../../deposit/schema/dissemin_v1.0.xsd>` in Version 1.0.
 
+Deposit Receipt
+---------------
+
+Dissemin expects that your repository returns a SWORDv2 deposit receipt, which is optional in the SWORDv2 standard.
+Please make sure that it contains a splash url, i.e. the landing page of the deposited document for the user.
+Your deposit receipt shall look like:
+
+.. code:: xml
+
+   <?xml version="1.0"?>
+   <entry xmlns="http://www.w3.org/2005/Atom">
+       ...
+       <link rel="alternate" href="https://repository.dissem.in/item/12345"/>
+       ...
+   </entry>
+
+Where ``href`` contains of course the splash url of the deposited item.
+
+Currently Dissemin will extract the identifier from the splash url.
+
 Examples and Scripts
 --------------------
 

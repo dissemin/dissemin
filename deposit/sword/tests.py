@@ -117,13 +117,11 @@ class MetaTestSWORDMETSProtocol(MetaTestProtocol):
         identifier = '8128'
         splash_url = "https://repository.dissem.in/item/{}".format(identifier)
         response = '''<?xml version="1.0" encoding="utf-8" ?>
-            <entry xmlns="http://www.w3.org/2005/Atom" xmlns:sword="http://purl.org/net/sword/">
-                <sword:originalDeposit href="''' + splash_url + '''">
-                    <sword:depositedOn/>
-                    <sword:depositedBy>dissemin</sword:depositedBy>
-                </sword:originalDeposit>
-            </entry>'''
+            <entry xmlns="http://www.w3.org/2005/Atom">
+                <link rel="alternate" href="{}"/>
+            </entry>'''.format(splash_url)
 
+        print(response)
         dr = self.protocol._get_deposit_result(response)
 
         assert isinstance(dr, DepositResult)

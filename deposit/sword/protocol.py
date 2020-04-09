@@ -31,22 +31,25 @@ logger = logging.getLogger('dissemin.' + __name__)
         
         
 # Namespaces
+ATOM_NAMESPACE = "http://www.w3.org/2005/Atom"
 DISSEMIN_NAMESPACE = "https://dissem.in/deposit/terms/"
 METS_NAMESPACE = "http://www.loc.gov/METS/"
 MODS_NAMESPACE = "http://www.loc.gov/mods/v3"
 XLINK_NAMESPACE = "http://www.w3.org/1999/xlink"
 XSI_NAMESPACE = "http://www.w3.org/2001/XMLSchema-instance"
 
+ATOM = "{%s}" % ATOM_NAMESPACE
 DS = "{%s}" % DISSEMIN_NAMESPACE
 METS = "{%s}" % METS_NAMESPACE
 MODS = "{%s}" % MODS_NAMESPACE
 XLINK = "{%s}" % XLINK_NAMESPACE
 
 NSMAP = {
-    'mets' : METS_NAMESPACE,
+    'atom' : ATOM_NAMESPACE,
     'ds' : DISSEMIN_NAMESPACE,
+    'mets' : METS_NAMESPACE,
     'xlink' : XLINK_NAMESPACE,
-    'xsi' : XSI_NAMESPACE
+    'xsi' : XSI_NAMESPACE,
 }
 
 
@@ -81,17 +84,19 @@ class SWORDMETSProtocol(RepositoryProtocol):
             self.log('Invalid XML response from {}'.format(self.repository.name))
             raise DepositError(_('The repository {} returned invalid XML').format(self.repository.name))
 
-        original_deposit = sword_statement.find('.//sword:originalDeposit', namespaces=sword_statement.nsmap)
-
-        if original_deposit is None:
-            splash_url = None
+        # We assume one element for the splash url, so we take the first one
+        link_alternate = sword_statement.find("atom:link[@rel='alternate']", namespaces=NSMAP)
+        print(link_alternate)
+        if link_alternate is not None:
+            splash_url = link_alternate.get('href', None)
         else:
-            splash_url = original_deposit.get('href', None)
-        if splash_url is not None:
+            splash_url = None
+
+        if splash_url:
             identifier = splash_url.split('/')[-1]
         else:
             identifier = None
-            msg = 'Found no splash url in XML reposonse from repository {}. Either no originalDeposit was present or the href was missing.'.format(self.repository.name)
+            msg = "Found no splash url in XML reposonse from repository {}. Either no link[@ref='alternate'] was present or the href was missing.".format(self.repository.name)
             self.log(msg)
             logger.warning(msg)
 
