@@ -108,51 +108,53 @@
                             <div class="collapse show" id="collapseDocType" aria-labelledby="headingDocType">
                                 <div class="container">
                                     <!-- Preprint -->
-                                    {% with radio_preprint=paper_form.radioUploadType.0 policy=paper.publisher.preprint %}
-                                        <span class="d-none" aria-hidden="true" id="choosenUploadType-preprint"><strong>{% trans "preprint" %}</strong> ({% include "publishers/policy_img.html" with policy=policy %} {{ policy | explain_policy_short_no_punc}})</span>
-                                        <div class="row border-bottom py-2">
-                                            <div class="col-auto">
-                                                {% include "publishers/policy_img.html" with policy=policy %}
+                                    {% with publisher=paper.publisher %}
+                                        {% with radio_preprint=paper_form.radioUploadType.0 policy=publisher.preprint %}
+                                            <span class="d-none" aria-hidden="true" id="choosenUploadType-preprint"><strong>{% trans "preprint" %}</strong> ({% include "publishers/policy_img.html" with policy=policy %} {{ policy | explain_policy_short_no_punc}})</span>
+                                            <div class="row border-bottom py-2">
+                                                <div class="col-auto">
+                                                    {% include "publishers/policy_img.html" %}
+                                                </div>
+                                                <div class="form-check col d-flex">
+                                                    <label class="form-check-label mr-auto" for="{{ radio_preprint.id_for_label }}">
+                                                        {% include "publishers/policy_preprint.html" %}
+                                                    </label>
+                                                    {{ radio_preprint.tag }}
+                                                </div>
                                             </div>
-                                            <div class="form-check col d-flex">
-                                                <label class="form-check-label mr-auto" for="{{ radio_preprint.id_for_label }}">
-                                                    {% include "publishers/policy_preprint.html" %}
-                                                </label>
-                                                {{ radio_preprint.tag }}
-                                            </div>
-                                        </div>
-                                    {% endwith %}
+                                        {% endwith %}
 
-                                    <!-- Postprint -->
-                                    {% with radio_postprint=paper_form.radioUploadType.1 policy=paper.publisher.postprint %}
-                                        <span class="d-none" aria-hidden="true" id="choosenUploadType-postprint"><strong>{% trans "postprint" %}</strong> ({% include "publishers/policy_img.html" with policy=policy%} {{ policy | explain_policy_short_no_punc}})</span>
-                                        <div class="row border-bottom py-2">
-                                            <div class="col-auto">
-                                                {% include "publishers/policy_img.html" with policy=policy %}
+                                        <!-- Postprint -->
+                                        {% with radio_postprint=paper_form.radioUploadType.1 policy=publisher.postprint %}
+                                            <span class="d-none" aria-hidden="true" id="choosenUploadType-postprint"><strong>{% trans "postprint" %}</strong> ({% include "publishers/policy_img.html" with policy=policy%} {{ policy | explain_policy_short_no_punc}})</span>
+                                            <div class="row border-bottom py-2">
+                                                <div class="col-auto">
+                                                    {% include "publishers/policy_img.html" %}
+                                                </div>
+                                                <div class="form-check col d-flex">
+                                                    <label class="form-check-label mr-auto" for="{{ radio_postprint.id_for_label }}">
+                                                        {% include "publishers/policy_postprint.html" %}
+                                                    </label>
+                                                    {{ radio_postprint.tag }}
+                                                </div>
                                             </div>
-                                            <div class="form-check col d-flex">
-                                                <label class="form-check-label mr-auto" for="{{ radio_postprint.id_for_label }}">
-                                                    {% include "publishers/policy_postprint.html" %}
-                                                </label>
-                                                {{ radio_postprint.tag }}
-                                            </div>
-                                        </div>
-                                    {% endwith %}
+                                        {% endwith %}
 
-                                    <!-- PDF version -->
-                                    {% with radio_pdfversion=paper_form.radioUploadType.2 policy=paper.publisher.pdfversion %}
-                                        <span class="d-none" aria-hidden="true" id="choosenUploadType-pdfversion"><strong>{% trans "pdfversion" %}</strong> ({% include "publishers/policy_img.html" with policy=policy %} {{ policy | explain_policy_short_no_punc}})</span>
-                                        <div class="row py-2">
-                                            <div class="col-auto">
-                                                {% include "publishers/policy_img.html" with policy=policy %}
+                                        <!-- PDF version -->
+                                        {% with radio_pdfversion=paper_form.radioUploadType.2 policy=publisher.pdfversion %}
+                                            <span class="d-none" aria-hidden="true" id="choosenUploadType-pdfversion"><strong>{% trans "pdfversion" %}</strong> ({% include "publishers/policy_img.html" with policy=policy %} {{ policy | explain_policy_short_no_punc}})</span>
+                                            <div class="row py-2">
+                                                <div class="col-auto">
+                                                    {% include "publishers/policy_img.html" %}
+                                                </div>
+                                                <div class="form-check col d-flex">
+                                                    <label class="form-check-label mr-auto" for="{{ radio_pdfversion.id_for_label }}">
+                                                        {% include "publishers/policy_pdfversion.html" %}
+                                                    </label>
+                                                    {{ radio_pdfversion.tag }}
+                                                </div>
                                             </div>
-                                            <div class="form-check col d-flex">
-                                                <label class="form-check-label mr-auto" for="{{ radio_pdfversion.id_for_label }}">
-                                                    {% include "publishers/policy_pdfversion.html" %}
-                                                </label>
-                                                {{ radio_pdfversion.tag }}
-                                            </div>
-                                        </div>
+                                        {% endwith %}
                                     {% endwith %}
                                 </div>
                             </div>
