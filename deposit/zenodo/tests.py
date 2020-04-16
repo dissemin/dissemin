@@ -113,6 +113,7 @@ class ZenodoProtocolTest(ProtocolTest):
         # The error message should be specific
         self.assertTrue('already in Zenodo' in r.message)
 
+    @pytest.mark.usefixtures('mock_doi')
     def test_500_error(self):
         with requests_mock.Mocker(real_http=True) as mocker:
             mocker.get(re.compile(r'.*\.zenodo\.org/.*'), status_code=500)
