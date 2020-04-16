@@ -11,7 +11,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-30 10:07+0100\n"
-"PO-Revision-Date: 2020-03-19 14:03:33+0000\n"
+"PO-Revision-Date: 2020-04-16 15:06:22+0000\n"
 "Language: hi\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -59,9 +59,8 @@ msgid "Do not publish before"
 msgstr "Unknown publisher"
 
 #: deposit/forms.py:166 deposit/templates/deposit/deposits.html:89
-#, fuzzy
 msgid "License"
-msgstr "No license"
+msgstr "लाइसेंस"
 
 #: deposit/forms.py:215
 msgid "No preferred repository"
@@ -69,7 +68,7 @@ msgstr "No preferred repository"
 
 #: deposit/forms.py:230 deposit/sword/forms.py:15
 msgid "E-mail"
-msgstr ""
+msgstr "ईमेल"
 
 #: deposit/forms.py:231
 #, fuzzy
@@ -500,9 +499,8 @@ msgid "PDF URL"
 msgstr "PDF URL"
 
 #: deposit/templates/deposit/deposits.html:134
-#, fuzzy
 msgid "Status:"
-msgstr "Status"
+msgstr "स्थिति:"
 
 #: deposit/templates/deposit/deposits.html:145
 msgid "Letter of Declaration"
@@ -510,7 +508,7 @@ msgstr ""
 
 #: deposit/templates/deposit/deposits.html:148
 msgid "Show"
-msgstr ""
+msgstr "दिखाएँ"
 
 #: deposit/templates/deposit/deposits.html:176
 #, fuzzy

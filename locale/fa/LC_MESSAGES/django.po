@@ -13,7 +13,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-30 10:07+0100\n"
-"PO-Revision-Date: 2020-04-14 03:22:24+0000\n"
+"PO-Revision-Date: 2020-04-16 15:06:22+0000\n"
 "Language: fa\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -931,9 +931,8 @@ msgid "Animals (Zoology)"
 msgstr ""
 
 #: model-gettext.py:61
-#, fuzzy
 msgid "Technology"
-msgstr "روان‌شناسی"
+msgstr "فناوری"
 
 #: model-gettext.py:62
 msgid "Medicine & health"
@@ -1453,7 +1452,7 @@ msgstr[0] ""
 
 #: papers/templates/papers/messages.html:14
 msgid "Details:"
-msgstr ""
+msgstr "جزئیات:"
 
 #: papers/templates/papers/messages.html:21
 #, fuzzy
@@ -1467,7 +1466,7 @@ msgstr "بر اساس عنوان"
 
 #: papers/templates/papers/messages.html:25
 msgid "Invalid publication date"
-msgstr ""
+msgstr "تاریخ نامعتبر انتشار"
 
 #: papers/templates/papers/messages.html:27
 #, fuzzy
@@ -1476,7 +1475,7 @@ msgstr "انتشارات"
 
 #: papers/templates/papers/messages.html:29
 msgid "Paper is invalid"
-msgstr ""
+msgstr "مقاله نامعتبر است"
 
 #: papers/templates/papers/messages.html:32
 msgid "{{ title }} was ignored for the following reason:"
@@ -1528,7 +1527,7 @@ msgstr ""
 #: papers/templates/papers/paper.html:103
 #: website/templates/dissemin/start_page.html:129
 msgid "Learn more!"
-msgstr ""
+msgstr "بیشتر بدانید!"
 
 #: papers/templates/papers/paper.html:114
 #, python-format
@@ -1555,7 +1554,7 @@ msgstr ""
 
 #: papers/templates/papers/paper_list.html:55
 msgid "from"
-msgstr ""
+msgstr "از"
 
 #: papers/templates/papers/paper_list.html:57
 #: papers/templates/papers/policies.html:17
@@ -1600,7 +1599,7 @@ msgstr ""
 #: papers/templates/papers/policies.html:70
 #: papers/templates/papers/policies.html:86
 msgid "Blue circle"
-msgstr ""
+msgstr "دایرهٔ آبی"
 
 #: papers/templates/papers/policies.html:73
 msgid "Mark this publication for later upload."
@@ -1682,11 +1681,11 @@ msgstr ""
 
 #: papers/templates/papers/search_base.html:68
 msgid "after"
-msgstr ""
+msgstr "پس از"
 
 #: papers/templates/papers/search_base.html:74
 msgid "before"
-msgstr ""
+msgstr "پیش از"
 
 #: papers/templates/papers/search_base.html:82
 msgid "By document type"
@@ -1754,11 +1753,11 @@ msgstr ""
 
 #: papers/templatetags/statuses.py:44
 msgid "Final versions can be archived."
-msgstr ""
+msgstr "نسخه‌های نهایی را می‌توان بایگانی کرد."
 
 #: papers/templatetags/statuses.py:45
 msgid "Final versions cannot be archived."
-msgstr ""
+msgstr "نسخه‌های نهایی را نمی‌توان بایگانی کرد."
 
 #: papers/templatetags/statuses.py:46
 msgid "Under the restrictions below, final versions can be archived."
@@ -1824,15 +1823,15 @@ msgstr "دسترسی آزاد"
 
 #: papers/templatetags/statuses.py:111
 msgid "Red circle"
-msgstr ""
+msgstr "دایرهٔ قرمز"
 
 #: papers/templatetags/statuses.py:112
 msgid "Orange circle"
-msgstr ""
+msgstr "دایرهٔ نارنجی"
 
 #: papers/templatetags/statuses.py:113
 msgid "White circle"
-msgstr ""
+msgstr "دایرهٔ سفید"
 
 #: papers/templatetags/statuses.py:114
 msgid "Question mark in circle"
@@ -1986,7 +1985,7 @@ msgstr "جستجو"
 #: publishers/templates/publishers/list.html:56
 #: publishers/templates/publishers/publisher.html:31
 msgid "Sources"
-msgstr ""
+msgstr "منابع"
 
 #: publishers/templates/publishers/list.html:57
 #: publishers/templates/publishers/publisher.html:32
@@ -2000,9 +1999,8 @@ msgid_plural "(%(num_total)s papers)"
 msgstr[0] "(%(num_total)s مقاله)"
 
 #: publishers/templates/publishers/list.html:96
-#, fuzzy
 msgid "No publishers found"
-msgstr "ناشری یافته نشد."
+msgstr "هیچ ناشری یافته نشد"
 
 #: publishers/templates/publishers/policy_pdfversion.html:5
 msgid "The published version is the final version of the paper, as formatted by the publisher."
@@ -2027,11 +2025,11 @@ msgstr ""
 
 #: publishers/templates/publishers/publisher.html:45
 msgid "Report any error to them."
-msgstr ""
+msgstr "هر خطایی را به آنان گزارش کنید."
 
 #: publishers/templates/publishers/publisher.html:51
 msgid "For superusers"
-msgstr ""
+msgstr "برای ابرکاربران"
 
 #: publishers/templates/publishers/publisher.html:54
 msgid "Change open access status"
@@ -2101,7 +2099,7 @@ msgstr ""
 
 #: upload/forms.py:33
 msgid "Invalid file format: only PDF files are accepted."
-msgstr ""
+msgstr "قالب نامعتبر پرونده: فقط پرونده‌های پی‌دی‌اف پذیرفتنی‌اند."
 
 #: upload/forms.py:43
 #, python-format
@@ -2134,7 +2132,7 @@ msgstr ""
 
 #: upload/templates/upload/widget.html:47
 msgid "Choose another file"
-msgstr ""
+msgstr "پروندهٔ دیگری انتخاب کنید"
 
 #: upload/views.py:133
 msgid "Invalid PDF file."
@@ -2269,7 +2267,7 @@ msgstr ""
 
 #: website/templates/dissemin/faq.html:33
 msgid "Should I trust your statistics?"
-msgstr ""
+msgstr "آیا باید به آمارهای شما اطمینان داشته باشم؟"
 
 #: website/templates/dissemin/faq.html:35
 msgid "Omissions and errors"
@@ -2646,11 +2644,11 @@ msgstr ""
 
 #: website/templates/dissemin/sources.html:5
 msgid "Data sources"
-msgstr ""
+msgstr "منابع داده‌ها"
 
 #: website/templates/dissemin/sources.html:10
 msgid "Data Sources"
-msgstr ""
+msgstr "منابع داده‌ها"
 
 #: website/templates/dissemin/sources.html:14
 msgid "<a href=\"https://www.crossref.org\">CrossRef.org</a> for traditional academic papers"
@@ -2768,7 +2766,7 @@ msgstr "شرایط خدمات"
 
 #: website/templates/dissemin/tos.html:18
 msgid "In short"
-msgstr ""
+msgstr "به‌صورت خلاصه"
 
 #: website/templates/dissemin/tos.html:21
 msgid "Scope of the service"
@@ -2804,7 +2802,7 @@ msgstr "به‌طور کامل"
 
 #: website/templates/dissemin/tos.html:63
 msgid "Personal data"
-msgstr ""
+msgstr "داده‌های شخصی"
 
 #: website/templates/dissemin/tos.html:65
 msgid "Dissemin uses ORCID's public OAuth interface to authenticate its users. This interface only transmits information marked as public in the user's ORCID profile. This means that ORCID passwords are never transmitted and email addresses are not transmitted when they are marked as private, which is the default setting. When logging in to Dissemin from ORCID, Dissemin acquires the user's ORCID id, as well as all public information attached to the ORCID record. We are using the <a href=\"https://sentry.io/privacy/\">Sentry service</a> for error tracking on this platform. Our webserver configuration stores basic access information (URL requested and IP address) for error monitoring, which are kept for fourteen days. Dissemin can store any information input by its users on the platform. Users can ask for a copy of the personal information Dissemin stores about them by writing an email to <a href=\"mailto:support@dissem.in\">support@dissem.in</a>."
@@ -2840,7 +2838,7 @@ msgstr "پرسش‌های متداول"
 
 #: website/templates/footer.html:8
 msgid "API"
-msgstr ""
+msgstr "ای‌پی‌آی"
 
 #: website/templates/footer.html:14
 msgid "Who are we?"
