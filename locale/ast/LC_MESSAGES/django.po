@@ -13,7 +13,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-30 10:07+0100\n"
-"PO-Revision-Date: 2020-03-19 14:03:30+0000\n"
+"PO-Revision-Date: 2020-04-20 14:51:48+0000\n"
 "Language: ast\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -55,7 +55,7 @@ msgstr "Clase Decimal Dewey"
 
 #: deposit/forms.py:160
 msgid "Do not publish before"
-msgstr ""
+msgstr "Nun espublizar antes"
 
 #: deposit/forms.py:166 deposit/templates/deposit/deposits.html:89
 msgid "License"
@@ -309,7 +309,7 @@ msgstr "Publicación pendiente"
 
 #: deposit/models.py:47
 msgid "Embargo"
-msgstr ""
+msgstr "Torga d'espardimientu públicu"
 
 #: deposit/models.py:48
 msgid "Published"
@@ -714,7 +714,7 @@ msgstr "Suecu"
 
 #: dissemin/settings/common.py:318
 msgid "Turkish"
-msgstr ""
+msgstr "Turcu"
 
 #: dissemin/settings/common.py:319
 msgid "Simplified Chinese"
@@ -730,7 +730,7 @@ msgstr "Ciencies, conocimientu y sistemes informáticos"
 
 #: model-gettext.py:3
 msgid "Bibliographies"
-msgstr ""
+msgstr "Bibliografíes"
 
 #: model-gettext.py:4
 msgid "Library & information sciences"
@@ -738,19 +738,19 @@ msgstr "Biblioteconomía y ciencies de la información"
 
 #: model-gettext.py:5
 msgid "Encyclopedias & books of facts"
-msgstr ""
+msgstr "Enciclopedies y compendios de datos"
 
 #: model-gettext.py:6
 msgid "Magazines, journals & serials"
-msgstr ""
+msgstr "Revistes, periódicos y series de publicaciones"
 
 #: model-gettext.py:7
 msgid "Associations, organizations & museums"
-msgstr ""
+msgstr "Asociaciones, organizaciones y museos"
 
 #: model-gettext.py:8
 msgid "News media, journalism & publishing"
-msgstr ""
+msgstr "Prensa, periodismu ya industria editorial"
 
 #: model-gettext.py:9
 msgid "Quotations"
@@ -758,7 +758,7 @@ msgstr "Paremioloxía"
 
 #: model-gettext.py:10
 msgid "Manuscripts & rare books"
-msgstr ""
+msgstr "Manuscritos y llibros raros"
 
 #: model-gettext.py:12
 msgid "Metaphysics"
@@ -771,7 +771,7 @@ msgstr "Bioloxía"
 
 #: model-gettext.py:14
 msgid "Parapsychology & occultism"
-msgstr ""
+msgstr "Parasicoloxía y ocultismu"
 
 #: model-gettext.py:15
 #, fuzzy
@@ -784,15 +784,15 @@ msgstr "Lóxica filosófica"
 
 #: model-gettext.py:18
 msgid "Ethics"
-msgstr ""
+msgstr "Ética"
 
 #: model-gettext.py:19
 msgid "Ancient, medieval & eastern philosophy"
-msgstr ""
+msgstr "Filosofía antigua, medieval y oriental"
 
 #: model-gettext.py:20
 msgid "Modern western philosophy"
-msgstr ""
+msgstr "Filosofía occidental moderna"
 
 #: model-gettext.py:21
 msgid "Religion"
@@ -800,27 +800,27 @@ msgstr "Relixón"
 
 #: model-gettext.py:22
 msgid "Philosophy & theory of religion"
-msgstr ""
+msgstr "Filosofía y teoría de la relixón"
 
 #: model-gettext.py:23
 msgid "The Bible"
-msgstr ""
+msgstr "La Biblia"
 
 #: model-gettext.py:24
 msgid "Christianity"
-msgstr ""
+msgstr "Cristianismu"
 
 #: model-gettext.py:25
 msgid "Christian practice & observance"
-msgstr ""
+msgstr "Praxis y observancia cristiana"
 
 #: model-gettext.py:26
 msgid "Christian pastoral practice & religious orders"
-msgstr ""
+msgstr "Práctica pastoral cristiana y ordes relixoses"
 
 #: model-gettext.py:27
 msgid "Christian organization, social work & worship"
-msgstr ""
+msgstr "Organización, trabayu social y cultu cristianos"
 
 #: model-gettext.py:28
 #, fuzzy
@@ -829,7 +829,7 @@ msgstr "Historia d'Asia"
 
 #: model-gettext.py:29
 msgid "Christian denominations"
-msgstr ""
+msgstr "Denominaciones cristianes"
 
 #: model-gettext.py:30
 msgid "Other religions"
@@ -841,55 +841,55 @@ msgstr "Ciencies sociales, socioloxía y antropoloxía"
 
 #: model-gettext.py:34
 msgid "Economics"
-msgstr ""
+msgstr "Economía"
 
 #: model-gettext.py:36
 msgid "Public administration & military science"
-msgstr ""
+msgstr "Alministración pública y ciencia militar"
 
 #: model-gettext.py:37
 msgid "Social problems & social services"
-msgstr ""
+msgstr "Problemes y servicios sociales"
 
 #: model-gettext.py:39
 msgid "Commerce, communications & transportation"
-msgstr ""
+msgstr "Comerciu, comunicaciones y tresportes"
 
 #: model-gettext.py:40
 msgid "Customs, etiquette & folklore"
-msgstr ""
+msgstr "Costumes, etiqueta y folclor"
 
 #: model-gettext.py:41 website/templates/navbar.html:15
 msgid "Language"
-msgstr ""
+msgstr "Llingua"
 
 #: model-gettext.py:43
 msgid "English & Old English languages"
-msgstr ""
+msgstr "Llingües inglesa y anglosaxona"
 
 #: model-gettext.py:44
 msgid "German & related languages"
-msgstr ""
+msgstr "Llingua alemana y rellacionaes"
 
 #: model-gettext.py:45
 msgid "French & related languages"
-msgstr ""
+msgstr "Llingua francesa y rellacionaes"
 
 #: model-gettext.py:46
 msgid "Italian, Romanian & related languages"
-msgstr ""
+msgstr "Llingües italiana, rumana y rellacionaes"
 
 #: model-gettext.py:47
 msgid "Spanish, Portuguese, Galician"
-msgstr ""
+msgstr "Castellán, portugués y gallegu"
 
 #: model-gettext.py:48
 msgid "Latin & Italic languages"
-msgstr ""
+msgstr "Llatín y llingües itáliques"
 
 #: model-gettext.py:49
 msgid "Classical & modern Greek languages"
-msgstr ""
+msgstr "Llingües griegues clásica y moderna"
 
 #: model-gettext.py:50
 #, fuzzy
@@ -902,15 +902,15 @@ msgstr "Ciencia"
 
 #: model-gettext.py:53
 msgid "Astronomy"
-msgstr ""
+msgstr "Astronomía"
 
 #: model-gettext.py:56
 msgid "Earth sciences & geology"
-msgstr ""
+msgstr "Ciencies de la Tierra y xeoloxía"
 
 #: model-gettext.py:57
 msgid "Fossils & prehistoric life"
-msgstr ""
+msgstr "Fósiles y vida prehistórica"
 
 #: model-gettext.py:58
 msgid "Biology"
@@ -918,11 +918,11 @@ msgstr "Bioloxía"
 
 #: model-gettext.py:59
 msgid "Plants (Botany)"
-msgstr ""
+msgstr "Plantes (botánica)"
 
 #: model-gettext.py:60
 msgid "Animals (Zoology)"
-msgstr ""
+msgstr "Animales (zooloxía)"
 
 #: model-gettext.py:61
 msgid "Technology"
@@ -938,7 +938,7 @@ msgstr "Agricultura"
 
 #: model-gettext.py:65
 msgid "Home & family management"
-msgstr ""
+msgstr "Alministración familiar y del llar"
 
 #: model-gettext.py:66
 msgid "Management & public relations"
@@ -950,55 +950,55 @@ msgstr "Inxeniería química"
 
 #: model-gettext.py:68
 msgid "Manufacturing"
-msgstr ""
+msgstr "Fabricación"
 
 #: model-gettext.py:69
 msgid "Manufacture for specific uses"
-msgstr ""
+msgstr "Fabricación pa usos concretos"
 
 #: model-gettext.py:70
 msgid "Construction of buildings"
-msgstr ""
+msgstr "Construcción d'edificios"
 
 #: model-gettext.py:71
 msgid "Arts"
-msgstr ""
+msgstr "Artes"
 
 #: model-gettext.py:72
 msgid "Area planning & landscape architecture"
-msgstr ""
+msgstr "Planificación territorial y paisaxismu"
 
 #: model-gettext.py:74
 msgid "Sculpture, ceramics & metalwork"
-msgstr ""
+msgstr "Escultura, cerámica y obres en metal"
 
 #: model-gettext.py:75
 msgid "Graphic arts & decorative arts"
-msgstr ""
+msgstr "Artes gráfiques y decoratives"
 
 #: model-gettext.py:76
 msgid "Painting"
-msgstr ""
+msgstr "Pintura"
 
 #: model-gettext.py:77
 msgid "Printmaking & prints"
-msgstr ""
+msgstr "Grabáu ya impresión"
 
 #: model-gettext.py:78
 msgid "Photography, computer art, film, video"
-msgstr ""
+msgstr "Fotografía, artes informátiques, cine y videu"
 
 #: model-gettext.py:79
 msgid "Music"
-msgstr ""
+msgstr "Música"
 
 #: model-gettext.py:80
 msgid "Sports, games & entertainment"
-msgstr ""
+msgstr "Deportes, xuegos y entretenimientu"
 
 #: model-gettext.py:81
 msgid "Literature, rhetoric & criticism"
-msgstr ""
+msgstr "Lliteratura, retórica y crítica"
 
 #: model-gettext.py:82
 msgid "American literature in English"
@@ -1006,7 +1006,7 @@ msgstr "Lliteratura de los Estaos Xuníos n’inglés"
 
 #: model-gettext.py:83
 msgid "English & Old English literatures"
-msgstr ""
+msgstr "Lliteratures inglesa y anglosaxona"
 
 #: model-gettext.py:84
 #, fuzzy
@@ -1020,11 +1020,11 @@ msgstr "Otres lliteratures"
 
 #: model-gettext.py:86
 msgid "Italian, Romanian & related literatures"
-msgstr ""
+msgstr "Lliteratures italiana, rumana y rellacionaes"
 
 #: model-gettext.py:87
 msgid "Spanish, Portuguese, Galician literatures"
-msgstr ""
+msgstr "Lliteratures castellana, portuguesa y gallega"
 
 #: model-gettext.py:88
 #, fuzzy
@@ -1033,7 +1033,7 @@ msgstr "Otres lliteratures"
 
 #: model-gettext.py:89
 msgid "Classical & modern Greek literatures"
-msgstr ""
+msgstr "Lliteratura griega clásica y moderna"
 
 #: model-gettext.py:90
 msgid "Other literatures"
@@ -1050,7 +1050,7 @@ msgstr "Xeografía y viaxes"
 
 #: model-gettext.py:94
 msgid "History of ancient world (to ca. 499)"
-msgstr ""
+msgstr "Hestoria del mundu antiguu (hasta ca. 499)"
 
 #: model-gettext.py:95
 #, fuzzy
@@ -1098,11 +1098,11 @@ msgstr "Otres lliteratures"
 
 #: model-gettext.py:104
 msgid "Public performances"
-msgstr ""
+msgstr "Representaciones públiques"
 
 #: model-gettext.py:105
 msgid "Stage presentations"
-msgstr ""
+msgstr "Presentaciones n'escena"
 
 #: model-gettext.py:106
 msgid "Indoor games & amusements"
@@ -1183,7 +1183,7 @@ msgstr "Creative Commons Attribution-NoDerivatives 4.0 Internacional (CC BY-ND 4
 
 #: model-gettext.py:125
 msgid "Zenodo"
-msgstr ""
+msgstr "Zenodo"
 
 #: model-gettext.py:126
 msgid "Zenodo is a general-purpose open repository hosted by CERN. If the document does not have a DOI yet, Zenodo will create one."
@@ -1494,9 +1494,9 @@ msgid "Published in %(year)s by"
 msgstr "Publicáu en %(year)s por"
 
 #: papers/templates/papers/paper.html:56
-#, fuzzy, python-format
+#, python-format
 msgid "and <a href=\"#\" id=\"showAllAuthors\">%(nb_remaining_authors)s other authors.</a>"
-msgstr "y <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s autores más</a>"
+msgstr "y <a href=\"#\" id=\"showAllAuthors\">%(nb_remaining_authors)s autores más</a>"
 
 #: papers/templates/papers/paper.html:62
 #, fuzzy
@@ -1633,7 +1633,6 @@ msgid " %(first_name)s %(last_name)s uses ORCID."
 msgstr " %(first_name)s %(last_name)s usa ORCID."
 
 #: papers/templates/papers/researcher.html:38
-#, fuzzy
 msgid "Refresh Publications"
 msgstr "Recargar les publicaciones"
 
@@ -1998,9 +1997,8 @@ msgstr[0] "(%(num_total)s artículu)"
 msgstr[1] "(%(num_total)s artículos)"
 
 #: publishers/templates/publishers/list.html:96
-#, fuzzy
 msgid "No publishers found"
-msgstr "Nun s'alcontró nengún artículu."
+msgstr "Nun s'alcontró nengún autor"
 
 #: publishers/templates/publishers/policy_pdfversion.html:5
 msgid "The published version is the final version of the paper, as formatted by the publisher."
@@ -2119,9 +2117,8 @@ msgid "Click or drop here"
 msgstr ""
 
 #: upload/templates/upload/widget.html:15
-#, fuzzy
 msgid "Or enter a URL:"
-msgstr "Meta-URL"
+msgstr "O apurre una URL:"
 
 #: upload/templates/upload/widget.html:19
 msgid "Upload from URL"
@@ -2254,9 +2251,8 @@ msgid "Can I create a profile on dissem.in?"
 msgstr "Nun pudo crease un proyeutu en OSF."
 
 #: website/templates/dissemin/faq.html:30
-#, fuzzy
 msgid "Policies and Full-text Availability"
-msgstr "Por disponibilidá del testu completu"
+msgstr "Polítiques y disponibilidá del testu completu"
 
 #: website/templates/dissemin/faq.html:31
 msgid "What do our policy classes mean?"
