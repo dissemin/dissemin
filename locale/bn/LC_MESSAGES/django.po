@@ -13,9 +13,8 @@
 #
 msgid ""
 msgstr ""
-""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-30 10:07+0100\n"
+"POT-Creation-Date: 2020-04-22 12:29+0200\n"
 "PO-Revision-Date: 2020-03-19 14:03:31+0000\n"
 "Language: bn\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -48,7 +47,7 @@ msgstr "ভান্ডার"
 msgid "Invalid full text identifier."
 msgstr "পূর্ণ বাক্য নির্দেশক অকার্যকর।"
 
-#: deposit/forms.py:144 papers/templates/papers/paper.html:168
+#: deposit/forms.py:144 papers/templates/papers/paper.html:181
 msgid "Abstract"
 msgstr "মূলভাব"
 
@@ -328,8 +327,8 @@ msgstr "ভান্ডার থেকে প্রত্যাখ্যাত"
 msgid "Deleted"
 msgstr "অপসারিত"
 
-#: deposit/models.py:340 deposit/templates/deposit/start.html:205
-#: deposit/views.py:118
+#: deposit/models.py:340 deposit/templates/deposit/start.html:228
+#: deposit/views.py:119
 msgid "Deposit"
 msgstr "জমা"
 
@@ -449,16 +448,16 @@ msgstr "প্রকল্প সবার জন্য উন্মুক্ত
 msgid "Failed to connect to the repository. Please try again later."
 msgstr "সংগ্রহস্থলের সাথে সংযোগ করতে ব্যর্থ। অনুগ্রহ করে পরে আবার চেষ্টা করুন।"
 
-#: deposit/sword/protocol.py:82
+#: deposit/sword/protocol.py:85
 #, fuzzy
 msgid "The repository {} returned invalid XML"
 msgstr "এই ভান্ডার পাওয়া যাচ্ছে না।"
 
-#: deposit/sword/protocol.py:330
+#: deposit/sword/protocol.py:335
 msgid "Username or password not provided for this repository. Please contact the Dissemin team."
 msgstr ""
 
-#: deposit/sword/protocol.py:355
+#: deposit/sword/protocol.py:360
 #, fuzzy
 msgid "Unable to deposit to repository"
 msgstr "অনানুষ্ঠানিক প্রকাশের পূর্বাবস্থা তৈরিতে ব্যর্থ।"
@@ -566,74 +565,76 @@ msgstr ""
 msgid "Options"
 msgstr ""
 
-#: deposit/templates/deposit/start.html:105
+#: deposit/templates/deposit/start.html:107
 msgid "Upload type:"
 msgstr ""
 
-#: deposit/templates/deposit/start.html:112
+#: deposit/templates/deposit/start.html:110
+#: deposit/templates/deposit/start.html:179
+#: deposit/templates/deposit/start.html:213
+msgid "Change"
+msgstr ""
+
+#: deposit/templates/deposit/start.html:120
 msgid "preprint"
 msgstr "প্রাকমুদ্রণ"
 
-#: deposit/templates/deposit/start.html:128
+#: deposit/templates/deposit/start.html:136
 msgid "postprint"
 msgstr "মুদ্রণপরবর্তী"
 
-#: deposit/templates/deposit/start.html:144
+#: deposit/templates/deposit/start.html:152
 #, fuzzy
 msgid "pdfversion"
 msgstr "প্রকাশিত সংস্করণ"
 
-#: deposit/templates/deposit/start.html:165
+#: deposit/templates/deposit/start.html:176
 msgid "Repository:"
 msgstr "ভান্ডার:"
 
-#: deposit/templates/deposit/start.html:192
+#: deposit/templates/deposit/start.html:210
 msgid "Metadata:"
 msgstr "মেটাউপাত্ত:"
 
-#: deposit/templates/deposit/start.html:212
+#: deposit/templates/deposit/start.html:235
 #: papers/templates/papers/search_base.html:165
 msgid "Paper animated bird"
 msgstr ""
 
-#: deposit/templates/deposit/start.html:213
+#: deposit/templates/deposit/start.html:236
 msgid "Submitting paper to repository"
 msgstr ""
 
-#: deposit/views.py:78
+#: deposit/views.py:79
 #, fuzzy
 msgid "This repository is currently not enabled."
 msgstr "এই ভান্ডার পাওয়া যাচ্ছে না।"
 
-#: deposit/views.py:84
+#: deposit/views.py:85
 msgid "This repository is not available for this paper."
 msgstr "এরকম ভান্ডার এই কাগজের জন্য উপলব্ধ নয়।"
 
-#: deposit/views.py:216
+#: deposit/views.py:217
 msgid "This repository could not be found."
 msgstr "এই ভান্ডার পাওয়া যাচ্ছে না।"
 
-#: deposit/views.py:259 deposit/views.py:275
+#: deposit/views.py:260 deposit/views.py:276
 msgid "Not all fields have been filled correctly."
 msgstr ""
 
-#: deposit/views.py:268
+#: deposit/views.py:269
 msgid "This repository cannot be used for this paper."
 msgstr "এই ভান্ডার এই কাগজের জন্য ব্যবহার করা যাবে না।"
 
-#: deposit/views.py:286
+#: deposit/views.py:287
 msgid "Access to the PDF was denied."
 msgstr "PDF-এ প্রবেশ প্রত্যাখ্যাত।"
 
-#: deposit/views.py:343
-msgid "Access to this ressource not allowed."
-msgstr ""
-
-#: deposit/views.py:348
+#: deposit/views.py:349
 msgid "Declaration {}.pdf"
 msgstr ""
 
-#: deposit/views.py:351
+#: deposit/views.py:352
 msgid "No pdf found for dr {}"
 msgstr ""
 
@@ -1150,7 +1151,10 @@ msgid "Green Open Access Service"
 msgstr "সবুজ উন্মুক্ত প্রবেশাধিকার সেবা"
 
 #: model-gettext.py:111
-msgid "Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n<br/>\nContact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
+msgid ""
+"Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n"
+"<br/>\n"
+"Contact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
 msgstr ""
 
 #: model-gettext.py:112
@@ -1158,7 +1162,11 @@ msgid "TUprints contract required!"
 msgstr ""
 
 #: model-gettext.py:113
-msgid "For every document, that you upload via Dissemin we need once a TUprints contract.\nPlease fill in the contract and send a printed and signed copy to:\n<br>\nULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
+msgid ""
+"For every document, that you upload via Dissemin we need once a TUprints contract.\n"
+"Please fill in the contract and send a printed and signed copy to:\n"
+"<br>\n"
+"ULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
 msgstr ""
 
 #: model-gettext.py:114
@@ -1311,7 +1319,7 @@ msgstr ""
 msgid "Other document"
 msgstr ""
 
-#: papers/forms.py:50 papers/views.py:72
+#: papers/forms.py:50 papers/views.py:73
 msgid "Invalid ORCID identifier."
 msgstr ""
 
@@ -1384,7 +1392,7 @@ msgstr ""
 msgid "Updating statistics"
 msgstr ""
 
-#: papers/models.py:1224 papers/views.py:144 papers/views.py:148
+#: papers/models.py:1224 papers/views.py:145 papers/views.py:149
 msgid "Papers"
 msgstr "কাগজসমূহ"
 
@@ -1453,7 +1461,7 @@ msgid "Format"
 msgstr ""
 
 #: papers/templates/papers/export_citation_modal.html:31
-#: papers/templates/papers/paper.html:154
+#: papers/templates/papers/paper.html:167
 #: papers/templates/papers/paper_list.html:55
 msgid "Download"
 msgstr ""
@@ -1520,45 +1528,51 @@ msgstr ""
 msgid "Show less"
 msgstr ""
 
-#: papers/templates/papers/paper.html:73
+#: papers/templates/papers/paper.html:74
 #, fuzzy
 msgid "Deposit accomplished!"
 msgstr "জমার তারিখ"
 
-#: papers/templates/papers/paper.html:74
+#: papers/templates/papers/paper.html:75
 #, python-format
 msgid "<p>This paper was successfully deposited and is now freely available at <a class=\"alert-link\" href=\"%(splash_url)s\">this address.</a></p>"
 msgstr ""
 
-#: papers/templates/papers/paper.html:81 papers/templates/papers/paper.html:113
+#: papers/templates/papers/paper.html:82 papers/templates/papers/paper.html:92
+#: papers/templates/papers/paper.html:126
 msgid "Deposit almost accomplished!"
 msgstr ""
 
-#: papers/templates/papers/paper.html:83
+#: papers/templates/papers/paper.html:85
 #, python-format
-msgid "<p>This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(splash_url)s\">this address</a> after validation by the repository administrators.</p>"
+msgid "<p>This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available after validation by the repository administration. You can check for the status in your <a class=\"alert-link\" href=\"%(my_profile)s\">profile</a>.</p>"
 msgstr ""
 
-#: papers/templates/papers/paper.html:103
+#: papers/templates/papers/paper.html:95
+#, python-format
+msgid "<p>This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available after validation by the repository administration, but not before %(pub_date)s. You can check for the status in your <a class=\"alert-link\" href=\"%(my_profile)s\">profile</a>.</p>"
+msgstr ""
+
+#: papers/templates/papers/paper.html:116
 #: website/templates/dissemin/start_page.html:129
 msgid "Learn more!"
 msgstr ""
 
-#: papers/templates/papers/paper.html:114
+#: papers/templates/papers/paper.html:127
 #, python-format
-msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(deposit_url)s\">this address</a> after validation by the repository administrators."
+msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available after validation by the repository administration."
 msgstr ""
 
-#: papers/templates/papers/paper.html:127
+#: papers/templates/papers/paper.html:140
 #, python-format
 msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(deposit_url)s\">this address</a> from <strong>%(pub_date|localize)s</strong> on due to an embargo."
 msgstr ""
 
-#: papers/templates/papers/paper.html:152
+#: papers/templates/papers/paper.html:165
 msgid "Full text:"
 msgstr ""
 
-#: papers/templates/papers/paper.html:156 statistics/models.py:66
+#: papers/templates/papers/paper.html:169 statistics/models.py:66
 msgid "Unavailable"
 msgstr ""
 
@@ -1854,48 +1868,48 @@ msgstr ""
 msgid "Question mark in circle"
 msgstr ""
 
-#: papers/views.py:88
+#: papers/views.py:89
 msgid "Dissemin requires access to your ORCID name, which is marked as private in your ORCID profile."
 msgstr ""
 
-#: papers/views.py:147
+#: papers/views.py:148
 msgid "All papers"
 msgstr ""
 
-#: papers/views.py:253
+#: papers/views.py:257
 msgid "To-do list"
 msgstr ""
 
-#: papers/views.py:254
+#: papers/views.py:258
 msgid "Papers on my to-do list"
 msgstr ""
 
-#: papers/views.py:278
+#: papers/views.py:282
 msgid "Invalid ORCID profile. Please make sure it includes a public name."
 msgstr ""
 
-#: papers/views.py:281
+#: papers/views.py:285
 msgid "Invalid ORCID profile."
 msgstr ""
 
-#: papers/views.py:309
+#: papers/views.py:313
 msgid "authored by"
 msgstr ""
 
-#: papers/views.py:377
+#: papers/views.py:381
 msgid "Paper view expects a DOI or a pk"
 msgstr ""
 
-#: papers/views.py:382
+#: papers/views.py:386
 #, python-format
 msgid "No %(verbose_name)s found matching the query"
 msgstr ""
 
-#: papers/views.py:386
+#: papers/views.py:390
 msgid "This paper has been deleted."
 msgstr ""
 
-#: papers/views.py:431
+#: papers/views.py:435
 msgid "Invalid DOI."
 msgstr ""
 
@@ -2191,7 +2205,10 @@ msgstr "প্রবেশ প্রত্যাখ্যাত"
 #: website/templates/403.html:13
 #, fuzzy, python-format
 msgid "The access to the requested page has been denied. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr "\n            আপনার অনুরোধকৃত পাতাটি পাওয়া গেল না। <a href=\"/\">মূল পাতায় ফিরে যান।</a>\n           "
+msgstr ""
+"\n"
+"            আপনার অনুরোধকৃত পাতাটি পাওয়া গেল না। <a href=\"/\">মূল পাতায় ফিরে যান।</a>\n"
+"           "
 
 #: website/templates/404.html:6 website/templates/404.html:10
 msgid "Page not found"
@@ -2200,7 +2217,10 @@ msgstr "পাতাটি পাওয়া যাচ্ছেনা"
 #: website/templates/404.html:13
 #, fuzzy, python-format
 msgid "The page you requested could not be found. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr "\n            আপনার অনুরোধকৃত পাতাটি পাওয়া গেল না। <a href=\"/\">মূল পাতায় ফিরে যান।</a>\n           "
+msgstr ""
+"\n"
+"            আপনার অনুরোধকৃত পাতাটি পাওয়া গেল না। <a href=\"/\">মূল পাতায় ফিরে যান।</a>\n"
+"           "
 
 #: website/templates/500.html:6 website/templates/500.html:10
 #, fuzzy
@@ -2210,7 +2230,10 @@ msgstr "অভ্যন্তরীণ ত্রুটি"
 #: website/templates/500.html:13
 #, fuzzy, python-format
 msgid "Your request triggered an internal server error. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr "\n            আপনার অনুরোধকৃত পাতাটি পাওয়া গেল না। <a href=\"/\">মূল পাতায় ফিরে যান।</a>\n           "
+msgstr ""
+"\n"
+"            আপনার অনুরোধকৃত পাতাটি পাওয়া গেল না। <a href=\"/\">মূল পাতায় ফিরে যান।</a>\n"
+"           "
 
 #: website/templates/admin/base_site.html:5
 #: website/templates/admin/base_site.html:8
@@ -2911,4 +2934,3 @@ msgstr ""
 #, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr ""
-

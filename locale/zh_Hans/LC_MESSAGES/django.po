@@ -15,9 +15,8 @@
 #
 msgid ""
 msgstr ""
-""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-30 10:07+0100\n"
+"POT-Creation-Date: 2020-04-22 12:29+0200\n"
 "PO-Revision-Date: 2020-03-19 14:03:36+0000\n"
 "Language: zh_hans\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -53,7 +52,7 @@ msgstr "存储库"
 msgid "Invalid full text identifier."
 msgstr "无效的全文标识符。"
 
-#: deposit/forms.py:144 papers/templates/papers/paper.html:168
+#: deposit/forms.py:144 papers/templates/papers/paper.html:181
 msgid "Abstract"
 msgstr "摘要"
 
@@ -332,8 +331,8 @@ msgstr "被存储库拒绝"
 msgid "Deleted"
 msgstr "已删除"
 
-#: deposit/models.py:340 deposit/templates/deposit/start.html:205
-#: deposit/views.py:118
+#: deposit/models.py:340 deposit/templates/deposit/start.html:228
+#: deposit/views.py:119
 msgid "Deposit"
 msgstr "存放"
 
@@ -453,16 +452,16 @@ msgstr "无法将项目公开化。"
 msgid "Failed to connect to the repository. Please try again later."
 msgstr "无法连接到存储库。请稍后重试。"
 
-#: deposit/sword/protocol.py:82
+#: deposit/sword/protocol.py:85
 #, fuzzy
 msgid "The repository {} returned invalid XML"
 msgstr "找不到此存储库。"
 
-#: deposit/sword/protocol.py:330
+#: deposit/sword/protocol.py:335
 msgid "Username or password not provided for this repository. Please contact the Dissemin team."
 msgstr ""
 
-#: deposit/sword/protocol.py:355
+#: deposit/sword/protocol.py:360
 #, fuzzy
 msgid "Unable to deposit to repository"
 msgstr "无法创建预印本。"
@@ -549,7 +548,10 @@ msgstr "存放"
 #: deposit/templates/deposit/start.html:64
 #, fuzzy, python-format
 msgid "You can deposit the full text of your article. Dissemin will send it to a repository where it will be made freely available. By depositing your article via Dissemin, you agree to our <a href=\"%(tosurl)s\">terms of service</a>."
-msgstr "\n            您可以存放您的文章全文。Dissemin将发送它到其能够自由展示的存储库。通过使用Dissemin存放您的文章，您同意我们的<a href=\"%(tosurl)s\">服务条款</a>。\n        "
+msgstr ""
+"\n"
+"            您可以存放您的文章全文。Dissemin将发送它到其能够自由展示的存储库。通过使用Dissemin存放您的文章，您同意我们的<a href=\"%(tosurl)s\">服务条款</a>。\n"
+"        "
 
 #: deposit/templates/deposit/start.html:72
 #, fuzzy
@@ -572,74 +574,76 @@ msgstr "文档"
 msgid "Options"
 msgstr "选项"
 
-#: deposit/templates/deposit/start.html:105
+#: deposit/templates/deposit/start.html:107
 msgid "Upload type:"
 msgstr "上传类型："
 
-#: deposit/templates/deposit/start.html:112
+#: deposit/templates/deposit/start.html:110
+#: deposit/templates/deposit/start.html:179
+#: deposit/templates/deposit/start.html:213
+msgid "Change"
+msgstr ""
+
+#: deposit/templates/deposit/start.html:120
 msgid "preprint"
 msgstr "预印本"
 
-#: deposit/templates/deposit/start.html:128
+#: deposit/templates/deposit/start.html:136
 msgid "postprint"
 msgstr "后印本"
 
-#: deposit/templates/deposit/start.html:144
+#: deposit/templates/deposit/start.html:152
 #, fuzzy
 msgid "pdfversion"
 msgstr "发行版本"
 
-#: deposit/templates/deposit/start.html:165
+#: deposit/templates/deposit/start.html:176
 msgid "Repository:"
 msgstr "存储库："
 
-#: deposit/templates/deposit/start.html:192
+#: deposit/templates/deposit/start.html:210
 msgid "Metadata:"
 msgstr "元数据："
 
-#: deposit/templates/deposit/start.html:212
+#: deposit/templates/deposit/start.html:235
 #: papers/templates/papers/search_base.html:165
 msgid "Paper animated bird"
 msgstr ""
 
-#: deposit/templates/deposit/start.html:213
+#: deposit/templates/deposit/start.html:236
 msgid "Submitting paper to repository"
 msgstr ""
 
-#: deposit/views.py:78
+#: deposit/views.py:79
 #, fuzzy
 msgid "This repository is currently not enabled."
 msgstr "找不到此存储库。"
 
-#: deposit/views.py:84
+#: deposit/views.py:85
 msgid "This repository is not available for this paper."
 msgstr "此存储库不适用于该论文。"
 
-#: deposit/views.py:216
+#: deposit/views.py:217
 msgid "This repository could not be found."
 msgstr "找不到此存储库。"
 
-#: deposit/views.py:259 deposit/views.py:275
+#: deposit/views.py:260 deposit/views.py:276
 msgid "Not all fields have been filled correctly."
 msgstr ""
 
-#: deposit/views.py:268
+#: deposit/views.py:269
 msgid "This repository cannot be used for this paper."
 msgstr "此存储库不能用于该论文。"
 
-#: deposit/views.py:286
+#: deposit/views.py:287
 msgid "Access to the PDF was denied."
 msgstr "访问PDF被拒绝。"
 
-#: deposit/views.py:343
-msgid "Access to this ressource not allowed."
-msgstr ""
-
-#: deposit/views.py:348
+#: deposit/views.py:349
 msgid "Declaration {}.pdf"
 msgstr "声明 {}.pdf"
 
-#: deposit/views.py:351
+#: deposit/views.py:352
 msgid "No pdf found for dr {}"
 msgstr ""
 
@@ -1146,7 +1150,10 @@ msgid "Green Open Access Service"
 msgstr "绿色开放访问"
 
 #: model-gettext.py:111
-msgid "Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n<br/>\nContact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
+msgid ""
+"Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n"
+"<br/>\n"
+"Contact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
 msgstr ""
 
 #: model-gettext.py:112
@@ -1154,7 +1161,11 @@ msgid "TUprints contract required!"
 msgstr ""
 
 #: model-gettext.py:113
-msgid "For every document, that you upload via Dissemin we need once a TUprints contract.\nPlease fill in the contract and send a printed and signed copy to:\n<br>\nULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
+msgid ""
+"For every document, that you upload via Dissemin we need once a TUprints contract.\n"
+"Please fill in the contract and send a printed and signed copy to:\n"
+"<br>\n"
+"ULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
 msgstr ""
 
 #: model-gettext.py:114
@@ -1311,7 +1322,7 @@ msgstr "预印本"
 msgid "Other document"
 msgstr "其他文档"
 
-#: papers/forms.py:50 papers/views.py:72
+#: papers/forms.py:50 papers/views.py:73
 msgid "Invalid ORCID identifier."
 msgstr "无效的ORCID标识符。"
 
@@ -1384,7 +1395,7 @@ msgstr "正在聚集出版物"
 msgid "Updating statistics"
 msgstr "正在更新统计"
 
-#: papers/models.py:1224 papers/views.py:144 papers/views.py:148
+#: papers/models.py:1224 papers/views.py:145 papers/views.py:149
 msgid "Papers"
 msgstr "论文"
 
@@ -1455,7 +1466,7 @@ msgid "Format"
 msgstr "格式"
 
 #: papers/templates/papers/export_citation_modal.html:31
-#: papers/templates/papers/paper.html:154
+#: papers/templates/papers/paper.html:167
 #: papers/templates/papers/paper_list.html:55
 msgid "Download"
 msgstr "下载"
@@ -1517,51 +1528,60 @@ msgstr "出版于%(year)s由"
 #: papers/templates/papers/paper.html:56
 #, fuzzy, python-format
 msgid "and <a href=\"#\" id=\"showAllAuthors\">%(nb_remaining_authors)s other authors.</a>"
-msgstr "\n            以及<a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s位其他作者</a>\n            "
+msgstr ""
+"\n"
+"            以及<a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s位其他作者</a>\n"
+"            "
 
 #: papers/templates/papers/paper.html:62
 #, fuzzy
 msgid "Show less"
 msgstr "显示"
 
-#: papers/templates/papers/paper.html:73
+#: papers/templates/papers/paper.html:74
 msgid "Deposit accomplished!"
 msgstr ""
 
-#: papers/templates/papers/paper.html:74
+#: papers/templates/papers/paper.html:75
 #, python-format
 msgid "<p>This paper was successfully deposited and is now freely available at <a class=\"alert-link\" href=\"%(splash_url)s\">this address.</a></p>"
 msgstr ""
 
-#: papers/templates/papers/paper.html:81 papers/templates/papers/paper.html:113
+#: papers/templates/papers/paper.html:82 papers/templates/papers/paper.html:92
+#: papers/templates/papers/paper.html:126
 msgid "Deposit almost accomplished!"
 msgstr ""
 
-#: papers/templates/papers/paper.html:83
-#, python-format
-msgid "<p>This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(splash_url)s\">this address</a> after validation by the repository administrators.</p>"
-msgstr ""
+#: papers/templates/papers/paper.html:85
+#, fuzzy, python-format
+msgid "<p>This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available after validation by the repository administration. You can check for the status in your <a class=\"alert-link\" href=\"%(my_profile)s\">profile</a>.</p>"
+msgstr "<strong>就快完成了！</strong>这篇论文已存放于<a href=\"%(repo_url)s\">%(repo_name)s</a>。在存储库的管理员验证后，全文将在<a href=\"%(deposit_url)s\">此地址</a>提供。"
 
-#: papers/templates/papers/paper.html:103
+#: papers/templates/papers/paper.html:95
+#, fuzzy, python-format
+msgid "<p>This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available after validation by the repository administration, but not before %(pub_date)s. You can check for the status in your <a class=\"alert-link\" href=\"%(my_profile)s\">profile</a>.</p>"
+msgstr "<strong>就快完成了！</strong>这篇论文已存放于<a href=\"%(repo_url)s\">%(repo_name)s</a>。在存储库的管理员验证后，全文将在<a href=\"%(deposit_url)s\">此地址</a>提供。"
+
+#: papers/templates/papers/paper.html:116
 #: website/templates/dissemin/start_page.html:129
 msgid "Learn more!"
 msgstr "了解更多"
 
-#: papers/templates/papers/paper.html:114
+#: papers/templates/papers/paper.html:127
 #, fuzzy, python-format
-msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(deposit_url)s\">this address</a> after validation by the repository administrators."
+msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available after validation by the repository administration."
 msgstr "<strong>就快完成了！</strong>这篇论文已存放于<a href=\"%(repo_url)s\">%(repo_name)s</a>。在存储库的管理员验证后，全文将在<a href=\"%(deposit_url)s\">此地址</a>提供。"
 
-#: papers/templates/papers/paper.html:127
+#: papers/templates/papers/paper.html:140
 #, fuzzy, python-format
 msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(deposit_url)s\">this address</a> from <strong>%(pub_date|localize)s</strong> on due to an embargo."
 msgstr "<strong>就快完成了！</strong>这篇论文已存放于<a href=\"%(repo_url)s\">%(repo_name)s</a>。在存储库的管理员验证后，全文将在<a href=\"%(deposit_url)s\">此地址</a>提供。"
 
-#: papers/templates/papers/paper.html:152
+#: papers/templates/papers/paper.html:165
 msgid "Full text:"
 msgstr "全文："
 
-#: papers/templates/papers/paper.html:156 statistics/models.py:66
+#: papers/templates/papers/paper.html:169 statistics/models.py:66
 msgid "Unavailable"
 msgstr "不可用"
 
@@ -1857,50 +1877,53 @@ msgstr ""
 msgid "Question mark in circle"
 msgstr ""
 
-#: papers/views.py:88
+#: papers/views.py:89
 msgid "Dissemin requires access to your ORCID name, which is marked as private in your ORCID profile."
 msgstr ""
 
-#: papers/views.py:147
+#: papers/views.py:148
 msgid "All papers"
 msgstr "所有论文"
 
-#: papers/views.py:253
+#: papers/views.py:257
 msgid "To-do list"
 msgstr "待办事项"
 
-#: papers/views.py:254
+#: papers/views.py:258
 msgid "Papers on my to-do list"
 msgstr ""
 
-#: papers/views.py:278
+#: papers/views.py:282
 #, fuzzy
 msgid "Invalid ORCID profile. Please make sure it includes a public name."
-msgstr "\n                            无效的ORCID详情。请确保它包含公开名称。\n                            "
+msgstr ""
+"\n"
+"                            无效的ORCID详情。请确保它包含公开名称。\n"
+"                            "
 
-#: papers/views.py:281
+#: papers/views.py:285
 msgid "Invalid ORCID profile."
 msgstr "无效的ORCID详情。"
 
-#: papers/views.py:309
+#: papers/views.py:313
 #, fuzzy
 msgid "authored by"
 msgstr "作者：\\"
 
-#: papers/views.py:377
+#: papers/views.py:381
 msgid "Paper view expects a DOI or a pk"
 msgstr ""
 
-#: papers/views.py:382
+#: papers/views.py:386
 #, python-format
 msgid "No %(verbose_name)s found matching the query"
 msgstr "找不到匹配查询的%(verbose_name)s"
 
-#: papers/views.py:386
+#: papers/views.py:390
 msgid "This paper has been deleted."
 msgstr ""
 
-#: papers/views.py:431
+#: papers/views.py:435
 msgid "Invalid DOI."
 msgstr "无效的DOI。"
 
@@ -2199,7 +2222,10 @@ msgstr "访问PDF被拒绝。"
 #: website/templates/403.html:13
 #, fuzzy, python-format
 msgid "The access to the requested page has been denied. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr "\n            找不到您请求的页面。<a href=\"/\">返回首页。</a>\n           "
+msgstr ""
+"\n"
+"            找不到您请求的页面。<a href=\"/\">返回首页。</a>\n"
+"           "
 
 #: website/templates/404.html:6 website/templates/404.html:10
 msgid "Page not found"
@@ -2208,7 +2234,10 @@ msgstr "找不到页面"
 #: website/templates/404.html:13
 #, fuzzy, python-format
 msgid "The page you requested could not be found. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr "\n            找不到您请求的页面。<a href=\"/\">返回首页。</a>\n           "
+msgstr ""
+"\n"
+"            找不到您请求的页面。<a href=\"/\">返回首页。</a>\n"
+"           "
 
 #: website/templates/500.html:6 website/templates/500.html:10
 #, fuzzy
@@ -2218,7 +2247,10 @@ msgstr "内部错误"
 #: website/templates/500.html:13
 #, fuzzy, python-format
 msgid "Your request triggered an internal server error. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr "\n            您的请求触发了内部错误。<a href=\"/\">返回首页。</a>\n           "
+msgstr ""
+"\n"
+"            您的请求触发了内部错误。<a href=\"/\">返回首页。</a>\n"
+"           "
 
 #: website/templates/admin/base_site.html:5
 #: website/templates/admin/base_site.html:8
@@ -2935,5 +2967,7 @@ msgstr "验证错误"
 #: website/templates/socialaccount/authentication_error.html:15
 #, fuzzy, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
-msgstr "\n            验证失败。<a href=\"/\">返回登录页面。</a>\n           "
-
+msgstr ""
+"\n"
+"            验证失败。<a href=\"/\">返回登录页面。</a>\n"
+"           "

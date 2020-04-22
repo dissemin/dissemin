@@ -8,9 +8,8 @@
 #
 msgid ""
 msgstr ""
-""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-07 14:39+0100\n"
+"POT-Creation-Date: 2020-04-22 12:29+0200\n"
 "PO-Revision-Date: 2020-03-19 14:03:31+0000\n"
 "Language: zh_hant\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -84,23 +83,22 @@ msgstr "不明錯誤"
 msgid "While fetching file from %(url)s the following error occured:"
 msgstr "從 %(url)s 取得檔案時發生以下錯誤："
 
-#: website/static/js/dissemin.js:758
+#: website/static/js/dissemin.js:781
 msgid "Sorry, we could not fill this for you."
 msgstr "很抱歉，我們無法替您填寫此欄位。"
 
-#: website/static/js/dissemin.js:759
+#: website/static/js/dissemin.js:782
 msgid "Trying to fill this field automatically for you..."
 msgstr "正在嘗試替您自動填寫欄位…"
 
-#: website/static/js/dissemin.js:793
+#: website/static/js/dissemin.js:816
 msgid "You have not selected a file for upload."
 msgstr "您尚未選擇要上傳的檔案。"
 
-#: website/static/js/dissemin.js:820
+#: website/static/js/dissemin.js:843
 msgid "Dissemin encountered an error, please try again later."
 msgstr "Dissemin 出現錯誤，請稍後再試。"
 
 #: website/static/js/moment.min.js:1
 msgid ": "
 msgstr ": "
-

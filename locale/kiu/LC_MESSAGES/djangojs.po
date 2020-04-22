@@ -9,12 +9,13 @@
 #
 msgid ""
 msgstr ""
-""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-04-22 12:29+0200\n"
 "PO-Revision-Date: 2020-03-23 13:57:49+0000\n"
-"X-POT-Import-Date: 2020-03-17 02:10:16+0000\n"
+"Language: kiu\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: kiu\n"
+"X-POT-Import-Date: 2020-03-17 02:10:16+0000\n"
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -82,23 +83,22 @@ msgstr "Xetaya nêzanıtiye"
 msgid "While fetching file from %(url)s the following error occured:"
 msgstr "Dosyay %(url)s ra Dosya ardış de xetay cêri veciyê:"
 
-#: website/static/js/dissemin.js:758
+#: website/static/js/dissemin.js:781
 msgid "Sorry, we could not fill this for you."
 msgstr "Qısur mewni, ma nêşa ney seba şıma pır kerê"
 
-#: website/static/js/dissemin.js:759
+#: website/static/js/dissemin.js:782
 msgid "Trying to fill this field automatically for you..."
 msgstr "Enê cayi mayê kem ke seba şıma otomatik pır kerê..."
 
-#: website/static/js/dissemin.js:793
+#: website/static/js/dissemin.js:816
 msgid "You have not selected a file for upload."
 msgstr "Seba bar kerdışi yew dosya weçinê"
 
-#: website/static/js/dissemin.js:820
+#: website/static/js/dissemin.js:843
 msgid "Dissemin encountered an error, please try again later."
 msgstr "Dissemin dustê yew xeta amê, kerem kerê dıme reyna bıcerrebnê."
 
 #: website/static/js/moment.min.js:1
 msgid ": "
 msgstr ": "
-

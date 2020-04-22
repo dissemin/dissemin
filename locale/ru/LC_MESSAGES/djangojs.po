@@ -16,7 +16,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-07 14:39+0100\n"
+"POT-Creation-Date: 2020-04-22 12:29+0200\n"
 "PO-Revision-Date: 2019-10-14 15:19:32+0000\n"
 "Language: ru\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -33,80 +33,80 @@ msgstr[0] "%s документ найден"
 msgstr[1] "%s документа найдено"
 msgstr[2] "%s документов найдено"
 
-#: website/static/js/dissemin.js:293
+#: website/static/js/dissemin.js:291
 msgid "Claiming..."
 msgstr ""
 
-#: website/static/js/dissemin.js:297
+#: website/static/js/dissemin.js:295
 msgid "Unclaiming..."
 msgstr ""
 
-#: website/static/js/dissemin.js:313
+#: website/static/js/dissemin.js:311
 msgid "Claiming failed!"
 msgstr ""
 
-#: website/static/js/dissemin.js:316
+#: website/static/js/dissemin.js:314
 msgid "Unclaiming failed!"
 msgstr ""
 
-#: website/static/js/dissemin.js:321
+#: website/static/js/dissemin.js:319
 msgid "Exclude from my profile"
 msgstr ""
 
-#: website/static/js/dissemin.js:325
+#: website/static/js/dissemin.js:323
 msgid "Include in my profile"
 msgstr ""
 
-#: website/static/js/dissemin.js:350
+#: website/static/js/dissemin.js:348
 #, fuzzy
 #| msgid "Adding to todolist"
 msgid "Adding to to-do list"
 msgstr "Добавление в список работ"
 
-#: website/static/js/dissemin.js:354
+#: website/static/js/dissemin.js:352
 #, fuzzy
 #| msgid "Removing from todolist"
 msgid "Removing from to-do list"
 msgstr "Удаление из списка работ"
 
-#: website/static/js/dissemin.js:600
+#: website/static/js/dissemin.js:598
 msgid "Preview of uploaded file"
 msgstr ""
 
-#: website/static/js/dissemin.js:603
-msgid "Pages: "
+#: website/static/js/dissemin.js:601
+msgid "Pages"
 msgstr ""
 
-#: website/static/js/dissemin.js:604
-msgid "Size: "
+#: website/static/js/dissemin.js:602
+msgid "Size"
 msgstr ""
 
-#: website/static/js/dissemin.js:619
+#: website/static/js/dissemin.js:617
 msgid "While uploading %(file)s the following error occured:"
 msgstr ""
 
-#: website/static/js/dissemin.js:628 website/static/js/dissemin.js:683
-#: website/static/js/dissemin.js:689
+#: website/static/js/dissemin.js:626 website/static/js/dissemin.js:681
+#: website/static/js/dissemin.js:687
 msgid "Unknown error"
 msgstr ""
 
-#: website/static/js/dissemin.js:673
+#: website/static/js/dissemin.js:671
 msgid "While fetching file from %(url)s the following error occured:"
 msgstr ""
 
-#: website/static/js/dissemin.js:760
+#: website/static/js/dissemin.js:781
 msgid "Sorry, we could not fill this for you."
 msgstr ""
 
-#: website/static/js/dissemin.js:761
+#: website/static/js/dissemin.js:782
 msgid "Trying to fill this field automatically for you..."
 msgstr ""
 
-#: website/static/js/dissemin.js:795
+#: website/static/js/dissemin.js:816
 msgid "You have not selected a file for upload."
 msgstr ""
 
-#: website/static/js/dissemin.js:822
+#: website/static/js/dissemin.js:843
 msgid "Dissemin encountered an error, please try again later."
 msgstr ""
 

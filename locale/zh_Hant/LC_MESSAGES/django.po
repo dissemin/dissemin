@@ -10,10 +10,9 @@
 #
 msgid ""
 msgstr ""
-""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-30 10:07+0100\n"
+"POT-Creation-Date: 2020-04-22 12:29+0200\n"
 "PO-Revision-Date: 2020-03-19 14:03:36+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -49,7 +48,7 @@ msgstr "知識庫"
 msgid "Invalid full text identifier."
 msgstr "無效的全文識別。"
 
-#: deposit/forms.py:144 papers/templates/papers/paper.html:168
+#: deposit/forms.py:144 papers/templates/papers/paper.html:181
 msgid "Abstract"
 msgstr "摘要"
 
@@ -326,8 +325,8 @@ msgstr "被知識庫拒絕"
 msgid "Deleted"
 msgstr "已刪除"
 
-#: deposit/models.py:340 deposit/templates/deposit/start.html:205
-#: deposit/views.py:118
+#: deposit/models.py:340 deposit/templates/deposit/start.html:228
+#: deposit/views.py:119
 msgid "Deposit"
 msgstr "存放"
 
@@ -447,15 +446,15 @@ msgstr "無法讓專案公開。"
 msgid "Failed to connect to the repository. Please try again later."
 msgstr "連接至知識庫失敗。請稍後再試。"
 
-#: deposit/sword/protocol.py:82
+#: deposit/sword/protocol.py:85
 msgid "The repository {} returned invalid XML"
 msgstr "知識庫 {} 回傳無效的 XML"
 
-#: deposit/sword/protocol.py:330
+#: deposit/sword/protocol.py:335
 msgid "Username or password not provided for this repository. Please contact the Dissemin team."
 msgstr "未提供此知識庫使用者名稱或密碼，請聯絡 Dissemin 團隊。"
 
-#: deposit/sword/protocol.py:355
+#: deposit/sword/protocol.py:360
 msgid "Unable to deposit to repository"
 msgstr "無法存放到知識庫"
 
@@ -562,72 +561,74 @@ msgstr "文件"
 msgid "Options"
 msgstr "選項"
 
-#: deposit/templates/deposit/start.html:105
+#: deposit/templates/deposit/start.html:107
 msgid "Upload type:"
 msgstr "上傳類型："
 
-#: deposit/templates/deposit/start.html:112
+#: deposit/templates/deposit/start.html:110
+#: deposit/templates/deposit/start.html:179
+#: deposit/templates/deposit/start.html:213
+msgid "Change"
+msgstr ""
+
+#: deposit/templates/deposit/start.html:120
 msgid "preprint"
 msgstr "預印本"
 
-#: deposit/templates/deposit/start.html:128
+#: deposit/templates/deposit/start.html:136
 msgid "postprint"
 msgstr "後刊本"
 
-#: deposit/templates/deposit/start.html:144
+#: deposit/templates/deposit/start.html:152
 msgid "pdfversion"
 msgstr "PDF 版本"
 
-#: deposit/templates/deposit/start.html:165
+#: deposit/templates/deposit/start.html:176
 msgid "Repository:"
 msgstr "知識庫："
 
-#: deposit/templates/deposit/start.html:192
+#: deposit/templates/deposit/start.html:210
 msgid "Metadata:"
 msgstr "詮釋資料："
 
-#: deposit/templates/deposit/start.html:212
+#: deposit/templates/deposit/start.html:235
 #: papers/templates/papers/search_base.html:165
 msgid "Paper animated bird"
 msgstr "外觀為論文紙張模樣的動態鳥"
 
-#: deposit/templates/deposit/start.html:213
+#: deposit/templates/deposit/start.html:236
 msgid "Submitting paper to repository"
 msgstr "正在提交論文到知識庫"
 
-#: deposit/views.py:78
+#: deposit/views.py:79
 msgid "This repository is currently not enabled."
 msgstr "此知識庫目前未啟用。"
 
-#: deposit/views.py:84
+#: deposit/views.py:85
 msgid "This repository is not available for this paper."
 msgstr "此知識庫不適用於此論文。"
 
-#: deposit/views.py:216
+#: deposit/views.py:217
 msgid "This repository could not be found."
 msgstr "找不到此知識庫。"
 
-#: deposit/views.py:259 deposit/views.py:275
+#: deposit/views.py:260 deposit/views.py:276
 msgid "Not all fields have been filled correctly."
 msgstr "並非所有欄位都有正確填寫。"
 
-#: deposit/views.py:268
+#: deposit/views.py:269
 msgid "This repository cannot be used for this paper."
 msgstr "此知識庫不可用於此論文。"
 
-#: deposit/views.py:286
+#: deposit/views.py:287
 msgid "Access to the PDF was denied."
 msgstr "獲取 PDF 被拒絕。"
 
-#: deposit/views.py:343
-msgid "Access to this ressource not allowed."
-msgstr "不允許取用此資源。"
-
-#: deposit/views.py:348
+#: deposit/views.py:349
 msgid "Declaration {}.pdf"
 msgstr "聲明 {}.pdf"
 
-#: deposit/views.py:351
+#: deposit/views.py:352
 msgid "No pdf found for dr {}"
 msgstr "找不到 dr {} 的 pdf"
 
@@ -1108,16 +1109,30 @@ msgid "Green Open Access Service"
 msgstr "綠色開放取用服務"
 
 #: model-gettext.py:111
-msgid "Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n<br/>\nContact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
-msgstr "您是否願意達姆斯塔特大學與周立圖書館替您出版您的綠色開放取用出版物？\n<br/>\n聯絡我們：<a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
+msgid ""
+"Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n"
+"<br/>\n"
+"Contact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
+msgstr ""
+"您是否願意達姆斯塔特大學與周立圖書館替您出版您的綠色開放取用出版物？\n"
+"<br/>\n"
+"聯絡我們：<a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
 
 #: model-gettext.py:112
 msgid "TUprints contract required!"
 msgstr "需要 TUprints 契約！"
 
 #: model-gettext.py:113
-msgid "For every document, that you upload via Dissemin we need once a TUprints contract.\nPlease fill in the contract and send a printed and signed copy to:\n<br>\nULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
-msgstr "對於所有您透過 Dissemin 上傳的文件，我們需要一份 TUprints 契約。\n請填寫契約，並寄送列印內容與屬名副本至：\n<br>\nULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
+msgid ""
+"For every document, that you upload via Dissemin we need once a TUprints contract.\n"
+"Please fill in the contract and send a printed and signed copy to:\n"
+"<br>\n"
+"ULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
+msgstr ""
+"對於所有您透過 Dissemin 上傳的文件，我們需要一份 TUprints 契約。\n"
+"請填寫契約，並寄送列印內容與屬名副本至：\n"
+"<br>\n"
+"ULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
 
 #: model-gettext.py:114
 msgid "Download contract"
@@ -1265,7 +1280,7 @@ msgstr "預刊本"
 msgid "Other document"
 msgstr "其它文件"
 
-#: papers/forms.py:50 papers/views.py:72
+#: papers/forms.py:50 papers/views.py:73
 msgid "Invalid ORCID identifier."
 msgstr "無效的 ORCID 識別碼。"
 
@@ -1338,7 +1353,7 @@ msgstr "正在聚集出版項目"
 msgid "Updating statistics"
 msgstr "正在更新統計內容"
 
-#: papers/models.py:1224 papers/views.py:144 papers/views.py:148
+#: papers/models.py:1224 papers/views.py:145 papers/views.py:149
 msgid "Papers"
 msgstr "論文"
 
@@ -1406,7 +1421,7 @@ msgid "Format"
 msgstr "格式"
 
 #: papers/templates/papers/export_citation_modal.html:31
-#: papers/templates/papers/paper.html:154
+#: papers/templates/papers/paper.html:167
 #: papers/templates/papers/paper_list.html:55
 msgid "Download"
 msgstr "下載"
@@ -1470,44 +1485,53 @@ msgstr "以及 <a href=\"#\" id=\"showAllAuthors\">%(nb_remaining_authors)s 位�
 msgid "Show less"
 msgstr "顯示較少"
 
-#: papers/templates/papers/paper.html:73
+#: papers/templates/papers/paper.html:74
 msgid "Deposit accomplished!"
 msgstr "存放完成！"
 
-#: papers/templates/papers/paper.html:74
+#: papers/templates/papers/paper.html:75
 #, python-format
 msgid "<p>This paper was successfully deposited and is now freely available at <a class=\"alert-link\" href=\"%(splash_url)s\">this address.</a></p>"
 msgstr "<p>此論文已存放成功，並可在<a class=\"alert-link\" href=\"%(splash_url)s\">此連結</a>裡自由取得。</p>"
 
-#: papers/templates/papers/paper.html:81 papers/templates/papers/paper.html:113
+#: papers/templates/papers/paper.html:82 papers/templates/papers/paper.html:92
+#: papers/templates/papers/paper.html:126
 msgid "Deposit almost accomplished!"
 msgstr "存放快完成了！"
 
-#: papers/templates/papers/paper.html:83
-#, python-format
-msgid "<p>This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(splash_url)s\">this address</a> after validation by the repository administrators.</p>"
+#: papers/templates/papers/paper.html:85
+#, fuzzy, python-format
+#| msgid "<p>This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(splash_url)s\">this address</a> after validation by the repository administrators.</p>"
+msgid "<p>This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available after validation by the repository administration. You can check for the status in your <a class=\"alert-link\" href=\"%(my_profile)s\">profile</a>.</p>"
 msgstr "此論文已被存放在 <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a> 裡。由知識庫管理員給確認後，全文內容將在<a class=\"alert-link\" href=\"%(splash_url)s\">此連結</a>可用。"
 
-#: papers/templates/papers/paper.html:103
+#: papers/templates/papers/paper.html:95
+#, fuzzy, python-format
+#| msgid "<p>This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(splash_url)s\">this address</a> after validation by the repository administrators.</p>"
+msgid "<p>This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available after validation by the repository administration, but not before %(pub_date)s. You can check for the status in your <a class=\"alert-link\" href=\"%(my_profile)s\">profile</a>.</p>"
+msgstr "此論文已被存放在 <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a> 裡。由知識庫管理員給確認後，全文內容將在<a class=\"alert-link\" href=\"%(splash_url)s\">此連結</a>可用。"
+
+#: papers/templates/papers/paper.html:116
 #: website/templates/dissemin/start_page.html:129
 msgid "Learn more!"
 msgstr "了解更多！"
 
-#: papers/templates/papers/paper.html:114
-#, python-format
-msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(deposit_url)s\">this address</a> after validation by the repository administrators."
+#: papers/templates/papers/paper.html:127
+#, fuzzy, python-format
+#| msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(deposit_url)s\">this address</a> after validation by the repository administrators."
+msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available after validation by the repository administration."
 msgstr "此論文已被存放在 <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a> 裡。由知識庫管理員給確認後，全文內容將在<a class=\"alert-link\" href=\"%(deposit_url)s\">此位址</a>可用。"
 
-#: papers/templates/papers/paper.html:127
+#: papers/templates/papers/paper.html:140
 #, python-format
 msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(deposit_url)s\">this address</a> from <strong>%(pub_date|localize)s</strong> on due to an embargo."
 msgstr "此論文已被存放在 <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a> 裡。出於限制緣故，全文內容是從<strong>%(pub_date|localize)s</strong>開始在<a class=\"alert-link\" href=\"%(deposit_url)s\">此位址</a>可用。"
 
-#: papers/templates/papers/paper.html:152
+#: papers/templates/papers/paper.html:165
 msgid "Full text:"
 msgstr "全文："
 
-#: papers/templates/papers/paper.html:156 statistics/models.py:66
+#: papers/templates/papers/paper.html:169 statistics/models.py:66
 msgid "Unavailable"
 msgstr "不可用"
 
@@ -1800,48 +1824,48 @@ msgstr "白圈"
 msgid "Question mark in circle"
 msgstr "圓圈裡的問號"
 
-#: papers/views.py:88
+#: papers/views.py:89
 msgid "Dissemin requires access to your ORCID name, which is marked as private in your ORCID profile."
 msgstr "Dissemin 需要取用您的 ORCID 名稱，此在您的 ORCID 個人資料被標記成未公開。"
 
-#: papers/views.py:147
+#: papers/views.py:148
 msgid "All papers"
 msgstr "所有論文"
 
-#: papers/views.py:253
+#: papers/views.py:257
 msgid "To-do list"
 msgstr "待辦清單"
 
-#: papers/views.py:254
+#: papers/views.py:258
 msgid "Papers on my to-do list"
 msgstr "在我待辦清單的論文"
 
-#: papers/views.py:278
+#: papers/views.py:282
 msgid "Invalid ORCID profile. Please make sure it includes a public name."
 msgstr "無效的 ORCID 個人資料。請確認有包含公開名稱。"
 
-#: papers/views.py:281
+#: papers/views.py:285
 msgid "Invalid ORCID profile."
 msgstr "無效 ORCID 個人檔案。"
 
-#: papers/views.py:309
+#: papers/views.py:313
 msgid "authored by"
 msgstr "創作出自"
 
-#: papers/views.py:377
+#: papers/views.py:381
 msgid "Paper view expects a DOI or a pk"
 msgstr "論文檢視需要 DOI 或 pk"
 
-#: papers/views.py:382
+#: papers/views.py:386
 #, python-format
 msgid "No %(verbose_name)s found matching the query"
 msgstr "找不到符合查詢的%(verbose_name)s"
 
-#: papers/views.py:386
+#: papers/views.py:390
 msgid "This paper has been deleted."
 msgstr "此論文已被刪除。"
 
-#: papers/views.py:431
+#: papers/views.py:435
 msgid "Invalid DOI."
 msgstr "無效 DOI。"
 
@@ -2489,7 +2513,9 @@ msgstr "然後，目前 Dissemin 僅支援遵循<a href=\"https://www.openarchiv
 
 #: website/templates/dissemin/faq.html:448
 msgid "If the repository is registered in BASE, please <a href=\"https://www.base-search.net/\">search in BASE</a> to check that your article is there. If it is, then this may be a bug of Dissemin; please file an <a href=\"https://github.com/dissemin/dissemin/issues\">issue</a> describing the problem, or send a message to <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>."
-msgstr "如果知識庫已經註冊到 BASE，請<a href=\"https://www.base-search.net/\">在 BASE 裡搜尋</a>來查看您的文章是否有出現。如果有找到的話，這可能是\n Dissemin 有程式錯誤，請在<a href=\"https://github.com/dissemin/dissemin/issues\">這裡</a>提出來描述問題，或是寄送訊息到 <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>。"
+msgstr ""
+"如果知識庫已經註冊到 BASE，請<a href=\"https://www.base-search.net/\">在 BASE 裡搜尋</a>來查看您的文章是否有出現。如果有找到的話，這可能是\n"
+" Dissemin 有程式錯誤，請在<a href=\"https://github.com/dissemin/dissemin/issues\">這裡</a>提出來描述問題，或是寄送訊息到 <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>。"
 
 #: website/templates/dissemin/faq.html:462
 msgid "Authenticating users is necessary to deposit papers on their behalf in open repositories. Besides, knowing a user's ORCID id helps us find its publications, avoiding articles authored by namesakes for instance. Logging in via ORCID will not expose any private information to Dissemin: we only have access to the public part of your ORCID record. For instance, unless you have explicitly marked your email address as public, we do not even know your email address when you log in to Dissemin via ORCID."
@@ -2521,7 +2547,9 @@ msgstr "點擊「新增至 ORCID」（Add to ORCID）來新增您的出版項目
 
 #: website/templates/dissemin/faq.html:503
 msgid "You can also add publications to your profile <em>on Dissemin</em>, by clicking the button \"Include in my profile\" in search results on Dissemin. (This button is only visible when you are logged in, and next to papers that Dissemin thinks you have authored.) You can also exclude articles from your profile in this way. Please note that these changes are local to Dissemin and are <em>not</em> propagated to your ORCID profile, because ORCID does not have a free API allowing us to propagate them."
-msgstr "您也可以<em>在 Dissemin</em> 來新增出版項目道您的個人檔案，透過在 Dissemin 搜尋結果中點擊「包含在我的個人檔案」按鍵即可。（此按鍵是要您已經有登入，而且只顯示在有被 Dissemin 判斷出是由您所編寫之論文的一旁。）您也可以用此方式在您個人檔案裡排除不需要的文章。請注意這些變動僅侷限於\nDissemin 而<em>不會</em>影響到您的 ORCID 個人檔案，因為 ORCID 並沒有可以讓我們自由使用來更改它們內容的 API。"
+msgstr ""
+"您也可以<em>在 Dissemin</em> 來新增出版項目道您的個人檔案，透過在 Dissemin 搜尋結果中點擊「包含在我的個人檔案」按鍵即可。（此按鍵是要您已經有登入，而且只顯示在有被 Dissemin 判斷出是由您所編寫之論文的一旁。）您也可以用此方式在您個人檔案裡排除不需要的文章。請注意這些變動僅侷限於\n"
+"Dissemin 而<em>不會</em>影響到您的 ORCID 個人檔案，因為 ORCID 並沒有可以讓我們自由使用來更改它們內容的 API。"
 
 #: website/templates/dissemin/faq.html:512
 #, python-format
@@ -2841,3 +2869,5 @@ msgstr "驗證錯誤"
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr "驗證失敗。<a href=\"%(account-login)s\">返回登入頁面。</a>"
 
+#~ msgid "Access to this ressource not allowed."
+#~ msgstr "不允許取用此資源。"

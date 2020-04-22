@@ -13,10 +13,9 @@
 #
 msgid ""
 msgstr ""
-""
 "Project-Id-Version: dissem.in\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-07 14:39+0100\n"
+"POT-Creation-Date: 2020-04-22 12:29+0200\n"
 "PO-Revision-Date: 2020-03-19 14:03:30+0000\n"
 "Last-Translator: Ryan Lahfa <masterancpp@gmail.com>\n"
 "Language-Team: Antoine Amarilli <a3nm@a3nm.net>\n"
@@ -94,23 +93,22 @@ msgstr "Erreur inconnue"
 msgid "While fetching file from %(url)s the following error occured:"
 msgstr "Lors de la récupération du fichier depuis %(url)s, l’erreur suivante s’est produite :"
 
-#: website/static/js/dissemin.js:758
+#: website/static/js/dissemin.js:781
 msgid "Sorry, we could not fill this for you."
 msgstr "Désolé, nous n’avons pas pu remplir ceci pour vous."
 
-#: website/static/js/dissemin.js:759
+#: website/static/js/dissemin.js:782
 msgid "Trying to fill this field automatically for you..."
 msgstr "Essai de remplissage automatique pour vous de ce champ en cours..."
 
-#: website/static/js/dissemin.js:793
+#: website/static/js/dissemin.js:816
 msgid "You have not selected a file for upload."
 msgstr "Vous n’avez sélectionné aucun fichier à téléverser."
 
-#: website/static/js/dissemin.js:820
+#: website/static/js/dissemin.js:843
 msgid "Dissemin encountered an error, please try again later."
 msgstr "Dissemin a rencontré une erreur, veuillez essayer à nouveau plus tard."
 
 #: website/static/js/moment.min.js:1
 msgid ": "
 msgstr ": "
-

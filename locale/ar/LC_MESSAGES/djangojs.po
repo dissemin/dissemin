@@ -10,9 +10,8 @@
 #
 msgid ""
 msgstr ""
-""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-07 14:39+0100\n"
+"POT-Creation-Date: 2020-04-22 12:29+0200\n"
 "PO-Revision-Date: 2020-03-31 13:51:14+0000\n"
 "Language: ar\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -91,23 +90,22 @@ msgstr "خطأ غير معروف"
 msgid "While fetching file from %(url)s the following error occured:"
 msgstr "أثناء جلب الملف من %(url)s، حدث الخطأ التالي:"
 
-#: website/static/js/dissemin.js:758
+#: website/static/js/dissemin.js:781
 msgid "Sorry, we could not fill this for you."
 msgstr "عذرا، لم نتمكن من ملء هذا لأجلك."
 
-#: website/static/js/dissemin.js:759
+#: website/static/js/dissemin.js:782
 msgid "Trying to fill this field automatically for you..."
 msgstr "تجري محاولة ملء هذا الحقل تلقائيا لأجلك..."
 
-#: website/static/js/dissemin.js:793
+#: website/static/js/dissemin.js:816
 msgid "You have not selected a file for upload."
 msgstr "لم تقم بتحديد ملف للرافعه."
 
-#: website/static/js/dissemin.js:820
+#: website/static/js/dissemin.js:843
 msgid "Dissemin encountered an error, please try again later."
 msgstr "واجه ديسمين؛ الرجاء إعادة المحاولة لاحقا."
 
 #: website/static/js/moment.min.js:1
 msgid ": "
 msgstr ": "
-

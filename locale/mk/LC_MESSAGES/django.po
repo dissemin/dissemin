@@ -10,9 +10,8 @@
 #
 msgid ""
 msgstr ""
-""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-30 10:07+0100\n"
+"POT-Creation-Date: 2020-04-22 12:29+0200\n"
 "PO-Revision-Date: 2020-03-19 14:03:34+0000\n"
 "Language: mk\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -45,7 +44,7 @@ msgstr "Складиште"
 msgid "Invalid full text identifier."
 msgstr "Неважечка целотекстна назнака."
 
-#: deposit/forms.py:144 papers/templates/papers/paper.html:168
+#: deposit/forms.py:144 papers/templates/papers/paper.html:181
 msgid "Abstract"
 msgstr "Извадок"
 
@@ -324,8 +323,8 @@ msgstr "Одбиено од складиштето"
 msgid "Deleted"
 msgstr "Избришано"
 
-#: deposit/models.py:340 deposit/templates/deposit/start.html:205
-#: deposit/views.py:118
+#: deposit/models.py:340 deposit/templates/deposit/start.html:228
+#: deposit/views.py:119
 msgid "Deposit"
 msgstr "Поднесок"
 
@@ -445,16 +444,16 @@ msgstr "Не можам да го направам проектот како ј�
 msgid "Failed to connect to the repository. Please try again later."
 msgstr "Не успеав да се поврзам со складиштето. Обидете се подоцна."
 
-#: deposit/sword/protocol.py:82
+#: deposit/sword/protocol.py:85
 #, fuzzy
 msgid "The repository {} returned invalid XML"
 msgstr "Не можев да го пронајдам складиштето."
 
-#: deposit/sword/protocol.py:330
+#: deposit/sword/protocol.py:335
 msgid "Username or password not provided for this repository. Please contact the Dissemin team."
 msgstr ""
 
-#: deposit/sword/protocol.py:355
+#: deposit/sword/protocol.py:360
 #, fuzzy
 msgid "Unable to deposit to repository"
 msgstr "Не можам да го избришам проектот."
@@ -565,74 +564,76 @@ msgstr "Документ"
 msgid "Options"
 msgstr "Можности"
 
-#: deposit/templates/deposit/start.html:105
+#: deposit/templates/deposit/start.html:107
 msgid "Upload type:"
 msgstr "Вид подигање:"
 
-#: deposit/templates/deposit/start.html:112
+#: deposit/templates/deposit/start.html:110
+#: deposit/templates/deposit/start.html:179
+#: deposit/templates/deposit/start.html:213
+msgid "Change"
+msgstr ""
+
+#: deposit/templates/deposit/start.html:120
 msgid "preprint"
 msgstr "првична верзија"
 
-#: deposit/templates/deposit/start.html:128
+#: deposit/templates/deposit/start.html:136
 msgid "postprint"
 msgstr "рецензирана верзија"
 
-#: deposit/templates/deposit/start.html:144
+#: deposit/templates/deposit/start.html:152
 #, fuzzy
 msgid "pdfversion"
 msgstr "објавена верзија"
 
-#: deposit/templates/deposit/start.html:165
+#: deposit/templates/deposit/start.html:176
 msgid "Repository:"
 msgstr "Складиште:"
 
-#: deposit/templates/deposit/start.html:192
+#: deposit/templates/deposit/start.html:210
 #, fuzzy
 msgid "Metadata:"
 msgstr "Метаподатоци"
 
-#: deposit/templates/deposit/start.html:212
+#: deposit/templates/deposit/start.html:235
 #: papers/templates/papers/search_base.html:165
 msgid "Paper animated bird"
 msgstr ""
 
-#: deposit/templates/deposit/start.html:213
+#: deposit/templates/deposit/start.html:236
 msgid "Submitting paper to repository"
 msgstr ""
 
-#: deposit/views.py:78
+#: deposit/views.py:79
 msgid "This repository is currently not enabled."
 msgstr "Ова складиште во моментов не е овозможено."
 
-#: deposit/views.py:84
+#: deposit/views.py:85
 msgid "This repository is not available for this paper."
 msgstr "Складиштето не е достапно за овој напис."
 
-#: deposit/views.py:216
+#: deposit/views.py:217
 msgid "This repository could not be found."
 msgstr "Не можев да го пронајдам складиштето."
 
-#: deposit/views.py:259 deposit/views.py:275
+#: deposit/views.py:260 deposit/views.py:276
 msgid "Not all fields have been filled correctly."
 msgstr ""
 
-#: deposit/views.py:268
+#: deposit/views.py:269
 msgid "This repository cannot be used for this paper."
 msgstr "Ова складиште не може да се користи за овој напис."
 
-#: deposit/views.py:286
+#: deposit/views.py:287
 msgid "Access to the PDF was denied."
 msgstr "Одбиен пристапот до PDF."
 
-#: deposit/views.py:343
-msgid "Access to this ressource not allowed."
-msgstr "Пристапот до овој ресурс не е дозволен."
-
-#: deposit/views.py:348
+#: deposit/views.py:349
 msgid "Declaration {}.pdf"
 msgstr "Изјава {}.pdf"
 
-#: deposit/views.py:351
+#: deposit/views.py:352
 msgid "No pdf found for dr {}"
 msgstr ""
 
@@ -1149,7 +1150,10 @@ msgid "Green Open Access Service"
 msgstr "Зелен отворен пристап"
 
 #: model-gettext.py:111
-msgid "Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n<br/>\nContact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
+msgid ""
+"Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n"
+"<br/>\n"
+"Contact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
 msgstr ""
 
 #: model-gettext.py:112
@@ -1157,7 +1161,11 @@ msgid "TUprints contract required!"
 msgstr ""
 
 #: model-gettext.py:113
-msgid "For every document, that you upload via Dissemin we need once a TUprints contract.\nPlease fill in the contract and send a printed and signed copy to:\n<br>\nULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
+msgid ""
+"For every document, that you upload via Dissemin we need once a TUprints contract.\n"
+"Please fill in the contract and send a printed and signed copy to:\n"
+"<br>\n"
+"ULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
 msgstr ""
 
 #: model-gettext.py:114
@@ -1318,7 +1326,7 @@ msgstr "Првична верзија"
 msgid "Other document"
 msgstr "Друг документ"
 
-#: papers/forms.py:50 papers/views.py:72
+#: papers/forms.py:50 papers/views.py:73
 msgid "Invalid ORCID identifier."
 msgstr "Неважечка ORCID-назнака."
 
@@ -1391,7 +1399,7 @@ msgstr "Групирање на објавите"
 msgid "Updating statistics"
 msgstr "Поднова на статистиките"
 
-#: papers/models.py:1224 papers/views.py:144 papers/views.py:148
+#: papers/models.py:1224 papers/views.py:145 papers/views.py:149
 msgid "Papers"
 msgstr "Написи"
 
@@ -1462,7 +1470,7 @@ msgid "Format"
 msgstr "Формат"
 
 #: papers/templates/papers/export_citation_modal.html:31
-#: papers/templates/papers/paper.html:154
+#: papers/templates/papers/paper.html:167
 #: papers/templates/papers/paper_list.html:55
 msgid "Download"
 msgstr "Преземи"
@@ -1532,44 +1540,53 @@ msgstr "и <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s дру
 msgid "Show less"
 msgstr "Прикажи"
 
-#: papers/templates/papers/paper.html:73
+#: papers/templates/papers/paper.html:74
 msgid "Deposit accomplished!"
 msgstr ""
 
-#: papers/templates/papers/paper.html:74
+#: papers/templates/papers/paper.html:75
 #, python-format
 msgid "<p>This paper was successfully deposited and is now freely available at <a class=\"alert-link\" href=\"%(splash_url)s\">this address.</a></p>"
 msgstr ""
 
-#: papers/templates/papers/paper.html:81 papers/templates/papers/paper.html:113
+#: papers/templates/papers/paper.html:82 papers/templates/papers/paper.html:92
+#: papers/templates/papers/paper.html:126
 msgid "Deposit almost accomplished!"
 msgstr ""
 
-#: papers/templates/papers/paper.html:83
-#, python-format
-msgid "<p>This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(splash_url)s\">this address</a> after validation by the repository administrators.</p>"
+#: papers/templates/papers/paper.html:85
+#, fuzzy, python-format
+#| msgid "<p>This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(splash_url)s\">this address</a> after validation by the repository administrators.</p>"
+msgid "<p>This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available after validation by the repository administration. You can check for the status in your <a class=\"alert-link\" href=\"%(my_profile)s\">profile</a>.</p>"
 msgstr "<p>Овој напис е поднесен во <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. Целосниот текст ќе биде достапен на <a class=\"alert-link\" href=\"%(splash_url)s\">оваа адреса</a> после потврдување од раководителите на складиштето.</p>"
 
-#: papers/templates/papers/paper.html:103
+#: papers/templates/papers/paper.html:95
+#, fuzzy, python-format
+#| msgid "<p>This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(splash_url)s\">this address</a> after validation by the repository administrators.</p>"
+msgid "<p>This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available after validation by the repository administration, but not before %(pub_date)s. You can check for the status in your <a class=\"alert-link\" href=\"%(my_profile)s\">profile</a>.</p>"
+msgstr "<p>Овој напис е поднесен во <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. Целосниот текст ќе биде достапен на <a class=\"alert-link\" href=\"%(splash_url)s\">оваа адреса</a> после потврдување од раководителите на складиштето.</p>"
+
+#: papers/templates/papers/paper.html:116
 #: website/templates/dissemin/start_page.html:129
 msgid "Learn more!"
 msgstr ""
 
-#: papers/templates/papers/paper.html:114
-#, python-format
-msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(deposit_url)s\">this address</a> after validation by the repository administrators."
+#: papers/templates/papers/paper.html:127
+#, fuzzy, python-format
+#| msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(deposit_url)s\">this address</a> after validation by the repository administrators."
+msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available after validation by the repository administration."
 msgstr "Овој напис е поднесен во <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. Целосниот текст ќе биде достапен на <a class=\"alert-link\" href=\"%(deposit_url)s\">оваа адреса</a> откако ќе биде потврден од раководителите на складиштето."
 
-#: papers/templates/papers/paper.html:127
+#: papers/templates/papers/paper.html:140
 #, fuzzy, python-format
 msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(deposit_url)s\">this address</a> from <strong>%(pub_date|localize)s</strong> on due to an embargo."
 msgstr "Овој напис е поднесен во <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. Целосниот текст ќе биде достапен на <a class=\"alert-link\" href=\"%(deposit_url)s\">оваа адреса</a> откако ќе биде потврден од раководителите на складиштето."
 
-#: papers/templates/papers/paper.html:152
+#: papers/templates/papers/paper.html:165
 msgid "Full text:"
 msgstr "Целосен текст:"
 
-#: papers/templates/papers/paper.html:156 statistics/models.py:66
+#: papers/templates/papers/paper.html:169 statistics/models.py:66
 msgid "Unavailable"
 msgstr "Недостапно"
 
@@ -1866,48 +1883,48 @@ msgstr ""
 msgid "Question mark in circle"
 msgstr ""
 
-#: papers/views.py:88
+#: papers/views.py:89
 msgid "Dissemin requires access to your ORCID name, which is marked as private in your ORCID profile."
 msgstr ""
 
-#: papers/views.py:147
+#: papers/views.py:148
 msgid "All papers"
 msgstr "Сите написи"
 
-#: papers/views.py:253
+#: papers/views.py:257
 msgid "To-do list"
 msgstr ""
 
-#: papers/views.py:254
+#: papers/views.py:258
 msgid "Papers on my to-do list"
 msgstr ""
 
-#: papers/views.py:278
+#: papers/views.py:282
 msgid "Invalid ORCID profile. Please make sure it includes a public name."
 msgstr "Неважечки профил на ORCID. Проверете дали има јавно име."
 
-#: papers/views.py:281
+#: papers/views.py:285
 msgid "Invalid ORCID profile."
 msgstr "Неважечки профил на ORCID."
 
-#: papers/views.py:309
+#: papers/views.py:313
 msgid "authored by"
 msgstr "во авторство на"
 
-#: papers/views.py:377
+#: papers/views.py:381
 msgid "Paper view expects a DOI or a pk"
 msgstr ""
 
-#: papers/views.py:382
+#: papers/views.py:386
 #, python-format
 msgid "No %(verbose_name)s found matching the query"
 msgstr "Не пронајдов %(verbose_name)s што одговара на бараното"
 
-#: papers/views.py:386
+#: papers/views.py:390
 msgid "This paper has been deleted."
 msgstr "Овој напис е избришан."
 
-#: papers/views.py:431
+#: papers/views.py:435
 msgid "Invalid DOI."
 msgstr "Неважечки DOI."
 
@@ -2928,3 +2945,5 @@ msgstr "Грешка при заверката"
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr ""
 
+#~ msgid "Access to this ressource not allowed."
+#~ msgstr "Пристапот до овој ресурс не е дозволен."

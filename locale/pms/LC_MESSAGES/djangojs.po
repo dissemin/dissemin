@@ -8,9 +8,8 @@
 #
 msgid ""
 msgstr ""
-""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-07 14:39+0100\n"
+"POT-Creation-Date: 2020-04-22 12:29+0200\n"
 "PO-Revision-Date: 2020-03-19 14:03:30+0000\n"
 "Language: pms\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -83,23 +82,22 @@ msgstr "Eror dësconossù"
 msgid "While fetching file from %(url)s the following error occured:"
 msgstr "Durant l'arcuperassion ëd l'archivi da %(url)s a l'é suceduje cost eror-sì:"
 
-#: website/static/js/dissemin.js:758
+#: website/static/js/dissemin.js:781
 msgid "Sorry, we could not fill this for you."
 msgstr "An dëspias, i l'oma nen podù compilé sòn për chiel."
 
-#: website/static/js/dissemin.js:759
+#: website/static/js/dissemin.js:782
 msgid "Trying to fill this field automatically for you..."
 msgstr "I provoma a compile 's camp-sì për chiel an automàtich..."
 
-#: website/static/js/dissemin.js:793
+#: website/static/js/dissemin.js:816
 msgid "You have not selected a file for upload."
 msgstr "A l'ha selessionà gnun archivi da carié."
 
-#: website/static/js/dissemin.js:820
+#: website/static/js/dissemin.js:843
 msgid "Dissemin encountered an error, please try again later."
 msgstr "Dissemin a l'ha rancontrà n'eror, për piasì ch'a preuva torna pi tard."
 
 #: website/static/js/moment.min.js:1
 msgid ": "
 msgstr ": "
-
