@@ -599,7 +599,7 @@ function showUploadedFileSummary(response) {
         })
     );
     $("#uploadedFilePages").text(gettext("Pages") + ": " + response.num_pages);
-    $("#uploadedFileSize").text(gettext("Size") + ": " + response.size + "MB");
+    $("#uploadedFileSize").text(gettext("Size") + ": " + response.size + " MB");
     $("#uploadedFileSummary").removeClass("d-none");
 }
 
