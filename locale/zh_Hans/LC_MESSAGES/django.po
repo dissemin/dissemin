@@ -16,7 +16,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-22 12:29+0200\n"
+"POT-Creation-Date: 2020-04-23 08:11+0200\n"
 "PO-Revision-Date: 2020-03-19 14:03:36+0000\n"
 "Language: zh_hans\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -52,7 +52,7 @@ msgstr "存储库"
 msgid "Invalid full text identifier."
 msgstr "无效的全文标识符。"
 
-#: deposit/forms.py:144 papers/templates/papers/paper.html:181
+#: deposit/forms.py:144 papers/templates/papers/paper.html:193
 msgid "Abstract"
 msgstr "摘要"
 
@@ -1466,7 +1466,7 @@ msgid "Format"
 msgstr "格式"
 
 #: papers/templates/papers/export_citation_modal.html:31
-#: papers/templates/papers/paper.html:167
+#: papers/templates/papers/paper.html:179
 #: papers/templates/papers/paper_list.html:55
 msgid "Download"
 msgstr "下载"
@@ -1542,46 +1542,46 @@ msgstr "显示"
 msgid "Deposit accomplished!"
 msgstr ""
 
-#: papers/templates/papers/paper.html:75
+#: papers/templates/papers/paper.html:76
 #, python-format
-msgid "<p>This paper was successfully deposited and is now freely available at <a class=\"alert-link\" href=\"%(splash_url)s\">this address.</a></p>"
+msgid "This paper was successfully deposited and is now freely available at <a class=\"alert-link\" href=\"%(splash_url)s\">this address.</a>>"
 msgstr ""
 
-#: papers/templates/papers/paper.html:82 papers/templates/papers/paper.html:92
-#: papers/templates/papers/paper.html:126
+#: papers/templates/papers/paper.html:84 papers/templates/papers/paper.html:98
+#: papers/templates/papers/paper.html:136
 msgid "Deposit almost accomplished!"
 msgstr ""
 
-#: papers/templates/papers/paper.html:85
+#: papers/templates/papers/paper.html:88
 #, fuzzy, python-format
-msgid "<p>This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available after validation by the repository administration. You can check for the status in your <a class=\"alert-link\" href=\"%(my_profile)s\">profile</a>.</p>"
+msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available after validation by the repository administration. You can check for the status in your <a class=\"alert-link\" href=\"%(my_profile)s\">profile</a>."
 msgstr "<strong>就快完成了！</strong>这篇论文已存放于<a href=\"%(repo_url)s\">%(repo_name)s</a>。在存储库的管理员验证后，全文将在<a href=\"%(deposit_url)s\">此地址</a>提供。"
 
-#: papers/templates/papers/paper.html:95
+#: papers/templates/papers/paper.html:102
 #, fuzzy, python-format
-msgid "<p>This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available after validation by the repository administration, but not before %(pub_date)s. You can check for the status in your <a class=\"alert-link\" href=\"%(my_profile)s\">profile</a>.</p>"
+msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available after validation by the repository administration, but not before %(pub_date)s. You can check for the status in your <a class=\"alert-link\" href=\"%(my_profile)s\">profile</a>."
 msgstr "<strong>就快完成了！</strong>这篇论文已存放于<a href=\"%(repo_url)s\">%(repo_name)s</a>。在存储库的管理员验证后，全文将在<a href=\"%(deposit_url)s\">此地址</a>提供。"
 
-#: papers/templates/papers/paper.html:116
+#: papers/templates/papers/paper.html:126
 #: website/templates/dissemin/start_page.html:129
 msgid "Learn more!"
 msgstr "了解更多"
 
-#: papers/templates/papers/paper.html:127
+#: papers/templates/papers/paper.html:138
 #, fuzzy, python-format
 msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available after validation by the repository administration."
 msgstr "<strong>就快完成了！</strong>这篇论文已存放于<a href=\"%(repo_url)s\">%(repo_name)s</a>。在存储库的管理员验证后，全文将在<a href=\"%(deposit_url)s\">此地址</a>提供。"
 
-#: papers/templates/papers/paper.html:140
+#: papers/templates/papers/paper.html:152
 #, fuzzy, python-format
 msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(deposit_url)s\">this address</a> from <strong>%(pub_date|localize)s</strong> on due to an embargo."
 msgstr "<strong>就快完成了！</strong>这篇论文已存放于<a href=\"%(repo_url)s\">%(repo_name)s</a>。在存储库的管理员验证后，全文将在<a href=\"%(deposit_url)s\">此地址</a>提供。"
 
-#: papers/templates/papers/paper.html:165
+#: papers/templates/papers/paper.html:177
 msgid "Full text:"
 msgstr "全文："
 
-#: papers/templates/papers/paper.html:169 statistics/models.py:66
+#: papers/templates/papers/paper.html:181 statistics/models.py:66
 msgid "Unavailable"
 msgstr "不可用"
 

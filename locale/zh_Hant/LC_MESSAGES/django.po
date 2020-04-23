@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-22 12:29+0200\n"
+"POT-Creation-Date: 2020-04-23 08:11+0200\n"
 "PO-Revision-Date: 2020-03-19 14:03:36+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -48,7 +48,7 @@ msgstr "知識庫"
 msgid "Invalid full text identifier."
 msgstr "無效的全文識別。"
 
-#: deposit/forms.py:144 papers/templates/papers/paper.html:181
+#: deposit/forms.py:144 papers/templates/papers/paper.html:193
 msgid "Abstract"
 msgstr "摘要"
 
@@ -1421,7 +1421,7 @@ msgid "Format"
 msgstr "格式"
 
 #: papers/templates/papers/export_citation_modal.html:31
-#: papers/templates/papers/paper.html:167
+#: papers/templates/papers/paper.html:179
 #: papers/templates/papers/paper_list.html:55
 msgid "Download"
 msgstr "下載"
@@ -1489,49 +1489,50 @@ msgstr "顯示較少"
 msgid "Deposit accomplished!"
 msgstr "存放完成！"
 
-#: papers/templates/papers/paper.html:75
-#, python-format
-msgid "<p>This paper was successfully deposited and is now freely available at <a class=\"alert-link\" href=\"%(splash_url)s\">this address.</a></p>"
+#: papers/templates/papers/paper.html:76
+#, fuzzy, python-format
+#| msgid "<p>This paper was successfully deposited and is now freely available at <a class=\"alert-link\" href=\"%(splash_url)s\">this address.</a></p>"
+msgid "This paper was successfully deposited and is now freely available at <a class=\"alert-link\" href=\"%(splash_url)s\">this address.</a>>"
 msgstr "<p>此論文已存放成功，並可在<a class=\"alert-link\" href=\"%(splash_url)s\">此連結</a>裡自由取得。</p>"
 
-#: papers/templates/papers/paper.html:82 papers/templates/papers/paper.html:92
-#: papers/templates/papers/paper.html:126
+#: papers/templates/papers/paper.html:84 papers/templates/papers/paper.html:98
+#: papers/templates/papers/paper.html:136
 msgid "Deposit almost accomplished!"
 msgstr "存放快完成了！"
 
-#: papers/templates/papers/paper.html:85
+#: papers/templates/papers/paper.html:88
 #, fuzzy, python-format
 #| msgid "<p>This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(splash_url)s\">this address</a> after validation by the repository administrators.</p>"
-msgid "<p>This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available after validation by the repository administration. You can check for the status in your <a class=\"alert-link\" href=\"%(my_profile)s\">profile</a>.</p>"
+msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available after validation by the repository administration. You can check for the status in your <a class=\"alert-link\" href=\"%(my_profile)s\">profile</a>."
 msgstr "此論文已被存放在 <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a> 裡。由知識庫管理員給確認後，全文內容將在<a class=\"alert-link\" href=\"%(splash_url)s\">此連結</a>可用。"
 
-#: papers/templates/papers/paper.html:95
+#: papers/templates/papers/paper.html:102
 #, fuzzy, python-format
 #| msgid "<p>This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(splash_url)s\">this address</a> after validation by the repository administrators.</p>"
-msgid "<p>This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available after validation by the repository administration, but not before %(pub_date)s. You can check for the status in your <a class=\"alert-link\" href=\"%(my_profile)s\">profile</a>.</p>"
+msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available after validation by the repository administration, but not before %(pub_date)s. You can check for the status in your <a class=\"alert-link\" href=\"%(my_profile)s\">profile</a>."
 msgstr "此論文已被存放在 <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a> 裡。由知識庫管理員給確認後，全文內容將在<a class=\"alert-link\" href=\"%(splash_url)s\">此連結</a>可用。"
 
-#: papers/templates/papers/paper.html:116
+#: papers/templates/papers/paper.html:126
 #: website/templates/dissemin/start_page.html:129
 msgid "Learn more!"
 msgstr "了解更多！"
 
-#: papers/templates/papers/paper.html:127
+#: papers/templates/papers/paper.html:138
 #, fuzzy, python-format
 #| msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(deposit_url)s\">this address</a> after validation by the repository administrators."
 msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available after validation by the repository administration."
 msgstr "此論文已被存放在 <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a> 裡。由知識庫管理員給確認後，全文內容將在<a class=\"alert-link\" href=\"%(deposit_url)s\">此位址</a>可用。"
 
-#: papers/templates/papers/paper.html:140
+#: papers/templates/papers/paper.html:152
 #, python-format
 msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(deposit_url)s\">this address</a> from <strong>%(pub_date|localize)s</strong> on due to an embargo."
 msgstr "此論文已被存放在 <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a> 裡。出於限制緣故，全文內容是從<strong>%(pub_date|localize)s</strong>開始在<a class=\"alert-link\" href=\"%(deposit_url)s\">此位址</a>可用。"
 
-#: papers/templates/papers/paper.html:165
+#: papers/templates/papers/paper.html:177
 msgid "Full text:"
 msgstr "全文："
 
-#: papers/templates/papers/paper.html:169 statistics/models.py:66
+#: papers/templates/papers/paper.html:181 statistics/models.py:66
 msgid "Unavailable"
 msgstr "不可用"
 

@@ -16,7 +16,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-22 12:29+0200\n"
+"POT-Creation-Date: 2020-04-23 08:11+0200\n"
 "PO-Revision-Date: 2020-03-31 13:51:14+0000\n"
 "Language: ar\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -49,7 +49,7 @@ msgstr "المستودع"
 msgid "Invalid full text identifier."
 msgstr "معرف النص الكامل غير صالح."
 
-#: deposit/forms.py:144 papers/templates/papers/paper.html:181
+#: deposit/forms.py:144 papers/templates/papers/paper.html:193
 msgid "Abstract"
 msgstr "نبذة مختصرة"
 
@@ -1446,7 +1446,7 @@ msgid "Format"
 msgstr "الصيغة"
 
 #: papers/templates/papers/export_citation_modal.html:31
-#: papers/templates/papers/paper.html:167
+#: papers/templates/papers/paper.html:179
 #: papers/templates/papers/paper_list.html:55
 msgid "Download"
 msgstr "تنزيل"
@@ -1524,49 +1524,50 @@ msgstr "عرض"
 msgid "Deposit accomplished!"
 msgstr "أُنجِز الإيداع!"
 
-#: papers/templates/papers/paper.html:75
-#, python-format
-msgid "<p>This paper was successfully deposited and is now freely available at <a class=\"alert-link\" href=\"%(splash_url)s\">this address.</a></p>"
+#: papers/templates/papers/paper.html:76
+#, fuzzy, python-format
+#| msgid "<p>This paper was successfully deposited and is now freely available at <a class=\"alert-link\" href=\"%(splash_url)s\">this address.</a></p>"
+msgid "This paper was successfully deposited and is now freely available at <a class=\"alert-link\" href=\"%(splash_url)s\">this address.</a>>"
 msgstr "<p>تم إيداع هذه الورقة بنجاح وهي الآن متاحة مجانا في <a class=\"alert-link\" href=\"%(splash_url)s\">هذا العنوان.</a></p>"
 
-#: papers/templates/papers/paper.html:82 papers/templates/papers/paper.html:92
-#: papers/templates/papers/paper.html:126
+#: papers/templates/papers/paper.html:84 papers/templates/papers/paper.html:98
+#: papers/templates/papers/paper.html:136
 msgid "Deposit almost accomplished!"
 msgstr "الإيداع أُنجِز تقريبا!"
 
-#: papers/templates/papers/paper.html:85
+#: papers/templates/papers/paper.html:88
 #, fuzzy, python-format
 #| msgid "<p>This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(splash_url)s\">this address</a> after validation by the repository administrators.</p>"
-msgid "<p>This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available after validation by the repository administration. You can check for the status in your <a class=\"alert-link\" href=\"%(my_profile)s\">profile</a>.</p>"
+msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available after validation by the repository administration. You can check for the status in your <a class=\"alert-link\" href=\"%(my_profile)s\">profile</a>."
 msgstr "<p>تم إيداع هذه الورقة في <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>، سيتوفر النص الكامل في <a class=\"alert-link\" href=\"%(splash_url)s\">this address</a> بعد التحقق بواسطة إداريي المستودع."
 
-#: papers/templates/papers/paper.html:95
+#: papers/templates/papers/paper.html:102
 #, fuzzy, python-format
 #| msgid "<p>This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(splash_url)s\">this address</a> after validation by the repository administrators.</p>"
-msgid "<p>This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available after validation by the repository administration, but not before %(pub_date)s. You can check for the status in your <a class=\"alert-link\" href=\"%(my_profile)s\">profile</a>.</p>"
+msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available after validation by the repository administration, but not before %(pub_date)s. You can check for the status in your <a class=\"alert-link\" href=\"%(my_profile)s\">profile</a>."
 msgstr "<p>تم إيداع هذه الورقة في <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>، سيتوفر النص الكامل في <a class=\"alert-link\" href=\"%(splash_url)s\">this address</a> بعد التحقق بواسطة إداريي المستودع."
 
-#: papers/templates/papers/paper.html:116
+#: papers/templates/papers/paper.html:126
 #: website/templates/dissemin/start_page.html:129
 msgid "Learn more!"
 msgstr "معرفة المزيد!"
 
-#: papers/templates/papers/paper.html:127
+#: papers/templates/papers/paper.html:138
 #, fuzzy, python-format
 #| msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(deposit_url)s\">this address</a> after validation by the repository administrators."
 msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available after validation by the repository administration."
 msgstr "تم إيداع هذه الورقة في <a href=\"%(repo_url)s\">%(repo_name)s</a>، سيتوفر النص الكامل في class=\"alert-link\" <a href=\"%(deposit_url)s\">هذا العنوان</a> بعد التحقق بواسطة إداريي المستودع."
 
-#: papers/templates/papers/paper.html:140
+#: papers/templates/papers/paper.html:152
 #, fuzzy, python-format
 msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(deposit_url)s\">this address</a> from <strong>%(pub_date|localize)s</strong> on due to an embargo."
 msgstr "تم إيداع هذه الورقة في <a href=\"%(repo_url)s\">%(repo_name)s</a>، سيتوفر النص الكامل في class=\"alert-link\" <a href=\"%(deposit_url)s\">هذا العنوان</a> بعد التحقق بواسطة إداريي المستودع."
 
-#: papers/templates/papers/paper.html:165
+#: papers/templates/papers/paper.html:177
 msgid "Full text:"
 msgstr "النص الكامل:"
 
-#: papers/templates/papers/paper.html:169 statistics/models.py:66
+#: papers/templates/papers/paper.html:181 statistics/models.py:66
 msgid "Unavailable"
 msgstr "غير متوفر"
 

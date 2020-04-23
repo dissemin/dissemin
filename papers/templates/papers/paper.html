@@ -72,9 +72,11 @@
                         <div class="alert alert-success" role="alert">
                             {% with splash_url=deposit.oairecord.splash_url %}
                                 <p><center><strong>{% trans "Deposit accomplished!" %}</strong></center></p>
-                                {% blocktrans trimmed %}
-                                    <p>This paper was successfully deposited and is now freely available at <a class="alert-link" href="{{ splash_url }}">this address.</a></p>
-                                {% endblocktrans %}
+                                <p>
+                                    {% blocktrans trimmed %}
+                                        This paper was successfully deposited and is now freely available at <a class="alert-link" href="{{ splash_url }}">this address.</a>>
+                                    {% endblocktrans %}
+                                </p>
                             {% endwith %}
                         </div>
                     {% elif deposit.status == 'pending' %}
@@ -82,9 +84,13 @@
                             <p><center><strong>{% trans "Deposit almost accomplished!" %}</strong></center></p>
                             {% with repo_name=deposit.repository.name repo_url=deposit.repository.url %}
                                 {% url 'my-profile' as my_profile %}
-                                {% blocktrans trimmed %}
-                                <p>This paper has been deposited in <a class="alert-link" href="{{ repo_url }}">{{ repo_name }}</a>. The full text will be available after validation by the repository administration. You can check for the status in your <a class="alert-link" href="{{ my_profile }}">profile</a>.</p>
-                                {% endblocktrans %}
+                                <p>
+                                    {% blocktrans trimmed %}
+                                        This paper has been deposited in <a class="alert-link" href="{{ repo_url }}">{{ repo_name }}</a>.
+                                        The full text will be available after validation by the repository administration.
+                                        You can check for the status in your <a class="alert-link" href="{{ my_profile }}">profile</a>.
+                                    {% endblocktrans %}
+                                </p>
                             {% endwith %}
                         </div>
                     {% elif deposit.status == 'embargoed' %}
@@ -92,9 +98,13 @@
                             <p><center><strong>{% trans "Deposit almost accomplished!" %}</strong></center></p>
                             {% with repo_name=deposit.repository.name repo_url=deposit.repository.url %}
                                 {% url 'my-profile' as my_profile %}
-                                {% blocktrans trimmed %}
-                                <p>This paper has been deposited in <a class="alert-link" href="{{ repo_url }}">{{ repo_name }}</a>. The full text will be available after validation by the repository administration, but not before {{ pub_date }}. You can check for the status in your <a class="alert-link" href="{{ my_profile }}">profile</a>.</p>
-                                {% endblocktrans %}
+                                <p>
+                                    {% blocktrans trimmed %}
+                                        This paper has been deposited in <a class="alert-link" href="{{ repo_url }}">{{ repo_name }}</a>.
+                                        The full text will be available after validation by the repository administration, but not before {{ pub_date }}.
+                                        You can check for the status in your <a class="alert-link" href="{{ my_profile }}">profile</a>.
+                                    {% endblocktrans %}
+                                </p>
                             {% endwith %}
                         </div>
                     {% endif %}
@@ -124,10 +134,12 @@
                                 {% with deposit.repository.url as repo_url %}
                                     {% with deposit.oairecord.splash_url as deposit_url %}
                                         <p><center><strong>{% trans "Deposit almost accomplished!" %}</strong></center></p>
-                                        {% blocktrans trimmed %}
-                                            This paper has been deposited in <a class="alert-link" href="{{ repo_url }}">{{ repo_name }}</a>.
-                                            The full text will be available after validation by the repository administration.
-                                        {% endblocktrans %}
+                                        <p>
+                                            {% blocktrans trimmed %}
+                                                This paper has been deposited in <a class="alert-link" href="{{ repo_url }}">{{ repo_name }}</a>.
+                                                The full text will be available after validation by the repository administration.
+                                            {% endblocktrans %}
+                                        </p>
                                     {% endwith %}
                                 {% endwith %}
                             {% endwith %}
