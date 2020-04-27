@@ -13,13 +13,14 @@
 #
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-04-23 08:11+0200\n"
-"PO-Revision-Date: 2020-03-19 14:03:31+0000\n"
+"PO-Revision-Date: 2020-04-27 14:44:21+0000\n"
 "Language: bn\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2020-02-28 17:30:27+0000\n"
+"X-POT-Import-Date: 2020-04-23 07:09:36+0000\n"
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -573,7 +574,7 @@ msgstr ""
 #: deposit/templates/deposit/start.html:179
 #: deposit/templates/deposit/start.html:213
 msgid "Change"
-msgstr ""
+msgstr "পরিবর্তন"
 
 #: deposit/templates/deposit/start.html:120
 msgid "preprint"
@@ -1151,10 +1152,7 @@ msgid "Green Open Access Service"
 msgstr "সবুজ উন্মুক্ত প্রবেশাধিকার সেবা"
 
 #: model-gettext.py:111
-msgid ""
-"Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n"
-"<br/>\n"
-"Contact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
+msgid "Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n<br/>\nContact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
 msgstr ""
 
 #: model-gettext.py:112
@@ -1162,11 +1160,7 @@ msgid "TUprints contract required!"
 msgstr ""
 
 #: model-gettext.py:113
-msgid ""
-"For every document, that you upload via Dissemin we need once a TUprints contract.\n"
-"Please fill in the contract and send a printed and signed copy to:\n"
-"<br>\n"
-"ULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
+msgid "For every document, that you upload via Dissemin we need once a TUprints contract.\nPlease fill in the contract and send a printed and signed copy to:\n<br>\nULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
 msgstr ""
 
 #: model-gettext.py:114
@@ -2205,10 +2199,7 @@ msgstr "প্রবেশ প্রত্যাখ্যাত"
 #: website/templates/403.html:13
 #, fuzzy, python-format
 msgid "The access to the requested page has been denied. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr ""
-"\n"
-"            আপনার অনুরোধকৃত পাতাটি পাওয়া গেল না। <a href=\"/\">মূল পাতায় ফিরে যান।</a>\n"
-"           "
+msgstr "\n            আপনার অনুরোধকৃত পাতাটি পাওয়া গেল না। <a href=\"/\">মূল পাতায় ফিরে যান।</a>\n           "
 
 #: website/templates/404.html:6 website/templates/404.html:10
 msgid "Page not found"
@@ -2217,10 +2208,7 @@ msgstr "পাতাটি পাওয়া যাচ্ছেনা"
 #: website/templates/404.html:13
 #, fuzzy, python-format
 msgid "The page you requested could not be found. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr ""
-"\n"
-"            আপনার অনুরোধকৃত পাতাটি পাওয়া গেল না। <a href=\"/\">মূল পাতায় ফিরে যান।</a>\n"
-"           "
+msgstr "\n            আপনার অনুরোধকৃত পাতাটি পাওয়া গেল না। <a href=\"/\">মূল পাতায় ফিরে যান।</a>\n           "
 
 #: website/templates/500.html:6 website/templates/500.html:10
 #, fuzzy
@@ -2230,10 +2218,7 @@ msgstr "অভ্যন্তরীণ ত্রুটি"
 #: website/templates/500.html:13
 #, fuzzy, python-format
 msgid "Your request triggered an internal server error. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr ""
-"\n"
-"            আপনার অনুরোধকৃত পাতাটি পাওয়া গেল না। <a href=\"/\">মূল পাতায় ফিরে যান।</a>\n"
-"           "
+msgstr "\n            আপনার অনুরোধকৃত পাতাটি পাওয়া গেল না। <a href=\"/\">মূল পাতায় ফিরে যান।</a>\n           "
 
 #: website/templates/admin/base_site.html:5
 #: website/templates/admin/base_site.html:8
@@ -2934,3 +2919,4 @@ msgstr ""
 #, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr ""
+

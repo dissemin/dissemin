@@ -11,9 +11,10 @@
 #
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-04-22 12:29+0200\n"
-"PO-Revision-Date: 2020-03-23 13:57:49+0000\n"
+"PO-Revision-Date: 2020-04-27 14:44:21+0000\n"
 "Language: ko\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -103,3 +104,4 @@ msgstr ""
 #: website/static/js/moment.min.js:1
 msgid ": "
 msgstr ": "
+

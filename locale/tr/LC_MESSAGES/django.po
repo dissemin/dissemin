@@ -14,13 +14,14 @@
 #
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-04-23 08:11+0200\n"
-"PO-Revision-Date: 2020-03-19 14:03:36+0000\n"
+"PO-Revision-Date: 2020-04-27 14:44:25+0000\n"
 "Language: tr\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2020-02-28 17:30:27+0000\n"
+"X-POT-Import-Date: 2020-04-23 07:09:36+0000\n"
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
@@ -551,7 +552,7 @@ msgstr "Bu makalenin yazarlarından biri gibi görünmüyorsunuz. Bu formu kulla
 
 #: deposit/templates/deposit/start.html:83
 msgid "This paper cannot be deposited in any repository supported by Dissemin."
-msgstr "Bu makale Dissemin tarafından desteklenen hiçbir depoya yerleştirilemez."
+msgstr "Bu madde Dissemin tarafından desteklenen hiçbir depoya yerleştirilemez."
 
 #: deposit/templates/deposit/start.html:89
 msgid "Document"
@@ -569,7 +570,7 @@ msgstr "Yükleme tipi:"
 #: deposit/templates/deposit/start.html:179
 #: deposit/templates/deposit/start.html:213
 msgid "Change"
-msgstr ""
+msgstr "Değiştir"
 
 #: deposit/templates/deposit/start.html:120
 msgid "preprint"
@@ -606,7 +607,7 @@ msgstr "Bu depo şu anda etkin değil."
 
 #: deposit/views.py:85
 msgid "This repository is not available for this paper."
-msgstr "Bu veri deposu bu makale için mevcut değil."
+msgstr "Bu veri deposu bu madde için mevcut değil."
 
 #: deposit/views.py:217
 msgid "This repository could not be found."
@@ -1115,30 +1116,16 @@ msgid "Green Open Access Service"
 msgstr "Yeşil Açık Erişim Hizmeti"
 
 #: model-gettext.py:111
-msgid ""
-"Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n"
-"<br/>\n"
-"Contact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
-msgstr ""
-"Üniversite ve Devlet Kütüphanesi Darmstadt'ın yayınlarınızı sizin için yeşil açık erişimini yayınlamasını ister misiniz?\n"
-"<br/>\n"
-"Bize ulaşın: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
+msgid "Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n<br/>\nContact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
+msgstr "Üniversite ve Devlet Kütüphanesi Darmstadt'ın yayınlarınızı sizin için yeşil açık erişimini yayınlamasını ister misiniz?\n<br/>\nBize ulaşın: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
 
 #: model-gettext.py:112
 msgid "TUprints contract required!"
 msgstr "TUprints sözleşmesi gerekli!"
 
 #: model-gettext.py:113
-msgid ""
-"For every document, that you upload via Dissemin we need once a TUprints contract.\n"
-"Please fill in the contract and send a printed and signed copy to:\n"
-"<br>\n"
-"ULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
-msgstr ""
-"Dissemin aracılığıyla yüklediğiniz her belge için bir kez TUprints sözleşmesine ihtiyacımız var.\n"
-"Lütfen sözleşmeyi doldurun ve şu adrese basılı ve imzalı bir kopya gönderin:\n"
-"<br>\n"
-"ULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
+msgid "For every document, that you upload via Dissemin we need once a TUprints contract.\nPlease fill in the contract and send a printed and signed copy to:\n<br>\nULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
+msgstr "Dissemin aracılığıyla yüklediğiniz her belge için bir kez TUprints sözleşmesine ihtiyacımız var.\nLütfen sözleşmeyi doldurun ve şu adrese basılı ve imzalı bir kopya gönderin:\n<br>\nULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
 
 #: model-gettext.py:114
 msgid "Download contract"
@@ -1495,10 +1482,9 @@ msgid "Deposit accomplished!"
 msgstr "Para yatırma işlemi tamamlandı!"
 
 #: papers/templates/papers/paper.html:76
-#, fuzzy, python-format
-#| msgid "<p>This paper was successfully deposited and is now freely available at <a class=\"alert-link\" href=\"%(splash_url)s\">this address.</a></p>"
+#, python-format
 msgid "This paper was successfully deposited and is now freely available at <a class=\"alert-link\" href=\"%(splash_url)s\">this address.</a>>"
-msgstr "<p>Bu makale başarıyla yatırıldı ve artık <a class=\"alert-link\" href=\"%(splash_url)s\">bu adresten ücretsiz olarak erişilebilir.</a></p>"
+msgstr "Bu madde başarıyla depolandı ve artık <a class=\"alert-link\" href=\"%(splash_url)s\">bu adresten</a> ücretsiz olarak erişilebilir."
 
 #: papers/templates/papers/paper.html:84 papers/templates/papers/paper.html:98
 #: papers/templates/papers/paper.html:136
@@ -1506,14 +1492,12 @@ msgid "Deposit almost accomplished!"
 msgstr "Depozito neredeyse tamamlandı!"
 
 #: papers/templates/papers/paper.html:88
-#, fuzzy, python-format
-#| msgid "<p>This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(splash_url)s\">this address</a> after validation by the repository administrators.</p>"
+#, python-format
 msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available after validation by the repository administration. You can check for the status in your <a class=\"alert-link\" href=\"%(my_profile)s\">profile</a>."
-msgstr "<p> Bu makale <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a> içine yerleştirilmiştir. Tam metin, depo yöneticileri tarafından onaylandıktan sonra <a class=\"alert-link\" href=\"%(splash_url)s\">bu adresinde</a> bulunabilir.</p>"
+msgstr "Bu madde <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a> olarak depolandı. Tam metin, depo yönetimi tarafından onaylandıktan sonra kullanılabilir olacaktır. Durumu <a class=\"alert-link\" href=\"%(my_profile)s\">profilinizde</a> kontrol edebilirsiniz."
 
 #: papers/templates/papers/paper.html:102
 #, fuzzy, python-format
-#| msgid "<p>This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(splash_url)s\">this address</a> after validation by the repository administrators.</p>"
 msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available after validation by the repository administration, but not before %(pub_date)s. You can check for the status in your <a class=\"alert-link\" href=\"%(my_profile)s\">profile</a>."
 msgstr "<p> Bu makale <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a> içine yerleştirilmiştir. Tam metin, depo yöneticileri tarafından onaylandıktan sonra <a class=\"alert-link\" href=\"%(splash_url)s\">bu adresinde</a> bulunabilir.</p>"
 
@@ -1524,14 +1508,13 @@ msgstr "Daha fazla bilgi!"
 
 #: papers/templates/papers/paper.html:138
 #, fuzzy, python-format
-#| msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(deposit_url)s\">this address</a> after validation by the repository administrators."
 msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available after validation by the repository administration."
 msgstr "Bu makale <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a> içine yerleştirilmiştir. Tam metin, depo yöneticileri tarafından onaylandıktan sonra <a class=\"alert-link\" href=\"%(deposit_url)s\">bu adresinde </a> bulunabilir."
 
 #: papers/templates/papers/paper.html:152
 #, python-format
 msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(deposit_url)s\">this address</a> from <strong>%(pub_date|localize)s</strong> on due to an embargo."
-msgstr "Bu makale <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a> içine yerleştirilmiştir. Tam metin şu adresten <a class=\"alert-link\" href=%(pub_date|localize)s</strong> adresinden bir ambargo <a class=\"alert-link\" href=\"%(deposit_url)s\">burada</a> bulunabilir."
+msgstr "Bu madde <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a> içine yerleştirilmiştir. Tam metin şu adresten <a class=\"alert-link\" href=%(pub_date|localize)s</strong> adresinden bir ambargo <a class=\"alert-link\" href=\"%(deposit_url)s\">burada</a> bulunabilir."
 
 #: papers/templates/papers/paper.html:177
 msgid "Full text:"
@@ -2060,11 +2043,11 @@ msgstr "Yayıncı paylaşmayı yasaklıyor"
 
 #: statistics/models.py:57
 msgid "This paper is made freely available by the publisher."
-msgstr "Bu makale yayıncı tarafından serbestçe sunulmaktadır."
+msgstr "Bu madde yayıncı tarafından serbestçe sunulmaktadır."
 
 #: statistics/models.py:58
 msgid "This paper is available in a repository."
-msgstr "Bu makale bir depoda mevcuttur."
+msgstr "Bu madde bir depoda mevcuttur."
 
 #: statistics/models.py:59
 msgid "This paper was not found in any repository, but could be made available legally by the author."
@@ -2251,7 +2234,7 @@ msgstr "Politika derslerimiz ne anlama geliyor?"
 
 #: website/templates/dissemin/faq.html:32
 msgid "When is a paper considered available?"
-msgstr "Bir makale ne zaman kullanılabilir kabul edilir?"
+msgstr "Bir madde ne zaman kullanılabilir?"
 
 #: website/templates/dissemin/faq.html:33
 msgid "Should I trust your statistics?"
@@ -2494,7 +2477,7 @@ msgstr "Şimdi, makaleniz kaynaklardan birinde görünüyor ancak Dissemin'de g�
 
 #: website/templates/dissemin/faq.html:414
 msgid "If the name matches but the paper is not in Dissemin, then maybe one of your co-authors asked us to delete it? Or it may be a bug. In this case, please file an <a href=\"https://github.com/dissemin/dissemin/issues\">issue</a> describing the problem, or send a message to <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>."
-msgstr "Ad eşleşiyor ancak makale Dissemin'de değilse, belki ortak yazarlarınızdan biri bizden silmemizi istedi? Ya da bir hata olabilir. Bu durumda, lütfen sorunu açıklayan bir <a href=\"https://github.com/dissemin/dissemin/issues\">sorunu</a> bildirin veya <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a> adresine bir mesaj gönderin."
+msgstr "Ad eşleşiyor ancak madde Dissemin'de değilse, belki ortak yazarlarınızdan biri bizden silmemizi istedi? Ya da bir hata olabilir. Bu durumda, lütfen sorunu açıklayan bir <a href=\"https://github.com/dissemin/dissemin/issues\">sorun</a> bildirin veya <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a> e-posta adresine bir mesaj gönderin."
 
 #: website/templates/dissemin/faq.html:419
 msgid "Note that, in the longer term, we hope to design a way for our users to edit their profiles on Dissemin to add missing papers and fix these problems; but we do not have such a system yet."
@@ -2870,5 +2853,3 @@ msgstr "Doğrulama hatası"
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr "Kimlik doğrulama başarısız. <a href=\"%(account-login)s\">Giriş sayfasına geri dönün.</a>"
 
-#~ msgid "Access to this ressource not allowed."
-#~ msgstr "Bu kaynağa erişime izin verilmiyor."

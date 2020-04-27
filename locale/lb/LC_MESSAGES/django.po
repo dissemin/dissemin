@@ -9,13 +9,14 @@
 #
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-04-23 08:11+0200\n"
-"PO-Revision-Date: 2020-03-19 14:03:33+0000\n"
+"PO-Revision-Date: 2020-04-27 14:44:23+0000\n"
 "Language: lb\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2020-02-28 17:30:27+0000\n"
+"X-POT-Import-Date: 2020-04-23 07:09:36+0000\n"
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -1118,10 +1119,7 @@ msgid "Green Open Access Service"
 msgstr ""
 
 #: model-gettext.py:111
-msgid ""
-"Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n"
-"<br/>\n"
-"Contact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
+msgid "Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n<br/>\nContact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
 msgstr ""
 
 #: model-gettext.py:112
@@ -1129,11 +1127,7 @@ msgid "TUprints contract required!"
 msgstr ""
 
 #: model-gettext.py:113
-msgid ""
-"For every document, that you upload via Dissemin we need once a TUprints contract.\n"
-"Please fill in the contract and send a printed and signed copy to:\n"
-"<br>\n"
-"ULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
+msgid "For every document, that you upload via Dissemin we need once a TUprints contract.\nPlease fill in the contract and send a printed and signed copy to:\n<br>\nULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
 msgstr ""
 
 #: model-gettext.py:114
@@ -2878,3 +2872,4 @@ msgstr ""
 #, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr ""
+

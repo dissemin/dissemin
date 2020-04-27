@@ -10,13 +10,14 @@
 #
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-04-23 08:11+0200\n"
-"PO-Revision-Date: 2020-03-19 14:03:35+0000\n"
+"PO-Revision-Date: 2020-04-27 14:44:24+0000\n"
 "Language: pt_br\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2020-02-28 17:30:27+0000\n"
+"X-POT-Import-Date: 2020-04-23 07:09:36+0000\n"
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
@@ -565,7 +566,7 @@ msgstr "Tipo de carregamento:"
 #: deposit/templates/deposit/start.html:179
 #: deposit/templates/deposit/start.html:213
 msgid "Change"
-msgstr ""
+msgstr "Alteração"
 
 #: deposit/templates/deposit/start.html:120
 msgid "preprint"
@@ -1106,10 +1107,7 @@ msgid "Green Open Access Service"
 msgstr "Serviço verde de acesso aberto"
 
 #: model-gettext.py:111
-msgid ""
-"Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n"
-"<br/>\n"
-"Contact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
+msgid "Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n<br/>\nContact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
 msgstr ""
 
 #: model-gettext.py:112
@@ -1117,11 +1115,7 @@ msgid "TUprints contract required!"
 msgstr "É necessário um contrato TUprints!"
 
 #: model-gettext.py:113
-msgid ""
-"For every document, that you upload via Dissemin we need once a TUprints contract.\n"
-"Please fill in the contract and send a printed and signed copy to:\n"
-"<br>\n"
-"ULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
+msgid "For every document, that you upload via Dissemin we need once a TUprints contract.\nPlease fill in the contract and send a printed and signed copy to:\n<br>\nULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
 msgstr ""
 
 #: model-gettext.py:114
@@ -1483,7 +1477,6 @@ msgstr "Depósito realizado!"
 
 #: papers/templates/papers/paper.html:76
 #, fuzzy, python-format
-#| msgid "<p>This paper was successfully deposited and is now freely available at <a class=\"alert-link\" href=\"%(splash_url)s\">this address.</a></p>"
 msgid "This paper was successfully deposited and is now freely available at <a class=\"alert-link\" href=\"%(splash_url)s\">this address.</a>>"
 msgstr "<p>Este documento foi depositado com sucesso e agora está disponível gratuitamente <a class=\"alert-link\" href=\"%(splash_url)s\">nesse endereço.</a></p>"
 
@@ -1493,9 +1486,9 @@ msgid "Deposit almost accomplished!"
 msgstr "Depósito quase realizado!"
 
 #: papers/templates/papers/paper.html:88
-#, fuzzy, python-format
+#, python-format
 msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available after validation by the repository administration. You can check for the status in your <a class=\"alert-link\" href=\"%(my_profile)s\">profile</a>."
-msgstr "<strong>Quase lá!</strong> Este artigo foi depositado em <a href=\"%(repo_url)s\">%(repo_name)s</a>. O texto completo estará disponível <a href=\"%(deposit_url)s\">nesse endereço</a> após a validação pelos administradores do repositório."
+msgstr ""
 
 #: papers/templates/papers/paper.html:102
 #, fuzzy, python-format
@@ -2869,5 +2862,3 @@ msgstr "Erro de autenticação"
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr "A autenticação falhou. <a href=\"%(account-login)s\">Volte para a página de entrar.</a>"
 
-#~ msgid "Access to this ressource not allowed."
-#~ msgstr "O acesso a este recurso não é permitido."

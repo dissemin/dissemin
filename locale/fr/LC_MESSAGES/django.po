@@ -19,10 +19,11 @@
 #
 msgid ""
 msgstr ""
+""
 "Project-Id-Version: dissem.in\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-04-23 08:11+0200\n"
-"PO-Revision-Date: 2020-04-14 03:22:25+0000\n"
+"PO-Revision-Date: 2020-04-27 14:44:23+0000\n"
 "Last-Translator: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language-Team: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language: fr\n"
@@ -31,7 +32,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
-"X-POT-Import-Date: 2020-02-28 17:30:27+0000\n"
+"X-POT-Import-Date: 2020-04-23 07:09:36+0000\n"
 
 #: autocomplete/views.py:81
 msgid "Current institutions"
@@ -579,7 +580,7 @@ msgstr "Type de dépôt :"
 #: deposit/templates/deposit/start.html:179
 #: deposit/templates/deposit/start.html:213
 msgid "Change"
-msgstr ""
+msgstr "Modifier"
 
 #: deposit/templates/deposit/start.html:120
 msgid "preprint"
@@ -1120,30 +1121,16 @@ msgid "Green Open Access Service"
 msgstr "Libre accès (voie verte)"
 
 #: model-gettext.py:111
-msgid ""
-"Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n"
-"<br/>\n"
-"Contact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
-msgstr ""
-"Aimeriez-vous que la Bibliothèque universitaire et d’état de Darmstadt publie vos publications en accès libre ouvert pour vous ?\n"
-"<br/>\n"
-"Contactez-nous : <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
+msgid "Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n<br/>\nContact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
+msgstr "Aimeriez-vous que la Bibliothèque universitaire et d’état de Darmstadt publie vos publications en accès libre ouvert pour vous ?\n<br/>\nContactez-nous : <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
 
 #: model-gettext.py:112
 msgid "TUprints contract required!"
 msgstr "Contrat TUprints nécessaire !"
 
 #: model-gettext.py:113
-msgid ""
-"For every document, that you upload via Dissemin we need once a TUprints contract.\n"
-"Please fill in the contract and send a printed and signed copy to:\n"
-"<br>\n"
-"ULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
-msgstr ""
-"Pour tout document que vous téléversez via Dissemin, nous avons besoin d’un contrat TUprints.\n"
-"Veuillez rmeplir le contrat et envoyer une copie imprimée et signée à :\n"
-"<br>\n"
-"ULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
+msgid "For every document, that you upload via Dissemin we need once a TUprints contract.\nPlease fill in the contract and send a printed and signed copy to:\n<br>\nULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
+msgstr "Pour tout document que vous téléversez via Dissemin, nous avons besoin d’un contrat TUprints.\nVeuillez rmeplir le contrat et envoyer une copie imprimée et signée à :\n<br>\nULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
 
 #: model-gettext.py:114
 msgid "Download contract"
@@ -1502,10 +1489,9 @@ msgid "Deposit accomplished!"
 msgstr "Dépôt effectué !"
 
 #: papers/templates/papers/paper.html:76
-#, fuzzy, python-format
-#| msgid "<p>This paper was successfully deposited and is now freely available at <a class=\"alert-link\" href=\"%(splash_url)s\">this address.</a></p>"
+#, python-format
 msgid "This paper was successfully deposited and is now freely available at <a class=\"alert-link\" href=\"%(splash_url)s\">this address.</a>>"
-msgstr "<p>Cet article a bien été déposé et est maintenant librement disponible à <a class=\"alert-link\" href=\"%(splash_url)s\">cette adresse.</a></p>"
+msgstr "Cet article a bien été déposé et est maintenant librement disponible à <a class=\"alert-link\" href=\"%(splash_url)s\">cette adresse.</a>"
 
 #: papers/templates/papers/paper.html:84 papers/templates/papers/paper.html:98
 #: papers/templates/papers/paper.html:136
@@ -1513,14 +1499,12 @@ msgid "Deposit almost accomplished!"
 msgstr "Dépôt quasiment effectué !"
 
 #: papers/templates/papers/paper.html:88
-#, fuzzy, python-format
-#| msgid "<p>This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(splash_url)s\">this address</a> after validation by the repository administrators.</p>"
+#, python-format
 msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available after validation by the repository administration. You can check for the status in your <a class=\"alert-link\" href=\"%(my_profile)s\">profile</a>."
-msgstr "<p>cet article a été déposé dans <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. Le texte complet sera disponible à <a class=\"alert-link\" href=\"%(splash_url)s\">cette adresse</a> après validation par les administrateurs du dépôt.</p>"
+msgstr "Ce papier a bien été déposé dans <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. Le texte complet sera disponible après validation par l’administration du dépôt. Vous pouvez vérifier son état dans votre <a class=\"alert-link\" href=\"%(my_profile)s\">profil</a>."
 
 #: papers/templates/papers/paper.html:102
 #, fuzzy, python-format
-#| msgid "<p>This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(splash_url)s\">this address</a> after validation by the repository administrators.</p>"
 msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available after validation by the repository administration, but not before %(pub_date)s. You can check for the status in your <a class=\"alert-link\" href=\"%(my_profile)s\">profile</a>."
 msgstr "<p>cet article a été déposé dans <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. Le texte complet sera disponible à <a class=\"alert-link\" href=\"%(splash_url)s\">cette adresse</a> après validation par les administrateurs du dépôt.</p>"
 
@@ -1531,7 +1515,6 @@ msgstr "En savoir plus !"
 
 #: papers/templates/papers/paper.html:138
 #, fuzzy, python-format
-#| msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(deposit_url)s\">this address</a> after validation by the repository administrators."
 msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available after validation by the repository administration."
 msgstr "Cet article a été déposé dans <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. Le texte intégral sera disponible à <a class=\"alert-link\" href=\"%(deposit_url)s\">cette adresse</a> une fois validé par les administrateurs du dépôt."
 
@@ -2882,5 +2865,3 @@ msgstr "Erreur d’authentification"
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr "L’authentification a échoué. <a href=\"%(account-login)s\">Revenir à la page de connexion.</a>"
 
-#~ msgid "Access to this ressource not allowed."
-#~ msgstr "Accès aux ressources interdit."

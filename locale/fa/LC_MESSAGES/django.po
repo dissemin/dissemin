@@ -10,13 +10,14 @@
 #
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-04-23 08:11+0200\n"
-"PO-Revision-Date: 2020-04-16 15:06:22+0000\n"
+"PO-Revision-Date: 2020-04-27 14:44:22+0000\n"
 "Language: fa\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2020-02-28 17:30:27+0000\n"
+"X-POT-Import-Date: 2020-04-23 07:09:36+0000\n"
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
@@ -70,7 +71,7 @@ msgstr ""
 
 #: deposit/forms.py:230 deposit/sword/forms.py:15
 msgid "E-mail"
-msgstr ""
+msgstr "ایمیل"
 
 #: deposit/forms.py:231
 #, fuzzy
@@ -377,7 +378,7 @@ msgstr "علوم پزشکی و سلامت"
 
 #: deposit/osf/forms.py:73 deposit/osf/forms.py:96
 msgid "Physical Sciences and Mathematics"
-msgstr ""
+msgstr "ریاضیات و علوم فیزیکی"
 
 #: deposit/osf/forms.py:75 deposit/osf/forms.py:98
 msgid "Social and Behavioral Sciences"
@@ -508,7 +509,7 @@ msgstr ""
 
 #: deposit/templates/deposit/deposits.html:148
 msgid "Show"
-msgstr ""
+msgstr "نشان بده"
 
 #: deposit/templates/deposit/deposits.html:176
 msgid "No deposits yet!"
@@ -571,7 +572,7 @@ msgstr "نوع بارگذاری:"
 #: deposit/templates/deposit/start.html:179
 #: deposit/templates/deposit/start.html:213
 msgid "Change"
-msgstr ""
+msgstr "تغییر"
 
 #: deposit/templates/deposit/start.html:120
 msgid "preprint"
@@ -909,11 +910,11 @@ msgstr "علم"
 
 #: model-gettext.py:53
 msgid "Astronomy"
-msgstr ""
+msgstr "ستاره‌شناسی"
 
 #: model-gettext.py:56
 msgid "Earth sciences & geology"
-msgstr ""
+msgstr "زمین‌شناسی و علوم زمین"
 
 #: model-gettext.py:57
 msgid "Fossils & prehistoric life"
@@ -929,7 +930,7 @@ msgstr ""
 
 #: model-gettext.py:60
 msgid "Animals (Zoology)"
-msgstr ""
+msgstr "جانورشناسی"
 
 #: model-gettext.py:61
 msgid "Technology"
@@ -1135,10 +1136,7 @@ msgid "Green Open Access Service"
 msgstr "دسترسی آزاد"
 
 #: model-gettext.py:111
-msgid ""
-"Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n"
-"<br/>\n"
-"Contact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
+msgid "Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n<br/>\nContact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
 msgstr ""
 
 #: model-gettext.py:112
@@ -1146,11 +1144,7 @@ msgid "TUprints contract required!"
 msgstr ""
 
 #: model-gettext.py:113
-msgid ""
-"For every document, that you upload via Dissemin we need once a TUprints contract.\n"
-"Please fill in the contract and send a printed and signed copy to:\n"
-"<br>\n"
-"ULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
+msgid "For every document, that you upload via Dissemin we need once a TUprints contract.\nPlease fill in the contract and send a printed and signed copy to:\n<br>\nULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
 msgstr ""
 
 #: model-gettext.py:114
@@ -1512,7 +1506,7 @@ msgstr ""
 
 #: papers/templates/papers/paper.html:62
 msgid "Show less"
-msgstr ""
+msgstr "کمتر نشان بده"
 
 #: papers/templates/papers/paper.html:74
 msgid "Deposit accomplished!"
@@ -2899,3 +2893,4 @@ msgstr ""
 #, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr ""
+

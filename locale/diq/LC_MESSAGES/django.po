@@ -1,15 +1,9 @@
-# Translation of Dissemin website to German (Deutsch)
+# Translation of Dissemin website to Zazaki (Zazaki)
 # Exported from translatewiki.net
 #
-# Author: Abijeet Patro
-# Author: Becks
-# Author: Danielbeerbonn
-# Author: FF11
-# Author: Kapidaehn
-# Author: Kly
-# Author: Leslie Neumann
-# Author: Metalhead64
-# Author: Zuphilip
+# Author: 1917 Ekim Devrimi
+# Author: Mirzali
+# Author: Orbot707
 # --
 # This file is part of the Dissemin Project
 # This file is distributed under the same license as the Dissemin package.
@@ -17,300 +11,298 @@
 msgid ""
 msgstr ""
 ""
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-23 08:11+0200\n"
 "PO-Revision-Date: 2020-04-27 14:44:22+0000\n"
-"Language: de\n"
+"X-POT-Import-Date: 2020-04-23 07:09:36+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2020-04-23 07:09:36+0000\n"
+"Language: diq\n"
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: autocomplete/views.py:81
 msgid "Current institutions"
-msgstr "Bestehende Einrichtungen"
+msgstr "Mewcud Enstituy"
 
 #: autocomplete/views.py:85
 msgid "Unverified institutions"
-msgstr "Nicht geprüfte Einrichtungen"
+msgstr "Enstituyê ke araşt nêbiyê"
 
 #: autocomplete/views.py:89
 msgid "Obsolete institutions"
-msgstr "Veraltete Einrichtungen"
+msgstr "Enstituyê kehani"
 
 #: deposit/forms.py:88
 msgid "Upload type"
-msgstr "Hochladetyp"
+msgstr "Tewrê barkerdışi"
 
 #: deposit/forms.py:91 deposit/templates/deposit/deposits.html:46
 msgid "Repository"
-msgstr "Repositorium"
+msgstr "Embar"
 
 #: deposit/forms.py:100
 msgid "Invalid full text identifier."
-msgstr "Ungültiger Volltextidentifikator."
+msgstr "Xırab şınastoğê metinê tami"
 
 #: deposit/forms.py:144 papers/templates/papers/paper.html:193
 msgid "Abstract"
-msgstr "Zusammenfassung"
+msgstr "Sıltek"
 
 #: deposit/forms.py:153
 msgid "Dewey Decimal Class"
-msgstr "Dewey-Dezimalklassifikation"
+msgstr "Sınıfa destekê Dewey"
 
 #: deposit/forms.py:160
 msgid "Do not publish before"
-msgstr "Nicht veröffentlichen vor"
+msgstr "Veror Neşr Mekerê"
 
 #: deposit/forms.py:166 deposit/templates/deposit/deposits.html:89
 msgid "License"
-msgstr "Lizenz"
+msgstr "Lisans"
 
 #: deposit/forms.py:215
 msgid "No preferred repository"
-msgstr "Kein bevorzugtes Repositorium"
+msgstr "Tercih bıyaye depo çıniyo"
 
 #: deposit/forms.py:230 deposit/sword/forms.py:15
 msgid "E-mail"
-msgstr "E-Mail"
+msgstr "E-poste"
 
 #: deposit/forms.py:231
 msgid "Preferred repository"
-msgstr "Bevorzugtes Repositorium"
+msgstr "Depoy tercihi"
 
 #: deposit/forms.py:241 deposit/hal/forms.py:71 deposit/osf/forms.py:134
 msgid "Save"
-msgstr "Speichern"
+msgstr "Qeyd ke"
 
 #: deposit/hal/forms.py:41
 msgid "Scientific field"
-msgstr "Wissenschaftliches Fachgebiet"
+msgstr "Cay zanışiye"
 
 #: deposit/hal/forms.py:46
 msgid "Depositing author"
-msgstr "Ablegende_r Autor_in"
+msgstr ""
 
 #: deposit/hal/forms.py:53
 msgid "Affiliation"
-msgstr "Zugehörigkeit"
+msgstr "Ezayiye"
 
 #: deposit/hal/metadata.py:36 model-gettext.py:55
 msgid "Chemistry"
-msgstr "Chemie"
+msgstr "Eczanewan"
 
 #: deposit/hal/metadata.py:37
 msgid "Computer science"
-msgstr "Informatik"
+msgstr "Zanışiya komputeri"
 
 #: deposit/hal/metadata.py:38 model-gettext.py:52
 msgid "Mathematics"
-msgstr "Mathematik"
+msgstr "Matematik"
 
 #: deposit/hal/metadata.py:39 model-gettext.py:54
 msgid "Physics"
-msgstr "Physik"
+msgstr "Fizik"
 
 #: deposit/hal/metadata.py:40
 msgid "Non-linear science"
-msgstr "Nichtlineare Wissenschaft"
+msgstr ""
 
 #: deposit/hal/metadata.py:41
 msgid "Cognitive science"
-msgstr "Kognitionswissenschaft"
+msgstr ""
 
 #: deposit/hal/metadata.py:42
 msgid "Environment sciences"
-msgstr "Umweltwissenschaften"
+msgstr ""
 
 #: deposit/hal/metadata.py:43
 msgid "Planet and Universe"
-msgstr "Astronomie"
+msgstr ""
 
 #: deposit/hal/metadata.py:44
 msgid "Biological anthropology"
-msgstr "Biologische Anthropologie"
+msgstr ""
 
 #: deposit/hal/metadata.py:45
 msgid "Social Anthropology and ethnology"
-msgstr "Sozialanthropologie und Ethnologie"
+msgstr ""
 
 #: deposit/hal/metadata.py:46
 msgid "Archaeology and Prehistory"
-msgstr "Archäologie und Vorgeschichte"
+msgstr ""
 
 #: deposit/hal/metadata.py:47
 msgid "Architecture, space management"
-msgstr "Architektur, Flächenmanagement"
+msgstr ""
 
 #: deposit/hal/metadata.py:48
 msgid "Art and art history"
-msgstr "Kunst und Kunstgeschichte"
+msgstr "Huner û tarixê huneri"
 
 #: deposit/hal/metadata.py:49
 msgid "Classical studies"
-msgstr "Klassische Altertumswissenschaft"
+msgstr ""
 
 #: deposit/hal/metadata.py:50
 msgid "Demography"
-msgstr "Demografie"
+msgstr "Demografiye"
 
 #: deposit/hal/metadata.py:51 deposit/osf/forms.py:67 deposit/osf/forms.py:90
 #: model-gettext.py:35
 msgid "Law"
-msgstr "Rechtswissenschaften"
+msgstr "Hıquq"
 
 #: deposit/hal/metadata.py:52
 msgid "Economies and finances"
-msgstr "Wirtschafts- und Finanzwesen"
+msgstr ""
 
 #: deposit/hal/metadata.py:53 deposit/osf/forms.py:63 deposit/osf/forms.py:86
 #: model-gettext.py:38
 msgid "Education"
-msgstr "Bildung"
+msgstr "Terbiyet"
 
 #: deposit/hal/metadata.py:54
 msgid "Environmental studies"
-msgstr "Umweltwissenschaften"
+msgstr ""
 
 #: deposit/hal/metadata.py:55
 msgid "Gender studies"
-msgstr "Geschlechterforschung"
+msgstr "gurenayışê cınsiyeti"
 
 #: deposit/hal/metadata.py:56
 msgid "Geography"
-msgstr "Geografie"
+msgstr "Coğrafya"
 
 #: deposit/hal/metadata.py:57
 msgid "Business administration"
-msgstr "Betriebswirtschaftslehre"
+msgstr "İdarey caykari"
 
 #: deposit/hal/metadata.py:58
 msgid "History, Philosophy and Sociology of Sciences"
-msgstr "Geschichte, Philosophie und Wissenschaftssoziologie"
+msgstr "Zanışiya Tarıxi, Felesefey u Sosylociye"
 
 #: deposit/hal/metadata.py:59 model-gettext.py:91
 msgid "History"
-msgstr "Geschichte"
+msgstr "Tarix"
 
 #: deposit/hal/metadata.py:60
 msgid "Library and information sciences"
-msgstr "Bibliotheks- und Informationswissenschaften"
+msgstr ""
 
 #: deposit/hal/metadata.py:61 model-gettext.py:42
 msgid "Linguistics"
-msgstr "Linguistik"
+msgstr "Zıwanzanışiye"
 
 #: deposit/hal/metadata.py:62
 msgid "Literature"
-msgstr "Literaturwissenschaft"
+msgstr "Edebiyat"
 
 #: deposit/hal/metadata.py:63
 msgid "Cultural heritage and museology"
-msgstr "Kulturerbe und Museologie"
+msgstr ""
 
 #: deposit/hal/metadata.py:64
 msgid "Musicology and performing arts"
-msgstr "Musik und Darstellende Künste"
+msgstr ""
 
 #: deposit/hal/metadata.py:65 model-gettext.py:11
 msgid "Philosophy"
-msgstr "Philosophie"
+msgstr "Felsefe"
 
 #: deposit/hal/metadata.py:66 model-gettext.py:16
 msgid "Psychology"
-msgstr "Psychologie"
+msgstr "Psikolociye"
 
 #: deposit/hal/metadata.py:67
 msgid "Religions"
-msgstr "Religionswissenschaften"
+msgstr "Din"
 
 #: deposit/hal/metadata.py:68 model-gettext.py:33
 msgid "Political science"
-msgstr "Politikwissenschaft"
+msgstr "Şınasiya siyasiye"
 
 #: deposit/hal/metadata.py:69
 msgid "Sociology"
-msgstr "Soziologie"
+msgstr "Sosyolociye"
 
 #: deposit/hal/metadata.py:70
 msgid "Methods and statistics"
-msgstr "Methoden und Statistik"
+msgstr ""
 
 #: deposit/hal/metadata.py:71
 msgid "Life sciences"
-msgstr "Biowissenschaften"
+msgstr "Zanışê weşayışi"
 
 #: deposit/hal/metadata.py:72
 msgid "Engineering sciences"
-msgstr "Ingenieurwissenschaften"
+msgstr "Zanışê mıhendisey"
 
 #: deposit/hal/metadata.py:73 model-gettext.py:32
 #: papers/templates/papers/search_base.html:23
 #: publishers/templates/publishers/list.html:16
 msgid "Statistics"
-msgstr "Statistik"
+msgstr "İstatistiki"
 
 #: deposit/hal/metadata.py:74
 msgid "Economy and quantitative finance"
-msgstr "Volkswirtschaftslehre"
+msgstr "Ekonomi u finanso kantitatif"
 
 #: deposit/hal/models.py:14
 msgid "HAL username"
-msgstr "HAL-Benutzername"
+msgstr "Nameyê karberiyo HAL"
 
 #: deposit/hal/models.py:15
 msgid "If set, deposits will be associated to this HAL account."
-msgstr "Falls festgelegt, werden Ablagen diesem HAL-Benutzerkonto zugeordnet."
+msgstr ""
 
 #: deposit/hal/protocol.py:170
 msgid "No HAL user credentials provided."
-msgstr "Keine HAL-Zugangsdaten angegeben"
+msgstr ""
 
 #: deposit/hal/protocol.py:241
 msgid "This document is already in HAL. HAL refused the deposit."
-msgstr "Dieses Dokument ist bereits in HAL. HAL lehnt daher den Upload ab."
+msgstr ""
 
 #: deposit/hal/protocol.py:248
 #, python-format
 msgid "HAL refused the deposit (HTTP error %d): %s"
-msgstr "HAL hat den Upload abgelehnt (HTTP error %d): %s"
+msgstr ""
 
 #: deposit/hal/protocol.py:255
 msgid "HAL returned an invalid XML response"
-msgstr "HAL gab eine ungültige XML-Antwort zurück"
+msgstr ""
 
 #: deposit/hal/protocol.py:267
 msgid "This paper already exists in HAL."
-msgstr "Diese Publikation ist in HAL bereits vorhanden."
+msgstr ""
 
 #: deposit/hal/protocol.py:273
 msgid "HAL rejected the submission."
-msgstr "HAL hat die Eingabe abgelehnt."
+msgstr ""
 
 #: deposit/hal/protocol.py:283
 msgid "HAL rejected the submission"
-msgstr "HAL hat die Eingabe abgelehnt"
+msgstr ""
 
 #: deposit/hal/protocol.py:292
 msgid "Password"
-msgstr "Passwort"
+msgstr "Parola"
 
 #: deposit/hal/protocol.py:320
 msgid "Connection to HAL failed. Please try again later."
-msgstr "Verbindung zu HAL konnte nicht aufgebaut werden. Bitte versuche es später nochmal."
+msgstr ""
 
 #: deposit/models.py:44
 msgid "Failed"
-msgstr "Fehlgeschlagen"
+msgstr "Ebe ser nêkewt"
 
 #: deposit/models.py:45
 msgid "Faked"
-msgstr "Gefälscht"
+msgstr "Sexte"
 
 #: deposit/models.py:46
 msgid "Pending publication"
-msgstr "Ausstehende Veröffentlichung"
+msgstr "Weşanayış pawıtiyeno"
 
 #: deposit/models.py:47
 msgid "Embargo"
@@ -318,932 +310,930 @@ msgstr "Embargo"
 
 #: deposit/models.py:48
 msgid "Published"
-msgstr "Veröffentlicht"
+msgstr "Weşanaye"
 
 #: deposit/models.py:49
 msgid "Refused by the repository"
-msgstr "Vom Repositorium abgelehnt"
+msgstr "Terefê depoy ra biyo red"
 
 #: deposit/models.py:50
 msgid "Deleted"
-msgstr "Gelöscht"
+msgstr "Esteriya"
 
 #: deposit/models.py:340 deposit/templates/deposit/start.html:228
 #: deposit/views.py:119
 msgid "Deposit"
-msgstr "Absenden"
+msgstr "Depozit"
 
 #: deposit/models.py:393
 msgid "We will use this email address to notify you when your deposits are accepted."
-msgstr "Wir werden diese E-Mail-Adresse verwenden, um Dir mitzuteilen, wenn deine Uploads akzeptiert wurden."
+msgstr ""
 
 #: deposit/models.py:399
 msgid "This repository will be used by default for your deposits."
-msgstr "Dieses Repositorium wird standardmäßig verwendet."
+msgstr ""
 
 #: deposit/osf/forms.py:35 deposit/osf/forms.py:46
 msgid "Creative Commons CC0 1.0 Universal"
-msgstr "Creative Commons CC0 1.0 Universal"
+msgstr ""
 
 #: deposit/osf/forms.py:37 deposit/osf/forms.py:48
 msgid "Creative Commons CC-By Attribution 4.0 International (CC BY 4.0)"
-msgstr "Creative Commons CC-By Attribution 4.0 International (CC BY 4.0)"
+msgstr ""
 
 #: deposit/osf/forms.py:40 deposit/osf/forms.py:51 model-gettext.py:122
 msgid "No license"
-msgstr "Keine Lizenz vorhanden"
+msgstr "Lisans çıniyo"
 
 #: deposit/osf/forms.py:57 deposit/osf/forms.py:80 model-gettext.py:73
 msgid "Architecture"
-msgstr "Architektur"
+msgstr "Mimariye"
 
 #: deposit/osf/forms.py:59 deposit/osf/forms.py:82
 msgid "Arts and Humanities"
-msgstr "Kunst- und Geisteswissenschaften"
+msgstr "Huner û İnsanetiye"
 
 #: deposit/osf/forms.py:61 deposit/osf/forms.py:84
 msgid "Business"
-msgstr "Wirtschaft"
+msgstr "Kar"
 
 #: deposit/osf/forms.py:65 deposit/osf/forms.py:88 model-gettext.py:63
 msgid "Engineering"
-msgstr "Ingenieurwesen"
+msgstr "Mıhendisiye"
 
 #: deposit/osf/forms.py:69 deposit/osf/forms.py:92
 msgid "Life Sciences"
-msgstr "Biowissenschaften"
+msgstr "Zanışê Weşayışi"
 
 #: deposit/osf/forms.py:71 deposit/osf/forms.py:94
 msgid "Medicine and Health Sciences"
-msgstr "Medizin und Gesundheitswissenschaften"
+msgstr "Zanışê Tıbi u Weşeyi"
 
 #: deposit/osf/forms.py:73 deposit/osf/forms.py:96
 msgid "Physical Sciences and Mathematics"
-msgstr "Physikalische Wissenschaften und Mathematik"
+msgstr "Zanışê Fiziki u Matematiki"
 
 #: deposit/osf/forms.py:75 deposit/osf/forms.py:98
 msgid "Social and Behavioral Sciences"
-msgstr "Sozial- und Verhaltenswissenschaften"
+msgstr ""
 
 #: deposit/osf/forms.py:141
 msgid "Invalid OSF identifier."
-msgstr "Ungültiger OSF-Identifikator."
+msgstr "Xırab Şınastoğê OSF"
 
 #: deposit/osf/models.py:13
 msgid "OSF identifier"
-msgstr "OSF-Identifikator"
+msgstr "Şınastoğê OSF"
 
 #: deposit/osf/models.py:14
 msgid "If set, your deposits will be associated to this OSF account. This identifier is a string of letters and numbers which can be found in your OSF public profile URL."
-msgstr "Sofern festgelegt, wird Deine Ablage mit diesem OSF-Konto verknüpft. Diese Kennung ist eine Zeichenfolge aus Buchstaben und Zahlen, die Du in der URL Deines öffentlichen OSF-Profils findest."
+msgstr ""
 
 #: deposit/osf/protocol.py:199
 msgid "Unable to create a project on OSF."
-msgstr "Erstellen eines Projekt auf OSF nicht möglich."
+msgstr ""
 
 #: deposit/osf/protocol.py:213
 msgid "Unable to authenticate to OSF."
-msgstr "Authentifikation bei OSF fehlgeschlagen."
+msgstr ""
 
 #: deposit/osf/protocol.py:230
 msgid "Unable to add contributors."
-msgstr "Hinzufügen der Autor_innen nicht möglich."
+msgstr ""
 
 #: deposit/osf/protocol.py:257
 msgid "Unable to update the contributors of the paper."
-msgstr "Aktualisieren der Autor_innen der Publikationen nicht möglich."
+msgstr ""
 
 #: deposit/osf/protocol.py:303
 msgid "Unable to update license."
-msgstr "Aktualisierung der Lizenz nicht möglich."
+msgstr ""
 
 #: deposit/osf/protocol.py:361
 msgid "Unable to create the preprint."
-msgstr "Erstellung des Preprints nicht möglich."
+msgstr ""
 
 #: deposit/osf/protocol.py:410
 msgid "Unable to update the preprint license."
-msgstr "Aktualisierung der Preprint-Lizenz nicht möglich."
+msgstr ""
 
 #: deposit/osf/protocol.py:418
 msgid "No Repository endpoint provided."
-msgstr "Kein Repositoriums-Endpunkt angegeben."
+msgstr ""
 
 #: deposit/osf/protocol.py:421
 msgid "No OSF token provided."
-msgstr "Es wurde kein OSF-Token angegeben"
+msgstr ""
 
 #: deposit/osf/protocol.py:462
 msgid "Unable to upload the PDF file."
-msgstr "Hochladen der PDF-Datei nicht möglich."
+msgstr ""
 
 #: deposit/osf/protocol.py:502
 msgid "Unable to delete the project."
-msgstr "Löschen des Projekts nicht möglich."
+msgstr ""
 
 #: deposit/osf/protocol.py:532 deposit/osf/protocol.py:540
 msgid "Unable to make the project public."
-msgstr "Veröffentlichen des Projekts nicht möglich."
+msgstr ""
 
 #: deposit/protocol.py:328
 msgid "Failed to connect to the repository. Please try again later."
-msgstr "Verbindung zum Repositorium konnte nicht hergestellt werden. Bitte versuche es später nochmal."
+msgstr ""
 
 #: deposit/sword/protocol.py:85
 msgid "The repository {} returned invalid XML"
-msgstr "Das Repositorium {} antwortete mit invalidem XML"
+msgstr ""
 
 #: deposit/sword/protocol.py:335
 msgid "Username or password not provided for this repository. Please contact the Dissemin team."
-msgstr "Anmeldename oder Passwort sind für dieses Repositorium nicht hinterlegt. Bitte kontaktiere das Dissemin Team."
+msgstr ""
 
 #: deposit/sword/protocol.py:360
 msgid "Unable to deposit to repository"
-msgstr "Hochladen in Repositorium ist fehlgeschlagen"
+msgstr ""
 
 #: deposit/templates/deposit/deposits.html:6
 #: deposit/templates/deposit/deposits.html:12 website/templates/navbar.html:33
 msgid "My deposits"
-msgstr "Meine Ablagen"
+msgstr "Mewduatê mı"
 
 #: deposit/templates/deposit/deposits.html:24
 #, python-format
 msgid "&lsquo;%(paper_title)s&rsquo; in <strong>%(repository)s</strong>"
-msgstr "&lsquo;%(paper_title)s&rsquo; in <strong>%(repository)s</strong>"
+msgstr ""
 
 #: deposit/templates/deposit/deposits.html:36
 msgid "Paper"
-msgstr "Publikation"
+msgstr "Kağıte"
 
 #: deposit/templates/deposit/deposits.html:56
 msgid "Deposit date"
-msgstr "Ablagedatum"
+msgstr "Tarixê mewduati"
 
 #: deposit/templates/deposit/deposits.html:67
 msgid "Publication date"
-msgstr "Veröffentlichungsdatum"
+msgstr ""
 
 #: deposit/templates/deposit/deposits.html:78
 msgid "Deposit type"
-msgstr "Ablagetyp"
+msgstr "Tipê mewduati"
 
 #: deposit/templates/deposit/deposits.html:100
 msgid "Identifier"
-msgstr "Kennung"
+msgstr "Şınastoğ"
 
 #: deposit/templates/deposit/deposits.html:112
 msgid "Meta URL"
-msgstr "Meta-URL"
+msgstr "Meta URL"
 
 #: deposit/templates/deposit/deposits.html:121
 msgid "PDF URL"
-msgstr "PDF-URL"
+msgstr "PDF URL"
 
 #: deposit/templates/deposit/deposits.html:134
 msgid "Status:"
-msgstr "Status:"
+msgstr "Weziyet:"
 
 #: deposit/templates/deposit/deposits.html:145
 msgid "Letter of Declaration"
-msgstr "Autorenerklärung"
+msgstr "Mektuba Deklarasyoni"
 
 #: deposit/templates/deposit/deposits.html:148
 msgid "Show"
-msgstr "Zeigen"
+msgstr "Bımocne"
 
 #: deposit/templates/deposit/deposits.html:176
 msgid "No deposits yet!"
-msgstr "Noch keine Ablagen!"
+msgstr ""
 
 #: deposit/templates/deposit/deposits.html:177
 msgid "You have not made any deposit via Dissemin. What are you waiting for? Liberate your papers today."
-msgstr "Du hast noch nichts über Dissemin abgelegt. Worauf wartest Du? Veröffentliche jetzt Deine Publikationen!"
+msgstr ""
 
 #: deposit/templates/deposit/preferences_base.html:7
 #: deposit/templates/deposit/preferences_global.html:7
 #: website/templates/navbar.html:32
 msgid "Preferences"
-msgstr "Einstellungen"
+msgstr "Tercihi"
 
 #: deposit/templates/deposit/preferences_base.html:11
 msgid "General"
-msgstr "Allgemein"
+msgstr "Bıngeh"
 
 #: deposit/templates/deposit/preferences_repository.html:6
 msgid "Repository preferences"
-msgstr "Repositoriumseinstellungen"
+msgstr "Tercihê depoyi"
 
 #: deposit/templates/deposit/start.html:12
 #: deposit/templates/deposit/start.html:60
 msgid "Depositing"
-msgstr "Ablegen"
+msgstr "Depokerdış"
 
 #: deposit/templates/deposit/start.html:64
 #, python-format
 msgid "You can deposit the full text of your article. Dissemin will send it to a repository where it will be made freely available. By depositing your article via Dissemin, you agree to our <a href=\"%(tosurl)s\">terms of service</a>."
-msgstr "Du kannst den Volltext Deiner Publikation ablegen. Dissemin transferiert sie zu einem Repositorium, wo frei darauf zugegriffen werden kann. Mit der Ablage Deines Artikels über Dissemin stimmst du den <a href=\"%(tosurl)s\">Nutzungsbedingungen</a> zu."
+msgstr ""
 
 #: deposit/templates/deposit/start.html:72
 msgid "Authorship"
-msgstr "Autorenschaft"
+msgstr "Nuskarey"
 
 #: deposit/templates/deposit/start.html:73
 msgid "You do not appear to be one of the authors of this paper. By using this form, you certify that you have the permission to upload it on their behalf."
-msgstr "Es sieht so aus, als seist Du kein_e Autor_in dieser Publikation. Mit der Ablage bestätigst Du, dass Du berechtigt bist, die Publikation hochzuladen."
+msgstr ""
 
 #: deposit/templates/deposit/start.html:83
 msgid "This paper cannot be deposited in any repository supported by Dissemin."
-msgstr "Die Publikation kann in keinem von Dissemin unterstützten Repositorium abgelegt werden."
+msgstr ""
 
 #: deposit/templates/deposit/start.html:89
 msgid "Document"
-msgstr "Dokument"
+msgstr "Dokuman"
 
 #: deposit/templates/deposit/start.html:93
 msgid "Options"
-msgstr "Einstellungen"
+msgstr "Weçinıteki"
 
 #: deposit/templates/deposit/start.html:107
 msgid "Upload type:"
-msgstr "Hochladetyp:"
+msgstr "Tewrê barkerdışi :"
 
 #: deposit/templates/deposit/start.html:110
 #: deposit/templates/deposit/start.html:179
 #: deposit/templates/deposit/start.html:213
 msgid "Change"
-msgstr "Ändern"
+msgstr ""
 
 #: deposit/templates/deposit/start.html:120
 msgid "preprint"
-msgstr "Preprint"
+msgstr "Verneşr"
 
 #: deposit/templates/deposit/start.html:136
 msgid "postprint"
-msgstr "Postprint"
+msgstr "bahdeneşri"
 
 #: deposit/templates/deposit/start.html:152
-#, fuzzy
 msgid "pdfversion"
-msgstr "veröffentlichte Version"
+msgstr "pdfversiyon"
 
 #: deposit/templates/deposit/start.html:176
 msgid "Repository:"
-msgstr "Repositorium:"
+msgstr "Embar:"
 
 #: deposit/templates/deposit/start.html:210
 msgid "Metadata:"
-msgstr "Metadaten:"
+msgstr "Metadata:"
 
 #: deposit/templates/deposit/start.html:235
 #: papers/templates/papers/search_base.html:165
 msgid "Paper animated bird"
-msgstr "Animierter Papiervogel"
+msgstr ""
 
 #: deposit/templates/deposit/start.html:236
 msgid "Submitting paper to repository"
-msgstr "Publikation einem Repositorium hinzufügen"
+msgstr ""
 
 #: deposit/views.py:79
 msgid "This repository is currently not enabled."
-msgstr "Das Repositorium ist derzeit nicht in Betrieb."
+msgstr ""
 
 #: deposit/views.py:85
 msgid "This repository is not available for this paper."
-msgstr "Das Repositorium ist für diese Publikation nicht verfügbar."
+msgstr ""
 
 #: deposit/views.py:217
 msgid "This repository could not be found."
-msgstr "Das Repositorium konnte nicht gefunden werden."
+msgstr ""
 
 #: deposit/views.py:260 deposit/views.py:276
 msgid "Not all fields have been filled correctly."
-msgstr "Nicht alle Felder wurden korrekt ausgefüllt."
+msgstr ""
 
 #: deposit/views.py:269
 msgid "This repository cannot be used for this paper."
-msgstr "Das Repositorium kann für diese Publikation nicht verwendet werden."
+msgstr ""
 
 #: deposit/views.py:287
 msgid "Access to the PDF was denied."
-msgstr "Zugriff auf das PDF wurde verweigert."
+msgstr ""
 
 #: deposit/views.py:349
 msgid "Declaration {}.pdf"
-msgstr "Erklärung {}.pdf"
+msgstr ""
 
 #: deposit/views.py:352
 msgid "No pdf found for dr {}"
-msgstr "Kein PDF für dr {} gefunden"
+msgstr ""
 
 #: deposit/zenodo/protocol.py:87
 msgid "This document is already in Zenodo. Zenodo refused the deposit."
-msgstr "Dieses Dokument ist bereits in Zenodo. Zenodo lehnt daher den Upload ab."
+msgstr ""
 
 #: deposit/zenodo/protocol.py:120
 msgid "No Zenodo API key provided."
-msgstr "Kein Zenodo-API-Schlüssel angegeben."
+msgstr ""
 
 #: deposit/zenodo/protocol.py:132
 msgid "This happens when Zenodo has hiccups. Please try again in a few minutes or use a different repository in the menu above."
-msgstr "Das passiert, wenn Zenodo Schluckauf hat. Bitte versuche es in ein paar Minuten nochmal oder wähle eine anderes Repositorium oben aus dem Menü aus."
+msgstr ""
 
 #: deposit/zenodo/protocol.py:138
 msgid "Unable to authenticate to Zenodo."
-msgstr "Authentifizierung bei Zenodo fehlgeschlagen."
+msgstr ""
 
 #: deposit/zenodo/protocol.py:146
 msgid "Unable to create a new deposition on Zenodo."
-msgstr "Es konnte keine Ablage auf Zenodo erstellt werden."
+msgstr ""
 
 #: deposit/zenodo/protocol.py:163
 msgid "Unable to transfer the document to Zenodo."
-msgstr "Übermittlung des Dokuments an Zenodo nicht möglich."
+msgstr ""
 
 #: deposit/zenodo/protocol.py:174
 msgid "No abstract is available for this paper but Zenodo requires one. Please provide it using the metadata panel."
-msgstr "Für diese Publikation ist keine Zusammenfassung verfügbar. Für die Ablage auf Zenodo wird eine Zusammenfassung benötigt. Bitte stelle sie über die Metadaten-Leiste zur Verfügung."
+msgstr ""
 
 #: deposit/zenodo/protocol.py:186
 msgid "Unable to submit paper metadata to Zenodo."
-msgstr "Übermittlung der Metadaten der Publikation an Zenodo nicht möglich."
+msgstr ""
 
 #: deposit/zenodo/protocol.py:204
 msgid "Unable to publish the deposition on Zenodo."
-msgstr "Veröffentlichung der Publikation auf Zenodo nicht möglich."
+msgstr ""
 
 #: dissemin/settings/common.py:307
 msgid "Arabic"
-msgstr "Arabisch"
+msgstr "Erebki"
 
 #: dissemin/settings/common.py:308
 msgid "German"
-msgstr "Deutsch"
+msgstr "Almanki"
 
 #: dissemin/settings/common.py:309
 msgid "English"
-msgstr "Englisch"
+msgstr "İngılızki"
 
 #: dissemin/settings/common.py:310
 msgid "Spanish"
-msgstr "Spanisch"
+msgstr "İspanyolki"
 
 #: dissemin/settings/common.py:311
 msgid "Finnish"
-msgstr "Finnisch"
+msgstr "Finki"
 
 #: dissemin/settings/common.py:312
 msgid "French"
-msgstr "Französisch"
+msgstr "Fransızki"
 
 #: dissemin/settings/common.py:313
 msgid "Korean"
-msgstr "Koreanisch"
+msgstr "Koreki"
 
 #: dissemin/settings/common.py:314
 msgid "Macedonian"
-msgstr "Mazedonisch"
+msgstr "Makedonki"
 
 #: dissemin/settings/common.py:315
 msgid "European Portuguese"
-msgstr "Europäisches Portugiesisch"
+msgstr "Portekizkiyê Ewropa"
 
 #: dissemin/settings/common.py:316
 msgid "Brazilian Portuguese"
-msgstr "Brasilianisches Portugiesisch"
+msgstr "Portekizkiyê Brezilya"
 
 #: dissemin/settings/common.py:317
 msgid "Swedish"
-msgstr "Schwedisch"
+msgstr "İswecki"
 
 #: dissemin/settings/common.py:318
 msgid "Turkish"
-msgstr "Türkisch"
+msgstr "Tırki"
 
 #: dissemin/settings/common.py:319
 msgid "Simplified Chinese"
-msgstr "Vereinfachtes Chinesisch"
+msgstr "Çinkiya rehat"
 
 #: dissemin/settings/common.py:320
 msgid "Traditional Chinese"
-msgstr "Traditionelles Chinesisch"
+msgstr "Çinkiyo toreyın"
 
 #: model-gettext.py:2
 msgid "Computer science, knowledge & systems"
-msgstr "Informatik"
+msgstr ""
 
 #: model-gettext.py:3
 msgid "Bibliographies"
-msgstr "Bibliographien"
+msgstr "Bibliyografiy"
 
 #: model-gettext.py:4
 msgid "Library & information sciences"
-msgstr "Bibliotheks- und Informationswissenschaften"
+msgstr ""
 
 #: model-gettext.py:5
 msgid "Encyclopedias & books of facts"
-msgstr "Enzyklopädien & Sachbücher"
+msgstr ""
 
 #: model-gettext.py:6
 msgid "Magazines, journals & serials"
-msgstr "Zeitschriften, Journale"
+msgstr ""
 
 #: model-gettext.py:7
 msgid "Associations, organizations & museums"
-msgstr "Organisationen, Museumswissenschaft"
+msgstr ""
 
 #: model-gettext.py:8
 msgid "News media, journalism & publishing"
-msgstr "Nachrichtenmedien, Journalismus, Verlagswesen"
+msgstr ""
 
 #: model-gettext.py:9
 msgid "Quotations"
-msgstr "Allgemeine Sammelwerke, Zitatensammlungen"
+msgstr ""
 
 #: model-gettext.py:10
 msgid "Manuscripts & rare books"
-msgstr "Handschriften, seltene Bücher"
+msgstr ""
 
 #: model-gettext.py:12
 msgid "Metaphysics"
-msgstr "Metaphysik"
+msgstr "Metafizik"
 
 #: model-gettext.py:13
 msgid "Epistemology"
-msgstr "Erkenntnistheorie"
+msgstr "Epistemoloci"
 
 #: model-gettext.py:14
 msgid "Parapsychology & occultism"
-msgstr "Parapsychologie, Okkultismus"
+msgstr "Parapsikoloci & Okultizm"
 
 #: model-gettext.py:15
 msgid "Philosophical schools of thought"
-msgstr "Einzelne philosophische Schulen"
+msgstr "Mektebê Felesefeyê Fıkıri"
 
 #: model-gettext.py:17
 msgid "Philosophical logic"
-msgstr "Logik"
+msgstr "Mantıqê felsefey"
 
 #: model-gettext.py:18
 msgid "Ethics"
-msgstr "Ethik"
+msgstr "Etik"
 
 #: model-gettext.py:19
 msgid "Ancient, medieval & eastern philosophy"
-msgstr "Antike, mittelalterliche und östliche Philosophie"
+msgstr "Felsefeyo kehan, miyani u rocvetışi"
 
 #: model-gettext.py:20
 msgid "Modern western philosophy"
-msgstr "Neuzeitliche westliche Philosophie"
+msgstr "Modern felsefey rocawani"
 
 #: model-gettext.py:21
 msgid "Religion"
-msgstr "Religion"
+msgstr "Din"
 
 #: model-gettext.py:22
 msgid "Philosophy & theory of religion"
-msgstr "Religionsphilosophie; Religionstheorie"
+msgstr "Teoriy felsefey u dini"
 
 #: model-gettext.py:23
 msgid "The Bible"
-msgstr "Bibel"
+msgstr "İncil"
 
 #: model-gettext.py:24
 msgid "Christianity"
-msgstr "Christentum, Christliche Theologie"
+msgstr "Xıristiyaniye"
 
 #: model-gettext.py:25
 msgid "Christian practice & observance"
-msgstr "Christliche Ethik, spirituelle Theologie"
+msgstr "Pragmatikê Xristiyaney & Riayet"
 
 #: model-gettext.py:26
 msgid "Christian pastoral practice & religious orders"
-msgstr "Christliche Orden und Ortskirchen"
+msgstr "Pastoral pragmatikê Xristiyaney u riayetê dini"
 
 #: model-gettext.py:27
 msgid "Christian organization, social work & worship"
-msgstr "Kirchenorganisation, Sozialarbeit und Religionsausübung"
+msgstr "Organizasyonê Xristiyaney, gurenayışê sosyali & ibadet"
 
 #: model-gettext.py:28
 msgid "History of Christianity"
-msgstr "Geschichte des Kristentums"
+msgstr "Terıxê Xristiyaney"
 
 #: model-gettext.py:29
 msgid "Christian denominations"
-msgstr "Christliche Konfessionen"
+msgstr "Mezhebê Xristiyaney"
 
 #: model-gettext.py:30
 msgid "Other religions"
-msgstr "Andere Religionen"
+msgstr "Dinê bini"
 
 #: model-gettext.py:31
 msgid "Social sciences, sociology & anthropology"
-msgstr "Sozialwissenschaften, Soziologie und Anthropologie"
+msgstr "Zanışê sosyali, Sosylociye u Antropoloci"
 
 #: model-gettext.py:34
 msgid "Economics"
-msgstr "Wirtschaft"
+msgstr "İqtısad"
 
 #: model-gettext.py:36
 msgid "Public administration & military science"
-msgstr "Öffentliche Verwaltung, Militärwissenschaft"
+msgstr "İdarey Şariy & Zanışê Asparey"
 
 #: model-gettext.py:37
 msgid "Social problems & social services"
-msgstr "Soziale Probleme und Sozialdienste"
+msgstr "Problemê sosyali & xızmetê sosyali"
 
 #: model-gettext.py:39
 msgid "Commerce, communications & transportation"
-msgstr "Handel, Kommunikation und Verkehr"
+msgstr "Ticaret, irtibat & resayış"
 
 #: model-gettext.py:40
 msgid "Customs, etiquette & folklore"
-msgstr "Bräuche, Etikette und Folklore"
+msgstr "Gumruk, nizamê weşayışi & folklor"
 
 #: model-gettext.py:41 website/templates/navbar.html:15
 msgid "Language"
-msgstr "Sprache"
+msgstr "Zıwan"
 
 #: model-gettext.py:43
 msgid "English & Old English languages"
-msgstr "Englisch und Altenglisch"
+msgstr "İngılızki & İngılızkiya kehan"
 
 #: model-gettext.py:44
 msgid "German & related languages"
-msgstr "Deutsch und germanische Sprachen"
+msgstr "Almanki & zıwanê eleqeyıni"
 
 #: model-gettext.py:45
 msgid "French & related languages"
-msgstr "Französisch und romanische Sprachen"
+msgstr "Fransızki & zıwanê eleqeyıni"
 
 #: model-gettext.py:46
 msgid "Italian, Romanian & related languages"
-msgstr "Italienisch, Rumänisch und verwandte Sprachen"
+msgstr "İtalyanki, Rumenki & zıwanê eleqeyıni"
 
 #: model-gettext.py:47
 msgid "Spanish, Portuguese, Galician"
-msgstr "Spanisch, Portugiesisch, Galizisch"
+msgstr "İspanyolki, Portekizki, Galiçyaki"
 
 #: model-gettext.py:48
 msgid "Latin & Italic languages"
-msgstr "Latein und italische Sprachen"
+msgstr "Latinki & Zıwanê İtaliki"
 
 #: model-gettext.py:49
 msgid "Classical & modern Greek languages"
-msgstr "Griechisch"
+msgstr "Yunankiya Klasik u Modern"
 
 #: model-gettext.py:50
 msgid "Other languages"
-msgstr "Andere Sprachen"
+msgstr "Zıwanê bini"
 
 #: model-gettext.py:51
 msgid "Science"
-msgstr "Naturwissenschaften"
+msgstr "Zanışiye"
 
 #: model-gettext.py:53
 msgid "Astronomy"
-msgstr "Astronomie"
+msgstr "Asmênşınasiye"
 
 #: model-gettext.py:56
 msgid "Earth sciences & geology"
-msgstr "Geowissenschaften"
+msgstr "Zanışê dınyay & Cêolociye"
 
 #: model-gettext.py:57
 msgid "Fossils & prehistoric life"
-msgstr "Paläontologie"
+msgstr "Fosili & Weşayışi vereterıxi"
 
 #: model-gettext.py:58
 msgid "Biology"
-msgstr "Biologie"
+msgstr "Biyolociye"
 
 #: model-gettext.py:59
 msgid "Plants (Botany)"
-msgstr "Pflanzen (Botanik)"
+msgstr "Nebat (Botaniye)"
 
 #: model-gettext.py:60
 msgid "Animals (Zoology)"
-msgstr "Tiere (Zoologie)"
+msgstr "Heywani (Zoolociye)"
 
 #: model-gettext.py:61
 msgid "Technology"
-msgstr "Technik"
+msgstr "Teknolociye"
 
 #: model-gettext.py:62
 msgid "Medicine & health"
-msgstr "Medizin und Gesundheit"
+msgstr "Tıb & Weşeyi"
 
 #: model-gettext.py:64
 msgid "Agriculture"
-msgstr "Landwirtschaft"
+msgstr "Ziraet"
 
 #: model-gettext.py:65
 msgid "Home & family management"
-msgstr "HAuswirtschaft"
+msgstr "Keye & idarey kufleti"
 
 #: model-gettext.py:66
 msgid "Management & public relations"
-msgstr "Management"
+msgstr "İdare & Şariya irtibat"
 
 #: model-gettext.py:67
 msgid "Chemical engineering"
-msgstr "Chemische Verfahrenstechnik"
+msgstr "Mıhendiseya Kimyay"
 
 #: model-gettext.py:68
 msgid "Manufacturing"
-msgstr "Industrielle Fertigung"
+msgstr "İmalat"
 
 #: model-gettext.py:69
 msgid "Manufacture for specific uses"
-msgstr "Industrielle Fertigung für einzelne Verwendungszwecke"
+msgstr "İmalatê bağse karnayışan"
 
 #: model-gettext.py:70
 msgid "Construction of buildings"
-msgstr "Hausbau, Bauhandwerk"
+msgstr "İnşaatê binayan"
 
 #: model-gettext.py:71
 msgid "Arts"
-msgstr "Künste, Bildende Kunst allgemein"
+msgstr "Senati"
 
 #: model-gettext.py:72
 msgid "Area planning & landscape architecture"
-msgstr "Landschaftsgestaltung, Raumplanung"
+msgstr "Planê mıntıqa & mimariya peyzaji"
 
 #: model-gettext.py:74
 msgid "Sculpture, ceramics & metalwork"
-msgstr "Plastik, Numismatik, Keramik, Metallkunst"
+msgstr ""
 
 #: model-gettext.py:75
 msgid "Graphic arts & decorative arts"
-msgstr "Zeichnung, Kunsthandwerk"
+msgstr ""
 
 #: model-gettext.py:76
 msgid "Painting"
-msgstr "Malerei"
+msgstr "Tablo"
 
 #: model-gettext.py:77
 msgid "Printmaking & prints"
-msgstr "Grafische Verfahren, Drucke"
+msgstr "Çapê tabloy & Tabloy"
 
 #: model-gettext.py:78
 msgid "Photography, computer art, film, video"
-msgstr "Fotografie, Computerkunst"
+msgstr "Fotoğrafwaney, senatê komputeri, film, video"
 
 #: model-gettext.py:79
 msgid "Music"
-msgstr "Musik"
+msgstr "Muzik"
 
 #: model-gettext.py:80
 msgid "Sports, games & entertainment"
-msgstr "Freizeitgestaltung, Darstellende Kunst"
+msgstr "Spori, Kayi & Hewin"
 
 #: model-gettext.py:81
 msgid "Literature, rhetoric & criticism"
-msgstr "Literatur, Rhetorik, Literaturwissenschaft"
+msgstr "Edebiyat, retorik & kritisizm"
 
 #: model-gettext.py:82
 msgid "American literature in English"
-msgstr "Englische Literatur Amerikas"
+msgstr "Edebiyatê Amerikay İngılızki"
 
 #: model-gettext.py:83
 msgid "English & Old English literatures"
-msgstr "Englische und altenglische Literatur"
+msgstr "İngılızki & Edebiyatê İngılızkiya kehan"
 
 #: model-gettext.py:84
 msgid "German & related literatures"
-msgstr "Deutsche Literatur"
+msgstr "Almanki & edebiyatê eleqeyıni"
 
 #: model-gettext.py:85
 msgid "French & related literatures"
-msgstr "Französische Literatur"
+msgstr "Fransızki & edebiyatê eleqeyıni"
 
 #: model-gettext.py:86
 msgid "Italian, Romanian & related literatures"
-msgstr "Italienische, rumänische, rätoromanische Literatur"
+msgstr "İtalyanki, Rumenki & edebiyatê eleqeyıni"
 
 #: model-gettext.py:87
 msgid "Spanish, Portuguese, Galician literatures"
-msgstr "Spanische und portugiesische Literatur"
+msgstr "Edebiyatê İspanyolki, Portekizki, Galiçyaki"
 
 #: model-gettext.py:88
 msgid "Latin & Italic literatures"
-msgstr "Lateinische Literatur"
+msgstr ""
 
 #: model-gettext.py:89
 msgid "Classical & modern Greek literatures"
-msgstr "Griechische LiteraturGriechische Literatur"
+msgstr ""
 
 #: model-gettext.py:90
 msgid "Other literatures"
-msgstr "Literaturen anderer Sprachen"
+msgstr ""
 
 #: model-gettext.py:92
 msgid "Geography & travel"
-msgstr "Geografie und Reisen"
+msgstr ""
 
 #: model-gettext.py:93
 msgid "Biography & genealogy"
-msgstr "Biografie, Genealogie, Heraldik"
+msgstr ""
 
 #: model-gettext.py:94
 msgid "History of ancient world (to ca. 499)"
-msgstr "Alte Geschichte, Archäologie bis ca. 499"
+msgstr ""
 
 #: model-gettext.py:95
 msgid "History of Europe"
-msgstr "Geschichte Europas"
+msgstr ""
 
 #: model-gettext.py:96
 msgid "History of Asia"
-msgstr "Geschichte Asiens"
+msgstr ""
 
 #: model-gettext.py:97
 msgid "History of Africa"
-msgstr "Geschichte Afrikas"
+msgstr ""
 
 #: model-gettext.py:98
 msgid "History of North America"
-msgstr "Geschichte Nordamerikas"
+msgstr ""
 
 #: model-gettext.py:99
 msgid "History of South America"
-msgstr "Geschichte Südamerikas"
+msgstr ""
 
 #: model-gettext.py:100
 msgid "History of other areas"
-msgstr "Geschichte anderer Gebiete"
+msgstr ""
 
 #: model-gettext.py:101
-#, fuzzy
 msgid "Data processing & computer science"
-msgstr "Informatik"
+msgstr ""
 
 #: model-gettext.py:102
 msgid "Military science"
-msgstr "Militärwissenschaften"
+msgstr ""
 
 #: model-gettext.py:103
 msgid "Other Germanic languages"
-msgstr "Andere germanische Sprachen"
+msgstr ""
 
 #: model-gettext.py:104
 msgid "Public performances"
-msgstr "Öffentliche Darbietungen"
+msgstr ""
 
 #: model-gettext.py:105
 msgid "Stage presentations"
-msgstr "Bühnenkunst"
+msgstr ""
 
 #: model-gettext.py:106
 msgid "Indoor games & amusements"
-msgstr "Spiele und Freizeitaktivitäten für drinnen"
+msgstr ""
 
 #: model-gettext.py:107
 msgid "Athletic & outdoor sports & games"
-msgstr "Sportarten, Sportspiele"
+msgstr ""
 
 #: model-gettext.py:108
 msgid "Other Germanic literatures"
-msgstr "Andere germanische Literaturen"
+msgstr ""
 
 #: model-gettext.py:109
 msgid "Germany & neighboring central European countries"
-msgstr "Mitteleuropa, Deutschland"
+msgstr ""
 
 #: model-gettext.py:110
 msgid "Green Open Access Service"
-msgstr "Zweitveröffentlichungsservice"
+msgstr ""
 
 #: model-gettext.py:111
 msgid "Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n<br/>\nContact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
-msgstr "Möchten Sie, dass die Universitäts- und Landesbibliothek Darmstadt dauerhaft die Zweitveröffentlichung Ihrer Publikationen für Sie übernimmt?\n<br/>\nKontaktieren Sie uns: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
+msgstr ""
 
 #: model-gettext.py:112
 msgid "TUprints contract required!"
-msgstr "TUprints-Vertrag nötig!"
+msgstr ""
 
 #: model-gettext.py:113
 msgid "For every document, that you upload via Dissemin we need once a TUprints contract.\nPlease fill in the contract and send a printed and signed copy to:\n<br>\nULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
-msgstr "Für alle Dokumente, die Sie über Dissemin hochladen, benötigen wir einmalig den TUprints-Vertrag. Bitte füllen Sie den Vertrag aus und senden Sie das ausgedruckte und unterschriebene Original an:\n<br/>\nULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
+msgstr ""
 
 #: model-gettext.py:114
 msgid "Download contract"
-msgstr "Download Vertrag"
+msgstr ""
 
 #: model-gettext.py:115
 msgid "Creative Commons 1.0 Universal (CC0 1.0) Public Domain Dedication"
-msgstr "Creative Commons CC0 1.0 Universell (CC0 1.0) Public Domain Dedication"
+msgstr ""
 
 #: model-gettext.py:116
 msgid "Creative Commons Attribution 4.0 International (CC BY 4.0)"
-msgstr "Creative Commons Namensnennung 4.0 International (CC BY 4.0)"
+msgstr ""
 
 #: model-gettext.py:117
 msgid "Creative Commons Attribution-ShareAlike 4.0, International (CC BY-SA 4.0)"
-msgstr "Creative Commons Namensnennung - Weitergabe unter gleichen Bedingungen 4.0 International (CC BY-SA 4.0)"
+msgstr ""
 
 #: model-gettext.py:118
 msgid "Creative Commons Attribution-NonCommerical 4.0 International (CC BY-NC 4.0)"
-msgstr "Creative Commons Namensnennung - Nicht kommerziell 4.0 International (CC BY-NC 4.0)"
+msgstr ""
 
 #: model-gettext.py:119
 msgid "Creative Commons Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0)"
-msgstr "Creative Commons Namensnennung - Keine Bearbeitungen 4.0 International (CC BY-ND 4.0)"
+msgstr ""
 
 #: model-gettext.py:120
 msgid "Free for private use; right holder retains other rights, including distribution"
-msgstr "Kostenlos zur privaten Nutzung; Rechteinhaber erhalten andere Rechte, inklusive Verbreitung."
+msgstr ""
 
 #: model-gettext.py:121
 msgid "Other open license"
-msgstr "Andere freie Lizenz"
+msgstr ""
 
 #: model-gettext.py:123
 msgid "Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)"
-msgstr "Creative Commons Namensnennung - Nicht kommerziell Weitergabe unter gleichen Bedinungen 4.0 International (CC BY-NC-SA 4.0)"
+msgstr ""
 
 #: model-gettext.py:124
 msgid "Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)"
-msgstr "Creative Commons Namensnennung - Nicht kommerziell - Keine Bearbeitungen 4.0 International (CC BY-NC-ND 4.0)"
+msgstr ""
 
 #: model-gettext.py:125
 msgid "Zenodo"
-msgstr "Zenodo"
+msgstr ""
 
 #: model-gettext.py:126
 msgid "Zenodo is a general-purpose open repository hosted by CERN. If the document does not have a DOI yet, Zenodo will create one."
-msgstr "Zenodo ist ein allgemeines, offene Repositorium, das vom CERN betrieben wird. Falls das Dokument noch keine DOI hat, wird Zenodo eine erstellen."
+msgstr ""
 
 #: model-gettext.py:127
 msgid "HAL"
-msgstr "HAL"
+msgstr ""
 
 #: model-gettext.py:128
 msgid "HAL is a  multidisciplinary open archive, sustained by the French Research Ministry."
-msgstr "HAL ist ein multidisziplinäres, offenes Archiv, das vom französischen Wissenschaftministerium getragen wird."
+msgstr ""
 
 #: model-gettext.py:129
 msgid "OSF preprints"
-msgstr "OSF Preprint"
+msgstr ""
 
 #: model-gettext.py:130
 msgid "Run by the Center for Open Science, OSF lets you share your preprints openly. You can also share supplemental data, materials or code associated with your article."
-msgstr "OSF wird vom Center for Open Science betrieben und ermöglicht es dir, Preprints zu veröffentlichen. Du kannst auch Forschungsdaten Quelltexte und sonstige Materialien anhängen."
+msgstr ""
 
 #: model-gettext.py:131
 msgid "TUprints"
-msgstr "TUprints"
+msgstr ""
 
 #: model-gettext.py:132
 msgid "TUprints is the open access repository for all current and former members of the Technical University Darmstadt."
-msgstr "TUprints ist das Open Access Repositorium für alle aktuellen und ehemaligen Angehörige und Mitglieder der TU Darmstadt."
+msgstr ""
 
 #: notification/models.py:62
 msgid "inboxes"
-msgstr "Posteingänge"
+msgstr ""
 
 #: papers/ajax.py:233 papers/templates/papers/paper_list.html:77
 msgid "Remove from to-do list"
-msgstr "Von Merkliste entfernen"
+msgstr ""
 
 #: papers/ajax.py:234
 msgid "Marking failed"
-msgstr "Merken fehlgeschlagen"
+msgstr ""
 
 #: papers/ajax.py:263 papers/templates/papers/paper_list.html:79
 #: papers/templates/papers/policies.html:73
 msgid "Mark for later upload"
-msgstr "Für späteren Upload merken"
+msgstr ""
 
 #: papers/ajax.py:264
 msgid "Removing failed"
-msgstr "Entfernen fehlgeschlagen"
+msgstr ""
 
 #: papers/baremodels.py:58
 msgid "Journal article"
-msgstr "Zeitschriftenartikel"
+msgstr "Meqaley qazeta"
 
 #: papers/baremodels.py:59
 msgid "Proceedings article"
-msgstr "Konferenzbeitrag"
+msgstr ""
 
 #: papers/baremodels.py:60
 msgid "Book chapter"
-msgstr "Buchkapitel"
+msgstr "Letey kıtabi"
 
 #: papers/baremodels.py:61
 msgid "Book"
-msgstr "Buch"
+msgstr "Kıtab"
 
 #: papers/baremodels.py:62
 msgid "Journal issue"
-msgstr "Zeitschriftenausgabe"
+msgstr "Mewzuy qazeta"
 
 #: papers/baremodels.py:63
 msgid "Proceedings"
-msgstr "Konferenzband"
+msgstr ""
 
 #: papers/baremodels.py:64
 msgid "Entry"
-msgstr "Eintrag"
+msgstr ""
 
 #: papers/baremodels.py:65
 msgid "Poster"
@@ -1251,159 +1241,159 @@ msgstr "Poster"
 
 #: papers/baremodels.py:66
 msgid "Report"
-msgstr "Bericht"
+msgstr "Rapor"
 
 #: papers/baremodels.py:67
 msgid "Thesis"
-msgstr "Abschlussarbeit"
+msgstr "Tez"
 
 #: papers/baremodels.py:68
 msgid "Dataset"
-msgstr "Datensatz"
+msgstr "Dataset"
 
 #: papers/baremodels.py:69 papers/models.py:99
 #: publishers/templates/publishers/policy_preprint.html:5
 msgid "Preprint"
-msgstr "Preprint"
+msgstr "Verneşr"
 
 #: papers/baremodels.py:70
 msgid "Other document"
-msgstr "Anderes Dokument"
+msgstr "Dokumano bın"
 
 #: papers/forms.py:50 papers/views.py:73
 msgid "Invalid ORCID identifier."
-msgstr "Ungültige ORCID-Kennung."
+msgstr ""
 
 #: papers/forms.py:56
 msgid "Department"
-msgstr "Fachbereich"
+msgstr "Departman"
 
 #: papers/forms.py:58 papers/templates/papers/researcher.html:9
 msgid "Researcher"
-msgstr "Forscher"
+msgstr ""
 
 #: papers/forms.py:71
 msgid "newest first"
-msgstr "neueste zuerst"
+msgstr ""
 
 #: papers/forms.py:72
 msgid "oldest first"
-msgstr "älteste zuerst"
+msgstr ""
 
 #: papers/forms.py:100 papers/forms.py:107
 msgid "Any"
-msgstr "Beliebig"
+msgstr "Qet"
 
 #: papers/forms.py:101
 msgid "Visible"
-msgstr "Sichtbar"
+msgstr "Asaye"
 
 #: papers/forms.py:102
 msgid "Invisible"
-msgstr "Nicht sichtbar"
+msgstr "Nêasaye"
 
 #: papers/models.py:100 publishers/templates/publishers/policy_postprint.html:6
 msgid "Postprint"
-msgstr "Postprint"
+msgstr ""
 
 #: papers/models.py:101
 #: publishers/templates/publishers/policy_pdfversion.html:6
 msgid "Published version"
-msgstr "Veröffentlichte Version"
+msgstr ""
 
 #: papers/models.py:105
 msgid "Preparing profile"
-msgstr "Profil wird erstellt"
+msgstr ""
 
 #: papers/models.py:106
 msgid "Fetching publications from ORCID"
-msgstr "Rufe Veröffentlichungen von ORCID ab"
+msgstr ""
 
 #: papers/models.py:107
 msgid "Fetching publications from CrossRef"
-msgstr "Rufe Veröffentlichungen von CrossRef ab"
+msgstr ""
 
 #: papers/models.py:108
 msgid "Fetching publications from BASE"
-msgstr "Rufe Veröffentlichungen von BASE ab"
+msgstr ""
 
 #: papers/models.py:109
 msgid "Fetching publications from CORE"
-msgstr "Rufe Veröffentlichungen von CORE ab"
+msgstr ""
 
 #: papers/models.py:110
 msgid "Fetching publications from OAI-PMH"
-msgstr "Rufe Veröffentlichungen von OAI-PMH ab"
+msgstr ""
 
 #: papers/models.py:111
 msgid "Clustering publications"
-msgstr "Publikationen gruppieren"
+msgstr ""
 
 #: papers/models.py:112
 msgid "Updating statistics"
-msgstr "Statistik wird aktualisiert"
+msgstr ""
 
 #: papers/models.py:1224 papers/views.py:145 papers/views.py:149
 msgid "Papers"
-msgstr "Publikationen"
+msgstr "Kağıti"
 
 #: papers/templates/papers/advanced_search.html:8
 msgid "Advanced Search"
-msgstr "Erweiterte Suche"
+msgstr ""
 
 #: papers/templates/papers/advanced_search.html:13
 #: website/templates/dissemin/start_page.html:30
 msgid "Advanced search"
-msgstr "Erweiterte Suche"
+msgstr ""
 
 #: papers/templates/papers/advanced_search.html:20
 msgid "Title"
-msgstr "Titel"
+msgstr ""
 
 #: papers/templates/papers/advanced_search.html:24
 msgid "Authors"
-msgstr "Autoren"
+msgstr ""
 
 #: papers/templates/papers/advanced_search.html:26
 msgid "Search by names or ORCIDs. Separate with commas and prefix with <code>last:</code> to enforce last name search."
-msgstr "Verwende Autorennamen oder ORCID-Identifikatoren. Verwende Kommas als Namenstrenner. Präfix mit <code>last:</code>, um die Nachnamensuche zu erzwingen."
+msgstr ""
 
 #: papers/templates/papers/advanced_search.html:39
 msgid "Document type"
-msgstr "Dokumenttyp"
+msgstr ""
 
 #: papers/templates/papers/advanced_search.html:60
 msgid "Fields for superusers"
-msgstr "Felder für Administratoren"
+msgstr ""
 
 #: papers/templates/papers/advanced_search.html:62
 #: papers/templates/papers/search_base.html:124
 msgid "By visibility"
-msgstr "Nach Sichtbarkeit"
+msgstr "Asayey gore"
 
 #: papers/templates/papers/advanced_search.html:66
 #: papers/templates/papers/search_base.html:128
 msgid "By full text availability"
-msgstr "Nach Volltextverfügbarkeit"
+msgstr ""
 
 #: papers/templates/papers/advanced_search.html:70
 #: papers/templates/papers/search_base.html:132 publishers/forms.py:23
 msgid "By publisher policy"
-msgstr "Nach Publikationsrichtlinie des Verlags"
+msgstr ""
 
 #: papers/templates/papers/author_list.html:21
 msgid "This contributorship is confirmed by ORCID."
-msgstr "Diese Autorenschaft wurde durch ORCID bestätigt."
+msgstr ""
 
 #: papers/templates/papers/export_citation_modal.html:7
 #: papers/templates/papers/paper_panel.html:59
 msgid "Export citation"
-msgstr "Zitation exportieren"
+msgstr ""
 
 #: papers/templates/papers/export_citation_modal.html:8
 #: papers/templates/papers/export_citation_modal.html:30
 msgid "Close"
-msgstr "Schließen"
+msgstr "Racnê"
 
 #: papers/templates/papers/export_citation_modal.html:15
 msgid "Format"
@@ -1413,1414 +1403,1411 @@ msgstr "Format"
 #: papers/templates/papers/paper.html:179
 #: papers/templates/papers/paper_list.html:55
 msgid "Download"
-msgstr "Herunterladen"
+msgstr "Ron"
 
 #: papers/templates/papers/messages.html:8
 #, python-format
 msgid "We ignored %(papers)s paper from your ORCiD profile."
 msgid_plural "We ignored %(papers)s papers from your ORCiD profile."
-msgstr[0] "Wir haben eine Publikation aus Deinem ORCiD-Profil ignoriert."
-msgstr[1] "Wir haben %(papers)s Publikationen aus Deinem ORCiD-Profil ignoriert."
+msgstr[0] ""
+msgstr[1] ""
 
 #: papers/templates/papers/messages.html:14
 msgid "Details:"
-msgstr "Details:"
+msgstr ""
 
 #: papers/templates/papers/messages.html:21
 msgid "No author"
-msgstr "Verfasser_innen"
+msgstr ""
 
 #: papers/templates/papers/messages.html:23
 msgid "No title"
-msgstr "Titel"
+msgstr ""
 
 #: papers/templates/papers/messages.html:25
 msgid "Invalid publication date"
-msgstr "Ungültiges Veröffentlichungsdatum"
+msgstr ""
 
 #: papers/templates/papers/messages.html:27
 msgid "No publication date"
-msgstr "Kein Publikationsdatum"
+msgstr ""
 
 #: papers/templates/papers/messages.html:29
 msgid "Paper is invalid"
-msgstr "Publikation hat Fehler"
+msgstr ""
 
 #: papers/templates/papers/messages.html:32
 msgid "{{ title }} was ignored for the following reason:"
-msgstr "{{ title }} wurde ignoriert weil:"
+msgstr ""
 
 #: papers/templates/papers/messages.html:36
 msgid "A paper was ignored, because is has no title."
-msgstr "Eine Publikation wurde ignoriert, weil sie keinen Titel hat."
+msgstr ""
 
 #: papers/templates/papers/paper.html:40
 #, python-format
 msgctxt "as in: _Journal article published in 2017 by_ Tom Smith, Nicole Allen"
 msgid "%(doctype)s published in %(year)s by"
-msgstr "%(doctype)s veröffentlicht in %(year)s von"
+msgstr ""
 
 #: papers/templates/papers/paper.html:46
 #, python-format
 msgctxt "as in: _Published in 2017 by_ Tom Smith, Nicole Allen"
 msgid "Published in %(year)s by"
-msgstr "Veröffentlicht in %(year)s von"
+msgstr ""
 
 #: papers/templates/papers/paper.html:56
 #, python-format
 msgid "and <a href=\"#\" id=\"showAllAuthors\">%(nb_remaining_authors)s other authors.</a>"
-msgstr "und <a href=\"#\" id=\"showAllAuthors\">%(nb_remaining_authors)s weitere Autoren.</a>"
+msgstr ""
 
 #: papers/templates/papers/paper.html:62
 msgid "Show less"
-msgstr "Weniger zeigen"
+msgstr ""
 
 #: papers/templates/papers/paper.html:74
 msgid "Deposit accomplished!"
-msgstr "Upload erledigt!"
+msgstr ""
 
 #: papers/templates/papers/paper.html:76
 #, python-format
 msgid "This paper was successfully deposited and is now freely available at <a class=\"alert-link\" href=\"%(splash_url)s\">this address.</a>>"
-msgstr "Die Publikation wurde erfolgreich hochgeladen und ist jetzt <a class=\"alert-link\" href=\"%(splash_url)s\">hier</a> frei verfügbar."
+msgstr ""
 
 #: papers/templates/papers/paper.html:84 papers/templates/papers/paper.html:98
 #: papers/templates/papers/paper.html:136
 msgid "Deposit almost accomplished!"
-msgstr "Veröffentlichung fast erledigt!"
+msgstr ""
 
 #: papers/templates/papers/paper.html:88
 #, python-format
 msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available after validation by the repository administration. You can check for the status in your <a class=\"alert-link\" href=\"%(my_profile)s\">profile</a>."
-msgstr "Die Publikation wurde in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a> hoichgeladen. Der Volltext wird nach einer Überprüfung des Repositoriumsbetreiber verfügbar sein. Du kannst den Status in deinem <a class=\"alert-link\" href=\"%(my_profile)s\">Profil</a> jederzeit einsehen."
+msgstr ""
 
 #: papers/templates/papers/paper.html:102
-#, fuzzy, python-format
+#, python-format
 msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available after validation by the repository administration, but not before %(pub_date)s. You can check for the status in your <a class=\"alert-link\" href=\"%(my_profile)s\">profile</a>."
-msgstr "<p>Die Publikation wurde auf <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a> hochgeladen. Der Volltext wird unter <a class=\"alert-link\" href=\"%(splash_url)s\">dieser Adresse</a> verfügbar sein, wenn er den Moderationsprozess des Repositoriums absolviert hat.</p>"
+msgstr ""
 
 #: papers/templates/papers/paper.html:126
 #: website/templates/dissemin/start_page.html:129
 msgid "Learn more!"
-msgstr "Mehr erfahren"
+msgstr ""
 
 #: papers/templates/papers/paper.html:138
-#, fuzzy, python-format
+#, python-format
 msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available after validation by the repository administration."
-msgstr "Die Publikation wurde erfolgreich in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a> eingereicht. Der Volltext wird nach Überprüfung durch die Repositoriumsverwaltung unter <a class=\"alert-link\" href=\"%(deposit_url)s\">dieser Adresse</a> verfügbar sein."
+msgstr ""
 
 #: papers/templates/papers/paper.html:152
 #, python-format
 msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(deposit_url)s\">this address</a> from <strong>%(pub_date|localize)s</strong> on due to an embargo."
-msgstr "Die Publikation wurde erfolgreich in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a> abgelegt. Der Volltext wird wegen eines Embargos erst ab <strong>%(pub_date|localize)s</strong> unter <a class=\"alert-link\" href=\"%(deposit_url)s\">dieser Adresse</a> verfügbar sein."
+msgstr ""
 
 #: papers/templates/papers/paper.html:177
 msgid "Full text:"
-msgstr "Volltext:"
+msgstr ""
 
 #: papers/templates/papers/paper.html:181 statistics/models.py:66
 msgid "Unavailable"
-msgstr "Nicht verfügbar"
+msgstr ""
 
 #: papers/templates/papers/paper_list.html:36
 #, python-format
 msgid "and %(remaining_authors)s other authors"
-msgstr "und %(remaining_authors)s weiteren Verfasser_innen"
+msgstr ""
 
 #: papers/templates/papers/paper_list.html:55
 msgid "from"
-msgstr "von"
+msgstr ""
 
 #: papers/templates/papers/paper_list.html:57
 #: papers/templates/papers/policies.html:17
 #: papers/templates/papers/policies.html:32
 #: papers/templates/papers/policies.html:47
 msgid "Upload"
-msgstr "Hochladen"
+msgstr "Bar ke"
 
 #: papers/templates/papers/paper_list.html:65
 msgid "Exclude from my profile"
-msgstr "Von meinem Profil ausschließen"
+msgstr ""
 
 #: papers/templates/papers/paper_list.html:69
 msgid "Include in my profile"
-msgstr "In mein Profil aufnehmen"
+msgstr ""
 
 #: papers/templates/papers/paper_panel.html:10
 msgid "Published in"
-msgstr "Veröffentlicht in"
+msgstr ""
 
 #: papers/templates/papers/paper_panel.html:19
 msgid "Links"
-msgstr "Links"
+msgstr "Gıreyi"
 
 #: papers/templates/papers/paper_panel.html:48
 msgid "Tools"
-msgstr "Werkzeuge"
+msgstr "Xeceti"
 
 #: papers/templates/papers/paper_panel.html:64
 msgid "Search in Google Scholar"
-msgstr "In Google Scholar suchen"
+msgstr ""
 
 #: papers/templates/papers/paper_panel.html:69
 msgid "Admin zone"
-msgstr "Verwaltungsbereich"
+msgstr ""
 
 #: papers/templates/papers/policies.html:56
 #: publishers/templates/publishers/publisher.html:92
 msgid "Policy details"
-msgstr "Einzelrichtlinien"
+msgstr ""
 
 #: papers/templates/papers/policies.html:70
 #: papers/templates/papers/policies.html:86
 msgid "Blue circle"
-msgstr "Blauer Kreis"
+msgstr ""
 
 #: papers/templates/papers/policies.html:73
 msgid "Mark this publication for later upload."
-msgstr "Publikation für späteren Upload merken"
+msgstr ""
 
 #: papers/templates/papers/policies.html:76
 msgid "Mark"
-msgstr "Merken"
+msgstr "Nişan"
 
 #: papers/templates/papers/policies.html:77
 msgid "Marked"
-msgstr "Gemerkt"
+msgstr ""
 
 #: papers/templates/papers/policies.html:89
 msgid "Contact the authors to make this publication freely available. This is a service of the Open Access Button."
-msgstr "Kontaktiere die Autoren dieser Publikation um sie frei verfügbar zu machen. Dieser Service wird durch den Open Access Button ermöglichst."
+msgstr ""
 
 #: papers/templates/papers/policies.html:89
 msgid "Contact authors"
-msgstr "Verfasser_innen kontaktieren"
+msgstr ""
 
 #: papers/templates/papers/policies.html:92
 #: website/templates/dissemin/tos.html:49
 msgid "Contact"
-msgstr "Kontakt"
+msgstr "İrtıbat"
 
 #: papers/templates/papers/researcher.html:14
 msgid "Is it you?"
-msgstr "Bist Du das?"
+msgstr ""
 
 #: papers/templates/papers/researcher.html:26
 #, python-format
 msgid " %(first_name)s %(last_name)s uses ORCID."
-msgstr " %(first_name)s %(last_name)s nutzt ORCID."
+msgstr ""
 
 #: papers/templates/papers/researcher.html:38
 msgid "Refresh Publications"
-msgstr "Veröffentlichungen auffrischen"
+msgstr ""
 
 #: papers/templates/papers/researcher.html:42
 msgid "Address:"
-msgstr "Adresse:"
+msgstr "Adrese:"
 
 #: papers/templates/papers/researcher.html:51
 #, python-format
 msgid "Missing publications? <a href=\"%(matching_papers_url)s\">Search for publications with a matching author name.</a>"
-msgstr "Fehlende Veröffentlichungen? <a href=\"%(matching_papers_url)s\">Suche nach Veröffentlichungen mit passendem Verfassernamen.</a>"
+msgstr ""
 
 #: papers/templates/papers/search.html:10
 #, python-format
 msgid "Missing publications? <a class=\"showHrefPrint\" href=\"%(faq_url)s#missingPaper\">Read more about our data sources.</a>"
-msgstr "Fehlende Veröffentlichungen?<a class=\"showHrefPrint\" href=\"%(faq_url)s#missingPaper\">Erfahre mehr über unsere Datenquellen.</a>"
+msgstr ""
 
 #: papers/templates/papers/search_base.html:25
 #, python-format
 msgid "%(formattedCounter)s paper found"
 msgid_plural "%(formattedCounter)s papers found"
-msgstr[0] "%(formattedCounter)s Publikation gefunden"
-msgstr[1] "%(formattedCounter)s Publikationen gefunden"
+msgstr[0] ""
+msgstr[1] ""
 
 #: papers/templates/papers/search_base.html:42
 msgid "Refine"
-msgstr "Filtern"
+msgstr ""
 
 #: papers/templates/papers/search_base.html:46
 msgid "By title"
-msgstr "Nach Titel"
+msgstr "Sernamey gore"
 
 #: papers/templates/papers/search_base.html:55
 msgid "By co-authors"
-msgstr "Nach Co-Autoren"
+msgstr ""
 
 #: papers/templates/papers/search_base.html:57
 msgid "By authors"
-msgstr "Nach Verfasser_innen"
+msgstr ""
 
 #: papers/templates/papers/search_base.html:66
 msgid "By publication date"
-msgstr "Nach Veröffentlichungsdatum"
+msgstr ""
 
 #: papers/templates/papers/search_base.html:68
 msgid "after"
-msgstr "nach"
+msgstr "bahdo"
 
 #: papers/templates/papers/search_base.html:74
 msgid "before"
-msgstr "vor"
+msgstr "veri"
 
 #: papers/templates/papers/search_base.html:82
 msgid "By document type"
-msgstr "Nach Dokumenttyp"
+msgstr "Tewrê dokumani gore"
 
 #: papers/templates/papers/search_base.html:107 publishers/forms.py:31
 msgid "Sort by"
-msgstr "Sortieren nach"
+msgstr ""
 
 #: papers/templates/papers/search_base.html:122
 msgid "Refine for superusers"
-msgstr "Verfeinern für Administratoren"
+msgstr ""
 
 #: papers/templates/papers/search_base.html:166
 msgid "Refreshing results"
-msgstr "Ergebnisse auffrischen"
+msgstr ""
 
 #: papers/templatetags/statuses.py:20 papers/templatetags/statuses.py:80
 msgid "Unknown OA status"
-msgstr "Unbekannter OA Status"
+msgstr ""
 
 #: papers/templatetags/statuses.py:28
 msgid "Unknown PDF status"
-msgstr "Unbekannter PDF-Status"
+msgstr ""
 
 #: papers/templatetags/statuses.py:34
 msgid "Preprints can be archived."
-msgstr "Preprints können archiviert werden."
+msgstr ""
 
 #: papers/templatetags/statuses.py:35
 msgid "Preprints cannot be archived."
-msgstr "Preprints können nicht archiviert werden."
+msgstr ""
 
 #: papers/templatetags/statuses.py:36
 msgid "Under the restrictions below, preprints can be archived."
-msgstr "Unter folgenden Bedingungen können Preprints archiviert werden."
+msgstr ""
 
 #: papers/templatetags/statuses.py:37
 msgid "Preprints archiving policy unclear"
-msgstr "Archivierungsrichtlinie für Preprints unklar"
+msgstr ""
 
 #: papers/templatetags/statuses.py:38
 msgid "Preprints archiving policy unknown"
-msgstr "Archivierungsbedingungen für Preprints unbekannt"
+msgstr ""
 
 #: papers/templatetags/statuses.py:39
 msgid "Postprints can be archived."
-msgstr "Postprints können archiviert werden."
+msgstr ""
 
 #: papers/templatetags/statuses.py:40
 msgid "Postprints cannot be archived."
-msgstr "Postprints können nicht archiviert werden."
+msgstr ""
 
 #: papers/templatetags/statuses.py:41
 msgid "Under the restrictions below, postprints can be archived."
-msgstr "Unter folgenden Beschränkungen können Postprints archiviert werden."
+msgstr ""
 
 #: papers/templatetags/statuses.py:42
 msgid "Postprint archiving policy unclear."
-msgstr "Archivierungsrichtlinie für Postprints unklar."
+msgstr ""
 
 #: papers/templatetags/statuses.py:43
 msgid "Postprint archiving policy unknown."
-msgstr "Archivierungsrichtlinie für Posprints unbekannt."
+msgstr ""
 
 #: papers/templatetags/statuses.py:44
 msgid "Final versions can be archived."
-msgstr "Endversionen können archiviert werden."
+msgstr ""
 
 #: papers/templatetags/statuses.py:45
 msgid "Final versions cannot be archived."
-msgstr "Endversionen können nicht archiviert werden."
+msgstr ""
 
 #: papers/templatetags/statuses.py:46
 msgid "Under the restrictions below, final versions can be archived."
-msgstr "Unter folgenden Einschränkungen können Endversionen archiviert werden."
+msgstr ""
 
 #: papers/templatetags/statuses.py:47
 msgid "Final version archiving policy unclear."
-msgstr "Archivierungsrichtlinie für Endversion unklar."
+msgstr ""
 
 #: papers/templatetags/statuses.py:48
 msgid "Final version archiving policy unknown."
-msgstr "Archivierungsrichtlinie für Endversion unbekannt."
+msgstr ""
 
 #: papers/templatetags/statuses.py:50
 msgid "Unknown policy"
-msgstr "Unbekannte Richtlinie"
+msgstr ""
 
 #: papers/templatetags/statuses.py:56
 msgid "archiving allowed."
-msgstr "Archivieren erlaubt."
+msgstr ""
 
 #: papers/templatetags/statuses.py:57
 msgid "archiving forbidden."
-msgstr "Archivieren verboten."
+msgstr ""
 
 #: papers/templatetags/statuses.py:58
 msgid "archiving restricted:"
-msgstr "Archivieren beschränkt:"
+msgstr ""
 
 #: papers/templatetags/statuses.py:59
 msgid "policy unclear."
-msgstr "Richtlinie unklar."
+msgstr ""
 
 #: papers/templatetags/statuses.py:60 papers/templatetags/statuses.py:62
 #: papers/templatetags/statuses.py:74
 msgid "policy unknown."
-msgstr "Richtlinie unbekannt."
+msgstr ""
 
 #: papers/templatetags/statuses.py:68
 msgid "archiving allowed"
-msgstr "Archivieren erlaubt"
+msgstr ""
 
 #: papers/templatetags/statuses.py:69
 msgid "archiving forbidden"
-msgstr "Archivieren verboten"
+msgstr ""
 
 #: papers/templatetags/statuses.py:70
 msgid "archiving restricted"
-msgstr "Archivieren beschränkt"
+msgstr ""
 
 #: papers/templatetags/statuses.py:71
 msgid "policy unclear"
-msgstr "Richtlinie unklar"
+msgstr ""
 
 #: papers/templatetags/statuses.py:72
 msgid "policy unknown"
-msgstr "Richtlinie unbekannt"
+msgstr ""
 
 #: papers/templatetags/statuses.py:110
 msgid "Green circle"
-msgstr "Grüner Kreis"
+msgstr ""
 
 #: papers/templatetags/statuses.py:111
 msgid "Red circle"
-msgstr "Roter Kreis"
+msgstr ""
 
 #: papers/templatetags/statuses.py:112
 msgid "Orange circle"
-msgstr "Orangener Kreis"
+msgstr ""
 
 #: papers/templatetags/statuses.py:113
 msgid "White circle"
-msgstr "Weißer Kreis"
+msgstr ""
 
 #: papers/templatetags/statuses.py:114
 msgid "Question mark in circle"
-msgstr "Fragezeichen in Kreis"
+msgstr ""
 
 #: papers/views.py:89
 msgid "Dissemin requires access to your ORCID name, which is marked as private in your ORCID profile."
-msgstr "Dissemin benötigt den Zugriff auf deinen ORCID-Namen, der in deinem ORCID-Profil als privat markiert ist."
+msgstr ""
 
 #: papers/views.py:148
 msgid "All papers"
-msgstr "Alle Publikationen"
+msgstr "Heme peli"
 
 #: papers/views.py:257
 msgid "To-do list"
-msgstr "Merkliste"
+msgstr ""
 
 #: papers/views.py:258
 msgid "Papers on my to-do list"
-msgstr "Publikationen auf meiner Merkliste"
+msgstr ""
 
 #: papers/views.py:282
 msgid "Invalid ORCID profile. Please make sure it includes a public name."
-msgstr "Ungültiges ORCID-Profil. Stelle bitte sicher, dass es einen öffentlich gemachten Namen enthält."
+msgstr ""
 
 #: papers/views.py:285
 msgid "Invalid ORCID profile."
-msgstr "Ungültiges ORCID-Profil."
+msgstr ""
 
 #: papers/views.py:313
 msgid "authored by"
-msgstr "verfasst von"
+msgstr ""
 
 #: papers/views.py:381
 msgid "Paper view expects a DOI or a pk"
-msgstr "Die Ansicht von Publikationen erwartet einen DOI oder einen pk"
+msgstr ""
 
 #: papers/views.py:386
 #, python-format
 msgid "No %(verbose_name)s found matching the query"
-msgstr "Kein %(verbose_name)s passend zur Abfrage gefunden"
+msgstr ""
 
 #: papers/views.py:390
 msgid "This paper has been deleted."
-msgstr "Diese Publikation wurde gelöscht."
+msgstr ""
 
 #: papers/views.py:435
 msgid "Invalid DOI."
-msgstr "Ungültige DOI."
+msgstr ""
 
 #: publishers/forms.py:10
 msgid "popularity"
-msgstr "Beliebtheit"
+msgstr ""
 
 #: publishers/forms.py:11
 msgid "name"
-msgstr "Name"
+msgstr "name"
 
 #: publishers/forms.py:14
 msgid "decreasing"
-msgstr "Rückläufig"
+msgstr ""
 
 #: publishers/forms.py:15
 msgid "increasing"
-msgstr "Steigend"
+msgstr ""
 
 #: publishers/forms.py:18
 msgid "By publisher"
-msgstr "Nach Verlag"
+msgstr ""
 
 #: publishers/forms.py:38
 msgid "Order"
-msgstr "Sortieren"
+msgstr ""
 
 #: publishers/models.py:39 website/templates/dissemin/faq.html:292
 msgid "Open access"
-msgstr "Open Access"
+msgstr ""
 
 #: publishers/models.py:39
 msgid "Freely available from the publisher."
-msgstr "Frei verfügbar durch Herausgeber."
+msgstr ""
 
 #: publishers/models.py:40
 msgid "Allows pre/post prints"
-msgstr "Erlaubt Pre- und Postprints"
+msgstr ""
 
 #: publishers/models.py:41
 msgid "The publisher sells copies but allows authors to deposit some version of the article in a repository."
-msgstr "Der Herausgeber verkauft Kopien, aber erlaubt den Verfasser_innen, einige Versionen des Artikels in einem Repositorium einzureichen."
+msgstr ""
 
 #: publishers/models.py:42
 msgid "Forbids pre/post prints"
-msgstr "Verbietet Pre- und Postprints"
+msgstr ""
 
 #: publishers/models.py:43
 msgid "The publisher forbids authors to deposit any version of their article online."
-msgstr "Der Herausgeber verbietet Verfasser_innen sämtliche Versionen ihres Artikels online verfügbar zu machen."
+msgstr ""
 
 #: publishers/models.py:44
 msgid "Policy unclear"
-msgstr "Richtlinie unklar"
+msgstr ""
 
 #: publishers/models.py:45
 msgid "For complicated policies, unknown publishers and unpublished documents."
-msgstr "Für komplizierte Richtlinien, unbekannte Herausgeber und unveröffentlichte Dokumente."
+msgstr ""
 
 #: publishers/models.py:55
 msgid "Allowed"
-msgstr "Erlaubt"
+msgstr ""
 
 #: publishers/models.py:56
 msgid "Forbidden"
-msgstr "Nicht gestattet"
+msgstr ""
 
 #: publishers/models.py:57
 msgid "Restricted"
-msgstr "Beschränkt"
+msgstr ""
 
 #: publishers/models.py:58
 msgid "Unclear"
-msgstr "Unklar"
+msgstr ""
 
 #: publishers/models.py:59
 msgid "Unknown"
-msgstr "Unbekannt"
+msgstr "Nêzanaye"
 
 #: publishers/models.py:78 publishers/templates/publishers/list.html:9
 #: publishers/templates/publishers/list.html:66
 msgid "Publishers"
-msgstr "Herausgeber"
+msgstr ""
 
 #: publishers/models.py:98
 msgid "Unknown publisher"
-msgstr "Herausgeber unbekannt"
+msgstr ""
 
 #: publishers/templates/publishers/list.html:19
 #, python-format
 msgid "%(counter)s publisher found"
 msgid_plural "%(counter)s publishers found"
-msgstr[0] "%(counter)s Herausgeber gefunden"
-msgstr[1] "%(counter)s Herausgeber gefunden"
+msgstr[0] ""
+msgstr[1] ""
 
 #: publishers/templates/publishers/list.html:26
 #: publishers/templates/publishers/list.html:52
 #: website/templates/dissemin/start_page.html:25
 msgid "Search"
-msgstr "Suche"
+msgstr "Cı geyre"
 
 #: publishers/templates/publishers/list.html:56
 #: publishers/templates/publishers/publisher.html:31
-#, fuzzy
 msgid "Sources"
-msgstr "Datenquellen"
+msgstr ""
 
 #: publishers/templates/publishers/list.html:57
 #: publishers/templates/publishers/publisher.html:32
 msgid "Data provided by"
-msgstr "Daten zur Verfügung gestellt von"
+msgstr ""
 
 #: publishers/templates/publishers/list.html:84
 #, python-format
 msgid "(%(num_total)s paper)"
 msgid_plural "(%(num_total)s papers)"
-msgstr[0] "(Eine Publikation)"
-msgstr[1] "(%(num_total)s Publikationen)"
+msgstr[0] "(Kağıte)"
+msgstr[1] "(%(num_total) Kağıti)"
 
 #: publishers/templates/publishers/list.html:96
 msgid "No publishers found"
-msgstr "Keine Herausgeber gefunden"
+msgstr ""
 
 #: publishers/templates/publishers/policy_pdfversion.html:5
 msgid "The published version is the final version of the paper, as formatted by the publisher."
-msgstr "Die veröffentlichte Version ist die letzte Version der Publikation, wie sie durch die bzw. den Herausgeber formatiert worden ist."
+msgstr ""
 
 #: publishers/templates/publishers/policy_postprint.html:5
 msgid "Postprints differ from preprints in that they include the changes suggested by the reviewers. They are not edited by the publisher."
-msgstr "Postprints unterscheiden sich von Preprints darin, dass sie die vorgeschlagenen Änderungen der Gutachter_innen beinhalten. Sie sind noch nicht durch den Herausgeber überarbeitet."
+msgstr ""
 
 #: publishers/templates/publishers/policy_preprint.html:4
 msgid "A preprint is a document produced by the authors without any interaction with the peer-reviewing process."
-msgstr "Ein Preprint ist ein von den Autor_innen erstelltes Dokument, das keinen Begutachtungsprozess durchlaufen hat."
+msgstr ""
 
 #: publishers/templates/publishers/publisher.html:17
 msgid "Publisher"
-msgstr "Herausgeber"
+msgstr ""
 
 #: publishers/templates/publishers/publisher.html:41
 #, python-format
 msgid "Last updated on %(last_updated)s, <a href=\"%(feedback_url)s\">report any error to them</a>."
-msgstr "Zuletzt aktualisiert am %(last_updated)s, <a href=\"%(feedback_url)s\">einen Fehler an sie melden.</a>"
+msgstr ""
 
 #: publishers/templates/publishers/publisher.html:45
 msgid "Report any error to them."
-msgstr "Sämtliche Fehler dort melden."
+msgstr ""
 
 #: publishers/templates/publishers/publisher.html:51
 msgid "For superusers"
-msgstr "Für Administratoren"
+msgstr ""
 
 #: publishers/templates/publishers/publisher.html:54
 msgid "Change open access status"
-msgstr "Open Access Status ändern"
+msgstr ""
 
 #: publishers/templates/publishers/publisher.html:72
 msgid "Green open access summary"
-msgstr "Grüner Open Access - Zusammenfassung"
+msgstr ""
 
 #: publishers/templates/publishers/publisher.html:74
 #, python-format
 msgid "This is a short summary of the green open access policy of %(publisher_name)s."
-msgstr "This ist eine kurze Zusammenfassung der Grüner Open Access Richtlinie von %(publisher_name)s."
+msgstr ""
 
 #: publishers/templates/publishers/publisher.html:82
 msgid "Conditions"
-msgstr "Bedingungen"
+msgstr "Şerti"
 
 #: statistics/models.py:48
 msgid "Available from the publisher"
-msgstr "Goldener Open Access, der Artikel ist durch den Verlag / Herausgeber frei verfügbar"
+msgstr ""
 
 #: statistics/models.py:49
 msgid "Available from the author"
-msgstr "Grüner Open Access, die Publikation ist bereits in einem Repositorium frei verfügbar"
+msgstr ""
 
 #: statistics/models.py:50
 msgid "Could be shared by the authors"
-msgstr "Publikation kann laut Verlagspolicy Open Access veröffentlicht werden"
+msgstr ""
 
 #: statistics/models.py:51
 msgid "Unknown/unclear sharing policy"
-msgstr "Publikation mit unbekannten / unklaren Zweitveröffentlichungsrichtlinien"
+msgstr ""
 
 #: statistics/models.py:52
 msgid "Publisher forbids sharing"
-msgstr "Der Verlag / Herausgeber verbietet Zweitveröffentlichungen"
+msgstr ""
 
 #: statistics/models.py:57
 msgid "This paper is made freely available by the publisher."
-msgstr "Diese Publikation ist durch den Herausgeber frei verfügbar gemacht worden."
+msgstr ""
 
 #: statistics/models.py:58
 msgid "This paper is available in a repository."
-msgstr "Diese Publikation ist in einem Repositorium verfügbar."
+msgstr ""
 
 #: statistics/models.py:59
 msgid "This paper was not found in any repository, but could be made available legally by the author."
-msgstr "Diese Publikation wurde in keinem Repositorium gefunden, könnte aber durch den bzw. die Verfasser_in verfügbar gemacht werden."
+msgstr ""
 
 #: statistics/models.py:60
 msgid "This paper was not found in any repository; the policy of its publisher is unknown or unclear."
-msgstr "Diese Publikation wurde in keinem Repositorium gefunden; die Bedingungen des Herausgebers sind unbekannt oder unklar."
+msgstr ""
 
 #: statistics/models.py:61
 msgid "Distributing this paper is prohibited by the publisher"
-msgstr "Das Anbieten dieser Publikation ist durch den  Herausgeber untersagt"
+msgstr ""
 
 #: statistics/models.py:65
 msgid "Available"
-msgstr "Verfügbar"
+msgstr "Esto"
 
 #: statistics/templates/statistics/pie_legend.html:7
 msgid "Refine by OA status"
-msgstr "Filtern nach OA Status"
+msgstr ""
 
 #: upload/forms.py:33
 msgid "Invalid file format: only PDF files are accepted."
-msgstr "Ungültiges Dateiformat: Es werden nur PDF-Dateien akzeptiert."
+msgstr ""
 
 #: upload/forms.py:43
 #, python-format
 msgid "File too large (%(size)s). Maximum size is %(maxsize)s."
-msgstr "Datei zu groß (%(size)s). Maximalgröße %(maxsize)s."
+msgstr ""
 
 #: upload/forms.py:51
 msgid "URL"
-msgstr "URL"
+msgstr ""
 
 #: upload/templates/upload/widget.html:3
 msgid "Select here the full text of your article. PDF files only, maximum size:"
-msgstr "Wähle hier den Volltext Deines Artikels. Nur PDF-Dateien, maximale Größe:"
+msgstr ""
 
 #: upload/templates/upload/widget.html:10
 msgid "Click or drop here"
-msgstr "Klicken oder hierher ziehen"
+msgstr ""
 
 #: upload/templates/upload/widget.html:15
 msgid "Or enter a URL:"
-msgstr "Oder eine URL angeben:"
+msgstr ""
 
 #: upload/templates/upload/widget.html:19
 msgid "Upload from URL"
-msgstr "Hochladen via URL"
+msgstr ""
 
 #: upload/templates/upload/widget.html:27
 msgid "Fetching file and generating preview..."
-msgstr "Hole Datei und erzeuge Vorschau..."
+msgstr ""
 
 #: upload/templates/upload/widget.html:47
 msgid "Choose another file"
-msgstr "Wähle eine andere Datei"
+msgstr ""
 
 #: upload/views.py:133
 msgid "Invalid PDF file."
-msgstr "Ungültiges PDF."
+msgstr ""
 
 #: upload/views.py:167
 msgid "Invalid form."
-msgstr "Ungültiges Formular."
+msgstr ""
 
 #: upload/views.py:177
 msgid "File too large."
-msgstr "Datei zu groß."
+msgstr ""
 
 #: upload/views.py:182
 msgid "Invalid content type: this link points to a web page, we need a direct link to a PDF file."
-msgstr "Ungültiger Content-Typ: Dieser Link weist auf eine Webseite hin, wir benötigen einen direkten Link zu einer PDF-Datei."
+msgstr ""
 
 #: upload/views.py:185
 msgid "Invalid SSL certificate on the remote server."
-msgstr "Ungültiges SSL Zertifikat auf dem Remote-Server."
+msgstr ""
 
 #: upload/views.py:187 upload/views.py:191
 msgid "Invalid URL (server timed out)."
-msgstr "Ungültige URL (Zeitüberschreitung des Servers)."
+msgstr ""
 
 #: upload/views.py:189 upload/views.py:193
 msgid "Invalid URL."
-msgstr "Ungültige URL"
+msgstr ""
 
 #: website/forms.py:16 website/forms.py:19
 msgid "Try any author name"
-msgstr "Beliebigen Verfassernamen eingeben"
+msgstr "Jewbina namey nuskari bıcerrebnê"
 
 #: website/templates/403.html:6 website/templates/403.html:10
 msgid "Access denied"
-msgstr "Zugriff verweigert"
+msgstr ""
 
 #: website/templates/403.html:13
 #, python-format
 msgid "The access to the requested page has been denied. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr "Der Zugriff auf die angeforderte Seite wurde verweigert. <a href=\"%(index)s\">Zurück zur Startseite.</a>"
+msgstr ""
 
 #: website/templates/404.html:6 website/templates/404.html:10
 msgid "Page not found"
-msgstr "Seite nicht gefunden"
+msgstr "Pele nêvêniye"
 
 #: website/templates/404.html:13
 #, python-format
 msgid "The page you requested could not be found. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr "Die angeforderte Seite konnte nicht gefunden werden. <a href=\"%(index)s\">Zurück zur Startseite.</a>"
+msgstr ""
 
 #: website/templates/500.html:6 website/templates/500.html:10
 msgid "Internal server error"
-msgstr "Interner Server Fehler"
+msgstr ""
 
 #: website/templates/500.html:13
 #, python-format
 msgid "Your request triggered an internal server error. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr "Deine Anfrage hat einen internen Fehler erzeugt. <a href=\"%(index)s\">Zurück zur Startseite.</a>"
+msgstr ""
 
 #: website/templates/admin/base_site.html:5
 #: website/templates/admin/base_site.html:8
 msgid "Dissemin administration"
-msgstr "Dissemin-Verwaltung"
+msgstr ""
 
 #: website/templates/base.html:66 website/templates/base.html:73
 msgid "Dissemin detects papers behind pay-walls and invites their authors to upload them in one click to an open repository."
-msgstr "Dissemin erkennt Publikationen hinter Bezahlschranken (&quot;Paywall&quot;) und lädt ihre Verfasser_innen dazu ein, sie mit einem Klick in ein freies Repositorium hochzuladen."
+msgstr ""
 
 #: website/templates/dissemin/error.html:6
 #: website/templates/dissemin/error.html:12
 msgid "Error"
-msgstr "Fehler"
+msgstr "Xeta"
 
 #: website/templates/dissemin/error.html:14
 msgid "Go back to the start page."
-msgstr "Zurück zur Startseite."
+msgstr ""
 
 #: website/templates/dissemin/faq.html:7 website/templates/dissemin/faq.html:56
 msgid "Frequently Asked Questions"
-msgstr "Häufig gestellte Fragen"
+msgstr ""
 
 #: website/templates/dissemin/faq.html:19
 msgid "Open Access"
-msgstr "Open Access"
+msgstr ""
 
 #: website/templates/dissemin/faq.html:20
 msgid "What is Open Access?"
-msgstr "Was ist Open Access?"
+msgstr ""
 
 #: website/templates/dissemin/faq.html:21
 msgid "Why should I upload my papers to a repository?"
-msgstr "Warum sollte ich meine Publikationen in ein Repositorium hochladen?"
+msgstr ""
 
 #: website/templates/dissemin/faq.html:22
 msgid "What repository should I use?"
-msgstr "Welches Repositorium sollte ich benutzen?"
+msgstr ""
 
 #: website/templates/dissemin/faq.html:23
 msgid "Why can't I deposit in my favorite repository yet?"
-msgstr "Warum kann ich noch nicht in mein gewünschtes Repositorium hochladen?"
+msgstr ""
 
 #: website/templates/dissemin/faq.html:25
 msgid "What is dissem.in?"
-msgstr "Was ist dissem.in?"
+msgstr ""
 
 #: website/templates/dissemin/faq.html:26
 msgid "Is dissem.in a repository?"
-msgstr "Ist dissem.in ein Repositorium?"
+msgstr ""
 
 #: website/templates/dissemin/faq.html:27
 msgid "Who runs dissem.in?"
-msgstr "Wer betreibt dissem.in?"
+msgstr ""
 
 #: website/templates/dissemin/faq.html:28
 msgid "Can I create a profile on dissem.in?"
-msgstr "Kann ich ein Profil auf dissem.in erstellen?"
+msgstr ""
 
 #: website/templates/dissemin/faq.html:30
 msgid "Policies and Full-text Availability"
-msgstr "Publikationsrichtlinien und Volltextverfügbarkeit"
+msgstr ""
 
 #: website/templates/dissemin/faq.html:31
 msgid "What do our policy classes mean?"
-msgstr "Was bedeuten die Publikationsrichtlinien?"
+msgstr ""
 
 #: website/templates/dissemin/faq.html:32
 msgid "When is a paper considered available?"
-msgstr "Wann gilt eine Veröffentlichung als verfügbar?"
+msgstr ""
 
 #: website/templates/dissemin/faq.html:33
 msgid "Should I trust your statistics?"
-msgstr "Sind die angegebenen Daten korrekt?"
+msgstr ""
 
 #: website/templates/dissemin/faq.html:35
 msgid "Omissions and errors"
-msgstr "Lücken und Fehler"
+msgstr ""
 
 #: website/templates/dissemin/faq.html:36
 msgid "One of my papers is missing. Why?"
-msgstr "Warum fehlt eine meiner Publikationen?"
+msgstr ""
 
 #: website/templates/dissemin/faq.html:37
 msgid "Some details of my paper are incorrect. What can I do?"
-msgstr "Einige Angaben zu meiner Publikation sind falsch. Was kann ich tun?"
+msgstr ""
 
 #: website/templates/dissemin/faq.html:38
 msgid "There is a freely available copy of my article online but dissem.in does not find it."
-msgstr "Es gibt eine online frei verfügbare Kopie meines Artikels, aber dissem.in findet sie nicht."
+msgstr ""
 
 #: website/templates/dissemin/faq.html:40
 msgid "Authentication with ORCID"
-msgstr "Authentifizierung mit ORCID"
+msgstr ""
 
 #: website/templates/dissemin/faq.html:41
 msgid "Why do you need to authenticate users?"
-msgstr "Wieso müssen sich Nutzer_innen authentifizieren?"
+msgstr ""
 
 #: website/templates/dissemin/faq.html:42
 msgid "What will you do to my ORCID profile if I log in?"
-msgstr "Werden Daten in meinem ORCID-Profil geändert, wenn ich mich anmelde?"
+msgstr ""
 
 #: website/templates/dissemin/faq.html:43
 msgid "How do I add publications to my ORCID profile?"
-msgstr "Wie füge ich Veröffentlichungen zu meinem ORCID-Profil hinzu?"
+msgstr ""
 
 #: website/templates/dissemin/faq.html:44
 msgid "My ORCID details on Dissemin are outdated."
-msgstr "Meine ORCID-Angaben auf Dissemin sind veraltet."
+msgstr ""
 
 #: website/templates/dissemin/faq.html:46
 msgid "Behind the scenes"
-msgstr "Hinter den Kulissen"
+msgstr ""
 
 #: website/templates/dissemin/faq.html:47
 msgid "Where do you get the data from?"
-msgstr "Woher bekommt ihr die Daten?"
+msgstr ""
 
 #: website/templates/dissemin/faq.html:48
 msgid "How can I help?"
-msgstr "Wie kann ich helfen?"
+msgstr ""
 
 #: website/templates/dissemin/faq.html:49
 msgid "Where is the source code?"
-msgstr "Wo ist der Quellcode?"
+msgstr ""
 
 #: website/templates/dissemin/faq.html:50
 msgid "Can I harvest your data?"
-msgstr "Kann ich eure Daten herunterladen?"
+msgstr ""
 
 #: website/templates/dissemin/faq.html:51
 msgid "Can I use the Dissemin logo to refer to the project?"
-msgstr "Kann ich das Dissemin-Logo zu Werbezwecken nutzen?"
+msgstr ""
 
 #: website/templates/dissemin/faq.html:136
 msgid "In a nutshell, the Open Access movement promotes free access to the scientific literature. For a more in-depth introduction, we recommend <a href=\"http://www.phdcomics.com/comics.php?f=1533\">this video in English</a> and <a href=\"https://pablo.rauzy.name/openaccess/introduction.html\">this introduction in French</a>."
-msgstr "Kurz zusammengefasst setzt sich die Open Access Bewegung für den freien Zugang zu Wissen ein. Für eine tiefer gehende Einführung empfehlen wir das Video <a href=\"http://www.phdcomics.com/comics.php?f=1533\">What is Open Access?</a>."
+msgstr ""
 
 #: website/templates/dissemin/faq.html:142
 msgid "You should do it because:"
-msgstr "Du solltest das aus folgenden Gründen tun:"
+msgstr ""
 
 #: website/templates/dissemin/faq.html:145
 msgid "It makes your research <strong>more accessible</strong> and <strong>more visible</strong>. Many researchers routinely check papers in topic repositories such as arXiv, and it is less likely that these researchers check your homepage regularly."
-msgstr "Auf Deine Forschung kann <strong>besser zugegriffen</strong> werden und sie wird <strong>sichtbarer</strong>. Viele Wissenschaftlerinnen und Wissenschaftler prüfen regelmäßig fachbezogene Repositorien wie arXiv auf Neuerscheinungen, aber nur selten private Homepages."
+msgstr ""
 
 #: website/templates/dissemin/faq.html:150
 msgid "You can even do it before publication. You can get <strong>valuable feedback</strong> to improve your paper before the actual peer-reviewing process. It may also be useful to establish priority if it takes a long time for your paper to get published."
-msgstr "Du kannst Deine Ergebnisse bereits vor der Veröffentlichung hochladen. Dadurch kannst Du <strong>wertvolles Feedback</strong> erhalten, um Deine Publikation bereits vor dem Peer-Reviewing zu verbessern. Außerdem sind Deine Ergebnisse schon verfügbar, bevor der Publikationsprozess abgeschlossen ist."
+msgstr ""
 
 #: website/templates/dissemin/faq.html:156
 msgid "It provides you a <strong>durable storage</strong>. Your homepage is likely to change or to disappear, for instance if you leave your current institution."
-msgstr "Repositorien speichern und archivieren Deine Publikationen <strong>dauerhaft</strong>. Deine Homepage wird wahrscheinlich spätestens dann nicht mehr erreichbar sein, wenn Du Dein Institut verlassen hast."
+msgstr ""
 
 #: website/templates/dissemin/faq.html:161
 msgid "Librarians around the world cannot check whether all the papers in a given journal are available on homepages: in doubt, they subscribe to this journal to make sure their researchers have access to it. This costs a lot of money for research institutions. Papers stored in repositories are <strong>easier to detect</strong> and can help academia save money."
-msgstr "Der Aufwand für Bibliothekar_innen, zu prüfen, ob alle Artikel einer bestimmten Zeitschrift auf Websiten von Wissenschaftler_innen vorhanden sind, ist zu groß: Daher abonnieren oder lizenzieren sie diese Zeitschrift lieber, damit ihre Wissenschaftler_innen Zugriff auf die Artikel erhalten. Dies ist jedoch mit teilweise erheblichen Kosten verbunden. Publikationen hingegen, die in ein Repositorium hochgeladen wurden, sind <strong>einfacher zu finden</strong> und verursachen weniger Kosten."
+msgstr ""
 
 #: website/templates/dissemin/faq.html:166
 msgid "Finally, for all these reasons, an increasing number of <strong>funding bodies</strong> require the outcomes of their projects to be made available in a repository."
-msgstr "Zuletzt: Aus den oben genannten Gründen fordern zunehmend mehr Drittmittelgeber, dass die Forschungsergebnisse Open Access oder in einem Repositorium veröffentlicht werden."
+msgstr ""
 
 #: website/templates/dissemin/faq.html:173
 msgid "There are roughly three types of repositories:"
-msgstr "Es gibt drei Klassen von Repositorien:"
+msgstr ""
 
 #: website/templates/dissemin/faq.html:176
 msgid "Subject repositories, restricted to some research fields, such as <a href=\"https://arxiv.org\">arXiv</a>."
-msgstr "Fachbezogene Repositorien für einzelne Wissenschaften wie <a href=\"https://arxiv.org\">arXiv</a>."
+msgstr ""
 
 #: website/templates/dissemin/faq.html:181
 msgid "Institutional repositories, designated to store the research output of a given institution or country."
-msgstr "Institutionelle Repositorien für die Wissenschaftler_innen des zugehörigen Instituts."
+msgstr ""
 
 #: website/templates/dissemin/faq.html:186
 msgid "General-purpose academic repositories such as <a href=\"https://zenodo.org\">Zenodo</a>, not limited to a particular scope."
-msgstr "Allgemeine Repositorien wie <a href=\"https://zenodo.org\">Zenodo</a>, die nicht auf einen bestimmten Bereich eingeschränkt sind."
+msgstr ""
 
 #: website/templates/dissemin/faq.html:192
 msgid "If your research community favours a specific repository, using it makes sense as it will increase your visibility. If not, institutional or general-purpose repositories are also good options."
-msgstr "Wenn es in Deiner wissenschaftlichen Community ein Standardrepositorium gibt, ist es für Dich vorteilhaft, es zu nutzen, weil dadurch Deine Sichtbarkeit erhöht wird. Aber auch institutionelle und allgemeine Repositorien sind eine gute Wahl."
+msgstr ""
 
 #: website/templates/dissemin/faq.html:199
 msgid "At the moment, you can use Dissemin to deposit in the following repositories:"
-msgstr "Im Moment kannst Du Dissemin zur Einreichung in folgende Repositorien nutzen:"
+msgstr ""
 
 #: website/templates/dissemin/faq.html:205
 msgid "<strong><a href=\"https://zenodo.org\">Zenodo</a></strong>, an innovative repository backed by the EU."
-msgstr "<strong><a href=\"https://zenodo.org\">Zenodo</a></strong> - ein allgemeines, durch die EU gefördertes, Repositorium."
+msgstr ""
 
 #: website/templates/dissemin/faq.html:210
 msgid "<strong><a href=\"https://hal.archives-ouvertes.fr/\">HAL</a></strong>, a French repository managed by the <a href=\"https://www.ccsd.cnrs.fr/\">CCSD</a>."
-msgstr "<strong><a href=\"https://hal.archives-ouvertes.fr/\">HAL</a></strong> - ein französisches Repositorium, das von <a href=\"https://www.ccsd.cnrs.fr/\">CCSD</a> bereit gestellt wird."
+msgstr ""
 
 #: website/templates/dissemin/faq.html:224
 msgid "Supporting more repositories requires us to write specific code for each repository. More importantly it requires the repositories to give us permission to deposit papers in bulk. We have been considering integrating the following repositories:"
-msgstr "Die Anbindung an weitere Repositorien erfordert spezielle Anpassungen. Darüber hinaus muss die bzw. der Betreiber_in des Repositoriums uns für den Upload freischalten. Wir planen eine Abindung an die folgenden Repositorien:"
+msgstr ""
 
 #: website/templates/dissemin/faq.html:230
 msgid "<strong><a href=\"https://arxiv.org/\">arXiv</a></strong>, a well-known general-purpose repository. For now, arXiv has declined to allow Dissemin to deposit using their SWORD API, and wants users to deposit in arXiv manually. If you would like to deposit in arXiv with Dissemin, you can let them know that you are interested (email: help AT arxiv.org, and start your message with \"Dear arXiv,\")."
-msgstr "<strong><a href=\"https://arxiv.org/\">arXiv</a></strong>, ein bekanntes, allgemeines Repositorium. Bis auf weiteres ist arXiv nicht daran interessiert, dass Dissemin über die SWORD-Schnittstelle Publikationen in arXiv ablegen darf. Daher muss Deine Publikationen manuell auf arXiv hochgeladen werden. Wenn Du Deine Publikation über Dissemin hochladen möchtest, dann verfasse eine E-Mail an help AT arxiv.org und bitte um eine Anbindung von Dissemin."
+msgstr ""
 
 #: website/templates/dissemin/faq.html:245
 #, python-format
 msgid "Dissemin is a web platform gathering metadata from <a href=\"%(sources_url)s\">many sources</a> and analyzing the full text availability of publications of researchers. It has been designed to foster the use of repositories (rather than preprints posted on personal homepages), <a href=\"#repositoriesRock\">for numerous reasons</a>."
-msgstr "Dissemin ist ein Web-Service, der Metadaten aus <a href=\"%(sources_url)s\">verschiedenen Quellen</a> zusammenführt und die Volltextverfügbarkeit von Publikationen prüft. Dissemin wurde entwickelt, um die Nutzung von Repositorien (statt privaten Websiten) zu fördern. Siehe hierzu auch <a href=\"#repositoriesRock\">Warum sollte ich meine Publikationen in ein Repositorium hochladen?</a>"
+msgstr ""
 
 #: website/templates/dissemin/faq.html:253
 msgid "Dissemin is not a repository as it does not store any full text. When the full text of a publication is available, a link to the relevant page is provided. The full texts deposited through Dissemin are stored in third-party repositories such as <a href=\"https://zenodo.org\">Zenodo</a> or <a href=\"https://hal.archives-ouvertes.fr/\">HAL</a>."
-msgstr "Dissemin ist kein Repositorium, da keine Volltexte gespeichert werden. Wenn ein Volltext einer Publikation verfügbar ist, wird ein Link zu ihm angezeigt. Volltexte, die über Dissemin hochgeladen werden, werden in externen Repositorien wie <a href=\"https://zenodo.org\">Zenodo</a> oder <a href=\"https://hal.archives-ouvertes.fr/\">HAL</a> gespeichert."
+msgstr ""
 
 #: website/templates/dissemin/faq.html:260
 msgid "Dissemin is brought to you by the <a href=\"https://association.dissem.in/\">CAPSH association</a>."
-msgstr "Dissemin wird von <a href=\"https://association.dissem.in/\">CAPSH</a> bereit gestellt."
+msgstr ""
 
 #: website/templates/dissemin/faq.html:267
 msgid "Yes, you can do it, by first <a href=\"https://orcid.org/register\">registering on ORCID</a> if you do not have an ORCID identifier yet. This only takes a few seconds, and you can then use your ORCID identifier to log into Dissemin."
-msgstr "Ja! Dafür benötigst Du ein ORCID-Profil, mit dem Du Dich bei Dissemin anmelden kannst. Wenn Du noch keines hast, kannst Du Dich bei <a href=\"https://orcid.org/register\">ORCID registrieren</a>."
+msgstr ""
 
 #: website/templates/dissemin/faq.html:281
 msgid "We have the following five policy classes:"
-msgstr "Wir definieren die folgenden fünf Klassen:"
+msgstr ""
 
 #: website/templates/dissemin/faq.html:285
 msgid "Class"
-msgstr "Klasse"
+msgstr ""
 
 #: website/templates/dissemin/faq.html:286
 msgid "Description"
-msgstr "Beschreibung"
+msgstr ""
 
 #: website/templates/dissemin/faq.html:295
 msgid "<strong>Open access:</strong><br /> The full text is made freely available by the publisher (in a fully open access or hybrid journal)."
-msgstr "<strong>Open Access:</strong><br /> Der Volltext ist durch den Verlag frei verfügbar (entweder in einem reinen Open-Access oder einem Hybrid-Open-Access-Journal)."
+msgstr ""
 
 #: website/templates/dissemin/faq.html:303
 msgid "Pre/post prints allowed and full text available"
-msgstr "Pre/Postprints erlaubt und Volltext ist verfügbar"
+msgstr ""
 
 #: website/templates/dissemin/faq.html:306
 msgid "<strong>Pre/post prints allowed and full text available:</strong><br /> The full text is available in a repository, but might not be freely available from the publisher itself. This is in line with the publishing policy and is called green open access or self-archiving."
-msgstr "<strong>Pre- oder Postprints dürfen frei veröffentlicht werden und sind als Volltext verfügbar:</strong><br /> Der Volltext ist in einem Repositorium frei verfügbar, aber nicht unbedingt bei dem Verlag frei zugänglich. Diese Art der Veröffentlichung heißt Grüner Open Access und ist durch die Publikationsrichtlinien des Verlags oder des Zweitveröffentlichungsrecht erlaubt."
+msgstr ""
 
 #: website/templates/dissemin/faq.html:314
 msgid "Pre/post prints allowed but full text unavailable"
-msgstr "Pre/Postprint erlaubt, aber Volltext nicht verfügbar"
+msgstr ""
 
 #: website/templates/dissemin/faq.html:317
 msgid "<strong>Pre/post prints allowed but full text unavailable:</strong><br /> The full text could be made available in a repository (as above) according to the publishing policy. We encourage their authors to do so."
-msgstr "<strong>Pre- oder Postprints dürfen frei veröffentlicht werden, aber es ist bislang kein Volltext verfügbar:</strong><br /> Der Volltext kann in einem Repositorium, wie im vorangegangenen Punkt, hochgeladen werden. Wir ermutigen Autor_innen, nicht frei verfügbare Pre- oder Postprints in ein Repositorium zu laden."
+msgstr ""
 
 #: website/templates/dissemin/faq.html:325
 msgid "Policy unknown"
-msgstr "Richtlinie unbekannt"
+msgstr ""
 
 #: website/templates/dissemin/faq.html:328
 msgid "<strong>Policy unknown:</strong><br /> The full text is not available and dissem.in could not evaluate if the publishers policy allows making the full text freely available."
-msgstr "<strong>Richtlinie unbekannt:</strong><br /> Der Volltext ist nicht verfügbar und dissem.in konnte nicht herausfinden, ob eine Zweitveröffentlichung vom Verlag gestattet wird."
+msgstr ""
 
 #: website/templates/dissemin/faq.html:336
 msgid "Pre/post prints forbidden"
-msgstr "Pre/Postprints nicht erlaubt"
+msgstr ""
 
 #: website/templates/dissemin/faq.html:339
 msgid "<strong>Pre/post prints forbidden:</strong><br /> The publisher forbids deposits in repositories, in general. Authors might still be allowed to deposit their works after some embargo period or if their funder has an agreement with this publisher."
-msgstr "<strong>Pre- oder Postprints sind nicht erlaubt:</strong><br /> Der Verlag verbietet eine Veröffentlichung generell, aber es kann die Möglichkeit bestehen, nach einer Ablauffrist eine Zweitveröffentlichung vorzunehmen."
+msgstr ""
 
 #: website/templates/dissemin/faq.html:350
 #, python-format
 msgid "When we have found it in one of the repositories we harvest. The list of these repositories can be found <a href=\"%(sources_url)s\">here</a>. Thanks to the <a href=\"https://www.base-search.net\">BASE</a> search engine, we cover more than 80 millions of preprints."
-msgstr "Eine Veröffentlichung gilt als verfügbar, wenn wir sie in einem Repositorium gefunden haben. Eine Liste der von uns durchsuchten Repositorien findest Du <a href=\"%(sources_url)s\">hier</a>. Mit Hilfe der <a href=\"https://www.base-search.net\">BASE-Suchmaschine</a>, haben wir mehr als 80 Millionen Preprints verzeichnet."
+msgstr ""
 
 #: website/templates/dissemin/faq.html:357
 msgid "There are a few caveats concerning our data:"
-msgstr "Es gibt einige Dinge zu beachten:"
+msgstr ""
 
 #: website/templates/dissemin/faq.html:363
 msgid "Some papers are not present in any of our metadata sources, so they are not counted at all."
-msgstr "Einige Publikationen sind nicht in unseren Metadatenquellen verzeichnet, sodass es eine Dunkelziffer gibt."
+msgstr ""
 
 #: website/templates/dissemin/faq.html:368
 msgid "Some entries in our system do not correspond to proper research papers."
-msgstr "Einige Einträge in unserer Datenbank gehören nicht zu einer wissenschaftlichen Publikation."
+msgstr ""
 
 #: website/templates/dissemin/faq.html:373
 msgid "Because there are many researchers with the same name, some papers may be misattributed to a homonym."
-msgstr "Da es viele Wissenschaftler_innen mit identischem Namen gibt, sind einige Publikationen nicht korrekt zugewiesen."
+msgstr ""
 
 #: website/templates/dissemin/faq.html:378
 msgid "Some repositories might not be covered by any of our sources, so a paper might be marked as unavailable while it is available."
-msgstr "Einige Repositorien werden von unseren Metadatenquellen nicht indiziert, sodass eine Veröffentlichung fälschlicherweise als nicht veröffentlicht gekennzeichnet ist."
+msgstr ""
 
 #: website/templates/dissemin/faq.html:383
 msgid "Some papers might be marked as available but actually are not, for instance because they have been deleted."
-msgstr "Einige Publikationen sind fälschlicherweise als veröffentlicht gekennzeichnet, z.B. weil sie inzwischen gelöscht wurden."
+msgstr ""
 
 #: website/templates/dissemin/faq.html:388
 msgid "All sorts of other technical issues."
-msgstr "Alle Arten von weiteren technischen Schwierigkeiten."
+msgstr ""
 
 #: website/templates/dissemin/faq.html:404
 #, python-format
 msgid "Please first check whether the paper is available in one of <a href=\"%(sources_url)s\">our sources</a>. If it is not, Dissemin cannot harvest it, and you should report the problem to the source where it should appear. Note that it can take up to a couple of months for our primary sources to discover your latest papers and for Dissemin to harvest it."
-msgstr "Überprüfe bitte zuerst, ob die Veröffentlichung in <a href=\"%(sources_url)s\">unseren Quellen</a> verzeichnet ist. Ist dies nicht der Fall, kann Dissemin diese nicht verzeichnen und Du solltest der entsprechenden Quelle mitteilen, dass Deine Veröffentlichung nicht verzeichnet ist. Beachte, dass dies bei unseren primären Quellen bis zu einigen Monaten dauern kann, die neuesten Veröffentlichungen zu entdecken und entsprechend für Dissemin zu sammeln."
+msgstr ""
 
 #: website/templates/dissemin/faq.html:409
 msgid "Now, if your paper does appear in one of the sources but not on Dissemin, please check that your name is not spelt incorrectly on the source, and that the spelling matches your ORCID record. If there is a misspelling, again, you should report the problem to the source that contains the mistake."
-msgstr "Sollte Deine Publikation in einer unserer Quellen verzeichnet sein, aber nicht in Dissemin, prüfe bitte, ob Dein Name in der Quelle korrekt wiedergegeben ist und mit der Schreibweise in Deinem ORCID-Profil übereinstimmt. Sollte Dein Name in der Quelle falsch geschrieben sein, dann melde dies bitte direkt der Quelle."
+msgstr ""
 
 #: website/templates/dissemin/faq.html:414
 msgid "If the name matches but the paper is not in Dissemin, then maybe one of your co-authors asked us to delete it? Or it may be a bug. In this case, please file an <a href=\"https://github.com/dissemin/dissemin/issues\">issue</a> describing the problem, or send a message to <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>."
-msgstr "Stimmen die Schreibweisen überein, aber die Veröffentlichung fehlt in Dissemin, haben eventuell Deine Mitautor_innen eine Löschung aus Dissemin veranlasst oder es handelt sich um einen Fehler in Dissemin. In diesem Fall verfasse bitte einen <a href=\"https://github.com/dissemin/dissemin/issues\">Bug Report</a> oder schreibe uns eine E-Mail an <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>."
+msgstr ""
 
 #: website/templates/dissemin/faq.html:419
 msgid "Note that, in the longer term, we hope to design a way for our users to edit their profiles on Dissemin to add missing papers and fix these problems; but we do not have such a system yet."
-msgstr "Langfristig wollen wir die Möglichkeit bieten, dass Du Dein Dissemin-Profil bearbeiten und fehlende Publikationen nachtragen kannst."
+msgstr ""
 
 #: website/templates/dissemin/faq.html:426
 #, python-format
 msgid "In most cases, the errors that you see on Dissemin have not been introduced by Dissemin, but are already present in the <a href=\"%(sources_url)s\">public sources</a> that Dissemin harvests. Hence, please first check if the error that you have seen is already present in our data sources, by looking at the \"Links\" section in the top right of the page. If one of these pages contain the error, you should report the problem to them and not to us, otherwise the mistake will persist in the source."
-msgstr "In den meisten Fällen handelt es sich um Fehler, die bereits in den <a href=\"%(sources_url)s\">Quellen</a> vorhanden sind und beim Einspielen der Daten übernommen werden. Daher solltest Du zunächst prüfen, ob der Fehler auch in der Datenquelle vorhanden ist - zu dieser gelangst du oben rechts im Abschnitt \"Links\". Sollte der Fehler bereits dort bestehen, wende Dich bitte direkt an die Quelle, da wir keine Änderungen vornehmen können."
+msgstr ""
 
 #: website/templates/dissemin/faq.html:431
 msgid "If the error is not present in any of the sources and you believe that Dissemin may have introduced the problem, please file an <a href=\"https://github.com/dissemin/dissemin/issues\">issue</a> with details of the problem, or send a message to <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>. Note that you cannot yet fix the problem yourself, although we hope in the longer term to develop a system to allow our users to edit details of their papers themselves."
-msgstr "Ist der Fehler in keiner Quelle zu finden, verfasse bitte einen detaillierten <a href=\"https://github.com/dissemin/dissemin/issues\">Bug Report</a> oder sende uns eine E-Mail an <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>. Derzeit kannst Du falsche Angaben nicht selbst korrigieren, wir hoffen aber, diese Möglichkeit in Zukunft anbieten zu können."
+msgstr ""
 
 #: website/templates/dissemin/faq.html:438
 msgid "First, note that Dissemin does not account for copies of articles that are only available on a personal homepage or a similar website. This is deliberate, because we believe that <a href=\"#repositoriesRock\">articles should be hosted in repositories</a>."
-msgstr "Dissemin verzeichnet keine Publikationen, die auf eigenen Websiten oder dergleichen verfügbar sind. Das ist auch beabsichtigt, weil wir meinen, dass <a href=\"#repositoriesRock\">Publikationen stattdessen in Repositorien zugänglich sein sollten</a>."
+msgstr ""
 
 #: website/templates/dissemin/faq.html:443
 msgid "Second, at the moment, Dissemin only supports repositories with a crawlable API that follows the <a href=\"https://www.openarchives.org/OAI/openarchivesprotocol.html\">OAI-PMH protocol</a>, and is <a href=\"https://www.base-search.net/about/en/suggest.php\">registered</a> in <a href=\"https://www.base-search.net/\">BASE</a>. We have a <a href=\"https://github.com/dissemin/croawl\">long-term project</a> to support more repositories by crawling them, but for the moment, we do not have the resources to support repositories not covered by BASE. Hence, if you are a user of a repository and would like it to be supported by Dissemin, please contact the repository administrator and suggest them to implement OAI-PMH support and to <a href=\"https://www.base-search.net/about/en/suggest.php\">register</a> their repository in BASE."
-msgstr "Hinzu kommt, dass Dissemin derzeit nur Repositorien mit einer <a href=\"https://www.openarchives.org/OAI/openarchivesprotocol.html\">OAI-PMH</a>-Schnittestelle durchsucht, die auch von <a href=\"https://www.base-search.net/\">BASE</a> durchsucht werden. Wir haben zwar ein <a href=\"https://github.com/dissemin/croawl\">Projekt</a> gestartet, um mehr Repositorien zu durchsuchen, aber derzeit fehlen uns die Ressourcen, um Repositorien, die nicht durch BASE abgedeckt sind, abzudecken. Solltest Du ein_e Nutzer_in eines Repositoriums sein, das nicht von Dissemin durchsucht wird, dann bitte die bzw. den entsprechenden Administrator_in eine OAI-PMH-Schnittstelle zu implementieren und das Repositorium bei BASE zu <a href=\"https://www.base-search.net/about/en/suggest.php\">registrieren</a>."
+msgstr ""
 
 #: website/templates/dissemin/faq.html:448
 msgid "If the repository is registered in BASE, please <a href=\"https://www.base-search.net/\">search in BASE</a> to check that your article is there. If it is, then this may be a bug of Dissemin; please file an <a href=\"https://github.com/dissemin/dissemin/issues\">issue</a> describing the problem, or send a message to <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>."
-msgstr "Wird das Repositorium von BASE indiziert, prüfe bitte, ob Deine Publikation in <a href=\"https://www.base-search.net/\">BASE</a> vorhanden ist. Ist sie vorhanden, dann kann es sich um einen Fehler in Dissemin handeln. In diesem Fall verfasse bitte einen <a href=\"https://github.com/dissemin/dissemin/issues\">Bug Report</a> oder schreibe uns eine E-Mail an <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>."
+msgstr ""
 
 #: website/templates/dissemin/faq.html:462
 msgid "Authenticating users is necessary to deposit papers on their behalf in open repositories. Besides, knowing a user's ORCID id helps us find its publications, avoiding articles authored by namesakes for instance. Logging in via ORCID will not expose any private information to Dissemin: we only have access to the public part of your ORCID record. For instance, unless you have explicitly marked your email address as public, we do not even know your email address when you log in to Dissemin via ORCID."
-msgstr "Eine Authentifizierung ist für eine Veröffentlichung in einem Repositorium erforderlich. Darüber hinaus können wir Deine bei ORCID hinterlegten Publikationsdaten einspielen und unsere Suche verbessern. Bei der Authentifizierung mit ORCID werden keine privaten Daten nach Dissemin übertragen, da wir nur Zugriff auf die öffentlichen Daten von ORCID haben. Wenn Du zum Beispiel Deine E-Mail-Adresse nicht veröffentlicht hast, werden wir sie auch nicht erhalten oder kennen."
+msgstr ""
 
 #: website/templates/dissemin/faq.html:469
 msgid "Nothing. When you log in via ORCID to Dissemin, this does not grant us any permission to change anything in your ORCID record."
-msgstr "Nichts. Wir haben seitens ORCID keine Berechtigung, Deine Daten zu ändern."
+msgstr ""
 
 #: website/templates/dissemin/faq.html:476
 msgid "ORCID supports various methods to claim publications. Our preferred one is via CrossRef's search interface. Here is how to use it:"
-msgstr "ORCID bietet mehrere Möglichkeiten, Publikationen zuzuordnen. Wir bevorzugen dafür CrossRef:"
+msgstr ""
 
 #: website/templates/dissemin/faq.html:482
 msgid "Go to <a href=\"https://search.crossref.org/\">CrossRef Metadata Search</a>;"
-msgstr "Rufe die <a href=\"https://search.crossref.org/\">CrossRef Metadatensuchen</a> auf;"
+msgstr ""
 
 #: website/templates/dissemin/faq.html:487
 msgid "Click \"Log in\" in the top right corner and go through the ORCID login process;"
-msgstr "Melde Dich unter \"Log in\" oder \"Anmelden\" in der oberen rechten Ecke mit Deiner ORCID an;"
+msgstr ""
 
 #: website/templates/dissemin/faq.html:492
 msgid "Search for your publications, for instance by typing your name in CrossRef's search interface;"
-msgstr "Suche Deine Publikationen, zu Beispiel indem Du Deinen Namen eingibst;"
+msgstr ""
 
 #: website/templates/dissemin/faq.html:497
 msgid "Add publications that are yours to your ORCID record by clicking \"Add to ORCID\"."
-msgstr "Füge Deine Publikationen zu Deinem ORCID-Profil hinzu indem du auf \"Hinzufügen zu ORCID\" klickst."
+msgstr ""
 
 #: website/templates/dissemin/faq.html:503
 msgid "You can also add publications to your profile <em>on Dissemin</em>, by clicking the button \"Include in my profile\" in search results on Dissemin. (This button is only visible when you are logged in, and next to papers that Dissemin thinks you have authored.) You can also exclude articles from your profile in this way. Please note that these changes are local to Dissemin and are <em>not</em> propagated to your ORCID profile, because ORCID does not have a free API allowing us to propagate them."
-msgstr "Du kannst auch Publikationen <em>in Deinem Dissemin-Profil</em> hinzufügen, indem Du bei den Suchresultaten auf den Button \"In mein Profil aufnehmen\"klickst. (Dieser Button ist nur sichtbar, wenn Du angemeldet bist, und auch nur bei Publikationen, von denen Dissemin vermutet, dass Du die bzw. der Autor_in bist.) Du kannst auf diese Weise auch Publikationen von Deinem Profil ausnehmen. In beiden Fällen geschieht dies nur in Dissemin und es findet <em>keine</em> Änderung in Deinem ORCID-Profil statt, da keine Möglichkeit besteht, die Daten zu übertragen."
+msgstr ""
 
 #: website/templates/dissemin/faq.html:512
 #, python-format
 msgid "If you change some details in your ORCID profile (name, homepage, etc.), the changes will not automatically be picked up in your profile on Dissemin. To update your profile on Dissemin accordingly, once you have logged in to Dissemin, you can go to your <a href=\"%(profile_url)s\">profile page</a> and click \"Refresh publications\"."
-msgstr "Solltest Du Dein ORCID-Profil bearbeiten (Name, Webseite, etc.), dann werden die Änderungen nicht automatisch in Dissemin eingespielt. Um Deine Daten in Dissemin zu aktualisieren, meldest Du Dich auf Dissemin an und klickst auf Deiner <a href=\"%(profile_url)s\">Profilseite</a> auf \"Refresh publications\"."
+msgstr ""
 
 #: website/templates/dissemin/faq.html:526
 #, python-format
 msgid "Our sources are listed on <a href=\"%(sources_url)s\">this page</a>."
-msgstr "Unsere Quellen findest Du <a href=\"%(sources_url)s\">hier</a>."
+msgstr ""
 
 #: website/templates/dissemin/faq.html:533
 msgid "There are many ways to get involved:"
-msgstr "Es gibt viele Möglichkeiten mitzuwirken:"
+msgstr ""
 
 #: website/templates/dissemin/faq.html:539
 msgid "Contribute to <a href=\"https://github.com/dissemin/dissemin\">the code</a>."
-msgstr "Zum <a href=\"https://github.com/dissemin/dissemin\">Code</a> beitragen."
+msgstr ""
 
 #: website/templates/dissemin/faq.html:544
 msgid "Fix any of our listed <a href=\"https://github.com/dissemin/dissemin/issues\">issues</a>."
-msgstr "Bearbeite eines unserer <a href=\"https://github.com/dissemin/dissemin/issues\">Issues</a>."
+msgstr ""
 
 #: website/templates/dissemin/faq.html:549
 msgid "Help us <a href=\"https://translatewiki.net/wiki/Translating:Dissemin\">translate</a> the interface in your language."
-msgstr "Hilf uns, Dissemin in Deine Sprache zu <a href=\"https://translatewiki.net/wiki/Translating:Dissemin\">übersetzen</a>."
+msgstr ""
 
 #: website/templates/dissemin/faq.html:554
 msgid "Encourage researchers to use this service."
-msgstr "Ermutige Wissenschaftler_innen, Dissemin zu benutzten."
+msgstr ""
 
 #: website/templates/dissemin/faq.html:559
 msgid "Star <a href=\"https://github.com/dissemin/dissemin\">our GitHub project</a>!"
-msgstr "Favorisiere unser <a href=\"https://github.com/dissemin/dissemin\">GitHub-Projekt</a>!"
+msgstr ""
 
 #: website/templates/dissemin/faq.html:564
 msgid "<a href=\"https://association.dissem.in/#dons\">Donations are accepted</a>."
-msgstr "<a href=\"https://association.dissem.in/#dons\">Spenden werden entgegengenommen</a>."
+msgstr ""
 
 #: website/templates/dissemin/faq.html:572
 msgid "The source code is available <a href=\"https://github.com/dissemin/dissemin\">on GitHub</a>."
-msgstr "Der <a href=\"https://github.com/dissemin/dissemin\">Quellcode</a> ist auf GitHub verfügbar."
+msgstr ""
 
 #: website/templates/dissemin/faq.html:579
 msgid "Yes! We even have <a href=\"https://dissemin.readthedocs.io/en/latest/api.html\">an API</a>. If it does not suit your needs, please don't hesitate to get in touch by writing to <a href=\"mailto:hello@dissem.in\">hello@dissem.in</a>."
-msgstr "Ja! Dissemin verfügt über eine <a href=\"https://dissemin.readthedocs.io/en/latest/api.html\">API</a>. Solltest Du weitere Funktionen benötigen, dann schreibe uns einfach eine E-Mail an <a href=\"mailto:hello@dissem.in\">hello@dissem.in</a>."
+msgstr ""
 
 #: website/templates/dissemin/faq.html:586
 msgid "Yes! See <a href=\"https://association.dissem.in/#logos\">here</a> for links to our logos and for explanations about how you can reuse them."
-msgstr "Ja! <a href=\"https://association.dissem.in/#logos\">Hier</a> kannst Du unsere Logos finden und wie Du sie weiter nutzen kannst."
+msgstr ""
 
 #: website/templates/dissemin/login.html:7
 #: website/templates/dissemin/login.html:11
 msgid "Sign in"
-msgstr "Anmelden"
+msgstr "Cı kewe"
 
 #: website/templates/dissemin/login.html:15
 msgid "Dissemin uses ORCID to authenticate its users. ORCID is an independent non-profit effort to provide an open registry of unique researcher identifiers. It also offers open services to link research activities and organizations to these identifiers. Learn more at <a href=\"https://orcid.org\" target=\"_blank\">orcid.org</a>."
-msgstr "Dissemin nutzt ORCID um seine Nutzer_innen zu authentifizieren. ORCID ist eine unabhängige Non-Profit-Organisation, von der man eine freie, eindeutige ID erhalten kann. Sie bietet zudem offene Services, um Forschungsaktivitäten und Organisation zu verknüpfen. Mehr Informationen gibt es auf <a href=\"https://orcid.org\" target=\"_blank\">orcid.org</a>."
+msgstr ""
 
 #: website/templates/dissemin/login.html:28
 #: website/templates/dissemin/login.html:34
 msgid "Log in"
-msgstr "Anmelden"
+msgstr "Cı kewe"
 
 #: website/templates/dissemin/login.html:30
 msgid "If you already have an ORCID account, you can use it with Dissemin. We will not make any changes to your profile."
-msgstr "Wenn Du bereits einen ORCID-Account hast, kannst Du diesen für Dissemin nutzen. Wir nehmen keine Änderungen an Deinem ORCID-Profil vor."
+msgstr ""
 
 #: website/templates/dissemin/login.html:39
 #: website/templates/dissemin/login.html:45
 msgid "Sign up"
-msgstr "Registrieren"
+msgstr "Qeyd be"
 
 #: website/templates/dissemin/login.html:41
 msgid "Not an ORCID user yet? Create an account, it is free and takes just a few seconds."
-msgstr "Du bist noch nicht bei ORCID? Erstelle ein Konto, es ist kostenlos und das Erstellen dauert nur wenige Sekunden."
+msgstr ""
 
 #: website/templates/dissemin/sources.html:5
 msgid "Data sources"
-msgstr "Datenquellen"
+msgstr ""
 
 #: website/templates/dissemin/sources.html:10
-#, fuzzy
 msgid "Data Sources"
-msgstr "Datenquellen"
+msgstr ""
 
 #: website/templates/dissemin/sources.html:14
 msgid "<a href=\"https://www.crossref.org\">CrossRef.org</a> for traditional academic papers"
-msgstr "<a href=\"https://search.crossref.org/\">CrossRef</a> für wissenschaftliche Publikationen"
+msgstr ""
 
 #: website/templates/dissemin/sources.html:17
 msgid "<a href=\"https://www.base-search.net\">BASE (Bielefeld Academic Search Engine)</a> for other papers, including preprints"
-msgstr "<a href=\"https://www.base-search.net\">BASE (Bielefeld Academic Search Engine)</a> für andere Publikationen, einschließlich Preprints"
+msgstr ""
 
 #: website/templates/dissemin/sources.html:20
 msgid "<a href=\"https://www.sherpa.ac.uk/romeo/\">SHERPA/RoMEO</a> for publisher policies"
-msgstr "<a href=\"https://www.sherpa.ac.uk/romeo/\">SHERPA/RoMEO</a> für Verlagsrichtlinien"
+msgstr ""
 
 #: website/templates/dissemin/sources.html:23
 msgid "<a href=\"https://www.zotero.org/\">Zotero</a> for metadata associated to DOIs"
-msgstr "<a href=\"https://www.zotero.org/\">Zotero</a> für Metadaten von DOIs"
+msgstr ""
 
 #: website/templates/dissemin/start_page.html:9
 msgid "Home"
-msgstr "Startseite"
+msgstr "Keye"
 
 #: website/templates/dissemin/start_page.html:19
 msgid "Welcome to Dissemin"
-msgstr "Willkommen bei Dissemin"
+msgstr "Dissemin rê Xeyr Ameyê"
 
 #: website/templates/dissemin/start_page.html:20
 msgid "Dissemin detects papers behind paywalls and helps their authors to upload them in one click to an open repository."
-msgstr "Dissemin erkennt Publikationen hinter Bezahlschranken (&quot;Paywall&quot;) und lädt ihre Verfasser_innen dazu ein, sie mit einem Klick in ein offenes Repositorium hochzuladen."
+msgstr ""
 
 #: website/templates/dissemin/start_page.html:39
 #: website/templates/dissemin/start_page.html:42
 msgid "Green Open Access"
-msgstr "Grüner Open Access"
+msgstr ""
 
 #: website/templates/dissemin/start_page.html:43
 msgid "Many researchers do not use their right to make their papers freely available online, in addition to the paywalled version of traditional publishers."
-msgstr "Nutze Dein Recht auf Zweitveröffentlichung und biete deine Publikationen zusätzlich zu den Bezahlversionen der traditionellen Herausgeber frei verfügbar an."
+msgstr ""
 
 #: website/templates/dissemin/start_page.html:44
 msgid "Uploading your papers to open repositories has significant advantages:"
-msgstr "Das Hochladen Deiner Publikationen in ein offenes Repositorium hat folgende Vorteile:"
+msgstr ""
 
 #: website/templates/dissemin/start_page.html:46
 msgid "Your research is available to everyone, increasing your readership and impact."
-msgstr "Deine Forschung ist für jeden zugänglich, was deine Leserschaft und Impact erhöht."
+msgstr ""
 
 #: website/templates/dissemin/start_page.html:47
 msgid "You help universities abandon overpriced journal subscriptions."
-msgstr "Du hilfst Universitäten dabei, überhöhte Subskriptionsgebühren zu vermeiden."
+msgstr ""
 
 #: website/templates/dissemin/start_page.html:58
 #: website/templates/dissemin/start_page.html:61
-#, fuzzy
 msgid "Open Repositories"
-msgstr "Offene Repositorien"
+msgstr ""
 
 #: website/templates/dissemin/start_page.html:62
 msgid "Uploading your papers on your own webpage is not enough. Your papers are easier to find and more secure in the long-term when uploaded to arXiv, Zenodo or institutional repositories."
-msgstr "Deine Dokumente sind in gut indizierten Repositorien wie arXiv, Zenodo oder institutionellen Repositorien leichter zu finden. Das Hochladen deiner Publikation auf einer eigenen Website ist weniger stabil."
+msgstr ""
 
 #: website/templates/dissemin/start_page.html:72
 #: website/templates/dissemin/start_page.html:75
 msgid "Latest Uploads"
-msgstr "Vor kurzem Hochgeladen"
+msgstr "Barkerdışê peyêni"
 
 #: website/templates/dissemin/start_page.html:76
 msgid "Researchers use Dissemin to make sure all their publications can be accessed freely. Have a look at their latest uploads:"
-msgstr "Wissenschaftler_innen nutzen Dissemin um ihre Publikationen frei verfügbar zu machen. Hier sind die letzten Veröffentlichungen:"
+msgstr ""
 
 #: website/templates/dissemin/start_page.html:84
 #, python-format
 msgid "Published in %(repo)s on %(pub_date)s"
-msgstr "Veröffentlicht in %(repo)s am %(pub_date)s"
+msgstr ""
 
 #: website/templates/dissemin/start_page.html:101
 msgid "Access statistics"
-msgstr "Open Access Verfügbarkeit"
+msgstr ""
 
 #: website/templates/dissemin/start_page.html:102
 msgid "Dissemin collects its data from various sources and evaluates if a given publication is freely available."
-msgstr "Dissemin sammelt Metadaten aus verschiedenen Quellen und wertet diese aus, um festzustellen, ob eine Publikation frei verfügbar ist."
+msgstr ""
 
 #: website/templates/dissemin/start_page.html:123
 #: website/templates/dissemin/start_page.html:126
 msgid "Dissemin for Libraries"
-msgstr "Dissemin für Bibliotheken"
+msgstr ""
 
 #: website/templates/dissemin/start_page.html:127
 msgid "As a library you can use Dissemin to find publications of your researchers that are behind paywalls. Dissemin can upload publications directly into your institutional repository and tries to support your local worklfow as much as possible."
-msgstr "Bibliotheken können Dissemin einsetzen, um Publikationen der Wissenschaftler_innen der eigenen Institution zu finden, die sich hinter einer Paywall (Bezahlschranke) befinden. Dissemin kann Publikationen direkt in das institutionelle Repositorium hochladen und dabei den lokalen Workflow bestmöglich unterstützen."
+msgstr ""
 
 #: website/templates/dissemin/start_page.html:128
 msgid "You can advertise Dissemin to your researchers and show them how easy it is to liberate their publications!"
-msgstr "Ihr könnt Dissemin bei den Wissenschaftler_innen eurer Institution bewerben und ihnen zeigen, wie einfach sie ihre Publikationen frei verfügbar machen können."
+msgstr ""
 
 #: website/templates/dissemin/start_page.html:139
 msgid "Network of Partners"
-msgstr "Partner Netzwerk"
+msgstr ""
 
 #: website/templates/dissemin/start_page.html:142
 msgid "Partners"
-msgstr "Partner"
+msgstr ""
 
 #: website/templates/dissemin/start_page.html:143
 msgid "Dissemin would not be possible without the support of our partners:"
-msgstr "Dissemin wäre nicht möglich ohne die Unterstützung unseres Netzwerks:"
+msgstr ""
 
 #: website/templates/dissemin/tos.html:7 website/templates/dissemin/tos.html:14
 #: website/templates/footer.html:9
 msgid "Terms of Service"
-msgstr "Nutzungsbedingungen"
+msgstr ""
 
 #: website/templates/dissemin/tos.html:18
 msgid "In short"
-msgstr "In Kürze"
+msgstr ""
 
 #: website/templates/dissemin/tos.html:21
 msgid "Scope of the service"
-msgstr "Serviceumfang"
+msgstr ""
 
 #: website/templates/dissemin/tos.html:23
 msgid "This platform offers an analysis of the accessibility of scholarly publications. It can also deposit publications on behalf of their authors in repositories. The accessibility and self-archiving policies of the papers on this platform can be incorrect and should not be relied upon for legal advice. When in doubt, users are advised to check from authoritative sources."
-msgstr "Diese Plattform bietet eine Analyse der Zugänglichkeit wissenschaftlicher Publikationen. Sie kann auch Publikationen für ihre Autor_innen in Repositorien hinterlegen. Die Zugänglichkeits- und Selbstarchivierungsrichtlinien der Veröffentlichungen auf dieser Plattform können falsch sein und sollten nicht zur Rechtsberatung herangezogen werden. Im Zweifelsfall wird Benutzer_innen empfohlen, verlässliche Quellen zu überprüfen."
+msgstr ""
 
 #: website/templates/dissemin/tos.html:28
 msgid "Privacy"
-msgstr "Datenschutz"
+msgstr ""
 
 #: website/templates/dissemin/tos.html:30
 msgid "The platform does not include any analytics, advertisement or tracking services. We are however using the <a href=\"https://sentry.io/privacy/\">Sentry service</a> for error tracking on this platform. Our webserver configuration stores basic access information (URL requested and IP address) for error monitoring, which are kept for fourteen days. Authenticated users are logged-in via ORCID, a third-party service. The platform has no access to the private information they provide to ORCID. In particular, we do not store any ORCID passwords, and we do not have access to email addresses that are marked as private in the ORCID record. We need to set cookies to authenticate our users, therefore by logging in on this platform, users accept these cookies."
-msgstr "Die Plattform verwendet keine Analyse-, Werbe- oder Verfolgungsdienste. Wir setzen <a href=\"https://sentry.io/privacy/\">Sentry service</a> für die Fehlerprotokollierung ein. Unser Webserver speichert elementare Zugriffsinformationen (Aufgerufene URL und IP-Adresse) zur Fehlerüberwachung, welche maximal 14 Tage gespeichert werden. Authentifizierte Benutzer_innen werden über ORCID, einen Dienst eines Drittanbieters, angemeldet. Die Plattform hat keinen Zugriff auf die privaten Informationen, die sie für ORCID bereitstellen. Insbesondere speichern wir keine ORCID-Passwörter und wir haben keinen Zugriff auf E-Mail-Adressen, die im ORCID-Datensatz als privat gekennzeichnet sind. Wir müssen Cookies benutzen, um unsere Benutzer_innen zu authentifizieren. Mit Anmeldung auf dieser Plattform, akzeptieren die Benutzer_innen diese Cookies."
+msgstr ""
 
 #: website/templates/dissemin/tos.html:42
 msgid "Deposits through Dissemin"
-msgstr "Upload über Dissemin"
+msgstr ""
 
 #: website/templates/dissemin/tos.html:44
 msgid "The platform can perform mandated publication deposit to repositories. Users are only allowed to upload papers that they have authored themselves, or papers whose authors have consented to the deposit. In addition to these terms of service, users are required to abide by the policies of these repositories."
-msgstr "Die Plattform kann auf Veranlassung Publikationen in Repositorien ablegen. Benutzer_innen sind nur dazu berechtigt, Publikationen hochzuladen, die sie selber verfasst haben oder Publikationen, deren Autor_innen der Ablage zugestimmt haben. Über diese Nutzungsbedingungen hinaus müssen Benutzer_innen die Richtlinien der Repositorien einhalten."
+msgstr ""
 
 #: website/templates/dissemin/tos.html:51
 msgid "Please address any inquiry to <a href=\"mailto:support@dissem.in\">support@dissem.in</a>."
-msgstr "Bitte richte alle Anfragen an <a href=\"mailto:support@dissem.in\">support@dissem.in</a>."
+msgstr ""
 
 #: website/templates/dissemin/tos.html:60
 msgid "In full"
-msgstr "Vollständig"
+msgstr ""
 
 #: website/templates/dissemin/tos.html:63
 msgid "Personal data"
-msgstr "Persönliche Daten"
+msgstr ""
 
 #: website/templates/dissemin/tos.html:65
 msgid "Dissemin uses ORCID's public OAuth interface to authenticate its users. This interface only transmits information marked as public in the user's ORCID profile. This means that ORCID passwords are never transmitted and email addresses are not transmitted when they are marked as private, which is the default setting. When logging in to Dissemin from ORCID, Dissemin acquires the user's ORCID id, as well as all public information attached to the ORCID record. We are using the <a href=\"https://sentry.io/privacy/\">Sentry service</a> for error tracking on this platform. Our webserver configuration stores basic access information (URL requested and IP address) for error monitoring, which are kept for fourteen days. Dissemin can store any information input by its users on the platform. Users can ask for a copy of the personal information Dissemin stores about them by writing an email to <a href=\"mailto:support@dissem.in\">support@dissem.in</a>."
-msgstr "Dissemin verwendet die öffentliche OAuth-Schnittstelle von ORCID, um seine Benutzer_innen zu authentifizieren. Diese Schnittstelle übermittelt nur Informationen, die im ORCID-Profil des Benutzers bzw. der Benutzerin als öffentlich markiert wurden. Das bedeutet, dass niemals ORCID-Passwörter übermittelt werden. E-Mail-Adressen werden ebenfalls nicht übermittelt, wenn sie als privat markiert wurden, was der Standardeinstellung entspricht. Bei der Anmeldung bei Dissemin von ORCID erhält Dissemin sowohl die Benutzerkennung von ORCID als auch alle öffentlichen Informationen Deines ORCID-Profils. Wir benutzen den Dienst <a href=\"https://sentry.io/privacy/\">Sentry</a> zum Fehlertracking auf dieser Plattform. Unsere Webserver-Konfiguration speichert Basisinformationen zum Zugriff (die angeforderte URL sowie die IP-Adresse) zur Fehlerüberwachung, die 14 Tage gespeichert werden. Dissemin kann alle Benutzereingaben von Informationen auf der Plattform speichern. Benutzer_innen können um eine Kopie der persönlichen Informationen bitten, die Dissemin über sie speichert, indem sie eine E-Mail an <a href=\"mailto:support@dissem.in\">support@dissem.in</a> schreiben."
+msgstr ""
 
 #: website/templates/dissemin/tos.html:76
 msgid "Full text storage"
-msgstr "Volltextspeicher"
+msgstr ""
 
 #: website/templates/dissemin/tos.html:78
 msgid "Documents deposited in repositories via Dissemin can be stored on the platform, but are not available for download on the platform. They can be stored internally for logging purposes, and to make sure failed deposits can be fixed later. Dissemin does not commit to store any of the files it receives from its users. Users can write to <a href=\"mailto:support@dissem.in\">support@dissem.in</a> if they want one of their uploads to be deleted from our internal storage space, or from the repository they have deposited to. Note that deletion policies vary accross repositories: we provide no guarantee that deposits can be deleted from the target repositories."
-msgstr "In Repositorien über Dissemin abgelegte Dokumente können auf der Plattform gespeichert werden, sind jedoch nicht zum Herunterladen auf der Plattform verfügbar. Sie können intern zu Protokollierungszwecken gespeichert werden und um sicherzustellen, dass fehlgeschlagene Ablagen später korrigiert werden können. Dissemin beabsichtigt keine Dateien zu speichern, die es von seinen Benutzer_innen erhält. Benutzer_innen können an <a href=\"mailto:support@dissem.in\">support@dissem.in</a> schreiben, falls sie einen ihrer Uploads von unserem internen Speicherplatz oder dem Repositorium löschen möchten, auf dem sie abgelegt wurden. Beachte, dass Löschrichtlinien auf den Repositorien variieren können: Wir bieten keine Garantie, dass Ablagen von den Ziel-Repositorien gelöscht werden können."
+msgstr ""
 
 #: website/templates/dissemin/tos.html:85
 msgid "Reporting misuse"
-msgstr "Missbräuchliche Verwendung melden"
+msgstr ""
 
 #: website/templates/dissemin/tos.html:87
 msgid "Misuse can be reported to <a href=\"mailto:support@dissem.in\">support@dissem.in</a>."
-msgstr "Missbräuchliche Verwendung kann an <a href=\"mailto:support@dissem.in\">support@dissem.in</a> gemeldet werden."
+msgstr ""
 
 #: website/templates/dissemin/tos.html:95
 msgid "The <a href=\"https://dissem.in\">dissem.in</a> website has been registered with <a href=\"https://www.cnil.fr/\">CNIL</a> under declaration n°1895382 v0."
-msgstr "Die <a href=\"https://dissem.in\">dissem.in</a>-Website wurde bei <a href=\"https://www.cnil.fr/\">CNIL</a> unter der Erklärung n°1895382 v0 registriert."
+msgstr ""
 
 #: website/templates/dissemin/tos.html:101
 msgid "You have the right to access, modify, and delete the personal information that we hold about you. To exercise this right, please contact us at <a href=\"mailto:support@dissem.in\">support@dissem.in</a>, or by postal mail at the following addresss:"
-msgstr "Du hast das Recht auf den Zugang, die Veränderung und Löschung der persönlichen Informationen, die wir über Dich erheben. Um dieses Recht auszuüben, kontaktiere uns bitte unter <a href=\"mailto:support@dissem.in\">support@dissem.in</a> oder per Post an die folgende Adresse:"
+msgstr ""
 
 #: website/templates/footer.html:7
 msgid "FAQ"
-msgstr "FAQ"
+msgstr ""
 
 #: website/templates/footer.html:8
 msgid "API"
-msgstr "API"
+msgstr ""
 
 #: website/templates/footer.html:14
 msgid "Who are we?"
-msgstr "Über uns"
+msgstr ""
 
 #: website/templates/footer.html:15
 msgid "Donate"
-msgstr "Spenden"
+msgstr ""
 
 #: website/templates/footer.html:16
 msgid "Blog"
-msgstr "Blog"
+msgstr "Qeyd"
 
 #: website/templates/navbar.html:6
 msgid "Logo"
@@ -2828,31 +2815,31 @@ msgstr "Logo"
 
 #: website/templates/navbar.html:24
 msgid "Translate"
-msgstr "Sprache wechseln"
+msgstr "Açarne"
 
 #: website/templates/navbar.html:34
 msgid "My profile"
-msgstr "Mein Profil"
+msgstr ""
 
 #: website/templates/navbar.html:35
 msgid "My to-do list"
-msgstr "Meine Merkliste"
+msgstr ""
 
 #: website/templates/navbar.html:36
 msgid "Logout"
-msgstr "Abmelden"
+msgstr "Veciyayış"
 
 #: website/templates/navbar.html:41
 msgid "Login"
-msgstr "Anmelden"
+msgstr "Cıkewtış"
 
 #: website/templates/socialaccount/authentication_error.html:6
 #: website/templates/socialaccount/authentication_error.html:12
 msgid "Authentication error"
-msgstr "Authentifizierungsfehler"
+msgstr ""
 
 #: website/templates/socialaccount/authentication_error.html:15
 #, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
-msgstr "Authentifizierung fehlgeschlagen. <a href=\"%(account-login)s\">Zurück zur Anmeldeseite gehen.</a>"
+msgstr ""
 

@@ -10,13 +10,14 @@
 #
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-04-23 08:11+0200\n"
-"PO-Revision-Date: 2020-03-19 14:03:35+0000\n"
+"PO-Revision-Date: 2020-04-27 14:44:24+0000\n"
 "Language: ro\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2020-02-28 17:30:27+0000\n"
+"X-POT-Import-Date: 2020-04-23 07:09:36+0000\n"
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=3; plural=(n == 1) ? 0 : ( (n == 0 || (n%100 > 0 && n%100 < 20)) ? 1 : 2 );\n"
 
@@ -544,11 +545,7 @@ msgstr "Depozitare"
 #: deposit/templates/deposit/start.html:64
 #, fuzzy, python-format
 msgid "You can deposit the full text of your article. Dissemin will send it to a repository where it will be made freely available. By depositing your article via Dissemin, you agree to our <a href=\"%(tosurl)s\">terms of service</a>."
-msgstr ""
-"Puteți depune textul integral al articolului dvs. Dissemin îl va\n"
-"             trimite într-un depozit în care va fi disponibil gratuit.\n"
-"Prin depunerea articolului prin Dissemin,\n"
-"             sunteți de acord cu noi <a href=\"%(tosurl)s\">terms of service</a>."
+msgstr "Puteți depune textul integral al articolului dvs. Dissemin îl va\n             trimite într-un depozit în care va fi disponibil gratuit.\nPrin depunerea articolului prin Dissemin,\n             sunteți de acord cu noi <a href=\"%(tosurl)s\">terms of service</a>."
 
 #: deposit/templates/deposit/start.html:72
 #, fuzzy
@@ -1158,10 +1155,7 @@ msgid "Green Open Access Service"
 msgstr "Acces liber verde"
 
 #: model-gettext.py:111
-msgid ""
-"Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n"
-"<br/>\n"
-"Contact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
+msgid "Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n<br/>\nContact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
 msgstr ""
 
 #: model-gettext.py:112
@@ -1169,11 +1163,7 @@ msgid "TUprints contract required!"
 msgstr ""
 
 #: model-gettext.py:113
-msgid ""
-"For every document, that you upload via Dissemin we need once a TUprints contract.\n"
-"Please fill in the contract and send a printed and signed copy to:\n"
-"<br>\n"
-"ULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
+msgid "For every document, that you upload via Dissemin we need once a TUprints contract.\nPlease fill in the contract and send a printed and signed copy to:\n<br>\nULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
 msgstr ""
 
 #: model-gettext.py:114
@@ -1562,9 +1552,9 @@ msgid "Deposit almost accomplished!"
 msgstr ""
 
 #: papers/templates/papers/paper.html:88
-#, fuzzy, python-format
+#, python-format
 msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available after validation by the repository administration. You can check for the status in your <a class=\"alert-link\" href=\"%(my_profile)s\">profile</a>."
-msgstr "<strong>Aproape acolo!</strong> Această lucrare a fost depusă în <a href=\"%(repo_url)s\">%(repo_name)s</a>. Textul complet va fi disponibil la <a href=\"%(deposit_url)s\">această adresă</a> după validarea de către administratorii repozitorului."
+msgstr ""
 
 #: papers/templates/papers/paper.html:102
 #, fuzzy, python-format
@@ -1909,9 +1899,7 @@ msgstr ""
 #: papers/views.py:282
 #, fuzzy
 msgid "Invalid ORCID profile. Please make sure it includes a public name."
-msgstr ""
-"Profilul ORCID este nevalid.\n"
-"Asigurați-vă că include un nume public."
+msgstr "Profilul ORCID este nevalid.\nAsigurați-vă că include un nume public."
 
 #: papers/views.py:285
 msgid "Invalid ORCID profile."
@@ -2952,3 +2940,4 @@ msgstr ""
 #, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr ""
+
