@@ -15,7 +15,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-04-22 12:29+0200\n"
-"PO-Revision-Date: 2020-04-27 14:44:21+0000\n"
+"PO-Revision-Date: 2020-04-30 14:47:51+0000\n"
 "Language: de\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -55,12 +55,10 @@ msgid "Include in my profile"
 msgstr "Meinem Profil hinzufügen"
 
 #: website/static/js/dissemin.js:348
-#, fuzzy
 msgid "Adding to to-do list"
 msgstr "Zur Merkliste hinzufügen"
 
 #: website/static/js/dissemin.js:352
-#, fuzzy
 msgid "Removing from to-do list"
 msgstr "Von Merkliste entfernen"
 

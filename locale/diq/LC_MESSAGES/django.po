@@ -2,6 +2,7 @@
 # Exported from translatewiki.net
 #
 # Author: 1917 Ekim Devrimi
+# Author: Becks
 # Author: Mirzali
 # Author: Orbot707
 # --
@@ -11,7 +12,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2020-04-27 14:44:22+0000\n"
+"PO-Revision-Date: 2020-04-30 14:47:52+0000\n"
 "X-POT-Import-Date: 2020-04-23 07:09:36+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1959,8 +1960,8 @@ msgstr ""
 #, python-format
 msgid "(%(num_total)s paper)"
 msgid_plural "(%(num_total)s papers)"
-msgstr[0] "(Kağıte)"
-msgstr[1] "(%(num_total) Kağıti)"
+msgstr[0] "(%(num_total)s Kağıte)"
+msgstr[1] "(%(num_total)s Kağıti)"
 
 #: publishers/templates/publishers/list.html:96
 msgid "No publishers found"

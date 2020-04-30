@@ -11,7 +11,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-04-23 08:11+0200\n"
-"PO-Revision-Date: 2020-04-27 14:44:23+0000\n"
+"PO-Revision-Date: 2020-04-30 14:47:53+0000\n"
 "Language: hi\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -816,7 +816,7 @@ msgstr ""
 
 #: model-gettext.py:23
 msgid "The Bible"
-msgstr ""
+msgstr "बाइबल"
 
 #: model-gettext.py:24
 #, fuzzy
@@ -857,7 +857,7 @@ msgstr "Social Anthropology and ethnology"
 
 #: model-gettext.py:34
 msgid "Economics"
-msgstr ""
+msgstr "अर्थशास्त्र"
 
 #: model-gettext.py:36
 msgid "Public administration & military science"
@@ -876,9 +876,8 @@ msgid "Customs, etiquette & folklore"
 msgstr ""
 
 #: model-gettext.py:41 website/templates/navbar.html:15
-#, fuzzy
 msgid "Language"
-msgstr "Change language"
+msgstr "भाषा"
 
 #: model-gettext.py:43
 msgid "English & Old English languages"
@@ -920,7 +919,7 @@ msgstr "Life Sciences"
 
 #: model-gettext.py:53
 msgid "Astronomy"
-msgstr ""
+msgstr "खगोल"
 
 #: model-gettext.py:56
 msgid "Earth sciences & geology"
@@ -931,9 +930,8 @@ msgid "Fossils & prehistoric life"
 msgstr ""
 
 #: model-gettext.py:58
-#, fuzzy
 msgid "Biology"
-msgstr "Sociology"
+msgstr "जीवविज्ञान"
 
 #: model-gettext.py:59
 msgid "Plants (Botany)"

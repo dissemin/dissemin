@@ -19,7 +19,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-04-23 08:11+0200\n"
-"PO-Revision-Date: 2020-04-27 14:44:22+0000\n"
+"PO-Revision-Date: 2020-04-30 14:47:52+0000\n"
 "Language: de\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -582,7 +582,6 @@ msgid "postprint"
 msgstr "Postprint"
 
 #: deposit/templates/deposit/start.html:152
-#, fuzzy
 msgid "pdfversion"
 msgstr "veröffentlichte Version"
 
@@ -1072,7 +1071,6 @@ msgid "History of other areas"
 msgstr "Geschichte anderer Gebiete"
 
 #: model-gettext.py:101
-#, fuzzy
 msgid "Data processing & computer science"
 msgstr "Informatik"
 
@@ -1492,7 +1490,7 @@ msgstr "Veröffentlichung fast erledigt!"
 #: papers/templates/papers/paper.html:88
 #, python-format
 msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available after validation by the repository administration. You can check for the status in your <a class=\"alert-link\" href=\"%(my_profile)s\">profile</a>."
-msgstr "Die Publikation wurde in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a> hoichgeladen. Der Volltext wird nach einer Überprüfung des Repositoriumsbetreiber verfügbar sein. Du kannst den Status in deinem <a class=\"alert-link\" href=\"%(my_profile)s\">Profil</a> jederzeit einsehen."
+msgstr "Die Publikation wurde in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a> hochgeladen. Der Volltext wird nach einer Überprüfung des Repositoriumsbetreibers verfügbar sein. Du kannst den Status in deinem <a class=\"alert-link\" href=\"%(my_profile)s\">Profil</a> jederzeit einsehen."
 
 #: papers/templates/papers/paper.html:102
 #, fuzzy, python-format
@@ -1505,9 +1503,9 @@ msgid "Learn more!"
 msgstr "Mehr erfahren"
 
 #: papers/templates/papers/paper.html:138
-#, fuzzy, python-format
+#, python-format
 msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available after validation by the repository administration."
-msgstr "Die Publikation wurde erfolgreich in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a> eingereicht. Der Volltext wird nach Überprüfung durch die Repositoriumsverwaltung unter <a class=\"alert-link\" href=\"%(deposit_url)s\">dieser Adresse</a> verfügbar sein."
+msgstr "Die Publikation wurde erfolgreich in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a> eingereicht. Der Volltext wird nach der Überprüfung durch die Repositoriumsverwaltung verfügbar sein."
 
 #: papers/templates/papers/paper.html:152
 #, python-format
@@ -1957,7 +1955,6 @@ msgstr "Suche"
 
 #: publishers/templates/publishers/list.html:56
 #: publishers/templates/publishers/publisher.html:31
-#, fuzzy
 msgid "Sources"
 msgstr "Datenquellen"
 

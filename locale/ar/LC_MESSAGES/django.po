@@ -18,7 +18,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-04-23 08:11+0200\n"
-"PO-Revision-Date: 2020-04-27 14:44:21+0000\n"
+"PO-Revision-Date: 2020-04-30 14:47:51+0000\n"
 "Language: ar\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -577,7 +577,7 @@ msgstr "نوع التحميل:"
 #: deposit/templates/deposit/start.html:179
 #: deposit/templates/deposit/start.html:213
 msgid "Change"
-msgstr ""
+msgstr "تغيير"
 
 #: deposit/templates/deposit/start.html:120
 msgid "preprint"
@@ -1510,9 +1510,9 @@ msgid "Deposit accomplished!"
 msgstr "أُنجِز الإيداع!"
 
 #: papers/templates/papers/paper.html:76
-#, fuzzy, python-format
+#, python-format
 msgid "This paper was successfully deposited and is now freely available at <a class=\"alert-link\" href=\"%(splash_url)s\">this address.</a>>"
-msgstr "<p>تم إيداع هذه الورقة بنجاح وهي الآن متاحة مجانا في <a class=\"alert-link\" href=\"%(splash_url)s\">هذا العنوان.</a></p>"
+msgstr "تم إيداع هذه الورقة بنجاح وهي الآن متاحة مجانا في <a class=\"alert-link\" href=\"%(splash_url)s\">هذا العنوان.</a>>"
 
 #: papers/templates/papers/paper.html:84 papers/templates/papers/paper.html:98
 #: papers/templates/papers/paper.html:136
