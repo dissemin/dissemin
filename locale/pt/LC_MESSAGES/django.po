@@ -16,7 +16,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-04-23 08:11+0200\n"
-"PO-Revision-Date: 2020-04-30 14:47:55+0000\n"
+"PO-Revision-Date: 2020-05-04 13:50:13+0000\n"
 "Language: pt\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1526,9 +1526,9 @@ msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_ur
 msgstr ""
 
 #: papers/templates/papers/paper.html:102
-#, fuzzy, python-format
+#, python-format
 msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available after validation by the repository administration, but not before %(pub_date)s. You can check for the status in your <a class=\"alert-link\" href=\"%(my_profile)s\">profile</a>."
-msgstr "Este documento foi depositado em <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. O texto completo estará disponível <a class=\"alert-link\" href=\"%(deposit_url)s\">neste endereço</a> a partir de <strong>%(pub_date|localize)s</strong> devido a um embargo."
+msgstr "Este documento foi depositado em <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. O texto completo irá ficar disponível depois da validação pela administração do repositório, mas não antes de %(pub_date)s. Pode consultar o estado no seu <a class=\"alert-link\" href=\"%(my_profile)s\">perfil</a>."
 
 #: papers/templates/papers/paper.html:126
 #: website/templates/dissemin/start_page.html:129

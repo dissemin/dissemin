@@ -13,7 +13,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-04-23 08:11+0200\n"
-"PO-Revision-Date: 2020-04-27 14:44:21+0000\n"
+"PO-Revision-Date: 2020-05-04 13:50:10+0000\n"
 "Language: da\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -576,7 +576,7 @@ msgstr "Overførselstype:"
 #: deposit/templates/deposit/start.html:179
 #: deposit/templates/deposit/start.html:213
 msgid "Change"
-msgstr ""
+msgstr "Ændre"
 
 #: deposit/templates/deposit/start.html:120
 msgid "preprint"

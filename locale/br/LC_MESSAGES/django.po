@@ -14,7 +14,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-04-23 08:11+0200\n"
-"PO-Revision-Date: 2020-04-27 14:44:21+0000\n"
+"PO-Revision-Date: 2020-05-04 13:50:10+0000\n"
 "Language: br\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -505,7 +505,7 @@ msgstr ""
 
 #: deposit/templates/deposit/deposits.html:148
 msgid "Show"
-msgstr ""
+msgstr "Diskouez"
 
 #: deposit/templates/deposit/deposits.html:176
 msgid "No deposits yet!"
@@ -583,12 +583,11 @@ msgstr ""
 
 #: deposit/templates/deposit/start.html:176
 msgid "Repository:"
-msgstr ""
+msgstr "Kavlec'h :"
 
 #: deposit/templates/deposit/start.html:210
-#, fuzzy
 msgid "Metadata:"
-msgstr "Metaroadennoù"
+msgstr "Metaroadennoù :"
 
 #: deposit/templates/deposit/start.html:235
 #: papers/templates/papers/search_base.html:165
@@ -625,7 +624,7 @@ msgstr ""
 
 #: deposit/views.py:349
 msgid "Declaration {}.pdf"
-msgstr ""
+msgstr "Disklêriadur {}.pdf"
 
 #: deposit/views.py:352
 msgid "No pdf found for dr {}"

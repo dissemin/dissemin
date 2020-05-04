@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2020-04-30 14:47:52+0000\n"
+"PO-Revision-Date: 2020-05-04 13:50:10+0000\n"
 "X-POT-Import-Date: 2020-04-23 07:09:36+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -564,7 +564,7 @@ msgstr "Tewrê barkerdışi :"
 #: deposit/templates/deposit/start.html:179
 #: deposit/templates/deposit/start.html:213
 msgid "Change"
-msgstr ""
+msgstr "Bıvurne"
 
 #: deposit/templates/deposit/start.html:120
 msgid "preprint"
@@ -1041,23 +1041,23 @@ msgstr ""
 
 #: model-gettext.py:95
 msgid "History of Europe"
-msgstr ""
+msgstr "Tarixê Ewropa"
 
 #: model-gettext.py:96
 msgid "History of Asia"
-msgstr ""
+msgstr "Tarixê Asya"
 
 #: model-gettext.py:97
 msgid "History of Africa"
-msgstr ""
+msgstr "Tarixê Afrika"
 
 #: model-gettext.py:98
 msgid "History of North America"
-msgstr ""
+msgstr "Tarixê Amerikaya Zımeyi"
 
 #: model-gettext.py:99
 msgid "History of South America"
-msgstr ""
+msgstr "Tarixê Amerikaya Veroci"
 
 #: model-gettext.py:100
 msgid "History of other areas"
@@ -2820,7 +2820,7 @@ msgstr "Açarne"
 
 #: website/templates/navbar.html:34
 msgid "My profile"
-msgstr ""
+msgstr "Profilê mı"
 
 #: website/templates/navbar.html:35
 msgid "My to-do list"
