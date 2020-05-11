@@ -19,7 +19,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-04-23 08:11+0200\n"
-"PO-Revision-Date: 2020-05-07 15:07:54+0000\n"
+"PO-Revision-Date: 2020-05-11 15:35:44+0000\n"
 "Language: de\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1493,9 +1493,9 @@ msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_ur
 msgstr "Die Publikation wurde in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a> hochgeladen. Der Volltext wird nach einer Überprüfung des Repositoriumsbetreibers verfügbar sein. Du kannst den Status in deinem <a class=\"alert-link\" href=\"%(my_profile)s\">Profil</a> jederzeit einsehen."
 
 #: papers/templates/papers/paper.html:102
-#, fuzzy, python-format
+#, python-format
 msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available after validation by the repository administration, but not before %(pub_date)s. You can check for the status in your <a class=\"alert-link\" href=\"%(my_profile)s\">profile</a>."
-msgstr "<p>Die Publikation wurde auf <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a> hochgeladen. Der Volltext wird unter <a class=\"alert-link\" href=\"%(splash_url)s\">dieser Adresse</a> verfügbar sein, wenn er den Moderationsprozess des Repositoriums absolviert hat.</p>"
+msgstr "Die Publikation wurde auf <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a> hochgeladen. Der Volltext wird wird nach einer Überprüfung der Repositoriumsadministration, jedoch nicht vor dem %(pub_date)s. Du kannst den Status jederzeit in deinem <a class=\"alert-link\" href=\"%(my_profile)s\">Profil</a> einsehen."
 
 #: papers/templates/papers/paper.html:126
 #: website/templates/dissemin/start_page.html:129
