@@ -16,7 +16,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-04-23 08:11+0200\n"
-"PO-Revision-Date: 2020-05-07 15:07:56+0000\n"
+"PO-Revision-Date: 2020-05-18 14:02:59+0000\n"
 "Language: pt\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1528,7 +1528,7 @@ msgstr ""
 #: papers/templates/papers/paper.html:102
 #, python-format
 msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available after validation by the repository administration, but not before %(pub_date)s. You can check for the status in your <a class=\"alert-link\" href=\"%(my_profile)s\">profile</a>."
-msgstr "Este documento foi depositado em <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. O texto completo irá ficar disponível depois da validação pela administração do repositório, mas não antes de %(pub_date)s. Pode consultar o estado no seu <a class=\"alert-link\" href=\"%(my_profile)s\">perfil</a>."
+msgstr "Este documento foi depositado no repositório <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. O texto completo estará disponível depois da validação da administração do repositório, mas nunca antes de %(pub_date)s. Pode consultar o estado no seu <a class=\"alert-link\" href=\"%(my_profile)s\">perfil</a>."
 
 #: papers/templates/papers/paper.html:126
 #: website/templates/dissemin/start_page.html:129
@@ -1536,9 +1536,9 @@ msgid "Learn more!"
 msgstr ""
 
 #: papers/templates/papers/paper.html:138
-#, fuzzy, python-format
+#, python-format
 msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available after validation by the repository administration."
-msgstr "<strong>Está quase lá!</strong> Este documento foi depositado em <a href=\"%(repo_url)s\">%(repo_name)s</a>. O texto completo estará disponível <a href=\"%(deposit_url)s\">neste endereço</a>, após a validação ser feita pelos administradores do repositório."
+msgstr "Este documento foi depositado em <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. O texto completo será disponibilizado após validação pela administração do repositório."
 
 #: papers/templates/papers/paper.html:152
 #, python-format
