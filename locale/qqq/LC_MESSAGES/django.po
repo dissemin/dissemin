@@ -7,6 +7,7 @@
 # Author: Liuxinyu970226
 # Author: Pyscowicz
 # Author: Robby
+# Author: Shirayuki
 # Author: Siebrand
 # --
 # This file is part of the Dissemin Project
@@ -17,7 +18,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-04-23 08:11+0200\n"
-"PO-Revision-Date: 2020-05-07 15:07:58+0000\n"
+"PO-Revision-Date: 2020-05-26 15:04:58+0000\n"
 "Language: qqq\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -95,20 +96,24 @@ msgid "Affiliation"
 msgstr ""
 
 #: deposit/hal/metadata.py:36 model-gettext.py:55
+#, fuzzy
 msgid "Chemistry"
-msgstr "ဓာတုဗေဒ"
+msgstr "{{delete}}ဓာတုဗေဒ"
 
 #: deposit/hal/metadata.py:37
+#, fuzzy
 msgid "Computer science"
-msgstr "ကွန်ပျူတာသိပ္ပံ"
+msgstr "ကွန်ပျူတာသိပ္ပံ\n{{delete}}"
 
 #: deposit/hal/metadata.py:38 model-gettext.py:52
+#, fuzzy
 msgid "Mathematics"
-msgstr "သင်္ချာ"
+msgstr "သင်္ချာ\n{{delete}}"
 
 #: deposit/hal/metadata.py:39 model-gettext.py:54
+#, fuzzy
 msgid "Physics"
-msgstr "ရူပဗေဒ"
+msgstr "{{delete}}ရူပဗေဒ"
 
 #: deposit/hal/metadata.py:40
 msgid "Non-linear science"
@@ -123,8 +128,9 @@ msgid "Environment sciences"
 msgstr ""
 
 #: deposit/hal/metadata.py:43
+#, fuzzy
 msgid "Planet and Universe"
-msgstr "ဂြိုဟ်နှင့် စကြာဝဠာ"
+msgstr "{{delete}}ဂြိုဟ်နှင့် စကြာဝဠာ"
 
 #: deposit/hal/metadata.py:44
 msgid "Biological anthropology"
@@ -165,8 +171,9 @@ msgstr ""
 
 #: deposit/hal/metadata.py:53 deposit/osf/forms.py:63 deposit/osf/forms.py:86
 #: model-gettext.py:38
+#, fuzzy
 msgid "Education"
-msgstr "ပညာရေး"
+msgstr "ပညာရေး\n{{delete}}"
 
 #: deposit/hal/metadata.py:54
 msgid "Environmental studies"
@@ -177,8 +184,9 @@ msgid "Gender studies"
 msgstr ""
 
 #: deposit/hal/metadata.py:56
+#, fuzzy
 msgid "Geography"
-msgstr "ပထဝီဝင်"
+msgstr "{{delete}}ပထဝီဝင်"
 
 #: deposit/hal/metadata.py:57
 msgid "Business administration"
@@ -189,8 +197,9 @@ msgid "History, Philosophy and Sociology of Sciences"
 msgstr ""
 
 #: deposit/hal/metadata.py:59 model-gettext.py:91
+#, fuzzy
 msgid "History"
-msgstr "သမိုင်း"
+msgstr "သမိုင်း\n{{delete}}"
 
 #: deposit/hal/metadata.py:60
 msgid "Library and information sciences"
@@ -201,8 +210,9 @@ msgid "Linguistics"
 msgstr ""
 
 #: deposit/hal/metadata.py:62
+#, fuzzy
 msgid "Literature"
-msgstr "စာပေ"
+msgstr "စာပေ\n{{delete}}"
 
 #: deposit/hal/metadata.py:63
 msgid "Cultural heritage and museology"
@@ -361,12 +371,14 @@ msgid "Arts and Humanities"
 msgstr ""
 
 #: deposit/osf/forms.py:61 deposit/osf/forms.py:84
+#, fuzzy
 msgid "Business"
-msgstr "စီးပွားရေး"
+msgstr "စီးပွားရေး\n{{delete}}"
 
 #: deposit/osf/forms.py:65 deposit/osf/forms.py:88 model-gettext.py:63
+#, fuzzy
 msgid "Engineering"
-msgstr "အင်ဂျင်နီယာဘာသာရပ်"
+msgstr "အင်ဂျင်နီယာဘာသာရပ်\n{{delete}}"
 
 #: deposit/osf/forms.py:69 deposit/osf/forms.py:92
 msgid "Life Sciences"
@@ -525,8 +537,9 @@ msgid "Preferences"
 msgstr "{{Identical|Preferences}}"
 
 #: deposit/templates/deposit/preferences_base.html:11
+#, fuzzy
 msgid "General"
-msgstr "အထွေထွေ"
+msgstr "{{delete}}အထွေထွေ"
 
 #: deposit/templates/deposit/preferences_repository.html:6
 msgid "Repository preferences"
@@ -728,7 +741,7 @@ msgstr ""
 #: model-gettext.py:2
 #, fuzzy
 msgid "Computer science, knowledge & systems"
-msgstr "ကွန်ပျူတာသိပ္ပံ"
+msgstr "{{delete}}ကွန်ပျူတာသိပ္ပံ"
 
 #: model-gettext.py:3
 msgid "Bibliographies"
@@ -757,7 +770,7 @@ msgstr ""
 #: model-gettext.py:9
 #, fuzzy
 msgid "Quotations"
-msgstr "ပညာရေး"
+msgstr "{{delete}}ပညာရေး"
 
 #: model-gettext.py:10
 msgid "Manuscripts & rare books"
@@ -766,7 +779,7 @@ msgstr ""
 #: model-gettext.py:12
 #, fuzzy
 msgid "Metaphysics"
-msgstr "ရူပဗေဒ"
+msgstr "{{delete}}ရူပဗေဒ"
 
 #: model-gettext.py:13
 msgid "Epistemology"
@@ -827,7 +840,7 @@ msgstr ""
 #: model-gettext.py:28
 #, fuzzy
 msgid "History of Christianity"
-msgstr "သမိုင်း"
+msgstr "{{delete}}သမိုင်း"
 
 #: model-gettext.py:29
 msgid "Christian denominations"
@@ -896,7 +909,7 @@ msgstr ""
 #: model-gettext.py:50
 #, fuzzy
 msgid "Other languages"
-msgstr "စာပေ"
+msgstr "{{delete}}စာပေ"
 
 #: model-gettext.py:51
 msgid "Science"
@@ -1014,12 +1027,12 @@ msgstr ""
 #: model-gettext.py:84
 #, fuzzy
 msgid "German & related literatures"
-msgstr "စာပေ"
+msgstr "{{delete}}စာပေ"
 
 #: model-gettext.py:85
 #, fuzzy
 msgid "French & related literatures"
-msgstr "စာပေ"
+msgstr "{{delete}}စာပေ"
 
 #: model-gettext.py:86
 msgid "Italian, Romanian & related literatures"
@@ -1032,7 +1045,7 @@ msgstr ""
 #: model-gettext.py:88
 #, fuzzy
 msgid "Latin & Italic literatures"
-msgstr "စာပေ"
+msgstr "{{delete}}စာပေ"
 
 #: model-gettext.py:89
 msgid "Classical & modern Greek literatures"
@@ -1041,17 +1054,17 @@ msgstr ""
 #: model-gettext.py:90
 #, fuzzy
 msgid "Other literatures"
-msgstr "စာပေ"
+msgstr "{{delete}}စာပေ"
 
 #: model-gettext.py:92
 #, fuzzy
 msgid "Geography & travel"
-msgstr "ပထဝီဝင်"
+msgstr "{{delete}}ပထဝီဝင်"
 
 #: model-gettext.py:93
 #, fuzzy
 msgid "Biography & genealogy"
-msgstr "ပထဝီဝင်"
+msgstr "{{delete}}ပထဝီဝင်"
 
 #: model-gettext.py:94
 msgid "History of ancient world (to ca. 499)"
@@ -1060,47 +1073,47 @@ msgstr ""
 #: model-gettext.py:95
 #, fuzzy
 msgid "History of Europe"
-msgstr "သမိုင်း"
+msgstr "{{delete}}သမိုင်း"
 
 #: model-gettext.py:96
 #, fuzzy
 msgid "History of Asia"
-msgstr "သမိုင်း"
+msgstr "{{delete}}သမိုင်း"
 
 #: model-gettext.py:97
 #, fuzzy
 msgid "History of Africa"
-msgstr "သမိုင်း"
+msgstr "{{delete}}သမိုင်း"
 
 #: model-gettext.py:98
 #, fuzzy
 msgid "History of North America"
-msgstr "သမိုင်း"
+msgstr "{{delete}}သမိုင်း"
 
 #: model-gettext.py:99
 #, fuzzy
 msgid "History of South America"
-msgstr "သမိုင်း"
+msgstr "{{delete}}သမိုင်း"
 
 #: model-gettext.py:100
 #, fuzzy
 msgid "History of other areas"
-msgstr "သမိုင်း"
+msgstr "{{delete}}သမိုင်း"
 
 #: model-gettext.py:101
 #, fuzzy
 msgid "Data processing & computer science"
-msgstr "ကွန်ပျူတာသိပ္ပံ"
+msgstr "{{delete}}ကွန်ပျူတာသိပ္ပံ"
 
 #: model-gettext.py:102
 #, fuzzy
 msgid "Military science"
-msgstr "ကွန်ပျူတာသိပ္ပံ"
+msgstr "{{delete}}ကွန်ပျူတာသိပ္ပံ"
 
 #: model-gettext.py:103
 #, fuzzy
 msgid "Other Germanic languages"
-msgstr "စာပေ"
+msgstr "{{delete}}စာပေ"
 
 #: model-gettext.py:104
 msgid "Public performances"
@@ -1121,7 +1134,7 @@ msgstr ""
 #: model-gettext.py:108
 #, fuzzy
 msgid "Other Germanic literatures"
-msgstr "စာပေ"
+msgstr "{{delete}}စာပေ"
 
 #: model-gettext.py:109
 msgid "Germany & neighboring central European countries"
