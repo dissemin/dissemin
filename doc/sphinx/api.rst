@@ -27,9 +27,9 @@ Querying by Metadata Fields
 ---------------------------
 
 When the DOI or the Dissemin ID are not known, it is possible to retrieve a paper by title, authors and publication date.
-This is done by posting a JSON object encoding this metadata to https://dissem.in/api/query, as follows::
+This is done by posting a JSON object encoding this metadata to https://dissem.in/api/query/ , as follows::
 
-    curl -H "Content-Type: application/json" -d '{"title":"Refining the Conceptualization of an Important Future-Oriented Self-Regulatory Behavior: Proactive Coping", "date":"2009-07-01","authors":[{"first":"Stephanie Jean","last":"Sohl"},{"first":"Anne","last":"Moyer"}]}' https://dissem.in/api/query
+    curl -H "Content-Type: application/json" -d '{"title":"Refining the Conceptualization of an Important Future-Oriented Self-Regulatory Behavior: Proactive Coping", "date":"2009-07-01","authors":[{"first":"Stephanie Jean","last":"Sohl"},{"first":"Anne","last":"Moyer"}]}' https://dissem.in/api/query/
 
 The date field can contain coarser dates such as ``2009-07`` or ``2009``, and authors can also be specified
 as plain text with ``{"plain":"Anne Moyer"}`` instead of ``{"first":"Anne","last":"Moyer"}``.
