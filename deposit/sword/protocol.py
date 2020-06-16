@@ -134,7 +134,7 @@ class SWORDMETSProtocol(RepositoryProtocol):
 
         # Creation of dmdSec and insertion of metadata
         mets_dmdSec = etree.SubElement(mets_xml, METS + 'dmdSec', ID='d_dmd_1')
-        mets_mdWrap = etree.SubElement(mets_dmdSec, METS + 'mdWrap', MDTYPE='OTHER')
+        mets_mdWrap = etree.SubElement(mets_dmdSec, METS + 'mdWrap', MDTYPE='OTHER', OTHERMDTYPE='DSMODS')
         mets_xmlData = etree.SubElement(mets_mdWrap, METS + 'xmlData')
         mets_xmlData.insert(0, metadata)
 
@@ -147,7 +147,7 @@ class SWORDMETSProtocol(RepositoryProtocol):
 
         # Creation of fileSec
         mets_fileSec = etree.SubElement(mets_xml, METS + 'fileSec')
-        mets_fileGrp = etree.SubElement(mets_fileSec, METS + 'fileGrp')
+        mets_fileGrp = etree.SubElement(mets_fileSec, METS + 'fileGrp', USE='CONTENT')
         mets_file = etree.SubElement(mets_fileGrp, METS + 'file', ID='d_file_1')
         mets_FLocat = etree.SubElement(mets_file, METS + 'FLocat')
         mets_FLocat.set(XLINK + 'href', 'document.pdf')

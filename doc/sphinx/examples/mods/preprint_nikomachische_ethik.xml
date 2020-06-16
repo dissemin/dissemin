@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='utf-8'?>
-<mets:mets xmlns:mets="http://www.loc.gov/METS/" xmlns:ds="https://dissem.in/deposit/terms/" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mods="http://www.loc.gov/mods/v3">
+<mets:mets xmlns:atom="http://www.w3.org/2005/Atom" xmlns:ds="https://dissem.in/deposit/terms/" xmlns:mets="http://www.loc.gov/METS/" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mods="http://www.loc.gov/mods/v3">
   <mets:metsHdr>
     <mets:agent ROLE="CREATOR" TYPE="ORGANIZATION">
       <mets:name>Dissemin</mets:name>
     </mets:agent>
   </mets:metsHdr>
   <mets:dmdSec ID="d_dmd_1">
-    <mets:mdWrap MDTYPE="OTHER">
+    <mets:mdWrap MDTYPE="OTHER" OTHERMDTYPE="DSMODS">
       <mets:xmlData>
         <mods:mods version="3.7">
           <mods:abstract>Beschreibt die Art und Weise zu leben</mods:abstract>
@@ -53,7 +53,7 @@
     </mets:rightsMD>
   </mets:amdSec>
   <mets:fileSec>
-    <mets:fileGrp>
+    <mets:fileGrp USE="CONTENT">
       <mets:file ID="d_file_1">
         <mets:FLocat xlink:href="document.pdf" LOCTYPE="URL"/>
       </mets:file>
