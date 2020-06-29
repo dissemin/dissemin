@@ -7,6 +7,7 @@
 # Author: Movses
 # Author: Okras
 # Author: Smigles
+# Author: Teretalexev
 # Author: Vlad5250
 # Author: Wirbel78
 # --
@@ -15,14 +16,15 @@
 #
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-04-22 12:29+0200\n"
-"PO-Revision-Date: 2019-10-14 15:19:32+0000\n"
+"PO-Revision-Date: 2020-06-29 14:18:11+0000\n"
 "Language: ru\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2019-10-01 08:31:19+0000\n"
-"X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
+"X-POT-Import-Date: 2020-03-17 02:10:16+0000\n"
+"X-Generator: MediaWiki 1.35.0-alpha; Translate 2020-04-20\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11) ? 0 : ( (n%10 >= 2 && n%10 <= 4 && (n%100 < 10 || n%100 >= 20)) ? 1 : 2 );\n"
 
 #: website/static/js/dissemin.js:202
@@ -35,7 +37,7 @@ msgstr[2] "%s документов найдено"
 
 #: website/static/js/dissemin.js:291
 msgid "Claiming..."
-msgstr ""
+msgstr "Идёт утверждение..."
 
 #: website/static/js/dissemin.js:295
 msgid "Unclaiming..."
@@ -51,101 +53,62 @@ msgstr ""
 
 #: website/static/js/dissemin.js:319
 msgid "Exclude from my profile"
-msgstr ""
+msgstr "Исключить из моего профиля"
 
 #: website/static/js/dissemin.js:323
 msgid "Include in my profile"
-msgstr ""
+msgstr "Добавить в мой профиль"
 
 #: website/static/js/dissemin.js:348
-#, fuzzy
-#| msgid "Adding to todolist"
 msgid "Adding to to-do list"
-msgstr "Добавление в список работ"
+msgstr "Добавление в список дел"
 
 #: website/static/js/dissemin.js:352
-#, fuzzy
-#| msgid "Removing from todolist"
 msgid "Removing from to-do list"
-msgstr "Удаление из списка работ"
+msgstr "Удаление из списка дел"
 
 #: website/static/js/dissemin.js:598
 msgid "Preview of uploaded file"
-msgstr ""
+msgstr "Предварительный просмотр загруженного файла"
 
 #: website/static/js/dissemin.js:601
 msgid "Pages"
-msgstr ""
+msgstr "Страницы"
 
 #: website/static/js/dissemin.js:602
 msgid "Size"
-msgstr ""
+msgstr "Размер"
 
 #: website/static/js/dissemin.js:617
 msgid "While uploading %(file)s the following error occured:"
-msgstr ""
+msgstr "При загрузке %(file)s% произошла следующая ошибка:"
 
 #: website/static/js/dissemin.js:626 website/static/js/dissemin.js:681
 #: website/static/js/dissemin.js:687
 msgid "Unknown error"
-msgstr ""
+msgstr "Неизвестная ошибка"
 
 #: website/static/js/dissemin.js:671
 msgid "While fetching file from %(url)s the following error occured:"
-msgstr ""
+msgstr "При получении файла %(url)s произошла следующая ошибка:"
 
 #: website/static/js/dissemin.js:781
 msgid "Sorry, we could not fill this for you."
-msgstr ""
+msgstr "Простите, мы не смогли заполнить это для вас."
 
 #: website/static/js/dissemin.js:782
 msgid "Trying to fill this field automatically for you..."
-msgstr ""
+msgstr "Пытаемся заполнить это поле автоматически..."
 
 #: website/static/js/dissemin.js:816
 msgid "You have not selected a file for upload."
-msgstr ""
+msgstr "Вы не выбрали файл для загрузки."
 
 #: website/static/js/dissemin.js:843
 msgid "Dissemin encountered an error, please try again later."
-msgstr ""
+msgstr "Dissemin столкнулся с ошибкой, пожалуйста, повторите попытку позже."
 
 #: website/static/js/moment.min.js:1
 msgid ": "
-msgstr ""
+msgstr ": "
 
-#~ msgid "Do not show this message anymore"
-#~ msgstr "Больше не показывать это сообщение"
-
-#~ msgid "No author"
-#~ msgstr "Нет автора"
-
-#~ msgid "No title"
-#~ msgstr "Без названия"
-
-#~ msgid "Invalid publication date"
-#~ msgstr "Недействительная дата публикации"
-
-#~ msgid "No publication date"
-#~ msgstr "Отсутствует дата публикации"
-
-#~ msgid "Paper is invalid"
-#~ msgstr "Ошибочный документ"
-
-#~ msgid "We ignored %(count)s paper from your ORCiD profile."
-#~ msgid_plural "We ignored %(count)s papers from your ORCiD profile."
-#~ msgstr[0] "Мы проигнорировали %(count)s документ из вашего профиля ORCiD."
-#~ msgstr[1] "Мы проигнорировали %(count)s документа из вашего профиля ORCiD."
-#~ msgstr[2] "Мы проигнорировали %(count)s документов из вашего профиля ORCiD."
-
-#~ msgid "\"%(name)s\" was ignored for the following reason: %(reason)s"
-#~ msgstr "\"%(имя)ена\" был проигнорирован по следующей причине: %(причина)ы"
-
-#~ msgid "A paper was ignored, because it has no name"
-#~ msgstr "Документ был проигнорирован, поскольку он не имеет названия"
-
-#~ msgid "Show more information"
-#~ msgstr "Показать больше информации"
-
-#~ msgid "Show less information"
-#~ msgstr "Показать меньше информации"

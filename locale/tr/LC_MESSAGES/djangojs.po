@@ -13,7 +13,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-04-22 12:29+0200\n"
-"PO-Revision-Date: 2020-05-07 15:07:53+0000\n"
+"PO-Revision-Date: 2020-06-29 14:18:12+0000\n"
 "Language: tr\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -52,12 +52,10 @@ msgid "Include in my profile"
 msgstr "Profilime dahil tut"
 
 #: website/static/js/dissemin.js:348
-#, fuzzy
 msgid "Adding to to-do list"
 msgstr "Yapılacaklar listesine ekleniyor"
 
 #: website/static/js/dissemin.js:352
-#, fuzzy
 msgid "Removing from to-do list"
 msgstr "Yapılacaklar listesinden kaldırılıyor"
 
