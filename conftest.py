@@ -34,6 +34,7 @@ from papers.models import OaiSource
 from papers.models import Researcher
 from publishers.models import Journal
 from publishers.models import Publisher
+from upload.models import UploadedPDF
 
 
 @pytest.fixture
@@ -211,6 +212,19 @@ def dummy_repository(repository):
     Returns a dummy_repository with a faked dummy-protocol where you need only the repository, but do not anything with it. Use this if you need a single dummy repository.
     """
     return repository.dummy_repository()
+
+
+@pytest.fixture
+def uploaded_pdf(user_leibniz):
+    """
+    A simple uploaded pdf of user leibniz. The file does not exist.
+    """
+    pdf = UploadedPDF.objects.create(
+        user=user_leibniz,
+        file='uploaded_pdf.pdf',
+    )
+    return pdf
+
 
 @pytest.fixture
 def requests_mocker():
