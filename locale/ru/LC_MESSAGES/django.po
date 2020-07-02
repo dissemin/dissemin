@@ -18,7 +18,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2020-06-29 14:18:15+0000\n"
+"PO-Revision-Date: 2020-07-02 15:44:16+0000\n"
 "X-POT-Import-Date: 2020-04-23 07:09:36+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2527,25 +2527,25 @@ msgstr "Нажмите \"Log in\" в верхнем правом углу и п�
 
 #: website/templates/dissemin/faq.html:492
 msgid "Search for your publications, for instance by typing your name in CrossRef's search interface;"
-msgstr ""
+msgstr "Поиск ваших публикаций, например, путём ввода вашего имени в поисковый интерфейс CrossRef;"
 
 #: website/templates/dissemin/faq.html:497
 msgid "Add publications that are yours to your ORCID record by clicking \"Add to ORCID\"."
-msgstr ""
+msgstr "Добавьте публикации, которые принадлежат вам, в вашу запись ORCID, нажав \"Добавить в ORCID\"."
 
 #: website/templates/dissemin/faq.html:503
 msgid "You can also add publications to your profile <em>on Dissemin</em>, by clicking the button \"Include in my profile\" in search results on Dissemin. (This button is only visible when you are logged in, and next to papers that Dissemin thinks you have authored.) You can also exclude articles from your profile in this way. Please note that these changes are local to Dissemin and are <em>not</em> propagated to your ORCID profile, because ORCID does not have a free API allowing us to propagate them."
-msgstr ""
+msgstr "Вы также можете добавлять публикации в свой профиль <em>Dissemin</em>, нажав на кнопку \"Включить в профиль\" в результатах поиска на Dissemin. (Эта кнопка видна только в том случае, если Вы вошли в систему и только рядом с публикациями, автором которых, по мнению Dissemin, являетесь Вы). Таким же образом Вы можете исключить статьи из своего профиля. Пожалуйста, обратите внимание, что эти изменения локальны для Dissemin и <em>не</em> распространены на ваш профиль ORCID, потому что ORCID не имеет бесплатного API, позволяющего нам передать ему изменения."
 
 #: website/templates/dissemin/faq.html:512
 #, python-format
 msgid "If you change some details in your ORCID profile (name, homepage, etc.), the changes will not automatically be picked up in your profile on Dissemin. To update your profile on Dissemin accordingly, once you have logged in to Dissemin, you can go to your <a href=\"%(profile_url)s\">profile page</a> and click \"Refresh publications\"."
-msgstr ""
+msgstr "Если вы измените некоторые данные в вашем профиле ORCID (имя, домашнюю страницу и т.д.), изменения автоматически не будут отображаться в вашем профиле на Dissemin. Чтобы обновить свой профиль на Dissemin соответствующим образом, необходимо: войти в систему, можете перейти на вашу <a href=\"%(profile_url)s\">страницу профиля</a> и нажать кнопку \"Обновить публикации\"."
 
 #: website/templates/dissemin/faq.html:526
 #, python-format
 msgid "Our sources are listed on <a href=\"%(sources_url)s\">this page</a>."
-msgstr ""
+msgstr "Наши исходники перечислены на <a href=\"%(sources_url)s\">этой странице</a>."
 
 #: website/templates/dissemin/faq.html:533
 msgid "There are many ways to get involved:"
@@ -2553,39 +2553,39 @@ msgstr "Есть много способов принять участие:"
 
 #: website/templates/dissemin/faq.html:539
 msgid "Contribute to <a href=\"https://github.com/dissemin/dissemin\">the code</a>."
-msgstr ""
+msgstr "Сделайте вклад в <a href=\"https://github.com/dissemin/dissemin\">код</a>."
 
 #: website/templates/dissemin/faq.html:544
 msgid "Fix any of our listed <a href=\"https://github.com/dissemin/dissemin/issues\">issues</a>."
-msgstr ""
+msgstr "Исправьте любую проблему из наших списков <a href=\"https://github.com/dissemin/dissemin/issues\">заявок</a>."
 
 #: website/templates/dissemin/faq.html:549
 msgid "Help us <a href=\"https://translatewiki.net/wiki/Translating:Dissemin\">translate</a> the interface in your language."
-msgstr ""
+msgstr "Помогите нам <a href=\"https://translatewiki.net/wiki/Translating:Dissemin\">перевести</a> интерфейс на ваш язык."
 
 #: website/templates/dissemin/faq.html:554
 msgid "Encourage researchers to use this service."
-msgstr ""
+msgstr "Привлекайте исследователей пользоваться этим сервисом."
 
 #: website/templates/dissemin/faq.html:559
 msgid "Star <a href=\"https://github.com/dissemin/dissemin\">our GitHub project</a>!"
-msgstr ""
+msgstr "Отметьте звёздочкой <a href=\"https://github.com/dissemin/dissemin\">наш проект GitHub</a>!"
 
 #: website/templates/dissemin/faq.html:564
 msgid "<a href=\"https://association.dissem.in/#dons\">Donations are accepted</a>."
-msgstr ""
+msgstr "<a href=\"https://association.dissem.in/#dons\">Принимаются пожертвования</a>"
 
 #: website/templates/dissemin/faq.html:572
 msgid "The source code is available <a href=\"https://github.com/dissemin/dissemin\">on GitHub</a>."
-msgstr ""
+msgstr "Исходный код доступен <a href=\"https://github.com/dissemin/dissemin\">на GitHub</a>."
 
 #: website/templates/dissemin/faq.html:579
 msgid "Yes! We even have <a href=\"https://dissemin.readthedocs.io/en/latest/api.html\">an API</a>. If it does not suit your needs, please don't hesitate to get in touch by writing to <a href=\"mailto:hello@dissem.in\">hello@dissem.in</a>."
-msgstr ""
+msgstr "Да! У нас даже есть <a href=\"https://dissemin.readthedocs.io/en/latest/api.html\">API</a>. Если он не соответствует вашим потребностям, пожалуйста, не стесняйтесь связаться с нами, написав по адресу <a href=\"mailto:hello@dissem.in\">hello@dissem.in</a>."
 
 #: website/templates/dissemin/faq.html:586
 msgid "Yes! See <a href=\"https://association.dissem.in/#logos\">here</a> for links to our logos and for explanations about how you can reuse them."
-msgstr ""
+msgstr "Да! <a href=\"https://association.dissem.in/#logos\">Здесь</a> можно найти ссылки на наши логотипы и пояснения о том, как их можно использовать повторно."
 
 #: website/templates/dissemin/login.html:7
 #: website/templates/dissemin/login.html:11
@@ -2594,7 +2594,7 @@ msgstr "Войти"
 
 #: website/templates/dissemin/login.html:15
 msgid "Dissemin uses ORCID to authenticate its users. ORCID is an independent non-profit effort to provide an open registry of unique researcher identifiers. It also offers open services to link research activities and organizations to these identifiers. Learn more at <a href=\"https://orcid.org\" target=\"_blank\">orcid.org</a>."
-msgstr ""
+msgstr "Dissemin использует ORCID для аутентификации своих пользователей. ORCID - это независимая некоммерческая организация, предоставляющая открытый реестр уникальных идентификаторов исследователей. Он также предлагает открытые сервисы для связи исследовательской деятельности и организаций с этими идентификаторами. Узнайте больше на <a href=\"https://orcid.org\" target=\"_blank\">orcid.org</a>."
 
 #: website/templates/dissemin/login.html:28
 #: website/templates/dissemin/login.html:34
@@ -2603,7 +2603,7 @@ msgstr "Войти"
 
 #: website/templates/dissemin/login.html:30
 msgid "If you already have an ORCID account, you can use it with Dissemin. We will not make any changes to your profile."
-msgstr ""
+msgstr "Если у вас уже есть аккаунт ORCID, вы можете использовать его с Dissemin. Мы не будем делать никаких изменений в вашем профиле."
 
 #: website/templates/dissemin/login.html:39
 #: website/templates/dissemin/login.html:45
@@ -2612,39 +2612,39 @@ msgstr "Зарегистрироваться"
 
 #: website/templates/dissemin/login.html:41
 msgid "Not an ORCID user yet? Create an account, it is free and takes just a few seconds."
-msgstr ""
+msgstr "Еще не являетесь пользователем ORCID? Создайте аккаунт, это бесплатно и занимает всего несколько секунд."
 
 #: website/templates/dissemin/sources.html:5
 msgid "Data sources"
-msgstr ""
+msgstr "Источники данных"
 
 #: website/templates/dissemin/sources.html:10
 msgid "Data Sources"
-msgstr ""
+msgstr "Источники Данных"
 
 #: website/templates/dissemin/sources.html:14
 msgid "<a href=\"https://www.crossref.org\">CrossRef.org</a> for traditional academic papers"
-msgstr ""
+msgstr "<a href=\"https://www.crossref.org\">CrossRef.org</a> для традиционных научных статей."
 
 #: website/templates/dissemin/sources.html:17
 msgid "<a href=\"https://www.base-search.net\">BASE (Bielefeld Academic Search Engine)</a> for other papers, including preprints"
-msgstr ""
+msgstr "<a href=\"https://www.base-search.net\">BASE (Bielefeld Academic Search Engine)</a> для других статей, включая препринты"
 
 #: website/templates/dissemin/sources.html:20
 msgid "<a href=\"https://www.sherpa.ac.uk/romeo/\">SHERPA/RoMEO</a> for publisher policies"
-msgstr ""
+msgstr "<a href=\"https://www.sherpa.ac.uk/romeo/\">SHERPA/RoMEO</a> для политики издательств"
 
 #: website/templates/dissemin/sources.html:23
 msgid "<a href=\"https://www.zotero.org/\">Zotero</a> for metadata associated to DOIs"
-msgstr ""
+msgstr "<a href=\"https://www.zotero.org/\">Zotero</a> для метаданных, связанных с DOI"
 
 #: website/templates/dissemin/start_page.html:9
 msgid "Home"
-msgstr ""
+msgstr "Главная страница"
 
 #: website/templates/dissemin/start_page.html:19
 msgid "Welcome to Dissemin"
-msgstr ""
+msgstr "Добро пожаловать в Dissemin"
 
 #: website/templates/dissemin/start_page.html:20
 msgid "Dissemin detects papers behind paywalls and helps their authors to upload them in one click to an open repository."
@@ -2692,7 +2692,7 @@ msgstr "Исследователи используют Dissemin, чтобы о�
 #: website/templates/dissemin/start_page.html:84
 #, python-format
 msgid "Published in %(repo)s on %(pub_date)s"
-msgstr ""
+msgstr "Опубликовано %(pub_date)s в %(repo)s"
 
 #: website/templates/dissemin/start_page.html:101
 msgid "Access statistics"
@@ -2717,7 +2717,7 @@ msgstr "Вы можете адресовать рекламу Dissemin свои�
 
 #: website/templates/dissemin/start_page.html:139
 msgid "Network of Partners"
-msgstr ""
+msgstr "Сеть партнёров"
 
 #: website/templates/dissemin/start_page.html:142
 msgid "Partners"
@@ -2734,15 +2734,15 @@ msgstr "Правила использования"
 
 #: website/templates/dissemin/tos.html:18
 msgid "In short"
-msgstr ""
+msgstr "Одним словом"
 
 #: website/templates/dissemin/tos.html:21
 msgid "Scope of the service"
-msgstr ""
+msgstr "Цель сервиса"
 
 #: website/templates/dissemin/tos.html:23
 msgid "This platform offers an analysis of the accessibility of scholarly publications. It can also deposit publications on behalf of their authors in repositories. The accessibility and self-archiving policies of the papers on this platform can be incorrect and should not be relied upon for legal advice. When in doubt, users are advised to check from authoritative sources."
-msgstr ""
+msgstr "Эта платформа предлагает анализ доступности научных публикаций. Она также может вносить публикации от имени их авторов в репозитории. Политика доступности и самоархивации статей на этой платформе может быть неверной и на нее не следует полагаться при получении юридических консультаций. В случае сомнений пользователям рекомендуется обращаться к авторитетным источникам."
 
 #: website/templates/dissemin/tos.html:28
 msgid "Privacy"
@@ -2750,19 +2750,19 @@ msgstr "Конфиденциальность"
 
 #: website/templates/dissemin/tos.html:30
 msgid "The platform does not include any analytics, advertisement or tracking services. We are however using the <a href=\"https://sentry.io/privacy/\">Sentry service</a> for error tracking on this platform. Our webserver configuration stores basic access information (URL requested and IP address) for error monitoring, which are kept for fourteen days. Authenticated users are logged-in via ORCID, a third-party service. The platform has no access to the private information they provide to ORCID. In particular, we do not store any ORCID passwords, and we do not have access to email addresses that are marked as private in the ORCID record. We need to set cookies to authenticate our users, therefore by logging in on this platform, users accept these cookies."
-msgstr ""
+msgstr "Платформа не включает в себя никаких аналитических, рекламных или отслеживающих сервисов. Тем не менее, мы используем <a href=\"https://sentry.io/privacy/\">Sentry service</a> для отслеживания ошибок на этой платформе. Наша конфигурация веб-сервера хранит основную информацию о доступе (запрашиваемый URL и IP-адрес) для отслеживания ошибок, которые хранятся в течение четырнадцати дней. Аутентифицированные пользователи авторизуются через ORCID, сторонний сервис. Платформа не имеет доступа к частной информации, которую они предоставляют ORCID. В частности, мы не храним никаких паролей ORCID, и у нас нет доступа к электронным адресам, которые помечены как приватные в записи ORCID. Мы используем куки для аутентификации наших пользователей, поэтому, войдя на эту платформу, пользователи одобряют использование этих куки."
 
 #: website/templates/dissemin/tos.html:42
 msgid "Deposits through Dissemin"
-msgstr ""
+msgstr "Внесено через Dissemin"
 
 #: website/templates/dissemin/tos.html:44
 msgid "The platform can perform mandated publication deposit to repositories. Users are only allowed to upload papers that they have authored themselves, or papers whose authors have consented to the deposit. In addition to these terms of service, users are required to abide by the policies of these repositories."
-msgstr ""
+msgstr "Платформа может выполнять внесение публикаций в репозитории от имени пользователя. Пользователям разрешается загружать только те работы, авторами которых они сами являются, или работы, авторы которых дали согласие на внесение их работ в репозиторий. В дополнение к этим правилам пользователи обязаны соблюдать политику этих репозиториев."
 
 #: website/templates/dissemin/tos.html:51
 msgid "Please address any inquiry to <a href=\"mailto:support@dissem.in\">support@dissem.in</a>."
-msgstr ""
+msgstr "Пожалуйста, направляйте любые вопросы по адресу <a href=\"mailto:support@dissem.in\">support@dissem.in</a>."
 
 #: website/templates/dissemin/tos.html:60
 msgid "In full"
@@ -2774,31 +2774,31 @@ msgstr "Личные данные"
 
 #: website/templates/dissemin/tos.html:65
 msgid "Dissemin uses ORCID's public OAuth interface to authenticate its users. This interface only transmits information marked as public in the user's ORCID profile. This means that ORCID passwords are never transmitted and email addresses are not transmitted when they are marked as private, which is the default setting. When logging in to Dissemin from ORCID, Dissemin acquires the user's ORCID id, as well as all public information attached to the ORCID record. We are using the <a href=\"https://sentry.io/privacy/\">Sentry service</a> for error tracking on this platform. Our webserver configuration stores basic access information (URL requested and IP address) for error monitoring, which are kept for fourteen days. Dissemin can store any information input by its users on the platform. Users can ask for a copy of the personal information Dissemin stores about them by writing an email to <a href=\"mailto:support@dissem.in\">support@dissem.in</a>."
-msgstr ""
+msgstr "Dissemin использует публичный интерфейс ORCID OAuth для аутентификации своих пользователей. Этот интерфейс передаёт только информацию, помеченную как публичная в профиле ORCID пользователя. Это означает, что пароли ORCID никогда не передаются, а адреса электронной почты не передаются, если они помечены как приватные, что является настройкой по умолчанию. При входе в систему с ORCID, Dissemin получает идентификатор ORCID пользователя, а также всю публичную информацию, прикрепленную к записи ORCID. Мы используем <a href=\"https://sentry.io/privacy/\">Sentry service</a> для отслеживания ошибок на этой платформе. Наша конфигурация веб-сервера хранит основную информацию о доступе (запрашиваемый URL и IP-адрес) для отслеживания ошибок, которые хранятся в течение четырнадцати дней. Dissemin может хранить любую информацию, введенную пользователями на платформе. Пользователи могут запросить копию личной информации, которую Dissemin хранит о них, написав письмо по адресу <a href=\"mailto:support@dissem.in\">support@dissem.in</a>."
 
 #: website/templates/dissemin/tos.html:76
 msgid "Full text storage"
-msgstr ""
+msgstr "Хранение полного текста"
 
 #: website/templates/dissemin/tos.html:78
 msgid "Documents deposited in repositories via Dissemin can be stored on the platform, but are not available for download on the platform. They can be stored internally for logging purposes, and to make sure failed deposits can be fixed later. Dissemin does not commit to store any of the files it receives from its users. Users can write to <a href=\"mailto:support@dissem.in\">support@dissem.in</a> if they want one of their uploads to be deleted from our internal storage space, or from the repository they have deposited to. Note that deletion policies vary accross repositories: we provide no guarantee that deposits can be deleted from the target repositories."
-msgstr ""
+msgstr "Документы, внесённые в репозитории через Dissemin, могут храниться на платформе, но не доступны для скачивания. Они могут храниться во внутренних хранилищах в целях ведения логов, а также для того, чтобы убедиться, что неудачные попытки внести работу могут быть исправлены позже. Dissemin не берет на себя обязательство хранить любые файлы, которые она получает от своих пользователей. Пользователи могут написать по адресу <a href=\"mailto:support@dissem.in\">support@dissem.in</a>, если они хотят, чтобы одна из их загрузок была удалена из нашего внутреннего хранилища или из репозитория, в которое они её внесли. Обратите внимание, что политики удаления различаются в разных репозиториях: мы не гарантируем, что внесённые работы могут быть удалены из целевых репозиториев."
 
 #: website/templates/dissemin/tos.html:85
 msgid "Reporting misuse"
-msgstr ""
+msgstr "Сообщение о неправомерном использовании"
 
 #: website/templates/dissemin/tos.html:87
 msgid "Misuse can be reported to <a href=\"mailto:support@dissem.in\">support@dissem.in</a>."
-msgstr ""
+msgstr "О неправильном использовании можно сообщить по адресу <a href=\"mailto:support@dissem.in\">support@dissem.in</a>."
 
 #: website/templates/dissemin/tos.html:95
 msgid "The <a href=\"https://dissem.in\">dissem.in</a> website has been registered with <a href=\"https://www.cnil.fr/\">CNIL</a> under declaration n°1895382 v0."
-msgstr ""
+msgstr "Веб-сайт <a href=\"https://dissem.in\">dissem.in</a> был зарегистрирован с <a href=\"https://www.cnil.fr/\">CNIL</a> по декларации n°1895382 v0."
 
 #: website/templates/dissemin/tos.html:101
 msgid "You have the right to access, modify, and delete the personal information that we hold about you. To exercise this right, please contact us at <a href=\"mailto:support@dissem.in\">support@dissem.in</a>, or by postal mail at the following addresss:"
-msgstr ""
+msgstr "Вы имеете право на доступ, изменение и удаление личной информации о вас, которой мы обладаем. Чтобы воспользоваться этим правом, свяжитесь с нами по адресу <a href=\"mailto:support@dissem.in\">support@dissem.in</a> или по почте по следующим адресам:"
 
 #: website/templates/footer.html:7
 msgid "FAQ"
@@ -2822,11 +2822,11 @@ msgstr "Блог"
 
 #: website/templates/navbar.html:6
 msgid "Logo"
-msgstr ""
+msgstr "Логотип"
 
 #: website/templates/navbar.html:24
 msgid "Translate"
-msgstr ""
+msgstr "Перевод"
 
 #: website/templates/navbar.html:34
 msgid "My profile"
@@ -2834,7 +2834,7 @@ msgstr "Мой профиль"
 
 #: website/templates/navbar.html:35
 msgid "My to-do list"
-msgstr ""
+msgstr "Мои список дел"
 
 #: website/templates/navbar.html:36
 msgid "Logout"
@@ -2852,5 +2852,5 @@ msgstr "Ошибка аутентификации"
 #: website/templates/socialaccount/authentication_error.html:15
 #, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
-msgstr ""
+msgstr "Аутентификация не прошла. <a href=\"%(account-login)s\">Вернуться на страницу входа.</a>."
 
