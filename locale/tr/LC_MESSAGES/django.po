@@ -17,7 +17,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-04-23 08:11+0200\n"
-"PO-Revision-Date: 2020-06-29 14:18:16+0000\n"
+"PO-Revision-Date: 2020-07-14 08:15:02+0000\n"
 "Language: tr\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1913,7 +1913,7 @@ msgstr "İzin verildi"
 
 #: publishers/models.py:56
 msgid "Forbidden"
-msgstr "Yasaklandı"
+msgstr "Yasak"
 
 #: publishers/models.py:57
 msgid "Restricted"
