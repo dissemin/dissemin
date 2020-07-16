@@ -735,13 +735,16 @@ class LoadOaiSource():
 
 
 # Fixtures and Functions for load_test_data, which should prefereably not be used as it loads a lot of things
-def get_researcher_by_name(first, last):
-    n = Name.lookup_name((first, last))
-    return Researcher.objects.get(name=n)
+@pytest.fixture(scope="class")
+def get_researcher_by_name():
+    def func(first, last):
+        n = Name.lookup_name((first, last))
+        return Researcher.objects.get(name=n)
+    return func
 
 
 @pytest.fixture
-def load_test_data(request, db):
+def load_test_data(request, db, get_researcher_by_name):
     call_command('loaddata', 'test_dump.json')
     self = request.cls
     self.i = Institution.objects.get(name='ENS')
@@ -757,7 +760,6 @@ def load_test_data(request, db):
     self.arxiv = OaiSource.objects.get(identifier='arxiv')
     self.lncs = Journal.objects.get(issn='0302-9743')
     self.acm = Journal.objects.get(issn='1529-3785').publisher
-
 
 @pytest.fixture
 def rebuild_index(request):
