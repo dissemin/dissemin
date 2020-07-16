@@ -1,5 +1,6 @@
 import os
 import pytest
+import xmlschema
 
 from lxml import etree
 
@@ -38,21 +39,18 @@ def metadata_xml_mets():
 
 
 @pytest.fixture(scope='session')
-def mets_xsd():
-    """
-    Returns a mets xsd as schema ready to validate
-    """
-    return etree.XMLSchema(etree.parse("http://www.loc.gov/standards/mets/version112/mets.xsd"))
+def validate_mets():
+    schema = xmlschema.XMLSchema('https://www.loc.gov/standards/mets/version112/mets.xsd')
+    def validator(xml):
+        schema.validate(xml)
+    return validator
 
-
-@pytest.fixture(scope="class")
-def mods_3_7_xsd():
-    '''
-    Loads mods 3.7 xsd and prepares it as schema ready for validation.
-    '''
-
-    mods_xsd = etree.parse("http://www.loc.gov/standards/mods/v3/mods-3-7.xsd")
-    return etree.XMLSchema(mods_xsd)
+@pytest.fixture(scope="session")
+def validate_mods_3_7():
+    schema = xmlschema.XMLSchema('https://www.loc.gov/standards/mods/mods-3-7.xsd')
+    def validator(xml):
+        schema.validate(xml)
+    return validator
 
 
 @pytest.fixture

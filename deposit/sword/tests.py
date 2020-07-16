@@ -223,16 +223,16 @@ class MetaTestSWORDMETSProtocol(MetaTestProtocol):
         assert initial.get('paper_id') == book_god_of_the_labyrinth.pk
         assert initial.get('email', None) == email
 
-    def test_get_mets(self, mets_xsd, metadata_xml_dc, dissemin_xml_1_0):
+    def test_get_mets(self, validate_mets, metadata_xml_dc, dissemin_xml_1_0):
         """
         A test for creating mets from metadata
         """
         mets_xml = self.protocol._get_mets(metadata_xml_dc, dissemin_xml_1_0)
         # Because of the xml declaration we have to convert to a bytes object
-        mets_xsd.assertValid(etree.fromstring(bytes(mets_xml, encoding='utf-8')))
+        validate_mets(etree.fromstring(bytes(mets_xml, encoding='utf-8')))
 
 
-    def test_get_mets_integration(self, mets_xsd, depositing_user, upload_data, ddc, license_chooser, abstract_required, embargo):
+    def test_get_mets_integration(self, validate_mets, depositing_user, upload_data, ddc, license_chooser, abstract_required, embargo):
         """
         Integration test running all possible metadata cases and validating against mets schema
         """
@@ -271,7 +271,7 @@ class MetaTestSWORDMETSProtocol(MetaTestProtocol):
         mets_xml = self.protocol._get_mets(metadata_xml, dissemin_xml)
         
         # Because of the xml declaration we have to convert to a bytes object
-        mets_xsd.assertValid(etree.fromstring(bytes(mets_xml, encoding='utf-8')))
+        validate_mets(etree.fromstring(bytes(mets_xml, encoding='utf-8')))
 
 
     def test_get_mets_container(self, blank_pdf_path, metadata_xml_mets):
@@ -565,7 +565,7 @@ class TestSWORDSMETSMODSProtocol(MetaTestSWORDMETSProtocol):
         assert self.protocol.__str__() == "SWORD Protocol (MODS)"
 
 
-    def test_get_xml_metadata(self, mods_3_7_xsd, ddc, abstract_required, upload_data):
+    def test_get_xml_metadata(self, validate_mods_3_7, ddc, abstract_required, upload_data):
         """
         Validates against mods 3.7 schema
         """
@@ -586,8 +586,7 @@ class TestSWORDSMETSMODSProtocol(MetaTestSWORDMETSProtocol):
 
         xml = self.protocol._get_xml_metadata(form)
         
-        # When using pytest -s, show resulting xml
         print("")
         print(etree.tostring(xml, pretty_print=True, encoding='utf-8', xml_declaration=True).decode())
 
-        mods_3_7_xsd.assertValid(xml)
+        validate_mods_3_7(xml)
