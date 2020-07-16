@@ -21,7 +21,7 @@ Install Packages and Create Virtualenv
 
 First, install the following dependencies (debian packages)::
     
-    *postgresql postgresql-server-dev-all postgresql-client python3-venv build-essential libxml2-dev libxslt1-dev python3-dev gettext libjpeg-dev libffi-dev libmagickwand-dev*
+    *postgresql postgresql-server-dev-all postgresql-client python3-venv build-essential libxml2-dev libxslt1-dev python3-dev gettext libjpeg-dev libffi-dev libmagickwand-dev gdal-bin*
 
 Make also sure to have ``pdftk`` installed.
 

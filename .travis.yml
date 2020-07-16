@@ -17,11 +17,12 @@ addons:
     postgresql: "9.4"
     apt:
        packages:
-       - openjdk-8-jre
        - curl
+       - gdal-bin
+       - ghostscript
        - libffi-dev
        - libssl-dev
-       - ghostscript
+       - openjdk-8-jre
     snaps:
       - pdftk
 
