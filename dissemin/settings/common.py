@@ -302,7 +302,7 @@ BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 43200}
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 LANGUAGE_CODE = 'en-us'
-POSSIBLE_LANGUAGE_CODES = ['ar', 'de', 'en', 'es', 'fi', 'fr', 'hi', 'ko', 'mk', 'nl', 'pms', 'pt', 'pt-br', 'sv', 'tr', 'zh-hans', 'zh-hant']
+POSSIBLE_LANGUAGE_CODES = ['ar', 'de', 'en', 'es', 'fi', 'fr', 'hi', 'ko', 'mk', 'nl', 'pms', 'pt', 'pt-br', 'ru', 'sv', 'tr', 'zh-hans', 'zh-hant']
 LANGUAGES = [
     ('ar', _('Arabic')),
     ('de', _('German')),
@@ -314,6 +314,7 @@ LANGUAGES = [
     ('mk', _('Macedonian')),
     ('pt', _('European Portuguese')),
     ('pt-br', _('Brazilian Portuguese')),
+    ('ru', _('Russian')),
     ('sv', _('Swedish')),
     ('tr', _('Turkish')),
     ('zh-hans', _('Simplified Chinese')),
