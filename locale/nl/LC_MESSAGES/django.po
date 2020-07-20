@@ -2,6 +2,7 @@
 # Exported from translatewiki.net
 #
 # Author: Abijeet Patro
+# Author: BaRaN6161 TURK
 # Author: Bdijkstra
 # Author: Becks
 # Author: Duckson32
@@ -18,28 +19,25 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-04-23 08:11+0200\n"
-"PO-Revision-Date: 2020-05-07 15:07:56+0000\n"
+"PO-Revision-Date: 2020-07-20 17:44:50+0000\n"
 "Language: nl\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-POT-Import-Date: 2020-04-23 07:09:36+0000\n"
-"X-Generator: MediaWiki 1.35.0-alpha; Translate 2020-04-20\n"
+"X-Generator: MediaWiki 1.36.0-alpha; Translate 2020-04-20\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: autocomplete/views.py:81
-#, fuzzy
 msgid "Current institutions"
-msgstr "Instellingen"
+msgstr "Huidige instellingen"
 
 #: autocomplete/views.py:85
-#, fuzzy
 msgid "Unverified institutions"
-msgstr "Instellingen"
+msgstr "Niet-geverifieerde instellingen"
 
 #: autocomplete/views.py:89
-#, fuzzy
 msgid "Obsolete institutions"
-msgstr "Instellingen"
+msgstr "Verouderde instellingen"
 
 #: deposit/forms.py:88
 msgid "Upload type"
@@ -507,9 +505,8 @@ msgid "PDF URL"
 msgstr "URL naar pdf"
 
 #: deposit/templates/deposit/deposits.html:134
-#, fuzzy
 msgid "Status:"
-msgstr "Status"
+msgstr "Status:"
 
 #: deposit/templates/deposit/deposits.html:145
 msgid "Letter of Declaration"
@@ -548,9 +545,9 @@ msgid "Depositing"
 msgstr "Overboeken"
 
 #: deposit/templates/deposit/start.html:64
-#, fuzzy, python-format
+#, python-format
 msgid "You can deposit the full text of your article. Dissemin will send it to a repository where it will be made freely available. By depositing your article via Dissemin, you agree to our <a href=\"%(tosurl)s\">terms of service</a>."
-msgstr "\n            Je kunt het artikel met volledige inhoud overboeken. Dissemin verzendt het artikel naar een opslagplaats en maakt 'm kosteloos beschikbaar.\n            Door je artikel via Dissemin over te boeken,\n            ga je akkoord met onze <a href=\"%(tosurl)s\">dienstvoorwaarden</a>.\n        "
+msgstr "U kunt de volledige tekst van uw artikel deponeren. Dissemin stuurt het naar een repository waar het gratis beschikbaar wordt gemaakt. Door uw artikel via Dissemin te deponeren, gaat u akkoord met onze <a href=\"%(tosurl)s\">servicevoorwaarden</a>."
 
 #: deposit/templates/deposit/start.html:72
 #, fuzzy
@@ -601,9 +598,8 @@ msgid "Repository:"
 msgstr "Opslagplaats:"
 
 #: deposit/templates/deposit/start.html:210
-#, fuzzy
 msgid "Metadata:"
-msgstr "Metagegevens"
+msgstr "Metadata:"
 
 #: deposit/templates/deposit/start.html:235
 #: papers/templates/papers/search_base.html:165
@@ -615,9 +611,8 @@ msgid "Submitting paper to repository"
 msgstr ""
 
 #: deposit/views.py:79
-#, fuzzy
 msgid "This repository is currently not enabled."
-msgstr "Kan deze opslagplaats niet vinden."
+msgstr "Deze repository is momenteel niet ingeschakeld."
 
 #: deposit/views.py:85
 msgid "This repository is not available for this paper."
@@ -648,9 +643,8 @@ msgid "No pdf found for dr {}"
 msgstr ""
 
 #: deposit/zenodo/protocol.py:87
-#, fuzzy
 msgid "This document is already in Zenodo. Zenodo refused the deposit."
-msgstr "Dit document bestaat al in HAL. HAL heeft de overboeking geweigerd."
+msgstr "Dit document staat al in Zenodo. Zenodo weigerde de aanbetaling."
 
 #: deposit/zenodo/protocol.py:120
 msgid "No Zenodo API key provided."
@@ -741,18 +735,16 @@ msgid "Traditional Chinese"
 msgstr "Traditioneel Chinees"
 
 #: model-gettext.py:2
-#, fuzzy
 msgid "Computer science, knowledge & systems"
-msgstr "Informatica"
+msgstr "Informatica, kennis en systemen"
 
 #: model-gettext.py:3
 msgid "Bibliographies"
 msgstr "Bibliografieën"
 
 #: model-gettext.py:4
-#, fuzzy
 msgid "Library & information sciences"
-msgstr "Bibliotheek en informatiekunde"
+msgstr "Bibliotheek en informatiewetenschappen"
 
 #: model-gettext.py:5
 msgid "Encyclopedias & books of facts"
@@ -771,18 +763,16 @@ msgid "News media, journalism & publishing"
 msgstr ""
 
 #: model-gettext.py:9
-#, fuzzy
 msgid "Quotations"
-msgstr "Publicaties"
+msgstr "Citaten"
 
 #: model-gettext.py:10
 msgid "Manuscripts & rare books"
 msgstr "Manuscripten en zeldzame boeken"
 
 #: model-gettext.py:12
-#, fuzzy
 msgid "Metaphysics"
-msgstr "Natuurkunde"
+msgstr "Metafysica"
 
 #: model-gettext.py:13
 #, fuzzy
@@ -799,9 +789,8 @@ msgid "Philosophical schools of thought"
 msgstr "Wijsbegeerte"
 
 #: model-gettext.py:17
-#, fuzzy
 msgid "Philosophical logic"
-msgstr "Wijsbegeerte"
+msgstr "Filosofische logica"
 
 #: model-gettext.py:18
 msgid "Ethics"
@@ -817,7 +806,6 @@ msgid "Modern western philosophy"
 msgstr "Moderne westerse filosofie"
 
 #: model-gettext.py:21
-#, fuzzy
 msgid "Religion"
 msgstr "Godsdienst"
 
@@ -855,14 +843,12 @@ msgid "Christian denominations"
 msgstr "Christelijke stromingen"
 
 #: model-gettext.py:30
-#, fuzzy
 msgid "Other religions"
-msgstr "Godsdienst"
+msgstr "Andere religies"
 
 #: model-gettext.py:31
-#, fuzzy
 msgid "Social sciences, sociology & anthropology"
-msgstr "Maatschappelijke antropologie en etnologie"
+msgstr "Sociale wetenschappen, sociologie en antropologie"
 
 #: model-gettext.py:34
 msgid "Economics"
@@ -885,9 +871,8 @@ msgid "Customs, etiquette & folklore"
 msgstr ""
 
 #: model-gettext.py:41 website/templates/navbar.html:15
-#, fuzzy
 msgid "Language"
-msgstr "Taal wijzigen"
+msgstr "Taal"
 
 #: model-gettext.py:43
 msgid "English & Old English languages"
@@ -925,9 +910,8 @@ msgid "Other languages"
 msgstr "Andere talen"
 
 #: model-gettext.py:51
-#, fuzzy
 msgid "Science"
-msgstr "Levenswetenschappen"
+msgstr "Wetenschap"
 
 #: model-gettext.py:53
 msgid "Astronomy"
@@ -942,9 +926,8 @@ msgid "Fossils & prehistoric life"
 msgstr "Fossielen en prehistorisch leven"
 
 #: model-gettext.py:58
-#, fuzzy
 msgid "Biology"
-msgstr "Omgangskunde"
+msgstr "Biologie"
 
 #: model-gettext.py:59
 msgid "Plants (Botany)"
@@ -955,28 +938,24 @@ msgid "Animals (Zoology)"
 msgstr ""
 
 #: model-gettext.py:61
-#, fuzzy
 msgid "Technology"
-msgstr "Psychologie"
+msgstr "Technologie"
 
 #: model-gettext.py:62
-#, fuzzy
 msgid "Medicine & health"
-msgstr "Geneeskunde en gezondheidswetenschappen"
+msgstr "Geneeskunde en gezondheid"
 
 #: model-gettext.py:64
-#, fuzzy
 msgid "Agriculture"
-msgstr "Bouwkunde"
+msgstr "Landbouw"
 
 #: model-gettext.py:65
 msgid "Home & family management"
 msgstr ""
 
 #: model-gettext.py:66
-#, fuzzy
 msgid "Management & public relations"
-msgstr "Publicaties vernieuwen"
+msgstr "Beheer en publieke relaties"
 
 #: model-gettext.py:67
 msgid "Chemical engineering"
@@ -1070,14 +1049,12 @@ msgid "Classical & modern Greek literatures"
 msgstr ""
 
 #: model-gettext.py:90
-#, fuzzy
 msgid "Other literatures"
-msgstr "Letterkunde"
+msgstr "Andere literatuur"
 
 #: model-gettext.py:92
-#, fuzzy
 msgid "Geography & travel"
-msgstr "Aardrijkskunde"
+msgstr "Geografie en reizen"
 
 #: model-gettext.py:93
 #, fuzzy
@@ -1176,29 +1153,24 @@ msgid "Download contract"
 msgstr "Ophalen"
 
 #: model-gettext.py:115
-#, fuzzy
 msgid "Creative Commons 1.0 Universal (CC0 1.0) Public Domain Dedication"
-msgstr "Creative Commons CC0 1.0 Universeel"
+msgstr "Creative Commons CC0 1.0 Universeel (CC0 1.0) Toewijding in het Publieke Domein"
 
 #: model-gettext.py:116
-#, fuzzy
 msgid "Creative Commons Attribution 4.0 International (CC BY 4.0)"
-msgstr "Creative Commons CC-By Attribution 4.0 Internationaal (CC BY 4.0)"
+msgstr "Creative Commons Naamsvermelding 4.0 Internationaal (CC BY 4.0)"
 
 #: model-gettext.py:117
-#, fuzzy
 msgid "Creative Commons Attribution-ShareAlike 4.0, International (CC BY-SA 4.0)"
-msgstr "Creative Commons CC-By Attribution 4.0 Internationaal (CC BY 4.0)"
+msgstr "Creative Commons Naamsvermelding-Gelijk 4.0 Internationaal (CC BY 4.0)"
 
 #: model-gettext.py:118
-#, fuzzy
 msgid "Creative Commons Attribution-NonCommerical 4.0 International (CC BY-NC 4.0)"
-msgstr "Creative Commons CC-By Attribution 4.0 Internationaal (CC BY 4.0)"
+msgstr "Creative Commons Naamsvermelding-niet-commercieel 4.0 Internationaal (CC BY 4.0)"
 
 #: model-gettext.py:119
-#, fuzzy
 msgid "Creative Commons Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0)"
-msgstr "Creative Commons CC-By Attribution 4.0 Internationaal (CC BY 4.0)"
+msgstr "Creative Commons Naamsvermelding-geenafgeleiden 4.0 Internationaal (CC BY 4.0)"
 
 #: model-gettext.py:120
 msgid "Free for private use; right holder retains other rights, including distribution"
@@ -1520,21 +1492,21 @@ msgid "A paper was ignored, because is has no title."
 msgstr ""
 
 #: papers/templates/papers/paper.html:40
-#, fuzzy, python-format
+#, python-format
 msgctxt "as in: _Journal article published in 2017 by_ Tom Smith, Nicole Allen"
 msgid "%(doctype)s published in %(year)s by"
-msgstr "Gepubliceerd op"
+msgstr "%(doctype)s gepubliceerd in %(year)s door"
 
 #: papers/templates/papers/paper.html:46
-#, fuzzy, python-format
+#, python-format
 msgctxt "as in: _Published in 2017 by_ Tom Smith, Nicole Allen"
 msgid "Published in %(year)s by"
-msgstr "Gepubliceerd op"
+msgstr "Gepubliceerd in %(year)s door"
 
 #: papers/templates/papers/paper.html:56
-#, fuzzy, python-format
+#, python-format
 msgid "and <a href=\"#\" id=\"showAllAuthors\">%(nb_remaining_authors)s other authors.</a>"
-msgstr "\n            en <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s andere auteurs</a>\n            "
+msgstr "en <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s andere auteurs.</a>"
 
 #: papers/templates/papers/paper.html:62
 msgid "Show less"
@@ -1658,9 +1630,8 @@ msgid "Contact the authors to make this publication freely available. This is a 
 msgstr ""
 
 #: papers/templates/papers/policies.html:89
-#, fuzzy
 msgid "Contact authors"
-msgstr "Op auteurs"
+msgstr "Neem contact op met auteurs"
 
 #: papers/templates/papers/policies.html:92
 #: website/templates/dissemin/tos.html:49
@@ -1677,7 +1648,6 @@ msgid " %(first_name)s %(last_name)s uses ORCID."
 msgstr ""
 
 #: papers/templates/papers/researcher.html:38
-#, fuzzy
 msgid "Refresh Publications"
 msgstr "Publicaties vernieuwen"
 
@@ -1686,9 +1656,9 @@ msgid "Address:"
 msgstr "Adres:"
 
 #: papers/templates/papers/researcher.html:51
-#, fuzzy, python-format
+#, python-format
 msgid "Missing publications? <a href=\"%(matching_papers_url)s\">Search for publications with a matching author name.</a>"
-msgstr "Ontbreken er publicaties? <a href=\"%(matching_papers_url)s\">Naar publicaties met een overeenkomende auteursnaam zoeken</a>"
+msgstr "Ontbreken er publicaties? <a href=\"%(matching_papers_url)s\">Naar publicaties met een overeenkomende auteursnaam zoeken.</a>"
 
 #: papers/templates/papers/search.html:10
 #, python-format

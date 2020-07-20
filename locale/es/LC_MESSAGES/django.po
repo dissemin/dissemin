@@ -2,6 +2,7 @@
 # Exported from translatewiki.net
 #
 # Author: Abijeet Patro
+# Author: BaRaN6161 TURK
 # Author: Becks
 # Author: Fitoschido
 # Author: Harvest
@@ -21,12 +22,12 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-04-23 08:11+0200\n"
-"PO-Revision-Date: 2020-05-07 15:07:54+0000\n"
+"PO-Revision-Date: 2020-07-20 17:44:48+0000\n"
 "Language: es\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-POT-Import-Date: 2020-04-23 07:09:36+0000\n"
-"X-Generator: MediaWiki 1.35.0-alpha; Translate 2020-04-20\n"
+"X-Generator: MediaWiki 1.36.0-alpha; Translate 2020-04-20\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: autocomplete/views.py:81
@@ -1195,9 +1196,8 @@ msgid "HAL is a  multidisciplinary open archive, sustained by the French Researc
 msgstr ""
 
 #: model-gettext.py:129
-#, fuzzy
 msgid "OSF preprints"
-msgstr "versión original"
+msgstr "Preimpresiones de OSF"
 
 #: model-gettext.py:130
 msgid "Run by the Center for Open Science, OSF lets you share your preprints openly. You can also share supplemental data, materials or code associated with your article."
@@ -2029,9 +2029,8 @@ msgid "Change open access status"
 msgstr ""
 
 #: publishers/templates/publishers/publisher.html:72
-#, fuzzy
 msgid "Green open access summary"
-msgstr "Acceso abierto"
+msgstr "Resumen de acceso abierto verde"
 
 #: publishers/templates/publishers/publisher.html:74
 #, python-format
@@ -2678,9 +2677,8 @@ msgstr ""
 
 #: website/templates/dissemin/start_page.html:39
 #: website/templates/dissemin/start_page.html:42
-#, fuzzy
 msgid "Green Open Access"
-msgstr "Acceso abierto"
+msgstr "Acceso abierto verde"
 
 #: website/templates/dissemin/start_page.html:43
 #, fuzzy
@@ -2702,7 +2700,6 @@ msgstr "Ello fuerza a las bibliotecas a comprar suscripciones sobrevaluadas a re
 
 #: website/templates/dissemin/start_page.html:58
 #: website/templates/dissemin/start_page.html:61
-#, fuzzy
 msgid "Open Repositories"
 msgstr "Repositorios abiertos"
 
@@ -2713,9 +2710,8 @@ msgstr "Publicar sus documentos en su propia página web no es suficiente. Dicha
 
 #: website/templates/dissemin/start_page.html:72
 #: website/templates/dissemin/start_page.html:75
-#, fuzzy
 msgid "Latest Uploads"
-msgstr "Cargar"
+msgstr "Últimas cargas"
 
 #: website/templates/dissemin/start_page.html:76
 msgid "Researchers use Dissemin to make sure all their publications can be accessed freely. Have a look at their latest uploads:"

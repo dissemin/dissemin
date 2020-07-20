@@ -12,12 +12,12 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2020-05-07 15:07:54+0000\n"
+"PO-Revision-Date: 2020-07-20 17:44:48+0000\n"
 "X-POT-Import-Date: 2020-04-23 07:09:36+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: diq\n"
-"X-Generator: MediaWiki 1.35.0-alpha; Translate 2020-04-20\n"
+"X-Generator: MediaWiki 1.36.0-alpha; Translate 2020-04-20\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: autocomplete/views.py:81

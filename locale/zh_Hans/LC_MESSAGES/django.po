@@ -3,6 +3,7 @@
 #
 # Author: A Chinese Wikipedian
 # Author: Abijeet Patro
+# Author: BaRaN6161 TURK
 # Author: Deathkon
 # Author: Josephine W.
 # Author: Liuxinyu970226
@@ -18,12 +19,12 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-04-23 08:11+0200\n"
-"PO-Revision-Date: 2020-05-07 15:07:58+0000\n"
+"PO-Revision-Date: 2020-07-20 17:44:52+0000\n"
 "Language: zh_hans\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-POT-Import-Date: 2020-04-23 07:09:36+0000\n"
-"X-Generator: MediaWiki 1.35.0-alpha; Translate 2020-04-20\n"
+"X-Generator: MediaWiki 1.36.0-alpha; Translate 2020-04-20\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: autocomplete/views.py:81
@@ -789,9 +790,8 @@ msgid "Parapsychology & occultism"
 msgstr ""
 
 #: model-gettext.py:15
-#, fuzzy
 msgid "Philosophical schools of thought"
-msgstr "哲学"
+msgstr "哲学流派"
 
 #: model-gettext.py:17
 msgid "Philosophical logic"
@@ -839,9 +839,8 @@ msgid "Christian organization, social work & worship"
 msgstr ""
 
 #: model-gettext.py:28
-#, fuzzy
 msgid "History of Christianity"
-msgstr "历史"
+msgstr "基督教史"
 
 #: model-gettext.py:29
 #, fuzzy
@@ -1028,14 +1027,12 @@ msgid "English & Old English literatures"
 msgstr ""
 
 #: model-gettext.py:84
-#, fuzzy
 msgid "German & related literatures"
-msgstr "文献"
+msgstr "德语及相关文学"
 
 #: model-gettext.py:85
-#, fuzzy
 msgid "French & related literatures"
-msgstr "文献"
+msgstr "法语及相关文学"
 
 #: model-gettext.py:86
 msgid "Italian, Romanian & related literatures"
@@ -1522,9 +1519,8 @@ msgid "and <a href=\"#\" id=\"showAllAuthors\">%(nb_remaining_authors)s other au
 msgstr "\n            以及<a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s位其他作者</a>\n            "
 
 #: papers/templates/papers/paper.html:62
-#, fuzzy
 msgid "Show less"
-msgstr "显示"
+msgstr "显示更少"
 
 #: papers/templates/papers/paper.html:74
 msgid "Deposit accomplished!"
