@@ -8,6 +8,7 @@
 # Author: Josephine W.
 # Author: Liuxinyu970226
 # Author: Wmr
+# Author: 列维劳德
 # Author: 沈澄心
 # Author: 铁桶
 # --
@@ -19,7 +20,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-04-23 08:11+0200\n"
-"PO-Revision-Date: 2020-07-27 16:20:51+0000\n"
+"PO-Revision-Date: 2020-07-30 13:26:39+0000\n"
 "Language: zh_hans\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -28,19 +29,16 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: autocomplete/views.py:81
-#, fuzzy
 msgid "Current institutions"
-msgstr "学院"
+msgstr "目前机构"
 
 #: autocomplete/views.py:85
-#, fuzzy
 msgid "Unverified institutions"
-msgstr "学院"
+msgstr "未证实机构"
 
 #: autocomplete/views.py:89
-#, fuzzy
 msgid "Obsolete institutions"
-msgstr "学院"
+msgstr "淘汰机构"
 
 #: deposit/forms.py:88
 msgid "Upload type"
@@ -548,9 +546,9 @@ msgid "Depositing"
 msgstr "存放"
 
 #: deposit/templates/deposit/start.html:64
-#, fuzzy, python-format
+#, python-format
 msgid "You can deposit the full text of your article. Dissemin will send it to a repository where it will be made freely available. By depositing your article via Dissemin, you agree to our <a href=\"%(tosurl)s\">terms of service</a>."
-msgstr "\n            您可以存放您的文章全文。Dissemin将发送它到其能够自由展示的存储库。通过使用Dissemin存放您的文章，您同意我们的<a href=\"%(tosurl)s\">服务条款</a>。\n        "
+msgstr "您可以存放您的文章全文。Dissemin将发送它到其能够自由展示的存储库。通过使用Dissemin存放您的文章，您同意我们的<a href=\"%(tosurl)s\">服务条款</a>。\n        "
 
 #: deposit/templates/deposit/start.html:72
 #, fuzzy
@@ -614,9 +612,8 @@ msgid "Submitting paper to repository"
 msgstr ""
 
 #: deposit/views.py:79
-#, fuzzy
 msgid "This repository is currently not enabled."
-msgstr "找不到此存储库。"
+msgstr "此存储库当前未启用。"
 
 #: deposit/views.py:85
 msgid "This repository is not available for this paper."
@@ -647,9 +644,8 @@ msgid "No pdf found for dr {}"
 msgstr ""
 
 #: deposit/zenodo/protocol.py:87
-#, fuzzy
 msgid "This document is already in Zenodo. Zenodo refused the deposit."
-msgstr "此文档已存在于HAL。HAL拒绝存放。"
+msgstr "此文档已存在于 Zenodo。Zenodo 拒绝存放。"
 
 #: deposit/zenodo/protocol.py:120
 msgid "No Zenodo API key provided."
@@ -740,9 +736,8 @@ msgid "Traditional Chinese"
 msgstr "繁体中文"
 
 #: model-gettext.py:2
-#, fuzzy
 msgid "Computer science, knowledge & systems"
-msgstr "计算机科学"
+msgstr "计算机科学、知识与系统"
 
 #: model-gettext.py:3
 msgid "Bibliographies"
@@ -843,9 +838,8 @@ msgid "History of Christianity"
 msgstr "基督教史"
 
 #: model-gettext.py:29
-#, fuzzy
 msgid "Christian denominations"
-msgstr "Dissemin管理"
+msgstr "基督教教派"
 
 #: model-gettext.py:30
 msgid "Other religions"
@@ -944,9 +938,8 @@ msgid "Technology"
 msgstr "技术"
 
 #: model-gettext.py:62
-#, fuzzy
 msgid "Medicine & health"
-msgstr "医学与健康科学"
+msgstr "医学与健康"
 
 #: model-gettext.py:64
 msgid "Agriculture"
@@ -957,14 +950,12 @@ msgid "Home & family management"
 msgstr ""
 
 #: model-gettext.py:66
-#, fuzzy
 msgid "Management & public relations"
-msgstr "刷新出版物"
+msgstr "管理与公共关系"
 
 #: model-gettext.py:67
-#, fuzzy
 msgid "Chemical engineering"
-msgstr "工程"
+msgstr "化工"
 
 #: model-gettext.py:68
 msgid "Manufacturing"
@@ -1052,14 +1043,12 @@ msgid "Classical & modern Greek literatures"
 msgstr ""
 
 #: model-gettext.py:90
-#, fuzzy
 msgid "Other literatures"
-msgstr "文献"
+msgstr "其他文献"
 
 #: model-gettext.py:92
-#, fuzzy
 msgid "Geography & travel"
-msgstr "地理"
+msgstr "地理与旅行"
 
 #: model-gettext.py:93
 #, fuzzy
@@ -1162,9 +1151,8 @@ msgid "Download contract"
 msgstr "下载"
 
 #: model-gettext.py:115
-#, fuzzy
 msgid "Creative Commons 1.0 Universal (CC0 1.0) Public Domain Dedication"
-msgstr "知识共享CC0 1.0通用"
+msgstr "知识共享CC0 1.0通用（CC0 1.0）公共领域奉献"
 
 #: model-gettext.py:116
 msgid "Creative Commons Attribution 4.0 International (CC BY 4.0)"
@@ -1514,9 +1502,9 @@ msgid "Published in %(year)s by"
 msgstr "出版于%(year)s由"
 
 #: papers/templates/papers/paper.html:56
-#, fuzzy, python-format
+#, python-format
 msgid "and <a href=\"#\" id=\"showAllAuthors\">%(nb_remaining_authors)s other authors.</a>"
-msgstr "\n            以及<a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s位其他作者</a>\n            "
+msgstr "以及<a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s位其他作者</a>\n            "
 
 #: papers/templates/papers/paper.html:62
 msgid "Show less"
@@ -1624,9 +1612,8 @@ msgid "Blue circle"
 msgstr ""
 
 #: papers/templates/papers/policies.html:73
-#, fuzzy
 msgid "Mark this publication for later upload."
-msgstr "标记本出版物以便稍后储入"
+msgstr "标记本出版物以便稍后储入。"
 
 #: papers/templates/papers/policies.html:76
 msgid "Mark"
@@ -1659,7 +1646,6 @@ msgid " %(first_name)s %(last_name)s uses ORCID."
 msgstr ""
 
 #: papers/templates/papers/researcher.html:38
-#, fuzzy
 msgid "Refresh Publications"
 msgstr "刷新出版物"
 
@@ -1668,9 +1654,9 @@ msgid "Address:"
 msgstr "地址："
 
 #: papers/templates/papers/researcher.html:51
-#, fuzzy, python-format
+#, python-format
 msgid "Missing publications? <a href=\"%(matching_papers_url)s\">Search for publications with a matching author name.</a>"
-msgstr "缺少出版物？<a href=\"%(matching_papers_url)s\">使用匹配的作者名搜索出版物</a>"
+msgstr "缺少出版物？<a href=\"%(matching_papers_url)s\">使用匹配的作者名搜索出版物。</a>"
 
 #: papers/templates/papers/search.html:10
 #, python-format
@@ -1878,18 +1864,16 @@ msgid "Papers on my to-do list"
 msgstr ""
 
 #: papers/views.py:282
-#, fuzzy
 msgid "Invalid ORCID profile. Please make sure it includes a public name."
-msgstr "\n                            无效的ORCID详情。请确保它包含公开名称。\n                            "
+msgstr "无效的ORCID详情。请确保它包含公开名称。\n                            "
 
 #: papers/views.py:285
 msgid "Invalid ORCID profile."
 msgstr "无效的ORCID详情。"
 
 #: papers/views.py:313
-#, fuzzy
 msgid "authored by"
-msgstr "作者：\\"
+msgstr "作者"
 
 #: papers/views.py:381
 msgid "Paper view expects a DOI or a pk"
@@ -2024,9 +2008,8 @@ msgid_plural "(%(num_total)s papers)"
 msgstr[0] "（%(num_total)s篇论文）"
 
 #: publishers/templates/publishers/list.html:96
-#, fuzzy
 msgid "No publishers found"
-msgstr "找不到发行者。"
+msgstr "找不到发行者"
 
 #: publishers/templates/publishers/policy_pdfversion.html:5
 msgid "The published version is the final version of the paper, as formatted by the publisher."
@@ -2121,9 +2104,8 @@ msgid "Available"
 msgstr "可用"
 
 #: statistics/templates/statistics/pie_legend.html:7
-#, fuzzy
 msgid "Refine by OA status"
-msgstr "未知OA状态"
+msgstr "OA状态优化"
 
 #: upload/forms.py:33
 msgid "Invalid file format: only PDF files are accepted."
@@ -2210,9 +2192,9 @@ msgid "Page not found"
 msgstr "找不到页面"
 
 #: website/templates/404.html:13
-#, fuzzy, python-format
+#, python-format
 msgid "The page you requested could not be found. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr "\n            找不到您请求的页面。<a href=\"/\">返回首页。</a>\n           "
+msgstr "找不到您请求的页面。<a href=\"%(index)s\">返回首页。</a>\n           "
 
 #: website/templates/500.html:6 website/templates/500.html:10
 #, fuzzy
@@ -2220,9 +2202,9 @@ msgid "Internal server error"
 msgstr "内部错误"
 
 #: website/templates/500.html:13
-#, fuzzy, python-format
+#, python-format
 msgid "Your request triggered an internal server error. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr "\n            您的请求触发了内部错误。<a href=\"/\">返回首页。</a>\n           "
+msgstr "您的请求触发了内部错误。<a href=\"%(index)s\">返回首页。</a>\n           "
 
 #: website/templates/admin/base_site.html:5
 #: website/templates/admin/base_site.html:8
@@ -2284,14 +2266,12 @@ msgid "Can I create a profile on dissem.in?"
 msgstr "我能在dissem.in创建我的详情么？"
 
 #: website/templates/dissemin/faq.html:30
-#, fuzzy
 msgid "Policies and Full-text Availability"
 msgstr "方针与全文可见性"
 
 #: website/templates/dissemin/faq.html:31
-#, fuzzy
 msgid "What do our policy classes mean?"
-msgstr "您的方针等级意思是什么？"
+msgstr "我们的方针等级意思是什么？"
 
 #: website/templates/dissemin/faq.html:32
 msgid "When is a paper considered available?"
@@ -2430,9 +2410,9 @@ msgid "<strong><a href=\"https://arxiv.org/\">arXiv</a></strong>, a well-known g
 msgstr "<strong><a href=\"https://arxiv.org/\">arXiv</a></strong>，知名的多用途存储库。目前arXiv拒绝允许Dissemin使用其SWORD API存放，并希望用户手动存放到arXiv。如果您希望通过Dissemin存放至arXiv，您可以让我们知道您对此感兴趣（电子邮件联络：help艾特arxiv.org，并以“亲爱的arXiv，”开头发送邮件即可）。"
 
 #: website/templates/dissemin/faq.html:245
-#, fuzzy, python-format
+#, python-format
 msgid "Dissemin is a web platform gathering metadata from <a href=\"%(sources_url)s\">many sources</a> and analyzing the full text availability of publications of researchers. It has been designed to foster the use of repositories (rather than preprints posted on personal homepages), <a href=\"#repositoriesRock\">for numerous reasons</a>."
-msgstr "Dissemin是一个网络平台，收集来自<a href=\"%(sources_url)s\">许多来源</a>的元数据并分析研究人员出版物的全文可用性。它旨在促进存储库的使用（而不是个人主页上发布的预印本），<a href=\"#repositories-rock\">出于各种原因</a>。"
+msgstr "Dissemin是一个网络平台，收集来自<a href=\"%(sources_url)s\">许多来源</a>的元数据并分析研究人员出版物的全文可用性。它旨在促进存储库的使用（而不是个人主页上发布的预印本），<a href=\"#repositoriesRock\">出于各种原因</a>。"
 
 #: website/templates/dissemin/faq.html:253
 msgid "Dissemin is not a repository as it does not store any full text. When the full text of a publication is available, a link to the relevant page is provided. The full texts deposited through Dissemin are stored in third-party repositories such as <a href=\"https://zenodo.org\">Zenodo</a> or <a href=\"https://hal.archives-ouvertes.fr/\">HAL</a>."
@@ -2530,9 +2510,9 @@ msgid "All sorts of other technical issues."
 msgstr "各种其他技术问题。"
 
 #: website/templates/dissemin/faq.html:404
-#, fuzzy, python-format
+#, python-format
 msgid "Please first check whether the paper is available in one of <a href=\"%(sources_url)s\">our sources</a>. If it is not, Dissemin cannot harvest it, and you should report the problem to the source where it should appear. Note that it can take up to a couple of months for our primary sources to discover your latest papers and for Dissemin to harvest it."
-msgstr "请首先检查该论文是否可以在<a href=\"%(sources_url)s\">我们的来源</a>中找到。如果不能，Dissemin就不能收录它，你应该将问题报告给其所在的来源机构。"
+msgstr "请首先检查该论文是否可以在<a href=\"%(sources_url)s\">我们的来源</a>中找到。如果不能，Dissemin就不能收录它，你应该将问题报告给其所在的来源机构。请注意，我们的主要来源最多可能需要几个月的时间才能发现您的最新论文，而 Dissemin 可能需要几个月才能收获。。"
 
 #: website/templates/dissemin/faq.html:409
 msgid "Now, if your paper does appear in one of the sources but not on Dissemin, please check that your name is not spelt incorrectly on the source, and that the spelling matches your ORCID record. If there is a misspelling, again, you should report the problem to the source that contains the mistake."
@@ -2547,19 +2527,17 @@ msgid "Note that, in the longer term, we hope to design a way for our users to e
 msgstr "请注意，从长远来看，我们希望为我们的用户设计一种方法来编辑Dissemin上的配置文件以添加缺失的论文并解决这些问题; 但我们目前还没有这样的系统。"
 
 #: website/templates/dissemin/faq.html:426
-#, fuzzy, python-format
+#, python-format
 msgid "In most cases, the errors that you see on Dissemin have not been introduced by Dissemin, but are already present in the <a href=\"%(sources_url)s\">public sources</a> that Dissemin harvests. Hence, please first check if the error that you have seen is already present in our data sources, by looking at the \"Links\" section in the top right of the page. If one of these pages contain the error, you should report the problem to them and not to us, otherwise the mistake will persist in the source."
-msgstr "在大多数情况下，您在Dissemin上看到的错误并非由Dissemin造成，而是已在Dissemin收录的<a href=\"{{ sources_url }}\">公开资源</a>中产生。因此，请先查看页面右上角的“链接”，检查您所看到的错误是否已经存在于我们的数据来源中。如果其中一个页面包含错误，您应该向他们报告问题，而不是向我们报告，否则错误会一直存在。"
+msgstr "在大多数情况下，您在Dissemin上看到的错误并非由Dissemin造成，而是已在Dissemin收录的<a href=\"%(sources_url)s\">公开资源</a>中产生。因此，请先查看页面右上角的“链接”，检查您所看到的错误是否已经存在于我们的数据来源中。如果其中一个页面包含错误，您应该向他们报告问题，而不是向我们报告，否则错误会一直存在。"
 
 #: website/templates/dissemin/faq.html:431
-#, fuzzy
 msgid "If the error is not present in any of the sources and you believe that Dissemin may have introduced the problem, please file an <a href=\"https://github.com/dissemin/dissemin/issues\">issue</a> with details of the problem, or send a message to <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>. Note that you cannot yet fix the problem yourself, although we hope in the longer term to develop a system to allow our users to edit details of their papers themselves."
 msgstr "如果错误不在任何来源中，并且您认为Dissemin可能造成了该问题，请提交<a href=\"https://github.com/dissemin/dissemin/issues\">问题说明</a> 并详细描述问题，或发送邮件至<a href=\"mailto:bugs@dissem.in\"> bugs@dissem.in </a>。请注意，虽然我们希望能够在未来开发一个系统，以便我们的用户自己编辑他们的论文的详细信息，但您目前仍然无法自己解决这些问题。"
 
 #: website/templates/dissemin/faq.html:438
-#, fuzzy
 msgid "First, note that Dissemin does not account for copies of articles that are only available on a personal homepage or a similar website. This is deliberate, because we believe that <a href=\"#repositoriesRock\">articles should be hosted in repositories</a>."
-msgstr "第一，请注意Dissemin不对只在个人主页或类似网站上的文章拷贝负有责任。这是刻意的，因为我们相信<a href=\"#repositories-rock\">文章应由存储库托管</a>。"
+msgstr "第一，请注意Dissemin不对只在个人主页或类似网站上的文章拷贝负有责任。这是刻意的，因为我们相信<a href=\"#repositoriesRock\">文章应由存储库托管</a>。"
 
 #: website/templates/dissemin/faq.html:443
 msgid "Second, at the moment, Dissemin only supports repositories with a crawlable API that follows the <a href=\"https://www.openarchives.org/OAI/openarchivesprotocol.html\">OAI-PMH protocol</a>, and is <a href=\"https://www.base-search.net/about/en/suggest.php\">registered</a> in <a href=\"https://www.base-search.net/\">BASE</a>. We have a <a href=\"https://github.com/dissemin/croawl\">long-term project</a> to support more repositories by crawling them, but for the moment, we do not have the resources to support repositories not covered by BASE. Hence, if you are a user of a repository and would like it to be supported by Dissemin, please contact the repository administrator and suggest them to implement OAI-PMH support and to <a href=\"https://www.base-search.net/about/en/suggest.php\">register</a> their repository in BASE."
@@ -2602,9 +2580,9 @@ msgid "You can also add publications to your profile <em>on Dissemin</em>, by cl
 msgstr "您也可以在Dissemin的搜索结果中点击“包含在我的个人资料中”按钮，将发布内容添加到您的个人资料<em>上的Dissemin</em>里。（此按钮仅在您登录时显示，并且在Dissemin认为您已撰写的论文旁可见。）您也可以通过这种方式从您的个人资料中排除文章。请注意，这些更改是Dissemin本地的，并且<em>不</em>会传播到您的ORCID配置文件，因为ORCID没有免费的API允许我们传播它们。"
 
 #: website/templates/dissemin/faq.html:512
-#, fuzzy, python-format
+#, python-format
 msgid "If you change some details in your ORCID profile (name, homepage, etc.), the changes will not automatically be picked up in your profile on Dissemin. To update your profile on Dissemin accordingly, once you have logged in to Dissemin, you can go to your <a href=\"%(profile_url)s\">profile page</a> and click \"Refresh publications\"."
-msgstr "如果您更改ORCID配置文件（名称，主页等）中的某些详细信息，则更改不会自动在您的配置文件中的Dissemin中生效。若要更新您在Dissemin的个人资料，您可以登录到Dissemin，并访问<a href=\"/my-profile\">个人资料页面</a>，点击“刷新出版物”。"
+msgstr "如果您更改ORCID配置文件（名称，主页等）中的某些详细信息，则更改不会自动在您的配置文件中的Dissemin中生效。若要更新您在Dissemin的个人资料，您可以登录到Dissemin，并访问<a href=\"%(profile_url)s\">个人资料页面</a>，点击“刷新出版物”。"
 
 #: website/templates/dissemin/faq.html:526
 #, python-format
@@ -2634,23 +2612,20 @@ msgid "Encourage researchers to use this service."
 msgstr "鼓励研究员使用此服务。"
 
 #: website/templates/dissemin/faq.html:559
-#, fuzzy
 msgid "Star <a href=\"https://github.com/dissemin/dissemin\">our GitHub project</a>!"
-msgstr "开始<a href=\"https://github.com/wetneb/dissemin\">我们的GitHub项目吧</a>！"
+msgstr "开始<a href=\"https://github.com/dissemin/dissemin\">我们的GitHub项目吧</a>！"
 
 #: website/templates/dissemin/faq.html:564
 msgid "<a href=\"https://association.dissem.in/#dons\">Donations are accepted</a>."
 msgstr "<a href=\"https://association.dissem.in/#dons\">接受捐款</a>。"
 
 #: website/templates/dissemin/faq.html:572
-#, fuzzy
 msgid "The source code is available <a href=\"https://github.com/dissemin/dissemin\">on GitHub</a>."
-msgstr "源代码在<a href=\"https://github.com/wetneb/dissemin\">GitHub</a>可用。"
+msgstr "源代码在<a href=\"https://github.com/dissemin/dissemin\">GitHub</a>可用。"
 
 #: website/templates/dissemin/faq.html:579
-#, fuzzy
 msgid "Yes! We even have <a href=\"https://dissemin.readthedocs.io/en/latest/api.html\">an API</a>. If it does not suit your needs, please don't hesitate to get in touch by writing to <a href=\"mailto:hello@dissem.in\">hello@dissem.in</a>."
-msgstr "是的！我们也有<a href=\"https://dev.dissem.in/api.html\">API</a>。如果这不符合您的需求，请不要犹豫，向<a href=\"mailto:hello@dissem.in\">hello@dissem.in</a>发送邮件取得联系即可"
+msgstr "是的！我们也有<a href=\"https://dissemin.readthedocs.io/en/latest/api.html\">API</a>。如果这不符合您的需求，请不要犹豫，向<a href=\"mailto:hello@dissem.in\">hello@dissem.in</a>发送邮件取得联系即可"
 
 #: website/templates/dissemin/faq.html:586
 msgid "Yes! See <a href=\"https://association.dissem.in/#logos\">here</a> for links to our logos and for explanations about how you can reuse them."
@@ -2662,9 +2637,8 @@ msgid "Sign in"
 msgstr "登录"
 
 #: website/templates/dissemin/login.html:15
-#, fuzzy
 msgid "Dissemin uses ORCID to authenticate its users. ORCID is an independent non-profit effort to provide an open registry of unique researcher identifiers. It also offers open services to link research activities and organizations to these identifiers. Learn more at <a href=\"https://orcid.org\" target=\"_blank\">orcid.org</a>."
-msgstr "Dissemin使用ORCID验证其用户。ORCID是为每一位独立研究员提供开放注册标识符的非营利性机构。它也提供开放服务链接研究实体与组织到这些标识符。在<a href=\"https://orcid.org\">orcid.org</a>了解更多。"
+msgstr "Dissemin使用ORCID验证其用户。ORCID是为每一位独立研究员提供开放注册标识符的非营利性机构。它也提供开放服务链接研究实体与组织到这些标识符。在<a href=\"https://orcid.org\" target=\"_blank\">orcid.org</a>了解更多。"
 
 #: website/templates/dissemin/login.html:28
 #: website/templates/dissemin/login.html:34
@@ -2681,7 +2655,6 @@ msgid "Sign up"
 msgstr "注册"
 
 #: website/templates/dissemin/login.html:41
-#, fuzzy
 msgid "Not an ORCID user yet? Create an account, it is free and takes just a few seconds."
 msgstr "还不是ORCID用户么？创建账户，这是免费的，并只花几秒钟。"
 
@@ -2730,9 +2703,8 @@ msgid "Green Open Access"
 msgstr "绿色开放访问"
 
 #: website/templates/dissemin/start_page.html:43
-#, fuzzy
 msgid "Many researchers do not use their right to make their papers freely available online, in addition to the paywalled version of traditional publishers."
-msgstr "很多研究员不利用其权利来使它们的论文在线自由使用，此外还存在传统发行方提供的付费墙版本。"
+msgstr "很多研究员不利用其权利来使它们的论文在线自由使用，此外还存在传统发行方的付费墙版本。"
 
 #: website/templates/dissemin/start_page.html:44
 msgid "Uploading your papers to open repositories has significant advantages:"
@@ -2743,9 +2715,8 @@ msgid "Your research is available to everyone, increasing your readership and im
 msgstr ""
 
 #: website/templates/dissemin/start_page.html:47
-#, fuzzy
 msgid "You help universities abandon overpriced journal subscriptions."
-msgstr "这强制了图书馆购买定价高昂的电子订阅至期刊，只要它们负担得起。"
+msgstr "你帮助大学放弃高昂的期刊订阅。"
 
 #: website/templates/dissemin/start_page.html:58
 #: website/templates/dissemin/start_page.html:61
@@ -2754,9 +2725,8 @@ msgid "Open Repositories"
 msgstr "开放存储库"
 
 #: website/templates/dissemin/start_page.html:62
-#, fuzzy
 msgid "Uploading your papers on your own webpage is not enough. Your papers are easier to find and more secure in the long-term when uploaded to arXiv, Zenodo or institutional repositories."
-msgstr "上传您的论文至您自己的网页是不够的。这种复制不稳定，并且与专业索引的存储库相比更难找到合适的文档。"
+msgstr "上传您的论文至您自己的网页是不够的。上传至 arXiv、Zenodo 或机构存储库时，您的论文在长期内更容易找到，更安全。"
 
 #: website/templates/dissemin/start_page.html:72
 #: website/templates/dissemin/start_page.html:75
@@ -2829,9 +2799,8 @@ msgid "Privacy"
 msgstr "隐私"
 
 #: website/templates/dissemin/tos.html:30
-#, fuzzy
 msgid "The platform does not include any analytics, advertisement or tracking services. We are however using the <a href=\"https://sentry.io/privacy/\">Sentry service</a> for error tracking on this platform. Our webserver configuration stores basic access information (URL requested and IP address) for error monitoring, which are kept for fourteen days. Authenticated users are logged-in via ORCID, a third-party service. The platform has no access to the private information they provide to ORCID. In particular, we do not store any ORCID passwords, and we do not have access to email addresses that are marked as private in the ORCID record. We need to set cookies to authenticate our users, therefore by logging in on this platform, users accept these cookies."
-msgstr "未获验证的用户不予追踪，因为平台不包含任何第三方分析或广告服务。验证用户会通过第三方服务ORCID登录。平台没有对他们提供给ORCID的私有信息的访问权。基本上我们不存储任何ORCID密码，并且我们没有对在ORCID记录中标记为私有的电子邮件地址的访问权。我们需要设置cookie以验证我们用户，因此通过登录此平台，用户会接受这些cookie。"
+msgstr "平台不包含任何第三方分析或广告服务。然而，我们使用哨兵服务在此平台上进行错误跟踪。我们的 Web 服务器配置存储用于错误监视的基本访问信息（请求的 URL 和 IP 地址），这些信息将保留十四天。验证用户会通过第三方服务ORCID登录。平台没有对他们提供给ORCID的私有信息的访问权。基本上我们不存储任何ORCID密码，并且我们没有对在ORCID记录中标记为私有的电子邮件地址的访问权。我们需要设置cookie以验证我们用户，因此通过登录此平台，用户会接受这些cookie。"
 
 #: website/templates/dissemin/tos.html:42
 msgid "Deposits through Dissemin"
@@ -2842,9 +2811,8 @@ msgid "The platform can perform mandated publication deposit to repositories. Us
 msgstr "该平台可以将被授权的出版物存储到存储库。用户只能上传他们自己撰写的论文或作者同意存档的论文。除了这些服务条款之外，用户还必须遵守这些存储库的政策。"
 
 #: website/templates/dissemin/tos.html:51
-#, fuzzy
 msgid "Please address any inquiry to <a href=\"mailto:support@dissem.in\">support@dissem.in</a>."
-msgstr "请向support@dissem.in提出任何咨询。"
+msgstr "请向<a href=\"mailto:support@dissem.in\">support@dissem.in</a>提出任何咨询。"
 
 #: website/templates/dissemin/tos.html:60
 msgid "In full"
@@ -2855,36 +2823,32 @@ msgid "Personal data"
 msgstr "个人数据"
 
 #: website/templates/dissemin/tos.html:65
-#, fuzzy
 msgid "Dissemin uses ORCID's public OAuth interface to authenticate its users. This interface only transmits information marked as public in the user's ORCID profile. This means that ORCID passwords are never transmitted and email addresses are not transmitted when they are marked as private, which is the default setting. When logging in to Dissemin from ORCID, Dissemin acquires the user's ORCID id, as well as all public information attached to the ORCID record. We are using the <a href=\"https://sentry.io/privacy/\">Sentry service</a> for error tracking on this platform. Our webserver configuration stores basic access information (URL requested and IP address) for error monitoring, which are kept for fourteen days. Dissemin can store any information input by its users on the platform. Users can ask for a copy of the personal information Dissemin stores about them by writing an email to <a href=\"mailto:support@dissem.in\">support@dissem.in</a>."
-msgstr "Dissemin使用ORCID的公共OAuth界面对其用户进行身份验证。该接口仅传输在用户的ORCID配置文件中标记为公共的信息。这意味着ORCID密码永远不会被传输，并且电子邮件地址在被标记为私有时不会被传输，这是默认设置。当从ORCID登录到Dissemin时，Dissemin获取用户的ORCID编号以及ORCID记录附带的所有公共信息。Dissemin可以存储用户在平台上输入的任何信息。用户可以通过写邮件到support@dissem.in，索取他们的个人信息在Dissemin存储的副本。"
+msgstr "Dissemin使用ORCID的公共OAuth界面对其用户进行身份验证。该接口仅传输在用户的ORCID配置文件中标记为公共的信息。这意味着ORCID密码永远不会被传输，并且电子邮件地址在被标记为私有时不会被传输，这是默认设置。当从ORCID登录到Dissemin时，Dissemin获取用户的ORCID编号以及ORCID记录附带的所有公共信息。我们使用此平台上的<a href=\"https://sentry.io/privacy/\">哨兵服务</a>进行错误跟踪。我们的 Web 服务器配置存储用于错误监视的基本访问信息（请求的 URL 和 IP 地址），这些信息将保留十四天。Dissemin可以存储用户在平台上输入的任何信息。用户可以通过写邮件到<a href=\"mailto:support@dissem.in\">support@dissem.in</a>，索取他们的个人信息在Dissemin存储的副本。"
 
 #: website/templates/dissemin/tos.html:76
 msgid "Full text storage"
 msgstr "全文存储"
 
 #: website/templates/dissemin/tos.html:78
-#, fuzzy
 msgid "Documents deposited in repositories via Dissemin can be stored on the platform, but are not available for download on the platform. They can be stored internally for logging purposes, and to make sure failed deposits can be fixed later. Dissemin does not commit to store any of the files it receives from its users. Users can write to <a href=\"mailto:support@dissem.in\">support@dissem.in</a> if they want one of their uploads to be deleted from our internal storage space, or from the repository they have deposited to. Note that deletion policies vary accross repositories: we provide no guarantee that deposits can be deleted from the target repositories."
-msgstr "通过Dissemin存储在存储库中的文档可以被存储在平台上，但不能在平台上下载。它们可以存储在内部用于记录目的，并确保以后可以修复失败的存档。Dissemin不承诺存储从用户那里收到的任何文件。如果用户希望从我们的内部存储空间或从存储库中删除其上传的内容，可以发邮件至support@dissem.in。请注意，删除策略在存储库之间有所不同：我们不保证可以从目标存储库中删除存档。"
+msgstr "通过Dissemin存储在存储库中的文档可以被存储在平台上，但不能在平台上下载。它们可以存储在内部用于记录目的，并确保以后可以修复失败的存档。Dissemin不承诺存储从用户那里收到的任何文件。如果用户希望从我们的内部存储空间或从存储库中删除其上传的内容，可以发邮件至<a href=\"mailto:support@dissem.in\">support@dissem.in</a>。请注意，删除策略在存储库之间有所不同：我们不保证可以从目标存储库中删除存档。"
 
 #: website/templates/dissemin/tos.html:85
 msgid "Reporting misuse"
 msgstr "报告滥用"
 
 #: website/templates/dissemin/tos.html:87
-#, fuzzy
 msgid "Misuse can be reported to <a href=\"mailto:support@dissem.in\">support@dissem.in</a>."
-msgstr "滥用可在support@dissem.in报告。"
+msgstr "滥用可在<a href=\"mailto:support@dissem.in\">support@dissem.in</a>报告。"
 
 #: website/templates/dissemin/tos.html:95
 msgid "The <a href=\"https://dissem.in\">dissem.in</a> website has been registered with <a href=\"https://www.cnil.fr/\">CNIL</a> under declaration n°1895382 v0."
 msgstr "<a href=\"https://dissem.in\">dissem.in</a>网站已登记在<a href=\"https://www.cnil.fr/\">CNIL</a>，申报号n°1895382 v0。"
 
 #: website/templates/dissemin/tos.html:101
-#, fuzzy
 msgid "You have the right to access, modify, and delete the personal information that we hold about you. To exercise this right, please contact us at <a href=\"mailto:support@dissem.in\">support@dissem.in</a>, or by postal mail at the following addresss:"
-msgstr "您拥有访问、修改和删除我们为您持有的个人信息的权利。要使用该权利，请在support@dissem.in联络我们，或写一封书面邮件至以下地址："
+msgstr "您拥有访问、修改和删除我们为您持有的个人信息的权利。要使用该权利，请在<a href=\"mailto:support@dissem.in\">support@dissem.in</a>联络我们，或写一封书面邮件至以下地址："
 
 #: website/templates/footer.html:7
 msgid "FAQ"
@@ -2937,7 +2901,7 @@ msgid "Authentication error"
 msgstr "验证错误"
 
 #: website/templates/socialaccount/authentication_error.html:15
-#, fuzzy, python-format
+#, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
-msgstr "\n            验证失败。<a href=\"/\">返回登录页面。</a>\n           "
+msgstr "验证失败。<a href=\"/\">返回登录页面。</a>\n           "
 
