@@ -5,6 +5,7 @@
 # Author: Dan Koehl
 # Author: ProletariatetsBefrielseOrkester
 # Author: Pyscowicz
+# Author: Sabelöga
 # Author: Sturban
 # Author: WikiPhoenix
 # --
@@ -16,7 +17,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-04-23 08:11+0200\n"
-"PO-Revision-Date: 2020-07-27 16:20:51+0000\n"
+"PO-Revision-Date: 2020-08-03 17:39:49+0000\n"
 "Language: sv\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -60,9 +61,8 @@ msgid "Dewey Decimal Class"
 msgstr ""
 
 #: deposit/forms.py:160
-#, fuzzy
 msgid "Do not publish before"
-msgstr "Okänd utgivare"
+msgstr "Publicera inte förrän"
 
 #: deposit/forms.py:166 deposit/templates/deposit/deposits.html:89
 #, fuzzy
@@ -622,7 +622,7 @@ msgstr ""
 
 #: deposit/views.py:260 deposit/views.py:276
 msgid "Not all fields have been filled correctly."
-msgstr "Alla fält har inte ifyllts korrekt."
+msgstr "Inte alla fält har fyllts i korrekt."
 
 #: deposit/views.py:269
 msgid "This repository cannot be used for this paper."
@@ -893,18 +893,16 @@ msgid "French & related languages"
 msgstr "Franska och relaterade språk"
 
 #: model-gettext.py:46
-#, fuzzy
 msgid "Italian, Romanian & related languages"
-msgstr "Tyska och relaterade språk"
+msgstr "Italienska, rumänska och relaterade språk"
 
 #: model-gettext.py:47
 msgid "Spanish, Portuguese, Galician"
 msgstr ""
 
 #: model-gettext.py:48
-#, fuzzy
 msgid "Latin & Italic languages"
-msgstr "Tyska och relaterade språk"
+msgstr "Latin och italiska språk"
 
 #: model-gettext.py:49
 msgid "Classical & modern Greek languages"
@@ -1530,9 +1528,8 @@ msgid "and <a href=\"#\" id=\"showAllAuthors\">%(nb_remaining_authors)s other au
 msgstr "och <a href=\"#\" id=\"showAllAuthors\">%(nb_remaining_authors)s andra författare</a>"
 
 #: papers/templates/papers/paper.html:62
-#, fuzzy
 msgid "Show less"
-msgstr "Visa"
+msgstr "Visa mindre"
 
 #: papers/templates/papers/paper.html:74
 msgid "Deposit accomplished!"
@@ -1561,7 +1558,7 @@ msgstr ""
 #: papers/templates/papers/paper.html:126
 #: website/templates/dissemin/start_page.html:129
 msgid "Learn more!"
-msgstr "Läs mer!"
+msgstr "Läs dig mer!"
 
 #: papers/templates/papers/paper.html:138
 #, python-format
@@ -1832,7 +1829,7 @@ msgstr "policy oklar."
 #: papers/templatetags/statuses.py:60 papers/templatetags/statuses.py:62
 #: papers/templatetags/statuses.py:74
 msgid "policy unknown."
-msgstr "policy okänt."
+msgstr "policy okänd."
 
 #: papers/templatetags/statuses.py:68
 msgid "archiving allowed"
@@ -2758,9 +2755,8 @@ msgstr ""
 
 #: website/templates/dissemin/start_page.html:72
 #: website/templates/dissemin/start_page.html:75
-#, fuzzy
 msgid "Latest Uploads"
-msgstr "Ladda upp"
+msgstr "Senaste uppladdningar"
 
 #: website/templates/dissemin/start_page.html:76
 msgid "Researchers use Dissemin to make sure all their publications can be accessed freely. Have a look at their latest uploads:"
@@ -2888,7 +2884,7 @@ msgstr "API"
 
 #: website/templates/footer.html:14
 msgid "Who are we?"
-msgstr "Vem är vi?"
+msgstr "Vilka är vi?"
 
 #: website/templates/footer.html:15
 msgid "Donate"
@@ -2912,9 +2908,8 @@ msgid "My profile"
 msgstr "Min profil"
 
 #: website/templates/navbar.html:35
-#, fuzzy
 msgid "My to-do list"
-msgstr "Ta bort från att göra-listan"
+msgstr "Min att-göra-lista"
 
 #: website/templates/navbar.html:36
 msgid "Logout"
