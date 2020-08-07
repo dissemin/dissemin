@@ -15,7 +15,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-04-23 08:11+0200\n"
-"PO-Revision-Date: 2020-07-27 16:20:48+0000\n"
+"PO-Revision-Date: 2020-08-07 07:38:19+0000\n"
 "Language: fi\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -676,19 +676,19 @@ msgstr ""
 
 #: dissemin/settings/common.py:307
 msgid "Arabic"
-msgstr "Arabia"
+msgstr "arabia"
 
 #: dissemin/settings/common.py:308
 msgid "German"
-msgstr "Saksa"
+msgstr "saksa"
 
 #: dissemin/settings/common.py:309
 msgid "English"
-msgstr "Englanti"
+msgstr "englanti"
 
 #: dissemin/settings/common.py:310
 msgid "Spanish"
-msgstr "Espanja"
+msgstr "espanja"
 
 #: dissemin/settings/common.py:311
 msgid "Finnish"
@@ -696,23 +696,23 @@ msgstr "suomi"
 
 #: dissemin/settings/common.py:312
 msgid "French"
-msgstr "Ranska"
+msgstr "ranska"
 
 #: dissemin/settings/common.py:313
 msgid "Korean"
-msgstr "Korea"
+msgstr "korea"
 
 #: dissemin/settings/common.py:314
 msgid "Macedonian"
-msgstr "Makedonia"
+msgstr "makedonia"
 
 #: dissemin/settings/common.py:315
 msgid "European Portuguese"
-msgstr "Euroopanportugali"
+msgstr "euroopanportugali"
 
 #: dissemin/settings/common.py:316
 msgid "Brazilian Portuguese"
-msgstr "Brasilianportugali"
+msgstr "brasilianportugali"
 
 #: dissemin/settings/common.py:317
 msgid "Swedish"
@@ -724,11 +724,11 @@ msgstr ""
 
 #: dissemin/settings/common.py:319
 msgid "Simplified Chinese"
-msgstr "Yksinkertainen kiina"
+msgstr "yksinkertainen kiina"
 
 #: dissemin/settings/common.py:320
 msgid "Traditional Chinese"
-msgstr "Perinteinen Kiina"
+msgstr "perinteinen kiina"
 
 #: model-gettext.py:2
 msgid "Computer science, knowledge & systems"

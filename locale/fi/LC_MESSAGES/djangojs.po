@@ -9,14 +9,15 @@
 #
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-04-22 12:29+0200\n"
-"PO-Revision-Date: 2020-01-09 19:06:56+0000\n"
+"PO-Revision-Date: 2020-08-07 07:38:16+0000\n"
 "Language: fi\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2019-12-12 14:04:05+0000\n"
-"X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
+"X-POT-Import-Date: 2020-03-17 02:10:16+0000\n"
+"X-Generator: MediaWiki 1.36.0-alpha; Translate 2020-07-20\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: website/static/js/dissemin.js:202
@@ -63,16 +64,12 @@ msgid "Preview of uploaded file"
 msgstr ""
 
 #: website/static/js/dissemin.js:601
-#, fuzzy
-#| msgid "Pages: "
 msgid "Pages"
-msgstr "Sivut: "
+msgstr "Sivut"
 
 #: website/static/js/dissemin.js:602
-#, fuzzy
-#| msgid "Size: "
 msgid "Size"
-msgstr "Koko: "
+msgstr "Koko"
 
 #: website/static/js/dissemin.js:617
 msgid "While uploading %(file)s the following error occured:"
@@ -106,3 +103,4 @@ msgstr ""
 #: website/static/js/moment.min.js:1
 msgid ": "
 msgstr ": "
+
