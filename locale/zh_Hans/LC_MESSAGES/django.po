@@ -4,6 +4,7 @@
 # Author: A Chinese Wikipedian
 # Author: Abijeet Patro
 # Author: BaRaN6161 TURK
+# Author: Becks
 # Author: Deathkon
 # Author: Josephine W.
 # Author: Liuxinyu970226
@@ -20,7 +21,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-04-23 08:11+0200\n"
-"PO-Revision-Date: 2020-07-30 13:26:39+0000\n"
+"PO-Revision-Date: 2020-08-13 17:14:40+0000\n"
 "Language: zh_hans\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2903,5 +2904,5 @@ msgstr "验证错误"
 #: website/templates/socialaccount/authentication_error.html:15
 #, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
-msgstr "验证失败。<a href=\"/\">返回登录页面。</a>\n           "
+msgstr "验证失败。<a href=\"%(account-login)s\">返回登录页面。</a>"
 

@@ -5,6 +5,7 @@
 # Author: Aftabuzzaman
 # Author: Kly
 # Author: Rasal Lia
+# Author: Sabelöga
 # Author: আজিজ
 # Author: আফতাবুজ্জামান
 # --
@@ -16,7 +17,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-04-23 08:11+0200\n"
-"PO-Revision-Date: 2020-07-27 16:20:47+0000\n"
+"PO-Revision-Date: 2020-08-13 17:14:37+0000\n"
 "Language: bn\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1400,7 +1401,6 @@ msgid "Advanced search"
 msgstr ""
 
 #: papers/templates/papers/advanced_search.html:20
-#, fuzzy
 msgid "Title"
 msgstr "শিরোনাম"
 

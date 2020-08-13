@@ -7,6 +7,7 @@
 # Author: Kassem7899
 # Author: Meno25
 # Author: NEHAOUA
+# Author: Sabelöga
 # Author: ديفيد
 # Author: محمد أحمد عبد الفتاح
 # --
@@ -18,7 +19,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-04-23 08:11+0200\n"
-"PO-Revision-Date: 2020-07-27 16:20:47+0000\n"
+"PO-Revision-Date: 2020-08-13 17:14:36+0000\n"
 "Language: ar\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1522,7 +1523,7 @@ msgstr "الإيداع أُنجِز تقريبا!"
 #: papers/templates/papers/paper.html:88
 #, python-format
 msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available after validation by the repository administration. You can check for the status in your <a class=\"alert-link\" href=\"%(my_profile)s\">profile</a>."
-msgstr ""
+msgstr "هذه الصفحة تم إيداعها في <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. النص الكامل سيكون متوفرا بعد التحقق بواسطة إدارة المستودع. يمكنك التحقق من الحالة في <a class=\"alert-link\" href=\"%(my_profile)s\">ملفك</a>."
 
 #: papers/templates/papers/paper.html:102
 #, fuzzy, python-format

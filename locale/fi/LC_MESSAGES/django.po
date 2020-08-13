@@ -4,8 +4,10 @@
 # Author: Abijeet Patro
 # Author: Antsa
 # Author: Kly
+# Author: Mguix
 # Author: Nike
 # Author: Pyscowicz
+# Author: Sabelöga
 # --
 # This file is part of the Dissemin Project
 # This file is distributed under the same license as the Dissemin package.
@@ -15,7 +17,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-04-23 08:11+0200\n"
-"PO-Revision-Date: 2020-08-07 07:38:19+0000\n"
+"PO-Revision-Date: 2020-08-13 17:14:38+0000\n"
 "Language: fi\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1495,9 +1497,8 @@ msgid "and <a href=\"#\" id=\"showAllAuthors\">%(nb_remaining_authors)s other au
 msgstr "ja <a href=\"#\" id=\"showAllAuthors\">%(nb_remaining_authors)s muuta tekijää.</a>"
 
 #: papers/templates/papers/paper.html:62
-#, fuzzy
 msgid "Show less"
-msgstr "Näytä"
+msgstr "Mostrar menys"
 
 #: papers/templates/papers/paper.html:74
 msgid "Deposit accomplished!"
