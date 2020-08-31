@@ -17,7 +17,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-04-23 08:11+0200\n"
-"PO-Revision-Date: 2020-08-03 17:39:49+0000\n"
+"PO-Revision-Date: 2020-08-31 14:06:12+0000\n"
 "Language: sv\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -26,19 +26,16 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: autocomplete/views.py:81
-#, fuzzy
 msgid "Current institutions"
-msgstr "Institutioner"
+msgstr "Nuvarande institutioner"
 
 #: autocomplete/views.py:85
-#, fuzzy
 msgid "Unverified institutions"
-msgstr "Institutioner"
+msgstr "Overifierade institutioner"
 
 #: autocomplete/views.py:89
-#, fuzzy
 msgid "Obsolete institutions"
-msgstr "Institutioner"
+msgstr "Föråldrade institutioner"
 
 #: deposit/forms.py:88
 msgid "Upload type"
@@ -46,7 +43,7 @@ msgstr "Uppladdningstyp"
 
 #: deposit/forms.py:91 deposit/templates/deposit/deposits.html:46
 msgid "Repository"
-msgstr ""
+msgstr "Databas"
 
 #: deposit/forms.py:100
 msgid "Invalid full text identifier."
@@ -65,13 +62,12 @@ msgid "Do not publish before"
 msgstr "Publicera inte förrän"
 
 #: deposit/forms.py:166 deposit/templates/deposit/deposits.html:89
-#, fuzzy
 msgid "License"
-msgstr "Ingen licens"
+msgstr "Licens"
 
 #: deposit/forms.py:215
 msgid "No preferred repository"
-msgstr ""
+msgstr "Ingen föredragen databas"
 
 #: deposit/forms.py:230 deposit/sword/forms.py:15
 msgid "E-mail"
@@ -79,7 +75,7 @@ msgstr "E-post"
 
 #: deposit/forms.py:231
 msgid "Preferred repository"
-msgstr ""
+msgstr "Föredragen databas"
 
 #: deposit/forms.py:241 deposit/hal/forms.py:71 deposit/osf/forms.py:134
 msgid "Save"
@@ -143,7 +139,7 @@ msgstr "Arkeologi och fornhistoria"
 
 #: deposit/hal/metadata.py:47
 msgid "Architecture, space management"
-msgstr ""
+msgstr "Arkitektur, rymdorganisering"
 
 #: deposit/hal/metadata.py:48
 msgid "Art and art history"
@@ -185,11 +181,11 @@ msgstr "Geografi"
 
 #: deposit/hal/metadata.py:57
 msgid "Business administration"
-msgstr ""
+msgstr "Affärsadministration"
 
 #: deposit/hal/metadata.py:58
 msgid "History, Philosophy and Sociology of Sciences"
-msgstr ""
+msgstr "Historia, filosofi och vetenskapssociologi"
 
 #: deposit/hal/metadata.py:59 model-gettext.py:91
 msgid "History"
@@ -197,7 +193,7 @@ msgstr "Historia"
 
 #: deposit/hal/metadata.py:60
 msgid "Library and information sciences"
-msgstr ""
+msgstr "Bibliotek och informationsvetenskap"
 
 #: deposit/hal/metadata.py:61 model-gettext.py:42
 msgid "Linguistics"
@@ -213,7 +209,7 @@ msgstr "Kulturarv och museologi"
 
 #: deposit/hal/metadata.py:64
 msgid "Musicology and performing arts"
-msgstr ""
+msgstr "Musikvetenskap och scenkonst"
 
 #: deposit/hal/metadata.py:65 model-gettext.py:11
 msgid "Philosophy"
@@ -259,11 +255,11 @@ msgstr "Ekonomi och kvantitativ finans"
 
 #: deposit/hal/models.py:14
 msgid "HAL username"
-msgstr ""
+msgstr "Användarnamn på HAL"
 
 #: deposit/hal/models.py:15
 msgid "If set, deposits will be associated to this HAL account."
-msgstr ""
+msgstr "Om det anges kommer insättningar att associeras med det här HAL-kontot."
 
 #: deposit/hal/protocol.py:170
 msgid "No HAL user credentials provided."
@@ -271,12 +267,12 @@ msgstr "Inga HAL-inloggningsuppgifter uppgavs."
 
 #: deposit/hal/protocol.py:241
 msgid "This document is already in HAL. HAL refused the deposit."
-msgstr ""
+msgstr "Det här dokumentet finns redan i HALL. HAL avvisade insättningen."
 
 #: deposit/hal/protocol.py:248
 #, python-format
 msgid "HAL refused the deposit (HTTP error %d): %s"
-msgstr ""
+msgstr "HAL avvisade insättningen (HTTP error %d): %s"
 
 #: deposit/hal/protocol.py:255
 msgid "HAL returned an invalid XML response"
@@ -284,7 +280,7 @@ msgstr "HAL returnerade ett ogiltigt XML-svar"
 
 #: deposit/hal/protocol.py:267
 msgid "This paper already exists in HAL."
-msgstr ""
+msgstr "Den här artikeln finns redan i HALL."
 
 #: deposit/hal/protocol.py:273
 msgid "HAL rejected the submission."
@@ -308,7 +304,7 @@ msgstr "Misslyckades"
 
 #: deposit/models.py:45
 msgid "Faked"
-msgstr ""
+msgstr "Förfalskning"
 
 #: deposit/models.py:46
 msgid "Pending publication"
@@ -316,7 +312,7 @@ msgstr "Väntande publicering"
 
 #: deposit/models.py:47
 msgid "Embargo"
-msgstr ""
+msgstr "Embargo"
 
 #: deposit/models.py:48
 msgid "Published"
@@ -324,7 +320,7 @@ msgstr "Publicerad"
 
 #: deposit/models.py:49
 msgid "Refused by the repository"
-msgstr ""
+msgstr "Avvisades av arkivet"
 
 #: deposit/models.py:50
 msgid "Deleted"
@@ -333,7 +329,7 @@ msgstr "Raderad"
 #: deposit/models.py:340 deposit/templates/deposit/start.html:228
 #: deposit/views.py:119
 msgid "Deposit"
-msgstr ""
+msgstr "Sätt in"
 
 #: deposit/models.py:393
 msgid "We will use this email address to notify you when your deposits are accepted."
@@ -361,15 +357,15 @@ msgstr "Arkitektur"
 
 #: deposit/osf/forms.py:59 deposit/osf/forms.py:82
 msgid "Arts and Humanities"
-msgstr ""
+msgstr "Konst och humaniora"
 
 #: deposit/osf/forms.py:61 deposit/osf/forms.py:84
 msgid "Business"
-msgstr ""
+msgstr "Affärer"
 
 #: deposit/osf/forms.py:65 deposit/osf/forms.py:88 model-gettext.py:63
 msgid "Engineering"
-msgstr ""
+msgstr "Ingenjörskonst"
 
 #: deposit/osf/forms.py:69 deposit/osf/forms.py:92
 msgid "Life Sciences"
@@ -385,7 +381,7 @@ msgstr "Fysisk vetenskap och matematik"
 
 #: deposit/osf/forms.py:75 deposit/osf/forms.py:98
 msgid "Social and Behavioral Sciences"
-msgstr ""
+msgstr "Social- och beteendevetenskap"
 
 #: deposit/osf/forms.py:141
 msgid "Invalid OSF identifier."
@@ -846,14 +842,12 @@ msgid "Christian denominations"
 msgstr "Dissemins administration"
 
 #: model-gettext.py:30
-#, fuzzy
 msgid "Other religions"
-msgstr "Religion"
+msgstr "Andra religioner"
 
 #: model-gettext.py:31
-#, fuzzy
 msgid "Social sciences, sociology & anthropology"
-msgstr "Socialantropologi och etnologi"
+msgstr "Sociala vetenskaper, sociologi och antropologi"
 
 #: model-gettext.py:34
 msgid "Economics"
@@ -876,13 +870,12 @@ msgid "Customs, etiquette & folklore"
 msgstr ""
 
 #: model-gettext.py:41 website/templates/navbar.html:15
-#, fuzzy
 msgid "Language"
-msgstr "Byt språk"
+msgstr "Språk"
 
 #: model-gettext.py:43
 msgid "English & Old English languages"
-msgstr ""
+msgstr "Engelska och fornengelska språk"
 
 #: model-gettext.py:44
 msgid "German & related languages"
@@ -898,7 +891,7 @@ msgstr "Italienska, rumänska och relaterade språk"
 
 #: model-gettext.py:47
 msgid "Spanish, Portuguese, Galician"
-msgstr ""
+msgstr "Spanska, portugisiska, galiciska"
 
 #: model-gettext.py:48
 msgid "Latin & Italic languages"
@@ -906,17 +899,15 @@ msgstr "Latin och italiska språk"
 
 #: model-gettext.py:49
 msgid "Classical & modern Greek languages"
-msgstr ""
+msgstr "Klassiska och moderna grekiska språk"
 
 #: model-gettext.py:50
-#, fuzzy
 msgid "Other languages"
-msgstr "Byt språk"
+msgstr "Andra språk"
 
 #: model-gettext.py:51
-#, fuzzy
 msgid "Science"
-msgstr "Livsvetenskap"
+msgstr "Vetenskap"
 
 #: model-gettext.py:53
 msgid "Astronomy"
@@ -928,35 +919,31 @@ msgstr ""
 
 #: model-gettext.py:57
 msgid "Fossils & prehistoric life"
-msgstr ""
+msgstr "Fossiler och förhistoriskt liv"
 
 #: model-gettext.py:58
-#, fuzzy
 msgid "Biology"
-msgstr "Sociologi"
+msgstr "Biologi"
 
 #: model-gettext.py:59
 msgid "Plants (Botany)"
-msgstr ""
+msgstr "Växter (botanik)"
 
 #: model-gettext.py:60
 msgid "Animals (Zoology)"
 msgstr "Djur (zoologi)"
 
 #: model-gettext.py:61
-#, fuzzy
 msgid "Technology"
-msgstr "Psykologi"
+msgstr "Teknologi"
 
 #: model-gettext.py:62
-#, fuzzy
 msgid "Medicine & health"
-msgstr "Medicin och hälsovetenskap"
+msgstr "Medicin och hälsa"
 
 #: model-gettext.py:64
-#, fuzzy
 msgid "Agriculture"
-msgstr "Arkitektur"
+msgstr "Jordbruk"
 
 #: model-gettext.py:65
 msgid "Home & family management"
@@ -981,7 +968,7 @@ msgstr ""
 
 #: model-gettext.py:70
 msgid "Construction of buildings"
-msgstr ""
+msgstr "Byggnadskonstruktioner"
 
 #: model-gettext.py:71
 msgid "Arts"
@@ -989,19 +976,19 @@ msgstr "Konst"
 
 #: model-gettext.py:72
 msgid "Area planning & landscape architecture"
-msgstr ""
+msgstr "Ytplanering och landskapsarkitektur"
 
 #: model-gettext.py:74
 msgid "Sculpture, ceramics & metalwork"
-msgstr "Skulptur, keramik och metalljobb"
+msgstr "Skulptur, keramik och metallarbete"
 
 #: model-gettext.py:75
 msgid "Graphic arts & decorative arts"
-msgstr ""
+msgstr "Grafisk konst och dekorativ konst"
 
 #: model-gettext.py:76
 msgid "Painting"
-msgstr ""
+msgstr "Målning"
 
 #: model-gettext.py:77
 msgid "Printmaking & prints"
@@ -1009,7 +996,7 @@ msgstr ""
 
 #: model-gettext.py:78
 msgid "Photography, computer art, film, video"
-msgstr ""
+msgstr "Fotografering, datorkonst, film, video"
 
 #: model-gettext.py:79
 msgid "Music"
@@ -1017,19 +1004,19 @@ msgstr "Musik"
 
 #: model-gettext.py:80
 msgid "Sports, games & entertainment"
-msgstr ""
+msgstr "Sport, spel och underhållning"
 
 #: model-gettext.py:81
 msgid "Literature, rhetoric & criticism"
-msgstr ""
+msgstr "Litteratur, retorik och kritik"
 
 #: model-gettext.py:82
 msgid "American literature in English"
-msgstr ""
+msgstr "Amerikansk litteratur på engelska"
 
 #: model-gettext.py:83
 msgid "English & Old English literatures"
-msgstr ""
+msgstr "Engelsk och fornengelsk litteratur"
 
 #: model-gettext.py:84
 msgid "German & related literatures"
@@ -1047,7 +1034,7 @@ msgstr "Tysk och relaterad litteratur"
 
 #: model-gettext.py:87
 msgid "Spanish, Portuguese, Galician literatures"
-msgstr ""
+msgstr "Spansk, portugisisk, galicisk litteratur"
 
 #: model-gettext.py:88
 #, fuzzy
@@ -1056,70 +1043,59 @@ msgstr "Tysk och relaterad litteratur"
 
 #: model-gettext.py:89
 msgid "Classical & modern Greek literatures"
-msgstr ""
+msgstr "Klassisk och modern grekisk literatur"
 
 #: model-gettext.py:90
-#, fuzzy
 msgid "Other literatures"
-msgstr "Litteratur"
+msgstr "Övrig litteratur"
 
 #: model-gettext.py:92
-#, fuzzy
 msgid "Geography & travel"
-msgstr "Geografi"
+msgstr "Geografi och resande"
 
 #: model-gettext.py:93
-#, fuzzy
 msgid "Biography & genealogy"
-msgstr "Geografi"
+msgstr "Geografi och genealogi"
 
 #: model-gettext.py:94
 msgid "History of ancient world (to ca. 499)"
-msgstr ""
+msgstr "Historien om den gamla värden (t.o.m. ca. 499)"
 
 #: model-gettext.py:95
-#, fuzzy
 msgid "History of Europe"
-msgstr "Afrikas historia"
+msgstr "Europas historia"
 
 #: model-gettext.py:96
-#, fuzzy
 msgid "History of Asia"
-msgstr "Historia"
+msgstr "Asiens historia"
 
 #: model-gettext.py:97
 msgid "History of Africa"
 msgstr "Afrikas historia"
 
 #: model-gettext.py:98
-#, fuzzy
 msgid "History of North America"
-msgstr "Afrikas historia"
+msgstr "Nordamerikas historia"
 
 #: model-gettext.py:99
-#, fuzzy
 msgid "History of South America"
-msgstr "Afrikas historia"
+msgstr "Sydamerikas historia"
 
 #: model-gettext.py:100
-#, fuzzy
 msgid "History of other areas"
-msgstr "Afrikas historia"
+msgstr "Andra områdens historia"
 
 #: model-gettext.py:101
-#, fuzzy
 msgid "Data processing & computer science"
-msgstr "Datavetenskap"
+msgstr "Databehandling och datavetenskap"
 
 #: model-gettext.py:102
-#, fuzzy
 msgid "Military science"
-msgstr "Statsvetenskap"
+msgstr "Militärvetenskap"
 
 #: model-gettext.py:103
-#, fuzzy
 msgid "Other Germanic languages"
-msgstr "Byt språk"
+msgstr "Andra germanska språk"
 
 #: model-gettext.py:104
 msgid "Public performances"
@@ -1164,34 +1140,28 @@ msgid "For every document, that you upload via Dissemin we need once a TUprints 
 msgstr ""
 
 #: model-gettext.py:114
-#, fuzzy
 msgid "Download contract"
-msgstr "Ladda ned"
+msgstr "Ladda ner kontrakt"
 
 #: model-gettext.py:115
-#, fuzzy
 msgid "Creative Commons 1.0 Universal (CC0 1.0) Public Domain Dedication"
-msgstr "Creative Commons CC0 1.0 Universell"
+msgstr "Creative Commons 1.0 universell (CC0 1.0) Public domain-dedikation"
 
 #: model-gettext.py:116
-#, fuzzy
 msgid "Creative Commons Attribution 4.0 International (CC BY 4.0)"
-msgstr "Creative Commons CC-By Erkännande 4.0 Internationell (CC BY 4.0)"
+msgstr "Creative Commons Erkännande 4.0 Internationell (CC BY 4.0)"
 
 #: model-gettext.py:117
-#, fuzzy
 msgid "Creative Commons Attribution-ShareAlike 4.0, International (CC BY-SA 4.0)"
-msgstr "Creative Commons CC-By Erkännande 4.0 Internationell (CC BY 4.0)"
+msgstr "Creative Commons Erkännande-DelaLika 4.0 Internationell (CC BY-SA 4.0)"
 
 #: model-gettext.py:118
-#, fuzzy
 msgid "Creative Commons Attribution-NonCommerical 4.0 International (CC BY-NC 4.0)"
-msgstr "Creative Commons CC-By Erkännande 4.0 Internationell (CC BY 4.0)"
+msgstr "Creative Commons Erkännande-IckeKommersiell 4.0 Internationell (CC BY-NC 4.0)"
 
 #: model-gettext.py:119
-#, fuzzy
 msgid "Creative Commons Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0)"
-msgstr "Creative Commons CC-By Erkännande 4.0 Internationell (CC BY 4.0)"
+msgstr "Creative Commons Erkännande-IngaBearbetningar 4.0 Internationell (CC BY-ND 4.0)"
 
 #: model-gettext.py:120
 msgid "Free for private use; right holder retains other rights, including distribution"
@@ -1202,18 +1172,16 @@ msgid "Other open license"
 msgstr "Annan öppen licens"
 
 #: model-gettext.py:123
-#, fuzzy
 msgid "Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)"
-msgstr "Creative Commons CC-By Erkännande 4.0 Internationell (CC BY 4.0)"
+msgstr "Creative Commons Erkännande-IckeKommersiell-DelaLika 4.0 Internationell (CC BY-NC-SA 4.0)"
 
 #: model-gettext.py:124
-#, fuzzy
 msgid "Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)"
-msgstr "Creative Commons CC-By Erkännande 4.0 Internationell (CC BY 4.0)"
+msgstr "Creative Commons Erkännande-Ickekommersiell-IngaBearbetningar 4.0 Internationell (CC BY-NC-ND 4.0)"
 
 #: model-gettext.py:125
 msgid "Zenodo"
-msgstr ""
+msgstr "Zenodo"
 
 #: model-gettext.py:126
 msgid "Zenodo is a general-purpose open repository hosted by CERN. If the document does not have a DOI yet, Zenodo will create one."
@@ -1221,7 +1189,7 @@ msgstr ""
 
 #: model-gettext.py:127
 msgid "HAL"
-msgstr ""
+msgstr "HAL"
 
 #: model-gettext.py:128
 msgid "HAL is a  multidisciplinary open archive, sustained by the French Research Ministry."
@@ -1237,7 +1205,7 @@ msgstr ""
 
 #: model-gettext.py:131
 msgid "TUprints"
-msgstr ""
+msgstr "TUprints"
 
 #: model-gettext.py:132
 msgid "TUprints is the open access repository for all current and former members of the Technical University Darmstadt."
@@ -1300,7 +1268,7 @@ msgstr ""
 
 #: papers/baremodels.py:66
 msgid "Report"
-msgstr ""
+msgstr "Rapport"
 
 #: papers/baremodels.py:67
 msgid "Thesis"
@@ -1333,11 +1301,11 @@ msgstr "Forskare"
 
 #: papers/forms.py:71
 msgid "newest first"
-msgstr ""
+msgstr "nyast först"
 
 #: papers/forms.py:72
 msgid "oldest first"
-msgstr ""
+msgstr "äldst sist"
 
 #: papers/forms.py:100 papers/forms.py:107
 msgid "Any"
@@ -1394,7 +1362,7 @@ msgstr "Uppdaterar statistik"
 
 #: papers/models.py:1224 papers/views.py:145 papers/views.py:149
 msgid "Papers"
-msgstr ""
+msgstr "Artiklar"
 
 #: papers/templates/papers/advanced_search.html:8
 msgid "Advanced Search"
@@ -1403,7 +1371,7 @@ msgstr "Avancerad sökning"
 #: papers/templates/papers/advanced_search.html:13
 #: website/templates/dissemin/start_page.html:30
 msgid "Advanced search"
-msgstr ""
+msgstr "Avancerad sökning"
 
 #: papers/templates/papers/advanced_search.html:20
 #, fuzzy
@@ -1426,7 +1394,7 @@ msgstr "Efter dokumenttyp"
 
 #: papers/templates/papers/advanced_search.html:60
 msgid "Fields for superusers"
-msgstr ""
+msgstr "Fält för avancerade användare"
 
 #: papers/templates/papers/advanced_search.html:62
 #: papers/templates/papers/search_base.html:124
@@ -1450,16 +1418,16 @@ msgstr ""
 #: papers/templates/papers/export_citation_modal.html:7
 #: papers/templates/papers/paper_panel.html:59
 msgid "Export citation"
-msgstr ""
+msgstr "Exportera citat"
 
 #: papers/templates/papers/export_citation_modal.html:8
 #: papers/templates/papers/export_citation_modal.html:30
 msgid "Close"
-msgstr ""
+msgstr "Stäng"
 
 #: papers/templates/papers/export_citation_modal.html:15
 msgid "Format"
-msgstr ""
+msgstr "Format"
 
 #: papers/templates/papers/export_citation_modal.html:31
 #: papers/templates/papers/paper.html:179
@@ -1471,8 +1439,8 @@ msgstr "Ladda ned"
 #, python-format
 msgid "We ignored %(papers)s paper from your ORCiD profile."
 msgid_plural "We ignored %(papers)s papers from your ORCiD profile."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Vi ignorerade %(papers)s artikel från din ORCiD-profil."
+msgstr[1] "Vi ignorerade %(papers)s artiklar från din ORCiD-profil."
 
 #: papers/templates/papers/messages.html:14
 msgid "Details:"
@@ -1500,7 +1468,7 @@ msgstr "Efter publiceringsdatum"
 
 #: papers/templates/papers/messages.html:29
 msgid "Paper is invalid"
-msgstr ""
+msgstr "Artikeln är ogiltig"
 
 #: papers/templates/papers/messages.html:32
 msgid "{{ title }} was ignored for the following reason:"
@@ -1508,7 +1476,7 @@ msgstr "{{ title }} ignorerades av följande anledning:"
 
 #: papers/templates/papers/messages.html:36
 msgid "A paper was ignored, because is has no title."
-msgstr ""
+msgstr "En artikel ignorerades, den har ingen titel."
 
 #: papers/templates/papers/paper.html:40
 #, python-format
@@ -1517,10 +1485,10 @@ msgid "%(doctype)s published in %(year)s by"
 msgstr "%(doctype)s publicerad i %(year)s av"
 
 #: papers/templates/papers/paper.html:46
-#, fuzzy, python-format
+#, python-format
 msgctxt "as in: _Published in 2017 by_ Tom Smith, Nicole Allen"
 msgid "Published in %(year)s by"
-msgstr "Publicerad i"
+msgstr "Publicerad %(year)s av"
 
 #: papers/templates/papers/paper.html:56
 #, python-format
@@ -1533,7 +1501,7 @@ msgstr "Visa mindre"
 
 #: papers/templates/papers/paper.html:74
 msgid "Deposit accomplished!"
-msgstr ""
+msgstr "Insättning lyckades!"
 
 #: papers/templates/papers/paper.html:76
 #, python-format
@@ -1572,7 +1540,7 @@ msgstr ""
 
 #: papers/templates/papers/paper.html:177
 msgid "Full text:"
-msgstr ""
+msgstr "Hela texten:"
 
 #: papers/templates/papers/paper.html:181 statistics/models.py:66
 msgid "Unavailable"
@@ -1620,7 +1588,7 @@ msgstr "Sök i Google Scholar"
 
 #: papers/templates/papers/paper_panel.html:69
 msgid "Admin zone"
-msgstr ""
+msgstr "Adminzon"
 
 #: papers/templates/papers/policies.html:56
 #: publishers/templates/publishers/publisher.html:92
@@ -1638,20 +1606,19 @@ msgstr "Markera den här publikationen för en senare uppladdning."
 
 #: papers/templates/papers/policies.html:76
 msgid "Mark"
-msgstr ""
+msgstr "Märk"
 
 #: papers/templates/papers/policies.html:77
 msgid "Marked"
-msgstr ""
+msgstr "Markerad"
 
 #: papers/templates/papers/policies.html:89
 msgid "Contact the authors to make this publication freely available. This is a service of the Open Access Button."
-msgstr ""
+msgstr "Kontakta författarna för att göra den har artikeln fritt tillgänglig. Detta är en av Open Access Buttons tjänster."
 
 #: papers/templates/papers/policies.html:89
-#, fuzzy
 msgid "Contact authors"
-msgstr "Efter författare"
+msgstr "Kontakta författare"
 
 #: papers/templates/papers/policies.html:92
 #: website/templates/dissemin/tos.html:49
@@ -1665,7 +1632,7 @@ msgstr "Är detta du?"
 #: papers/templates/papers/researcher.html:26
 #, python-format
 msgid " %(first_name)s %(last_name)s uses ORCID."
-msgstr ""
+msgstr " %(first_name)s %(last_name)s använder ORCID."
 
 #: papers/templates/papers/researcher.html:38
 msgid "Refresh Publications"
@@ -1683,28 +1650,26 @@ msgstr "Saknas publikationer? <a href=\"%(matching_papers_url)s\">Sök efter pub
 #: papers/templates/papers/search.html:10
 #, python-format
 msgid "Missing publications? <a class=\"showHrefPrint\" href=\"%(faq_url)s#missingPaper\">Read more about our data sources.</a>"
-msgstr ""
+msgstr "Saknar publikationer. <a class=\"showHrefPrint\" href=\"%(faq_url)s#missingPaper\">Läs mer om våra datakällor.</a>"
 
 #: papers/templates/papers/search_base.html:25
-#, fuzzy, python-format
+#, python-format
 msgid "%(formattedCounter)s paper found"
 msgid_plural "%(formattedCounter)s papers found"
-msgstr[0] "%(formattedCounter)s utgivare hittades"
-msgstr[1] "%(formattedCounter)s utgivare hittades"
+msgstr[0] "%(formattedCounter)s artikar hittades"
+msgstr[1] "%(formattedCounter)s artiklar hittades"
 
 #: papers/templates/papers/search_base.html:42
 msgid "Refine"
-msgstr ""
+msgstr "Förfina"
 
 #: papers/templates/papers/search_base.html:46
-#, fuzzy
 msgid "By title"
-msgstr "titel"
+msgstr "Efter titel"
 
 #: papers/templates/papers/search_base.html:55
-#, fuzzy
 msgid "By co-authors"
-msgstr "Efter författare"
+msgstr "Efter medförfattare"
 
 #: papers/templates/papers/search_base.html:57
 msgid "By authors"
@@ -1732,7 +1697,7 @@ msgstr "Sortera efter"
 
 #: papers/templates/papers/search_base.html:122
 msgid "Refine for superusers"
-msgstr ""
+msgstr "Förfina för avancerade användare"
 
 #: papers/templates/papers/search_base.html:166
 msgid "Refreshing results"
@@ -1878,33 +1843,31 @@ msgstr ""
 
 #: papers/views.py:148
 msgid "All papers"
-msgstr ""
+msgstr "Alla artiklar"
 
 #: papers/views.py:257
 msgid "To-do list"
-msgstr ""
+msgstr "Att göra-lista"
 
 #: papers/views.py:258
 msgid "Papers on my to-do list"
-msgstr ""
+msgstr "Artiklar på min att göra-lista"
 
 #: papers/views.py:282
-#, fuzzy
 msgid "Invalid ORCID profile. Please make sure it includes a public name."
-msgstr "\n                            Ogiltig ORCID-profil.\n                            Se till att den innehåller ett offentligt namn.\n                            "
+msgstr "Ogiltig ORCID-profil. Se till att den innehåller ett offentligt namn."
 
 #: papers/views.py:285
 msgid "Invalid ORCID profile."
 msgstr "Ogiltig ORCID-profil."
 
 #: papers/views.py:313
-#, fuzzy
 msgid "authored by"
-msgstr " författad av "
+msgstr "författad av"
 
 #: papers/views.py:381
 msgid "Paper view expects a DOI or a pk"
-msgstr ""
+msgstr "Artikelvisning förväntar sig en DOI eller pk"
 
 #: papers/views.py:386
 #, python-format
@@ -1913,12 +1876,11 @@ msgstr "Ingen %(verbose_name)s hittades som matchade frågan"
 
 #: papers/views.py:390
 msgid "This paper has been deleted."
-msgstr ""
+msgstr "Den här artikeln har raderats."
 
 #: papers/views.py:435
-#, fuzzy
 msgid "Invalid DOI."
-msgstr "Ogiltigt formulär."
+msgstr "Ogiltigt DOI."
 
 #: publishers/forms.py:10
 msgid "popularity"
@@ -1943,7 +1905,7 @@ msgstr "Efter utgivarpolicy"
 
 #: publishers/forms.py:38
 msgid "Order"
-msgstr ""
+msgstr "Ordning"
 
 #: publishers/models.py:39 website/templates/dissemin/faq.html:292
 msgid "Open access"
@@ -2034,8 +1996,8 @@ msgstr "Data tillhandahålls av"
 #, python-format
 msgid "(%(num_total)s paper)"
 msgid_plural "(%(num_total)s papers)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "(%(num_total)s artikel)"
+msgstr[1] "(%(num_total)s artiklar)"
 
 #: publishers/templates/publishers/list.html:96
 msgid "No publishers found"
@@ -2060,12 +2022,11 @@ msgstr "Utgivare"
 #: publishers/templates/publishers/publisher.html:41
 #, python-format
 msgid "Last updated on %(last_updated)s, <a href=\"%(feedback_url)s\">report any error to them</a>."
-msgstr ""
+msgstr "Senast uppdaterad %(last_updated)s, <a href=\"%(feedback_url)s\">rapportera om problem uppstått</a>."
 
 #: publishers/templates/publishers/publisher.html:45
-#, fuzzy
 msgid "Report any error to them."
-msgstr "Rapportera alla fel till dem"
+msgstr "Rapportera alla fel till dem."
 
 #: publishers/templates/publishers/publisher.html:51
 msgid "For superusers"
@@ -2149,7 +2110,7 @@ msgstr ""
 
 #: upload/forms.py:51
 msgid "URL"
-msgstr ""
+msgstr "Webbadress"
 
 #: upload/templates/upload/widget.html:3
 msgid "Select here the full text of your article. PDF files only, maximum size:"
