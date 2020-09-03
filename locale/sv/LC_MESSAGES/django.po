@@ -17,7 +17,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-04-23 08:11+0200\n"
-"PO-Revision-Date: 2020-08-31 14:06:12+0000\n"
+"PO-Revision-Date: 2020-09-03 14:38:30+0000\n"
 "Language: sv\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2175,9 +2175,9 @@ msgid "Access denied"
 msgstr "Åtkomst till PDF nekades."
 
 #: website/templates/403.html:13
-#, fuzzy, python-format
+#, python-format
 msgid "The access to the requested page has been denied. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr "\n            Sidan du begärde kunde inte hittas. <a href=\"/\">Gå tillbaka till hemsidan.</a>\n           "
+msgstr "Sidan du begärde kunde inte hittas. <a href=\"%(index)s\">Gå tillbaka till hemsidan.</a>"
 
 #: website/templates/404.html:6 website/templates/404.html:10
 msgid "Page not found"
