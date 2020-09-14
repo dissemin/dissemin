@@ -4,6 +4,7 @@
 # Author: Abijeet Patro
 # Author: Becks
 # Author: Esraa Ismail
+# Author: Hhaboh162002
 # Author: Kassem7899
 # Author: Meno25
 # Author: NEHAOUA
@@ -19,7 +20,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-04-23 08:11+0200\n"
-"PO-Revision-Date: 2020-08-13 17:14:36+0000\n"
+"PO-Revision-Date: 2020-09-14 15:01:11+0000\n"
 "Language: ar\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -41,7 +42,7 @@ msgstr "مؤسسات عفا عليها الزمن"
 
 #: deposit/forms.py:88
 msgid "Upload type"
-msgstr "نوع التحميل"
+msgstr "نوع الرفع"
 
 #: deposit/forms.py:91 deposit/templates/deposit/deposits.html:46
 msgid "Repository"
@@ -60,9 +61,8 @@ msgid "Dewey Decimal Class"
 msgstr "فئة ديوي العشرية"
 
 #: deposit/forms.py:160
-#, fuzzy
 msgid "Do not publish before"
-msgstr "ناشر مغمور"
+msgstr "لا تنشر قبل"
 
 #: deposit/forms.py:166 deposit/templates/deposit/deposits.html:89
 msgid "License"
@@ -87,7 +87,7 @@ msgstr "حفظ"
 
 #: deposit/hal/forms.py:41
 msgid "Scientific field"
-msgstr "الحقل العلمي"
+msgstr "المجال العلمي"
 
 #: deposit/hal/forms.py:46
 msgid "Depositing author"
@@ -2737,9 +2737,8 @@ msgstr "لا يكفي رفع أوراقك على صفحة الويب الخاص�
 
 #: website/templates/dissemin/start_page.html:72
 #: website/templates/dissemin/start_page.html:75
-#, fuzzy
 msgid "Latest Uploads"
-msgstr "رفع"
+msgstr "آخر المرفوعات"
 
 #: website/templates/dissemin/start_page.html:76
 msgid "Researchers use Dissemin to make sure all their publications can be accessed freely. Have a look at their latest uploads:"
