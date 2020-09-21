@@ -13,7 +13,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-04-23 08:11+0200\n"
-"PO-Revision-Date: 2020-07-27 16:20:50+0000\n"
+"PO-Revision-Date: 2020-09-21 14:02:02+0000\n"
 "Language: pt_br\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2386,7 +2386,7 @@ msgstr "Sim, você pode fazê-lo, primeiro <a href=\"https://orcid.org/registo\"
 
 #: website/templates/dissemin/faq.html:281
 msgid "We have the following five policy classes:"
-msgstr ""
+msgstr "Temos as seguintes cinco classes de política:"
 
 #: website/templates/dissemin/faq.html:285
 msgid "Class"
