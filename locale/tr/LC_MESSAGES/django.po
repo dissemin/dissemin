@@ -6,6 +6,7 @@
 # Author: Grkn gll
 # Author: Incelemeelemani
 # Author: LuCKY
+# Author: Stonecy
 # Author: Suvarioglu
 # Author: TmY e12
 # Author: ToprakM
@@ -18,7 +19,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-04-23 08:11+0200\n"
-"PO-Revision-Date: 2020-07-30 13:26:39+0000\n"
+"PO-Revision-Date: 2020-09-28 15:14:45+0000\n"
 "Language: tr\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
