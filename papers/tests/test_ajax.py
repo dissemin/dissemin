@@ -213,6 +213,7 @@ class PaperAjaxTest(JsonRenderingTest):
                                     'slug': self.r1.slug})
         self.checkJson(page)
 
+    @pytest.mark.xfail(reason="No abstract in response of doi-cache.dissem.in/zotero")
     @pytest.mark.usefixtures('mock_doi')
     def test_consolidate_paper(self):
         p = Paper.create_by_doi('10.1175/jas-d-15-0240.1')
