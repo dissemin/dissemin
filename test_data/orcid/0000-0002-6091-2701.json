@@ -1,0 +1,227 @@
+{
+  "orcid-identifier" : {
+    "uri" : "https://orcid.org/0000-0002-6091-2701",
+    "path" : "0000-0002-6091-2701",
+    "host" : "orcid.org"
+  },
+  "preferences" : {
+    "locale" : "EN"
+  },
+  "history" : {
+    "creation-method" : "DIRECT",
+    "completion-date" : null,
+    "submission-date" : {
+      "value" : 1595331309200
+    },
+    "last-modified-date" : {
+      "value" : 1595331823413
+    },
+    "claimed" : true,
+    "source" : null,
+    "deactivation-date" : null,
+    "verified-email" : true,
+    "verified-primary-email" : true
+  },
+  "person" : {
+    "last-modified-date" : null,
+    "name" : null,
+    "other-names" : {
+      "last-modified-date" : null,
+      "other-name" : [ ],
+      "path" : "/0000-0002-6091-2701/other-names"
+    },
+    "biography" : null,
+    "researcher-urls" : {
+      "last-modified-date" : null,
+      "researcher-url" : [ ],
+      "path" : "/0000-0002-6091-2701/researcher-urls"
+    },
+    "emails" : {
+      "last-modified-date" : null,
+      "email" : [ ],
+      "path" : "/0000-0002-6091-2701/email"
+    },
+    "addresses" : {
+      "last-modified-date" : null,
+      "address" : [ ],
+      "path" : "/0000-0002-6091-2701/address"
+    },
+    "keywords" : {
+      "last-modified-date" : null,
+      "keyword" : [ ],
+      "path" : "/0000-0002-6091-2701/keywords"
+    },
+    "external-identifiers" : {
+      "last-modified-date" : null,
+      "external-identifier" : [ ],
+      "path" : "/0000-0002-6091-2701/external-identifiers"
+    },
+    "path" : "/0000-0002-6091-2701/person"
+  },
+  "activities-summary" : {
+    "last-modified-date" : {
+      "value" : 1595331823413
+    },
+    "educations" : {
+      "last-modified-date" : {
+        "value" : 1595331695629
+      },
+      "education-summary" : [ {
+        "created-date" : {
+          "value" : 1595331695629
+        },
+        "last-modified-date" : {
+          "value" : 1595331695629
+        },
+        "source" : {
+          "source-orcid" : {
+            "uri" : "https://orcid.org/0000-0002-6091-2701",
+            "path" : "0000-0002-6091-2701",
+            "host" : "orcid.org"
+          },
+          "source-client-id" : null,
+          "source-name" : {
+            "value" : "Erinç Şen"
+          }
+        },
+        "department-name" : "School of Graduate Studies",
+        "role-title" : "LL.M.",
+        "start-date" : {
+          "year" : {
+            "value" : "2019"
+          },
+          "month" : null,
+          "day" : null
+        },
+        "end-date" : null,
+        "organization" : {
+          "name" : "Kadir Has University",
+          "address" : {
+            "city" : "İstanbul",
+            "region" : "",
+            "country" : "TR"
+          },
+          "disambiguated-organization" : null
+        },
+        "visibility" : "PUBLIC",
+        "put-code" : 12199741,
+        "path" : "/0000-0002-6091-2701/education/12199741"
+      }, {
+        "created-date" : {
+          "value" : 1595331542492
+        },
+        "last-modified-date" : {
+          "value" : 1595331542492
+        },
+        "source" : {
+          "source-orcid" : {
+            "uri" : "https://orcid.org/0000-0002-6091-2701",
+            "path" : "0000-0002-6091-2701",
+            "host" : "orcid.org"
+          },
+          "source-client-id" : null,
+          "source-name" : {
+            "value" : "Erinç Şen"
+          }
+        },
+        "department-name" : "Faculty of Law",
+        "role-title" : "LL.B.",
+        "start-date" : {
+          "year" : {
+            "value" : "2015"
+          },
+          "month" : null,
+          "day" : null
+        },
+        "end-date" : {
+          "year" : {
+            "value" : "2019"
+          },
+          "month" : null,
+          "day" : null
+        },
+        "organization" : {
+          "name" : "MEF University",
+          "address" : {
+            "city" : "İstanbul",
+            "region" : "",
+            "country" : "TR"
+          },
+          "disambiguated-organization" : null
+        },
+        "visibility" : "PUBLIC",
+        "put-code" : 12199721,
+        "path" : "/0000-0002-6091-2701/education/12199721"
+      } ],
+      "path" : "/0000-0002-6091-2701/educations"
+    },
+    "employments" : {
+      "last-modified-date" : {
+        "value" : 1595331823413
+      },
+      "employment-summary" : [ {
+        "created-date" : {
+          "value" : 1595331823413
+        },
+        "last-modified-date" : {
+          "value" : 1595331823413
+        },
+        "source" : {
+          "source-orcid" : {
+            "uri" : "https://orcid.org/0000-0002-6091-2701",
+            "path" : "0000-0002-6091-2701",
+            "host" : "orcid.org"
+          },
+          "source-client-id" : null,
+          "source-name" : {
+            "value" : "Erinç Şen"
+          }
+        },
+        "department-name" : "Legal",
+        "role-title" : "Legal Intern",
+        "start-date" : {
+          "year" : {
+            "value" : "2019"
+          },
+          "month" : {
+            "value" : "08"
+          },
+          "day" : {
+            "value" : "05"
+          }
+        },
+        "end-date" : null,
+        "organization" : {
+          "name" : "Kiler Holding",
+          "address" : {
+            "city" : "İstanbul",
+            "region" : "",
+            "country" : "TR"
+          },
+          "disambiguated-organization" : null
+        },
+        "visibility" : "PUBLIC",
+        "put-code" : 12199761,
+        "path" : "/0000-0002-6091-2701/employment/12199761"
+      } ],
+      "path" : "/0000-0002-6091-2701/employments"
+    },
+    "fundings" : {
+      "last-modified-date" : null,
+      "group" : [ ],
+      "path" : "/0000-0002-6091-2701/fundings"
+    },
+    "peer-reviews" : {
+      "last-modified-date" : null,
+      "group" : [ ],
+      "path" : "/0000-0002-6091-2701/peer-reviews"
+    },
+    "works" : {
+      "last-modified-date" : null,
+      "group" : [ ],
+      "path" : "/0000-0002-6091-2701/works"
+    },
+    "path" : "/0000-0002-6091-2701/activities"
+  },
+  "path" : "/0000-0002-6091-2701"
+}

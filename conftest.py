@@ -275,6 +275,30 @@ def mock_crossref(requests_mocker):
 
     return requests_mocker
 
+@pytest.fixture
+def mock_pub_orcid(requests_mocker):
+    def request_callback(request):
+        # Remove leading /v2.1/ and trailing /
+        f_name = '{}.json'.format(request.path_url[6:-1])
+        print(f_name)
+        f_path = os.path.join(settings.BASE_DIR, 'test_data', 'orcid', f_name)
+        headers = {
+            'Content-Type' : 'application/citeproc+json'
+        }
+        try:
+            with open(f_path, 'r') as f:
+                body = f.read()
+                return (200, headers, body)
+        except FileNotFoundError:
+            print('File not found: {} - Returning 404'.format(f_path))
+            return (404, {}, None)
+
+    requests_mocker.add_callback(
+        requests_mocker.GET,
+        re.compile(r'https://pub.orcid.org/v2.1'),
+        callback=request_callback
+    )
+
 
 @pytest.fixture
 def book_god_of_the_labyrinth(load_json):

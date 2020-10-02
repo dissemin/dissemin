@@ -147,6 +147,7 @@ class TestPaperPages():
     def test_researcher_blocked_orcid(self, check_status):
         check_status(404, 'researcher-by-orcid', kwargs={'orcid': '9999-9999-9999-9994'})
 
+    @pytest.mark.usefixtures('mock_pub_orcid')
     def test_researcher_no_name(self, check_status):
         """
         This ORCID profile does not have a public name:
