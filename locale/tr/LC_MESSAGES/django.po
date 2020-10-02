@@ -19,7 +19,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-04-23 08:11+0200\n"
-"PO-Revision-Date: 2020-09-28 15:14:45+0000\n"
+"PO-Revision-Date: 2020-10-02 07:04:51+0000\n"
 "Language: tr\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2438,7 +2438,7 @@ msgstr "Verilerimizle ilgili birkaç uyarı var:"
 
 #: website/templates/dissemin/faq.html:363
 msgid "Some papers are not present in any of our metadata sources, so they are not counted at all."
-msgstr "Bazı makaleler meta veri kaynaklarımızın hiçbirinde mevcut olmadığından hiç sayılmaz."
+msgstr "Bazı maddeler meta veri kaynaklarımızın hiçbirinde mevcut olmadığından hiç sayılmaz."
 
 #: website/templates/dissemin/faq.html:368
 msgid "Some entries in our system do not correspond to proper research papers."
