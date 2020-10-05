@@ -307,9 +307,16 @@ class SWORDMETSProtocol(RepositoryProtocol):
                 params = {
                     "id" : deposit_record.identifier
                 }
+                logger.info("Refresh deposit status of {}".format(deposit_record.identifier))
                 try:
-                    data = s.get(self.repository.update_status_url, params=params, timeout=10).json()
-                except requests.exceptions.RequestException as e:
+                    r = s.get(self.repository.update_status_url, params=params, timeout=10)
+                    if r.status_code == 404:
+                        logger.info("Received 404, treating as refused")
+                        data = { 'status' : 'refused' }
+                    else:
+                        r.raise_for_status()
+                        data = r.json()
+                except Exception as e:
                     logger.exception(e)
                 else:
                     try:

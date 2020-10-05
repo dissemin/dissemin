@@ -374,6 +374,34 @@ class MetaTestSWORDMETSProtocol(MetaTestProtocol):
         assert pending_deposit_record.status == 'pending'
 
     @responses.activate
+    def test_refresh_deposit_status_404(self, pending_deposit_record):
+        """
+        With a 404, we expect new deposit status to be refused
+        """
+        update_status_url = 'https://repository.dissem.in/update_status'
+        responses.add(responses.GET, update_status_url, status=404)
+        self.protocol.repository.update_status_url = update_status_url
+        self.protocol.refresh_deposit_status()
+        pending_deposit_record.refresh_from_db()
+        assert pending_deposit_record.status == 'refused'
+
+    @responses.activate
+    def test_refresh_deposit_status_status_error(self, pending_deposit_record):
+        """
+        If we get status code not being 2xx or 404, we do nothing
+        """
+        update_status_url = 'https://repository.dissem.in/update_status'
+        body = {
+            'status' : 'published'
+        }
+        responses.add(responses.GET, update_status_url, status=403, body=json.dumps(body))
+        self.protocol.repository.update_status_url = update_status_url
+        self.protocol.refresh_deposit_status()
+        pending_deposit_record.refresh_from_db()
+        assert pending_deposit_record.status == 'pending'
+
+
+    @responses.activate
     def test_refresh_deposit_status_no_url(self, pending_deposit_record):
         """
         If no URL for update is given, i.e. repostory.update_status_url is empty, nothing must happen
