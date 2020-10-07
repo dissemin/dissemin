@@ -29,6 +29,7 @@ from positions.fields import PositionField
 from deposit.registry import protocol_registry
 from django.contrib.auth.models import User
 from django.contrib.postgres.fields import JSONField
+from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
@@ -125,14 +126,25 @@ class LetterOfDeclaration(models.Model):
     text = models.TextField()
     #: Text for the link that leads to download
     url_text = models.CharField(max_length=100)
+    #: URL for online forms instead of generated / prefilled pdf files
+    url = models.URLField(blank=True)
     #: Human readable function that generates letter
-    function_key = models.CharField(max_length=256)
+    function_key = models.CharField(max_length=256, blank=True)
 
     def __str__(self):
         """
         String represenation of object
         """
         return self.function_key
+
+    def clean(self):
+        error = {
+            'url' : 'Exactly one of Url or Function key must be set',
+            'function_key' : 'Exactly one of Url or Function key must be set',
+        }
+        if self.url and self.function_key or not self.url and not self.function_key:
+            raise ValidationError(error)
+
 
 vinaigrette.register(LetterOfDeclaration, ['heading', 'text', 'url_text'])
 
