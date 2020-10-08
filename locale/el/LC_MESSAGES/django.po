@@ -6,6 +6,7 @@
 # Author: Geraki
 # Author: GhotuoIncubator
 # Author: KATRINE1992
+# Author: MuratTheTurkish
 # Author: Nikosgranturismogt
 # --
 # This file is part of the Dissemin Project
@@ -16,7 +17,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-04-23 08:11+0200\n"
-"PO-Revision-Date: 2020-07-27 16:20:48+0000\n"
+"PO-Revision-Date: 2020-10-08 13:52:07+0000\n"
 "Language: el\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2563,7 +2564,7 @@ msgstr "Σημειώστε ότι, σε μακροπρόθεσμη βάση, ε�
 #: website/templates/dissemin/faq.html:426
 #, fuzzy, python-format
 msgid "In most cases, the errors that you see on Dissemin have not been introduced by Dissemin, but are already present in the <a href=\"%(sources_url)s\">public sources</a> that Dissemin harvests. Hence, please first check if the error that you have seen is already present in our data sources, by looking at the \"Links\" section in the top right of the page. If one of these pages contain the error, you should report the problem to them and not to us, otherwise the mistake will persist in the source."
-msgstr "Στις περισσότερες περιπτώσεις, τα λάθη που βλέπετε στο Dissemin δεν έχουν εισαχθεί από το Dissemi, αλλά ήδη υπάρχουν στο <a href=''{{sources_url}}''>δημόσιες πηγές <a> που συγκεντρώνει το Dissemin. Στο εξής,πρώτα τσεκάρετε αν το λάθος που είδατε υπάρχει ήδη στις πηγές δεδομένων, κοιτάζοντας στο τμήμα ''Σύνδεσμοι' στο δεξί επάνω μέρος της σελίδας. Αν κάποια από αυτές τις σελίδες περιέχει το λάθος, πρέπει να αναφέρετε το πρόβλημα σε αυτούς και όχι σε εμάς, ειδάλλως το λάθος θα υφίσταται στην πηγή."
+msgstr "Στις περισσότερες περιπτώσεις, τα λάθη που βλέπετε στο Dissemin δεν έχουν εισαχθεί από το Dissemi, αλλά ήδη υπάρχουν στο <a href=\"%(sources_url)s\">δημόσιες πηγές</a> που συγκεντρώνει το Dissemin. Στο εξής,πρώτα τσεκάρετε αν το λάθος που είδατε υπάρχει ήδη στις πηγές δεδομένων, κοιτάζοντας στο τμήμα ''Σύνδεσμοι' στο δεξί επάνω μέρος της σελίδας. Αν κάποια από αυτές τις σελίδες περιέχει το λάθος, πρέπει να αναφέρετε το πρόβλημα σε αυτούς και όχι σε εμάς, ειδάλλως το λάθος θα υφίσταται στην πηγή."
 
 #: website/templates/dissemin/faq.html:431
 #, fuzzy

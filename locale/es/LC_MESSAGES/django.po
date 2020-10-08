@@ -11,6 +11,7 @@
 # Author: KATRINE1992
 # Author: Macofe
 # Author: MarcoAurelio
+# Author: MuratTheTurkish
 # Author: Pato
 # Author: Silverie04
 # --
@@ -22,7 +23,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-04-23 08:11+0200\n"
-"PO-Revision-Date: 2020-07-27 16:20:48+0000\n"
+"PO-Revision-Date: 2020-10-08 13:52:08+0000\n"
 "Language: es\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2507,7 +2508,7 @@ msgstr "Tomar en cuenta, a largo plazo, que esperamos desenar un modo para nuest
 #: website/templates/dissemin/faq.html:426
 #, fuzzy, python-format
 msgid "In most cases, the errors that you see on Dissemin have not been introduced by Dissemin, but are already present in the <a href=\"%(sources_url)s\">public sources</a> that Dissemin harvests. Hence, please first check if the error that you have seen is already present in our data sources, by looking at the \"Links\" section in the top right of the page. If one of these pages contain the error, you should report the problem to them and not to us, otherwise the mistake will persist in the source."
-msgstr "En la mayoria de casos, los errores que ves en Dissemin non han sido introducido por Dissemin, mas estan ja presentes en  that you see on Dissemin have not been introduced by Dissemin, b <a href=\"{{ sources_url }}\">fuentes publicas</a> coleccionadas por Dissemin. En el futuro debera testar,si el error visto esta ja presente en las fuentes de dados,mirando la seccion de los ''Enlaces'' en la parte derecha superior de la pagina. Si ha un error en una pagina, debe reportar al problema a ellos y no a nosotros, otramente la error va persisitir en la fuente."
+msgstr "En la mayoria de casos, los errores que ves en Dissemin non han sido introducido por Dissemin, mas estan ja presentes en  that you see on Dissemin have not been introduced by Dissemin, b <a href=\"%(sources_url)s\">fuentes publicas</a> coleccionadas por Dissemin. En el futuro debera testar,si el error visto esta ja presente en las fuentes de dados,mirando la seccion de los ''Enlaces'' en la parte derecha superior de la pagina. Si ha un error en una pagina, debe reportar al problema a ellos y no a nosotros, otramente la error va persisitir en la fuente."
 
 #: website/templates/dissemin/faq.html:431
 #, fuzzy

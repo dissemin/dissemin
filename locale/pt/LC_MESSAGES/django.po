@@ -7,6 +7,7 @@
 # Author: Hamilton Abreu
 # Author: Mansil
 # Author: Mansil alfalb
+# Author: MuratTheTurkish
 # --
 # This file is part of the Dissemin Project
 # This file is distributed under the same license as the Dissemin package.
@@ -16,7 +17,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-04-23 08:11+0200\n"
-"PO-Revision-Date: 2020-07-27 16:20:50+0000\n"
+"PO-Revision-Date: 2020-10-08 13:52:10+0000\n"
 "Language: pt\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2526,7 +2527,7 @@ msgstr "Note que a longo prazo, esperamos criar uma maneira para os nossos utili
 #: website/templates/dissemin/faq.html:426
 #, fuzzy, python-format
 msgid "In most cases, the errors that you see on Dissemin have not been introduced by Dissemin, but are already present in the <a href=\"%(sources_url)s\">public sources</a> that Dissemin harvests. Hence, please first check if the error that you have seen is already present in our data sources, by looking at the \"Links\" section in the top right of the page. If one of these pages contain the error, you should report the problem to them and not to us, otherwise the mistake will persist in the source."
-msgstr "Na maioria dos casos, os erros que encontrar no Dissemin não foram introduzidas pelo Dissemin, mas já estão presentes nas <a href=\"{{ sources_url }}\">fontes públicas</a> que o Dissemin colhe. Portanto, primeiro verifique se o erro que encontrou já está presente nas nossas fontes de dados, consultando a secção de \"Ligações\" na parte superior direita da página. Se uma destas páginas conter o erro, deve comunicar o problema para eles, e não para nós, caso contrário o erro persistirá na fonte."
+msgstr "Na maioria dos casos, os erros que encontrar no Dissemin não foram introduzidas pelo Dissemin, mas já estão presentes nas <a href=\"%(sources_url)s\">fontes públicas</a> que o Dissemin colhe. Portanto, primeiro verifique se o erro que encontrou já está presente nas nossas fontes de dados, consultando a secção de \"Ligações\" na parte superior direita da página. Se uma destas páginas conter o erro, deve comunicar o problema para eles, e não para nós, caso contrário o erro persistirá na fonte."
 
 #: website/templates/dissemin/faq.html:431
 msgid "If the error is not present in any of the sources and you believe that Dissemin may have introduced the problem, please file an <a href=\"https://github.com/dissemin/dissemin/issues\">issue</a> with details of the problem, or send a message to <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>. Note that you cannot yet fix the problem yourself, although we hope in the longer term to develop a system to allow our users to edit details of their papers themselves."
