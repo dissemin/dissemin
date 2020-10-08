@@ -68,6 +68,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.urls import reverse
 from django.db import DataError
 from django.db import models
+from django.db.models import prefetch_related_objects
 from django.template.defaultfilters import slugify
 from django.utils import timezone
 from django.utils.functional import cached_property
@@ -696,6 +697,15 @@ class Paper(models.Model, BarePaper):
         not always desirable.
         """
         self.cached_oairecords = list(self.oairecord_set.all())
+
+    @property
+    def sorted_published_oairecords(self):
+        """
+        Fetches all oairecords; if there's a DepositRecord, require that it is published
+        """
+        prefetch_related_objects(self.sorted_oai_records, 'depositrecord_set')
+        l = [r for r in self.sorted_oai_records if not r.depositrecord_set.exists() or any(d.status == 'published' for d in r.depositrecord_set.all())]
+        return l
 
     @property
     def researcher_ids(self):
