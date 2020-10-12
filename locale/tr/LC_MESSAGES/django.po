@@ -6,6 +6,7 @@
 # Author: Grkn gll
 # Author: Incelemeelemani
 # Author: LuCKY
+# Author: Sezgin İbiş
 # Author: Stonecy
 # Author: Suvarioglu
 # Author: TmY e12
@@ -19,7 +20,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-04-23 08:11+0200\n"
-"PO-Revision-Date: 2020-10-02 07:04:51+0000\n"
+"PO-Revision-Date: 2020-10-12 13:48:17+0000\n"
 "Language: tr\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
