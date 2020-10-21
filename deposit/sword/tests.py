@@ -223,10 +223,11 @@ class MetaTestSWORDMETSProtocol(MetaTestProtocol):
         assert initial.get('paper_id') == book_god_of_the_labyrinth.pk
         assert initial.get('email', None) == email
 
-    def test_get_mets(self, validate_mets, metadata_xml_dc, dissemin_xml_1_0):
+    def test_get_mets(self, book_god_of_the_labyrinth, validate_mets, metadata_xml_dc, dissemin_xml_1_0):
         """
         A test for creating mets from metadata
         """
+        self.protocol.paper = book_god_of_the_labyrinth
         mets_xml = self.protocol._get_mets(metadata_xml_dc, dissemin_xml_1_0)
         # Because of the xml declaration we have to convert to a bytes object
         validate_mets(etree.fromstring(bytes(mets_xml, encoding='utf-8')))
@@ -274,14 +275,15 @@ class MetaTestSWORDMETSProtocol(MetaTestProtocol):
         validate_mets(etree.fromstring(bytes(mets_xml, encoding='utf-8')))
 
 
-    def test_get_mets_container(self, blank_pdf_path, metadata_xml_mets):
+    def test_get_mets_container(self, book_god_of_the_labyrinth, blank_pdf_path, metadata_xml_mets):
         """
         A test for creating a mets container
         """
-        s = SWORDMETSProtocol._get_mets_container(blank_pdf_path, metadata_xml_mets)
+        self.protocol.paper = book_god_of_the_labyrinth
+        s = self.protocol._get_mets_container(blank_pdf_path, metadata_xml_mets)
         with ZipFile(s, 'r') as zip_file:
             files = zip_file.namelist()
-            for filename in ['mets.xml', 'document.pdf']:
+            for filename in ['mets.xml', self.protocol.filename]:
                 assert filename in files
             assert not zip_file.testzip()
 
@@ -436,10 +438,11 @@ class MetaTestSWORDMETSProtocol(MetaTestProtocol):
 
 
     @responses.activate
-    def test_submit_deposit(self, blank_pdf_path, monkeypatch, monkeypatch_metadata_creation, monkeypatch_get_deposit_result):
+    def test_submit_deposit(self, book_god_of_the_labyrinth, blank_pdf_path, monkeypatch, monkeypatch_metadata_creation, monkeypatch_get_deposit_result):
         """
         A test for submit deposit.
         """
+        self.protocol.paper = book_god_of_the_labyrinth
         # Mocking requests
         responses.add(responses.POST, self.protocol.repository.endpoint, status=201)
 
@@ -460,10 +463,11 @@ class MetaTestSWORDMETSProtocol(MetaTestProtocol):
 
 
     @responses.activate
-    def test_submit_deposit_server_error(self, blank_pdf_path, monkeypatch_metadata_creation):
+    def test_submit_deposit_server_error(self, book_god_of_the_labyrinth, blank_pdf_path, monkeypatch_metadata_creation):
         """
         A test where the repository is not available. Should raise ``DepositError``
         """
+        self.protocol.paper = book_god_of_the_labyrinth
         responses.add(responses.POST, self.protocol.repository.endpoint, status=401)
 
         with pytest.raises(DepositError):
