@@ -2,7 +2,7 @@ dissem.in
 =========
 
 [![Documentation Status](https://readthedocs.org/projects/dissemin/badge/?version=latest)](https://dissemin.readthedocs.io/en/latest/?badge=latest)
-[![Build Status](https://travis-ci.org/dissemin/dissemin.svg?branch=master)](https://travis-ci.org/dissemin/dissemin)
+[![Build Status](https://travis-ci.com/dissemin/dissemin.svg?branch=master)](https://travis-ci.com/dissemin/dissemin)
 [![Coverage Status](https://coveralls.io/repos/dissemin/dissemin/badge.svg?branch=master&service=github)](https://coveralls.io/github/dissemin/dissemin?branch=master)
 
 Web platform to help researchers upload their papers to open repositories.
