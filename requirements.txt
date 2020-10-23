@@ -21,7 +21,7 @@ django-jsonview
 django-leaflet
 django-positions
 django-memoize
-django-redis-cache
+django-redis-cache<3.0.0
 django-sass-processor
 django-settings-export
 django-solo
