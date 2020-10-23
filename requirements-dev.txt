@@ -1,11 +1,11 @@
 attrs==17.4.0
+coverage
 django-debug-toolbar
 django-extensions
-pytest==4.1.1
+pytest
+pyflakes
 pytest-django
 sphinx
 sphinx_rtd_theme
-coverage
-pyflakes
 responses
 xmlschema
