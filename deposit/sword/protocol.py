@@ -108,6 +108,13 @@ class SWORDMETSProtocol(RepositoryProtocol):
         return deposit_result
 
 
+    @property
+    def filename(self):
+        """
+        Returns a filename that is paper slug and has at most 35+4 characters.
+        """
+        return '{:.35}.pdf'.format(self.paper.slug)
+
     def _get_mets(self, metadata, dissemin_metadata):
         """
         Creates a mets xml from metadata
@@ -150,7 +157,8 @@ class SWORDMETSProtocol(RepositoryProtocol):
         mets_fileGrp = etree.SubElement(mets_fileSec, METS + 'fileGrp', USE='CONTENT')
         mets_file = etree.SubElement(mets_fileGrp, METS + 'file', ID='d_file_1')
         mets_FLocat = etree.SubElement(mets_file, METS + 'FLocat')
-        mets_FLocat.set(XLINK + 'href', 'document.pdf')
+        mets_FLocat.set(XLINK + 'href', self.filename)
+        # TODO self.get:filename implementieren
         mets_FLocat.set('LOCTYPE', 'URL')
 
         # Creation of structMap
@@ -162,8 +170,7 @@ class SWORDMETSProtocol(RepositoryProtocol):
         return etree.tostring(mets_xml, pretty_print=True, encoding='utf-8', xml_declaration=True).decode()
 
 
-    @staticmethod
-    def _get_mets_container(pdf, mets):
+    def _get_mets_container(self, pdf, mets):
         """
         Creates a mets package, i.e. zip for a given file and given schema. The filename in the package is taken from mets.
 
@@ -173,7 +180,7 @@ class SWORDMETSProtocol(RepositoryProtocol):
         """
         s = BytesIO()
         with ZipFile(s, 'w') as zip_file:
-            zip_file.write(pdf, 'document.pdf')
+            zip_file.write(pdf, self.filename)
             zip_file.writestr('mets.xml', mets)
         return s
 
@@ -331,7 +338,7 @@ class SWORDMETSProtocol(RepositoryProtocol):
         """
         Submit paper to the repository. This is a wrapper for the subclasses and calls some protocol specific functions. It creates the METS container and deposits.
 
-        :param pdf: Filename to dhe PDF file to submit
+        :param pdf: Filename to the PDF file to submit
         :param form: The form returned by get_form and completed by the user
 
         :returns: DepositResult object

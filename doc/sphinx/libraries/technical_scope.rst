@@ -26,7 +26,9 @@ Currently we populate only ``dmdSec``, ``amdSec/rightsMD``, ``fileSec`` and ``st
 We deliver two files per package:
 
 * ``mets.xml`` - containing the metadata
-* ``document.pdf`` - the document to be deposited
+* ``a_pdf_file.pdf`` - the document to be deposited.
+  The name may vary as we ship the original filename from the user.
+  You find the filename in ``structMap`` inside of ``mets.xml``.
 
 We set the following headers::
 
