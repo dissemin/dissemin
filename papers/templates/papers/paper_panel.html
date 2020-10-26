@@ -19,21 +19,19 @@
 <h4 class="h-border">{% trans "Links" %}</h4>
 
 <ul class="list-unstyled">
-    {% for record in paper.sorted_oai_records %}
+    {% for record in paper.sorted_published_oairecords %}
         <li>
             {% if record.splash_url %}
                 <a href="{{ record.splash_url }}">
-            {% endif %}
-            {% if record.priority > 0 %}
-                {{ record.source_or_publisher }}
-            {% else %}
-                {% if record.splash_url %}
-                    [{{ record.splash_url |domain }}]
-                {% elif record.pdf_url %}
-                    [{{ record.pdf_url |domain }}]
+                {% if record.priority > 0 %}
+                    {{ record.source_or_publisher }}
+                {% else %}
+                    {% if record.splash_url %}
+                        [{{ record.splash_url |domain }}]
+                    {% elif record.pdf_url %}
+                        [{{ record.pdf_url |domain }}]
+                    {% endif %}
                 {% endif %}
-            {% endif %}
-            {% if record.splash_url %}
                 <small><span class="oi oi-external-link" aria-hidden="true"></span></small>
                 </a>{% if record.pdf_url %} | {% endif %}
             {% endif %}
