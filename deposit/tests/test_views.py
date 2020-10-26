@@ -31,7 +31,7 @@ class TestDepositView():
 @pytest.mark.usefixtures('lod_env')
 class TestLetterDeclarationView():
     """
-    Tests groups various tests about the LetterDeclarationView
+    Groups various tests about the LetterDeclarationView
     """
 
     def test_deposit_record_not_found(self, db, check_status):
@@ -70,6 +70,17 @@ class TestLetterDeclarationView():
 
         check_status(404, 'letter-of-declaration', args=[self.dr.pk])
 
+    def test_letter_url(self):
+        """
+        If we have a URL in lod, then return URL as redirect
+        """
+        url = "https://letters.dissem.in/online-form"
+        self.dr.repository.letter_declaration.url = url
+        self.dr.repository.letter_declaration.save()
+
+        response = self.client.get(reverse('letter-of-declaration', args=[self.dr.pk]))
+        assert response.status_code == 302
+        assert response.url == url
 
     def test_letter_returned(self, monkeypatch, blank_pdf):
         """

@@ -151,6 +151,7 @@ The object requires
 * ``heading`` - Heading, e.g. 'Contract required!'.
 * ``text`` - A short text displayed to the user.
 * ``url_text`` - Text of the download button.
+* ``url`` - The URL to an online form
 * ``function key`` - The function that generates the letter.
 
 .. note::

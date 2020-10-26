@@ -255,7 +255,7 @@ class LetterOfDeclarationAdminForm(forms.ModelForm):
         """
         super().__init__(*args, **kwargs)
 
-        choices = sorted([(value, value) for value in REGISTERED_DECLARATION_FUNCTIONS], key=lambda item: item[1])
+        choices = [('', '--- None ---')] + sorted([(value, value) for value in REGISTERED_DECLARATION_FUNCTIONS], key=lambda item: item[1])
         self.fields['function_key'].widget = forms.Select(choices=choices)
 
 

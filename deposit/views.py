@@ -35,6 +35,7 @@ from django.http import FileResponse
 from django.http import HttpResponseForbidden
 from django.http import Http404
 from django.shortcuts import get_object_or_404
+from django.shortcuts import redirect
 from django.shortcuts import render
 from django.urls import reverse
 from django.urls import reverse_lazy
@@ -338,15 +339,19 @@ class LetterDeclarationView(LoginRequiredMixin, View):
         """
         We test if the user is the user that own the deposit and return a PDF file if the repository specifies this
         """
-        dr = get_object_or_404(DepositRecord.objects.select_related('paper', 'repository', 'user', 'license'), pk=pk)
+        dr = get_object_or_404(DepositRecord.objects.select_related('paper', 'repository', 'repository__letter_declaration', 'user', 'license'), pk=pk)
 
         if dr.user != request.user:
             raise PermissionDenied
         # If the repository requires a letter of declaration, we try to create the pdf, otherwise we return 404.
         if dr.repository.letter_declaration is not None and dr.status == "pending":
-            pdf = get_declaration_pdf(dr)
-            pdf.seek(0)
-            filename = _("Declaration {}.pdf").format(dr.paper.title)
-            return FileResponse(pdf, as_attachment=True, filename=filename)
+            # URL get precendence over pdf
+            if dr.repository.letter_declaration.url:
+                return redirect(dr.repository.letter_declaration.url)
+            else:
+                pdf = get_declaration_pdf(dr)
+                pdf.seek(0)
+                filename = _("Declaration {}.pdf").format(dr.paper.title)
+                return FileResponse(pdf, as_attachment=True, filename=filename)
         else:
             raise Http404(_("No pdf found for dr {}".format(dr.pk)))

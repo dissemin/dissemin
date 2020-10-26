@@ -13,6 +13,13 @@ Letter of Declaration
 Usually institutional repositories require some kind of a letter of declaration from their scientists.
 With this letter the scientists declare certain legal statements about the publication and its deposition.
 
+.. image:: lod_service.png
+    :alt: Example of letter of declaration service alert after upload
+    :width: 50%
+
+Serving PDF
+-----------
+
 Dissemin can generate these type of letters individually per repository.
 This way the letter fits your needs in terms of design, content and legal character.
 We can prefill the letter with all necessary data, so that the depositor just has to sign and send you the letter.
@@ -24,9 +31,11 @@ After the deposit the depositors are informed that they need to fill in such a l
 They can directly download this letter.
 Of course they can regenerate this letter at any point in time as long you haven't published the resource.
 
-.. image:: lod_service.png
-    :alt: Example of letter of declaration service alert after upload
-    :width: 50%
+Linking to online form
+----------------------
+
+If you provide an online form, Dissemin can link to this form.
+
 
 .. _libraries-services-goa:
 
