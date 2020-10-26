@@ -226,6 +226,7 @@ class PaperAjaxTest(JsonRenderingTest):
         self.assertTrue(result['success'])
         self.assertTrue(len(result['value']) > 10)
 
+    @pytest.mark.xfail(reason="Currently 500 from doi-cache")
     @pytest.mark.usefixtures('mock_doi')
     def test_consolidate_elsevier_paper(self):
         p = Paper.create_by_doi('10.1016/0168-5597(91)90120-m')
