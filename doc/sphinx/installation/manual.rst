@@ -23,6 +23,11 @@ First, install the following dependencies (debian packages)::
     
     *postgresql postgresql-server-dev-all postgresql-client python3-venv build-essential libxml2-dev libxslt1-dev python3-dev gettext libjpeg-dev libffi-dev libmagickwand-dev gdal-bin*
 
+.. note::
+    On Debian 10+ and Ubuntu 18+, libmagickwand has dropped PDF processing for security reason. To reenable you have to change the config to at least read access, e.g. with::
+
+        sudo sed -i 's/<policy domain="coder" rights="none" pattern="PDF" \/>/<policy domain="coder" rights="read" pattern="PDF" \/>/' /etc/ImageMagick-6/policy.xml
+
 Make also sure to have ``pdftk`` installed.
 
 Then, build a virtual environment to isolate all the python dependencies::
