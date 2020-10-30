@@ -14,9 +14,8 @@
 #
 msgid ""
 msgstr ""
-""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-23 08:11+0200\n"
+"POT-Creation-Date: 2020-10-30 11:34+0100\n"
 "PO-Revision-Date: 2020-10-29 12:16:22+0000\n"
 "Language: el\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -304,44 +303,44 @@ msgstr "Κωδικός πρόσβασης"
 msgid "Connection to HAL failed. Please try again later."
 msgstr ""
 
-#: deposit/models.py:44
+#: deposit/models.py:45
 msgid "Failed"
 msgstr "Απέτυχε"
 
-#: deposit/models.py:45
+#: deposit/models.py:46
 msgid "Faked"
 msgstr "Ψεύτικο"
 
-#: deposit/models.py:46
+#: deposit/models.py:47
 msgid "Pending publication"
 msgstr "Η δημοσίευση εκκρεμεί"
 
-#: deposit/models.py:47
+#: deposit/models.py:48
 msgid "Embargo"
 msgstr ""
 
-#: deposit/models.py:48
+#: deposit/models.py:49
 msgid "Published"
 msgstr "Δημοσιεύθηκε"
 
-#: deposit/models.py:49
+#: deposit/models.py:50
 msgid "Refused by the repository"
 msgstr "Το αποθετήριο το αρνήθηκε"
 
-#: deposit/models.py:50
+#: deposit/models.py:51
 msgid "Deleted"
 msgstr "Διεγράφη"
 
-#: deposit/models.py:340 deposit/templates/deposit/start.html:228
-#: deposit/views.py:119
+#: deposit/models.py:352 deposit/templates/deposit/start.html:228
+#: deposit/views.py:120
 msgid "Deposit"
 msgstr "Απόθεμα"
 
-#: deposit/models.py:393
+#: deposit/models.py:405
 msgid "We will use this email address to notify you when your deposits are accepted."
 msgstr ""
 
-#: deposit/models.py:399
+#: deposit/models.py:411
 msgid "This repository will be used by default for your deposits."
 msgstr ""
 
@@ -458,11 +457,11 @@ msgstr "Αποτυχία σύνδεσης στην αποθήκη. Παρακα�
 msgid "The repository {} returned invalid XML"
 msgstr "Αυτό το αποθηκευτήριο δεν βρέθηκε."
 
-#: deposit/sword/protocol.py:335
+#: deposit/sword/protocol.py:349
 msgid "Username or password not provided for this repository. Please contact the Dissemin team."
 msgstr ""
 
-#: deposit/sword/protocol.py:360
+#: deposit/sword/protocol.py:374
 #, fuzzy
 msgid "Unable to deposit to repository"
 msgstr "Αποτυχία στην δημιουργία της προεκτύπωσης."
@@ -611,36 +610,36 @@ msgstr ""
 msgid "Submitting paper to repository"
 msgstr ""
 
-#: deposit/views.py:79
+#: deposit/views.py:80
 #, fuzzy
 msgid "This repository is currently not enabled."
 msgstr "Αυτό το αποθηκευτήριο δεν βρέθηκε."
 
-#: deposit/views.py:85
+#: deposit/views.py:86
 msgid "This repository is not available for this paper."
 msgstr "Αυτό το αποθηκευτήριο δεν είναι διαθέσιμο για αυτό το χαρτί."
 
-#: deposit/views.py:217
+#: deposit/views.py:218
 msgid "This repository could not be found."
 msgstr "Αυτό το αποθηκευτήριο δεν βρέθηκε."
 
-#: deposit/views.py:260 deposit/views.py:276
+#: deposit/views.py:261 deposit/views.py:277
 msgid "Not all fields have been filled correctly."
 msgstr ""
 
-#: deposit/views.py:269
+#: deposit/views.py:270
 msgid "This repository cannot be used for this paper."
 msgstr "Αυτό το αποθηκευτήριο δεν μπορεί να χρησιμοποιηθεί για αυτό το χαρτί."
 
-#: deposit/views.py:287
+#: deposit/views.py:288
 msgid "Access to the PDF was denied."
 msgstr "Η πρόσβαση στο PDF απορρίφθηκε."
 
-#: deposit/views.py:349
+#: deposit/views.py:354
 msgid "Declaration {}.pdf"
 msgstr ""
 
-#: deposit/views.py:352
+#: deposit/views.py:357
 msgid "No pdf found for dr {}"
 msgstr ""
 
@@ -722,18 +721,22 @@ msgid "Brazilian Portuguese"
 msgstr ""
 
 #: dissemin/settings/common.py:317
-msgid "Swedish"
+msgid "Russian"
 msgstr ""
 
 #: dissemin/settings/common.py:318
-msgid "Turkish"
+msgid "Swedish"
 msgstr ""
 
 #: dissemin/settings/common.py:319
+msgid "Turkish"
+msgstr ""
+
+#: dissemin/settings/common.py:320
 msgid "Simplified Chinese"
 msgstr "Απλοποιημένα Κινέζικα"
 
-#: dissemin/settings/common.py:320
+#: dissemin/settings/common.py:321
 msgid "Traditional Chinese"
 msgstr ""
 
@@ -1157,7 +1160,10 @@ msgid "Green Open Access Service"
 msgstr "Πράσινη ανοιχτή πρόσβαση"
 
 #: model-gettext.py:111
-msgid "Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n<br/>\nContact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
+msgid ""
+"Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n"
+"<br/>\n"
+"Contact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
 msgstr ""
 
 #: model-gettext.py:112
@@ -1165,7 +1171,11 @@ msgid "TUprints contract required!"
 msgstr ""
 
 #: model-gettext.py:113
-msgid "For every document, that you upload via Dissemin we need once a TUprints contract.\nPlease fill in the contract and send a printed and signed copy to:\n<br>\nULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
+msgid ""
+"For every document, that you upload via Dissemin we need once a TUprints contract.\n"
+"Please fill in the contract and send a printed and signed copy to:\n"
+"<br>\n"
+"ULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
 msgstr ""
 
 #: model-gettext.py:114
@@ -1316,7 +1326,7 @@ msgstr "Θέση"
 msgid "Dataset"
 msgstr ""
 
-#: papers/baremodels.py:69 papers/models.py:99
+#: papers/baremodels.py:69 papers/models.py:100
 #: publishers/templates/publishers/policy_preprint.html:5
 msgid "Preprint"
 msgstr "Προεκτύπωση"
@@ -1357,48 +1367,48 @@ msgstr "Ορατό"
 msgid "Invisible"
 msgstr "Αόρατο"
 
-#: papers/models.py:100 publishers/templates/publishers/policy_postprint.html:6
+#: papers/models.py:101 publishers/templates/publishers/policy_postprint.html:6
 msgid "Postprint"
 msgstr ""
 
-#: papers/models.py:101
+#: papers/models.py:102
 #: publishers/templates/publishers/policy_pdfversion.html:6
 msgid "Published version"
 msgstr "Δημοσιευμένη έκδοση"
 
-#: papers/models.py:105
+#: papers/models.py:106
 msgid "Preparing profile"
 msgstr "Προετοιμασία προφίλ"
 
-#: papers/models.py:106
+#: papers/models.py:107
 msgid "Fetching publications from ORCID"
 msgstr ""
 
-#: papers/models.py:107
+#: papers/models.py:108
 msgid "Fetching publications from CrossRef"
 msgstr ""
 
-#: papers/models.py:108
+#: papers/models.py:109
 msgid "Fetching publications from BASE"
 msgstr ""
 
-#: papers/models.py:109
+#: papers/models.py:110
 msgid "Fetching publications from CORE"
 msgstr ""
 
-#: papers/models.py:110
+#: papers/models.py:111
 msgid "Fetching publications from OAI-PMH"
 msgstr ""
 
-#: papers/models.py:111
+#: papers/models.py:112
 msgid "Clustering publications"
 msgstr ""
 
-#: papers/models.py:112
+#: papers/models.py:113
 msgid "Updating statistics"
 msgstr "Ενημέρωση στατιστικών"
 
-#: papers/models.py:1224 papers/views.py:145 papers/views.py:149
+#: papers/models.py:1234 papers/views.py:145 papers/views.py:149
 msgid "Papers"
 msgstr "Χαρτιά"
 
@@ -1454,7 +1464,7 @@ msgid "This contributorship is confirmed by ORCID."
 msgstr ""
 
 #: papers/templates/papers/export_citation_modal.html:7
-#: papers/templates/papers/paper_panel.html:59
+#: papers/templates/papers/paper_panel.html:57
 msgid "Export citation"
 msgstr ""
 
@@ -1553,7 +1563,7 @@ msgstr ""
 
 #: papers/templates/papers/paper.html:88
 #, python-format
-msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available after validation by the repository administration. You can check for the status in your <a class=\"alert-link\" href=\"%(my_profile)s\">profile</a>."
+msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available after validation by the repository administration. You can check the publication progress in your <a class=\"alert-link\" href=\"%(my_profile)s\">profile</a>."
 msgstr ""
 
 #: papers/templates/papers/paper.html:102
@@ -1616,15 +1626,15 @@ msgstr "Δημοσιεύθηκε την"
 msgid "Links"
 msgstr "Σύνδεσμοι"
 
-#: papers/templates/papers/paper_panel.html:48
+#: papers/templates/papers/paper_panel.html:46
 msgid "Tools"
 msgstr "Εργαλεία"
 
-#: papers/templates/papers/paper_panel.html:64
+#: papers/templates/papers/paper_panel.html:62
 msgid "Search in Google Scholar"
 msgstr "Αναζήτηση στο Google Scholar"
 
-#: papers/templates/papers/paper_panel.html:69
+#: papers/templates/papers/paper_panel.html:67
 msgid "Admin zone"
 msgstr "Ζώνη διαχειριστή"
 
@@ -2944,4 +2954,3 @@ msgstr ""
 #, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr ""
-

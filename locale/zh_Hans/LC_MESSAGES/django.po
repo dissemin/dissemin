@@ -18,9 +18,8 @@
 #
 msgid ""
 msgstr ""
-""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-23 08:11+0200\n"
+"POT-Creation-Date: 2020-10-30 11:34+0100\n"
 "PO-Revision-Date: 2020-10-29 12:16:26+0000\n"
 "Language: zh_hans\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -304,44 +303,44 @@ msgstr "密码"
 msgid "Connection to HAL failed. Please try again later."
 msgstr "连接到HAL失败。请稍后重试。"
 
-#: deposit/models.py:44
+#: deposit/models.py:45
 msgid "Failed"
 msgstr "失败"
 
-#: deposit/models.py:45
+#: deposit/models.py:46
 msgid "Faked"
 msgstr "假的"
 
-#: deposit/models.py:46
+#: deposit/models.py:47
 msgid "Pending publication"
 msgstr "等待发布"
 
-#: deposit/models.py:47
+#: deposit/models.py:48
 msgid "Embargo"
 msgstr ""
 
-#: deposit/models.py:48
+#: deposit/models.py:49
 msgid "Published"
 msgstr "已发布"
 
-#: deposit/models.py:49
+#: deposit/models.py:50
 msgid "Refused by the repository"
 msgstr "被存储库拒绝"
 
-#: deposit/models.py:50
+#: deposit/models.py:51
 msgid "Deleted"
 msgstr "已删除"
 
-#: deposit/models.py:340 deposit/templates/deposit/start.html:228
-#: deposit/views.py:119
+#: deposit/models.py:352 deposit/templates/deposit/start.html:228
+#: deposit/views.py:120
 msgid "Deposit"
 msgstr "存放"
 
-#: deposit/models.py:393
+#: deposit/models.py:405
 msgid "We will use this email address to notify you when your deposits are accepted."
 msgstr "当您的存放内容被接受时，我们将使用该电子邮件地址通知您。"
 
-#: deposit/models.py:399
+#: deposit/models.py:411
 msgid "This repository will be used by default for your deposits."
 msgstr "该存储库将默认用作您存放材料的存储库。"
 
@@ -458,11 +457,11 @@ msgstr "无法连接到存储库。请稍后重试。"
 msgid "The repository {} returned invalid XML"
 msgstr "找不到此存储库。"
 
-#: deposit/sword/protocol.py:335
+#: deposit/sword/protocol.py:349
 msgid "Username or password not provided for this repository. Please contact the Dissemin team."
 msgstr ""
 
-#: deposit/sword/protocol.py:360
+#: deposit/sword/protocol.py:374
 #, fuzzy
 msgid "Unable to deposit to repository"
 msgstr "无法创建预印本。"
@@ -549,7 +548,9 @@ msgstr "存放"
 #: deposit/templates/deposit/start.html:64
 #, python-format
 msgid "You can deposit the full text of your article. Dissemin will send it to a repository where it will be made freely available. By depositing your article via Dissemin, you agree to our <a href=\"%(tosurl)s\">terms of service</a>."
-msgstr "您可以存放您的文章全文。Dissemin将发送它到其能够自由展示的存储库。通过使用Dissemin存放您的文章，您同意我们的<a href=\"%(tosurl)s\">服务条款</a>。\n        "
+msgstr ""
+"您可以存放您的文章全文。Dissemin将发送它到其能够自由展示的存储库。通过使用Dissemin存放您的文章，您同意我们的<a href=\"%(tosurl)s\">服务条款</a>。\n"
+"        "
 
 #: deposit/templates/deposit/start.html:72
 #, fuzzy
@@ -612,35 +613,35 @@ msgstr ""
 msgid "Submitting paper to repository"
 msgstr ""
 
-#: deposit/views.py:79
+#: deposit/views.py:80
 msgid "This repository is currently not enabled."
 msgstr "此存储库当前未启用。"
 
-#: deposit/views.py:85
+#: deposit/views.py:86
 msgid "This repository is not available for this paper."
 msgstr "此存储库不适用于该论文。"
 
-#: deposit/views.py:217
+#: deposit/views.py:218
 msgid "This repository could not be found."
 msgstr "找不到此存储库。"
 
-#: deposit/views.py:260 deposit/views.py:276
+#: deposit/views.py:261 deposit/views.py:277
 msgid "Not all fields have been filled correctly."
 msgstr ""
 
-#: deposit/views.py:269
+#: deposit/views.py:270
 msgid "This repository cannot be used for this paper."
 msgstr "此存储库不能用于该论文。"
 
-#: deposit/views.py:287
+#: deposit/views.py:288
 msgid "Access to the PDF was denied."
 msgstr "访问PDF被拒绝。"
 
-#: deposit/views.py:349
+#: deposit/views.py:354
 msgid "Declaration {}.pdf"
 msgstr "声明 {}.pdf"
 
-#: deposit/views.py:352
+#: deposit/views.py:357
 msgid "No pdf found for dr {}"
 msgstr ""
 
@@ -721,18 +722,22 @@ msgid "Brazilian Portuguese"
 msgstr "巴西葡萄牙语"
 
 #: dissemin/settings/common.py:317
+msgid "Russian"
+msgstr ""
+
+#: dissemin/settings/common.py:318
 msgid "Swedish"
 msgstr "瑞典语"
 
-#: dissemin/settings/common.py:318
+#: dissemin/settings/common.py:319
 msgid "Turkish"
 msgstr ""
 
-#: dissemin/settings/common.py:319
+#: dissemin/settings/common.py:320
 msgid "Simplified Chinese"
 msgstr "简体中文"
 
-#: dissemin/settings/common.py:320
+#: dissemin/settings/common.py:321
 msgid "Traditional Chinese"
 msgstr "繁体中文"
 
@@ -1135,7 +1140,10 @@ msgid "Green Open Access Service"
 msgstr "绿色开放访问"
 
 #: model-gettext.py:111
-msgid "Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n<br/>\nContact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
+msgid ""
+"Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n"
+"<br/>\n"
+"Contact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
 msgstr ""
 
 #: model-gettext.py:112
@@ -1143,7 +1151,11 @@ msgid "TUprints contract required!"
 msgstr ""
 
 #: model-gettext.py:113
-msgid "For every document, that you upload via Dissemin we need once a TUprints contract.\nPlease fill in the contract and send a printed and signed copy to:\n<br>\nULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
+msgid ""
+"For every document, that you upload via Dissemin we need once a TUprints contract.\n"
+"Please fill in the contract and send a printed and signed copy to:\n"
+"<br>\n"
+"ULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
 msgstr ""
 
 #: model-gettext.py:114
@@ -1290,7 +1302,7 @@ msgstr "论题"
 msgid "Dataset"
 msgstr "数据集"
 
-#: papers/baremodels.py:69 papers/models.py:99
+#: papers/baremodels.py:69 papers/models.py:100
 #: publishers/templates/publishers/policy_preprint.html:5
 msgid "Preprint"
 msgstr "预印本"
@@ -1331,48 +1343,48 @@ msgstr "可见"
 msgid "Invisible"
 msgstr "不可见"
 
-#: papers/models.py:100 publishers/templates/publishers/policy_postprint.html:6
+#: papers/models.py:101 publishers/templates/publishers/policy_postprint.html:6
 msgid "Postprint"
 msgstr "后印本"
 
-#: papers/models.py:101
+#: papers/models.py:102
 #: publishers/templates/publishers/policy_pdfversion.html:6
 msgid "Published version"
 msgstr "发行版本"
 
-#: papers/models.py:105
+#: papers/models.py:106
 msgid "Preparing profile"
 msgstr "发行详情"
 
-#: papers/models.py:106
+#: papers/models.py:107
 msgid "Fetching publications from ORCID"
 msgstr "正在从ORCID检索出版物"
 
-#: papers/models.py:107
+#: papers/models.py:108
 msgid "Fetching publications from CrossRef"
 msgstr "正在从CrossRef检索出版物"
 
-#: papers/models.py:108
+#: papers/models.py:109
 msgid "Fetching publications from BASE"
 msgstr "正在从BASE检索出版物"
 
-#: papers/models.py:109
+#: papers/models.py:110
 msgid "Fetching publications from CORE"
 msgstr "正在从CORE检索出版物"
 
-#: papers/models.py:110
+#: papers/models.py:111
 msgid "Fetching publications from OAI-PMH"
 msgstr "正在从OAI-PMH检索出版物"
 
-#: papers/models.py:111
+#: papers/models.py:112
 msgid "Clustering publications"
 msgstr "正在聚集出版物"
 
-#: papers/models.py:112
+#: papers/models.py:113
 msgid "Updating statistics"
 msgstr "正在更新统计"
 
-#: papers/models.py:1224 papers/views.py:145 papers/views.py:149
+#: papers/models.py:1234 papers/views.py:145 papers/views.py:149
 msgid "Papers"
 msgstr "论文"
 
@@ -1429,7 +1441,7 @@ msgid "This contributorship is confirmed by ORCID."
 msgstr ""
 
 #: papers/templates/papers/export_citation_modal.html:7
-#: papers/templates/papers/paper_panel.html:59
+#: papers/templates/papers/paper_panel.html:57
 msgid "Export citation"
 msgstr ""
 
@@ -1505,7 +1517,9 @@ msgstr "出版于%(year)s由"
 #: papers/templates/papers/paper.html:56
 #, python-format
 msgid "and <a href=\"#\" id=\"showAllAuthors\">%(nb_remaining_authors)s other authors.</a>"
-msgstr "以及<a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s位其他作者</a>\n            "
+msgstr ""
+"以及<a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s位其他作者</a>\n"
+"            "
 
 #: papers/templates/papers/paper.html:62
 msgid "Show less"
@@ -1526,9 +1540,9 @@ msgid "Deposit almost accomplished!"
 msgstr ""
 
 #: papers/templates/papers/paper.html:88
-#, python-format
-msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available after validation by the repository administration. You can check for the status in your <a class=\"alert-link\" href=\"%(my_profile)s\">profile</a>."
-msgstr ""
+#, fuzzy, python-format
+msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available after validation by the repository administration. You can check the publication progress in your <a class=\"alert-link\" href=\"%(my_profile)s\">profile</a>."
+msgstr "<strong>就快完成了！</strong>这篇论文已存放于<a href=\"%(repo_url)s\">%(repo_name)s</a>。在存储库的管理员验证后，全文将在<a href=\"%(deposit_url)s\">此地址</a>提供。"
 
 #: papers/templates/papers/paper.html:102
 #, fuzzy, python-format
@@ -1590,15 +1604,15 @@ msgstr "出版于"
 msgid "Links"
 msgstr "链接"
 
-#: papers/templates/papers/paper_panel.html:48
+#: papers/templates/papers/paper_panel.html:46
 msgid "Tools"
 msgstr "工具"
 
-#: papers/templates/papers/paper_panel.html:64
+#: papers/templates/papers/paper_panel.html:62
 msgid "Search in Google Scholar"
 msgstr "在Google学术中搜索"
 
-#: papers/templates/papers/paper_panel.html:69
+#: papers/templates/papers/paper_panel.html:67
 msgid "Admin zone"
 msgstr "管理区"
 
@@ -1866,7 +1880,9 @@ msgstr ""
 
 #: papers/views.py:282
 msgid "Invalid ORCID profile. Please make sure it includes a public name."
-msgstr "无效的ORCID详情。请确保它包含公开名称。\n                            "
+msgstr ""
+"无效的ORCID详情。请确保它包含公开名称。\n"
+"                            "
 
 #: papers/views.py:285
 msgid "Invalid ORCID profile."
@@ -2186,7 +2202,10 @@ msgstr "访问PDF被拒绝。"
 #: website/templates/403.html:13
 #, fuzzy, python-format
 msgid "The access to the requested page has been denied. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr "\n            找不到您请求的页面。<a href=\"/\">返回首页。</a>\n           "
+msgstr ""
+"\n"
+"            找不到您请求的页面。<a href=\"/\">返回首页。</a>\n"
+"           "
 
 #: website/templates/404.html:6 website/templates/404.html:10
 msgid "Page not found"
@@ -2195,7 +2214,9 @@ msgstr "找不到页面"
 #: website/templates/404.html:13
 #, python-format
 msgid "The page you requested could not be found. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr "找不到您请求的页面。<a href=\"%(index)s\">返回首页。</a>\n           "
+msgstr ""
+"找不到您请求的页面。<a href=\"%(index)s\">返回首页。</a>\n"
+"           "
 
 #: website/templates/500.html:6 website/templates/500.html:10
 #, fuzzy
@@ -2205,7 +2226,9 @@ msgstr "内部错误"
 #: website/templates/500.html:13
 #, python-format
 msgid "Your request triggered an internal server error. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr "您的请求触发了内部错误。<a href=\"%(index)s\">返回首页。</a>\n           "
+msgstr ""
+"您的请求触发了内部错误。<a href=\"%(index)s\">返回首页。</a>\n"
+"           "
 
 #: website/templates/admin/base_site.html:5
 #: website/templates/admin/base_site.html:8
@@ -2905,4 +2928,3 @@ msgstr "验证错误"
 #, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr "验证失败。<a href=\"%(account-login)s\">返回登录页面。</a>"
-

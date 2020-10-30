@@ -17,12 +17,13 @@
 #
 msgid ""
 msgstr ""
-""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-10-30 11:34+0100\n"
 "PO-Revision-Date: 2020-10-29 12:16:25+0000\n"
-"X-POT-Import-Date: 2020-04-23 07:09:36+0000\n"
+"Language: ru\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: ru\n"
+"X-POT-Import-Date: 2020-04-23 07:09:36+0000\n"
 "X-Generator: MediaWiki 1.36.0-alpha; Translate 2020-10-28\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11) ? 0 : ( (n%10 >= 2 && n%10 <= 4 && (n%100 < 10 || n%100 >= 20)) ? 1 : 2 );\n"
 
@@ -299,44 +300,44 @@ msgstr "Пароль"
 msgid "Connection to HAL failed. Please try again later."
 msgstr "Подключение к HAL не удалось. Пожалуйста, попробуйте позже."
 
-#: deposit/models.py:44
+#: deposit/models.py:45
 msgid "Failed"
 msgstr "Не удалось"
 
-#: deposit/models.py:45
+#: deposit/models.py:46
 msgid "Faked"
 msgstr "Фальшивый"
 
-#: deposit/models.py:46
+#: deposit/models.py:47
 msgid "Pending publication"
 msgstr "Ожидаемая публикация"
 
-#: deposit/models.py:47
+#: deposit/models.py:48
 msgid "Embargo"
 msgstr "Запрет"
 
-#: deposit/models.py:48
+#: deposit/models.py:49
 msgid "Published"
 msgstr "Опубликовано"
 
-#: deposit/models.py:49
+#: deposit/models.py:50
 msgid "Refused by the repository"
 msgstr "Отклонено репозиторием"
 
-#: deposit/models.py:50
+#: deposit/models.py:51
 msgid "Deleted"
 msgstr "Удалено"
 
-#: deposit/models.py:340 deposit/templates/deposit/start.html:228
-#: deposit/views.py:119
+#: deposit/models.py:352 deposit/templates/deposit/start.html:228
+#: deposit/views.py:120
 msgid "Deposit"
 msgstr "Вклад"
 
-#: deposit/models.py:393
+#: deposit/models.py:405
 msgid "We will use this email address to notify you when your deposits are accepted."
 msgstr "Мы будем использовать этот адрес электронной почты, чтобы уведомить вас, когда внесённые вами документы будут приняты."
 
-#: deposit/models.py:399
+#: deposit/models.py:411
 msgid "This repository will be used by default for your deposits."
 msgstr "Это хранилище будет использоваться по умолчанию для документов, внесённых вами."
 
@@ -452,11 +453,11 @@ msgstr "Не удалось подключиться к репозиторию. 
 msgid "The repository {} returned invalid XML"
 msgstr "Репозиторий {} вернул недопустимый XML"
 
-#: deposit/sword/protocol.py:335
+#: deposit/sword/protocol.py:349
 msgid "Username or password not provided for this repository. Please contact the Dissemin team."
 msgstr "Имя пользователя или пароль не предусмотрены для данного репозитория. Пожалуйста, свяжитесь с командой Dissemin."
 
-#: deposit/sword/protocol.py:360
+#: deposit/sword/protocol.py:374
 msgid "Unable to deposit to repository"
 msgstr "Невозможно внести в репозиторий"
 
@@ -601,35 +602,35 @@ msgstr "Бумажная анимированная птичка"
 msgid "Submitting paper to repository"
 msgstr "Отправка бумаги в хранилище"
 
-#: deposit/views.py:79
+#: deposit/views.py:80
 msgid "This repository is currently not enabled."
 msgstr "В настоящее время этот репозиторий не доступен."
 
-#: deposit/views.py:85
+#: deposit/views.py:86
 msgid "This repository is not available for this paper."
 msgstr "Этот репозиторий недоступен для данной статьи."
 
-#: deposit/views.py:217
+#: deposit/views.py:218
 msgid "This repository could not be found."
 msgstr "Не удалось найти данный репозиторий."
 
-#: deposit/views.py:260 deposit/views.py:276
+#: deposit/views.py:261 deposit/views.py:277
 msgid "Not all fields have been filled correctly."
 msgstr "Не все поля заполнены правильно."
 
-#: deposit/views.py:269
+#: deposit/views.py:270
 msgid "This repository cannot be used for this paper."
 msgstr "Этот репозиторий не может быть использован для данной статьи."
 
-#: deposit/views.py:287
+#: deposit/views.py:288
 msgid "Access to the PDF was denied."
 msgstr "Доступ к PDF был запрещён."
 
-#: deposit/views.py:349
+#: deposit/views.py:354
 msgid "Declaration {}.pdf"
 msgstr "Декларация {}.pdf"
 
-#: deposit/views.py:352
+#: deposit/views.py:357
 msgid "No pdf found for dr {}"
 msgstr "pdf не был найден для {}"
 
@@ -710,18 +711,22 @@ msgid "Brazilian Portuguese"
 msgstr "Бразильский португальский"
 
 #: dissemin/settings/common.py:317
+msgid "Russian"
+msgstr ""
+
+#: dissemin/settings/common.py:318
 msgid "Swedish"
 msgstr "Шведский"
 
-#: dissemin/settings/common.py:318
+#: dissemin/settings/common.py:319
 msgid "Turkish"
 msgstr "Турецкий"
 
-#: dissemin/settings/common.py:319
+#: dissemin/settings/common.py:320
 msgid "Simplified Chinese"
 msgstr "Упрощённый китайский"
 
-#: dissemin/settings/common.py:320
+#: dissemin/settings/common.py:321
 msgid "Traditional Chinese"
 msgstr "Традиционный китайский"
 
@@ -1110,16 +1115,30 @@ msgid "Green Open Access Service"
 msgstr "Сервис Green Open Access"
 
 #: model-gettext.py:111
-msgid "Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n<br/>\nContact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
-msgstr "Хотели бы вы, чтобы Университет и Государственная библиотека Дармштадта публиковали ваши публикации в зелёном открытом доступе для вас?\n<br/>\nСвяжитесь с нами: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
+msgid ""
+"Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n"
+"<br/>\n"
+"Contact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
+msgstr ""
+"Хотели бы вы, чтобы Университет и Государственная библиотека Дармштадта публиковали ваши публикации в зелёном открытом доступе для вас?\n"
+"<br/>\n"
+"Свяжитесь с нами: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
 
 #: model-gettext.py:112
 msgid "TUprints contract required!"
 msgstr "Требуется договор TUprints!"
 
 #: model-gettext.py:113
-msgid "For every document, that you upload via Dissemin we need once a TUprints contract.\nPlease fill in the contract and send a printed and signed copy to:\n<br>\nULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
-msgstr "Для каждого документа, который вы загружаете через Dissemin, нам один раз понадобится договор TUprint.\nПожалуйста, заполните договор и отправьте нам распечатанный и подписанный экземпляр:\n<br>\nULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
+msgid ""
+"For every document, that you upload via Dissemin we need once a TUprints contract.\n"
+"Please fill in the contract and send a printed and signed copy to:\n"
+"<br>\n"
+"ULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
+msgstr ""
+"Для каждого документа, который вы загружаете через Dissemin, нам один раз понадобится договор TUprint.\n"
+"Пожалуйста, заполните договор и отправьте нам распечатанный и подписанный экземпляр:\n"
+"<br>\n"
+"ULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
 
 #: model-gettext.py:114
 msgid "Download contract"
@@ -1258,7 +1277,7 @@ msgstr "Диссертация"
 msgid "Dataset"
 msgstr "Набор данных"
 
-#: papers/baremodels.py:69 papers/models.py:99
+#: papers/baremodels.py:69 papers/models.py:100
 #: publishers/templates/publishers/policy_preprint.html:5
 msgid "Preprint"
 msgstr "Препринт"
@@ -1299,48 +1318,48 @@ msgstr "Видимые"
 msgid "Invisible"
 msgstr "Невидимые"
 
-#: papers/models.py:100 publishers/templates/publishers/policy_postprint.html:6
+#: papers/models.py:101 publishers/templates/publishers/policy_postprint.html:6
 msgid "Postprint"
 msgstr "Постпринт"
 
-#: papers/models.py:101
+#: papers/models.py:102
 #: publishers/templates/publishers/policy_pdfversion.html:6
 msgid "Published version"
 msgstr "Опубликованная версия"
 
-#: papers/models.py:105
+#: papers/models.py:106
 msgid "Preparing profile"
 msgstr "Подготовка профиля"
 
-#: papers/models.py:106
+#: papers/models.py:107
 msgid "Fetching publications from ORCID"
 msgstr "Поиск публикаций в ORCID"
 
-#: papers/models.py:107
+#: papers/models.py:108
 msgid "Fetching publications from CrossRef"
 msgstr "Поиск публикаций в CrossRef"
 
-#: papers/models.py:108
+#: papers/models.py:109
 msgid "Fetching publications from BASE"
 msgstr "Поиск публикация в BASE"
 
-#: papers/models.py:109
+#: papers/models.py:110
 msgid "Fetching publications from CORE"
 msgstr "Поиск публикаций в CORE"
 
-#: papers/models.py:110
+#: papers/models.py:111
 msgid "Fetching publications from OAI-PMH"
 msgstr "Поиск публикаций в OAI-PMH"
 
-#: papers/models.py:111
+#: papers/models.py:112
 msgid "Clustering publications"
 msgstr "Кластерные публикации"
 
-#: papers/models.py:112
+#: papers/models.py:113
 msgid "Updating statistics"
 msgstr "Обновление статистики"
 
-#: papers/models.py:1224 papers/views.py:145 papers/views.py:149
+#: papers/models.py:1234 papers/views.py:145 papers/views.py:149
 msgid "Papers"
 msgstr "Статьи"
 
@@ -1393,7 +1412,7 @@ msgid "This contributorship is confirmed by ORCID."
 msgstr "Этот вклад подтвержден ORCID."
 
 #: papers/templates/papers/export_citation_modal.html:7
-#: papers/templates/papers/paper_panel.html:59
+#: papers/templates/papers/paper_panel.html:57
 msgid "Export citation"
 msgstr "Экспортировать для цитирования"
 
@@ -1488,8 +1507,9 @@ msgid "Deposit almost accomplished!"
 msgstr "Размещение почти завершено!"
 
 #: papers/templates/papers/paper.html:88
-#, python-format
-msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available after validation by the repository administration. You can check for the status in your <a class=\"alert-link\" href=\"%(my_profile)s\">profile</a>."
+#, fuzzy, python-format
+#| msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available after validation by the repository administration. You can check for the status in your <a class=\"alert-link\" href=\"%(my_profile)s\">profile</a>."
+msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available after validation by the repository administration. You can check the publication progress in your <a class=\"alert-link\" href=\"%(my_profile)s\">profile</a>."
 msgstr "Статья помещена в <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. Полный текст будет доступен после проверки администрацией репозитория. Вы можете проверить статус статьи в вашем <a class=\"alert-link\" href=\"%(my_profile)s\">профиле</a>."
 
 #: papers/templates/papers/paper.html:102
@@ -1552,15 +1572,15 @@ msgstr "Опубликовано в"
 msgid "Links"
 msgstr "Ссылки"
 
-#: papers/templates/papers/paper_panel.html:48
+#: papers/templates/papers/paper_panel.html:46
 msgid "Tools"
 msgstr "Инструменты"
 
-#: papers/templates/papers/paper_panel.html:64
+#: papers/templates/papers/paper_panel.html:62
 msgid "Search in Google Scholar"
 msgstr "Искать в Google Scholar"
 
-#: papers/templates/papers/paper_panel.html:69
+#: papers/templates/papers/paper_panel.html:67
 msgid "Admin zone"
 msgstr "Область администратора"
 
@@ -2853,4 +2873,3 @@ msgstr "Ошибка аутентификации"
 #, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr "Аутентификация не прошла. <a href=\"%(account-login)s\">Вернуться на страницу входа.</a>."
-
