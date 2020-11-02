@@ -17,13 +17,14 @@
 #
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-30 11:34+0100\n"
-"PO-Revision-Date: 2020-10-29 12:16:25+0000\n"
+"PO-Revision-Date: 2020-11-02 11:39:44+0000\n"
 "Language: ru\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2020-04-23 07:09:36+0000\n"
+"X-POT-Import-Date: 2020-10-30 11:32:03+0000\n"
 "X-Generator: MediaWiki 1.36.0-alpha; Translate 2020-10-28\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11) ? 0 : ( (n%10 >= 2 && n%10 <= 4 && (n%100 < 10 || n%100 >= 20)) ? 1 : 2 );\n"
 
@@ -712,7 +713,7 @@ msgstr "Бразильский португальский"
 
 #: dissemin/settings/common.py:317
 msgid "Russian"
-msgstr ""
+msgstr "Русский"
 
 #: dissemin/settings/common.py:318
 msgid "Swedish"
@@ -1115,30 +1116,16 @@ msgid "Green Open Access Service"
 msgstr "Сервис Green Open Access"
 
 #: model-gettext.py:111
-msgid ""
-"Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n"
-"<br/>\n"
-"Contact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
-msgstr ""
-"Хотели бы вы, чтобы Университет и Государственная библиотека Дармштадта публиковали ваши публикации в зелёном открытом доступе для вас?\n"
-"<br/>\n"
-"Свяжитесь с нами: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
+msgid "Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n<br/>\nContact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
+msgstr "Хотели бы вы, чтобы Университет и Государственная библиотека Дармштадта публиковали ваши публикации в зелёном открытом доступе для вас?\n<br/>\nСвяжитесь с нами: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
 
 #: model-gettext.py:112
 msgid "TUprints contract required!"
 msgstr "Требуется договор TUprints!"
 
 #: model-gettext.py:113
-msgid ""
-"For every document, that you upload via Dissemin we need once a TUprints contract.\n"
-"Please fill in the contract and send a printed and signed copy to:\n"
-"<br>\n"
-"ULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
-msgstr ""
-"Для каждого документа, который вы загружаете через Dissemin, нам один раз понадобится договор TUprint.\n"
-"Пожалуйста, заполните договор и отправьте нам распечатанный и подписанный экземпляр:\n"
-"<br>\n"
-"ULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
+msgid "For every document, that you upload via Dissemin we need once a TUprints contract.\nPlease fill in the contract and send a printed and signed copy to:\n<br>\nULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
+msgstr "Для каждого документа, который вы загружаете через Dissemin, нам один раз понадобится договор TUprint.\nПожалуйста, заполните договор и отправьте нам распечатанный и подписанный экземпляр:\n<br>\nULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
 
 #: model-gettext.py:114
 msgid "Download contract"
@@ -1507,8 +1494,7 @@ msgid "Deposit almost accomplished!"
 msgstr "Размещение почти завершено!"
 
 #: papers/templates/papers/paper.html:88
-#, fuzzy, python-format
-#| msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available after validation by the repository administration. You can check for the status in your <a class=\"alert-link\" href=\"%(my_profile)s\">profile</a>."
+#, python-format
 msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available after validation by the repository administration. You can check the publication progress in your <a class=\"alert-link\" href=\"%(my_profile)s\">profile</a>."
 msgstr "Статья помещена в <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. Полный текст будет доступен после проверки администрацией репозитория. Вы можете проверить статус статьи в вашем <a class=\"alert-link\" href=\"%(my_profile)s\">профиле</a>."
 
@@ -2873,3 +2859,4 @@ msgstr "Ошибка аутентификации"
 #, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr "Аутентификация не прошла. <a href=\"%(account-login)s\">Вернуться на страницу входа.</a>."
+

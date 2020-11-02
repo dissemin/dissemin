@@ -18,13 +18,14 @@
 #
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-30 11:34+0100\n"
-"PO-Revision-Date: 2020-10-29 12:16:26+0000\n"
+"PO-Revision-Date: 2020-11-02 11:39:44+0000\n"
 "Language: tr\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2020-04-23 07:09:36+0000\n"
+"X-POT-Import-Date: 2020-10-30 11:32:03+0000\n"
 "X-Generator: MediaWiki 1.36.0-alpha; Translate 2020-10-28\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
@@ -713,7 +714,7 @@ msgstr "Brezilya Portekizcesi"
 
 #: dissemin/settings/common.py:317
 msgid "Russian"
-msgstr ""
+msgstr "Rusça"
 
 #: dissemin/settings/common.py:318
 msgid "Swedish"
@@ -1116,30 +1117,16 @@ msgid "Green Open Access Service"
 msgstr "Yeşil Açık Erişim Hizmeti"
 
 #: model-gettext.py:111
-msgid ""
-"Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n"
-"<br/>\n"
-"Contact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
-msgstr ""
-"Üniversite ve Devlet Kütüphanesi Darmstadt'ın yayınlarınızı sizin için yeşil açık erişimini yayınlamasını ister misiniz?\n"
-"<br/>\n"
-"Bize ulaşın: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
+msgid "Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n<br/>\nContact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
+msgstr "Üniversite ve Devlet Kütüphanesi Darmstadt'ın yayınlarınızı sizin için yeşil açık erişimini yayınlamasını ister misiniz?\n<br/>\nBize ulaşın: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
 
 #: model-gettext.py:112
 msgid "TUprints contract required!"
 msgstr "TUprints sözleşmesi gerekli!"
 
 #: model-gettext.py:113
-msgid ""
-"For every document, that you upload via Dissemin we need once a TUprints contract.\n"
-"Please fill in the contract and send a printed and signed copy to:\n"
-"<br>\n"
-"ULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
-msgstr ""
-"Dissemin aracılığıyla yüklediğiniz her belge için bir kez TUprints sözleşmesine ihtiyacımız var.\n"
-"Lütfen sözleşmeyi doldurun ve şu adrese basılı ve imzalı bir kopya gönderin:\n"
-"<br>\n"
-"ULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
+msgid "For every document, that you upload via Dissemin we need once a TUprints contract.\nPlease fill in the contract and send a printed and signed copy to:\n<br>\nULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
+msgstr "Dissemin aracılığıyla yüklediğiniz her belge için bir kez TUprints sözleşmesine ihtiyacımız var.\nLütfen sözleşmeyi doldurun ve şu adrese basılı ve imzalı bir kopya gönderin:\n<br>\nULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
 
 #: model-gettext.py:114
 msgid "Download contract"
@@ -1506,10 +1493,9 @@ msgid "Deposit almost accomplished!"
 msgstr "Depozito neredeyse tamamlandı!"
 
 #: papers/templates/papers/paper.html:88
-#, fuzzy, python-format
-#| msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available after validation by the repository administration. You can check for the status in your <a class=\"alert-link\" href=\"%(my_profile)s\">profile</a>."
+#, python-format
 msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available after validation by the repository administration. You can check the publication progress in your <a class=\"alert-link\" href=\"%(my_profile)s\">profile</a>."
-msgstr "Bu madde <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a> olarak depolandı. Tam metin, depo yönetimi tarafından onaylandıktan sonra kullanılabilir olacaktır. Durumu <a class=\"alert-link\" href=\"%(my_profile)s\">profilinizde</a> kontrol edebilirsiniz."
+msgstr "Bu kağıt <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a> deposunda depolanmıştır. Tam metin arşiv yönetimi tarafından doğrulandıktan sonra mevcut olacaktır.  <a class=\"alert-link\" href=\"%(my_profile)s\">Profilinizden</a> yayım ilerlemesini kontrol edebilirsiniz."
 
 #: papers/templates/papers/paper.html:102
 #, fuzzy, python-format
@@ -2866,3 +2852,4 @@ msgstr "Doğrulama hatası"
 #, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr "Kimlik doğrulama başarısız. <a href=\"%(account-login)s\">Giriş sayfasına geri dönün.</a>"
+
