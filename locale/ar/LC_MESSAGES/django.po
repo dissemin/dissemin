@@ -17,9 +17,8 @@
 #
 msgid ""
 msgstr ""
-""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-30 11:34+0100\n"
+"POT-Creation-Date: 2020-11-05 09:24+0100\n"
 "PO-Revision-Date: 2020-11-02 11:39:41+0000\n"
 "Language: ar\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -547,7 +546,9 @@ msgstr "إيداع"
 #: deposit/templates/deposit/start.html:64
 #, python-format
 msgid "You can deposit the full text of your article. Dissemin will send it to a repository where it will be made freely available. By depositing your article via Dissemin, you agree to our <a href=\"%(tosurl)s\">terms of service</a>."
-msgstr "يمكنك إيداع النص الكامل لمقالتك، وسوف يرسله ديسمين إلى مستودع حيث سيُتَاح بحرية،\n            ، من خلال إيداع مقالتك عبر ديسيمين، فإنك توافق على <a href=\"%(tosurl)s\">شروط الخدمة</a>."
+msgstr ""
+"يمكنك إيداع النص الكامل لمقالتك، وسوف يرسله ديسمين إلى مستودع حيث سيُتَاح بحرية،\n"
+"            ، من خلال إيداع مقالتك عبر ديسيمين، فإنك توافق على <a href=\"%(tosurl)s\">شروط الخدمة</a>."
 
 #: deposit/templates/deposit/start.html:72
 #, fuzzy
@@ -1128,21 +1129,26 @@ msgid "Green Open Access Service"
 msgstr "الوصول المفتوح الأخضر"
 
 #: model-gettext.py:111
-msgid "Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n<br/>\nContact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
-msgstr "هل ترغب في أن تنشر جامعة ومكتبة دارمشتات منشوراتك وصولا أخضر مفتوحا لك؟\n<br/>\nاتصل بنا: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
+msgid ""
+"Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n"
+"<br/>\n"
+"Contact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
+msgstr ""
+"هل ترغب في أن تنشر جامعة ومكتبة دارمشتات منشوراتك وصولا أخضر مفتوحا لك؟\n"
+"<br/>\n"
+"اتصل بنا: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
 
 #: model-gettext.py:112
 msgid "TUprints contract required!"
 msgstr "مطلوب عقد TUprints!"
 
 #: model-gettext.py:113
-msgid "For every document, that you upload via Dissemin we need once a TUprints contract.\nPlease fill in the contract and send a printed and signed copy to:\n<br>\nULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
-msgstr "لكل مستند، تقوم بتحميله عبر Dissemin، نحتاج مرة واحدة إلى عقد TUprints.\nيرجى ملء العقد وإرسال نسخة مطبوعة وموقعة إلى:\n<br>\nULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
+msgid "We need the TUprints agreement for all documents uploaded through Dissemin. After authentification with your TU-ID, please fill out the agreement and send it digitally. A signature is not necessary."
+msgstr ""
 
 #: model-gettext.py:114
-#, fuzzy
-msgid "Download contract"
-msgstr "تنزيل"
+msgid "Fill in agreement"
+msgstr ""
 
 #: model-gettext.py:115
 msgid "Creative Commons 1.0 Universal (CC0 1.0) Public Domain Dedication"
@@ -2554,7 +2560,9 @@ msgstr "أولا، لاحظ أن ديسمين لا يمثل نسخا من الم
 
 #: website/templates/dissemin/faq.html:443
 msgid "Second, at the moment, Dissemin only supports repositories with a crawlable API that follows the <a href=\"https://www.openarchives.org/OAI/openarchivesprotocol.html\">OAI-PMH protocol</a>, and is <a href=\"https://www.base-search.net/about/en/suggest.php\">registered</a> in <a href=\"https://www.base-search.net/\">BASE</a>. We have a <a href=\"https://github.com/dissemin/croawl\">long-term project</a> to support more repositories by crawling them, but for the moment, we do not have the resources to support repositories not covered by BASE. Hence, if you are a user of a repository and would like it to be supported by Dissemin, please contact the repository administrator and suggest them to implement OAI-PMH support and to <a href=\"https://www.base-search.net/about/en/suggest.php\">register</a> their repository in BASE."
-msgstr "ثانيا، في الوقت الحالي، يدعم ديسيمين فقط المستودعات مع واجهة برمجة تطبيقات الزاحف التي تتبع <a href=\"https://www.openarchives.org/OAI/openarchivesprotocol.html\">بروتوكول\nOAI-PMH</a>، و<a href=\"https://www.base-search.net/about/en/suggest.php\">المسجل</a> في <a href=\"https://www.base-search.net/\">بيس</a>. لدينا <a href=\"https://github.com/dissemin/croawl\">مشروع طويل الأجل</a> لدعم المزيد من المستودعات من خلال الزحف إليها، ولكن في الوقت الحالي، لا تتوفر لدينا الموارد اللازمة لدعم المستودعات التي لا يغطيها بيس، وبالتالي، إذا كنت مستخدما للمستودع وترغب في أن يكون مدعوما من قبل ديسيمين، يُرجَى الاتصال بمسؤول المستودع واقتراح تنفيذ دعم OAI-PMH <a href=\"https://www.base-search.net/about/en/suggest.php\">تسجيل</a> مستودعهم في بيس"
+msgstr ""
+"ثانيا، في الوقت الحالي، يدعم ديسيمين فقط المستودعات مع واجهة برمجة تطبيقات الزاحف التي تتبع <a href=\"https://www.openarchives.org/OAI/openarchivesprotocol.html\">بروتوكول\n"
+"OAI-PMH</a>، و<a href=\"https://www.base-search.net/about/en/suggest.php\">المسجل</a> في <a href=\"https://www.base-search.net/\">بيس</a>. لدينا <a href=\"https://github.com/dissemin/croawl\">مشروع طويل الأجل</a> لدعم المزيد من المستودعات من خلال الزحف إليها، ولكن في الوقت الحالي، لا تتوفر لدينا الموارد اللازمة لدعم المستودعات التي لا يغطيها بيس، وبالتالي، إذا كنت مستخدما للمستودع وترغب في أن يكون مدعوما من قبل ديسيمين، يُرجَى الاتصال بمسؤول المستودع واقتراح تنفيذ دعم OAI-PMH <a href=\"https://www.base-search.net/about/en/suggest.php\">تسجيل</a> مستودعهم في بيس"
 
 #: website/templates/dissemin/faq.html:448
 msgid "If the repository is registered in BASE, please <a href=\"https://www.base-search.net/\">search in BASE</a> to check that your article is there. If it is, then this may be a bug of Dissemin; please file an <a href=\"https://github.com/dissemin/dissemin/issues\">issue</a> describing the problem, or send a message to <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>."
@@ -2632,7 +2640,9 @@ msgstr "<a href=\"https://association.dissem.in/#dons\">يتم قبول التب
 
 #: website/templates/dissemin/faq.html:572
 msgid "The source code is available <a href=\"https://github.com/dissemin/dissemin\">on GitHub</a>."
-msgstr "شفرة المصدر متاحة <a href=\"https://github.com/dissemin/dissemin\">في\nجيت هب</a>."
+msgstr ""
+"شفرة المصدر متاحة <a href=\"https://github.com/dissemin/dissemin\">في\n"
+"جيت هب</a>."
 
 #: website/templates/dissemin/faq.html:579
 msgid "Yes! We even have <a href=\"https://dissemin.readthedocs.io/en/latest/api.html\">an API</a>. If it does not suit your needs, please don't hesitate to get in touch by writing to <a href=\"mailto:hello@dissem.in\">hello@dissem.in</a>."
@@ -2850,7 +2860,9 @@ msgstr "الإبلاغ عن إساءة استخدام"
 
 #: website/templates/dissemin/tos.html:87
 msgid "Misuse can be reported to <a href=\"mailto:support@dissem.in\">support@dissem.in</a>."
-msgstr "يمكن الإبلاغ عن أي سوء استخدام إلى: \n<a href=\"mailto:support@dissem.in\">support@dissem.in</a>"
+msgstr ""
+"يمكن الإبلاغ عن أي سوء استخدام إلى: \n"
+"<a href=\"mailto:support@dissem.in\">support@dissem.in</a>"
 
 #: website/templates/dissemin/tos.html:95
 msgid "The <a href=\"https://dissem.in\">dissem.in</a> website has been registered with <a href=\"https://www.cnil.fr/\">CNIL</a> under declaration n°1895382 v0."
@@ -2915,3 +2927,17 @@ msgstr "خطأ مصادقة"
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr "فشلت المصادقة; <a href=\"%(account-login)s\">الرجوع إلى صفحة تسجيل الدخول.</a>"
 
+#~ msgid ""
+#~ "For every document, that you upload via Dissemin we need once a TUprints contract.\n"
+#~ "Please fill in the contract and send a printed and signed copy to:\n"
+#~ "<br>\n"
+#~ "ULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
+#~ msgstr ""
+#~ "لكل مستند، تقوم بتحميله عبر Dissemin، نحتاج مرة واحدة إلى عقد TUprints.\n"
+#~ "يرجى ملء العقد وإرسال نسخة مطبوعة وموقعة إلى:\n"
+#~ "<br>\n"
+#~ "ULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
+
+#, fuzzy
+#~ msgid "Download contract"
+#~ msgstr "تنزيل"

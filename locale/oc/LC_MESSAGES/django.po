@@ -10,9 +10,8 @@
 #
 msgid ""
 msgstr ""
-""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-30 11:34+0100\n"
+"POT-Creation-Date: 2020-11-05 09:24+0100\n"
 "PO-Revision-Date: 2020-11-02 11:39:43+0000\n"
 "Language: oc\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1155,7 +1154,10 @@ msgid "Green Open Access Service"
 msgstr "Liure accès (via verda)"
 
 #: model-gettext.py:111
-msgid "Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n<br/>\nContact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
+msgid ""
+"Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n"
+"<br/>\n"
+"Contact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
 msgstr ""
 
 #: model-gettext.py:112
@@ -1163,13 +1165,12 @@ msgid "TUprints contract required!"
 msgstr ""
 
 #: model-gettext.py:113
-msgid "For every document, that you upload via Dissemin we need once a TUprints contract.\nPlease fill in the contract and send a printed and signed copy to:\n<br>\nULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
+msgid "We need the TUprints agreement for all documents uploaded through Dissemin. After authentification with your TU-ID, please fill out the agreement and send it digitally. A signature is not necessary."
 msgstr ""
 
 #: model-gettext.py:114
-#, fuzzy
-msgid "Download contract"
-msgstr "Telecargar"
+msgid "Fill in agreement"
+msgstr ""
 
 #: model-gettext.py:115
 msgid "Creative Commons 1.0 Universal (CC0 1.0) Public Domain Dedication"
@@ -1529,7 +1530,10 @@ msgstr "Publicat dins"
 #: papers/templates/papers/paper.html:56
 #, fuzzy, python-format
 msgid "and <a href=\"#\" id=\"showAllAuthors\">%(nb_remaining_authors)s other authors.</a>"
-msgstr "\n            et <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s autres autors</a>\n            "
+msgstr ""
+"\n"
+"            et <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s autres autors</a>\n"
+"            "
 
 #: papers/templates/papers/paper.html:62
 msgid "Show less"
@@ -2934,3 +2938,6 @@ msgstr ""
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr ""
 
+#, fuzzy
+#~ msgid "Download contract"
+#~ msgstr "Telecargar"

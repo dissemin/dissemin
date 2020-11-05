@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-30 11:34+0100\n"
+"POT-Creation-Date: 2020-11-05 09:24+0100\n"
 "PO-Revision-Date: 2019-06-06 15:52:56+0000\n"
 "Language: sr-Latn\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1195,18 +1195,12 @@ msgid "TUprints contract required!"
 msgstr ""
 
 #: model-gettext.py:113
-msgid ""
-"For every document, that you upload via Dissemin we need once a TUprints contract.\n"
-"Please fill in the contract and send a printed and signed copy to:\n"
-"<br>\n"
-"ULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
+msgid "We need the TUprints agreement for all documents uploaded through Dissemin. After authentification with your TU-ID, please fill out the agreement and send it digitally. A signature is not necessary."
 msgstr ""
 
 #: model-gettext.py:114
-#, fuzzy
-#| msgid "Download"
-msgid "Download contract"
-msgstr "Preuzmi"
+msgid "Fill in agreement"
+msgstr ""
 
 #: model-gettext.py:115
 msgid "Creative Commons 1.0 Universal (CC0 1.0) Public Domain Dedication"
@@ -2971,6 +2965,11 @@ msgstr ""
 #, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr ""
+
+#, fuzzy
+#~| msgid "Download"
+#~ msgid "Download contract"
+#~ msgstr "Preuzmi"
 
 #~ msgid "please wait..."
 #~ msgstr "sačekajte…"

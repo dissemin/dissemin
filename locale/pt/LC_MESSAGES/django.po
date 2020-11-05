@@ -14,9 +14,8 @@
 #
 msgid ""
 msgstr ""
-""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-30 11:34+0100\n"
+"POT-Creation-Date: 2020-11-05 09:24+0100\n"
 "PO-Revision-Date: 2020-11-02 11:39:44+0000\n"
 "Language: pt\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1140,7 +1139,10 @@ msgid "Green Open Access Service"
 msgstr "Acesso aberto (verde)"
 
 #: model-gettext.py:111
-msgid "Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n<br/>\nContact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
+msgid ""
+"Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n"
+"<br/>\n"
+"Contact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
 msgstr ""
 
 #: model-gettext.py:112
@@ -1148,13 +1150,12 @@ msgid "TUprints contract required!"
 msgstr ""
 
 #: model-gettext.py:113
-msgid "For every document, that you upload via Dissemin we need once a TUprints contract.\nPlease fill in the contract and send a printed and signed copy to:\n<br>\nULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
+msgid "We need the TUprints agreement for all documents uploaded through Dissemin. After authentification with your TU-ID, please fill out the agreement and send it digitally. A signature is not necessary."
 msgstr ""
 
 #: model-gettext.py:114
-#, fuzzy
-msgid "Download contract"
-msgstr "Descarregar"
+msgid "Fill in agreement"
+msgstr ""
 
 #: model-gettext.py:115
 #, fuzzy
@@ -1870,7 +1871,11 @@ msgstr ""
 #: papers/views.py:282
 #, fuzzy
 msgid "Invalid ORCID profile. Please make sure it includes a public name."
-msgstr "\n                            Perfil ORCID inválido.\n                            Por favor, certifique-se se incluiu um nome público.\n                            "
+msgstr ""
+"\n"
+"                            Perfil ORCID inválido.\n"
+"                            Por favor, certifique-se se incluiu um nome público.\n"
+"                            "
 
 #: papers/views.py:285
 msgid "Invalid ORCID profile."
@@ -2197,7 +2202,10 @@ msgstr "Página não encontrada"
 #: website/templates/404.html:13
 #, fuzzy, python-format
 msgid "The page you requested could not be found. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr "\n            Não foi possível encontrar a página solicitada. <a href=\"/\">Volte para a página inicial.</a>\n           "
+msgstr ""
+"\n"
+"            Não foi possível encontrar a página solicitada. <a href=\"/\">Volte para a página inicial.</a>\n"
+"           "
 
 #: website/templates/500.html:6 website/templates/500.html:10
 msgid "Internal server error"
@@ -2915,5 +2923,11 @@ msgstr "Erro de autenticação"
 #: website/templates/socialaccount/authentication_error.html:15
 #, fuzzy, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
-msgstr "\n            Ocorreu um erro na autenticação. <a href=\"/\">Volte para a página de iniciar sessão.</a>\n           "
+msgstr ""
+"\n"
+"            Ocorreu um erro na autenticação. <a href=\"/\">Volte para a página de iniciar sessão.</a>\n"
+"           "
 
+#, fuzzy
+#~ msgid "Download contract"
+#~ msgstr "Descarregar"

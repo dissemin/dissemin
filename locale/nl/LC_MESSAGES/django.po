@@ -16,9 +16,8 @@
 #
 msgid ""
 msgstr ""
-""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-30 11:34+0100\n"
+"POT-Creation-Date: 2020-11-05 09:24+0100\n"
 "PO-Revision-Date: 2020-11-02 11:39:43+0000\n"
 "Language: nl\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1140,7 +1139,10 @@ msgid "Green Open Access Service"
 msgstr "Vrije toegang met de kleur groen"
 
 #: model-gettext.py:111
-msgid "Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n<br/>\nContact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
+msgid ""
+"Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n"
+"<br/>\n"
+"Contact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
 msgstr ""
 
 #: model-gettext.py:112
@@ -1148,13 +1150,12 @@ msgid "TUprints contract required!"
 msgstr ""
 
 #: model-gettext.py:113
-msgid "For every document, that you upload via Dissemin we need once a TUprints contract.\nPlease fill in the contract and send a printed and signed copy to:\n<br>\nULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
+msgid "We need the TUprints agreement for all documents uploaded through Dissemin. After authentification with your TU-ID, please fill out the agreement and send it digitally. A signature is not necessary."
 msgstr ""
 
 #: model-gettext.py:114
-#, fuzzy
-msgid "Download contract"
-msgstr "Ophalen"
+msgid "Fill in agreement"
+msgstr ""
 
 #: model-gettext.py:115
 msgid "Creative Commons 1.0 Universal (CC0 1.0) Public Domain Dedication"
@@ -1875,7 +1876,11 @@ msgstr ""
 #: papers/views.py:282
 #, fuzzy
 msgid "Invalid ORCID profile. Please make sure it includes a public name."
-msgstr "\n                            Ongeldig ORCID-profiel.\n                            Zorg ervoor dat het profiel een openbare naam bevat.\n                            "
+msgstr ""
+"\n"
+"                            Ongeldig ORCID-profiel.\n"
+"                            Zorg ervoor dat het profiel een openbare naam bevat.\n"
+"                            "
 
 #: papers/views.py:285
 msgid "Invalid ORCID profile."
@@ -2200,7 +2205,9 @@ msgstr "Toegangsaanvraag voor de pdf is geweigerd."
 #: website/templates/403.html:13
 #, fuzzy, python-format
 msgid "The access to the requested page has been denied. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr "Kan de aangevraagde pagina niet vinden. <a href=\"/\">Terug naar de startpagina.</a>\n           "
+msgstr ""
+"Kan de aangevraagde pagina niet vinden. <a href=\"/\">Terug naar de startpagina.</a>\n"
+"           "
 
 #: website/templates/404.html:6 website/templates/404.html:10
 msgid "Page not found"
@@ -2209,7 +2216,9 @@ msgstr "Pagina niet gevonden"
 #: website/templates/404.html:13
 #, fuzzy, python-format
 msgid "The page you requested could not be found. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr "Kan de aangevraagde pagina niet vinden. <a href=\"/\">Terug naar de startpagina.</a>\n           "
+msgstr ""
+"Kan de aangevraagde pagina niet vinden. <a href=\"/\">Terug naar de startpagina.</a>\n"
+"           "
 
 #: website/templates/500.html:6 website/templates/500.html:10
 #, fuzzy
@@ -2219,7 +2228,9 @@ msgstr "Interne fout"
 #: website/templates/500.html:13
 #, fuzzy, python-format
 msgid "Your request triggered an internal server error. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr "Je verzoek heeft een interne fout veroorzaakt. <a href=\"/\">Terug naar de startpagina.</a>\n           "
+msgstr ""
+"Je verzoek heeft een interne fout veroorzaakt. <a href=\"/\">Terug naar de startpagina.</a>\n"
+"           "
 
 #: website/templates/admin/base_site.html:5
 #: website/templates/admin/base_site.html:8
@@ -2925,5 +2936,11 @@ msgstr "Verifiëringsfout"
 #: website/templates/socialaccount/authentication_error.html:15
 #, fuzzy, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
-msgstr "\n            Verifiëren is mislukt. <a href=\"/\">Terug naar de aanmeldpagina.</a>\n           "
+msgstr ""
+"\n"
+"            Verifiëren is mislukt. <a href=\"/\">Terug naar de aanmeldpagina.</a>\n"
+"           "
 
+#, fuzzy
+#~ msgid "Download contract"
+#~ msgstr "Ophalen"

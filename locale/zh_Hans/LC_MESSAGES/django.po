@@ -18,9 +18,8 @@
 #
 msgid ""
 msgstr ""
-""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-30 11:34+0100\n"
+"POT-Creation-Date: 2020-11-05 09:24+0100\n"
 "PO-Revision-Date: 2020-11-02 11:39:45+0000\n"
 "Language: zh_hans\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -549,7 +548,9 @@ msgstr "存放"
 #: deposit/templates/deposit/start.html:64
 #, python-format
 msgid "You can deposit the full text of your article. Dissemin will send it to a repository where it will be made freely available. By depositing your article via Dissemin, you agree to our <a href=\"%(tosurl)s\">terms of service</a>."
-msgstr "您可以存放您的文章全文。Dissemin将发送它到其能够自由展示的存储库。通过使用Dissemin存放您的文章，您同意我们的<a href=\"%(tosurl)s\">服务条款</a>。\n        "
+msgstr ""
+"您可以存放您的文章全文。Dissemin将发送它到其能够自由展示的存储库。通过使用Dissemin存放您的文章，您同意我们的<a href=\"%(tosurl)s\">服务条款</a>。\n"
+"        "
 
 #: deposit/templates/deposit/start.html:72
 #, fuzzy
@@ -1139,7 +1140,10 @@ msgid "Green Open Access Service"
 msgstr "绿色开放访问"
 
 #: model-gettext.py:111
-msgid "Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n<br/>\nContact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
+msgid ""
+"Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n"
+"<br/>\n"
+"Contact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
 msgstr ""
 
 #: model-gettext.py:112
@@ -1147,13 +1151,12 @@ msgid "TUprints contract required!"
 msgstr ""
 
 #: model-gettext.py:113
-msgid "For every document, that you upload via Dissemin we need once a TUprints contract.\nPlease fill in the contract and send a printed and signed copy to:\n<br>\nULB Darmstadt, Team Digitales Publizieren, Magdalenenstr. 8, 64289 Darmstadt"
+msgid "We need the TUprints agreement for all documents uploaded through Dissemin. After authentification with your TU-ID, please fill out the agreement and send it digitally. A signature is not necessary."
 msgstr ""
 
 #: model-gettext.py:114
-#, fuzzy
-msgid "Download contract"
-msgstr "下载"
+msgid "Fill in agreement"
+msgstr ""
 
 #: model-gettext.py:115
 msgid "Creative Commons 1.0 Universal (CC0 1.0) Public Domain Dedication"
@@ -1509,7 +1512,9 @@ msgstr "出版于%(year)s由"
 #: papers/templates/papers/paper.html:56
 #, python-format
 msgid "and <a href=\"#\" id=\"showAllAuthors\">%(nb_remaining_authors)s other authors.</a>"
-msgstr "以及<a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s位其他作者</a>\n            "
+msgstr ""
+"以及<a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s位其他作者</a>\n"
+"            "
 
 #: papers/templates/papers/paper.html:62
 msgid "Show less"
@@ -1870,7 +1875,9 @@ msgstr ""
 
 #: papers/views.py:282
 msgid "Invalid ORCID profile. Please make sure it includes a public name."
-msgstr "无效的ORCID详情。请确保它包含公开名称。\n                            "
+msgstr ""
+"无效的ORCID详情。请确保它包含公开名称。\n"
+"                            "
 
 #: papers/views.py:285
 msgid "Invalid ORCID profile."
@@ -2190,7 +2197,10 @@ msgstr "访问PDF被拒绝。"
 #: website/templates/403.html:13
 #, fuzzy, python-format
 msgid "The access to the requested page has been denied. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr "\n            找不到您请求的页面。<a href=\"/\">返回首页。</a>\n           "
+msgstr ""
+"\n"
+"            找不到您请求的页面。<a href=\"/\">返回首页。</a>\n"
+"           "
 
 #: website/templates/404.html:6 website/templates/404.html:10
 msgid "Page not found"
@@ -2199,7 +2209,9 @@ msgstr "找不到页面"
 #: website/templates/404.html:13
 #, python-format
 msgid "The page you requested could not be found. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr "找不到您请求的页面。<a href=\"%(index)s\">返回首页。</a>\n           "
+msgstr ""
+"找不到您请求的页面。<a href=\"%(index)s\">返回首页。</a>\n"
+"           "
 
 #: website/templates/500.html:6 website/templates/500.html:10
 #, fuzzy
@@ -2209,7 +2221,9 @@ msgstr "内部错误"
 #: website/templates/500.html:13
 #, python-format
 msgid "Your request triggered an internal server error. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr "您的请求触发了内部错误。<a href=\"%(index)s\">返回首页。</a>\n           "
+msgstr ""
+"您的请求触发了内部错误。<a href=\"%(index)s\">返回首页。</a>\n"
+"           "
 
 #: website/templates/admin/base_site.html:5
 #: website/templates/admin/base_site.html:8
@@ -2910,3 +2924,6 @@ msgstr "验证错误"
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr "验证失败。<a href=\"%(account-login)s\">返回登录页面。</a>"
 
+#, fuzzy
+#~ msgid "Download contract"
+#~ msgstr "下载"
