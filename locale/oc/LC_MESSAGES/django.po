@@ -10,13 +10,14 @@
 #
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-11-05 09:24+0100\n"
-"PO-Revision-Date: 2020-11-02 11:39:43+0000\n"
+"PO-Revision-Date: 2020-11-05 12:19:13+0000\n"
 "Language: oc\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2020-10-30 11:32:03+0000\n"
+"X-POT-Import-Date: 2020-11-05 12:10:48+0000\n"
 "X-Generator: MediaWiki 1.36.0-alpha; Translate 2020-10-28\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
@@ -1154,10 +1155,7 @@ msgid "Green Open Access Service"
 msgstr "Liure accès (via verda)"
 
 #: model-gettext.py:111
-msgid ""
-"Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n"
-"<br/>\n"
-"Contact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
+msgid "Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n<br/>\nContact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
 msgstr ""
 
 #: model-gettext.py:112
@@ -1530,10 +1528,7 @@ msgstr "Publicat dins"
 #: papers/templates/papers/paper.html:56
 #, fuzzy, python-format
 msgid "and <a href=\"#\" id=\"showAllAuthors\">%(nb_remaining_authors)s other authors.</a>"
-msgstr ""
-"\n"
-"            et <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s autres autors</a>\n"
-"            "
+msgstr "\n            et <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s autres autors</a>\n            "
 
 #: papers/templates/papers/paper.html:62
 msgid "Show less"
@@ -2938,6 +2933,3 @@ msgstr ""
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr ""
 
-#, fuzzy
-#~ msgid "Download contract"
-#~ msgstr "Telecargar"
