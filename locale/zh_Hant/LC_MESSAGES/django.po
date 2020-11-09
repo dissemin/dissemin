@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-11-05 09:24+0100\n"
-"PO-Revision-Date: 2020-11-05 12:19:15+0000\n"
+"PO-Revision-Date: 2020-11-09 11:35:46+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: zh_hant\n"
@@ -1123,11 +1123,11 @@ msgstr "需要 TUprints 契約！"
 
 #: model-gettext.py:113
 msgid "We need the TUprints agreement for all documents uploaded through Dissemin. After authentification with your TU-ID, please fill out the agreement and send it digitally. A signature is not necessary."
-msgstr ""
+msgstr "我們需要用於透過 Dissemin 所上傳文件的 TUprints 協議。在以您的 TU-ID 驗證後，請填寫協議並以數位形式發送。可不需簽名。"
 
 #: model-gettext.py:114
 msgid "Fill in agreement"
-msgstr ""
+msgstr "填寫協議"
 
 #: model-gettext.py:115
 msgid "Creative Commons 1.0 Universal (CC0 1.0) Public Domain Dedication"

@@ -23,7 +23,7 @@ msgstr ""
 "Project-Id-Version: dissem.in\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-11-05 09:24+0100\n"
-"PO-Revision-Date: 2020-11-05 12:19:12+0000\n"
+"PO-Revision-Date: 2020-11-09 11:35:43+0000\n"
 "Last-Translator: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language-Team: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language: fr\n"
@@ -1134,11 +1134,11 @@ msgstr "Contrat TUprints nécessaire !"
 
 #: model-gettext.py:113
 msgid "We need the TUprints agreement for all documents uploaded through Dissemin. After authentification with your TU-ID, please fill out the agreement and send it digitally. A signature is not necessary."
-msgstr ""
+msgstr "Nous avons besoin de l’accord de TUprints pour tous les documents téléchargés via Dissemin. Après authentification avec votre TU-ID, veuillez remplir l’accord et l’envoyer numériquement. La signature n’est pas nécessaire."
 
 #: model-gettext.py:114
 msgid "Fill in agreement"
-msgstr ""
+msgstr "Remplir l’accord"
 
 #: model-gettext.py:115
 msgid "Creative Commons 1.0 Universal (CC0 1.0) Public Domain Dedication"

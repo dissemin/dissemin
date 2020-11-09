@@ -21,7 +21,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-11-05 09:24+0100\n"
-"PO-Revision-Date: 2020-11-05 12:19:14+0000\n"
+"PO-Revision-Date: 2020-11-09 11:35:45+0000\n"
 "Language: tr\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1126,11 +1126,11 @@ msgstr "TUprints sözleşmesi gerekli!"
 
 #: model-gettext.py:113
 msgid "We need the TUprints agreement for all documents uploaded through Dissemin. After authentification with your TU-ID, please fill out the agreement and send it digitally. A signature is not necessary."
-msgstr ""
+msgstr "Dissemin üzerinden yüklenen tüm belgeler için TUprints sözleşmesine ihtiyacımız var. TU-ID'nizle yetkilendirdikten sonra, lütfen sözleşmeyi doldurun ve dijital olarak gönderin. İmza gerekli değildir."
 
 #: model-gettext.py:114
 msgid "Fill in agreement"
-msgstr ""
+msgstr "Sözleşmeyi doldurun"
 
 #: model-gettext.py:115
 msgid "Creative Commons 1.0 Universal (CC0 1.0) Public Domain Dedication"

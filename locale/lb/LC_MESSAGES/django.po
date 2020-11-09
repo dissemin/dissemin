@@ -12,7 +12,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-11-05 09:24+0100\n"
-"PO-Revision-Date: 2020-11-05 12:19:13+0000\n"
+"PO-Revision-Date: 2020-11-09 11:35:43+0000\n"
 "Language: lb\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -709,7 +709,7 @@ msgstr ""
 
 #: dissemin/settings/common.py:317
 msgid "Russian"
-msgstr ""
+msgstr "Russesch"
 
 #: dissemin/settings/common.py:318
 msgid "Swedish"

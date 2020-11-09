@@ -14,7 +14,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-11-05 09:24+0100\n"
-"PO-Revision-Date: 2020-11-05 12:19:14+0000\n"
+"PO-Revision-Date: 2020-11-09 11:35:44+0000\n"
 "Language: pt_br\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1121,11 +1121,11 @@ msgstr "É necessário um contrato TUprints!"
 
 #: model-gettext.py:113
 msgid "We need the TUprints agreement for all documents uploaded through Dissemin. After authentification with your TU-ID, please fill out the agreement and send it digitally. A signature is not necessary."
-msgstr ""
+msgstr "Precisamos do contrato TUprints para todos os documentos carregados através do Dissemin. Após a autenticação com seu TU-ID, preencha o contrato e envie-o digitalmente. A assinatura não é necessária."
 
 #: model-gettext.py:114
 msgid "Fill in agreement"
-msgstr ""
+msgstr "Preencher acordo"
 
 #: model-gettext.py:115
 msgid "Creative Commons 1.0 Universal (CC0 1.0) Public Domain Dedication"
