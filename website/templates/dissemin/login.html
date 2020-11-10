@@ -6,9 +6,71 @@
 
 {% block title %}{% trans "Sign in" %}{% endblock %}
 
+{% block css %}
+    <link rel="stylesheet" href="{% static "css/select2.min.css" %}" />
+    <link rel="stylesheet" href="{% static "css/select2-bootstrap4.min.css" %}" />
+{% endblock css %}
+
+{% block scripts %}
+    <script src="{% static "js/select2.min.js"%}"></script>
+{% endblock %}
+
 {% block content %}
     <div class="container pt-3 pb-3">
         <h1 class="text-center">{% trans "Sign in" %}</h1>
+        <p>
+            {% url "tos" as tos %}
+            {% blocktrans trimmed %}
+            You can authenticate either with an institutional account or with an ORCID account. Learn more about our data privacy in our <a href="{{ tos }}">terms of servive</a>
+            {% endblocktrans %}
+        </p>
+        <div class="row">
+            <div class="col-12 col-lg-6 d-lg-flex">
+                <div class="bg-light border rounded p-4">
+                    <h2>{% trans "Institutional Login" %}</h2>
+                    <p>
+                        {% blocktrans trimmed %}
+                            If your institution participates in eduGAIN, you can log in with your institutional account.
+                            If you do not find your institution, it is likely that it does not participate in eduGAIN.
+                            In this case you can still login with ORCID.
+                        {% endblocktrans %}
+                    </p>
+                    <form action="{% url "shib_ds:redirect" %}">
+                        <input type="hidden" name="next" value="{{ shib_ds.next }}"/>
+                        <div class="form-group">
+                            <label for="shib_ds">{% trans "Choose your institution" %}</label>
+                            <select id="shib_ds" name="{{ shib_ds.return_id_param }}" style="width: 100%">
+                                {% if shib_ds.recent_idps %}
+                                    <option selected value="{{ shib_ds.recent_idps.0.id }}" label="{{ shib_ds.recent_idps.0.text }}">{{ shib_ds.recent_idps.0.text }}</option>
+                                {% endif %}
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">{% trans "Log in" %}</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-12 col-lg-6 d-lg-flex pt-3 pt-lg-0">
+                <div class="bg-light border rounded p-4">
+                    <h2>{% trans "ORCID" %}</h2>
+                    <div class="row">
+                    <div class="col">
+                    <p>
+                        {% blocktrans trimmed %}
+                            If you already have an ORCID account, you can use it with Dissemin.
+                            Otherwise you can create it: It is free and just takes a few seconds.
+                            We will not make any changes to your profile.
+                        {% endblocktrans %}
+                    </p>
+                    <a class="btn btn-orcid" href="{% provider_login_url "orcid" auth_params="show_login=True" %}">{% trans "Log in" %}</a>
+                    </div>
+                    <div class="d-none d-md-inline col-md-2">
+                <img class="img-fluid" src="{% static "dissemin/img/orcid-big.png" %}" alt="ORCID"/>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--
         <div class="row">
             <div class="col-12 col-md-10">
                 <p>
@@ -46,5 +108,18 @@
                 </div>
             </div>
         </div>
+        -->
     </div>
+
+<script>
+    $(document).ready(function() {
+        $('#shib_ds').select2({
+            ajax: {
+                url: '{% url "shib_ds:search" %}',
+                dataType: 'json'
+            },
+            theme: "bootstrap4"
+        });
+    });
+</script>
 {% endblock %}

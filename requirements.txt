@@ -61,3 +61,4 @@ dealer
 django-select2
 bleach
 git+https://github.com/Brown-University-Library/django-shibboleth-remoteuser.git
+git+https://github.com/ULB-Darmstadt/django-shibboleth-ds.git

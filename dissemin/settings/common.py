@@ -30,9 +30,11 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+import os
+
 from datetime import timedelta
 from dealer.git import git
-import os
+from shibboleth_discovery.helpers import select2_processor
 
 from django.utils.translation import ugettext_lazy as _
 
@@ -166,6 +168,7 @@ INSTALLED_APPS = (
     'tempus_dominus',
     'sass_processor',
     'shibboleth',
+    'shibboleth_discovery',
 )
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -398,6 +401,9 @@ SHIBBOLETH_ATTRIBUTE_MAP = {
     'shib-mail' : (False, 'email'),
     'shib-orcid' : (False, 'orcid'),
 }
+
+SHIB_DS_POST_PROCESSOR = select2_processor
+SHIB_DS_MAX_IDP = 1
 
 # Logging is very important thing. Here we define some standards. We use Django logging system, so there it is easy to custimze your logging preferences.
 # To switch for 'console' to level 'DEBUG' please use prod.py resp. dev.py

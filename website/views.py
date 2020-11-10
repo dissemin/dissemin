@@ -1,5 +1,7 @@
 from django.views.generic.base import TemplateView
 
+from shibboleth_discovery.mixins import ShibDSLoginMixin
+
 from deposit.models import DepositRecord
 from website.forms import StartPageSearchForm
 from statistics.models import COMBINED_STATUS_CHOICES
@@ -32,3 +34,10 @@ class StartPageView(TemplateView):
         )[:5]
 
         return context
+
+class LoginView(ShibDSLoginMixin, TemplateView):
+    """
+    This is a login view using shibboleth mixin
+    """
+
+    template_name = 'dissemin/login.html'

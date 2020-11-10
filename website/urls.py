@@ -69,6 +69,8 @@ from publishers.views import PublisherView
 from publishers.views import PublishersView
 from upload.views import handleAjaxUpload
 from upload.views import handleUrlDownload
+from website.views import LoginView
+
 from website.views import StartPageView
 
 try:
@@ -172,8 +174,10 @@ urlpatterns = [
     # We keep notification urls, because the app is rather opaque
     path('', include('notification.urls')),
     path('jsreverse/', django_js_reverse.views.urls_js, name='js_reverse'),
+    # Shibboleth Discovery
+    path('shib-ds/', include('shibboleth_discovery.urls')),
     # Social auth
-    path('accounts/login/', TemplateView.as_view(template_name='dissemin/login.html'), name='account-login'),
+    path('accounts/login/', LoginView.as_view(), name='account-login'),
     path('accounts/logout/', logoutView, name='account-logout'),
     path('accounts/social/', include('allauth.socialaccount.urls')),
     # JavaScript i18n
