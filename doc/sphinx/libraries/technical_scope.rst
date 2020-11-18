@@ -170,6 +170,10 @@ Given an endpoint, put a little script that does the job. From the SWORDv2 respo
 
     https://repository.example.org/scripts/status?id=3243
 
+    or
+
+    https://repository.example.org/entry/3243?convert=toDissemin
+
 As response we expect simple JSON containing ``status, publication_date, pdf_url`` where status is one of ``pending, embargoes, published, refused``. In case of ``embargoed`` and ``published`` we like to have publication date, i.e. when the resource is publicly available, as ``YYYY-MM-DD`` and the direct link to the pdf if possible. Below we have a simple example.
 
 .. code::

@@ -1,6 +1,7 @@
 import json
 import os
 import pytest
+import re
 import responses
 
 from datetime import date
@@ -50,6 +51,16 @@ class MetaTestSWORDMETSProtocol(MetaTestProtocol):
         )
 
         return dr
+
+
+    @pytest.fixture
+    def update_status_url(self):
+        """
+        Sets url to repository
+        """
+        url = 'https://repository.dissem.in/{}/status'
+        self.protocol.repository.update_status_url = url
+
 
     @pytest.mark.write_mets_examples
     def test_write_mets_metadata_examples(self, db, upload_data, user_leibniz):
@@ -346,61 +357,61 @@ class MetaTestSWORDMETSProtocol(MetaTestProtocol):
 
 
     @responses.activate
-    def test_refresh_deposit_status(self, pending_deposit_record):
+    def test_refresh_deposit_status(self, pending_deposit_record, update_status_url):
         """
         Test if status is updated
         """
-        update_status_url = 'https://repository.dissem.in/update_status'
+        mock_url = self.protocol.repository.update_status_url.format(pending_deposit_record.identifier)
         body = {
             'status' : 'refused'
         }
-        responses.add(responses.GET, update_status_url, status=200, body=json.dumps(body))
-        self.protocol.repository.update_status_url = update_status_url
+        responses.add(responses.GET, mock_url, status=200, body=json.dumps(body))
         self.protocol.refresh_deposit_status()
         pending_deposit_record.refresh_from_db()
         assert pending_deposit_record.status == body.get('status')
+        assert responses.assert_call_count(mock_url, 1) is True
 
     @responses.activate
-    def test_refresh_deposit_status_invalid_data(self, pending_deposit_record):
+    def test_refresh_deposit_status_invalid_data(self, pending_deposit_record, update_status_url):
         """
         With invalid data, status must not be updated
         """
-        update_status_url = 'https://repository.dissem.in/update_status'
+        mock_url = self.protocol.repository.update_status_url.format(pending_deposit_record.identifier)
         body = {
             'status' : 'embargoed'
         }
-        responses.add(responses.GET, update_status_url, status=200, body=json.dumps(body))
-        self.protocol.repository.update_status_url = update_status_url
+        responses.add(responses.GET, mock_url, status=200, body=json.dumps(body))
         self.protocol.refresh_deposit_status()
         pending_deposit_record.refresh_from_db()
         assert pending_deposit_record.status == 'pending'
+        assert responses.assert_call_count(mock_url, 1) is True
 
     @responses.activate
-    def test_refresh_deposit_status_404(self, pending_deposit_record):
+    def test_refresh_deposit_status_404(self, pending_deposit_record, update_status_url):
         """
         With a 404, we expect new deposit status to be refused
         """
-        update_status_url = 'https://repository.dissem.in/update_status'
-        responses.add(responses.GET, update_status_url, status=404)
-        self.protocol.repository.update_status_url = update_status_url
+        mock_url = self.protocol.repository.update_status_url.format(pending_deposit_record.identifier)
+        responses.add(responses.GET, mock_url, status=404)
         self.protocol.refresh_deposit_status()
         pending_deposit_record.refresh_from_db()
         assert pending_deposit_record.status == 'refused'
+        assert responses.assert_call_count(mock_url, 1) is True
 
     @responses.activate
-    def test_refresh_deposit_status_status_error(self, pending_deposit_record):
+    def test_refresh_deposit_status_status_error(self, pending_deposit_record, update_status_url):
         """
         If we get status code not being 2xx or 404, we do nothing
         """
-        update_status_url = 'https://repository.dissem.in/update_status'
+        mock_url = self.protocol.repository.update_status_url.format(pending_deposit_record.identifier)
         body = {
             'status' : 'published'
         }
-        responses.add(responses.GET, update_status_url, status=403, body=json.dumps(body))
-        self.protocol.repository.update_status_url = update_status_url
+        responses.add(responses.GET, mock_url, status=403, body=json.dumps(body))
         self.protocol.refresh_deposit_status()
         pending_deposit_record.refresh_from_db()
         assert pending_deposit_record.status == 'pending'
+        assert responses.assert_call_count(mock_url, 1) is True
 
 
     @responses.activate
@@ -408,33 +419,26 @@ class MetaTestSWORDMETSProtocol(MetaTestProtocol):
         """
         If no URL for update is given, i.e. repostory.update_status_url is empty, nothing must happen
         """
-        body = {
-            'status' : 'embargoed'
-        }
-        responses.add(responses.GET, '', status=200, body=json.dumps(body))
+        responses.add(responses.GET, re.compile('.*'))
         self.protocol.refresh_deposit_status()
         pending_deposit_record.refresh_from_db()
         assert pending_deposit_record.status == 'pending'
-        self.protocol.refresh_deposit_status()
+        assert len(responses.calls) == 0
 
     @responses.activate
-    def test_refresh_deposit_status_record_from_other_repository(self, pending_deposit_record, dummy_repository):
+    def test_refresh_deposit_status_record_from_other_repository(self, pending_deposit_record, update_status_url, dummy_repository):
         """
         If the record is not from the repository, ist must not be updated.
         """
         pending_deposit_record.repository = dummy_repository
         pending_deposit_record.save()
 
-        update_status_url = 'https://repository.dissem.in/update_status'
-        body = {
-            'status' : 'refused'
-        }
-        responses.add(responses.GET, update_status_url, status=200, body=json.dumps(body))
-        self.protocol.repository.update_status_url = update_status_url
+        responses.add(responses.GET, re.compile('.*'))
 
         self.protocol.refresh_deposit_status()
         pending_deposit_record.refresh_from_db()
         assert pending_deposit_record.status == 'pending'
+        assert len(responses.calls) == 0
 
 
     @responses.activate

@@ -311,12 +311,10 @@ class SWORDMETSProtocol(RepositoryProtocol):
         if self.repository.update_status_url:
             s = requests.Session()
             for deposit_record in DepositRecord.objects.filter(status='pending', repository=self.repository).select_related('oairecord', 'oairecord__about'):
-                params = {
-                    "id" : deposit_record.identifier
-                }
                 logger.info("Refresh deposit status of {}".format(deposit_record.identifier))
+                url = self.repository.update_status_url.format(deposit_record.identifier)
                 try:
-                    r = s.get(self.repository.update_status_url, params=params, timeout=10)
+                    r = s.get(url, timeout=10)
                     if r.status_code == 404:
                         logger.info("Received 404, treating as refused")
                         data = { 'status' : 'refused' }
