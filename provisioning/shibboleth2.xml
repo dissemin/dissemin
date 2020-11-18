@@ -13,7 +13,7 @@
 
     <!-- The ApplicationDefaults element is where most of Shibboleth's SAML bits are defined. -->
     <ApplicationDefaults entityID="https://sp.dissem.in/shibboleth"
-        REMOTE_USER="eppn"
+        REMOTE_USER="shib-username"
         cipherSuites="DEFAULT:!EXP:!LOW:!aNULL:!eNULL:!DES:!IDEA:!SEED:!RC4:!3DES:!kRSA:!SSLv2:!SSLv3:!TLSv1:!TLSv1.1">
 
         <!--
@@ -32,7 +32,7 @@
             cookieProps="https">
 
             <SSO discoveryProtocol="SAMLDS"
-                discoveryURL="https://dissem.in/static/shib/shibboleth-embedded-ds-1.2.2/" >
+                discoveryURL="https://sandbox.dissem.in/accounts/login/" >
                 SAML2
             </SSO>
 
@@ -167,7 +167,9 @@
             key="sp-encrypt-key.pem" certificate="sp-encrypt-cert.pem"/>
 
         <!-- ApplicationOverride for our sandbox -->
-        <ApplicationOverride id="sandbox" entityID="https://sp.sandbox.dissem.in/shibboleth">
+        <ApplicationOverride
+            id="sandbox"
+            entityID="https://sp.sandbox.dissem.in/shibboleth"
             <Sessions lifetime="28800"
                 timeout="3600"
                 relayState="ss:mem"
@@ -176,7 +178,7 @@
                 cookieProps="https">
                 <!-- We have a different discoveryURL, setting via ContentSetting does not work for SP v 3.0.4 -->
                 <SSO discoveryProtocol="SAMLDS"
-                    discoveryURL="https://sandbox.dissem.in/static/shib/shibboleth-embedded-ds-1.2.2/" >
+                    discoveryURL="https://sandbox.dissem.in/accounts/login/" >
                     SAML2
                 </SSO>
                 <!-- We want slighty different description and name to make clear that this is our sandbox.

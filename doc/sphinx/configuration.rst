@@ -160,6 +160,8 @@ For our sandbox, make sure to add::
 
     <Location />
         ShibRequestSetting applicationId sandbox
+        AuthType shibboleth
+        Require shibboleth
     </Location>
 
 right before the WSGI-part.
