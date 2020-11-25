@@ -92,7 +92,7 @@ class TestLetterDeclarationView():
 
         assert response.status_code == 200
         assert response.as_attachment == True
-        assert response.filename == "Declaration {}.pdf".format(self.dr.paper.title)
+        assert response.filename == "Declaration {}.pdf".format(self.dr.paper.slug[:35])
         assert response._headers['content-type'][0] == "Content-Type"
         assert response._headers['content-type'][1] == "application/pdf"
 

@@ -351,7 +351,7 @@ class LetterDeclarationView(LoginRequiredMixin, View):
             else:
                 pdf = get_declaration_pdf(dr)
                 pdf.seek(0)
-                filename = _("Declaration {}.pdf").format(dr.paper.title)
+                filename = _("Declaration {}.pdf").format(dr.paper.slug[:25])
                 return FileResponse(pdf, as_attachment=True, filename=filename)
         else:
             raise Http404(_("No pdf found for dr {}".format(dr.pk)))
