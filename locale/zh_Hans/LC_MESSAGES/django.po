@@ -18,9 +18,8 @@
 #
 msgid ""
 msgstr ""
-""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-05 09:24+0100\n"
+"POT-Creation-Date: 2020-11-25 16:08+0100\n"
 "PO-Revision-Date: 2020-11-05 12:19:14+0000\n"
 "Language: zh_hans\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -267,40 +266,40 @@ msgstr "HAL用户名"
 msgid "If set, deposits will be associated to this HAL account."
 msgstr "如果设置，存放将与该HAL账户相关联。"
 
-#: deposit/hal/protocol.py:170
+#: deposit/hal/protocol.py:168
 msgid "No HAL user credentials provided."
 msgstr "没有提供HAL用户凭据。"
 
-#: deposit/hal/protocol.py:241
+#: deposit/hal/protocol.py:239
 msgid "This document is already in HAL. HAL refused the deposit."
 msgstr "此文档已存在于HAL。HAL拒绝存放。"
 
-#: deposit/hal/protocol.py:248
+#: deposit/hal/protocol.py:246
 #, python-format
 msgid "HAL refused the deposit (HTTP error %d): %s"
 msgstr "HAL拒绝存放（HTTP错误%d）：%s"
 
-#: deposit/hal/protocol.py:255
+#: deposit/hal/protocol.py:253
 msgid "HAL returned an invalid XML response"
 msgstr "HAL返回了无效的XML响应"
 
-#: deposit/hal/protocol.py:267
+#: deposit/hal/protocol.py:265
 msgid "This paper already exists in HAL."
 msgstr "此论文已存在于HAL。"
 
-#: deposit/hal/protocol.py:273
+#: deposit/hal/protocol.py:271
 msgid "HAL rejected the submission."
 msgstr "HAL拒绝提交。"
 
-#: deposit/hal/protocol.py:283
+#: deposit/hal/protocol.py:281
 msgid "HAL rejected the submission"
 msgstr "HAL拒绝提交"
 
-#: deposit/hal/protocol.py:292
+#: deposit/hal/protocol.py:290
 msgid "Password"
 msgstr "密码"
 
-#: deposit/hal/protocol.py:320
+#: deposit/hal/protocol.py:318
 msgid "Connection to HAL failed. Please try again later."
 msgstr "连接到HAL失败。请稍后重试。"
 
@@ -353,7 +352,7 @@ msgstr "知识共享CC0 1.0通用"
 msgid "Creative Commons CC-By Attribution 4.0 International (CC BY 4.0)"
 msgstr "知识共享署名-相同方式共享4.0国际（CC BY 4.0）"
 
-#: deposit/osf/forms.py:40 deposit/osf/forms.py:51 model-gettext.py:122
+#: deposit/osf/forms.py:40 deposit/osf/forms.py:51 model-gettext.py:125
 msgid "No license"
 msgstr "无许可协议"
 
@@ -458,11 +457,11 @@ msgstr "无法连接到存储库。请稍后重试。"
 msgid "The repository {} returned invalid XML"
 msgstr "找不到此存储库。"
 
-#: deposit/sword/protocol.py:349
+#: deposit/sword/protocol.py:347
 msgid "Username or password not provided for this repository. Please contact the Dissemin team."
 msgstr ""
 
-#: deposit/sword/protocol.py:374
+#: deposit/sword/protocol.py:372
 #, fuzzy
 msgid "Unable to deposit to repository"
 msgstr "无法创建预印本。"
@@ -549,7 +548,9 @@ msgstr "存放"
 #: deposit/templates/deposit/start.html:64
 #, python-format
 msgid "You can deposit the full text of your article. Dissemin will send it to a repository where it will be made freely available. By depositing your article via Dissemin, you agree to our <a href=\"%(tosurl)s\">terms of service</a>."
-msgstr "您可以存放您的文章全文。Dissemin将发送它到其能够自由展示的存储库。通过使用Dissemin存放您的文章，您同意我们的<a href=\"%(tosurl)s\">服务条款</a>。\n        "
+msgstr ""
+"您可以存放您的文章全文。Dissemin将发送它到其能够自由展示的存储库。通过使用Dissemin存放您的文章，您同意我们的<a href=\"%(tosurl)s\">服务条款</a>。\n"
+"        "
 
 #: deposit/templates/deposit/start.html:72
 #, fuzzy
@@ -680,63 +681,63 @@ msgstr "无法提交论文元数据至Zenodo。"
 msgid "Unable to publish the deposition on Zenodo."
 msgstr "无法在Zenodo发布存放。"
 
-#: dissemin/settings/common.py:307
+#: dissemin/settings/common.py:304
 msgid "Arabic"
 msgstr "阿拉伯语"
 
-#: dissemin/settings/common.py:308
+#: dissemin/settings/common.py:305
 msgid "German"
 msgstr "德语"
 
-#: dissemin/settings/common.py:309
+#: dissemin/settings/common.py:306
 msgid "English"
 msgstr "英语"
 
-#: dissemin/settings/common.py:310
+#: dissemin/settings/common.py:307
 msgid "Spanish"
 msgstr "西班牙语"
 
-#: dissemin/settings/common.py:311
+#: dissemin/settings/common.py:308
 msgid "Finnish"
 msgstr "芬兰语"
 
-#: dissemin/settings/common.py:312
+#: dissemin/settings/common.py:309
 msgid "French"
 msgstr "法语"
 
-#: dissemin/settings/common.py:313
+#: dissemin/settings/common.py:310
 msgid "Korean"
 msgstr "韩语"
 
-#: dissemin/settings/common.py:314
+#: dissemin/settings/common.py:311
 msgid "Macedonian"
 msgstr "马其顿语"
 
-#: dissemin/settings/common.py:315
+#: dissemin/settings/common.py:312
 msgid "European Portuguese"
 msgstr "欧洲葡萄牙语"
 
-#: dissemin/settings/common.py:316
+#: dissemin/settings/common.py:313
 msgid "Brazilian Portuguese"
 msgstr "巴西葡萄牙语"
 
-#: dissemin/settings/common.py:317
+#: dissemin/settings/common.py:314
 msgid "Russian"
 msgstr ""
 
-#: dissemin/settings/common.py:318
+#: dissemin/settings/common.py:315
 msgid "Swedish"
 msgstr "瑞典语"
 
-#: dissemin/settings/common.py:319
+#: dissemin/settings/common.py:316
 msgid "Turkish"
 msgstr ""
 
-#: dissemin/settings/common.py:320
+#: dissemin/settings/common.py:317
 msgid "Simplified Chinese"
 msgstr "简体中文"
 
-#: dissemin/settings/common.py:321
+#: dissemin/settings/common.py:318
 msgid "Traditional Chinese"
 msgstr "繁体中文"
 
@@ -1139,7 +1140,10 @@ msgid "Green Open Access Service"
 msgstr "绿色开放访问"
 
 #: model-gettext.py:111
-msgid "Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n<br/>\nContact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
+msgid ""
+"Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n"
+"<br/>\n"
+"Contact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
 msgstr ""
 
 #: model-gettext.py:112
@@ -1155,75 +1159,97 @@ msgid "Fill in agreement"
 msgstr ""
 
 #: model-gettext.py:115
+msgid "Contract necessary!"
+msgstr ""
+
+#: model-gettext.py:116
+msgid "Before we can publish your publication, we need the completely filled in and signed publication agreement, which you can send to Braunschweig University Library by e-mail, fax or postal mail."
+msgstr ""
+
+#: model-gettext.py:117
+#, fuzzy
+#| msgid "Download"
+msgid "Download Contract"
+msgstr "下载"
+
+#: model-gettext.py:118
 msgid "Creative Commons 1.0 Universal (CC0 1.0) Public Domain Dedication"
 msgstr "知识共享CC0 1.0通用（CC0 1.0）公共领域奉献"
 
-#: model-gettext.py:116
+#: model-gettext.py:119
 msgid "Creative Commons Attribution 4.0 International (CC BY 4.0)"
 msgstr "知识共享署名4.0国际（CC BY 4.0）"
 
-#: model-gettext.py:117
+#: model-gettext.py:120
 msgid "Creative Commons Attribution-ShareAlike 4.0, International (CC BY-SA 4.0)"
 msgstr "知识共享署名-相同方式共享4.0国际（CC BY 4.0）"
 
-#: model-gettext.py:118
+#: model-gettext.py:121
 msgid "Creative Commons Attribution-NonCommerical 4.0 International (CC BY-NC 4.0)"
 msgstr "知识共享署名-非商业性使用4.0国际（CC BY 4.0）"
 
-#: model-gettext.py:119
+#: model-gettext.py:122
 msgid "Creative Commons Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0)"
 msgstr "知识共享署名-禁止演绎4.0国际（CC BY 4.0）"
 
-#: model-gettext.py:120
+#: model-gettext.py:123
 msgid "Free for private use; right holder retains other rights, including distribution"
 msgstr ""
 
-#: model-gettext.py:121
+#: model-gettext.py:124
 msgid "Other open license"
 msgstr "其他开放许可协议"
 
-#: model-gettext.py:123
+#: model-gettext.py:126
 #, fuzzy
 msgid "Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)"
 msgstr "知识共享署名-相同方式共享4.0国际（CC BY 4.0）"
 
-#: model-gettext.py:124
+#: model-gettext.py:127
 #, fuzzy
 msgid "Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)"
 msgstr "知识共享署名-相同方式共享4.0国际（CC BY 4.0）"
 
-#: model-gettext.py:125
+#: model-gettext.py:128
 msgid "Zenodo"
 msgstr ""
 
-#: model-gettext.py:126
+#: model-gettext.py:129
 msgid "Zenodo is a general-purpose open repository hosted by CERN. If the document does not have a DOI yet, Zenodo will create one."
 msgstr ""
 
-#: model-gettext.py:127
+#: model-gettext.py:130
 msgid "HAL"
 msgstr "HAL"
 
-#: model-gettext.py:128
+#: model-gettext.py:131
 msgid "HAL is a  multidisciplinary open archive, sustained by the French Research Ministry."
 msgstr ""
 
-#: model-gettext.py:129
+#: model-gettext.py:132
 #, fuzzy
 msgid "OSF preprints"
 msgstr "预印本"
 
-#: model-gettext.py:130
+#: model-gettext.py:133
 msgid "Run by the Center for Open Science, OSF lets you share your preprints openly. You can also share supplemental data, materials or code associated with your article."
 msgstr ""
 
-#: model-gettext.py:131
+#: model-gettext.py:134
 #, fuzzy
 msgid "TUprints"
 msgstr "预印本"
 
-#: model-gettext.py:132
+#: model-gettext.py:135
 msgid "TUprints is the open access repository for all current and former members of the Technical University Darmstadt."
+msgstr ""
+
+#: model-gettext.py:136
+msgid "Institutional Repository of TU Braunschweig"
+msgstr ""
+
+#: model-gettext.py:137
+msgid "Researchers at TU Braunschweig can publish their first and second (self archiving) publications Open Access on the official publication server of TU Braunschweig."
 msgstr ""
 
 #: notification/models.py:62
@@ -1508,7 +1534,9 @@ msgstr "出版于%(year)s由"
 #: papers/templates/papers/paper.html:56
 #, python-format
 msgid "and <a href=\"#\" id=\"showAllAuthors\">%(nb_remaining_authors)s other authors.</a>"
-msgstr "以及<a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s位其他作者</a>\n            "
+msgstr ""
+"以及<a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s位其他作者</a>\n"
+"            "
 
 #: papers/templates/papers/paper.html:62
 msgid "Show less"
@@ -1869,7 +1897,9 @@ msgstr ""
 
 #: papers/views.py:282
 msgid "Invalid ORCID profile. Please make sure it includes a public name."
-msgstr "无效的ORCID详情。请确保它包含公开名称。\n                            "
+msgstr ""
+"无效的ORCID详情。请确保它包含公开名称。\n"
+"                            "
 
 #: papers/views.py:285
 msgid "Invalid ORCID profile."
@@ -2189,7 +2219,10 @@ msgstr "访问PDF被拒绝。"
 #: website/templates/403.html:13
 #, fuzzy, python-format
 msgid "The access to the requested page has been denied. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr "\n            找不到您请求的页面。<a href=\"/\">返回首页。</a>\n           "
+msgstr ""
+"\n"
+"            找不到您请求的页面。<a href=\"/\">返回首页。</a>\n"
+"           "
 
 #: website/templates/404.html:6 website/templates/404.html:10
 msgid "Page not found"
@@ -2198,7 +2231,9 @@ msgstr "找不到页面"
 #: website/templates/404.html:13
 #, python-format
 msgid "The page you requested could not be found. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr "找不到您请求的页面。<a href=\"%(index)s\">返回首页。</a>\n           "
+msgstr ""
+"找不到您请求的页面。<a href=\"%(index)s\">返回首页。</a>\n"
+"           "
 
 #: website/templates/500.html:6 website/templates/500.html:10
 #, fuzzy
@@ -2208,7 +2243,9 @@ msgstr "内部错误"
 #: website/templates/500.html:13
 #, python-format
 msgid "Your request triggered an internal server error. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr "您的请求触发了内部错误。<a href=\"%(index)s\">返回首页。</a>\n           "
+msgstr ""
+"您的请求触发了内部错误。<a href=\"%(index)s\">返回首页。</a>\n"
+"           "
 
 #: website/templates/admin/base_site.html:5
 #: website/templates/admin/base_site.html:8
@@ -2908,4 +2945,3 @@ msgstr "验证错误"
 #, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr "验证失败。<a href=\"%(account-login)s\">返回登录页面。</a>"
-

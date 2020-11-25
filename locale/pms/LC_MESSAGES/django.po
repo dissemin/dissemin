@@ -10,9 +10,8 @@
 #
 msgid ""
 msgstr ""
-""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-05 09:24+0100\n"
+"POT-Creation-Date: 2020-11-25 16:08+0100\n"
 "PO-Revision-Date: 2020-11-09 11:35:44+0000\n"
 "Language: pms\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -257,40 +256,40 @@ msgstr "Stranòm HAL"
 msgid "If set, deposits will be associated to this HAL account."
 msgstr "Si selessionà, ij depòsit a saran assossià a cost cont HAL."
 
-#: deposit/hal/protocol.py:170
+#: deposit/hal/protocol.py:168
 msgid "No HAL user credentials provided."
 msgstr "Gnun-e credensiaj d'utent HAL fornìe."
 
-#: deposit/hal/protocol.py:241
+#: deposit/hal/protocol.py:239
 msgid "This document is already in HAL. HAL refused the deposit."
 msgstr "Ës document a l'é già an HAL. HAL a l'ha arfudà ël depòsit."
 
-#: deposit/hal/protocol.py:248
+#: deposit/hal/protocol.py:246
 #, python-format
 msgid "HAL refused the deposit (HTTP error %d): %s"
 msgstr "HAL a l'ha arfudà ël depòsit (eror HTTP %d): %s"
 
-#: deposit/hal/protocol.py:255
+#: deposit/hal/protocol.py:253
 msgid "HAL returned an invalid XML response"
 msgstr "HAL a l'ha dàit na rispòsta XML nen vàlida"
 
-#: deposit/hal/protocol.py:267
+#: deposit/hal/protocol.py:265
 msgid "This paper already exists in HAL."
 msgstr "Cost artìcol a esist già an HAL."
 
-#: deposit/hal/protocol.py:273
+#: deposit/hal/protocol.py:271
 msgid "HAL rejected the submission."
 msgstr "HAL a l'ha arfudà la spedission."
 
-#: deposit/hal/protocol.py:283
+#: deposit/hal/protocol.py:281
 msgid "HAL rejected the submission"
 msgstr "HAL a l'ha arfudà la spedission"
 
-#: deposit/hal/protocol.py:292
+#: deposit/hal/protocol.py:290
 msgid "Password"
 msgstr "Ciav"
 
-#: deposit/hal/protocol.py:320
+#: deposit/hal/protocol.py:318
 msgid "Connection to HAL failed. Please try again later."
 msgstr "Faliment ëd la conession a HAL. Për piasì, ch'a preuva torna pi tard."
 
@@ -343,7 +342,7 @@ msgstr "Creative Commons CC0 1.0 Universal"
 msgid "Creative Commons CC-By Attribution 4.0 International (CC BY 4.0)"
 msgstr "Creative Commons CC-By Attribution 4.0 Antërnassional (CC BY 4.0)"
 
-#: deposit/osf/forms.py:40 deposit/osf/forms.py:51 model-gettext.py:122
+#: deposit/osf/forms.py:40 deposit/osf/forms.py:51 model-gettext.py:125
 msgid "No license"
 msgstr "Gnun-a licensa"
 
@@ -447,11 +446,11 @@ msgstr "Falì a coleghesse al depòsit. Për piasì, ch'a preuva torna pi tard."
 msgid "The repository {} returned invalid XML"
 msgstr "Ël depòsit {} a l'ha rëspondù con n'XML nen vàlid"
 
-#: deposit/sword/protocol.py:349
+#: deposit/sword/protocol.py:347
 msgid "Username or password not provided for this repository. Please contact the Dissemin team."
 msgstr "Stranòm o ciav nen fornì për cost depòsit-sì. Për piasì, ch'a contata l'echip Dissemin."
 
-#: deposit/sword/protocol.py:374
+#: deposit/sword/protocol.py:372
 msgid "Unable to deposit to repository"
 msgstr "Impossìbil buté ant ël depòsit."
 
@@ -664,63 +663,63 @@ msgstr "Impossìbil mandé ij metadàit ëd l'artìcol a Zenodo."
 msgid "Unable to publish the deposition on Zenodo."
 msgstr "Impossìbil publiché ël depòsit su Zenodo."
 
-#: dissemin/settings/common.py:307
+#: dissemin/settings/common.py:304
 msgid "Arabic"
 msgstr "Àrabo"
 
-#: dissemin/settings/common.py:308
+#: dissemin/settings/common.py:305
 msgid "German"
 msgstr "Alman"
 
-#: dissemin/settings/common.py:309
+#: dissemin/settings/common.py:306
 msgid "English"
 msgstr "Anglèis"
 
-#: dissemin/settings/common.py:310
+#: dissemin/settings/common.py:307
 msgid "Spanish"
 msgstr "Spagneul"
 
-#: dissemin/settings/common.py:311
+#: dissemin/settings/common.py:308
 msgid "Finnish"
 msgstr "Finlandèis"
 
-#: dissemin/settings/common.py:312
+#: dissemin/settings/common.py:309
 msgid "French"
 msgstr "Fransèis"
 
-#: dissemin/settings/common.py:313
+#: dissemin/settings/common.py:310
 msgid "Korean"
 msgstr "Corean"
 
-#: dissemin/settings/common.py:314
+#: dissemin/settings/common.py:311
 msgid "Macedonian"
 msgstr "Macédon"
 
-#: dissemin/settings/common.py:315
+#: dissemin/settings/common.py:312
 msgid "European Portuguese"
 msgstr "Portughèis europengh"
 
-#: dissemin/settings/common.py:316
+#: dissemin/settings/common.py:313
 msgid "Brazilian Portuguese"
 msgstr "Portughèis brasilian"
 
-#: dissemin/settings/common.py:317
+#: dissemin/settings/common.py:314
 msgid "Russian"
 msgstr "Russ"
 
-#: dissemin/settings/common.py:318
+#: dissemin/settings/common.py:315
 msgid "Swedish"
 msgstr "Svedèis"
 
-#: dissemin/settings/common.py:319
+#: dissemin/settings/common.py:316
 msgid "Turkish"
 msgstr "Turch"
 
-#: dissemin/settings/common.py:320
+#: dissemin/settings/common.py:317
 msgid "Simplified Chinese"
 msgstr "Cinèis semplificà"
 
-#: dissemin/settings/common.py:321
+#: dissemin/settings/common.py:318
 msgid "Traditional Chinese"
 msgstr "Cinèis tradissional"
 
@@ -1109,8 +1108,14 @@ msgid "Green Open Access Service"
 msgstr "Servissi d'acess lìber verd"
 
 #: model-gettext.py:111
-msgid "Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n<br/>\nContact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
-msgstr "Vorërj-lo che la Biblioteca universitaria e statal ëd  Darmstadt a publichèissa soe publicassion an acess lìber verd për chieé?\n<br/>\nCh'an contata: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
+msgid ""
+"Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n"
+"<br/>\n"
+"Contact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
+msgstr ""
+"Vorërj-lo che la Biblioteca universitaria e statal ëd  Darmstadt a publichèissa soe publicassion an acess lìber verd për chieé?\n"
+"<br/>\n"
+"Ch'an contata: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
 
 #: model-gettext.py:112
 msgid "TUprints contract required!"
@@ -1125,72 +1130,94 @@ msgid "Fill in agreement"
 msgstr "Compilé l'acòrd"
 
 #: model-gettext.py:115
+msgid "Contract necessary!"
+msgstr ""
+
+#: model-gettext.py:116
+msgid "Before we can publish your publication, we need the completely filled in and signed publication agreement, which you can send to Braunschweig University Library by e-mail, fax or postal mail."
+msgstr ""
+
+#: model-gettext.py:117
+#, fuzzy
+#| msgid "Download"
+msgid "Download Contract"
+msgstr "Dëscarié"
+
+#: model-gettext.py:118
 msgid "Creative Commons 1.0 Universal (CC0 1.0) Public Domain Dedication"
 msgstr "Creative Commons 1.0 Universal (CCO 1.0) Dedicà al domini pùblich"
 
-#: model-gettext.py:116
+#: model-gettext.py:119
 msgid "Creative Commons Attribution 4.0 International (CC BY 4.0)"
 msgstr "Creative Commons CC-By Attribution 4.0 Antërnassional (CC BY 4.0)"
 
-#: model-gettext.py:117
+#: model-gettext.py:120
 msgid "Creative Commons Attribution-ShareAlike 4.0, International (CC BY-SA 4.0)"
 msgstr "Creative Commons CC-By Attribution 4.0 Antërnassional (CC BY 4.0)"
 
-#: model-gettext.py:118
+#: model-gettext.py:121
 msgid "Creative Commons Attribution-NonCommerical 4.0 International (CC BY-NC 4.0)"
 msgstr "Creative Commons CC-By Atribussion nen comersial 4.0 Antërnassional (CC BY-NC 4.0)"
 
-#: model-gettext.py:119
+#: model-gettext.py:122
 msgid "Creative Commons Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0)"
 msgstr "Creative Commons Atribussion gnun derivà 4.0 Antërnassional (CC BY-ND 4.0)"
 
-#: model-gettext.py:120
+#: model-gettext.py:123
 msgid "Free for private use; right holder retains other rights, including distribution"
 msgstr "Lìber për l'usagi privà; ël titolar dij drit d'autor a goerna j'àutri drit, comprèisa la distribussion"
 
-#: model-gettext.py:121
+#: model-gettext.py:124
 msgid "Other open license"
 msgstr "Àutra licensa lìbera"
 
-#: model-gettext.py:123
+#: model-gettext.py:126
 msgid "Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)"
 msgstr "Creative Commons Attribution - Nen comersial - Partagi ant j'istesse condission 4.0 Antërnassional (CC BY-NC-SA 4.0)"
 
-#: model-gettext.py:124
+#: model-gettext.py:127
 msgid "Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)"
 msgstr "Creative Commons Attribution - Nen comersial - Gnun derivà 4.0 Antërnassional (CC BY-NC-ND 4.0)"
 
-#: model-gettext.py:125
+#: model-gettext.py:128
 msgid "Zenodo"
 msgstr "Zenodo"
 
-#: model-gettext.py:126
+#: model-gettext.py:129
 msgid "Zenodo is a general-purpose open repository hosted by CERN. If the document does not have a DOI yet, Zenodo will create one."
 msgstr "Zenodo a l'é un depòsit duvert ëd but general ospità dal CERN. Si ël document a l'ha ancor nen un DOI, Zenodo a na creerà un."
 
-#: model-gettext.py:127
+#: model-gettext.py:130
 msgid "HAL"
 msgstr "HAL"
 
-#: model-gettext.py:128
+#: model-gettext.py:131
 msgid "HAL is a  multidisciplinary open archive, sustained by the French Research Ministry."
 msgstr "HAL a l'é n'archivi duvert multi-dissiplinar, sostnù dal Ministé dl'arserca fransèis."
 
-#: model-gettext.py:129
+#: model-gettext.py:132
 msgid "OSF preprints"
 msgstr "prepublicassion OSF"
 
-#: model-gettext.py:130
+#: model-gettext.py:133
 msgid "Run by the Center for Open Science, OSF lets you share your preprints openly. You can also share supplemental data, materials or code associated with your article."
 msgstr "Masentà dal Sènter për na Siensa Duverta, OSF a-j lassa partagé liberaman soe prepublicassion. A peul ëdcò partagé dij dàit adissionaj, dij materiaj o dël còdes associà a sò artìcol."
 
-#: model-gettext.py:131
+#: model-gettext.py:134
 msgid "TUprints"
 msgstr "TUprints"
 
-#: model-gettext.py:132
+#: model-gettext.py:135
 msgid "TUprints is the open access repository for all current and former members of the Technical University Darmstadt."
 msgstr "TUprints a l'é ël depòsit a acess duvert për tuti ij mèmber present e passà ëd l'Università tecnològica ëd Darmstadt."
+
+#: model-gettext.py:136
+msgid "Institutional Repository of TU Braunschweig"
+msgstr ""
+
+#: model-gettext.py:137
+msgid "Researchers at TU Braunschweig can publish their first and second (self archiving) publications Open Access on the official publication server of TU Braunschweig."
+msgstr ""
 
 #: notification/models.py:62
 msgid "inboxes"
@@ -2848,4 +2875,3 @@ msgstr "Eror d'autentificassion"
 #, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr "L'autentificassion a l'ha falì. <a href=\"%(account-login)s\">Torné a la pàgina d'intrada.</a>"
-

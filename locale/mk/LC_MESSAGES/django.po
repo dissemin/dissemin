@@ -10,9 +10,8 @@
 #
 msgid ""
 msgstr ""
-""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-05 09:24+0100\n"
+"POT-Creation-Date: 2020-11-25 16:08+0100\n"
 "PO-Revision-Date: 2020-11-05 12:19:13+0000\n"
 "Language: mk\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -259,40 +258,40 @@ msgstr "HAL корисничко име"
 msgid "If set, deposits will be associated to this HAL account."
 msgstr "Ако е зададено, депозитите ќе се придружат кон оваа сметка на HAL."
 
-#: deposit/hal/protocol.py:170
+#: deposit/hal/protocol.py:168
 msgid "No HAL user credentials provided."
 msgstr "Немате укажано најавни податоци за HAL."
 
-#: deposit/hal/protocol.py:241
+#: deposit/hal/protocol.py:239
 msgid "This document is already in HAL. HAL refused the deposit."
 msgstr "Документот е веќе во HAL. HAL го одби поднесокот."
 
-#: deposit/hal/protocol.py:248
+#: deposit/hal/protocol.py:246
 #, python-format
 msgid "HAL refused the deposit (HTTP error %d): %s"
 msgstr "HAL го одби поднесокот (HTTP-грешка %d): %s"
 
-#: deposit/hal/protocol.py:255
+#: deposit/hal/protocol.py:253
 msgid "HAL returned an invalid XML response"
 msgstr "HAL даде неважечки XML-одговор"
 
-#: deposit/hal/protocol.py:267
+#: deposit/hal/protocol.py:265
 msgid "This paper already exists in HAL."
 msgstr "Овој напис веќе постои во HAL"
 
-#: deposit/hal/protocol.py:273
+#: deposit/hal/protocol.py:271
 msgid "HAL rejected the submission."
 msgstr "HAL го одби поднесокот."
 
-#: deposit/hal/protocol.py:283
+#: deposit/hal/protocol.py:281
 msgid "HAL rejected the submission"
 msgstr "HAL го одби поднесокот"
 
-#: deposit/hal/protocol.py:292
+#: deposit/hal/protocol.py:290
 msgid "Password"
 msgstr "Лозинка"
 
-#: deposit/hal/protocol.py:320
+#: deposit/hal/protocol.py:318
 msgid "Connection to HAL failed. Please try again later."
 msgstr "Не успеав да се поврзам со HAL. Обидете се подоцна."
 
@@ -345,7 +344,7 @@ msgstr "Криејтив комонс CC0 1.0 Универзална"
 msgid "Creative Commons CC-By Attribution 4.0 International (CC BY 4.0)"
 msgstr "Криејтив комонс CC-By Наведи извор 4.0 Меѓународна (CC BY 4.0)"
 
-#: deposit/osf/forms.py:40 deposit/osf/forms.py:51 model-gettext.py:122
+#: deposit/osf/forms.py:40 deposit/osf/forms.py:51 model-gettext.py:125
 msgid "No license"
 msgstr "Нема лиценца"
 
@@ -450,11 +449,11 @@ msgstr "Не успеав да се поврзам со складиштето. 
 msgid "The repository {} returned invalid XML"
 msgstr "Не можев да го пронајдам складиштето."
 
-#: deposit/sword/protocol.py:349
+#: deposit/sword/protocol.py:347
 msgid "Username or password not provided for this repository. Please contact the Dissemin team."
 msgstr ""
 
-#: deposit/sword/protocol.py:374
+#: deposit/sword/protocol.py:372
 #, fuzzy
 msgid "Unable to deposit to repository"
 msgstr "Не можам да го избришам проектот."
@@ -674,63 +673,63 @@ msgstr "Не можев да ги поднесам метаподатоците 
 msgid "Unable to publish the deposition on Zenodo."
 msgstr "не можев да го објавам поднесокот на Zenodo."
 
-#: dissemin/settings/common.py:307
+#: dissemin/settings/common.py:304
 msgid "Arabic"
 msgstr ""
 
-#: dissemin/settings/common.py:308
+#: dissemin/settings/common.py:305
 msgid "German"
 msgstr ""
 
-#: dissemin/settings/common.py:309
+#: dissemin/settings/common.py:306
 msgid "English"
 msgstr "англиски"
 
-#: dissemin/settings/common.py:310
+#: dissemin/settings/common.py:307
 msgid "Spanish"
 msgstr ""
 
-#: dissemin/settings/common.py:311
+#: dissemin/settings/common.py:308
 msgid "Finnish"
 msgstr ""
 
-#: dissemin/settings/common.py:312
+#: dissemin/settings/common.py:309
 msgid "French"
 msgstr "француски"
 
-#: dissemin/settings/common.py:313
+#: dissemin/settings/common.py:310
 msgid "Korean"
 msgstr ""
 
-#: dissemin/settings/common.py:314
+#: dissemin/settings/common.py:311
 msgid "Macedonian"
 msgstr "Македонски"
 
-#: dissemin/settings/common.py:315
+#: dissemin/settings/common.py:312
 msgid "European Portuguese"
 msgstr ""
 
-#: dissemin/settings/common.py:316
+#: dissemin/settings/common.py:313
 msgid "Brazilian Portuguese"
 msgstr ""
 
-#: dissemin/settings/common.py:317
+#: dissemin/settings/common.py:314
 msgid "Russian"
 msgstr ""
 
-#: dissemin/settings/common.py:318
+#: dissemin/settings/common.py:315
 msgid "Swedish"
 msgstr ""
 
-#: dissemin/settings/common.py:319
+#: dissemin/settings/common.py:316
 msgid "Turkish"
 msgstr ""
 
-#: dissemin/settings/common.py:320
+#: dissemin/settings/common.py:317
 msgid "Simplified Chinese"
 msgstr "Упростен кинески"
 
-#: dissemin/settings/common.py:321
+#: dissemin/settings/common.py:318
 msgid "Traditional Chinese"
 msgstr ""
 
@@ -1155,7 +1154,10 @@ msgid "Green Open Access Service"
 msgstr "Зелен отворен пристап"
 
 #: model-gettext.py:111
-msgid "Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n<br/>\nContact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
+msgid ""
+"Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n"
+"<br/>\n"
+"Contact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
 msgstr ""
 
 #: model-gettext.py:112
@@ -1171,80 +1173,102 @@ msgid "Fill in agreement"
 msgstr ""
 
 #: model-gettext.py:115
+msgid "Contract necessary!"
+msgstr ""
+
+#: model-gettext.py:116
+msgid "Before we can publish your publication, we need the completely filled in and signed publication agreement, which you can send to Braunschweig University Library by e-mail, fax or postal mail."
+msgstr ""
+
+#: model-gettext.py:117
+#, fuzzy
+#| msgid "Download"
+msgid "Download Contract"
+msgstr "Преземи"
+
+#: model-gettext.py:118
 #, fuzzy
 msgid "Creative Commons 1.0 Universal (CC0 1.0) Public Domain Dedication"
 msgstr "Криејтив комонс CC0 1.0 Универзална"
 
-#: model-gettext.py:116
+#: model-gettext.py:119
 #, fuzzy
 msgid "Creative Commons Attribution 4.0 International (CC BY 4.0)"
 msgstr "Криејтив комонс CC-By Наведи извор 4.0 Меѓународна (CC BY 4.0)"
 
-#: model-gettext.py:117
+#: model-gettext.py:120
 #, fuzzy
 msgid "Creative Commons Attribution-ShareAlike 4.0, International (CC BY-SA 4.0)"
 msgstr "Криејтив комонс CC-By Наведи извор 4.0 Меѓународна (CC BY 4.0)"
 
-#: model-gettext.py:118
+#: model-gettext.py:121
 #, fuzzy
 msgid "Creative Commons Attribution-NonCommerical 4.0 International (CC BY-NC 4.0)"
 msgstr "Криејтив комонс CC-By Наведи извор 4.0 Меѓународна (CC BY 4.0)"
 
-#: model-gettext.py:119
+#: model-gettext.py:122
 #, fuzzy
 msgid "Creative Commons Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0)"
 msgstr "Криејтив комонс CC-By Наведи извор 4.0 Меѓународна (CC BY 4.0)"
 
-#: model-gettext.py:120
+#: model-gettext.py:123
 msgid "Free for private use; right holder retains other rights, including distribution"
 msgstr ""
 
-#: model-gettext.py:121
+#: model-gettext.py:124
 msgid "Other open license"
 msgstr "друга отворена лиценца"
 
-#: model-gettext.py:123
+#: model-gettext.py:126
 #, fuzzy
 msgid "Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)"
 msgstr "Криејтив комонс CC-By Наведи извор 4.0 Меѓународна (CC BY 4.0)"
 
-#: model-gettext.py:124
+#: model-gettext.py:127
 #, fuzzy
 msgid "Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)"
 msgstr "Криејтив комонс CC-By Наведи извор 4.0 Меѓународна (CC BY 4.0)"
 
-#: model-gettext.py:125
+#: model-gettext.py:128
 msgid "Zenodo"
 msgstr ""
 
-#: model-gettext.py:126
+#: model-gettext.py:129
 msgid "Zenodo is a general-purpose open repository hosted by CERN. If the document does not have a DOI yet, Zenodo will create one."
 msgstr ""
 
-#: model-gettext.py:127
+#: model-gettext.py:130
 msgid "HAL"
 msgstr ""
 
-#: model-gettext.py:128
+#: model-gettext.py:131
 msgid "HAL is a  multidisciplinary open archive, sustained by the French Research Ministry."
 msgstr ""
 
-#: model-gettext.py:129
+#: model-gettext.py:132
 #, fuzzy
 msgid "OSF preprints"
 msgstr "првична верзија"
 
-#: model-gettext.py:130
+#: model-gettext.py:133
 msgid "Run by the Center for Open Science, OSF lets you share your preprints openly. You can also share supplemental data, materials or code associated with your article."
 msgstr ""
 
-#: model-gettext.py:131
+#: model-gettext.py:134
 #, fuzzy
 msgid "TUprints"
 msgstr "првична верзија"
 
-#: model-gettext.py:132
+#: model-gettext.py:135
 msgid "TUprints is the open access repository for all current and former members of the Technical University Darmstadt."
+msgstr ""
+
+#: model-gettext.py:136
+msgid "Institutional Repository of TU Braunschweig"
+msgstr ""
+
+#: model-gettext.py:137
+msgid "Researchers at TU Braunschweig can publish their first and second (self archiving) publications Open Access on the official publication server of TU Braunschweig."
 msgstr ""
 
 #: notification/models.py:62
@@ -2938,4 +2962,3 @@ msgstr "Грешка при заверката"
 #, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr ""
-
