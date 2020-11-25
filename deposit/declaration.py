@@ -85,7 +85,7 @@ def declaration_ub_braunschweig(deposit_record):
     # The authors field does not carry many authors, so we just take the first and append 'et el' if there is more than
     author = str(deposit_record.paper.authors[0].name)
     if deposit_record.paper.author_count > 1:
-        author += 'et al'
+        author += ' et al'
 
     # Title is just the title
     title = deposit_record.paper.title
