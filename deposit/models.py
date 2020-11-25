@@ -135,7 +135,7 @@ class LetterOfDeclaration(models.Model):
         """
         String represenation of object
         """
-        return self.function_key
+        return self.function_key or self.url
 
     def clean(self):
         error = {
