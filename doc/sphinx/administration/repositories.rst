@@ -32,6 +32,8 @@ Api_key
     If your repository uses an API key, fill it in here
 Endpoint
     URL to call when depositing
+Update Status URL
+    If not empty, from this URL the SWORD protocol refreshes the deposit status. The *id* of the repository entry is inserted at ``{}``, so the URL must contain ``{}``.
 Enabled
     Here you can enable or disable the repository.
     Disabling means that the repository refuses to deposit and is not shown to the user.
