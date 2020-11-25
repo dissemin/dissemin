@@ -20,40 +20,37 @@
 
 
 
-from io import BytesIO
-from datetime import date
-import json
-import traceback
-from zipfile import ZipFile
-from papers.utils import extract_domain
-
-import requests
 import codecs
+import json
+import logging
+import requests
+import traceback
+
+import http.client as http_client
+
+from datetime import date
+from lxml import etree
+from io import BytesIO
 from urllib.parse import urlparse
+from zipfile import ZipFile
+
+from django.utils.translation import ugettext as _
 
 from deposit.hal.forms import HALForm
 from deposit.hal.forms import HALPreferencesForm
 from deposit.hal.metadata import AOFRFormatter
+from deposit.hal.models import HALDepositPreferences
 from deposit.models import DepositRecord
 from deposit.protocol import DepositError
 from deposit.protocol import DepositResult
 from deposit.protocol import RepositoryProtocol
 from deposit.registry import protocol_registry
-from django.utils.translation import ugettext as _
 from papers.name import most_similar_author
-from lxml import etree
+from papers.utils import extract_domain
 from papers.utils import kill_html
-from deposit.hal.models import HALDepositPreferences
-
-try:
-    import http.client as http_client
-except ImportError:
-    # Python 2
-    import http.client as http_client
 
 
-#http_client.HTTPConnection.debuglevel = 1
-
+logger = logging.getLogger('dissemin.' + __name__)
 
 class HALProtocol(RepositoryProtocol):
     """
@@ -99,7 +96,8 @@ class HALProtocol(RepositoryProtocol):
             results =  r.json().get('results') or ''
             if results:
                 return results[0].get('uri', '').split('/')[-1]
-        except (requests.exceptions.RequestException, ValueError, KeyError):
+        except (requests.exceptions.RequestException, ValueError, KeyError) as e:
+            logger.exception(e)
             return None
 
     def get_form_initial_data(self, **kwargs):
