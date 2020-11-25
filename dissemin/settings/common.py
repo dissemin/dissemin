@@ -257,7 +257,7 @@ REDIS_URL = ':%s@%s:%s/%d' % (
         REDIS_DB)
 BROKER_URL = 'redis://'+REDIS_URL
 # We also use Redis as result backend.
-CELERY_RESULT_BACKEND = BROKER_URL
+CELERY_BROKER_URL = BROKER_URL
 
 # Redis is not mandatory, this client is reserved for deposits.
 try:
@@ -268,10 +268,7 @@ try:
 except ImportError:
     pass
 
-CELERY_ACCEPT_CONTENT = ['pickle', 'json', 'msgpack', 'yaml']
-CELERY_IMPORTS = ['backend.tasks']
-
-CELERYBEAT_SCHEDULE = {
+CELERY_BEAT_SCHEDULE = {
     'update_all_stats': {
         'task': 'update_all_stats',
         'schedule': timedelta(days=1),

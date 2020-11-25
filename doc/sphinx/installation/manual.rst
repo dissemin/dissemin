@@ -119,7 +119,7 @@ You should use the following sample files that are similar to the `official samp
     CELERY_APP="dissemin.celery:app"
     CELERYD_NODES="dissem"
     CELERYD_OPTS=""
-    CELERY_BIN="/path/to/venv/env/bin/celery"
+    CELERY_BIN="/path/to/venv/bin/celery"
     CELERYD_PID_FILE="/var/run/celery/%n.pid"
     CELERYD_LOG_FILE="/var/log/celery/%n.log"
     CELERYD_LOG_LEVEL="INFO"
@@ -142,7 +142,7 @@ For the ``celeryd`` systemd service put the following in ``/etc/systemd/system/c
     Restart=always
     EnvironmentFile=-/etc/default/celery
     WorkingDirectory=/path/to/dissemin/
-    ExecStart=/bin/sh -c '${CELERY_BIN} multi start ${CELERYD_NODES} -A ${CELERY_APP} --pidfile=${CELERYD_PID_FILE} --logfile=${CELERYD_LOG_FILE} --loglevel=${CELERYD_LOG_LEVEL} ${CELERYD_OPTS}'
+    ExecStart=/bin/sh -c '${CELERY_BIN} -A ${CELERY_APP} multi start ${CELERYD_NODES} --pidfile=${CELERYD_PID_FILE} --logfile=${CELERYD_LOG_FILE} --loglevel=${CELERYD_LOG_LEVEL} ${CELERYD_OPTS}'
     ExecStop=/bin/sh -c '${CELERY_BIN} multi stopwait ${CELERYD_NODES} --pidfile=${CELERYD_PID_FILE}'
     ExecReload=/bin/sh -c '${CELERY_BIN} multi restart ${CELERYD_NODES} -A ${CELERY_APP} --pidfile=${CELERYD_PID_FILE} --logfile=${CELERYD_LOG_FILE} --loglevel=${CELERYD_LOG_LEVEL} ${CELERYD_OPTS}'
 
@@ -162,7 +162,7 @@ For the ``celerybeatd`` systemd service put the following in ``/etc/systemd/syst
     Restart=always
     EnvironmentFile=-/etc/default/celery
     WorkingDirectory=/path/to/dissemin/
-    ExecStart=/bin/sh -c 'PYTHONPATH=$(pwd) ${CELERY_BIN} beat -A ${CELERY_APP} --pidfile=${CELERYBEAT_PID_FILE} --logfile=${CELERYBEAT_LOG_FILE} --loglevel=${CELERYD_LOG_LEVEL} -s ${CELERYBEAT_SCHEDULE_FILE}'
+    ExecStart=/bin/sh -c 'PYTHONPATH=$(pwd) ${CELERY_BIN} -A ${CELERY_APP} beat --pidfile=${CELERYBEAT_PID_FILE} --logfile=${CELERYBEAT_LOG_FILE} --loglevel=${CELERYD_LOG_LEVEL} -s ${CELERYBEAT_SCHEDULE_FILE}'
     ExecStop=/bin/kill -s TERM $MAINPID
 
     [Install]
@@ -184,3 +184,9 @@ To make them start on boot call::
 
     systemctl enable celery.service
     systemctl enable celerybeat.service
+
+Logrotate
+~~~~~~~~~
+
+Over time the logfiles of celery tend to get rather big, so you should enable log rotation.
+Celery does not complain if the log file is removed, it just opens it again.
