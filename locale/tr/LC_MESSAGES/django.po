@@ -18,13 +18,14 @@
 #
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-11-25 16:08+0100\n"
-"PO-Revision-Date: 2020-11-09 11:35:45+0000\n"
+"PO-Revision-Date: 2020-11-26 16:50:27+0000\n"
 "Language: tr\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2020-11-05 12:10:48+0000\n"
+"X-POT-Import-Date: 2020-11-25 15:31:57+0000\n"
 "X-Generator: MediaWiki 1.36.0-alpha; Translate 2020-10-28\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
@@ -1116,14 +1117,8 @@ msgid "Green Open Access Service"
 msgstr "Yeşil Açık Erişim Hizmeti"
 
 #: model-gettext.py:111
-msgid ""
-"Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n"
-"<br/>\n"
-"Contact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
-msgstr ""
-"Üniversite ve Devlet Kütüphanesi Darmstadt'ın yayınlarınızı sizin için yeşil açık erişimini yayınlamasını ister misiniz?\n"
-"<br/>\n"
-"Bize ulaşın: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
+msgid "Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n<br/>\nContact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
+msgstr "Üniversite ve Devlet Kütüphanesi Darmstadt'ın yayınlarınızı sizin için yeşil açık erişimini yayınlamasını ister misiniz?\n<br/>\nBize ulaşın: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
 
 #: model-gettext.py:112
 msgid "TUprints contract required!"
@@ -1139,17 +1134,15 @@ msgstr "Sözleşmeyi doldurun"
 
 #: model-gettext.py:115
 msgid "Contract necessary!"
-msgstr ""
+msgstr "Sözleşme gerekli!"
 
 #: model-gettext.py:116
 msgid "Before we can publish your publication, we need the completely filled in and signed publication agreement, which you can send to Braunschweig University Library by e-mail, fax or postal mail."
-msgstr ""
+msgstr "Yayınınızı yayımlamadan önce, Braunschweig Üniversite Kütüphanesine e-posta, faks veya posta yoluyla gönderebileceğiniz, tamamen doldurulmuş ve imzalanmış bir yayın sözleşmesine ihtiyacımız var."
 
 #: model-gettext.py:117
-#, fuzzy
-#| msgid "Download"
 msgid "Download Contract"
-msgstr "İndir"
+msgstr "Sözleşmeyi İndir"
 
 #: model-gettext.py:118
 msgid "Creative Commons 1.0 Universal (CC0 1.0) Public Domain Dedication"
@@ -1221,11 +1214,11 @@ msgstr "TUprints, Darmstadt Teknik Üniversitesi'nin tüm mevcut ve eski üyeler
 
 #: model-gettext.py:136
 msgid "Institutional Repository of TU Braunschweig"
-msgstr ""
+msgstr "TU Braunschweig Kurumsal Deposu"
 
 #: model-gettext.py:137
 msgid "Researchers at TU Braunschweig can publish their first and second (self archiving) publications Open Access on the official publication server of TU Braunschweig."
-msgstr ""
+msgstr "TU Braunschweig'deki araştırmacılar, birinci ve ikinci (kendi kendine arşivlenen) yayınlarını Açık Erişim TU Braunschweig'in resmi yayın sunucusunda yayınlayabilirler."
 
 #: notification/models.py:62
 msgid "inboxes"
@@ -2879,3 +2872,4 @@ msgstr "Doğrulama hatası"
 #, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr "Kimlik doğrulama başarısız. <a href=\"%(account-login)s\">Giriş sayfasına geri dönün.</a>"
+

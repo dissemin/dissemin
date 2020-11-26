@@ -16,13 +16,14 @@
 #
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-11-25 16:08+0100\n"
-"PO-Revision-Date: 2020-11-05 12:19:13+0000\n"
+"PO-Revision-Date: 2020-11-26 16:50:26+0000\n"
 "Language: nl\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2020-11-05 12:10:48+0000\n"
+"X-POT-Import-Date: 2020-11-25 15:31:57+0000\n"
 "X-Generator: MediaWiki 1.36.0-alpha; Translate 2020-10-28\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -1139,10 +1140,7 @@ msgid "Green Open Access Service"
 msgstr "Vrije toegang met de kleur groen"
 
 #: model-gettext.py:111
-msgid ""
-"Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n"
-"<br/>\n"
-"Contact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
+msgid "Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n<br/>\nContact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
 msgstr ""
 
 #: model-gettext.py:112
@@ -1167,7 +1165,6 @@ msgstr ""
 
 #: model-gettext.py:117
 #, fuzzy
-#| msgid "Download"
 msgid "Download Contract"
 msgstr "Ophalen"
 
@@ -1898,11 +1895,7 @@ msgstr ""
 #: papers/views.py:282
 #, fuzzy
 msgid "Invalid ORCID profile. Please make sure it includes a public name."
-msgstr ""
-"\n"
-"                            Ongeldig ORCID-profiel.\n"
-"                            Zorg ervoor dat het profiel een openbare naam bevat.\n"
-"                            "
+msgstr "\n                            Ongeldig ORCID-profiel.\n                            Zorg ervoor dat het profiel een openbare naam bevat.\n                            "
 
 #: papers/views.py:285
 msgid "Invalid ORCID profile."
@@ -2227,9 +2220,7 @@ msgstr "Toegangsaanvraag voor de pdf is geweigerd."
 #: website/templates/403.html:13
 #, fuzzy, python-format
 msgid "The access to the requested page has been denied. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr ""
-"Kan de aangevraagde pagina niet vinden. <a href=\"/\">Terug naar de startpagina.</a>\n"
-"           "
+msgstr "Kan de aangevraagde pagina niet vinden. <a href=\"/\">Terug naar de startpagina.</a>\n           "
 
 #: website/templates/404.html:6 website/templates/404.html:10
 msgid "Page not found"
@@ -2238,9 +2229,7 @@ msgstr "Pagina niet gevonden"
 #: website/templates/404.html:13
 #, fuzzy, python-format
 msgid "The page you requested could not be found. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr ""
-"Kan de aangevraagde pagina niet vinden. <a href=\"/\">Terug naar de startpagina.</a>\n"
-"           "
+msgstr "Kan de aangevraagde pagina niet vinden. <a href=\"/\">Terug naar de startpagina.</a>\n           "
 
 #: website/templates/500.html:6 website/templates/500.html:10
 #, fuzzy
@@ -2250,9 +2239,7 @@ msgstr "Interne fout"
 #: website/templates/500.html:13
 #, fuzzy, python-format
 msgid "Your request triggered an internal server error. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr ""
-"Je verzoek heeft een interne fout veroorzaakt. <a href=\"/\">Terug naar de startpagina.</a>\n"
-"           "
+msgstr "Je verzoek heeft een interne fout veroorzaakt. <a href=\"/\">Terug naar de startpagina.</a>\n           "
 
 #: website/templates/admin/base_site.html:5
 #: website/templates/admin/base_site.html:8
@@ -2958,7 +2945,5 @@ msgstr "Verifiëringsfout"
 #: website/templates/socialaccount/authentication_error.html:15
 #, fuzzy, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
-msgstr ""
-"\n"
-"            Verifiëren is mislukt. <a href=\"/\">Terug naar de aanmeldpagina.</a>\n"
-"           "
+msgstr "\n            Verifiëren is mislukt. <a href=\"/\">Terug naar de aanmeldpagina.</a>\n           "
+

@@ -10,13 +10,14 @@
 #
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-11-25 16:08+0100\n"
-"PO-Revision-Date: 2020-11-05 12:19:14+0000\n"
+"PO-Revision-Date: 2020-11-26 16:50:26+0000\n"
 "Language: ro\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2020-11-05 12:10:48+0000\n"
+"X-POT-Import-Date: 2020-11-25 15:31:57+0000\n"
 "X-Generator: MediaWiki 1.36.0-alpha; Translate 2020-10-28\n"
 "Plural-Forms: nplurals=3; plural=(n == 1) ? 0 : ( (n == 0 || (n%100 > 0 && n%100 < 20)) ? 1 : 2 );\n"
 
@@ -544,11 +545,7 @@ msgstr "Depozitare"
 #: deposit/templates/deposit/start.html:64
 #, fuzzy, python-format
 msgid "You can deposit the full text of your article. Dissemin will send it to a repository where it will be made freely available. By depositing your article via Dissemin, you agree to our <a href=\"%(tosurl)s\">terms of service</a>."
-msgstr ""
-"Puteți depune textul integral al articolului dvs. Dissemin îl va\n"
-"             trimite într-un depozit în care va fi disponibil gratuit.\n"
-"Prin depunerea articolului prin Dissemin,\n"
-"             sunteți de acord cu noi <a href=\"%(tosurl)s\">terms of service</a>."
+msgstr "Puteți depune textul integral al articolului dvs. Dissemin îl va\n             trimite într-un depozit în care va fi disponibil gratuit.\nPrin depunerea articolului prin Dissemin,\n             sunteți de acord cu noi <a href=\"%(tosurl)s\">terms of service</a>."
 
 #: deposit/templates/deposit/start.html:72
 #, fuzzy
@@ -1162,10 +1159,7 @@ msgid "Green Open Access Service"
 msgstr "Acces liber verde"
 
 #: model-gettext.py:111
-msgid ""
-"Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n"
-"<br/>\n"
-"Contact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
+msgid "Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n<br/>\nContact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
 msgstr ""
 
 #: model-gettext.py:112
@@ -1190,7 +1184,6 @@ msgstr ""
 
 #: model-gettext.py:117
 #, fuzzy
-#| msgid "Download"
 msgid "Download Contract"
 msgstr "Descărcare"
 
@@ -1930,9 +1923,7 @@ msgstr ""
 #: papers/views.py:282
 #, fuzzy
 msgid "Invalid ORCID profile. Please make sure it includes a public name."
-msgstr ""
-"Profilul ORCID este nevalid.\n"
-"Asigurați-vă că include un nume public."
+msgstr "Profilul ORCID este nevalid.\nAsigurați-vă că include un nume public."
 
 #: papers/views.py:285
 msgid "Invalid ORCID profile."
@@ -2973,3 +2964,4 @@ msgstr ""
 #, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr ""
+

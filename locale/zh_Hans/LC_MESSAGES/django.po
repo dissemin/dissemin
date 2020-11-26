@@ -18,13 +18,14 @@
 #
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-11-25 16:08+0100\n"
-"PO-Revision-Date: 2020-11-05 12:19:14+0000\n"
+"PO-Revision-Date: 2020-11-26 16:50:27+0000\n"
 "Language: zh_hans\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2020-11-05 12:10:48+0000\n"
+"X-POT-Import-Date: 2020-11-25 15:31:57+0000\n"
 "X-Generator: MediaWiki 1.36.0-alpha; Translate 2020-10-28\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
@@ -548,9 +549,7 @@ msgstr "存放"
 #: deposit/templates/deposit/start.html:64
 #, python-format
 msgid "You can deposit the full text of your article. Dissemin will send it to a repository where it will be made freely available. By depositing your article via Dissemin, you agree to our <a href=\"%(tosurl)s\">terms of service</a>."
-msgstr ""
-"您可以存放您的文章全文。Dissemin将发送它到其能够自由展示的存储库。通过使用Dissemin存放您的文章，您同意我们的<a href=\"%(tosurl)s\">服务条款</a>。\n"
-"        "
+msgstr "您可以存放您的文章全文。Dissemin将发送它到其能够自由展示的存储库。通过使用Dissemin存放您的文章，您同意我们的<a href=\"%(tosurl)s\">服务条款</a>。\n        "
 
 #: deposit/templates/deposit/start.html:72
 #, fuzzy
@@ -1140,10 +1139,7 @@ msgid "Green Open Access Service"
 msgstr "绿色开放访问"
 
 #: model-gettext.py:111
-msgid ""
-"Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n"
-"<br/>\n"
-"Contact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
+msgid "Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n<br/>\nContact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
 msgstr ""
 
 #: model-gettext.py:112
@@ -1168,7 +1164,6 @@ msgstr ""
 
 #: model-gettext.py:117
 #, fuzzy
-#| msgid "Download"
 msgid "Download Contract"
 msgstr "下载"
 
@@ -1534,9 +1529,7 @@ msgstr "出版于%(year)s由"
 #: papers/templates/papers/paper.html:56
 #, python-format
 msgid "and <a href=\"#\" id=\"showAllAuthors\">%(nb_remaining_authors)s other authors.</a>"
-msgstr ""
-"以及<a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s位其他作者</a>\n"
-"            "
+msgstr "以及<a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s位其他作者</a>\n            "
 
 #: papers/templates/papers/paper.html:62
 msgid "Show less"
@@ -1897,9 +1890,7 @@ msgstr ""
 
 #: papers/views.py:282
 msgid "Invalid ORCID profile. Please make sure it includes a public name."
-msgstr ""
-"无效的ORCID详情。请确保它包含公开名称。\n"
-"                            "
+msgstr "无效的ORCID详情。请确保它包含公开名称。\n                            "
 
 #: papers/views.py:285
 msgid "Invalid ORCID profile."
@@ -2219,10 +2210,7 @@ msgstr "访问PDF被拒绝。"
 #: website/templates/403.html:13
 #, fuzzy, python-format
 msgid "The access to the requested page has been denied. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr ""
-"\n"
-"            找不到您请求的页面。<a href=\"/\">返回首页。</a>\n"
-"           "
+msgstr "\n            找不到您请求的页面。<a href=\"/\">返回首页。</a>\n           "
 
 #: website/templates/404.html:6 website/templates/404.html:10
 msgid "Page not found"
@@ -2231,9 +2219,7 @@ msgstr "找不到页面"
 #: website/templates/404.html:13
 #, python-format
 msgid "The page you requested could not be found. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr ""
-"找不到您请求的页面。<a href=\"%(index)s\">返回首页。</a>\n"
-"           "
+msgstr "找不到您请求的页面。<a href=\"%(index)s\">返回首页。</a>\n           "
 
 #: website/templates/500.html:6 website/templates/500.html:10
 #, fuzzy
@@ -2243,9 +2229,7 @@ msgstr "内部错误"
 #: website/templates/500.html:13
 #, python-format
 msgid "Your request triggered an internal server error. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr ""
-"您的请求触发了内部错误。<a href=\"%(index)s\">返回首页。</a>\n"
-"           "
+msgstr "您的请求触发了内部错误。<a href=\"%(index)s\">返回首页。</a>\n           "
 
 #: website/templates/admin/base_site.html:5
 #: website/templates/admin/base_site.html:8
@@ -2945,3 +2929,4 @@ msgstr "验证错误"
 #, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr "验证失败。<a href=\"%(account-login)s\">返回登录页面。</a>"
+

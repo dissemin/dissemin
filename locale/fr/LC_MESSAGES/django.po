@@ -19,10 +19,11 @@
 #
 msgid ""
 msgstr ""
+""
 "Project-Id-Version: dissem.in\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-11-25 16:08+0100\n"
-"PO-Revision-Date: 2020-11-09 11:35:43+0000\n"
+"PO-Revision-Date: 2020-11-26 16:50:25+0000\n"
 "Last-Translator: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language-Team: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language: fr\n"
@@ -31,7 +32,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: MediaWiki 1.36.0-alpha; Translate 2020-10-28\n"
-"X-POT-Import-Date: 2020-11-05 12:10:48+0000\n"
+"X-POT-Import-Date: 2020-11-25 15:31:57+0000\n"
 
 #: autocomplete/views.py:81
 msgid "Current institutions"
@@ -1124,14 +1125,8 @@ msgid "Green Open Access Service"
 msgstr "Libre accès (voie verte)"
 
 #: model-gettext.py:111
-msgid ""
-"Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n"
-"<br/>\n"
-"Contact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
-msgstr ""
-"Aimeriez-vous que la Bibliothèque universitaire et d’état de Darmstadt publie vos publications en accès libre ouvert pour vous ?\n"
-"<br/>\n"
-"Contactez-nous : <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
+msgid "Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n<br/>\nContact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
+msgstr "Aimeriez-vous que la Bibliothèque universitaire et d’état de Darmstadt publie vos publications en accès libre ouvert pour vous ?\n<br/>\nContactez-nous : <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
 
 #: model-gettext.py:112
 msgid "TUprints contract required!"
@@ -1147,17 +1142,15 @@ msgstr "Remplir l’accord"
 
 #: model-gettext.py:115
 msgid "Contract necessary!"
-msgstr ""
+msgstr "Contrat obligatoire !"
 
 #: model-gettext.py:116
 msgid "Before we can publish your publication, we need the completely filled in and signed publication agreement, which you can send to Braunschweig University Library by e-mail, fax or postal mail."
-msgstr ""
+msgstr "Avant que nous puissions publier votre publication, nous avons besoin de l’accord de publication complètement rempli et signé, que vous pouvez envoyer à la Bibliothèque de l’université de Braunschweig par courriel, fax ou courrier postal."
 
 #: model-gettext.py:117
-#, fuzzy
-#| msgid "Download"
 msgid "Download Contract"
-msgstr "Télécharger"
+msgstr "Télécharger le contrat"
 
 #: model-gettext.py:118
 msgid "Creative Commons 1.0 Universal (CC0 1.0) Public Domain Dedication"
@@ -1229,11 +1222,11 @@ msgstr "TUprints est le dépôt en accès ouvert pour tous les membres actuels e
 
 #: model-gettext.py:136
 msgid "Institutional Repository of TU Braunschweig"
-msgstr ""
+msgstr "Dépôt institutionnel de TU de Braunschweig"
 
 #: model-gettext.py:137
 msgid "Researchers at TU Braunschweig can publish their first and second (self archiving) publications Open Access on the official publication server of TU Braunschweig."
-msgstr ""
+msgstr "Les chercheurs à TU de Brauschweig peuvent publier leurs première et seconde (auto-archivage) publications en accès libre sur le serveur de publications officiel de TU de Braunschweig."
 
 #: notification/models.py:62
 msgid "inboxes"
@@ -2895,3 +2888,4 @@ msgstr "Erreur d’authentification"
 #, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr "L’authentification a échoué. <a href=\"%(account-login)s\">Revenir à la page de connexion.</a>"
+
