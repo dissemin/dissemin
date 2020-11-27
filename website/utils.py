@@ -1,6 +1,6 @@
 def merge_users(user_1, user_2):
     """
-    Merges the second user into the last user. Values of the first user get precedence.
+    Merges the second user into the first user. Values of the first user get precedence.
     """
     # Model fields that we can directly merge
     model_fields = ['email', 'first_name', 'last_name',]

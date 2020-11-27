@@ -1,0 +1,541 @@
+{
+  "orcid-identifier" : {
+    "uri" : "https://orcid.org/0000-0001-7935-7720",
+    "path" : "0000-0001-7935-7720",
+    "host" : "orcid.org"
+  },
+  "preferences" : {
+    "locale" : "EN"
+  },
+  "history" : {
+    "creation-method" : "DIRECT",
+    "completion-date" : null,
+    "submission-date" : {
+      "value" : 1542877696504
+    },
+    "last-modified-date" : {
+      "value" : 1606407345005
+    },
+    "claimed" : true,
+    "source" : null,
+    "deactivation-date" : null,
+    "verified-email" : true,
+    "verified-primary-email" : true
+  },
+  "person" : {
+    "last-modified-date" : {
+      "value" : 1554816582654
+    },
+    "name" : {
+      "created-date" : {
+        "value" : 1542877696504
+      },
+      "last-modified-date" : {
+        "value" : 1606407345003
+      },
+      "given-names" : {
+        "value" : "Stefan"
+      },
+      "family-name" : {
+        "value" : "Beck"
+      },
+      "credit-name" : null,
+      "source" : null,
+      "visibility" : "PUBLIC",
+      "path" : "0000-0001-7935-7720"
+    },
+    "other-names" : {
+      "last-modified-date" : null,
+      "other-name" : [ ],
+      "path" : "/0000-0001-7935-7720/other-names"
+    },
+    "biography" : null,
+    "researcher-urls" : {
+      "last-modified-date" : null,
+      "researcher-url" : [ ],
+      "path" : "/0000-0001-7935-7720/researcher-urls"
+    },
+    "emails" : {
+      "last-modified-date" : null,
+      "email" : [ ],
+      "path" : "/0000-0001-7935-7720/email"
+    },
+    "addresses" : {
+      "last-modified-date" : {
+        "value" : 1554816582654
+      },
+      "address" : [ {
+        "created-date" : {
+          "value" : 1554816582653
+        },
+        "last-modified-date" : {
+          "value" : 1554816582654
+        },
+        "source" : {
+          "source-orcid" : {
+            "uri" : "https://orcid.org/0000-0001-7935-7720",
+            "path" : "0000-0001-7935-7720",
+            "host" : "orcid.org"
+          },
+          "source-client-id" : null,
+          "source-name" : {
+            "value" : "Stefan Beck"
+          }
+        },
+        "country" : {
+          "value" : "DE"
+        },
+        "visibility" : "PUBLIC",
+        "path" : "/0000-0001-7935-7720/address/1228190",
+        "put-code" : 1228190,
+        "display-index" : 1
+      } ],
+      "path" : "/0000-0001-7935-7720/address"
+    },
+    "keywords" : {
+      "last-modified-date" : null,
+      "keyword" : [ ],
+      "path" : "/0000-0001-7935-7720/keywords"
+    },
+    "external-identifiers" : {
+      "last-modified-date" : null,
+      "external-identifier" : [ ],
+      "path" : "/0000-0001-7935-7720/external-identifiers"
+    },
+    "path" : "/0000-0001-7935-7720/person"
+  },
+  "activities-summary" : {
+    "last-modified-date" : {
+      "value" : 1554818213835
+    },
+    "educations" : {
+      "last-modified-date" : null,
+      "education-summary" : [ ],
+      "path" : "/0000-0001-7935-7720/educations"
+    },
+    "employments" : {
+      "last-modified-date" : {
+        "value" : 1554817015469
+      },
+      "employment-summary" : [ {
+        "created-date" : {
+          "value" : 1554816083833
+        },
+        "last-modified-date" : {
+          "value" : 1554817015469
+        },
+        "source" : {
+          "source-orcid" : {
+            "uri" : "https://orcid.org/0000-0001-7935-7720",
+            "path" : "0000-0001-7935-7720",
+            "host" : "orcid.org"
+          },
+          "source-client-id" : null,
+          "source-name" : {
+            "value" : "Stefan Beck"
+          }
+        },
+        "department-name" : "IT, F & E",
+        "role-title" : "Project OpenIng",
+        "start-date" : {
+          "year" : {
+            "value" : "2019"
+          },
+          "month" : {
+            "value" : "01"
+          },
+          "day" : {
+            "value" : "01"
+          }
+        },
+        "end-date" : null,
+        "organization" : {
+          "name" : "Universitäts- und Landesbibliothek Darmstadt",
+          "address" : {
+            "city" : "Darmstadt",
+            "region" : "Hessen",
+            "country" : "DE"
+          },
+          "disambiguated-organization" : {
+            "disambiguated-organization-identifier" : "38842",
+            "disambiguation-source" : "RINGGOLD"
+          }
+        },
+        "visibility" : "PUBLIC",
+        "put-code" : 7666974,
+        "path" : "/0000-0001-7935-7720/employment/7666974"
+      }, {
+        "created-date" : {
+          "value" : 1554815879351
+        },
+        "last-modified-date" : {
+          "value" : 1554816905952
+        },
+        "source" : {
+          "source-orcid" : {
+            "uri" : "https://orcid.org/0000-0001-7935-7720",
+            "path" : "0000-0001-7935-7720",
+            "host" : "orcid.org"
+          },
+          "source-client-id" : null,
+          "source-name" : {
+            "value" : "Stefan Beck"
+          }
+        },
+        "department-name" : null,
+        "role-title" : "Bibliotheksreferendar",
+        "start-date" : {
+          "year" : {
+            "value" : "2016"
+          },
+          "month" : {
+            "value" : "10"
+          },
+          "day" : null
+        },
+        "end-date" : {
+          "year" : {
+            "value" : "2018"
+          },
+          "month" : {
+            "value" : "09"
+          },
+          "day" : null
+        },
+        "organization" : {
+          "name" : "Philipps-Universität Marburg Universitätsbibliothek",
+          "address" : {
+            "city" : "Marburg",
+            "region" : "Hessen",
+            "country" : "DE"
+          },
+          "disambiguated-organization" : {
+            "disambiguated-organization-identifier" : "489120",
+            "disambiguation-source" : "RINGGOLD"
+          }
+        },
+        "visibility" : "PUBLIC",
+        "put-code" : 7666939,
+        "path" : "/0000-0001-7935-7720/employment/7666939"
+      }, {
+        "created-date" : {
+          "value" : 1542877935033
+        },
+        "last-modified-date" : {
+          "value" : 1554816885602
+        },
+        "source" : {
+          "source-orcid" : {
+            "uri" : "https://orcid.org/0000-0001-7935-7720",
+            "path" : "0000-0001-7935-7720",
+            "host" : "orcid.org"
+          },
+          "source-client-id" : null,
+          "source-name" : {
+            "value" : "Stefan Beck"
+          }
+        },
+        "department-name" : null,
+        "role-title" : "Wissenschaftlicher Mitarbeiter",
+        "start-date" : {
+          "year" : {
+            "value" : "2012"
+          },
+          "month" : {
+            "value" : "05"
+          },
+          "day" : null
+        },
+        "end-date" : {
+          "year" : {
+            "value" : "2015"
+          },
+          "month" : {
+            "value" : "05"
+          },
+          "day" : null
+        },
+        "organization" : {
+          "name" : "Philipps-Universität Marburg Fachbereich 12 Mathematik und Informatik",
+          "address" : {
+            "city" : "Marburg",
+            "region" : "Hessen",
+            "country" : "DE"
+          },
+          "disambiguated-organization" : {
+            "disambiguated-organization-identifier" : "234651",
+            "disambiguation-source" : "RINGGOLD"
+          }
+        },
+        "visibility" : "PUBLIC",
+        "put-code" : 6840966,
+        "path" : "/0000-0001-7935-7720/employment/6840966"
+      } ],
+      "path" : "/0000-0001-7935-7720/employments"
+    },
+    "fundings" : {
+      "last-modified-date" : null,
+      "group" : [ ],
+      "path" : "/0000-0001-7935-7720/fundings"
+    },
+    "peer-reviews" : {
+      "last-modified-date" : null,
+      "group" : [ ],
+      "path" : "/0000-0001-7935-7720/peer-reviews"
+    },
+    "works" : {
+      "last-modified-date" : {
+        "value" : 1554818213835
+      },
+      "group" : [ {
+        "last-modified-date" : {
+          "value" : 1554816414660
+        },
+        "external-ids" : {
+          "external-id" : [ {
+            "external-id-type" : "doi",
+            "external-id-value" : "10.5281/zenodo.2571984",
+            "external-id-url" : null,
+            "external-id-relationship" : "SELF"
+          }, {
+            "external-id-type" : "source-work-id",
+            "external-id-value" : "BASE:8eb8a1e0c90ffe070f3f5e40c5e1ee9f61b5b7c5aa0b99e78185e186f988a9c8",
+            "external-id-url" : {
+              "value" : "https://www.base-search.net/Record/8eb8a1e0c90ffe070f3f5e40c5e1ee9f61b5b7c5aa0b99e78185e186f988a9c8"
+            },
+            "external-id-relationship" : "SELF"
+          } ]
+        },
+        "work-summary" : [ {
+          "put-code" : 56270398,
+          "created-date" : {
+            "value" : 1554816414660
+          },
+          "last-modified-date" : {
+            "value" : 1554816414660
+          },
+          "source" : {
+            "source-orcid" : null,
+            "source-client-id" : {
+              "uri" : "https://orcid.org/client/APP-HCGH49OO61VH1II3",
+              "path" : "APP-HCGH49OO61VH1II3",
+              "host" : "orcid.org"
+            },
+            "source-name" : {
+              "value" : "BASE - Bielefeld Academic Search Engine"
+            }
+          },
+          "title" : {
+            "title" : {
+              "value" : "dissemin/dissemin: v0.3.1"
+            },
+            "subtitle" : null,
+            "translated-title" : null
+          },
+          "external-ids" : {
+            "external-id" : [ {
+              "external-id-type" : "source-work-id",
+              "external-id-value" : "BASE:8eb8a1e0c90ffe070f3f5e40c5e1ee9f61b5b7c5aa0b99e78185e186f988a9c8",
+              "external-id-url" : {
+                "value" : "https://www.base-search.net/Record/8eb8a1e0c90ffe070f3f5e40c5e1ee9f61b5b7c5aa0b99e78185e186f988a9c8"
+              },
+              "external-id-relationship" : "SELF"
+            }, {
+              "external-id-type" : "doi",
+              "external-id-value" : "10.5281/zenodo.2571984",
+              "external-id-url" : null,
+              "external-id-relationship" : "SELF"
+            } ]
+          },
+          "type" : "OTHER",
+          "publication-date" : {
+            "year" : {
+              "value" : "2019"
+            },
+            "month" : null,
+            "day" : null,
+            "media-type" : null
+          },
+          "visibility" : "PUBLIC",
+          "path" : "/0000-0001-7935-7720/work/56270398",
+          "display-index" : "0"
+        } ]
+      }, {
+        "last-modified-date" : {
+          "value" : 1554818213835
+        },
+        "external-ids" : {
+          "external-id" : [ {
+            "external-id-type" : "doi",
+            "external-id-value" : "10.17192/z2016.0217",
+            "external-id-url" : null,
+            "external-id-relationship" : "SELF"
+          }, {
+            "external-id-type" : "source-work-id",
+            "external-id-value" : "BASE:576e9ac926d793f6d1f04c0426c4555e01376d70ccc8aed64c23ff09a8426711",
+            "external-id-url" : {
+              "value" : "https://www.base-search.net/Record/576e9ac926d793f6d1f04c0426c4555e01376d70ccc8aed64c23ff09a8426711"
+            },
+            "external-id-relationship" : "SELF"
+          } ]
+        },
+        "work-summary" : [ {
+          "put-code" : 56272110,
+          "created-date" : {
+            "value" : 1554818213831
+          },
+          "last-modified-date" : {
+            "value" : 1554818213835
+          },
+          "source" : {
+            "source-orcid" : {
+              "uri" : "https://orcid.org/0000-0001-7935-7720",
+              "path" : "0000-0001-7935-7720",
+              "host" : "orcid.org"
+            },
+            "source-client-id" : null,
+            "source-name" : {
+              "value" : "Stefan Beck"
+            }
+          },
+          "title" : {
+            "title" : {
+              "value" : "A Family of Right Coideal Subalgebras of U_q(sl_(n+1)) "
+            },
+            "subtitle" : null,
+            "translated-title" : null
+          },
+          "external-ids" : {
+            "external-id" : [ {
+              "external-id-type" : "source-work-id",
+              "external-id-value" : "BASE:576e9ac926d793f6d1f04c0426c4555e01376d70ccc8aed64c23ff09a8426711",
+              "external-id-url" : {
+                "value" : "https://www.base-search.net/Record/576e9ac926d793f6d1f04c0426c4555e01376d70ccc8aed64c23ff09a8426711"
+              },
+              "external-id-relationship" : "SELF"
+            }, {
+              "external-id-type" : "doi",
+              "external-id-value" : "10.17192/z2016.0217",
+              "external-id-url" : null,
+              "external-id-relationship" : "SELF"
+            } ]
+          },
+          "type" : "DISSERTATION",
+          "publication-date" : {
+            "year" : {
+              "value" : "2016"
+            },
+            "month" : null,
+            "day" : null,
+            "media-type" : null
+          },
+          "visibility" : "PUBLIC",
+          "path" : "/0000-0001-7935-7720/work/56272110",
+          "display-index" : "1"
+        }, {
+          "put-code" : 56270438,
+          "created-date" : {
+            "value" : 1554816453672
+          },
+          "last-modified-date" : {
+            "value" : 1554816453672
+          },
+          "source" : {
+            "source-orcid" : null,
+            "source-client-id" : {
+              "uri" : "https://orcid.org/client/APP-HCGH49OO61VH1II3",
+              "path" : "APP-HCGH49OO61VH1II3",
+              "host" : "orcid.org"
+            },
+            "source-name" : {
+              "value" : "BASE - Bielefeld Academic Search Engine"
+            }
+          },
+          "title" : {
+            "title" : {
+              "value" : "A Family of Right Coideal Subalgebras of U_q(sl_(n+1)) ; Eine Familie von Rechtskoidealunteralgebren für U_q(sl_(n+1))"
+            },
+            "subtitle" : null,
+            "translated-title" : null
+          },
+          "external-ids" : {
+            "external-id" : [ {
+              "external-id-type" : "source-work-id",
+              "external-id-value" : "BASE:576e9ac926d793f6d1f04c0426c4555e01376d70ccc8aed64c23ff09a8426711",
+              "external-id-url" : {
+                "value" : "https://www.base-search.net/Record/576e9ac926d793f6d1f04c0426c4555e01376d70ccc8aed64c23ff09a8426711"
+              },
+              "external-id-relationship" : "SELF"
+            }, {
+              "external-id-type" : "doi",
+              "external-id-value" : "10.17192/z2016.0217",
+              "external-id-url" : null,
+              "external-id-relationship" : "SELF"
+            } ]
+          },
+          "type" : "DISSERTATION",
+          "publication-date" : {
+            "year" : {
+              "value" : "2016"
+            },
+            "month" : null,
+            "day" : null,
+            "media-type" : null
+          },
+          "visibility" : "PUBLIC",
+          "path" : "/0000-0001-7935-7720/work/56270438",
+          "display-index" : "0"
+        }, {
+          "put-code" : 56271933,
+          "created-date" : {
+            "value" : 1554818016019
+          },
+          "last-modified-date" : {
+            "value" : 1554818016019
+          },
+          "source" : {
+            "source-orcid" : null,
+            "source-client-id" : {
+              "uri" : "https://orcid.org/client/0000-0001-8099-6984",
+              "path" : "0000-0001-8099-6984",
+              "host" : "orcid.org"
+            },
+            "source-name" : {
+              "value" : "DataCite"
+            }
+          },
+          "title" : {
+            "title" : {
+              "value" : "A Family of Right Coideal Subalgebras of U_q(sl_(n+1))"
+            },
+            "subtitle" : null,
+            "translated-title" : null
+          },
+          "external-ids" : {
+            "external-id" : [ {
+              "external-id-type" : "doi",
+              "external-id-value" : "10.17192/z2016.0217",
+              "external-id-url" : null,
+              "external-id-relationship" : "SELF"
+            } ]
+          },
+          "type" : "OTHER",
+          "publication-date" : {
+            "year" : {
+              "value" : "2016"
+            },
+            "month" : null,
+            "day" : null,
+            "media-type" : null
+          },
+          "visibility" : "PUBLIC",
+          "path" : "/0000-0001-7935-7720/work/56271933",
+          "display-index" : "0"
+        } ]
+      } ],
+      "path" : "/0000-0001-7935-7720/works"
+    },
+    "path" : "/0000-0001-7935-7720/activities"
+  },
+  "path" : "/0000-0001-7935-7720"
+}

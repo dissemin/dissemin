@@ -1,0 +1,1212 @@
+{
+  "orcid-identifier" : {
+    "uri" : "https://orcid.org/0000-0002-8612-8827",
+    "path" : "0000-0002-8612-8827",
+    "host" : "orcid.org"
+  },
+  "preferences" : {
+    "locale" : "FR"
+  },
+  "history" : {
+    "creation-method" : "DIRECT",
+    "completion-date" : null,
+    "submission-date" : {
+      "value" : 1418307932940
+    },
+    "last-modified-date" : {
+      "value" : 1603524573490
+    },
+    "claimed" : true,
+    "source" : null,
+    "deactivation-date" : null,
+    "verified-email" : true,
+    "verified-primary-email" : true
+  },
+  "person" : {
+    "last-modified-date" : {
+      "value" : 1429966227402
+    },
+    "name" : {
+      "created-date" : {
+        "value" : 1460761977838
+      },
+      "last-modified-date" : {
+        "value" : 1460761977838
+      },
+      "given-names" : {
+        "value" : "Antonin"
+      },
+      "family-name" : {
+        "value" : "Delpeuch"
+      },
+      "credit-name" : null,
+      "source" : null,
+      "visibility" : "PUBLIC",
+      "path" : "0000-0002-8612-8827"
+    },
+    "other-names" : {
+      "last-modified-date" : null,
+      "other-name" : [ ],
+      "path" : "/0000-0002-8612-8827/other-names"
+    },
+    "biography" : null,
+    "researcher-urls" : {
+      "last-modified-date" : {
+        "value" : 1429966227402
+      },
+      "researcher-url" : [ {
+        "created-date" : {
+          "value" : 1429966227402
+        },
+        "last-modified-date" : {
+          "value" : 1429966227402
+        },
+        "source" : {
+          "source-orcid" : {
+            "uri" : "https://orcid.org/0000-0002-8612-8827",
+            "path" : "0000-0002-8612-8827",
+            "host" : "orcid.org"
+          },
+          "source-client-id" : null,
+          "source-name" : {
+            "value" : "Antonin Delpeuch"
+          }
+        },
+        "url-name" : "Personal homepage",
+        "url" : {
+          "value" : "http://antonin.delpeuch.eu/"
+        },
+        "visibility" : "PUBLIC",
+        "path" : "/0000-0002-8612-8827/researcher-urls/446320",
+        "put-code" : 446320,
+        "display-index" : 0
+      } ],
+      "path" : "/0000-0002-8612-8827/researcher-urls"
+    },
+    "emails" : {
+      "last-modified-date" : null,
+      "email" : [ ],
+      "path" : "/0000-0002-8612-8827/email"
+    },
+    "addresses" : {
+      "last-modified-date" : null,
+      "address" : [ ],
+      "path" : "/0000-0002-8612-8827/address"
+    },
+    "keywords" : {
+      "last-modified-date" : null,
+      "keyword" : [ ],
+      "path" : "/0000-0002-8612-8827/keywords"
+    },
+    "external-identifiers" : {
+      "last-modified-date" : null,
+      "external-identifier" : [ ],
+      "path" : "/0000-0002-8612-8827/external-identifiers"
+    },
+    "path" : "/0000-0002-8612-8827/person"
+  },
+  "activities-summary" : {
+    "last-modified-date" : {
+      "value" : 1600176854196
+    },
+    "educations" : {
+      "last-modified-date" : {
+        "value" : 1576047405903
+      },
+      "education-summary" : [ {
+        "created-date" : {
+          "value" : 1470811345800
+        },
+        "last-modified-date" : {
+          "value" : 1470811345800
+        },
+        "source" : {
+          "source-orcid" : null,
+          "source-client-id" : {
+            "uri" : "https://orcid.org/client/0000-0002-4407-7742",
+            "path" : "0000-0002-4407-7742",
+            "host" : "orcid.org"
+          },
+          "source-name" : {
+            "value" : "ORCID Integration at the University of Oxford"
+          }
+        },
+        "department-name" : "Department of Computer Science; New College",
+        "role-title" : null,
+        "start-date" : null,
+        "end-date" : null,
+        "organization" : {
+          "name" : "University of Oxford",
+          "address" : {
+            "city" : "Oxford",
+            "region" : "Oxfordshire",
+            "country" : "GB"
+          },
+          "disambiguated-organization" : {
+            "disambiguated-organization-identifier" : "6396",
+            "disambiguation-source" : "RINGGOLD"
+          }
+        },
+        "visibility" : "PUBLIC",
+        "put-code" : 2113924,
+        "path" : "/0000-0002-8612-8827/education/2113924"
+      }, {
+        "created-date" : {
+          "value" : 1429966153902
+        },
+        "last-modified-date" : {
+          "value" : 1429966153902
+        },
+        "source" : {
+          "source-orcid" : {
+            "uri" : "https://orcid.org/0000-0002-8612-8827",
+            "path" : "0000-0002-8612-8827",
+            "host" : "orcid.org"
+          },
+          "source-client-id" : null,
+          "source-name" : {
+            "value" : "Antonin Delpeuch"
+          }
+        },
+        "department-name" : "Computer Laboratory",
+        "role-title" : "MPhil in Advanced Computer Science",
+        "start-date" : {
+          "year" : {
+            "value" : "2014"
+          },
+          "month" : {
+            "value" : "10"
+          },
+          "day" : {
+            "value" : "01"
+          }
+        },
+        "end-date" : {
+          "year" : {
+            "value" : "2015"
+          },
+          "month" : {
+            "value" : "06"
+          },
+          "day" : {
+            "value" : "15"
+          }
+        },
+        "organization" : {
+          "name" : "University of Cambridge",
+          "address" : {
+            "city" : "Cambridge",
+            "region" : "Cambridgeshire",
+            "country" : "GB"
+          },
+          "disambiguated-organization" : {
+            "disambiguated-organization-identifier" : "2152",
+            "disambiguation-source" : "RINGGOLD"
+          }
+        },
+        "visibility" : "PUBLIC",
+        "put-code" : 870993,
+        "path" : "/0000-0002-8612-8827/education/870993"
+      }, {
+        "created-date" : {
+          "value" : 1418308032549
+        },
+        "last-modified-date" : {
+          "value" : 1576047405903
+        },
+        "source" : {
+          "source-orcid" : {
+            "uri" : "https://orcid.org/0000-0002-8612-8827",
+            "path" : "0000-0002-8612-8827",
+            "host" : "orcid.org"
+          },
+          "source-client-id" : null,
+          "source-name" : {
+            "value" : "Antonin Delpeuch"
+          }
+        },
+        "department-name" : "Département d'Informatique",
+        "role-title" : "Licence",
+        "start-date" : {
+          "year" : {
+            "value" : "2012"
+          },
+          "month" : {
+            "value" : "09"
+          },
+          "day" : {
+            "value" : "01"
+          }
+        },
+        "end-date" : {
+          "year" : {
+            "value" : "2013"
+          },
+          "month" : {
+            "value" : "09"
+          },
+          "day" : {
+            "value" : "01"
+          }
+        },
+        "organization" : {
+          "name" : "École Normale Supérieure",
+          "address" : {
+            "city" : "Paris",
+            "region" : "",
+            "country" : "FR"
+          },
+          "disambiguated-organization" : {
+            "disambiguated-organization-identifier" : "26909",
+            "disambiguation-source" : "RINGGOLD"
+          }
+        },
+        "visibility" : "PUBLIC",
+        "put-code" : 615763,
+        "path" : "/0000-0002-8612-8827/education/615763"
+      } ],
+      "path" : "/0000-0002-8612-8827/educations"
+    },
+    "employments" : {
+      "last-modified-date" : null,
+      "employment-summary" : [ ],
+      "path" : "/0000-0002-8612-8827/employments"
+    },
+    "fundings" : {
+      "last-modified-date" : null,
+      "group" : [ ],
+      "path" : "/0000-0002-8612-8827/fundings"
+    },
+    "peer-reviews" : {
+      "last-modified-date" : null,
+      "group" : [ ],
+      "path" : "/0000-0002-8612-8827/peer-reviews"
+    },
+    "works" : {
+      "last-modified-date" : {
+        "value" : 1600176854196
+      },
+      "group" : [ {
+        "last-modified-date" : {
+          "value" : 1600176829712
+        },
+        "external-ids" : {
+          "external-id" : [ {
+            "external-id-type" : "doi",
+            "external-id-value" : "10.4204/eptcs.323.1",
+            "external-id-url" : null,
+            "external-id-relationship" : "SELF"
+          } ]
+        },
+        "work-summary" : [ {
+          "put-code" : 80370714,
+          "created-date" : {
+            "value" : 1600176829712
+          },
+          "last-modified-date" : {
+            "value" : 1600176829712
+          },
+          "source" : {
+            "source-orcid" : null,
+            "source-client-id" : {
+              "uri" : "https://orcid.org/client/0000-0002-3054-1567",
+              "path" : "0000-0002-3054-1567",
+              "host" : "orcid.org"
+            },
+            "source-name" : {
+              "value" : "Crossref Metadata Search"
+            }
+          },
+          "title" : {
+            "title" : {
+              "value" : "A Complete Language for Faceted Dataflow Programs"
+            },
+            "subtitle" : null,
+            "translated-title" : null
+          },
+          "external-ids" : {
+            "external-id" : [ {
+              "external-id-type" : "doi",
+              "external-id-value" : "10.4204/eptcs.323.1",
+              "external-id-url" : null,
+              "external-id-relationship" : "SELF"
+            }, {
+              "external-id-type" : "issn",
+              "external-id-value" : "2075-2180",
+              "external-id-url" : null,
+              "external-id-relationship" : "PART_OF"
+            } ]
+          },
+          "type" : "JOURNAL_ARTICLE",
+          "publication-date" : {
+            "year" : {
+              "value" : "2020"
+            },
+            "month" : {
+              "value" : "09"
+            },
+            "day" : null,
+            "media-type" : null
+          },
+          "visibility" : "PUBLIC",
+          "path" : "/0000-0002-8612-8827/work/80370714",
+          "display-index" : "0"
+        } ]
+      }, {
+        "last-modified-date" : {
+          "value" : 1600176854196
+        },
+        "external-ids" : {
+          "external-id" : [ {
+            "external-id-type" : "doi",
+            "external-id-value" : "10.4204/eptcs.323.3",
+            "external-id-url" : null,
+            "external-id-relationship" : "SELF"
+          } ]
+        },
+        "work-summary" : [ {
+          "put-code" : 80370724,
+          "created-date" : {
+            "value" : 1600176854196
+          },
+          "last-modified-date" : {
+            "value" : 1600176854196
+          },
+          "source" : {
+            "source-orcid" : null,
+            "source-client-id" : {
+              "uri" : "https://orcid.org/client/0000-0002-3054-1567",
+              "path" : "0000-0002-3054-1567",
+              "host" : "orcid.org"
+            },
+            "source-name" : {
+              "value" : "Crossref Metadata Search"
+            }
+          },
+          "title" : {
+            "title" : {
+              "value" : "Autonomization of Monoidal Categories"
+            },
+            "subtitle" : null,
+            "translated-title" : null
+          },
+          "external-ids" : {
+            "external-id" : [ {
+              "external-id-type" : "doi",
+              "external-id-value" : "10.4204/eptcs.323.3",
+              "external-id-url" : null,
+              "external-id-relationship" : "SELF"
+            }, {
+              "external-id-type" : "issn",
+              "external-id-value" : "2075-2180",
+              "external-id-url" : null,
+              "external-id-relationship" : "PART_OF"
+            } ]
+          },
+          "type" : "JOURNAL_ARTICLE",
+          "publication-date" : {
+            "year" : {
+              "value" : "2020"
+            },
+            "month" : {
+              "value" : "09"
+            },
+            "day" : null,
+            "media-type" : null
+          },
+          "visibility" : "PUBLIC",
+          "path" : "/0000-0002-8612-8827/work/80370724",
+          "display-index" : "0"
+        } ]
+      }, {
+        "last-modified-date" : {
+          "value" : 1591721421920
+        },
+        "external-ids" : {
+          "external-id" : [ {
+            "external-id-type" : "doi",
+            "external-id-value" : "10.5281/zenodo.3886939",
+            "external-id-url" : null,
+            "external-id-relationship" : "SELF"
+          } ]
+        },
+        "work-summary" : [ {
+          "put-code" : 75367814,
+          "created-date" : {
+            "value" : 1591721421920
+          },
+          "last-modified-date" : {
+            "value" : 1591721421920
+          },
+          "source" : {
+            "source-orcid" : null,
+            "source-client-id" : {
+              "uri" : "https://orcid.org/client/0000-0001-8099-6984",
+              "path" : "0000-0001-8099-6984",
+              "host" : "orcid.org"
+            },
+            "source-name" : {
+              "value" : "DataCite"
+            }
+          },
+          "title" : {
+            "title" : {
+              "value" : "OpenRefine presentation at CZI EOSS Kickoff Meeting"
+            },
+            "subtitle" : null,
+            "translated-title" : null
+          },
+          "external-ids" : {
+            "external-id" : [ {
+              "external-id-type" : "doi",
+              "external-id-value" : "10.5281/zenodo.3886939",
+              "external-id-url" : null,
+              "external-id-relationship" : "SELF"
+            } ]
+          },
+          "type" : "OTHER",
+          "publication-date" : {
+            "year" : {
+              "value" : "2020"
+            },
+            "month" : {
+              "value" : "06"
+            },
+            "day" : {
+              "value" : "09"
+            },
+            "media-type" : null
+          },
+          "visibility" : "PUBLIC",
+          "path" : "/0000-0002-8612-8827/work/75367814",
+          "display-index" : "0"
+        } ]
+      }, {
+        "last-modified-date" : {
+          "value" : 1591721422138
+        },
+        "external-ids" : {
+          "external-id" : [ {
+            "external-id-type" : "doi",
+            "external-id-value" : "10.5281/zenodo.3886938",
+            "external-id-url" : null,
+            "external-id-relationship" : "SELF"
+          } ]
+        },
+        "work-summary" : [ {
+          "put-code" : 75367815,
+          "created-date" : {
+            "value" : 1591721422138
+          },
+          "last-modified-date" : {
+            "value" : 1591721422138
+          },
+          "source" : {
+            "source-orcid" : null,
+            "source-client-id" : {
+              "uri" : "https://orcid.org/client/0000-0001-8099-6984",
+              "path" : "0000-0001-8099-6984",
+              "host" : "orcid.org"
+            },
+            "source-name" : {
+              "value" : "DataCite"
+            }
+          },
+          "title" : {
+            "title" : {
+              "value" : "OpenRefine presentation at CZI EOSS Kickoff Meeting"
+            },
+            "subtitle" : null,
+            "translated-title" : null
+          },
+          "external-ids" : {
+            "external-id" : [ {
+              "external-id-type" : "doi",
+              "external-id-value" : "10.5281/zenodo.3886938",
+              "external-id-url" : null,
+              "external-id-relationship" : "SELF"
+            } ]
+          },
+          "type" : "OTHER",
+          "publication-date" : {
+            "year" : {
+              "value" : "2020"
+            },
+            "month" : {
+              "value" : "06"
+            },
+            "day" : {
+              "value" : "09"
+            },
+            "media-type" : null
+          },
+          "visibility" : "PUBLIC",
+          "path" : "/0000-0002-8612-8827/work/75367815",
+          "display-index" : "0"
+        } ]
+      }, {
+        "last-modified-date" : {
+          "value" : 1578287532740
+        },
+        "external-ids" : {
+          "external-id" : [ {
+            "external-id-type" : "arxiv",
+            "external-id-value" : "arXiv:1907.09927v3",
+            "external-id-url" : {
+              "value" : "http://arxiv.org/abs/1907.09927v3"
+            },
+            "external-id-relationship" : "SELF"
+          } ]
+        },
+        "work-summary" : [ {
+          "put-code" : 62044200,
+          "created-date" : {
+            "value" : 1569215532738
+          },
+          "last-modified-date" : {
+            "value" : 1578287532740
+          },
+          "source" : {
+            "source-orcid" : {
+              "uri" : "https://orcid.org/0000-0002-8612-8827",
+              "path" : "0000-0002-8612-8827",
+              "host" : "orcid.org"
+            },
+            "source-client-id" : null,
+            "source-name" : {
+              "value" : "Antonin Delpeuch"
+            }
+          },
+          "title" : {
+            "title" : {
+              "value" : "The word problem for double categories"
+            },
+            "subtitle" : null,
+            "translated-title" : null
+          },
+          "external-ids" : {
+            "external-id" : [ {
+              "external-id-type" : "arxiv",
+              "external-id-value" : "arXiv:1907.09927v3",
+              "external-id-url" : {
+                "value" : "http://arxiv.org/abs/1907.09927v3"
+              },
+              "external-id-relationship" : "SELF"
+            } ]
+          },
+          "type" : "JOURNAL_ARTICLE",
+          "publication-date" : {
+            "year" : {
+              "value" : "2020"
+            },
+            "month" : {
+              "value" : "01"
+            },
+            "day" : {
+              "value" : "02"
+            },
+            "media-type" : null
+          },
+          "visibility" : "PUBLIC",
+          "path" : "/0000-0002-8612-8827/work/62044200",
+          "display-index" : "1"
+        } ]
+      }, {
+        "last-modified-date" : {
+          "value" : 1563653654043
+        },
+        "external-ids" : {
+          "external-id" : [ {
+            "external-id-type" : "arxiv",
+            "external-id-value" : "arXiv:1906.05937v1",
+            "external-id-url" : {
+              "value" : "http://arxiv.org/abs/1906.05937v1"
+            },
+            "external-id-relationship" : "SELF"
+          } ]
+        },
+        "work-summary" : [ {
+          "put-code" : 59690883,
+          "created-date" : {
+            "value" : 1563653654043
+          },
+          "last-modified-date" : {
+            "value" : 1563653654043
+          },
+          "source" : {
+            "source-orcid" : {
+              "uri" : "https://orcid.org/0000-0002-8612-8827",
+              "path" : "0000-0002-8612-8827",
+              "host" : "orcid.org"
+            },
+            "source-client-id" : null,
+            "source-name" : {
+              "value" : "Antonin Delpeuch"
+            }
+          },
+          "title" : {
+            "title" : {
+              "value" : "A complete language for faceted dataflow programs"
+            },
+            "subtitle" : null,
+            "translated-title" : null
+          },
+          "external-ids" : {
+            "external-id" : [ {
+              "external-id-type" : "arxiv",
+              "external-id-value" : "arXiv:1906.05937v1",
+              "external-id-url" : {
+                "value" : "http://arxiv.org/abs/1906.05937v1"
+              },
+              "external-id-relationship" : "SELF"
+            } ]
+          },
+          "type" : "OTHER",
+          "publication-date" : {
+            "year" : {
+              "value" : "2019"
+            },
+            "month" : {
+              "value" : "06"
+            },
+            "day" : {
+              "value" : "13"
+            },
+            "media-type" : null
+          },
+          "visibility" : "PUBLIC",
+          "path" : "/0000-0002-8612-8827/work/59690883",
+          "display-index" : "1"
+        } ]
+      }, {
+        "last-modified-date" : {
+          "value" : 1559981625872
+        },
+        "external-ids" : {
+          "external-id" : [ {
+            "external-id-type" : "doi",
+            "external-id-value" : "10.5281/zenodo.3241717",
+            "external-id-url" : null,
+            "external-id-relationship" : "SELF"
+          } ]
+        },
+        "work-summary" : [ {
+          "put-code" : 58268879,
+          "created-date" : {
+            "value" : 1559981625872
+          },
+          "last-modified-date" : {
+            "value" : 1559981625872
+          },
+          "source" : {
+            "source-orcid" : null,
+            "source-client-id" : {
+              "uri" : "https://orcid.org/client/0000-0001-8099-6984",
+              "path" : "0000-0001-8099-6984",
+              "host" : "orcid.org"
+            },
+            "source-name" : {
+              "value" : "DataCite"
+            }
+          },
+          "title" : {
+            "title" : {
+              "value" : "Aligned ISNI and Ringgold identifiers for institutions"
+            },
+            "subtitle" : null,
+            "translated-title" : null
+          },
+          "external-ids" : {
+            "external-id" : [ {
+              "external-id-type" : "doi",
+              "external-id-value" : "10.5281/zenodo.3241717",
+              "external-id-url" : null,
+              "external-id-relationship" : "SELF"
+            } ]
+          },
+          "type" : "DATA_SET",
+          "publication-date" : {
+            "year" : {
+              "value" : "2019"
+            },
+            "month" : {
+              "value" : "06"
+            },
+            "day" : {
+              "value" : "08"
+            },
+            "media-type" : null
+          },
+          "visibility" : "PUBLIC",
+          "path" : "/0000-0002-8612-8827/work/58268879",
+          "display-index" : "0"
+        } ]
+      }, {
+        "last-modified-date" : {
+          "value" : 1559981626109
+        },
+        "external-ids" : {
+          "external-id" : [ {
+            "external-id-type" : "doi",
+            "external-id-value" : "10.5281/zenodo.758080",
+            "external-id-url" : null,
+            "external-id-relationship" : "SELF"
+          } ]
+        },
+        "work-summary" : [ {
+          "put-code" : 58268880,
+          "created-date" : {
+            "value" : 1559981626109
+          },
+          "last-modified-date" : {
+            "value" : 1559981626109
+          },
+          "source" : {
+            "source-orcid" : null,
+            "source-client-id" : {
+              "uri" : "https://orcid.org/client/0000-0001-8099-6984",
+              "path" : "0000-0001-8099-6984",
+              "host" : "orcid.org"
+            },
+            "source-name" : {
+              "value" : "DataCite"
+            }
+          },
+          "title" : {
+            "title" : {
+              "value" : "Aligned ISNI and Ringgold identifiers for institutions"
+            },
+            "subtitle" : null,
+            "translated-title" : null
+          },
+          "external-ids" : {
+            "external-id" : [ {
+              "external-id-type" : "doi",
+              "external-id-value" : "10.5281/zenodo.758080",
+              "external-id-url" : null,
+              "external-id-relationship" : "SELF"
+            } ]
+          },
+          "type" : "DATA_SET",
+          "publication-date" : {
+            "year" : {
+              "value" : "2019"
+            },
+            "month" : {
+              "value" : "06"
+            },
+            "day" : {
+              "value" : "08"
+            },
+            "media-type" : null
+          },
+          "visibility" : "PUBLIC",
+          "path" : "/0000-0002-8612-8827/work/58268880",
+          "display-index" : "0"
+        } ]
+      }, {
+        "last-modified-date" : {
+          "value" : 1555081732912
+        },
+        "external-ids" : {
+          "external-id" : [ ]
+        },
+        "work-summary" : [ {
+          "put-code" : 56391706,
+          "created-date" : {
+            "value" : 1555081732912
+          },
+          "last-modified-date" : {
+            "value" : 1555081732912
+          },
+          "source" : {
+            "source-orcid" : {
+              "uri" : "https://orcid.org/0000-0002-8612-8827",
+              "path" : "0000-0002-8612-8827",
+              "host" : "orcid.org"
+            },
+            "source-client-id" : null,
+            "source-name" : {
+              "value" : "Antonin Delpeuch"
+            }
+          },
+          "title" : {
+            "title" : {
+              "value" : "OpenTapioca: Lightweight Entity Linking for Wikidata"
+            },
+            "subtitle" : null,
+            "translated-title" : null
+          },
+          "external-ids" : {
+            "external-id" : [ ]
+          },
+          "type" : "JOURNAL_ARTICLE",
+          "publication-date" : {
+            "year" : {
+              "value" : "2019"
+            },
+            "month" : {
+              "value" : "04"
+            },
+            "day" : {
+              "value" : "12"
+            },
+            "media-type" : null
+          },
+          "visibility" : "PUBLIC",
+          "path" : "/0000-0002-8612-8827/work/56391706",
+          "display-index" : "1"
+        } ]
+      }, {
+        "last-modified-date" : {
+          "value" : 1529935348184
+        },
+        "external-ids" : {
+          "external-id" : [ {
+            "external-id-type" : "arxiv",
+            "external-id-value" : "1804.07832",
+            "external-id-url" : null,
+            "external-id-relationship" : "SELF"
+          } ]
+        },
+        "work-summary" : [ {
+          "put-code" : 45993824,
+          "created-date" : {
+            "value" : 1529935348184
+          },
+          "last-modified-date" : {
+            "value" : 1529935348184
+          },
+          "source" : {
+            "source-orcid" : {
+              "uri" : "https://orcid.org/0000-0002-8612-8827",
+              "path" : "0000-0002-8612-8827",
+              "host" : "orcid.org"
+            },
+            "source-client-id" : null,
+            "source-name" : {
+              "value" : "Antonin Delpeuch"
+            }
+          },
+          "title" : {
+            "title" : {
+              "value" : "Normal forms for planar connected string diagrams"
+            },
+            "subtitle" : null,
+            "translated-title" : null
+          },
+          "external-ids" : {
+            "external-id" : [ {
+              "external-id-type" : "arxiv",
+              "external-id-value" : "1804.07832",
+              "external-id-url" : null,
+              "external-id-relationship" : "SELF"
+            } ]
+          },
+          "type" : "JOURNAL_ARTICLE",
+          "publication-date" : {
+            "year" : {
+              "value" : "2018"
+            },
+            "month" : null,
+            "day" : null,
+            "media-type" : null
+          },
+          "visibility" : "PUBLIC",
+          "path" : "/0000-0002-8612-8827/work/45993824",
+          "display-index" : "1"
+        } ]
+      }, {
+        "last-modified-date" : {
+          "value" : 1533935865501
+        },
+        "external-ids" : {
+          "external-id" : [ {
+            "external-id-type" : "doi",
+            "external-id-value" : "10.5281/ZENODO.1299049",
+            "external-id-url" : null,
+            "external-id-relationship" : "SELF"
+          } ]
+        },
+        "work-summary" : [ {
+          "put-code" : 47337044,
+          "created-date" : {
+            "value" : 1533935865501
+          },
+          "last-modified-date" : {
+            "value" : 1533935865501
+          },
+          "source" : {
+            "source-orcid" : null,
+            "source-client-id" : {
+              "uri" : "https://orcid.org/client/0000-0001-8099-6984",
+              "path" : "0000-0001-8099-6984",
+              "host" : "orcid.org"
+            },
+            "source-name" : {
+              "value" : "DataCite"
+            }
+          },
+          "title" : {
+            "title" : {
+              "value" : "Type-Driven Distributional Semantics For Prepositional Phrase Attachment"
+            },
+            "subtitle" : null,
+            "translated-title" : null
+          },
+          "external-ids" : {
+            "external-id" : [ {
+              "external-id-type" : "doi",
+              "external-id-value" : "10.5281/ZENODO.1299049",
+              "external-id-url" : null,
+              "external-id-relationship" : "SELF"
+            } ]
+          },
+          "type" : "OTHER",
+          "publication-date" : {
+            "year" : {
+              "value" : "2015"
+            },
+            "month" : {
+              "value" : "01"
+            },
+            "day" : {
+              "value" : "01"
+            },
+            "media-type" : null
+          },
+          "visibility" : "PUBLIC",
+          "path" : "/0000-0002-8612-8827/work/47337044",
+          "display-index" : "0"
+        } ]
+      }, {
+        "last-modified-date" : {
+          "value" : 1533935865625
+        },
+        "external-ids" : {
+          "external-id" : [ {
+            "external-id-type" : "doi",
+            "external-id-value" : "10.5281/ZENODO.1299048",
+            "external-id-url" : null,
+            "external-id-relationship" : "SELF"
+          } ]
+        },
+        "work-summary" : [ {
+          "put-code" : 47337045,
+          "created-date" : {
+            "value" : 1533935865625
+          },
+          "last-modified-date" : {
+            "value" : 1533935865625
+          },
+          "source" : {
+            "source-orcid" : null,
+            "source-client-id" : {
+              "uri" : "https://orcid.org/client/0000-0001-8099-6984",
+              "path" : "0000-0001-8099-6984",
+              "host" : "orcid.org"
+            },
+            "source-name" : {
+              "value" : "DataCite"
+            }
+          },
+          "title" : {
+            "title" : {
+              "value" : "Type-Driven Distributional Semantics For Prepositional Phrase Attachment"
+            },
+            "subtitle" : null,
+            "translated-title" : null
+          },
+          "external-ids" : {
+            "external-id" : [ {
+              "external-id-type" : "doi",
+              "external-id-value" : "10.5281/ZENODO.1299048",
+              "external-id-url" : null,
+              "external-id-relationship" : "SELF"
+            } ]
+          },
+          "type" : "OTHER",
+          "publication-date" : {
+            "year" : {
+              "value" : "2015"
+            },
+            "month" : {
+              "value" : "01"
+            },
+            "day" : {
+              "value" : "01"
+            },
+            "media-type" : null
+          },
+          "visibility" : "PUBLIC",
+          "path" : "/0000-0002-8612-8827/work/47337045",
+          "display-index" : "0"
+        } ]
+      }, {
+        "last-modified-date" : {
+          "value" : 1530090589416
+        },
+        "external-ids" : {
+          "external-id" : [ ]
+        },
+        "work-summary" : [ {
+          "put-code" : 46050270,
+          "created-date" : {
+            "value" : 1530090589416
+          },
+          "last-modified-date" : {
+            "value" : 1530090589416
+          },
+          "source" : {
+            "source-orcid" : {
+              "uri" : "https://orcid.org/0000-0002-8612-8827",
+              "path" : "0000-0002-8612-8827",
+              "host" : "orcid.org"
+            },
+            "source-client-id" : null,
+            "source-name" : {
+              "value" : "Antonin Delpeuch"
+            }
+          },
+          "title" : {
+            "title" : {
+              "value" : "Type-driven distributional semantics for prepositional phrase attachment"
+            },
+            "subtitle" : null,
+            "translated-title" : null
+          },
+          "external-ids" : {
+            "external-id" : [ ]
+          },
+          "type" : "SUPERVISED_STUDENT_PUBLICATION",
+          "publication-date" : {
+            "year" : {
+              "value" : "2015"
+            },
+            "month" : null,
+            "day" : null,
+            "media-type" : null
+          },
+          "visibility" : "PUBLIC",
+          "path" : "/0000-0002-8612-8827/work/46050270",
+          "display-index" : "1"
+        } ]
+      }, {
+        "last-modified-date" : {
+          "value" : 1437762951577
+        },
+        "external-ids" : {
+          "external-id" : [ {
+            "external-id-type" : "doi",
+            "external-id-value" : "10.4204/eptcs.172.16",
+            "external-id-url" : {
+              "value" : ""
+            },
+            "external-id-relationship" : "SELF"
+          } ]
+        },
+        "work-summary" : [ {
+          "put-code" : 15894056,
+          "created-date" : {
+            "value" : 1427320593315
+          },
+          "last-modified-date" : {
+            "value" : 1437762951577
+          },
+          "source" : {
+            "source-orcid" : null,
+            "source-client-id" : {
+              "uri" : "https://orcid.org/client/0000-0002-3054-1567",
+              "path" : "0000-0002-3054-1567",
+              "host" : "orcid.org"
+            },
+            "source-name" : {
+              "value" : "Crossref Metadata Search"
+            }
+          },
+          "title" : {
+            "title" : {
+              "value" : "Complexity of Grammar Induction for Quantum Types"
+            },
+            "subtitle" : null,
+            "translated-title" : null
+          },
+          "external-ids" : {
+            "external-id" : [ {
+              "external-id-type" : "doi",
+              "external-id-value" : "10.4204/eptcs.172.16",
+              "external-id-url" : {
+                "value" : ""
+              },
+              "external-id-relationship" : "SELF"
+            } ]
+          },
+          "type" : "JOURNAL_ARTICLE",
+          "publication-date" : {
+            "year" : {
+              "value" : "2014"
+            },
+            "month" : null,
+            "day" : null,
+            "media-type" : null
+          },
+          "visibility" : "PUBLIC",
+          "path" : "/0000-0002-8612-8827/work/15894056",
+          "display-index" : "0"
+        } ]
+      }, {
+        "last-modified-date" : {
+          "value" : 1437795003191
+        },
+        "external-ids" : {
+          "external-id" : [ ]
+        },
+        "work-summary" : [ {
+          "put-code" : 16667185,
+          "created-date" : {
+            "value" : 1432650824085
+          },
+          "last-modified-date" : {
+            "value" : 1437795003191
+          },
+          "source" : {
+            "source-orcid" : {
+              "uri" : "https://orcid.org/0000-0002-8612-8827",
+              "path" : "0000-0002-8612-8827",
+              "host" : "orcid.org"
+            },
+            "source-client-id" : null,
+            "source-name" : {
+              "value" : "Antonin Delpeuch"
+            }
+          },
+          "title" : {
+            "title" : {
+              "value" : "From Natural Language to RDF Graphs with Pregroups"
+            },
+            "subtitle" : null,
+            "translated-title" : null
+          },
+          "external-ids" : {
+            "external-id" : [ ]
+          },
+          "type" : "CONFERENCE_PAPER",
+          "publication-date" : {
+            "year" : {
+              "value" : "2014"
+            },
+            "month" : null,
+            "day" : null,
+            "media-type" : null
+          },
+          "visibility" : "PUBLIC",
+          "path" : "/0000-0002-8612-8827/work/16667185",
+          "display-index" : "0"
+        } ]
+      } ],
+      "path" : "/0000-0002-8612-8827/works"
+    },
+    "path" : "/0000-0002-8612-8827/activities"
+  },
+  "path" : "/0000-0002-8612-8827"
+}

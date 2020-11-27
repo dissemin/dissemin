@@ -20,9 +20,6 @@
 
 import json
 
-from allauth.exceptions import ImmediateHttpResponse
-from allauth.socialaccount.signals import pre_social_login
-from allauth.account.signals import user_logged_in
 from haystack.generic_views import SearchView
 
 from django.contrib.auth.decorators import user_passes_test
@@ -34,7 +31,6 @@ from django.http import HttpResponseForbidden
 from django.http import HttpResponsePermanentRedirect
 from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
-from django.shortcuts import render
 from django.template import loader
 from django.urls import reverse
 from django.utils.cache import add_never_cache_headers
@@ -60,56 +56,8 @@ from search import SearchQuerySet
 from statistics.models import BareAccessStatistics
 
 
-def fetch_on_orcid_login(sender, sociallogin, **kwargs):
-    account = sociallogin.account
-
-    # Only prefetch if the social login refers to a valid ORCID account
-    orcid = validate_orcid(account.uid)
-    if not orcid:
-        raise ImmediateHttpResponse(
-            render(
-                kwargs['request'],
-                'dissemin/error.html',
-                {'message':_('Invalid ORCID identifier.')}
-            )
-        )
-
-    profile = None # disabled account.extra_data because of API version mismatches
-    user = None
-    if '_user_cache' in account.__dict__:
-        user = account.user
-    r = Researcher.get_or_create_by_orcid(orcid, profile, user)
-
-    if not r: # invalid ORCID profile (e.g. no name provided)
-        raise ImmediateHttpResponse(
-            render(
-                kwargs['request'],
-                'dissemin/error.html',
-                {'message': _(
-                    'Dissemin requires access to your ORCID name, '
-                    'which is marked as private in your ORCID profile.'
-                )}
-            )
-        )
-
-def complete_researcher_profile_on_orcid_login(sender, user, **kwargs):
-    orcid = user.socialaccount_set.first().uid
-    r = Researcher.objects.get(orcid=orcid)
-
-    if r.user_id is None and user is not None:
-        r.user = user
-        r.save(update_fields=['user'])
-    if r.empty_orcid_profile is None:
-        r.init_from_orcid()
-    else:
-        r.fetch_everything_if_outdated()
-
-pre_social_login.connect(fetch_on_orcid_login)
-user_logged_in.connect(complete_researcher_profile_on_orcid_login)
-
 # Number of papers shown on a search results page
 NB_RESULTS_PER_PAGE = 20
-
 
 class AdvancedPaperSearchView(FormView):
     """Displays the full search form."""

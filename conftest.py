@@ -246,6 +246,7 @@ def mock_doi(requests_mocker):
                 return (200, headers, body)
         except FileNotFoundError:
             print('File not found: {} - Returning 404'.format(f_path))
+            print("curl -LH \"Accept: application/citeproc+json\" \"{}\" > {}".format(request.url, f_path))
             return (404, {}, None)
 
     requests_mocker.add_callback(
@@ -294,7 +295,6 @@ def mock_pub_orcid(requests_mocker):
     def request_callback(request):
         # Remove leading /v2.1/ and trailing /
         f_name = '{}.json'.format(request.path_url[6:-1])
-        print(f_name)
         f_path = os.path.join(settings.BASE_DIR, 'test_data', 'orcid', f_name)
         headers = {
             'Content-Type' : 'application/citeproc+json'
@@ -304,7 +304,7 @@ def mock_pub_orcid(requests_mocker):
                 body = f.read()
                 return (200, headers, body)
         except FileNotFoundError:
-            print('File not found: {} - Returning 404'.format(f_path))
+            print("curl -H \"Accept: application/orcid+json\" \"{}\" > {}".format(request.url, f_path))
             return (404, {}, None)
 
     requests_mocker.add_callback(
