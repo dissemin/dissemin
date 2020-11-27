@@ -4,7 +4,7 @@ from django.contrib.sessions.middleware import SessionMiddleware
 
 from papers.models import Researcher
 from website.middleware import ShibbolethRemoteUserMiddleware
-from website.models import ShibbolethUser
+from website.models import ShibbolethAccount
 
 class TestShibbolethRemoteUserMiddleware:
     """
@@ -18,7 +18,7 @@ class TestShibbolethRemoteUserMiddleware:
             first_name='Samuel',
             last_name='Vimes',
         )
-        ShibbolethUser.objects.create(
+        ShibbolethAccount.objects.create(
             user=user,
             shib_username=shib_meta.get('username')
         )

@@ -5,7 +5,7 @@ from allauth.socialaccount.models import SocialAccount
 
 from papers.models import Paper
 from papers.models import Researcher
-from website.models import ShibbolethUser
+from website.models import ShibbolethAccount
 from website.signals import fetch_on_orcid_login
 from website.signals import complete_researcher_profile_on_orcid_login
 
@@ -66,10 +66,10 @@ class TestCompleteResearcherProfileOnORCIDLogin:
     def test_researcher_user_shibboleth(self, django_user_model):
         """
         Here we do have a shibboleth user attached to the researcher
-        We need to merge the user, change the concordance in ShibbolethUser and delete the no longer used user
+        We need to merge the user, change the concordance in ShibbolethAccount and delete the no longer used user
         """
         shib_user = django_user_model.objects.create(username='delpeucha_shib')
-        shib_account = ShibbolethUser.objects.create(user=shib_user, shib_username='delpeucha@idp.dissem.in')
+        shib_account = ShibbolethAccount.objects.create(user=shib_user, shib_username='delpeucha@idp.dissem.in')
         self.r.user = shib_user
         self.r.save()
         complete_researcher_profile_on_orcid_login(sender='test', user=self.user)

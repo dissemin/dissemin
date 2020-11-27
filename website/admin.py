@@ -1,5 +1,5 @@
 from django.contrib import admin
 
-from website.models import ShibbolethUser
+from website.models import ShibbolethAccount
 
-admin.site.register(ShibbolethUser)
+admin.site.register(ShibbolethAccount)

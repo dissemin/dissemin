@@ -7,7 +7,7 @@ from django.utils.translation import ugettext as _
 
 from papers.models import Researcher
 from papers.utils import validate_orcid
-from website.models import ShibbolethUser
+from website.models import ShibbolethAccount
 from website.utils import merge_users
 
 
@@ -62,8 +62,8 @@ def complete_researcher_profile_on_orcid_login(sender, user, **kwargs):
     else:
         # Let's see if there's a shibboleth user
         try:
-            shib_account = ShibbolethUser.objects.get(user=r.user)
-        except ShibbolethUser.DoesNotExist:
+            shib_account = ShibbolethAccount.objects.get(user=r.user)
+        except ShibbolethAccount.DoesNotExist:
             # This must be a different user, i.e. from ORCID or some custom user
             pass
         else:

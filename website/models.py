@@ -2,13 +2,14 @@ from django.conf import settings
 from django.db import models
 
 
-class ShibbolethUser(models.Model):
+class ShibbolethAccount(models.Model):
     """
-    Class that is a concordance between Django User model and eduPersonTargetedId
+    Class that is a concordance between Django User model and eduPersonTargetedId (or any other identifier)
     """
     #: The Django User model
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL,
+        related_name='shibboleth_account',
         on_delete=models.CASCADE,
     )
     #: eduPersonTargetedId must nox exceed 256 characters according to definition

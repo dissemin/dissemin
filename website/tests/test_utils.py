@@ -59,7 +59,7 @@ class TestUserMerge:
             'paper',
             'password',
             'researcher',
-            'shibbolethuser',
+            'shibboleth_account',
             'socialaccount',
             'uploadedpdf',
             'user_permissions',
