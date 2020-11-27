@@ -167,6 +167,16 @@ For our sandbox, make sure to add::
 right before the WSGI-part.
 This makes sure to use the ApplicationOverride for sandbox that we mentioned above.
 
+Django
+------
+
+In Django, only a few things need to be configured.
+You need to set ``SHIB_DS_SP_URL`` which is the URL that leads to the Daemons Login site, which will perform a redirect to the choosen IdP. This is for production ``https://dissem.in/Shibboleth.sso/Login``. Then you will have to point to the DiscoFeed. You can do this either by pointing to a URL or file, usually the URL is fine and is for production ``https://dissem.in/Shibboleth.sso/DiscoFeed``.
+
+.. note::
+
+    In development settings, both are predefined and there's no necessarity to change them. However, an authentication won't be possible, because the value are somewhat made up.
+
 Troubleshooting
 ---------------
 
