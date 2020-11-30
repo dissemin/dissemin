@@ -13,7 +13,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-11-25 16:08+0100\n"
-"PO-Revision-Date: 2020-11-26 16:50:26+0000\n"
+"PO-Revision-Date: 2020-11-30 16:02:34+0000\n"
 "Language: pms\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1126,11 +1126,11 @@ msgstr "Compilé l'acòrd"
 
 #: model-gettext.py:115
 msgid "Contract necessary!"
-msgstr ""
+msgstr "Contrat necessari!"
 
 #: model-gettext.py:116
 msgid "Before we can publish your publication, we need the completely filled in and signed publication agreement, which you can send to Braunschweig University Library by e-mail, fax or postal mail."
-msgstr ""
+msgstr "Prima ëd podèj publiché soa publicassion, i l'oma damanca ëd l'acòrd ëd publicassion compilà e sot-signà për da bin, ch'a peul mandé a la Biblioteca ëd l'università ëd Braunschweig për pòsta eletrònica, fax o pòsta ordinaria."
 
 #: model-gettext.py:117
 msgid "Download Contract"
@@ -1206,11 +1206,11 @@ msgstr "TUprints a l'é ël depòsit a acess duvert për tuti ij mèmber present
 
 #: model-gettext.py:136
 msgid "Institutional Repository of TU Braunschweig"
-msgstr ""
+msgstr "Depòsit anstitussional ëd TU ëd Braunschweig"
 
 #: model-gettext.py:137
 msgid "Researchers at TU Braunschweig can publish their first and second (self archiving) publications Open Access on the official publication server of TU Braunschweig."
-msgstr ""
+msgstr "J'arsercador ëd TU ëd Braunschweig a peulo publiché soe prima e sconda publicassion (d'àuto-archivi) an sël servent ëd publicassion ofissial ëd TU ëd Braunschweig."
 
 #: notification/models.py:62
 msgid "inboxes"

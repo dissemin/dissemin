@@ -12,7 +12,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-11-25 16:08+0100\n"
-"PO-Revision-Date: 2020-11-26 16:50:25+0000\n"
+"PO-Revision-Date: 2020-11-30 16:02:33+0000\n"
 "Language: lb\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1140,16 +1140,15 @@ msgstr ""
 
 #: model-gettext.py:115
 msgid "Contract necessary!"
-msgstr ""
+msgstr "Kontrakt noutwendeg!"
 
 #: model-gettext.py:116
 msgid "Before we can publish your publication, we need the completely filled in and signed publication agreement, which you can send to Braunschweig University Library by e-mail, fax or postal mail."
 msgstr ""
 
 #: model-gettext.py:117
-#, fuzzy
 msgid "Download Contract"
-msgstr "Eroflueden"
+msgstr "Kontrakt Eroflueden"
 
 #: model-gettext.py:118
 msgid "Creative Commons 1.0 Universal (CC0 1.0) Public Domain Dedication"
