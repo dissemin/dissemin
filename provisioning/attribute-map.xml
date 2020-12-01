@@ -2,7 +2,7 @@
 
     <!-- eduPersonTargetedID- Identifies the user uniquely, required-->
     <Attribute name="urn:oid:1.3.6.1.4.1.5923.1.1.1.10" id="shib-username">
-        <AttributeDecoder xsi:type="ScopedAttributeDecoder" caseSensitive="false"/>
+        <AttributeDecoder xsi:type="NameIDAttributeDecoder" formatter="$NameQualifier!$SPNameQualifier!$Name" defaultQualifiers="true"/>
     </Attribute>
 
     <!-- First name and last name to name the user, required -->
