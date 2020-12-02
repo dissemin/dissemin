@@ -31,8 +31,6 @@ from django.urls import register_converter
 from django.urls.converters import StringConverter
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.contrib.auth import logout
-from django.shortcuts import redirect
 from django.shortcuts import render
 from django.views.generic.base import TemplateView
 from django.views.i18n import JavaScriptCatalog
@@ -70,6 +68,7 @@ from publishers.views import PublishersView
 from upload.views import handleAjaxUpload
 from upload.views import handleUrlDownload
 from website.views import LoginView
+from website.views import LogoutView
 
 from website.views import StartPageView
 
@@ -102,13 +101,6 @@ def handler500(request, exception=None):
     response.status_code = 500
     return response
 
-
-def logoutView(request):
-    logout(request)
-    if 'HTTP_REFERER' in request.META:
-        return redirect(request.META['HTTP_REFERER'])
-    else:
-        return redirect('/')
 
 js_info_dict = {
     'packages': (
@@ -178,7 +170,7 @@ urlpatterns = [
     path('shib-ds/', include('shibboleth_discovery.urls')),
     # Social auth
     path('accounts/login/', LoginView.as_view(), name='account-login'),
-    path('accounts/logout/', logoutView, name='account-logout'),
+    path('accounts/logout/', LogoutView.as_view(), name='account-logout'),
     path('accounts/social/', include('allauth.socialaccount.urls')),
     # JavaScript i18n
     path('jsi18n/', JavaScriptCatalog.as_view(), name='javascript-catalog'),

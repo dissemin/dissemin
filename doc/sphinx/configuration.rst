@@ -177,6 +177,10 @@ You need to set ``SHIB_DS_SP_URL`` which is the URL that leads to the Daemons Lo
 
     In development settings, both are predefined and there's no necessarity to change them. However, an authentication won't be possible, because the value are somewhat made up.
 
+Then you need to set ``SHIBBOLETH_LOGOUT_URL`` in the settings. This points to the Daemons logout site, e.g. ``https://dissem.in/Shibboleth.sso/Logout`` and logs out the user from the Daemon. The user is eventually redirected to Dissemins start page.
+
+On development environment you shouldn't set this value.
+
 Troubleshooting
 ---------------
 
