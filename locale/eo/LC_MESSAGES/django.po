@@ -2,6 +2,7 @@
 # Exported from translatewiki.net
 #
 # Author: Fitoschido
+# Author: Javiero
 # Author: Mirin
 # Author: Robin van der Vliet
 # Author: Sabelöga
@@ -14,7 +15,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-11-25 16:08+0100\n"
-"PO-Revision-Date: 2020-11-26 16:50:24+0000\n"
+"PO-Revision-Date: 2020-12-03 14:42:44+0000\n"
 "Language: eo\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1172,16 +1173,15 @@ msgstr ""
 
 #: model-gettext.py:115
 msgid "Contract necessary!"
-msgstr ""
+msgstr "Kontrakto necesa!"
 
 #: model-gettext.py:116
 msgid "Before we can publish your publication, we need the completely filled in and signed publication agreement, which you can send to Braunschweig University Library by e-mail, fax or postal mail."
 msgstr ""
 
 #: model-gettext.py:117
-#, fuzzy
 msgid "Download Contract"
-msgstr "Elŝuti"
+msgstr "Elŝuti Kontrakton"
 
 #: model-gettext.py:118
 #, fuzzy
