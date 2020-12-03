@@ -37,11 +37,13 @@
 {% trans "Some details of my paper are incorrect. What can I do?" as omission_detail %}
 {% trans "There is a freely available copy of my article online but dissem.in does not find it." as omission_available %}
 
-{% trans "Authentication with ORCID" as auth%}
+{% trans "Authentication" as auth%}
 {% trans "Why do you need to authenticate users?" as auth_why %}
+{% trans "What is the difference between authentication via ORCID and eduGAIN?" as auth_methods %}
 {% trans "What will you do to my ORCID profile if I log in?" as auth_happen %}
 {% trans "How do I add publications to my ORCID profile?" as auth_add_pubs %}
 {% trans "My ORCID details on Dissemin are outdated." as auth_outdated %}
+{% trans "I authenticate with eduGAIN and ORCID, can I combine the accounts into one?" as auth_combine %}
 
 {% trans "Behind the scenes" as behind %}
 {% trans "Where do you get the data from?" as behind_sources %}
@@ -105,10 +107,12 @@
                     <h2 class="mb-0">{{ auth }}</h2>
                 </div>
                 <div class="card-body">
-                    <a class="nav-link py-0" href="#orcidWhy">{{ auth_why }}</a>
-                    <a class="nav-link py-0" href="#orcidLogin">{{ auth_happen }}</a>
-                    <a class="nav-link py-0" href="#orcidAddPubs">{{ auth_add_pubs }}</a>
-                    <a class="nav-link py-0" href="#orcidUpdate">{{ auth_outdated }}</a>
+                    <a class="nav-link py-0" href="#auth">{{ auth_why }}</a>
+                    <a class="nav-link py-0" href="#authWhy">{{ auth_methods }}</a>
+                    <a class="nav-link py-0" href="#authLogin">{{ auth_happen }}</a>
+                    <a class="nav-link py-0" href="#authAddPubs">{{ auth_add_pubs }}</a>
+                    <a class="nav-link py-0" href="#authUpdate">{{ auth_outdated }}</a>
+                    <a class="nav-link py-0" href="#authCombine">{{ auth_combine }}</a>
                 </div>
             </div>
             <div class="card">
@@ -456,21 +460,32 @@ The full text could be made available in a repository (as above) according to th
             <h2>{{ auth }}</h2>
         </div>
         <div class="card-body">
-            <h3 id="orcidWhy">{{ auth }}</h3>
+            <h3 id="authWhy">{{ auth_why }}</h3>
             <p>
                 {% blocktrans trimmed %}
                     Authenticating users is necessary to deposit papers on their behalf in open repositories. Besides, knowing a user's ORCID id helps us find its publications, avoiding articles authored by namesakes for instance. Logging in via ORCID will not expose any private information to Dissemin: we only have access to the public part of your ORCID record. For instance, unless you have explicitly marked your email address as public, we do not even know your email address when you log in to Dissemin via ORCID.
+
+                    Authenticatoin with eduGAIN/Shibboleth exposes us only the information that your identity provider is willing to transfer.
                 {% endblocktrans %}
             </p>
 
-            <h3 id="orcidLogin">{{ auth_happen }}</h3>
+            <h3 id="authMethods">{{ auth_methods }}</h3>
+            <p>
+                {% blocktrans trimmed %}
+                    If your identity provider sends Dissemin an ORCID, there is no difference in functionality, except that for some institutional repositories we can confirm that you are a member of the owning instution of the repository if you authenticate with eduGAIN---which may accelerate the publication process in the repository.
+
+                    If your identity provide does not transmit an ORCID, we can't associate your account with an ORCID profile.
+                {% endblocktrans %}
+            </p>
+
+            <h3 id="authLogin">{{ auth_happen }}</h3>
             <p>
                 {% blocktrans trimmed %}
                     Nothing. When you log in via ORCID to Dissemin, this does not grant us any permission to change anything in your ORCID record.
                 {% endblocktrans %}
             </p>
 
-            <h3 id="orcidAddPubs">{{ auth_add_pubs }}</h3>
+            <h3 id="authAddPubs">{{ auth_add_pubs }}</h3>
             <p>
                 {% blocktrans trimmed %}
                     ORCID supports various methods to claim publications. Our preferred one is via CrossRef's search interface. Here is how to use it:
@@ -504,12 +519,19 @@ The full text could be made available in a repository (as above) according to th
                 {% endblocktrans %}
             </p>
 
-            <h3 id="orcidUpdate">{{ auth_outdated }}</h3>
+            <h3 id="authUpdate">{{ auth_outdated }}</h3>
 
             <p>
                 {% url "my-profile" as profile_url %}
                 {% blocktrans trimmed %}
                 If you change some details in your ORCID profile (name, homepage, etc.), the changes will not automatically be picked up in your profile on Dissemin. To update your profile on Dissemin accordingly, once you have logged in to Dissemin, you can go to your <a href="{{ profile_url }}">profile page</a> and click "Refresh publications".
+                {% endblocktrans %}
+            </p>
+
+            <h3 id="authCombine">{{ auth_combine }}</h3>
+            <p>
+                {% blocktrans trimmed %}
+                    Based on the ORCID, Dissemin will automatically merge both accounts into one. This requires that your identity provider releases your ORCID. If your identity provider supports this functionality, you can add your ORCID in the user management of your identity provider.
                 {% endblocktrans %}
             </p>
         </div>
