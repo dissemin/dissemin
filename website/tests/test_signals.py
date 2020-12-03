@@ -35,12 +35,11 @@ class TestCompleteResearcherProfileOnORCIDLogin:
     orcid = '0000-0001-7935-7720'
 
     @pytest.fixture(autouse=True)
-    def setup(self, django_user_model):
+    def setup(self, django_user_model, mock_pub_orcid, mock_doi):
         self.user = django_user_model.objects.create(username='delpeucha')
         self.account = SocialAccount.objects.create(uid=self.orcid, user=self.user)
         self.r = Researcher.get_or_create_by_orcid(self.orcid)
 
-    @pytest.mark.usefixtures('mock_pub_orcid', 'mock_doi')
     def test_researcher_user_empty(self):
         """
         The researcher does not have a user yet, this is simple
@@ -51,7 +50,6 @@ class TestCompleteResearcherProfileOnORCIDLogin:
         assert self.r.user == self.user
         assert Paper.objects.all() .count() == 3
 
-    @pytest.mark.usefixtures('mock_pub_orcid', 'mock_doi')
     def test_researcher_user_orcid(self):
         """
         The researcher has an ORCID authenticated (or other) user

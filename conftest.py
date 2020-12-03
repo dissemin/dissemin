@@ -309,7 +309,7 @@ def mock_pub_orcid(requests_mocker):
 
     requests_mocker.add_callback(
         requests_mocker.GET,
-        re.compile(r'https://pub.orcid.org/v2.1'),
+        re.compile(r'https://pub.{}/v2.1'.format(settings.ORCID_BASE_DOMAIN)),
         callback=request_callback
     )
 
