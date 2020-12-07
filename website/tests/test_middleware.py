@@ -32,6 +32,6 @@ class TestShibbolethRemoteUserMiddleware:
         SessionMiddleware().process_request(request)
         AuthenticationMiddleware().process_request(request)
         ShibbolethRemoteUserMiddleware().process_request(request)
-        assert 'shib' in request.session
+        assert request.session.get('shib') == shib_meta
         assert request.user.is_authenticated
         assert request.user == user

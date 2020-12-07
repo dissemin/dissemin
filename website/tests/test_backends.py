@@ -25,16 +25,11 @@ class TestShibbolethRemoteUserBackendExistingShibbolethAccount:
             user=self.user
         )
 
-    def assert_shibboleth_md(self, user):
-        assert user.first_name == self.shib_meta.get('first_name')
-        assert user.last_name == self.shib_meta.get('last_name')
-
     def test_authenticate_no_orcid(self):
         del self.shib_meta['orcid']
         user = auth.authenticate(remote_user=self.remote_user, shib_meta=self.shib_meta)
         assert user.shibboleth_account == self.shib_account
         assert user == self.researcher.user
-        #self.assert_shibboleth_md(user, self.shib_meta)
 
     def test_authenticate_orcid_identical(self):
         user = auth.authenticate(remote_user=self.remote_user, shib_meta=self.shib_meta)
