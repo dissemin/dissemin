@@ -169,6 +169,7 @@ INSTALLED_APPS = (
     'sass_processor',
     'shibboleth',
     'shibboleth_discovery',
+    'django_better_admin_arrayfield',
 )
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

@@ -58,7 +58,7 @@ from caching.base import CachingMixin
 from celery.result import AsyncResult
 from django.contrib.auth.models import User
 from django.contrib.postgres.fields import JSONField
-from django.contrib.postgres.fields import ArrayField
+from django_better_admin_arrayfield.models.fields import ArrayField
 from django_countries.fields import CountryField
 from django_countries.fields import countries
 from django.conf import settings
