@@ -1,3 +1,19 @@
+def get_email(user):
+    """
+    This tries to fetch the email of a given user.
+    We have several sources: user object itself, researcher object, userpreferences and shibboleth metadata
+    """
+    if hasattr(user, 'shib') and user.shib.get('email'):
+        return user.shib.get('email')
+    if hasattr(user, 'userpreferences') and user.userpreferences.email:
+        return user.userpreferences.email
+    r = user.researcher_set.first()
+    if r and r.email:
+        return r.email
+    if user.email:
+        return user.email
+
+
 class MetadataConverter():
     """
     This class is able to convert our own metadata of a paper from the database into a relatively flat dictionary.

@@ -1,9 +1,11 @@
 import pytest
 
+from deposit.models import UserPreferences
 from deposit.utils import MetadataConverter
-
+from deposit.utils import get_email
 from papers.models import OaiSource
 from papers.models import OaiRecord
+from papers.models import Researcher
 from publishers.models import Journal
 from publishers.models import Publisher
 
@@ -69,6 +71,42 @@ def alternative_record(db, book_god_of_the_labyrinth, dummy_oaisource):
 
     )
     return o
+
+
+class TestGetEmail:
+    """
+    Test about getting the email of a user
+    """
+    email = 'test@dissem.in'
+
+    @pytest.fixture(autouse=True)
+    def setup(self, django_user_model):
+        self.user = django_user_model.objects.create(username='test')
+
+    def test_mail_from_shib(self):
+        self.user.shib = {'email' : self.email}
+        email = get_email(self.user)
+        assert email == self.email
+
+    def test_mail_from_preferences(self):
+        UserPreferences.objects.create(user=self.user, email=self.email)
+        email = get_email(self.user)
+        assert email == self.email
+
+    def test_mail_from_researcher(self):
+        Researcher.create_by_name('a', 'b', user=self.user, email=self.email)
+        email = get_email(self.user)
+        assert email == self.email
+
+    def test_mail_from_user(self):
+        self.user.email = self.email
+        email = get_email(self.user)
+        assert email == self.email
+
+    def test_no_email(self):
+        email = get_email(self.user)
+        assert email is None
+
 
 
 class TestMetadataConverter():

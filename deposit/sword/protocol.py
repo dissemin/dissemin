@@ -9,13 +9,10 @@ from itertools import chain
 from lxml import etree
 from zipfile import ZipFile
 
-from django.core.exceptions import ObjectDoesNotExist
-from django.core.exceptions import MultipleObjectsReturned
 from django.utils.functional import cached_property
 from django.utils.translation import ugettext as _
 
 from deposit.models import DepositRecord
-from deposit.models import UserPreferences
 from deposit.protocol import DepositError
 from deposit.protocol import DepositResult
 from deposit.protocol import RepositoryProtocol
@@ -26,6 +23,8 @@ from deposit.utils import MetadataConverter
 from papers.models import OaiRecord
 from papers.models import Researcher
 from papers.utils import kill_html
+
+from deposit.utils import get_email
 
 logger = logging.getLogger('dissemin.' + __name__)
         
@@ -272,19 +271,7 @@ class SWORDMETSProtocol(RepositoryProtocol):
             self.paper.consolidate_metadata(wait=False)
 
         # We try to find an email, if we do not succed, that's ok
-        up = UserPreferences.get_by_user(user=self.user)
-        if up.email:
-            data['email'] = up.email
-        else:
-            try:
-                r = Researcher.objects.get(user=self.user)
-            except ObjectDoesNotExist:
-                pass
-            except MultipleObjectsReturned:
-                logger.warning("User with id {} has multiple researcher objects assigned".format(self.user.id))
-            else:
-                if r.email:
-                    data['email'] = r.email
+        data['email'] = get_email(self.user)
 
         return data
 

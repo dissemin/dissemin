@@ -46,6 +46,7 @@ from django.views.generic import ListView
 from django.views.generic.edit import FormView
 
 from deposit.declaration import get_declaration_pdf
+from deposit.decorators import shib_meta_to_user
 from deposit.forms import PaperDepositForm
 from deposit.forms import UserPreferencesForm
 from deposit.models import DepositRecord
@@ -74,6 +75,7 @@ def get_all_repositories_and_protocols(paper, user):
 
 @json_view
 @user_passes_test(is_authenticated)
+@shib_meta_to_user
 def get_metadata_form(request):
     repo = get_object_or_404(Repository, pk=request.GET.get('repository'))
     if not repo.enabled:
@@ -91,6 +93,7 @@ def get_metadata_form(request):
 
 
 @user_passes_test(is_authenticated)
+@shib_meta_to_user
 def start_view(request, pk):
     paper = get_object_or_404(
         Paper.objects.prefetch_related(
