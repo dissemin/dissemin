@@ -34,6 +34,18 @@ from papers.models import OaiSource
 from papers.models import Researcher
 from publishers.models import Journal
 from publishers.models import Publisher
+
+
+@pytest.fixture
+def shib_meta():
+    SHIB_META = {
+        'username' : 'vimess@discworld.edu',
+        'first_name' : 'Samuel',
+        'last_name' : 'Vimes',
+        'orcid' : '0000-0001-8187-9704',
+        'email' : 'vimess@discworld.edu',
+    }
+    return SHIB_META
 from upload.models import UploadedPDF
 
 
