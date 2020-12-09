@@ -19,12 +19,15 @@ from deposit.protocol import RepositoryProtocol
 from deposit.registry import protocol_registry
 from deposit.sword.forms import SWORDMETSForm
 from deposit.utils import MetadataConverter
+from deposit.utils import get_email
 
+from papers.models import Institution
 from papers.models import OaiRecord
 from papers.models import Researcher
 from papers.utils import kill_html
 
-from deposit.utils import get_email
+from website.utils import get_users_idp
+
 
 logger = logging.getLogger('dissemin.' + __name__)
         
@@ -200,8 +203,11 @@ class SWORDMETSProtocol(RepositoryProtocol):
         ds_depositor = etree.SubElement(ds, DS + 'depositor')
 
         ds_authentication = etree.SubElement(ds_depositor, DS + 'authentication')
-        # hard-coded since there is currently only one authentication method
-        ds_authentication.text = 'orcid'
+        # We have currently two uthentication methods
+        if self.user.shib.get('username'):
+            ds_authentication.text = 'shibboleth'
+        else:
+            ds_authentication.text = 'orcid'
 
         ds_first_name = etree.SubElement(ds_depositor, DS + 'firstName')
         ds_first_name.text = self.user.first_name
@@ -222,6 +228,15 @@ class SWORDMETSProtocol(RepositoryProtocol):
             ds_is_contributor.text = 'true'
         else:
             ds_is_contributor.text = 'false'
+
+        # If the user is authenticated via shibboleth, we can find out if the user is a member of the repository's institution
+        ds_identical_institution = etree.SubElement(ds_depositor, DS + 'identicalInstitution')
+        idp_identifier = get_users_idp(self.user)
+        if Institution.objects.get_repository_by_identifier(idp_identifier) == self.repository:
+            ds_identical_institution.text = 'true'
+        else:
+            ds_identical_institution.text = 'false'
+
 
         # Information about the publication
 
