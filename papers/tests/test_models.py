@@ -45,6 +45,37 @@ from papers.models import Researcher
 from papers.models import Institution
 from publishers.tests.test_romeo import RomeoAPIStub
 
+
+@pytest.mark.usefixtures('db')
+class TestInstitutionManager:
+    """
+    Groups test about the manager
+    """
+
+    def test_institution_not_found(self):
+        r = Institution.objects.get_repository_by_identifier('identifier_404')
+        assert r is None
+
+    def test_no_repository_set(self):
+        identifier = 'ds:institute'
+        Institution.objects.create(
+            name='Insitute',
+            identifiers=[identifier, 'other_identifier'],
+        )
+        r = Institution.objects.get_repository_by_identifier(identifier)
+        assert r is None
+
+    def test_repository_found(self, dummy_repository):
+        identifier = 'ds:institute'
+        Institution.objects.create(
+            name='Insitute',
+            identifiers=[identifier, 'other_identifier'],
+            repository=dummy_repository,
+        )
+        r = Institution.objects.get_repository_by_identifier(identifier)
+        assert r == dummy_repository
+
+
 class TestPaper():
     """
     Class that groups tests for Paper class

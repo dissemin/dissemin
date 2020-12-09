@@ -52,6 +52,7 @@ from deposit.forms import UserPreferencesForm
 from deposit.models import DepositRecord
 from deposit.models import Repository
 from deposit.models import UserPreferences
+from deposit.utils import get_preselected_repository
 from papers.models import Paper
 from papers.user import is_authenticated
 
@@ -106,18 +107,13 @@ def start_view(request, pk):
     available_repositories = sorted([repo for repo, proto in repositories_protocol], key=lambda r: r.name.lower())
     
     # select the most appropriate repository
-    userprefs = UserPreferences.get_by_user(request.user)
-    preselected_repository = userprefs.get_preferred_or_last_repository()
+    preselected_repository = get_preselected_repository(request.user, available_repositories)
     preselected_protocol = None
     if preselected_repository:
         preselected_protocol = {repo.id : proto for repo, proto in repositories_protocol}.get(preselected_repository.id, None)
-    # If the preferred repository is not available for this paper, pick any
-    if not preselected_protocol:
-        for repo, protocol in repositories_protocol:
-            if protocol is not None:
-                preselected_repository = repo
-                preselected_protocol = protocol
-                break
+    elif len(repositories_protocol) > 0:
+        preselected_repository = repositories_protocol[0][0]
+        preselected_protocol = repositories_protocol[0][1]
 
     breadcrumbs = paper.breadcrumbs()
     breadcrumbs.append((_('Deposit'), ''))

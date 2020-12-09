@@ -60,6 +60,7 @@ class TimeLimitedPaginator(Paginator):
 
 class InstitutionAdmin(admin.ModelAdmin, DynamicArrayMixin):
     raw_id_fields = ('stats', )
+    search_fields = ('name', )
 
 class NameInline(admin.TabularInline):
     model = Name

@@ -56,8 +56,10 @@ from statistics.models import STATUS_CHOICES_HELPTEXT
 from caching.base import CachingManager
 from caching.base import CachingMixin
 from celery.result import AsyncResult
+
 from django.contrib.auth.models import User
 from django.contrib.postgres.fields import JSONField
+from django.contrib.postgres.indexes import GinIndex
 from django_better_admin_arrayfield.models.fields import ArrayField
 from django_countries.fields import CountryField
 from django_countries.fields import countries
@@ -114,6 +116,24 @@ HARVESTER_TASK_CHOICES = [
    ]
 
 
+class InstitutionManager(models.Manager):
+    """
+    This manager implements mainly a method to conveniently get a repository for a given identifier
+    """
+
+    def get_repository_by_identifier(self, identifier):
+        """
+        First, find the Insitution instance, then return the repository
+        """
+        if identifier:
+            try:
+                institution = self.get(identifiers__contains=[identifier])
+            except self.model.DoesNotExist:
+                return
+            else:
+                return institution.repository
+
+
 class Institution(models.Model):
     """
     A university or research institute.
@@ -124,9 +144,23 @@ class Institution(models.Model):
     identifiers = ArrayField(models.CharField(max_length=256), null=True, blank=True)
     #: Country code
     country = CountryField(null=True, blank=True)
-
+    #: a repository associated to this institute
+    repository = models.ForeignKey(
+        'deposit.repository',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL
+    )
     #: :py:class:`AccessStatistics` about the papers authored in this institution.
     stats = models.ForeignKey(AccessStatistics, null=True, blank=True, on_delete=models.CASCADE)
+
+    objects = InstitutionManager()
+
+    class Meta:
+        indexes = [
+            GinIndex(fields=['identifiers', ])
+        ]
+
 
     @property
     def sorted_departments(self):

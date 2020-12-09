@@ -1,3 +1,14 @@
+def get_users_idp(user):
+    """
+    If we have a user, get his IdP.
+    We have the format IdP!SP!Name
+    """
+    idp = ''
+    if hasattr(user, 'shib'):
+        idp = user.shib.get('username', '').split('!')[0]
+    return idp
+
+
 def merge_users(user_1, user_2):
     """
     Merges the second user into the first user. Values of the first user get precedence.

@@ -115,6 +115,12 @@ Each license consists of its name and its URI. If your license does not provide 
 .. note::
     You can localize your licenses name, see :doc:`../contributing/localization` for further information.
 
+
+Insitution
+==========
+
+To match a repository with an institution, see :ref:`institution`.
+
 Creating a Letter of Declaration
 ================================
 

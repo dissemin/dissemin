@@ -3,6 +3,8 @@ import pytest
 from deposit.models import UserPreferences
 from deposit.utils import MetadataConverter
 from deposit.utils import get_email
+from deposit.utils import get_preselected_repository
+from papers.models import Institution
 from papers.models import OaiSource
 from papers.models import OaiRecord
 from papers.models import Researcher
@@ -106,6 +108,35 @@ class TestGetEmail:
     def test_no_email(self):
         email = get_email(self.user)
         assert email is None
+
+class TestGetPreselectedRepository:
+
+    @pytest.fixture(autouse=True)
+    def setup(self, django_user_model, dummy_repository):
+        self.user = django_user_model.objects.create(username='test')
+        self.repository = dummy_repository
+        self.repositories = [dummy_repository]
+
+    def test_preferred_repository(self):
+        UserPreferences.objects.create(user=self.user, preferred_repository=self.repository)
+        assert get_preselected_repository(self.user, self.repositories) == self.repository
+
+    def test_from_shibboleth(self, shib_meta):
+        self.user.shib = shib_meta
+        Institution.objects.create(
+            name='Insitute',
+            identifiers=['shib:{}'.format(shib_meta.get('username').split('!')[0])],
+            repository=self.repository
+        )
+        assert get_preselected_repository(self.user, self.repositories) == self.repository
+
+    def test_last(self):
+        UserPreferences.objects.create(user=self.user, last_repository=self.repository)
+        assert get_preselected_repository(self.user, self.repositories) == self.repository
+
+    def test_none(self):
+        assert get_preselected_repository(self.user, self.repositories) is None
+
 
 
 
