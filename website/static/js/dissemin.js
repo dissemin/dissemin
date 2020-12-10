@@ -747,6 +747,9 @@ $(function() {
                 $(".prefetchingFieldStatus").each(function(i,prefetch) {
 	                initPrefetch($(prefetch));
 	            });
+                // For HAL that uses select2
+                $('[data-autocomplete-light-function=select2-customTemplate]').trigger('autocompleteLightInitialize');
+                $('.select2').select2();
 
             },
             url : Urls["ajax-get-metadata-form"]()
