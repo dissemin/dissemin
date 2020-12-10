@@ -258,6 +258,7 @@ REDIS_URL = ':%s@%s:%s/%d' % (
 BROKER_URL = 'redis://'+REDIS_URL
 # We also use Redis as result backend.
 CELERY_BROKER_URL = BROKER_URL
+CELERY_RESULT_BACKEND = BROKER_URL
 
 # Redis is not mandatory, this client is reserved for deposits.
 try:
