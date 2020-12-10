@@ -203,3 +203,12 @@ Of course, *3.* is not an option!
 
 The standard approach to solve this is usually to use MDQ, where IdPs will be checked in case of need.
 This system is not (yet) suitable for a DiscoveryService since it needs to know all IdPs.
+
+
+Missing attributes
+``````````````````
+
+Albeit we postulated our demanded attributes within eduGAIN, this does mean, that an IdP will release the requested attributes.
+It is up to the IdP which attributes it releases to a SP.
+Ususally they will ship *eduPersonTargetedId, surname and givenName*.
+In case of need we can ask the IdP to release more attributes.
