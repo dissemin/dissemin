@@ -15,18 +15,11 @@ class MetadataConverter():
         """
         self.paper = paper
         self.records = prefered_records + [r for r in paper.oairecord_set.all() if r not in prefered_records]
+        # Let's set metadata based on the given paper and its oairecords
+        self._paper_metadata()
+        self._oai_metadata()
 
-    def metadata(self):
-        """
-        Returns all metadata from paper and its OaiRecords, using the prefered OaiRecord with priority
-        """
-        metadata = {
-            **self.paper_metadata(),
-            **self.oai_metadata(),
-        }
-        return metadata
-
-    def oai_metadata(self):
+    def _oai_metadata(self):
         """
         Gets only metadata from OaiRecord objects with prefered having priority
         """
@@ -42,22 +35,19 @@ class MetadataConverter():
             'volume' : self._get_volume(),
         }
 
-        return oai_metadata
+        # Now that we have all metadata, let's set them as attributes
+        for key, value in oai_metadata.items():
+            setattr(self, key, value)
 
-
-    def paper_metadata(self):
+    def _paper_metadata(self):
         """
         Gets only the metadata from the paper
+        This metadata always exists
         """
-        paper_metadata = {
-            'authors' : self._get_authors(),
-            'doctype' : self.paper.doctype,
-            'pubdate' : self.paper.pubdate,
-            'title' : self.paper.title
-        }
-
-        return paper_metadata
-
+        self.authors = self._get_authors()
+        self.doctype = self.paper.doctype
+        self.pubdate = self.paper.pubdate
+        self.title = self.paper.title
 
     def _get_authors(self):
         """

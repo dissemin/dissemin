@@ -144,13 +144,13 @@ class RepositoryProtocol(object, metaclass = RepositoryProtocolMeta):
     # Metadata helpers
 
     @cached_property
-    def paper_metadata(self):
+    def metadata(self):
         """
         Gives access to a dict of the metadata from the paper and its OaiRecords.
         """
         prefered_records = self._get_prefered_records()
         mc = MetadataConverter(self.paper, prefered_records)
-        return mc.metadata()
+        return mc
 
 
     def _get_prefered_records(self):
@@ -166,7 +166,6 @@ class RepositoryProtocol(object, metaclass = RepositoryProtocolMeta):
             source__identifier='base'
         )
         return list(chain(crossref, base))
-
 
 
     @staticmethod
