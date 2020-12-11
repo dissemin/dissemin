@@ -5,13 +5,11 @@ import logging
 
 from datetime import datetime
 from io import BytesIO
-from itertools import chain
 from lxml import etree
 from zipfile import ZipFile
 
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.exceptions import MultipleObjectsReturned
-from django.utils.functional import cached_property
 from django.utils.translation import ugettext as _
 
 from deposit.models import DepositRecord
@@ -21,9 +19,7 @@ from deposit.protocol import DepositResult
 from deposit.protocol import RepositoryProtocol
 from deposit.registry import protocol_registry
 from deposit.sword.forms import SWORDMETSForm
-from deposit.utils import MetadataConverter
 
-from papers.models import OaiRecord
 from papers.models import Researcher
 from papers.utils import kill_html
 
@@ -60,16 +56,6 @@ class SWORDMETSProtocol(RepositoryProtocol):
 
     # The class of the form for the deposit
     form_class = SWORDMETSForm
-
-    @cached_property
-    def paper_metadata(self):
-        """
-        Gives access to a dict of the metadata from the paper and its OaiRecords.
-        """
-        prefered_records = self._get_prefered_records()
-        mc = MetadataConverter(self.paper, prefered_records)
-        return mc.metadata()
-
 
     def _get_deposit_result(self, response):
         """
@@ -287,21 +273,6 @@ class SWORDMETSProtocol(RepositoryProtocol):
                     data['email'] = r.email
 
         return data
-
-
-    def _get_prefered_records(self):
-        """
-        Returns the prefered records, that is CrossRef, then BASE
-        """
-        crossref = OaiRecord.objects.filter(
-            about=self.paper,
-            source__identifier='crossref',
-        )
-        base = OaiRecord.objects.filter(
-            about=self.paper,
-            source__identifier='base'
-        )
-        return list(chain(crossref, base))
 
 
     def refresh_deposit_status(self):
