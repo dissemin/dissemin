@@ -1,6 +1,6 @@
 class MetadataConverter():
     """
-    This class is able to convert our own metadata of a paper from the database into a relatively flat dictionary.
+    This class is able to convert our own metadata of a paper from the database into a relatively flat dictionary-like object
 
     Additionally, since there is usually more than one OaiRecord for a paper, you can set a list of prefered OaiRecords to look for information first.
 
@@ -16,8 +16,12 @@ class MetadataConverter():
         self.paper = paper
         self.records = prefered_records + [r for r in paper.oairecord_set.all() if r not in prefered_records]
         # Let's set metadata based on the given paper and its oairecords
+        self.metadata = dict()
         self._paper_metadata()
         self._oai_metadata()
+
+    def get(self, key, default=None):
+        return getattr(self, key, default)
 
     def _oai_metadata(self):
         """
@@ -44,6 +48,7 @@ class MetadataConverter():
         Gets only the metadata from the paper
         This metadata always exists
         """
+
         self.authors = self._get_authors()
         self.doctype = self.paper.doctype
         self.pubdate = self.paper.pubdate

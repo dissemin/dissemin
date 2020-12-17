@@ -243,7 +243,6 @@ def mock_doi(requests_mocker):
     requests_mocker.add_passthru('https://doi-cache.dissem.in/zotero/')
     requests_mocker.add_passthru('http://localhost') # Our VNU server runs on localhost
     requests_mocker.add_passthru('https://pub.orcid.org/')
-    requests_mocker.add_passthru('https://sandbox.zenodo.org/')
 
     return requests_mocker
 
@@ -271,7 +270,6 @@ def mock_crossref(requests_mocker):
     requests_mocker.add_passthru('http://doi-cache.dissem.in/zotero/')
     requests_mocker.add_passthru('http://localhost') # Our VNU server runs on localhost
     requests_mocker.add_passthru('https://pub.orcid.org/')
-    requests_mocker.add_passthru('https://sandbox.zenodo.org/')
 
     return requests_mocker
 
@@ -644,6 +642,7 @@ class LoadJSON():
         with open(f_name, 'r') as json_file:
             data = json.load(json_file)
         p = Paper.objects.get_or_create(**data)[0]
+        p.refresh_from_db()
         self.objects.append(p)
         return p
 
