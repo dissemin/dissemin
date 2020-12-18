@@ -23,11 +23,29 @@ import os
 import pytest
 import responses
 
-from django.conf import settings
+from datetime import date
 
+from django.conf import settings
+from django.urls import reverse
+
+from deposit.models import DepositRecord
+from deposit.models import UserPreferences
 from deposit.protocol import DepositError
 from deposit.tests.test_protocol import MetaTestProtocol
 from papers.models import Paper
+
+@pytest.fixture
+def file_id(blank_pdf_path, authenticated_client):
+    """
+    This does upload a file and returns the id
+    """
+    url = reverse('ajax-uploadFulltext')
+    with open(blank_pdf_path, 'rb') as fp:
+        r = authenticated_client.post(url, {'upl' : fp})
+    assert r.json().get('status') == 'success'
+    file_id = r.json().get('file_id')
+    return file_id
+
 
 
 @pytest.fixture
@@ -352,3 +370,279 @@ class TestZenodoProtocol(MetaTestProtocol):
 
         self.protocol._upload_pdf(blank_pdf_path, zenodo_id)
         # Hard to test something here, so we just assume, the function doesn't do any error
+
+
+@pytest.mark.usefixtures('mock_doi', 'zenodo_protocol')
+class TestZenodoGetMetadataForm:
+    """
+    This is an integration test for the retrieval of the form
+    """
+
+    def test_get_metadata_form(self, authenticated_client, requests_mocker, license_chooser):
+        doi = '10.32463/rphs.2018.v04i02.11'
+        paper = Paper.create_by_doi(doi)
+
+        params = {
+            'repository' : self.protocol.repository.pk,
+            'paper' : paper.pk
+        }
+
+        url = reverse('ajax-get-metadata-form')
+        r = authenticated_client.get(url, params)
+        print(r.content)
+
+        assert r.json().get('status') == 'success'
+        form = r.json().get('form')
+        assert 'abstract' in form
+        assert 'E. coli' in form
+        assert 'license' in form
+
+
+@pytest.mark.xfail(reason='crispy forms renders a <label for=".."> without id for the for')
+@pytest.mark.usefixtures('mock_doi', 'zenodo_protocol')
+class TestZenodoStartView:
+    """
+    Here test the start view with Zenodo protocol configured
+    """
+
+    def test_start_view(self, authenticated_client, check_html, license_chooser):
+        doi = '10.32463/rphs.2018.v04i02.11'
+        paper = Paper.create_by_doi(doi)
+
+        url = reverse('upload-paper', args=[paper.pk])
+        r = authenticated_client.get(url)
+        assert r.status_code == 200
+        check_html(r)
+
+
+@pytest.mark.usefixtures('mock_doi', 'zenodo_protocol')
+class TestZenodoSubmitDeposit:
+    """
+    Here test the protocol starting with reverse('ajax-submit-deposit')
+    """
+
+    def test_submit_deposit(self, authenticated_client, file_id, license_chooser, publish_response, requests_mocker):
+        doi = '10.32463/rphs.2018.v04i02.11'
+        paper = Paper.create_by_doi(doi)
+
+        # Now we can prepare the 'real' form
+        data = {
+            'file_id' : file_id,
+            'radioUploadType' : 'preprint',
+            'radioRepository' : self.protocol.repository.pk,
+            'abstract' : paper.abstract,
+            'license' : license_chooser.pk,
+        }
+
+        # Let's mock the zenodo api as we did before
+        zenodo_id = publish_response.get('id')
+        # This is for creating the document
+        requests_mocker.add(
+            responses.POST,
+            self.protocol.repository.endpoint,
+            json={'id': zenodo_id},
+            status=201,
+        )
+        # This for uploading file
+        requests_mocker.add(
+            responses.POST,
+            '{}/{}/files'.format(self.protocol.repository.endpoint, zenodo_id),
+            status=201,
+        )
+        # This is for submitting metadata
+        requests_mocker.add(
+            responses.PUT,
+            self.protocol.repository.endpoint + '/{}'.format(zenodo_id),
+            status=200,
+        )
+        # This is for publishing
+        requests_mocker.add(
+            responses.POST,
+            self.protocol.repository.endpoint + '/{}/actions/publish'.format(zenodo_id),
+            json=publish_response,
+            status=202
+        )
+        url = reverse('ajax-submit-deposit', args=[paper.pk])
+        r = authenticated_client.post(url, data)
+        assert r.status_code == 200
+        assert r.json().get('status') == 'success'
+
+        upload_id = r.json().get('upload_id')
+
+        # There should now be two OaiRecords
+        assert paper.oairecord_set.all().count() == 2
+        dr = DepositRecord.objects.get(pk=upload_id)
+        assert dr.identifier == str(zenodo_id)
+        assert dr.user == authenticated_client.user
+        assert dr.repository == self.protocol.repository
+        assert dr.status == 'published'
+        assert dr.license == license_chooser.license
+        assert dr.pub_date == date.today()
+
+        # Let's check the OaiRecord
+        oai = dr.oairecord
+        assert oai.about == paper
+        assert oai.splash_url == publish_response.get('links').get('html')
+        assert oai.pdf_url == publish_response.get('files')[0].get('links').get('self')
+
+        # And finally, last_repository in userpreferences should be set
+        up = UserPreferences.objects.get(user=authenticated_client.user)
+        assert up.last_repository == self.protocol.repository
+
+
+    def test_submit_deposit_no_file(self, authenticated_client, license_chooser):
+        doi = '10.32463/rphs.2018.v04i02.11'
+        paper = Paper.create_by_doi(doi)
+        # Now we can prepare the 'real' form
+        data = {
+            'radioUploadType' : 'preprint',
+            'radioRepository' : self.protocol.repository.pk,
+            'abstract' : paper.abstract,
+            'license' : license_chooser.pk,
+        }
+
+        url = reverse('ajax-submit-deposit', args=[paper.pk])
+        r = authenticated_client.post(url, data)
+        assert r.status_code == 400
+        assert r.json().get('status') == 'error'
+        assert 'form' in r.json()
+        assert 'message' in r.json()
+        assert DepositRecord.objects.all().exists() == False
+
+    def test_submit_deposit_no_upload_type(self, authenticated_client, file_id, license_chooser):
+        doi = '10.32463/rphs.2018.v04i02.11'
+        paper = Paper.create_by_doi(doi)
+
+        # Now we can prepare the 'real' form
+        data = {
+            'file_id' : file_id,
+            'radioRepository' : self.protocol.repository.pk,
+            'abstract' : paper.abstract,
+            'license' : license_chooser.pk,
+        }
+
+        url = reverse('ajax-submit-deposit', args=[paper.pk])
+        r = authenticated_client.post(url, data)
+        assert r.status_code == 400
+        assert r.json().get('status') == 'error'
+        assert 'form' in r.json()
+        assert 'message' in r.json()
+        assert DepositRecord.objects.all().exists() == False
+
+    def test_submit_deposit_no_repository(self, authenticated_client, file_id, license_chooser):
+        doi = '10.32463/rphs.2018.v04i02.11'
+        paper = Paper.create_by_doi(doi)
+
+        # Now we can prepare the 'real' form
+        data = {
+            'file_id' : file_id,
+            'radioUploadType' : 'preprint',
+            'abstract' : paper.abstract,
+            'license' : license_chooser.pk,
+        }
+
+        url = reverse('ajax-submit-deposit', args=[paper.pk])
+        r = authenticated_client.post(url, data)
+        assert r.status_code == 400
+        assert r.json().get('status') == 'error'
+        assert 'form' in r.json()
+        assert 'message' in r.json()
+        assert DepositRecord.objects.all().exists() == False
+
+
+    def test_submit_deposit_no_abstract(self, authenticated_client, file_id, license_chooser):
+        doi = '10.32463/rphs.2018.v04i02.11'
+        paper = Paper.create_by_doi(doi)
+
+        # Now we can prepare the 'real' form
+        data = {
+            'file_id' : file_id,
+            'radioUploadType' : 'preprint',
+            'radioRepository' : self.protocol.repository.pk,
+            'license' : license_chooser.pk,
+        }
+
+        url = reverse('ajax-submit-deposit', args=[paper.pk])
+        r = authenticated_client.post(url, data)
+        assert r.status_code == 400
+        assert r.json().get('status') == 'error'
+        assert 'form_html' in r.json()
+        assert 'message' in r.json()
+        assert DepositRecord.objects.all().exists() == False
+
+    def test_submit_deposit_no_license(self, authenticated_client, file_id, license_chooser):
+        doi = '10.32463/rphs.2018.v04i02.11'
+        paper = Paper.create_by_doi(doi)
+
+        # Now we can prepare the 'real' form
+        data = {
+            'file_id' : file_id,
+            'radioUploadType' : 'preprint',
+            'radioRepository' : self.protocol.repository.pk,
+            'abstract' : paper.abstract,
+        }
+
+        url = reverse('ajax-submit-deposit', args=[paper.pk])
+        r = authenticated_client.post(url, data)
+        assert r.status_code == 400
+        assert r.json().get('status') == 'error'
+        assert 'form_html' in r.json()
+        assert 'message' in r.json()
+        assert DepositRecord.objects.all().exists() == False
+
+    @pytest.mark.parametrize('status', [(500, 201, 200, 202), (201, 500, 200, 202), (201, 201, 500, 202), (201, 201, 200, 500)])
+    def test_submit_deposit_hiccups(self, authenticated_client, file_id, license_chooser, publish_response, requests_mocker, status):
+        doi = '10.32463/rphs.2018.v04i02.11'
+        paper = Paper.create_by_doi(doi)
+
+        # Now we can prepare the 'real' form
+        data = {
+            'file_id' : file_id,
+            'radioUploadType' : 'preprint',
+            'radioRepository' : self.protocol.repository.pk,
+            'abstract' : paper.abstract,
+            'license' : license_chooser.pk,
+        }
+
+        # Let's mock the zenodo api as we did before
+        zenodo_id = publish_response.get('id')
+        # It's nicer to have a ConnectionError is a request isn't set, but in this case unpractical
+        requests_mocker.assert_all_requests_are_fired = False
+        # This is for creating the document
+        requests_mocker.add(
+            responses.POST,
+            self.protocol.repository.endpoint,
+            json={'id': zenodo_id},
+            status=status[0],
+        )
+        # This for uploading file
+        requests_mocker.add(
+            responses.POST,
+            '{}/{}/files'.format(self.protocol.repository.endpoint, zenodo_id),
+            status=status[1],
+        )
+        # This is for submitting metadata
+        requests_mocker.add(
+            responses.PUT,
+            self.protocol.repository.endpoint + '/{}'.format(zenodo_id),
+            status=status[2],
+        )
+        # This is for publishing
+        requests_mocker.add(
+            responses.POST,
+            self.protocol.repository.endpoint + '/{}/actions/publish'.format(zenodo_id),
+            json=publish_response,
+            status=status[3],
+        )
+        url = reverse('ajax-submit-deposit', args=[paper.pk])
+        r = authenticated_client.post(url, data)
+
+        # Failed, so should some things
+        assert r.status_code == 400
+        assert r.json().get('status') == 'error'
+        assert 'message' in r.json()
+
+        dr = DepositRecord.objects.get(paper=paper)
+        assert dr.user == authenticated_client.user
+        assert dr.status == 'failed'
+        assert dr.repository == self.protocol.repository
