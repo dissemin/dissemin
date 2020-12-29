@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2020-12-14 14:04:17+0000\n"
+"PO-Revision-Date: 2020-12-29 07:48:30+0000\n"
 "X-POT-Import-Date: 2020-11-25 15:31:57+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -41,7 +41,7 @@ msgstr "Repositori"
 
 #: deposit/forms.py:100
 msgid "Invalid full text identifier."
-msgstr "Identificador de text complet invàlid."
+msgstr "Identificador de text complet no vàlid."
 
 #: deposit/forms.py:144 papers/templates/papers/paper.html:193
 msgid "Abstract"

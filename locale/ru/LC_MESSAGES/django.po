@@ -21,7 +21,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-11-25 16:08+0100\n"
-"PO-Revision-Date: 2020-12-22 12:54:20+0000\n"
+"PO-Revision-Date: 2020-12-29 07:48:35+0000\n"
 "Language: ru\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1134,11 +1134,11 @@ msgstr "Заполнить договор"
 
 #: model-gettext.py:115
 msgid "Contract necessary!"
-msgstr ""
+msgstr "Необходим контракт!"
 
 #: model-gettext.py:116
 msgid "Before we can publish your publication, we need the completely filled in and signed publication agreement, which you can send to Braunschweig University Library by e-mail, fax or postal mail."
-msgstr ""
+msgstr "Прежде чем мы сможем разместить вашу публикацию, нам потребуется полностью заполненное и подписанное соглашение о публикации, которое вы можете отправить в библиотеку Брауншвейгского университета по электронной почте, факсу или обычной почте."
 
 #: model-gettext.py:117
 msgid "Download Contract"
@@ -1214,11 +1214,11 @@ msgstr "TUprints - это репозиторий с открытым досту�
 
 #: model-gettext.py:136
 msgid "Institutional Repository of TU Braunschweig"
-msgstr ""
+msgstr "Институциональный репозиторий Брауншвейгского технического университета"
 
 #: model-gettext.py:137
 msgid "Researchers at TU Braunschweig can publish their first and second (self archiving) publications Open Access on the official publication server of TU Braunschweig."
-msgstr ""
+msgstr "Исследователи из Брауншвейгского технического университета могут размещать свои первые и вторые (самоархивирующиеся) публикации в открытом доступе на официальном сервере публикаций Брауншвейгского технического университета."
 
 #: notification/models.py:62
 msgid "inboxes"
