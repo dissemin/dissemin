@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: dissem.in\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-04-22 12:29+0200\n"
-"PO-Revision-Date: 2020-10-29 12:16:21+0000\n"
+"PO-Revision-Date: 2021-01-04 13:42:09+0000\n"
 "Last-Translator: Ryan Lahfa <masterancpp@gmail.com>\n"
 "Language-Team: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language: fr\n"
@@ -45,11 +45,11 @@ msgstr "Retrait en cours..."
 
 #: website/static/js/dissemin.js:311
 msgid "Claiming failed!"
-msgstr "Échec de l’inclusion !"
+msgstr "Échec de l’inclusion !"
 
 #: website/static/js/dissemin.js:314
 msgid "Unclaiming failed!"
-msgstr "Échec du retrait !"
+msgstr "Échec du retrait !"
 
 #: website/static/js/dissemin.js:319
 msgid "Exclude from my profile"
@@ -83,7 +83,7 @@ msgstr "Taille"
 
 #: website/static/js/dissemin.js:617
 msgid "While uploading %(file)s the following error occured:"
-msgstr "Lors du téléversement du %(file)s, l’erreur suivante est survenue :"
+msgstr "Lors du téléversement de %(file)s, l’erreur suivante est survenue :"
 
 #: website/static/js/dissemin.js:626 website/static/js/dissemin.js:681
 #: website/static/js/dissemin.js:687
@@ -92,7 +92,7 @@ msgstr "Erreur inconnue"
 
 #: website/static/js/dissemin.js:671
 msgid "While fetching file from %(url)s the following error occured:"
-msgstr "Lors de la récupération du fichier depuis %(url)s, l’erreur suivante s’est produite :"
+msgstr "Lors de la récupération du fichier depuis %(url)s, l’erreur suivante est survenue :"
 
 #: website/static/js/dissemin.js:781
 msgid "Sorry, we could not fill this for you."

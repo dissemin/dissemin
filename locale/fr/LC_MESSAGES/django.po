@@ -24,7 +24,7 @@ msgstr ""
 "Project-Id-Version: dissem.in\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-11-25 16:08+0100\n"
-"PO-Revision-Date: 2020-11-30 16:02:32+0000\n"
+"PO-Revision-Date: 2021-01-04 13:42:12+0000\n"
 "Last-Translator: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language-Team: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language: fr\n"
@@ -478,7 +478,7 @@ msgstr "Mes dépôts"
 #: deposit/templates/deposit/deposits.html:24
 #, python-format
 msgid "&lsquo;%(paper_title)s&rsquo; in <strong>%(repository)s</strong>"
-msgstr "« %(paper_title)s » dans <strong>%(repository)s</strong>"
+msgstr "« %(paper_title)s » dans <strong>%(repository)s</strong>"
 
 #: deposit/templates/deposit/deposits.html:36
 msgid "Paper"
@@ -510,7 +510,7 @@ msgstr "URL du PDF"
 
 #: deposit/templates/deposit/deposits.html:134
 msgid "Status:"
-msgstr "État :"
+msgstr "État :"
 
 #: deposit/templates/deposit/deposits.html:145
 msgid "Letter of Declaration"
@@ -522,7 +522,7 @@ msgstr "Afficher"
 
 #: deposit/templates/deposit/deposits.html:176
 msgid "No deposits yet!"
-msgstr "Encore aucun dépôt !"
+msgstr "Encore aucun dépôt !"
 
 #: deposit/templates/deposit/deposits.html:177
 msgid "You have not made any deposit via Dissemin. What are you waiting for? Liberate your papers today."
@@ -601,7 +601,7 @@ msgstr "Dépôt :"
 
 #: deposit/templates/deposit/start.html:210
 msgid "Metadata:"
-msgstr "Métadonnées :"
+msgstr "Métadonnées :"
 
 #: deposit/templates/deposit/start.html:235
 #: papers/templates/papers/search_base.html:165
@@ -722,7 +722,7 @@ msgstr "portugais brésilien"
 
 #: dissemin/settings/common.py:314
 msgid "Russian"
-msgstr "Russe"
+msgstr "russe"
 
 #: dissemin/settings/common.py:315
 msgid "Swedish"
@@ -730,7 +730,7 @@ msgstr "suédois"
 
 #: dissemin/settings/common.py:316
 msgid "Turkish"
-msgstr "Turc"
+msgstr "turc"
 
 #: dissemin/settings/common.py:317
 msgid "Simplified Chinese"
@@ -1094,7 +1094,7 @@ msgstr "Science militaire"
 
 #: model-gettext.py:103
 msgid "Other Germanic languages"
-msgstr "Autres langues germaniques"
+msgstr "autres langues germaniques"
 
 #: model-gettext.py:104
 msgid "Public performances"
@@ -1106,7 +1106,7 @@ msgstr "Présentations d’étape"
 
 #: model-gettext.py:106
 msgid "Indoor games & amusements"
-msgstr "Jeux en intérieur & divertissements"
+msgstr "Jeux en intérieur et divertissements"
 
 #: model-gettext.py:107
 msgid "Athletic & outdoor sports & games"
@@ -1127,11 +1127,11 @@ msgstr "Libre accès (voie verte)"
 
 #: model-gettext.py:111
 msgid "Would you like that the University and State Library Darmstadt publishes your publications green open access for you?\n<br/>\nContact us: <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
-msgstr "Aimeriez-vous que la Bibliothèque universitaire et d’état de Darmstadt publie vos publications en accès libre ouvert pour vous ?\n<br/>\nContactez-nous : <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
+msgstr "Aimeriez-vous que la Bibliothèque universitaire et d’État de Darmstadt publie vos publications en accès libre ouvert pour vous ?\n<br />\nContactez-nous : <a href=\"mailto:dpub@ulb-tu-darmstadt.de\">dpub@ulb-tu-darmstadt.de</a>"
 
 #: model-gettext.py:112
 msgid "TUprints contract required!"
-msgstr "Contrat TUprints nécessaire !"
+msgstr "Contrat TUprints nécessaire !"
 
 #: model-gettext.py:113
 msgid "We need the TUprints agreement for all documents uploaded through Dissemin. After authentification with your TU-ID, please fill out the agreement and send it digitally. A signature is not necessary."
@@ -1147,7 +1147,7 @@ msgstr "Contrat obligatoire !"
 
 #: model-gettext.py:116
 msgid "Before we can publish your publication, we need the completely filled in and signed publication agreement, which you can send to Braunschweig University Library by e-mail, fax or postal mail."
-msgstr "Pour publier votre publication, nous avons besoin de l’accord de publication entièrement renseigné et signé, que vous pouvez envoyer à la Bibliothèque de l’université de Braunschweig par courriel, fax ou courrier postal."
+msgstr "Pour publier votre publication, nous avons besoin de l’accord de publication entièrement renseigné et signé, que vous pouvez envoyer à la bibliothèque de l’université de Braunschweig par courriel, fax ou courrier postal."
 
 #: model-gettext.py:117
 msgid "Download Contract"
@@ -1207,11 +1207,11 @@ msgstr "HAL est une archive ouverte multidisciplinaire, soutenue par le Ministè
 
 #: model-gettext.py:132
 msgid "OSF preprints"
-msgstr "prépublications OSF"
+msgstr "Prépublications OSF"
 
 #: model-gettext.py:133
 msgid "Run by the Center for Open Science, OSF lets you share your preprints openly. You can also share supplemental data, materials or code associated with your article."
-msgstr "Exécuté par le Center for Open Science (« centre pour une science ouverte »), l’OSF vous laisse partager librement vos prépublications. Vous pouvez aussi partager des données supplémentaires, des matériaux ou du code associé à votre article."
+msgstr "Exécuté par le Center for Open Science (« Centre pour une science ouverte »), l’OSF vous laisse partager librement vos prépublications. Vous pouvez aussi partager des données supplémentaires, des matériaux ou du code associé à votre article."
 
 #: model-gettext.py:134
 msgid "TUprints"
@@ -1223,11 +1223,11 @@ msgstr "TUprints est le dépôt en accès ouvert pour tous les membres actuels e
 
 #: model-gettext.py:136
 msgid "Institutional Repository of TU Braunschweig"
-msgstr "Dépôt institutionnel de TU de Braunschweig"
+msgstr "Dépôt institutionnel de l’Université de technologie de Braunschweig"
 
 #: model-gettext.py:137
 msgid "Researchers at TU Braunschweig can publish their first and second (self archiving) publications Open Access on the official publication server of TU Braunschweig."
-msgstr "Les chercheurs au TU Brauschweig peuvent publier leurs première et deuxième publications (auto-archivées) en accès libre sur le serveur de publications officiel du TU Braunschweig."
+msgstr "Les chercheurs à l’UT de Brauschweig peuvent publier leurs première et deuxième publications (auto-archivées) en accès libre sur le serveur de publications officiel de l’UT de Braunschweig."
 
 #: notification/models.py:62
 msgid "inboxes"
@@ -1458,7 +1458,7 @@ msgstr[1] "Nous avons ignoré les papiers %(papers)s de votre profil ORCiD."
 
 #: papers/templates/papers/messages.html:14
 msgid "Details:"
-msgstr "Détails :"
+msgstr "Détails :"
 
 #: papers/templates/papers/messages.html:21
 msgid "No author"
@@ -1482,7 +1482,7 @@ msgstr "Le papier n’est pas valide"
 
 #: papers/templates/papers/messages.html:32
 msgid "{{ title }} was ignored for the following reason:"
-msgstr "{{ title }} a été ignoré pour le motif suivant :"
+msgstr "{{ title }} a été ignoré pour le motif suivant :"
 
 #: papers/templates/papers/messages.html:36
 msgid "A paper was ignored, because is has no title."
@@ -1529,14 +1529,14 @@ msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_ur
 msgstr "Ce papier a bien été déposé dans <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. Le texte complet sera disponible après validation par l’administration du dépôt. Vous pouvez vérifier son état dans votre <a class=\"alert-link\" href=\"%(my_profile)s\">profil</a>."
 
 #: papers/templates/papers/paper.html:102
-#, fuzzy, python-format
+#, python-format
 msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available after validation by the repository administration, but not before %(pub_date)s. You can check for the status in your <a class=\"alert-link\" href=\"%(my_profile)s\">profile</a>."
-msgstr "<p>cet article a été déposé dans <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. Le texte complet sera disponible à <a class=\"alert-link\" href=\"%(splash_url)s\">cette adresse</a> après validation par les administrateurs du dépôt.</p>"
+msgstr "Cet article a été déposé dans <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. Le texte complet sera disponible après validation par les administrateurs du dépôt,  mais pas avant%(pub_date)s. Vous pouvez en vérifier l’état dans <a class=\"alert-link\" href=\"%(my_profile)s\">votre profil</a>."
 
 #: papers/templates/papers/paper.html:126
 #: website/templates/dissemin/start_page.html:129
 msgid "Learn more!"
-msgstr "En savoir plus !"
+msgstr "En savoir plus !"
 
 #: papers/templates/papers/paper.html:138
 #, fuzzy, python-format
@@ -1660,7 +1660,7 @@ msgstr "S’il manque des publications, vous pouvez <a href=\"%(matching_papers_
 #: papers/templates/papers/search.html:10
 #, python-format
 msgid "Missing publications? <a class=\"showHrefPrint\" href=\"%(faq_url)s#missingPaper\">Read more about our data sources.</a>"
-msgstr "Il manque des publications ? <a class=\"showHrefPrint\" href=\"%(faq_url)s#missing-paper\">Lire davantage sur nos sources de données.</a>"
+msgstr "Il manque des publications ? <a class=\"showHrefPrint\" href=\"%(faq_url)s#missingPaper\">En lire plus sur nos sources de données.</a>"
 
 #: papers/templates/papers/search_base.html:25
 #, python-format
@@ -2123,11 +2123,11 @@ msgstr "Sélectionnez ici le texte intégral de votre article. Seuls les fichier
 
 #: upload/templates/upload/widget.html:10
 msgid "Click or drop here"
-msgstr "Cliquer ou tirer ici"
+msgstr "Cliquer ou trainer-lâcher ici"
 
 #: upload/templates/upload/widget.html:15
 msgid "Or enter a URL:"
-msgstr "Sinon, saisissez une URL :"
+msgstr "Sinon, saisissez une URL :"
 
 #: upload/templates/upload/widget.html:19
 msgid "Upload from URL"
@@ -2256,7 +2256,7 @@ msgstr "Qui conduit ''dissem.in'' ?"
 
 #: website/templates/dissemin/faq.html:28
 msgid "Can I create a profile on dissem.in?"
-msgstr "Puis-je me créer un profil sur dissem.in ?"
+msgstr "Puis-je me créer un profil sur dissem.in ?"
 
 #: website/templates/dissemin/faq.html:30
 msgid "Policies and Full-text Availability"
@@ -2264,7 +2264,7 @@ msgstr "Politiques et disponibilité du texte intégral"
 
 #: website/templates/dissemin/faq.html:31
 msgid "What do our policy classes mean?"
-msgstr "Que signifient les différentes politiques d’accès ?"
+msgstr "Que signifient les différentes politiques d’accès ?"
 
 #: website/templates/dissemin/faq.html:32
 msgid "When is a paper considered available?"
@@ -2421,7 +2421,7 @@ msgstr "Oui, vous pouvez le faire en commençant par <a href=\"https://orcid.org
 
 #: website/templates/dissemin/faq.html:281
 msgid "We have the following five policy classes:"
-msgstr "Nous avons les cinq classes suivantes de politiques :"
+msgstr "Nous avons les cinq classes suivantes de politiques :"
 
 #: website/templates/dissemin/faq.html:285
 msgid "Class"
@@ -2457,7 +2457,7 @@ msgstr "Politique inconnue"
 
 #: website/templates/dissemin/faq.html:328
 msgid "<strong>Policy unknown:</strong><br /> The full text is not available and dissem.in could not evaluate if the publishers policy allows making the full text freely available."
-msgstr "<strong>Politique inconnue :</strong><br /> le texte complet n’est pas disponible et Dissem.in n’a pas pu évaluer si la politique des maisons d’édition autorise de rendre le texte intégral librement disponible."
+msgstr "<strong>Politique inconnue :</strong><br /> le texte complet n’est pas disponible et Dissem.in n’a pas pu évaluer si la politique des maisons d’édition autorise de rendre le texte intégral librement disponible."
 
 #: website/templates/dissemin/faq.html:336
 msgid "Pre/post prints forbidden"
@@ -2573,7 +2573,7 @@ msgstr "Vous pouvez également ajouter des publications à votre profil <em>sur 
 #: website/templates/dissemin/faq.html:512
 #, python-format
 msgid "If you change some details in your ORCID profile (name, homepage, etc.), the changes will not automatically be picked up in your profile on Dissemin. To update your profile on Dissemin accordingly, once you have logged in to Dissemin, you can go to your <a href=\"%(profile_url)s\">profile page</a> and click \"Refresh publications\"."
-msgstr "Si vous modifiez certains détails dans votre profil ORCID (nom, page d’accueil, etc.), les modifications ne seront pas automatiquement récupérées dans votre profil sur Dissemin. Pour mettre à jour votre profil sur Dissemin en conséquence, une fois que vous êtes connecté à Dissemin, vous pouvez accéder à votre <a href=\"%(profile_url)s\">page de profil</a> et cliquer sur « Actualiser les publications »."
+msgstr "Si vous modifiez certains détails dans votre profil ORCID (nom, page d’accueil, etc.), les modifications ne seront pas automatiquement récupérées dans votre profil sur Dissemin. Pour mettre à jour votre profil sur Dissemin en conséquence, une fois que vous y êtes connecté, vous pouvez accéder à votre <a href=\"%(profile_url)s\">page de profil</a> et cliquer sur « Actualiser les publications »."
 
 #: website/templates/dissemin/faq.html:526
 #, python-format
@@ -2602,7 +2602,7 @@ msgstr "Encourager les chercheurs à utiliser ce service."
 
 #: website/templates/dissemin/faq.html:559
 msgid "Star <a href=\"https://github.com/dissemin/dissemin\">our GitHub project</a>!"
-msgstr "Évaluez <a href=\"https://github.com/dissemin/dissemin\">notre projet Github</a> !"
+msgstr "Évaluez <a href=\"https://github.com/dissemin/dissemin\">notre projet Github</a> !"
 
 #: website/templates/dissemin/faq.html:564
 msgid "<a href=\"https://association.dissem.in/#dons\">Donations are accepted</a>."
@@ -2614,7 +2614,7 @@ msgstr "Le code source est disponible <a href=\"https://github.com/dissemin/diss
 
 #: website/templates/dissemin/faq.html:579
 msgid "Yes! We even have <a href=\"https://dissemin.readthedocs.io/en/latest/api.html\">an API</a>. If it does not suit your needs, please don't hesitate to get in touch by writing to <a href=\"mailto:hello@dissem.in\">hello@dissem.in</a>."
-msgstr "Oui ! Nous avons même <a href=\"https://dev.dissem.in/api.html\">une API</a>. Si vous n’êtes pas satisfait par ce qu’elle propose, n’hésitez pas à nous contacter en écrivant à  <a href=\"mailto:hello@dissem.in\">hello@dissem.in</a>."
+msgstr "Oui ! Nous avons même <a href=\"https://dev.dissem.in/api.html\">une API</a>. Si vous n’êtes pas satisfait par ce qu’elle propose, n’hésitez pas à nous contacter en écrivant à  <a href=\"mailto:hello@dissem.in\">hello@dissem.in</a>."
 
 #: website/templates/dissemin/faq.html:586
 msgid "Yes! See <a href=\"https://association.dissem.in/#logos\">here</a> for links to our logos and for explanations about how you can reuse them."
@@ -2645,7 +2645,7 @@ msgstr "S’inscrire"
 
 #: website/templates/dissemin/login.html:41
 msgid "Not an ORCID user yet? Create an account, it is free and takes just a few seconds."
-msgstr "Pas encore utilisateur d’ORCID ? Créez un compte, c’est gratuit et ne prend que quelques secondes."
+msgstr "Pas encore utilisateur d’ORCID ? Créez un compte, c’est gratuit et ne prend que quelques secondes."
 
 #: website/templates/dissemin/sources.html:5
 msgid "Data sources"
