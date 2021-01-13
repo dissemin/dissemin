@@ -56,9 +56,11 @@ from statistics.models import STATUS_CHOICES_HELPTEXT
 from caching.base import CachingManager
 from caching.base import CachingMixin
 from celery.result import AsyncResult
+
 from django.contrib.auth.models import User
 from django.contrib.postgres.fields import JSONField
-from django.contrib.postgres.fields import ArrayField
+from django.contrib.postgres.indexes import GinIndex
+from django_better_admin_arrayfield.models.fields import ArrayField
 from django_countries.fields import CountryField
 from django_countries.fields import countries
 from django.conf import settings
@@ -114,6 +116,24 @@ HARVESTER_TASK_CHOICES = [
    ]
 
 
+class InstitutionManager(models.Manager):
+    """
+    This manager implements mainly a method to conveniently get a repository for a given identifier
+    """
+
+    def get_repository_by_identifier(self, identifier):
+        """
+        First, find the Insitution instance, then return the repository
+        """
+        if identifier:
+            try:
+                institution = self.get(identifiers__contains=[identifier])
+            except self.model.DoesNotExist:
+                return
+            else:
+                return institution.repository
+
+
 class Institution(models.Model):
     """
     A university or research institute.
@@ -124,9 +144,23 @@ class Institution(models.Model):
     identifiers = ArrayField(models.CharField(max_length=256), null=True, blank=True)
     #: Country code
     country = CountryField(null=True, blank=True)
-
+    #: a repository associated to this institute
+    repository = models.ForeignKey(
+        'deposit.repository',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL
+    )
     #: :py:class:`AccessStatistics` about the papers authored in this institution.
     stats = models.ForeignKey(AccessStatistics, null=True, blank=True, on_delete=models.CASCADE)
+
+    objects = InstitutionManager()
+
+    class Meta:
+        indexes = [
+            GinIndex(fields=['identifiers', ])
+        ]
+
 
     @property
     def sorted_departments(self):
@@ -525,6 +559,41 @@ class Researcher(models.Model):
                 'department': self.department_id}
         return ResearcherDepartmentForm(initial=data)
 
+    def merge(self, researcher, delete_user=False):
+        """
+        Updates self by the values of researcher. Values of self get precedence other those from the given researcher
+        """
+        if not self.pk or not researcher.pk:
+            raise ValueError("Both Researcher objects need a primary key.")
+        if self.pk == researcher.pk:
+            raise ValueError("Cannot merge researcher into itself")
+        # We take values for simple field types; where we just need to copy information
+        field_names = ['name', 'user', 'department', 'institution', 'email', 'homepage', 'role', 'orcid', 'empty_orcid_profile', 'last_harvest', 'harvester', 'current_task', 'stats', 'visible']
+        for field_name in field_names:
+            if not getattr(self, field_name):
+                setattr(self, field_name, getattr(researcher, field_name))
+
+        # In the next step, we have to take over the papers
+        # We go through the papers researchers and change the Id
+        for paper in researcher.papers:
+            save = False
+            for author in paper.authors_list:
+                if author.get('researcher_id') == researcher.pk:
+                    author['researcher_id'] =  self.pk
+                    save = True
+                if author.get('orcid') == researcher.orcid:
+                    author['orcid'] = self.orcid
+                    save = True
+            if save:
+                paper.save()
+                paper.update_index()
+
+        if delete_user and researcher.user:
+            if researcher.user != self.user:
+                researcher.user.delete()
+
+        researcher.delete()
+        self.save()
 
 class Name(models.Model, BareName):
     first = models.CharField(max_length=MAX_NAME_LENGTH)

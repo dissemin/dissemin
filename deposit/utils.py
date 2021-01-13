@@ -1,3 +1,45 @@
+from deposit.models import UserPreferences
+from papers.models import Institution
+from website.utils import get_users_idp
+
+
+def get_email(user):
+    """
+    This tries to fetch the email of a given user.
+    We have several sources: user object itself, researcher object, userpreferences and shibboleth metadata
+    """
+    if hasattr(user, 'shib') and user.shib.get('email'):
+        return user.shib.get('email')
+    if hasattr(user, 'userpreferences') and user.userpreferences.email:
+        return user.userpreferences.email
+    r = user.researcher_set.first()
+    if r and r.email:
+        return r.email
+    if user.email:
+        return user.email
+
+
+def get_preselected_repository(user, repositories):
+    """
+    This returns the preselected repository of a user out of a given list
+    We look in the user preferences, if no suitable repository is found, we try from shibboleth data, else we take the last, or finally, none
+    :param user: User object
+    :returns: Repository or None
+    """
+    user_preferences = UserPreferences.get_by_user(user)
+    preferred_repository = user_preferences.get_preferred_repository()
+    if preferred_repository in repositories:
+        return preferred_repository
+    # Let's try via shibboleth
+    identifier = 'shib:{}'.format(get_users_idp(user))
+    institutional_repository = Institution.objects.get_repository_by_identifier(identifier)
+    if institutional_repository in repositories:
+        return institutional_repository
+    last_repository = user_preferences.get_last_repository()
+    if last_repository in repositories:
+        return last_repository
+
+
 class MetadataConverter():
     """
     This class is able to convert our own metadata of a paper from the database into a relatively flat dictionary.

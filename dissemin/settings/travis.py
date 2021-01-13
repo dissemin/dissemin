@@ -80,3 +80,7 @@ SASS_OUTPUT_STYLE = 'nested'
 # Static root must be set to have scss compile correctly
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
+# We need to set a redirect
+SHIB_DS_SP_URL = 'https://shibboleth.dissem.in/'
+# We need a DiscoFeed, otherwise the module does not work
+SHIB_DS_DISCOFEED_PATH = os.path.join(BASE_DIR, 'test_data', 'shibds', 'DiscoFeed.json')

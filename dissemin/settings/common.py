@@ -30,9 +30,11 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+import os
+
 from datetime import timedelta
 from dealer.git import git
-import os
+from shibboleth_discovery.helpers import select2_processor
 
 from django.utils.translation import ugettext_lazy as _
 
@@ -165,6 +167,9 @@ INSTALLED_APPS = (
     'vinaigrette',
     'tempus_dominus',
     'sass_processor',
+    'shibboleth',
+    'shibboleth_discovery',
+    'django_better_admin_arrayfield',
 )
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -183,6 +188,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'website.middleware.ShibbolethRemoteUserMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'vinaigrette.middleware.VinaigretteAdminLanguageMiddleware',
@@ -191,6 +197,7 @@ MIDDLEWARE = [
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
+    'website.backends.ShibbolethRemoteUserBackend',
 )
 
 
@@ -383,6 +390,19 @@ SETTINGS_EXPORT = [
     'DISPLAY_BETA_RIBBON',
     'SENTRY_DSN',
 ]
+
+# Authentication with Shibboleth
+
+SHIBBOLETH_ATTRIBUTE_MAP = {
+    'shib-username' : (True, 'username'),
+    'shib-givenName' : (True, 'first_name'),
+    'shib-sn' : (True, 'last_name'),
+    'shib-mail' : (False, 'email'),
+    'shib-orcid' : (False, 'orcid'),
+}
+
+SHIB_DS_POST_PROCESSOR = select2_processor
+SHIB_DS_MAX_IDP = 1
 
 # Logging is very important thing. Here we define some standards. We use Django logging system, so there it is easy to custimze your logging preferences.
 # To switch for 'console' to level 'DEBUG' please use prod.py resp. dev.py

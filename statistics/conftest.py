@@ -3,11 +3,10 @@ from django.core.management import call_command
 
 from papers.models import Institution
 from papers.models import Department
-from conftest import get_researcher_by_name
 from backend.orcid import OrcidPaperSource
 
 @pytest.fixture(scope='class')
-def fetch_crossref_profile(request, django_db_setup, django_db_blocker):
+def fetch_crossref_profile(request, django_db_setup, django_db_blocker, get_researcher_by_name):
     with django_db_blocker.unblock():
         call_command('loaddata', 'test_dump.json')
         self = request.cls

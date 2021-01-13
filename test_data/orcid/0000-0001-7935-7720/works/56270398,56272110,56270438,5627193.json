@@ -1,0 +1,443 @@
+{
+  "bulk" : [ {
+    "work" : {
+      "created-date" : {
+        "value" : 1554816414660
+      },
+      "last-modified-date" : {
+        "value" : 1554816414660
+      },
+      "source" : {
+        "source-orcid" : null,
+        "source-client-id" : {
+          "uri" : "https://orcid.org/client/APP-HCGH49OO61VH1II3",
+          "path" : "APP-HCGH49OO61VH1II3",
+          "host" : "orcid.org"
+        },
+        "source-name" : {
+          "value" : "BASE - Bielefeld Academic Search Engine"
+        }
+      },
+      "put-code" : 56270398,
+      "path" : "/0000-0001-7935-7720/work/56270398",
+      "title" : {
+        "title" : {
+          "value" : "dissemin/dissemin: v0.3.1"
+        },
+        "subtitle" : null,
+        "translated-title" : null
+      },
+      "journal-title" : null,
+      "short-description" : "This is an interim version of dissemin, its architecture is expected to be further revamped and cleaned. It includes functional connectors for Zenodo and HAL, harvesters for OAI sources, Crossref, ORCID and Unpaywall. Compatible with Python 3 and Django 1.11-2.2.",
+      "citation" : null,
+      "type" : "OTHER",
+      "publication-date" : {
+        "year" : {
+          "value" : "2019"
+        },
+        "month" : null,
+        "day" : null,
+        "media-type" : null
+      },
+      "external-ids" : {
+        "external-id" : [ {
+          "external-id-type" : "source-work-id",
+          "external-id-value" : "BASE:8eb8a1e0c90ffe070f3f5e40c5e1ee9f61b5b7c5aa0b99e78185e186f988a9c8",
+          "external-id-url" : {
+            "value" : "https://www.base-search.net/Record/8eb8a1e0c90ffe070f3f5e40c5e1ee9f61b5b7c5aa0b99e78185e186f988a9c8"
+          },
+          "external-id-relationship" : "SELF"
+        }, {
+          "external-id-type" : "doi",
+          "external-id-value" : "10.5281/zenodo.2571984",
+          "external-id-url" : null,
+          "external-id-relationship" : "SELF"
+        } ]
+      },
+      "url" : {
+        "value" : "https://zenodo.org/record/2571984"
+      },
+      "contributors" : {
+        "contributor" : [ {
+          "contributor-orcid" : null,
+          "credit-name" : {
+            "value" : "Antonin Delpeuch"
+          },
+          "contributor-email" : null,
+          "contributor-attributes" : {
+            "contributor-sequence" : null,
+            "contributor-role" : "AUTHOR"
+          }
+        }, {
+          "contributor-orcid" : null,
+          "credit-name" : {
+            "value" : "a3nm"
+          },
+          "contributor-email" : null,
+          "contributor-attributes" : {
+            "contributor-sequence" : null,
+            "contributor-role" : "AUTHOR"
+          }
+        }, {
+          "contributor-orcid" : null,
+          "credit-name" : {
+            "value" : "Ryan Lahfa"
+          },
+          "contributor-email" : null,
+          "contributor-attributes" : {
+            "contributor-sequence" : null,
+            "contributor-role" : "AUTHOR"
+          }
+        }, {
+          "contributor-orcid" : null,
+          "credit-name" : {
+            "value" : "translatewiki.net"
+          },
+          "contributor-email" : null,
+          "contributor-attributes" : {
+            "contributor-sequence" : null,
+            "contributor-role" : "AUTHOR"
+          }
+        }, {
+          "contributor-orcid" : null,
+          "credit-name" : {
+            "value" : "Xia Li-yao"
+          },
+          "contributor-email" : null,
+          "contributor-attributes" : {
+            "contributor-sequence" : null,
+            "contributor-role" : "AUTHOR"
+          }
+        }, {
+          "contributor-orcid" : null,
+          "credit-name" : {
+            "value" : "Steph. No."
+          },
+          "contributor-email" : null,
+          "contributor-attributes" : {
+            "contributor-sequence" : null,
+            "contributor-role" : "AUTHOR"
+          }
+        }, {
+          "contributor-orcid" : null,
+          "credit-name" : {
+            "value" : "Lucas Verney"
+          },
+          "contributor-email" : null,
+          "contributor-attributes" : {
+            "contributor-sequence" : null,
+            "contributor-role" : "AUTHOR"
+          }
+        }, {
+          "contributor-orcid" : null,
+          "credit-name" : {
+            "value" : "Evarin"
+          },
+          "contributor-email" : null,
+          "contributor-attributes" : {
+            "contributor-sequence" : null,
+            "contributor-role" : "AUTHOR"
+          }
+        }, {
+          "contributor-orcid" : null,
+          "credit-name" : {
+            "value" : "p4bl0"
+          },
+          "contributor-email" : null,
+          "contributor-attributes" : {
+            "contributor-sequence" : null,
+            "contributor-role" : "AUTHOR"
+          }
+        }, {
+          "contributor-orcid" : null,
+          "credit-name" : {
+            "value" : "jibe-b"
+          },
+          "contributor-email" : null,
+          "contributor-attributes" : {
+            "contributor-sequence" : null,
+            "contributor-role" : "AUTHOR"
+          }
+        }, {
+          "contributor-orcid" : null,
+          "credit-name" : {
+            "value" : "Stefan Beck"
+          },
+          "contributor-email" : null,
+          "contributor-attributes" : {
+            "contributor-sequence" : null,
+            "contributor-role" : "AUTHOR"
+          }
+        }, {
+          "contributor-orcid" : null,
+          "credit-name" : {
+            "value" : "nemobis"
+          },
+          "contributor-email" : null,
+          "contributor-attributes" : {
+            "contributor-sequence" : null,
+            "contributor-role" : "AUTHOR"
+          }
+        }, {
+          "contributor-orcid" : null,
+          "credit-name" : {
+            "value" : "Virgile Andreani"
+          },
+          "contributor-email" : null,
+          "contributor-attributes" : {
+            "contributor-sequence" : null,
+            "contributor-role" : "AUTHOR"
+          }
+        }, {
+          "contributor-orcid" : null,
+          "credit-name" : {
+            "value" : "Martin Monperrus"
+          },
+          "contributor-email" : null,
+          "contributor-attributes" : {
+            "contributor-sequence" : null,
+            "contributor-role" : "AUTHOR"
+          }
+        }, {
+          "contributor-orcid" : null,
+          "credit-name" : {
+            "value" : "Kenji Maillard"
+          },
+          "contributor-email" : null,
+          "contributor-attributes" : {
+            "contributor-sequence" : null,
+            "contributor-role" : "AUTHOR"
+          }
+        }, {
+          "contributor-orcid" : null,
+          "credit-name" : {
+            "value" : "Jill-Jênn Vie"
+          },
+          "contributor-email" : null,
+          "contributor-attributes" : {
+            "contributor-sequence" : null,
+            "contributor-role" : "AUTHOR"
+          }
+        }, {
+          "contributor-orcid" : null,
+          "credit-name" : {
+            "value" : "Golls"
+          },
+          "contributor-email" : null,
+          "contributor-attributes" : {
+            "contributor-sequence" : null,
+            "contributor-role" : "AUTHOR"
+          }
+        } ]
+      },
+      "language-code" : null,
+      "country" : null,
+      "visibility" : "PUBLIC"
+    }
+  }, {
+    "work" : {
+      "created-date" : {
+        "value" : 1554816453672
+      },
+      "last-modified-date" : {
+        "value" : 1554816453672
+      },
+      "source" : {
+        "source-orcid" : null,
+        "source-client-id" : {
+          "uri" : "https://orcid.org/client/APP-HCGH49OO61VH1II3",
+          "path" : "APP-HCGH49OO61VH1II3",
+          "host" : "orcid.org"
+        },
+        "source-name" : {
+          "value" : "BASE - Bielefeld Academic Search Engine"
+        }
+      },
+      "put-code" : 56270438,
+      "path" : "/0000-0001-7935-7720/work/56270438",
+      "title" : {
+        "title" : {
+          "value" : "A Family of Right Coideal Subalgebras of U_q(sl_(n+1)) ; Eine Familie von Rechtskoidealunteralgebren für U_q(sl_(n+1))"
+        },
+        "subtitle" : null,
+        "translated-title" : null
+      },
+      "journal-title" : null,
+      "short-description" : "Abstract ; Die vorliegende Dissertation beschreibt eine neue Familie von sphärischen Rechtskoidealunteralgebren in der quantisierten universellen Einhüllenden vom Typ A_n. Die sphärischen Rechtskoidealunteralgebren werden vermittels PBW-Elementen beschrieben. Die Darstellungstheorie der Rechtskoidealunteralgebren wir auf die von quantisierten universellen Einhüllenden vom Typ A_n zurückgeführt. Der resultierende quantenhomogene Raum wird mit einem bereits bekannten verglichen. ; Abstract ; The presented thesis describes a new family of spherical right coideal subalgebras of quantum universal enveloping algebras of type A_n. The description of the spherical right coideal subalgebras is given in terms of PBW-type elements. The representation theory is derived from quantum universal enveloping algebras of type A_n. The resulting quantum homogeneous space is compared with an already known one.",
+      "citation" : null,
+      "type" : "DISSERTATION",
+      "publication-date" : {
+        "year" : {
+          "value" : "2016"
+        },
+        "month" : null,
+        "day" : null,
+        "media-type" : null
+      },
+      "external-ids" : {
+        "external-id" : [ {
+          "external-id-type" : "source-work-id",
+          "external-id-value" : "BASE:576e9ac926d793f6d1f04c0426c4555e01376d70ccc8aed64c23ff09a8426711",
+          "external-id-url" : {
+            "value" : "https://www.base-search.net/Record/576e9ac926d793f6d1f04c0426c4555e01376d70ccc8aed64c23ff09a8426711"
+          },
+          "external-id-relationship" : "SELF"
+        }, {
+          "external-id-type" : "doi",
+          "external-id-value" : "10.17192/z2016.0217",
+          "external-id-url" : null,
+          "external-id-relationship" : "SELF"
+        } ]
+      },
+      "url" : {
+        "value" : "https://doi.org/10.17192/z2016.0217"
+      },
+      "contributors" : {
+        "contributor" : [ {
+          "contributor-orcid" : null,
+          "credit-name" : {
+            "value" : "Beck, Stefan"
+          },
+          "contributor-email" : null,
+          "contributor-attributes" : {
+            "contributor-sequence" : null,
+            "contributor-role" : "AUTHOR"
+          }
+        } ]
+      },
+      "language-code" : null,
+      "country" : null,
+      "visibility" : "PUBLIC"
+    }
+  }, {
+    "work" : {
+      "created-date" : {
+        "value" : 1554818016019
+      },
+      "last-modified-date" : {
+        "value" : 1554818016019
+      },
+      "source" : {
+        "source-orcid" : null,
+        "source-client-id" : {
+          "uri" : "https://orcid.org/client/0000-0001-8099-6984",
+          "path" : "0000-0001-8099-6984",
+          "host" : "orcid.org"
+        },
+        "source-name" : {
+          "value" : "DataCite"
+        }
+      },
+      "put-code" : 56271933,
+      "path" : "/0000-0001-7935-7720/work/56271933",
+      "title" : {
+        "title" : {
+          "value" : "A Family of Right Coideal Subalgebras of U_q(sl_(n+1))"
+        },
+        "subtitle" : null,
+        "translated-title" : null
+      },
+      "journal-title" : {
+        "value" : "Philipps-Universität Marburg"
+      },
+      "short-description" : "Die vorliegende Dissertation beschreibt eine neue Familie von sphärischen Rechtskoidealunteralgebren in der quantisierten universellen Einhüllenden vom Typ A_n. Die sphärischen Rechtskoidealunteralgebren werden vermittels PBW-Elementen beschrieben. Die Darstellungstheorie der Rechtskoidealunteralgebren wir auf die von quantisierten universellen Einhüllenden vom Typ A_n zurückgeführt. Der resultierende quantenhomogene Raum wird mit einem bereits bekannten verglichen.",
+      "citation" : null,
+      "type" : "OTHER",
+      "publication-date" : {
+        "year" : {
+          "value" : "2016"
+        },
+        "month" : null,
+        "day" : null,
+        "media-type" : null
+      },
+      "external-ids" : {
+        "external-id" : [ {
+          "external-id-type" : "doi",
+          "external-id-value" : "10.17192/z2016.0217",
+          "external-id-url" : null,
+          "external-id-relationship" : "SELF"
+        } ]
+      },
+      "url" : null,
+      "contributors" : {
+        "contributor" : [ {
+          "contributor-orcid" : null,
+          "credit-name" : {
+            "value" : "Stefan Beck"
+          },
+          "contributor-email" : null,
+          "contributor-attributes" : null
+        } ]
+      },
+      "language-code" : null,
+      "country" : null,
+      "visibility" : "PUBLIC"
+    }
+  }, {
+    "work" : {
+      "created-date" : {
+        "value" : 1554818213831
+      },
+      "last-modified-date" : {
+        "value" : 1554818213835
+      },
+      "source" : {
+        "source-orcid" : {
+          "uri" : "https://orcid.org/0000-0001-7935-7720",
+          "path" : "0000-0001-7935-7720",
+          "host" : "orcid.org"
+        },
+        "source-client-id" : null,
+        "source-name" : {
+          "value" : "Stefan Beck"
+        }
+      },
+      "put-code" : 56272110,
+      "path" : "/0000-0001-7935-7720/work/56272110",
+      "title" : {
+        "title" : {
+          "value" : "A Family of Right Coideal Subalgebras of U_q(sl_(n+1)) "
+        },
+        "subtitle" : null,
+        "translated-title" : null
+      },
+      "journal-title" : null,
+      "short-description" : "\tThe presented thesis describes a new family of spherical right coideal subalgebras of quantum universal enveloping algebras of type A_n. The description of the spherical right coideal subalgebras is given in terms of PBW-type elements. The representation theory is derived from quantum universal enveloping algebras of type A_n. The resulting quantum homogeneous space is compared with an already known one.",
+      "citation" : null,
+      "type" : "DISSERTATION",
+      "publication-date" : {
+        "year" : {
+          "value" : "2016"
+        },
+        "month" : null,
+        "day" : null,
+        "media-type" : null
+      },
+      "external-ids" : {
+        "external-id" : [ {
+          "external-id-type" : "source-work-id",
+          "external-id-value" : "BASE:576e9ac926d793f6d1f04c0426c4555e01376d70ccc8aed64c23ff09a8426711",
+          "external-id-url" : {
+            "value" : "https://www.base-search.net/Record/576e9ac926d793f6d1f04c0426c4555e01376d70ccc8aed64c23ff09a8426711"
+          },
+          "external-id-relationship" : "SELF"
+        }, {
+          "external-id-type" : "doi",
+          "external-id-value" : "10.17192/z2016.0217",
+          "external-id-url" : null,
+          "external-id-relationship" : "SELF"
+        } ]
+      },
+      "url" : {
+        "value" : "https://doi.org/10.17192/z2016.0217"
+      },
+      "contributors" : {
+        "contributor" : [ ]
+      },
+      "language-code" : null,
+      "country" : null,
+      "visibility" : "PUBLIC"
+    }
+  } ]
+}

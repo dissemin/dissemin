@@ -46,11 +46,13 @@ from django.views.generic import ListView
 from django.views.generic.edit import FormView
 
 from deposit.declaration import get_declaration_pdf
+from deposit.decorators import shib_meta_to_user
 from deposit.forms import PaperDepositForm
 from deposit.forms import UserPreferencesForm
 from deposit.models import DepositRecord
 from deposit.models import Repository
 from deposit.models import UserPreferences
+from deposit.utils import get_preselected_repository
 from papers.models import Paper
 from papers.user import is_authenticated
 
@@ -74,6 +76,7 @@ def get_all_repositories_and_protocols(paper, user):
 
 @json_view
 @user_passes_test(is_authenticated)
+@shib_meta_to_user
 def get_metadata_form(request):
     repo = get_object_or_404(Repository, pk=request.GET.get('repository'))
     if not repo.enabled:
@@ -91,6 +94,7 @@ def get_metadata_form(request):
 
 
 @user_passes_test(is_authenticated)
+@shib_meta_to_user
 def start_view(request, pk):
     paper = get_object_or_404(
         Paper.objects.prefetch_related(
@@ -103,18 +107,13 @@ def start_view(request, pk):
     available_repositories = sorted([repo for repo, proto in repositories_protocol], key=lambda r: r.name.lower())
     
     # select the most appropriate repository
-    userprefs = UserPreferences.get_by_user(request.user)
-    preselected_repository = userprefs.get_preferred_or_last_repository()
+    preselected_repository = get_preselected_repository(request.user, available_repositories)
     preselected_protocol = None
     if preselected_repository:
         preselected_protocol = {repo.id : proto for repo, proto in repositories_protocol}.get(preselected_repository.id, None)
-    # If the preferred repository is not available for this paper, pick any
-    if not preselected_protocol:
-        for repo, protocol in repositories_protocol:
-            if protocol is not None:
-                preselected_repository = repo
-                preselected_protocol = protocol
-                break
+    elif len(repositories_protocol) > 0:
+        preselected_repository = repositories_protocol[0][0]
+        preselected_protocol = repositories_protocol[0][1]
 
     breadcrumbs = paper.breadcrumbs()
     breadcrumbs.append((_('Deposit'), ''))

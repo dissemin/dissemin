@@ -2,7 +2,12 @@ import pytest
 
 from datetime import date
 
+from urllib.parse import parse_qs
+from urllib.parse import urlparse
+from urllib.parse import urlunparse
+
 from django.urls import reverse
+from django.contrib.sites.shortcuts import get_current_site
 
 from deposit.models import DepositRecord
 from website.forms import StartPageSearchForm
@@ -74,3 +79,25 @@ class TestStartPageView():
         assert len(latest_deposits) <= 5
         for d in latest_deposits:
             assert d.status == 'published'
+
+
+class TestLogout:
+    """
+    Here we test the logout view
+    """
+
+    def test_logout_view(self, client):
+        url = reverse('account-logout')
+        r = client.get(url)
+        assert r.status_code == 302
+        assert r.url == reverse('start-page')
+
+    def test_logout_view_shibboleth(self, client, db, settings):
+        settings.SHIBBOLETH_LOGOUT_URL= 'https://sp.dissem.in/Shibboleth.sso/Logout'
+        url = reverse('account-logout')
+        r = client.get(url)
+        assert r.status_code == 302
+        parts = urlparse(r.url)
+        params = parse_qs(parts.query)
+        assert settings.SHIBBOLETH_LOGOUT_URL == urlunparse([parts.scheme, parts.netloc, parts.path, '','',''])
+        assert params.get('return')[0] == 'https://{}'.format(get_current_site(r.request)) + reverse('start-page')

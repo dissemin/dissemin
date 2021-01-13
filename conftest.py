@@ -34,6 +34,19 @@ from papers.models import OaiSource
 from papers.models import Researcher
 from publishers.models import Journal
 from publishers.models import Publisher
+from upload.models import UploadedPDF
+
+
+@pytest.fixture
+def shib_meta():
+    SHIB_META = {
+            'username' : 'https://idp.dissem.in/!https://sp.dissem.in!dmltZXNzQGRpc2N3b3JsZC5lZHU=',
+        'first_name' : 'Samuel',
+        'last_name' : 'Vimes',
+        'orcid' : '0000-0001-8187-9704',
+        'email' : 'vimess@discworld.edu',
+    }
+    return SHIB_META
 
 
 @pytest.fixture
@@ -212,6 +225,19 @@ def dummy_repository(repository):
     """
     return repository.dummy_repository()
 
+
+@pytest.fixture
+def uploaded_pdf(user_leibniz):
+    """
+    A simple uploaded pdf of user leibniz. The file does not exist.
+    """
+    pdf = UploadedPDF.objects.create(
+        user=user_leibniz,
+        file='uploaded_pdf.pdf',
+    )
+    return pdf
+
+
 @pytest.fixture
 def requests_mocker():
     with responses.RequestsMock() as rsps:
@@ -232,6 +258,7 @@ def mock_doi(requests_mocker):
                 return (200, headers, body)
         except FileNotFoundError:
             print('File not found: {} - Returning 404'.format(f_path))
+            print("curl -LH \"Accept: application/citeproc+json\" \"{}\" > {}".format(request.url, f_path))
             return (404, {}, None)
 
     requests_mocker.add_callback(
@@ -280,7 +307,6 @@ def mock_pub_orcid(requests_mocker):
     def request_callback(request):
         # Remove leading /v2.1/ and trailing /
         f_name = '{}.json'.format(request.path_url[6:-1])
-        print(f_name)
         f_path = os.path.join(settings.BASE_DIR, 'test_data', 'orcid', f_name)
         headers = {
             'Content-Type' : 'application/citeproc+json'
@@ -290,12 +316,12 @@ def mock_pub_orcid(requests_mocker):
                 body = f.read()
                 return (200, headers, body)
         except FileNotFoundError:
-            print('File not found: {} - Returning 404'.format(f_path))
+            print("curl -H \"Accept: application/orcid+json\" \"{}\" > {}".format(request.url, f_path))
             return (404, {}, None)
 
     requests_mocker.add_callback(
         requests_mocker.GET,
-        re.compile(r'https://pub.orcid.org/v2.1'),
+        re.compile(r'https://pub.{}/v2.1'.format(settings.ORCID_BASE_DOMAIN)),
         callback=request_callback
     )
 
@@ -721,13 +747,16 @@ class LoadOaiSource():
 
 
 # Fixtures and Functions for load_test_data, which should prefereably not be used as it loads a lot of things
-def get_researcher_by_name(first, last):
-    n = Name.lookup_name((first, last))
-    return Researcher.objects.get(name=n)
+@pytest.fixture(scope="class")
+def get_researcher_by_name():
+    def func(first, last):
+        n = Name.lookup_name((first, last))
+        return Researcher.objects.get(name=n)
+    return func
 
 
 @pytest.fixture
-def load_test_data(request, db):
+def load_test_data(request, db, get_researcher_by_name):
     call_command('loaddata', 'test_dump.json')
     self = request.cls
     self.i = Institution.objects.get(name='ENS')
@@ -743,7 +772,6 @@ def load_test_data(request, db):
     self.arxiv = OaiSource.objects.get(identifier='arxiv')
     self.lncs = Journal.objects.get(issn='0302-9743')
     self.acm = Journal.objects.get(issn='1529-3785').publisher
-
 
 @pytest.fixture
 def rebuild_index(request):

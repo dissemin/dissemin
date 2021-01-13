@@ -1,0 +1,121 @@
+[
+    {
+        "entityID":"https://idp.hrz.tu-darmstadt.de/idp/shibboleth",
+        "DisplayNames":[
+            {
+                "value":"Technische Universität Darmstadt",
+                "lang":"de"
+            },
+            {
+                "value":"Technische Universität Darmstadt",
+                "lang":"en"
+            }
+        ],
+        "Descriptions":[
+            {
+                "value":"Identity Provider der TU Darmstadt",
+                "lang":"de"
+            },
+            {
+                "value":"Identity Provider der TU Darmstadt",
+                "lang":"en"
+            }
+        ],
+        "InformationURLs":[
+            {
+                "value":"http://www.hrz.tu-darmstadt.de",
+                "lang":"de"
+            },
+            {
+                "value":"http://www.hrz.tu-darmstadt.de",
+                "lang":"en"
+            }
+        ],
+        "PrivacyStatementURLs":[
+            {
+                "value":"https://www.aai.dfn.de/fileadmin/documents/datenschutz/ausgelagerter_idp.html",
+                "lang":"de"
+            }
+        ],
+        "Logos":[
+            {
+                "value":"https://idp.hrz.tu-darmstadt.de/idp/images/favicon.ico",
+                "height":"16",
+                "width":"16"
+            },
+            {
+                "value":"https://idp.hrz.tu-darmstadt.de/idp/images/logo.png",
+                "height":"64",
+                "width":"80"
+            }
+        ]
+    },
+    {
+        "entityID":"https://idp.hrz.uni-kassel.de/idp/shibboleth-idp",
+        "DisplayNames":[
+            {
+                "value":"Universität Kassel",
+                "lang":"de"
+            },
+            {
+                "value":"Universität Kassel",
+                "lang":"en"
+            }
+        ],
+        "Descriptions":[
+            {
+                "value":"Universität Kassel - Shibboleth Identity Provider",
+                "lang":"de"
+            },
+            {
+                "value":"Universität Kassel - Shibboleth Identity Provider",
+                "lang":"en"
+            }
+        ],
+        "InformationURLs":[
+            {
+                "value":"http://www.uni-kassel.de",
+                "lang":"de"
+            },
+            {
+                "value":"http://www.uni-kassel.de",
+                "lang":"en"
+            }
+        ]
+    },
+    {
+        "entityID":"https://idp.hs-bochum.de/idp/shibboleth",
+        "DisplayNames":[
+            {
+                "value":"Hochschule Bochum",
+                "lang":"de"
+            },
+            {
+                "value":"Bochum University Of Applied Sciences",
+                "lang":"en"
+            }
+        ],
+        "Descriptions":[
+            {
+                "value":"Hochschule Bochum",
+                "lang":"de"
+            },
+            {
+                "value":"Bochum University Of Applied Sciences",
+                "lang":"en"
+            }
+        ],
+        "Logos":[
+            {
+                "value":"https://idp.hs-bochum.de/favicon.ico",
+                "height":"16",
+                "width":"16"
+            },
+            {
+                "value":"https://idp.hs-bochum.de/aai/bo-logo.jpg",
+                "height":"64",
+                "width":"80"
+            }
+        ]
+    }
+]

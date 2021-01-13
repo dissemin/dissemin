@@ -65,3 +65,7 @@ DISPLAY_BETA_RIBBON = False
 # Uncomment to use a selfhosted version of Mathjax.
 # Mathjax should be downloaded and installed manually to this URL.
 # MATHJAX_SELFHOST_URL = 'http://domain.example.com/static/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML'
+
+
+# Perform a logout on the shibboleth daemon, additional to logout of django
+SHIBBOLETH_LOGOUT_URL = 'https://dissem.in/Shibboleth.sso/Logout'

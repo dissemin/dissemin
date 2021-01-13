@@ -28,14 +28,15 @@
             <h3 id="privacy">{% trans "Privacy" %}</h3>
             <p>
                 {% blocktrans trimmed %}
+                    Authenticated users are logged-in either via eduGAIN/Shibboleth or ORCID.
+
+                    Dissemin is a participant of <a href="https://www.renater.fr">RENATER</a> and participates in eduGAIN. When a user logs in to Dissemin via eduGAIN, we receive a persistent identifier and the name of the user. The email address and ORCID identifier are optional. The identity provider can supply additional metadata which we do not rely on.
+
+                    Users can also log in via <a href="https://orcid.org">ORCID</a>, a third-party service. The platform has no access to the private information they provide to ORCID. In particular, we do not store any ORCID passwords, and we do not have access to email addresses that are marked as private in the ORCID record.
+
                     The platform does not include any analytics, advertisement or tracking services. We are however using the <a href="https://sentry.io/privacy/">Sentry service</a> for error tracking on this platform. Our webserver configuration stores basic access information (URL requested and IP address) for error monitoring, which are kept for fourteen days.
 
-Authenticated users are logged-in via ORCID, a third-party service.
-The platform has no access to the
-private information they provide to ORCID. In particular, we do
-not store any ORCID passwords, and we do not have access to email addresses that are marked as private in the ORCID record.
-
-We need to set cookies to authenticate our users, therefore by logging in on this platform, users accept these cookies.
+                    We need to set cookies to authenticate our users, therefore by logging in on this platform, users accept these cookies.
             {% endblocktrans %}
             </p>
 
@@ -63,13 +64,19 @@ We need to set cookies to authenticate our users, therefore by logging in on thi
             <h3 id="personelData">{% trans "Personal data" %}</h3>
             <p>
                 {% blocktrans trimmed %}
-                    Dissemin uses ORCID's public OAuth interface to authenticate its users. This interface only transmits information marked as public in the user's ORCID profile. This means that ORCID passwords are never transmitted and email addresses are not transmitted when they are marked as private, which is the default setting.
-            
+                    Dissemin uses eduGAIN/Shibboleth and ORCID's public OAuth interface to authenticate its users.
+
+                    When authenticating with eduGAIN/Shibboleth, the user will authenticate against an identity provider participating in eduGAIN. Dissemin asks the following attributes to be released by the identity provider: eduPersonTargetedId (required), name (required), email (optional) and ORCID (optional). In case that a valid ORCID is transmitted, Dissemin will harvest public data from the corresponding ORCID profile
+
+                    The ORCID interface only transmits information marked as public in the user's ORCID profile. This means that ORCID passwords are never transmitted and email addresses are not transmitted when they are marked as private, which is the default setting.
+
                     When logging in to Dissemin from ORCID, Dissemin acquires the user's ORCID id, as well as all public information attached to the ORCID record.
 
                     We are using the <a href="https://sentry.io/privacy/">Sentry service</a> for error tracking on this platform. Our webserver configuration stores basic access information (URL requested and IP address) for error monitoring, which are kept for fourteen days.
 
-            Dissemin can store any information input by its users on the platform. Users can ask for a copy of the personal information Dissemin stores about them by writing an email to <a href="mailto:support@dissem.in">support@dissem.in</a>.
+                    Dissemin can store any information input by its users on the platform. Users can ask for a copy of the personal information Dissemin stores about them by writing an email to <a href="mailto:support@dissem.in">support@dissem.in</a>.
+
+                    Dissemin will transmit name, email or ORCID of the depositing user to the user-selected repository depending on the requirements of the selected repository.
                 {% endblocktrans %}
             </p>
 
