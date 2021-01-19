@@ -216,16 +216,15 @@ class MetaTestSWORDMETSProtocol(MetaTestProtocol):
 
 
     @pytest.mark.parametrize('email', ['isaac.newton@dissem.in', None])
-    def test_get_form_initial_data(self, book_god_of_the_labyrinth, empty_user_preferences, email):
+    def test_get_form_initial_data(self, book_god_of_the_labyrinth, user_leibniz, email):
         """
         Check the initial data
         TODO: Licenses
         """
         self.protocol.paper = book_god_of_the_labyrinth
 
-        self.protocol.user = empty_user_preferences.user
-        empty_user_preferences.email = email
-        empty_user_preferences.save()
+        self.protocol.user = user_leibniz
+        user_leibniz.email = email
 
         initial = self.protocol.get_form_initial_data()
 

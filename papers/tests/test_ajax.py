@@ -23,11 +23,12 @@
 import json
 import pytest
 
-from conftest import get_researcher_by_name
 from django.contrib.auth.models import User
 from django.urls import reverse
 import django.test
+from papers.models import Name
 from papers.models import Paper
+from papers.models import Researcher
 
 
 # TODO TO BE TESTED
@@ -205,7 +206,8 @@ class PaperAjaxTest(JsonRenderingTest):
         super(PaperAjaxTest, self).setUp()
         u = User.objects.create_user('terry', 'pit@mat.io', 'yo')
         u.save()
-        self.r1 = get_researcher_by_name('Isabelle', 'Aujard')
+        n = Name.lookup_name(('Isabelle', 'Aujard'))
+        self.r1 = Researcher.objects.get(name=n)
 
     def test_researcher_papers(self):
         page = self.getPage('researcher',

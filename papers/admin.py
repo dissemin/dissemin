@@ -15,8 +15,9 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
-from solo.admin import SingletonModelAdmin
 from django_admin_relation_links import AdminChangeLinksMixin
+from django_better_admin_arrayfield.admin.mixins import DynamicArrayMixin
+from solo.admin import SingletonModelAdmin
 
 from django.contrib import admin
 from django.core.paginator import Paginator
@@ -56,6 +57,10 @@ class TimeLimitedPaginator(Paginator):
             except OperationalError:
                 return 9999999999
 
+
+class InstitutionAdmin(admin.ModelAdmin, DynamicArrayMixin):
+    raw_id_fields = ('stats', )
+    search_fields = ('name', )
 
 class NameInline(admin.TabularInline):
     model = Name
@@ -107,7 +112,7 @@ class ResearcherAdmin(admin.ModelAdmin):
     search_fields = ('user', 'orcid', )
 
 
-admin.site.register(Institution)
+admin.site.register(Institution, InstitutionAdmin)
 admin.site.register(Department, DepartmentAdmin)
 admin.site.register(Researcher, ResearcherAdmin)
 admin.site.register(Name)

@@ -21,7 +21,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-11-25 16:08+0100\n"
-"PO-Revision-Date: 2020-11-26 16:50:27+0000\n"
+"PO-Revision-Date: 2021-01-11 16:36:37+0000\n"
 "Language: tr\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2501,7 +2501,7 @@ msgstr "Ad eşleşiyor ancak madde Dissemin'de değilse, belki ortak yazarların
 
 #: website/templates/dissemin/faq.html:419
 msgid "Note that, in the longer term, we hope to design a way for our users to edit their profiles on Dissemin to add missing papers and fix these problems; but we do not have such a system yet."
-msgstr "Uzun vadede, kullanıcılarımıza Dissemin'deki profillerini düzenlemeleri için eksik belgeler eklemeleri ve bu sorunları çözmeleri için bir yol tasarlamayı umuyoruz; ama henüz böyle bir sistemimiz yok."
+msgstr "Uzun vadede, kullanıcılarımızın eksik kağıtları eklemek ve bu sorunları düzeltmek için Dissemin'deki profillerini düzenlemeleri için bir yol tasarlamayı umuyoruz; ancak henüz böyle bir sistemimiz yoktur."
 
 #: website/templates/dissemin/faq.html:426
 #, python-format

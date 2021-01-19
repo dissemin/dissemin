@@ -1,0 +1,81 @@
+{
+  "type": "book",
+  "id": "https://doi.org/10.5281/zenodo.2571984",
+  "author": [
+    {
+      "family": "Delpeuch",
+      "given": "Antonin"
+    },
+    {
+      "literal": "A3nm"
+    },
+    {
+      "family": "Lahfa",
+      "given": "Ryan"
+    },
+    {
+      "literal": "Translatewiki.Net"
+    },
+    {
+      "family": "Li-Yao",
+      "given": "Xia"
+    },
+    {
+      "literal": "Steph. No."
+    },
+    {
+      "family": "Verney",
+      "given": "Lucas"
+    },
+    {
+      "literal": "Evarin"
+    },
+    {
+      "literal": "P4bl0"
+    },
+    {
+      "literal": "Jibe-B"
+    },
+    {
+      "family": "Beck",
+      "given": "Stefan"
+    },
+    {
+      "literal": "Nemobis"
+    },
+    {
+      "family": "Andreani",
+      "given": "Virgile"
+    },
+    {
+      "family": "Monperrus",
+      "given": "Martin"
+    },
+    {
+      "family": "Maillard",
+      "given": "Kenji"
+    },
+    {
+      "literal": "Jill-Jênn Vie"
+    },
+    {
+      "literal": "Golls"
+    }
+  ],
+  "issued": {
+    "date-parts": [
+      [
+        2019,
+        2,
+        18
+      ]
+    ]
+  },
+  "abstract": "This is an interim version of dissemin, its architecture is expected to be further revamped and cleaned.\nIt includes functional connectors for Zenodo and HAL, harvesters for OAI sources, Crossref, ORCID and Unpaywall.\nCompatible with Python 3 and Django 1.11-2.2.",
+  "DOI": "10.5281/ZENODO.2571984",
+  "publisher": "Zenodo",
+  "title": "dissemin/dissemin: v0.3.1",
+  "URL": "https://zenodo.org/record/2571984",
+  "copyright": "Open Access",
+  "version": "v0.3.1"
+}

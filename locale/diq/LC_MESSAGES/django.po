@@ -14,7 +14,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-11-25 16:08+0100\n"
-"PO-Revision-Date: 2020-11-26 16:50:24+0000\n"
+"PO-Revision-Date: 2021-01-04 13:42:10+0000\n"
 "Language: diq\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -951,7 +951,7 @@ msgstr "İmalat"
 
 #: model-gettext.py:69
 msgid "Manufacture for specific uses"
-msgstr "İmalatê bağse karnayışan"
+msgstr "Seba gurenayışê xısusiyi ra peydakerdış"
 
 #: model-gettext.py:70
 msgid "Construction of buildings"

@@ -8,20 +8,23 @@ from io import BytesIO
 from lxml import etree
 from zipfile import ZipFile
 
-from django.core.exceptions import ObjectDoesNotExist
-from django.core.exceptions import MultipleObjectsReturned
 from django.utils.translation import ugettext as _
 
 from deposit.models import DepositRecord
-from deposit.models import UserPreferences
 from deposit.protocol import DepositError
 from deposit.protocol import DepositResult
 from deposit.protocol import RepositoryProtocol
 from deposit.registry import protocol_registry
 from deposit.sword.forms import SWORDMETSForm
 
+from deposit.utils import get_email
+
+from papers.models import Institution
 from papers.models import Researcher
 from papers.utils import kill_html
+
+from website.utils import get_users_idp
+
 
 logger = logging.getLogger('dissemin.' + __name__)
         
@@ -187,8 +190,11 @@ class SWORDMETSProtocol(RepositoryProtocol):
         ds_depositor = etree.SubElement(ds, DS + 'depositor')
 
         ds_authentication = etree.SubElement(ds_depositor, DS + 'authentication')
-        # hard-coded since there is currently only one authentication method
-        ds_authentication.text = 'orcid'
+        # We have currently two uthentication methods
+        if self.user.shib.get('username'):
+            ds_authentication.text = 'shibboleth'
+        else:
+            ds_authentication.text = 'orcid'
 
         ds_first_name = etree.SubElement(ds_depositor, DS + 'firstName')
         ds_first_name.text = self.user.first_name
@@ -209,6 +215,15 @@ class SWORDMETSProtocol(RepositoryProtocol):
             ds_is_contributor.text = 'true'
         else:
             ds_is_contributor.text = 'false'
+
+        # If the user is authenticated via shibboleth, we can find out if the user is a member of the repository's institution
+        ds_identical_institution = etree.SubElement(ds_depositor, DS + 'identicalInstitution')
+        idp_identifier = get_users_idp(self.user)
+        if Institution.objects.get_repository_by_identifier(idp_identifier) == self.repository:
+            ds_identical_institution.text = 'true'
+        else:
+            ds_identical_institution.text = 'false'
+
 
         # Information about the publication
 
@@ -258,19 +273,7 @@ class SWORDMETSProtocol(RepositoryProtocol):
             self.paper.consolidate_metadata(wait=False)
 
         # We try to find an email, if we do not succed, that's ok
-        up = UserPreferences.get_by_user(user=self.user)
-        if up.email:
-            data['email'] = up.email
-        else:
-            try:
-                r = Researcher.objects.get(user=self.user)
-            except ObjectDoesNotExist:
-                pass
-            except MultipleObjectsReturned:
-                logger.warning("User with id {} has multiple researcher objects assigned".format(self.user.id))
-            else:
-                if r.email:
-                    data['email'] = r.email
+        data['email'] = get_email(self.user)
 
         return data
 

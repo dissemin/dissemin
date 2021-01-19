@@ -7,6 +7,7 @@ cryptography
 django>=2.2.0,<2.3.0
 django-admin-relation-links
 django-allauth
+django-better-admin-arrayfield
 django-bootstrap-pagination
 django-bulk-update
 django-cache-machine
@@ -60,3 +61,5 @@ python-dateutil # for haystack, as explained here:
 dealer
 django-select2
 bleach
+git+https://github.com/Brown-University-Library/django-shibboleth-remoteuser.git
+git+https://github.com/ULB-Darmstadt/django-shibboleth-ds.git

@@ -13,7 +13,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-11-25 16:08+0100\n"
-"PO-Revision-Date: 2020-11-30 16:02:34+0000\n"
+"PO-Revision-Date: 2020-12-29 07:48:34+0000\n"
 "Language: pms\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1850,7 +1850,7 @@ msgstr "Profil ORCID nen vàlid. Për piasì, ch'as sigura ch'a anclud un nòm p
 
 #: papers/views.py:285
 msgid "Invalid ORCID profile."
-msgstr "Profil ORCID nen vàlid."
+msgstr "Profil ORCID nen bon."
 
 #: papers/views.py:313
 msgid "authored by"

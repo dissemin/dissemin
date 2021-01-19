@@ -27,6 +27,7 @@ def depositing_user(db, request, user_leibniz):
     """
     Depositing user with Researcher profile with and without ORCID
     """
+    user_leibniz.shib = dict()
     Researcher.create_by_name(
         user=user_leibniz,
         first=user_leibniz.first_name,

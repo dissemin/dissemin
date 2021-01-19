@@ -45,6 +45,37 @@ from papers.models import Researcher
 from papers.models import Institution
 from publishers.tests.test_romeo import RomeoAPIStub
 
+
+@pytest.mark.usefixtures('db')
+class TestInstitutionManager:
+    """
+    Groups test about the manager
+    """
+
+    def test_institution_not_found(self):
+        r = Institution.objects.get_repository_by_identifier('identifier_404')
+        assert r is None
+
+    def test_no_repository_set(self):
+        identifier = 'ds:institute'
+        Institution.objects.create(
+            name='Insitute',
+            identifiers=[identifier, 'other_identifier'],
+        )
+        r = Institution.objects.get_repository_by_identifier(identifier)
+        assert r is None
+
+    def test_repository_found(self, dummy_repository):
+        identifier = 'ds:institute'
+        Institution.objects.create(
+            name='Insitute',
+            identifiers=[identifier, 'other_identifier'],
+            repository=dummy_repository,
+        )
+        r = Institution.objects.get_repository_by_identifier(identifier)
+        assert r == dummy_repository
+
+
 class TestPaper():
     """
     Class that groups tests for Paper class
@@ -297,6 +328,63 @@ class TestResearcher:
         r2 = Researcher.get_or_create_by_orcid('0000-0003-2295-9629',
             instance='sandbox.orcid.org')
         assert r1 != r2
+
+    def test_merge_monitor_fields(self):
+        """
+        We monitor fields. If we get a new field, we have to adjust the corresponding merge function.
+        So if we add or remove a field to Researcher, this test will fail!
+        """
+        field_names = {'id', 'name', 'user', 'department', 'institution', 'email', 'homepage', 'role', 'orcid', 'empty_orcid_profile', 'last_harvest', 'harvester', 'current_task', 'stats', 'visible'}
+        assert set(field.name for field in Researcher._meta.get_fields()) == field_names
+
+    @pytest.mark.usefixtures('mock_doi')
+    @pytest.mark.parametrize('delete_user', [True, False])
+    def test_merge(self, delete_user, django_user_model):
+        u = django_user_model.objects.create(
+            username='becks',
+            first_name='Stefan',
+            last_name='Beck'
+        )
+        r = Researcher.create_by_name('Stefan', 'Beck', email='stefan.beck@ulb.tu-darmstadt.de', homepage='https://becks.dissem.in', user=u)
+        u2 = django_user_model.objects.create(
+            username='becks2',
+            first_name='Stefan',
+            last_name='Beck'
+        )
+        r2 = Researcher.create_by_name('Stefan', 'Beck', orcid='0000-0001-8187-9704', homepage='https://sbeck.dissem.in', user=u2)
+        p = Paper.create_by_doi('10.17192/z2016.0217')
+        p.set_researcher(0, r2.pk)
+        p.save()
+        r.merge(r2, delete_user=delete_user)
+        p.refresh_from_db()
+        r.refresh_from_db()
+        assert r.name == r2.name
+        assert r.email == 'stefan.beck@ulb.tu-darmstadt.de'
+        assert r.homepage == 'https://becks.dissem.in'
+        assert r.orcid == r2.orcid
+        assert p.authors_list[0]['researcher_id'] == r.pk
+        with pytest.raises(Researcher.DoesNotExist):
+            r2.refresh_from_db()
+        if delete_user:
+            with pytest.raises(django_user_model.DoesNotExist):
+                u2.refresh_from_db()
+        else:
+            u2.refresh_from_db()
+
+    def test_merge_value_error(self):
+        r = Researcher.create_by_name('Stefan', 'Beck', email='stefan.beck@ulb.tu-darmstadt.de', homepage='https://becks.dissem.in')
+        r2 = Researcher.create_by_name('Stefan', 'Beck', homepage='https://sbeck.dissem.in')
+        with pytest.raises(ValueError):
+            r.pk = None
+            r.merge(r2)
+        r.save()
+        with pytest.raises(ValueError):
+            r2.pk = None
+            r.merge(r2)
+        r.save()
+        with pytest.raises(ValueError):
+            r2.pk = r.pk
+            r.merge(r2)
 
 
 class NameTest(django.test.TestCase):
