@@ -69,6 +69,7 @@ from upload.views import handleAjaxUpload
 from upload.views import handleUrlDownload
 from website.views import LoginView
 from website.views import LogoutView
+from website.views import TOSView
 
 from website.views import StartPageView
 
@@ -136,7 +137,7 @@ urlpatterns = [
     # Static pages
     path('faq/', TemplateView.as_view(template_name='dissemin/faq.html'), name='faq'),
     path('sources/', TemplateView.as_view(template_name='dissemin/sources.html'), name='sources'),
-    path('tos/', TemplateView.as_view(template_name='dissemin/tos.html'), name='tos'),
+    path('tos/', TOSView.as_view(), name='tos'),
     # API
     path('api/p/<int:pk>', api_paper_pk, name='api-paper-pk'),
     path('api/r/<int:researcher>/<slug:slug>/', ResearcherAPI.as_view(), name='api-researcher-id'),

@@ -118,5 +118,81 @@
             </p>
         </div>
     </div>
+    <div class="card-mb-3">
+        <div class="card-header bg-light-blue text-white">
+            <h2>Privacy Policy</h2>
+        </div>
+        <div class="card-body">
+            <p>This privacy policy describes the private data usage and processing. It mainly addresses the usage when logged in via Federated Login (Shibboleth). The data private data usage and processing when logged via another authentication method may vary in detail.</p>
+            <h3>Name of the Service</h3>
+            <p>Dissemin</p>
+
+            <h3>Description of the Service</h3>
+            <p>Free and open service to help researchers deposit their articles in open repositories with respect to self-archiving policies of the publisher and in align with guidelines of employers or funders. The service is supported by CCSD (HAL), CERN (Zenodo) and the universities of Braunschweig, Darmstadt and Stuttgart.
+            </p>
+            <h3>Data Controller and Contact Person</h3>
+            <p>
+                Association CAPSH<br />
+                34 rue de la Chanaise<br />
+                71250 Cluny<br />
+                France
+            </p>
+
+            <h3>Jurisdiction</h3>
+            <p>The provisions of French law apply to this agreement. Place of jurisdiction is Cluny.</p>
+
+            <h3>Personal Data Processed</h3>
+            <p>In case of login via Federation Login (Shibboleth), following personal data is processed:</p>
+            <ul>
+                <li>
+                    Data requested as required from users home organization:
+                    <ul>
+                        <li>SAML persistent identifier, unique identifier to identify the user (attribute: eduPersonTargetedID)</li>
+                        <li>users name (attributes: givenName, sn</li>
+                    </ul>
+                </li>
+                <li>
+                    Data requested optional from users home organization:
+                    <ul>
+                        <li>users email (attribute: mail)</li>
+                        <li>users ORCID (attribute: eduPersonOrcid</li>
+                    </ul>
+                </li>
+                <li>
+                    Data gathered from the user:
+                    <ul>
+                        <li>In case the home organisation does not provide some of the requested attributes, the user might be requested to provide the missing information in order to use certain functionality, or otherwise this functionality may not be available to the user.</li>
+                        <li>In case user makes use of personalization settings.</li>
+                    </ul>
+                </li>
+                <li>General network traffic data is logged.</li>
+            </ul>
+
+            <h3>Purpose of the Processing of Personal Data</h3>
+            <p>The unique user identifier is needed to recognize the user over sessions and to associate user-related information like personal preferences or settings.</p>
+            <p>The name of the user is used in the interaction of the platform and the user. Additionally, when the user deposits a publication to an open repository via the platform, the name will be transmitted as required by the adminitration of the choosen repository.</p>
+            <p>In case of a deposition into an open repository, the email of the user will be transmitted as required by the administration of the choosen repository.</p>
+            <p>The ORCID is used to associate publications of the user to the users profile. In case of a deposition to an open repository, the ORCID will be transmitted.</p>
+            <p>Please see the repositories data privacy policies on handling personal data for ruther information.</p>
+            <p>Generall network traffic data is stored for maintenance of the platform.</p>
+
+            <h3>Third Parties to whom Personal Data is Disclosed</h3>
+            <p>Personal data (name, email, ORCID) may be disclosed on behalf of the user to the following third parties:</p>
+            <ul>
+                {% for repository in active_repositories %}
+                <li><a href="{{ repository.url }}">{{ repository.name }}</a></li>
+                {% endfor %}
+
+            </ul>
+            <p>In case of disclosing email, the user will have the opportunity of selecting a different email address.</p>
+
+            <h3>How to Access, Rectify and Delete the Personal Data</h3>
+            <p>If you need to access, rectify and/or delete any personal data we store about you or which you provided to us please contact us via email: team@dissem.in</p>
+            
+            <h3>Data Protection Code of Conduct</h3>
+            <p>Your personal data will be protected according to the <a href="http://www.geant.net/uri/dataprotection-code-of-conduct/v1">Code of Conduct for Service Providers</a>, a common standard for the research and higher education sector to protect your privacy.</p>
+         </div>
+    </div>
+
 </div>
 {% endblock content %}

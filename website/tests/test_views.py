@@ -20,6 +20,7 @@ class TestMiscPages():
     """
 
     @pytest.mark.parametrize('page', ['faq', 'tos', 'sources', 'account-login', 'socialaccount_login_error',])
+    @pytest.mark.usefixtures('db')
     def test_static(self, page, check_page):
         """
         Tests above static pages
