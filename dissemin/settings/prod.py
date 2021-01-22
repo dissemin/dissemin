@@ -69,3 +69,5 @@ DISPLAY_BETA_RIBBON = False
 
 # Perform a logout on the shibboleth daemon, additional to logout of django
 SHIBBOLETH_LOGOUT_URL = 'https://dissem.in/Shibboleth.sso/Logout'
+SHIB_DS_SP_URL = 'https://dissem.in/Shibboleth.sso/Login'
+SHIB_DS_DISCOFEED_URL = 'https://dissem.in/Shibboleth.sso/DiscoFeed'
