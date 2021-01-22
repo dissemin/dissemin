@@ -38,15 +38,27 @@ from upload.models import UploadedPDF
 
 
 @pytest.fixture
-def shib_meta():
-    SHIB_META = {
-            'username' : 'https://idp.dissem.in/!https://sp.dissem.in!dmltZXNzQGRpc2N3b3JsZC5lZHU=',
-        'first_name' : 'Samuel',
-        'last_name' : 'Vimes',
-        'orcid' : '0000-0001-8187-9704',
-        'email' : 'vimess@discworld.edu',
-    }
+def shib_meta(shib_request):
+    SHIB_META = dict()
+    for key, value in settings.SHIBBOLETH_ATTRIBUTE_MAP.items():
+        SHIB_META[value[1]] = shib_request[key]
+
     return SHIB_META
+
+@pytest.fixture
+def shib_request():
+    """
+    Use this fixture if you require to login with test client via shibboleth
+    """
+    SHIB_REQUEST = {
+        'shib-username' : 'https://idp.dissem.in/!https://sp.dissem.in!dmltZXNzQGRpc2N3b3JsZC5lZHU=',
+        'shib-givenName' : 'Samuel',
+        'shib-sn' : 'Vimes',
+        'shib-mail' : 'vimess@discworld.edu',
+        'shib-orcid' : '0000-0001-8187-9704',
+    }
+    SHIB_REQUEST['REMOTE_USER'] = SHIB_REQUEST['shib-username']
+    return SHIB_REQUEST
 
 
 @pytest.fixture
