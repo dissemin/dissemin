@@ -250,6 +250,7 @@ class RepositoryPreferencesView(LoginRequiredMixin, FormView):
 @require_POST
 @json_view
 @user_passes_test(is_authenticated)
+@shib_meta_to_user
 @ratelimit(key='ip', rate='200/d')
 def submitDeposit(request, pk):
     paper = get_object_or_404(Paper, pk=pk)
