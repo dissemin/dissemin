@@ -11,6 +11,7 @@ from django.views.generic.base import TemplateView
 from shibboleth_discovery.mixins import ShibDSLoginMixin
 
 from deposit.models import DepositRecord
+from deposit.models import Repository
 from website.forms import StartPageSearchForm
 from statistics.models import COMBINED_STATUS_CHOICES
 
@@ -70,3 +71,19 @@ class LogoutView(RedirectView):
                 urlencode(params)
             )
         return self.url
+
+
+class TOSView(TemplateView):
+    
+    template_name='dissemin/tos.html'
+
+    def get_context_data(self, **kwargs):
+        """
+        We add the repositories
+        """
+        context = super().get_context_data(**kwargs)
+
+        context['active_repositories'] = Repository.objects.filter(enabled=True)
+
+        return context
+
