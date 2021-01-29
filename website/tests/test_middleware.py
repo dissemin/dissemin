@@ -17,7 +17,7 @@ class TestShibbolethRemoteUserMiddleware:
         r = client.get('/', **shib_request)
         # Now, if we hit again and we are still logged in, this is fine
         s = client.get('/', **shib_request)
-        assert r.cookies['csrftoken'] == s.cookies['csrftoken']
+        assert r.cookies['csrftoken'].value == s.cookies['csrftoken'].value
 
     @pytest.mark.usefixtures('db')
     def test_is_authenticated_no_remote_user_header(self, client, shib_request):
